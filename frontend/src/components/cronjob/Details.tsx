@@ -18,6 +18,7 @@ import { apply } from '../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
+import { uniqueString } from '../../lib/util';
 import { clusterAction } from '../../redux/clusterActionSlice';
 import { ActionButton } from '../common';
 import { DetailsGrid } from '../common/Resource';
@@ -35,12 +36,6 @@ function SpawnJobDialog(props: {
   const { namespace } = useParams<{ namespace: string }>();
   const { t } = useTranslation(['translation']);
   const dispatch = useDispatch();
-  // method to generate a unique string
-  const uniqueString = () => {
-    const timestamp = Date.now().toString(36);
-    const randomNum = Math.random().toString(36).substr(2, 5);
-    return `${timestamp}-${randomNum}`;
-  };
 
   const job = _.cloneDeep(cronJob.spec.jobTemplate);
   const [jobName, setJobName] = useState(
