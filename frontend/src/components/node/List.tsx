@@ -1,4 +1,3 @@
-import makeStyles from '@mui/styles/makeStyles';
 import { useTranslation } from 'react-i18next';
 import Node from '../../lib/k8s/node';
 import { HoverInfoLabel } from '../common';
@@ -6,14 +5,7 @@ import ResourceListView from '../common/Resource/ResourceListView';
 import { UsageBarChart } from './Charts';
 import { NodeReadyLabel } from './Details';
 
-const useStyle = makeStyles({
-  chartCell: {
-    width: '20%',
-  },
-});
-
 export default function NodeList() {
-  const classes = useStyle();
   const [nodeMetrics, metricsError] = Node.useMetrics();
   const { t } = useTranslation(['glossary', 'translation']);
 
@@ -38,7 +30,7 @@ export default function NodeList() {
           id: 'cpu',
           label: t('CPU'),
           cellProps: {
-            className: classes.chartCell,
+            sx: { width: '20%' },
           },
           getter: node => (
             <UsageBarChart
@@ -53,7 +45,7 @@ export default function NodeList() {
           id: 'memory',
           label: t('Memory'),
           cellProps: {
-            className: classes.chartCell,
+            sx: { width: '20%' },
           },
           getter: node => (
             <UsageBarChart

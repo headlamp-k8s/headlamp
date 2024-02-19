@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/system';
 import React, { ReactElement } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -9,30 +9,17 @@ export interface ClusterChooserProps {
 }
 export type ClusterChooserType = React.ComponentType<ClusterChooserProps> | ReactElement | null;
 
-const useClusterTitleStyle = makeStyles(theme => ({
-  button: {
-    color: theme.palette.clusterChooser.button.color,
-    background: theme.palette.clusterChooser.button.background,
-    '&:hover': {
-      background: theme.palette.clusterChooser.button.hover.background,
-    },
-    maxWidth: '20em',
-    textTransform: 'none',
-    padding: '6px 22px',
-  },
-  clusterName: {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    display: 'block',
-  },
-}));
+const SpanClusterName = styled('span')({
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  display: 'block',
+});
 
 const ClusterChooser = React.forwardRef(function ClusterChooser(
   { clickHandler, cluster }: ClusterChooserProps,
   ref: React.Ref<HTMLButtonElement>
 ) {
-  const classes = useClusterTitleStyle();
   const { t } = useTranslation();
 
   return (
@@ -40,12 +27,21 @@ const ClusterChooser = React.forwardRef(function ClusterChooser(
       size="large"
       variant="contained"
       onClick={clickHandler}
-      className={classes.button}
+      sx={{
+        color: 'clusterChooser.button.color',
+        background: 'clusterChooser.button.background',
+        '&:hover': {
+          background: 'clusterChooser.button.hover.background',
+        },
+        maxWidth: '20em',
+        textTransform: 'none',
+        padding: '6px 22px',
+      }}
       ref={ref}
     >
-      <span className={classes.clusterName} title={cluster}>
+      <SpanClusterName title={cluster}>
         <Trans t={t}>Cluster: {{ cluster }}</Trans>
-      </span>
+      </SpanClusterName>
     </Button>
   );
 });

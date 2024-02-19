@@ -189,10 +189,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -206,10 +206,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -261,10 +261,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -278,10 +278,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -333,10 +333,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -350,10 +350,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -405,10 +405,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -422,10 +422,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -477,10 +477,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -494,10 +494,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="makeStyles-root MuiBox-root css-0"
+                  class="MuiBox-root css-am63uh"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"

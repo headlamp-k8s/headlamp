@@ -5,8 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled, useTheme } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,24 +18,15 @@ import { NameValueTable } from '../common/SimpleTable';
 const versionSnackbarHideTimeout = 5000; // ms
 const versionFetchInterval = 60000; // ms
 
-const useVersionButtonStyle = makeStyles(theme => ({
-  versionBox: {
-    textAlign: 'center',
-    '& .MuiButton-label': {
-      color: theme.palette.sidebarLink.main,
-    },
-  },
-  versionIcon: {
-    marginTop: '5px',
-    marginRight: '5px',
-    marginLeft: '5px',
-  },
-}));
+const VersionIcon = styled(Icon)({
+  marginTop: '5px',
+  marginRight: '5px',
+  marginLeft: '5px',
+});
 
 export default function VersionButton() {
   const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const { enqueueSnackbar } = useSnackbar();
-  const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
   const cluster = useCluster();
   const theme = useTheme();
@@ -140,18 +130,23 @@ export default function VersionButton() {
   }
 
   return !clusterVersion ? null : (
-    <Box mx="auto" pt=".2em" className={classes.versionBox}>
+    <Box
+      mx="auto"
+      pt=".2em"
+      sx={{
+        textAlign: 'center',
+        '& .MuiButton-label': {
+          color: 'sidebarLink.main',
+        },
+      }}
+    >
       <Button
         onClick={() => setOpen(true)}
         style={{ textTransform: 'none', paddingBottom: 0, paddingTop: 0 }}
       >
         <Box display={isSidebarOpen ? 'flex' : 'block'} alignItems="center">
           <Box>
-            <Icon
-              color={theme.palette.text.secondary}
-              icon="mdi:kubernetes"
-              className={classes.versionIcon}
-            />
+            <VersionIcon color={theme.palette.text.secondary} icon="mdi:kubernetes" />
           </Box>
           <Box>{clusterVersion.gitVersion}</Box>
         </Box>
