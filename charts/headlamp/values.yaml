@@ -45,6 +45,13 @@ config:
   # -- directory to look for plugins
   pluginsDir: "/headlamp/plugins"
 
+# -- An optional list of environment variables
+# env:
+  # - name: KUBERNETES_SERVICE_HOST
+  #   value: localhost
+  # - name: KUBERNETES_SERVICE_PORT
+  #   value: 6443
+
 serviceAccount:
   # -- Specifies whether a service account should be created
   create: true

@@ -3,7 +3,7 @@
 exports[`Storyshots LocaleSelect Initial 1`] = `
 <div>
   <div
-    class="MuiFormControl-root makeStyles-formControl css-1nrlq1o-MuiFormControl-root"
+    class="MuiFormControl-root css-k2e4wk-MuiFormControl-root"
   >
     <div
       class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-zghmfh-MuiInputBase-root-MuiInput-root-MuiSelect-root"

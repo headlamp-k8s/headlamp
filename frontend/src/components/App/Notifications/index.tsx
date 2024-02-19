@@ -14,7 +14,7 @@ import {
   useTheme,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -182,6 +182,7 @@ export default function Notifications() {
   });
   const { t } = useTranslation();
   const history = useHistory();
+  const maxNotificationsInPopup = 50;
 
   useEffect(() => {
     const notificationsToShow: NotificationIface[] = [];
@@ -225,6 +226,16 @@ export default function Notifications() {
     }
   }, [events, notifications]);
 
+  const [areAllNotificationsInDeleteState, areThereUnseenNotifications, filteredNotifications] =
+    useMemo(() => {
+      const allindelete = notifications.filter(notification => !notification.deleted).length === 0;
+      return [
+        allindelete,
+        notifications.filter(notification => notification.seen !== true).length > 0,
+        allindelete ? [] : notifications.slice(0, maxNotificationsInPopup),
+      ];
+    }, [notifications]);
+
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -259,12 +270,8 @@ export default function Notifications() {
       setAnchorEl(null);
     }
   }
-  const areThereUnseenNotifications =
-    notifications.filter(notification => notification.seen !== true).length > 0;
-  const areAllNotificationsInDeleteState =
-    notifications.filter(notification => !notification.deleted).length === 0;
+
   const notificationMenuId = 'notification-menu';
-  const maxNotificationsInPopup = 50;
   const show = Boolean(anchorEl);
 
   return (
@@ -332,9 +339,7 @@ export default function Notifications() {
           </Grid>
         </Box>
         <NotificationsList
-          notifications={
-            areAllNotificationsInDeleteState ? [] : notifications.slice(0, maxNotificationsInPopup)
-          }
+          notifications={filteredNotifications}
           clickEventHandler={menuItemClickHandler}
         />
         <Button

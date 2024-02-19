@@ -8,9 +8,6 @@ const useStyles = makeStyles({
   fullText: {
     wordBreak: 'break-all',
   },
-  button: {
-    display: 'inline',
-  },
 });
 
 export interface ShowHideLabelProps {
@@ -63,7 +60,7 @@ export default function ShowHideLabel(props: ShowHideLabelProps) {
             {!expanded && '…'}
             <IconButton
               aria-controls={labelIdOrRandom}
-              className={classes.button}
+              sx={{ display: 'inline' }}
               onClick={() => setExpanded(expandedVal => !expandedVal)}
               size="small"
               arial-label={expanded ? t('translation|Collapse') : t('translation|Expand')}

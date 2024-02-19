@@ -587,7 +587,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     >
                       <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover makeStyles-link css-srrjpp-MuiTypography-root-MuiLink-root"
+                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-gkj5ua-MuiTypography-root-MuiLink-root"
                         href="/"
                       >
                         mycustomresource
@@ -629,7 +629,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     >
                       <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover makeStyles-link css-srrjpp-MuiTypography-root-MuiLink-root"
+                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-gkj5ua-MuiTypography-root-MuiLink-root"
                         href="/"
                       >
                         myotherresource

@@ -1,7 +1,9 @@
+import { Theme } from '@mui/material';
 import MuiTab from '@mui/material/Tab';
 import MuiTabs from '@mui/material/Tabs';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
+import { SxProps } from '@mui/system';
 import React from 'react';
 import { useId } from '../../lib/util';
 
@@ -23,7 +25,7 @@ export interface TabsProps {
   };
   defaultIndex?: number | null | boolean;
   onTabChanged?: (tabIndex: number) => void;
-  className?: string;
+  sx?: SxProps<Theme>;
   ariaLabel: string;
 }
 
@@ -67,7 +69,7 @@ export default function Tabs(props: TabsProps) {
         variant="scrollable"
         centered={false}
         scrollButtons="auto"
-        className={props.className}
+        sx={props.sx}
         {...tabProps}
       >
         {tabs.map(({ label }, i) => (
