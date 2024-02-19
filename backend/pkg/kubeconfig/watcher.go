@@ -1,12 +1,12 @@
 package kubeconfig
 
 import (
-	"log"
 	"os"
 	"path/filepath"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	"k8s.io/utils/strings/slices"
 )
 
@@ -20,7 +20,8 @@ func LoadAndWatchFiles(kubeConfigStore ContextStore, paths string, source int) {
 	// create watcher
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Println("Error watching for kube config changes:", err)
+		logger.Log(logger.LevelError, nil, err, "creating watcher")
+
 		return
 	}
 
@@ -35,12 +36,12 @@ func LoadAndWatchFiles(kubeConfigStore ContextStore, paths string, source int) {
 		select {
 		case <-ticker.C:
 			if len(watcher.WatchList()) != len(kubeConfigPaths) {
-				log.Println("watcher: re-adding missing files")
+				logger.Log(logger.LevelInfo, nil, nil, "watcher: re-adding missing files")
 				addFilesToWatcher(watcher, kubeConfigPaths)
 
 				err := LoadAndStoreKubeConfigs(kubeConfigStore, paths, source)
 				if err != nil {
-					log.Println("watcher: error loading kubeconfig files", err)
+					logger.Log(logger.LevelError, nil, err, "watcher: error loading kubeconfig files")
 				}
 			}
 
@@ -49,17 +50,18 @@ func LoadAndWatchFiles(kubeConfigStore ContextStore, paths string, source int) {
 			for _, trigger := range triggers {
 				trigger := trigger
 				if event.Op.Has(trigger) {
-					log.Println("watcher: kubeconfig file changed, reloading contexts")
+					logger.Log(logger.LevelInfo, map[string]string{"event": event.Name},
+						nil, "watcher: kubeconfig file changed, reloading contexts")
 
 					err := LoadAndStoreKubeConfigs(kubeConfigStore, paths, source)
 					if err != nil {
-						log.Println("watcher: error loading kubeconfig files", err)
+						logger.Log(logger.LevelError, nil, err, "watcher: error loading kubeconfig files")
 					}
 				}
 			}
 
 		case err := <-watcher.Errors:
-			log.Println("watcher: error watching kubeconfig files", err)
+			logger.Log(logger.LevelError, nil, err, "watcher: error watching kubeconfig files")
 		}
 	}
 }
@@ -72,7 +74,9 @@ func addFilesToWatcher(watcher *fsnotify.Watcher, paths []string) {
 		if !filepath.IsAbs(path) {
 			absPath, err := filepath.Abs(path)
 			if err != nil {
-				log.Printf("Couldn't get absolute path for %s: %v ,so it is not added to watcher", path, err)
+				logger.Log(logger.LevelError, map[string]string{"path": path},
+					err, "getting absolute path")
+
 				continue
 			}
 
@@ -81,7 +85,9 @@ func addFilesToWatcher(watcher *fsnotify.Watcher, paths []string) {
 
 		// check if path exists
 		if _, err := os.Stat(path); os.IsNotExist(err) {
-			log.Printf("Path %s does not exist, so it is not added to watcher", path)
+			logger.Log(logger.LevelError, map[string]string{"path": path},
+				err, "Path does not exist")
+
 			continue
 		}
 
@@ -95,7 +101,8 @@ func addFilesToWatcher(watcher *fsnotify.Watcher, paths []string) {
 		// if it isn't, add it to the watcher
 		err := watcher.Add(path)
 		if err != nil {
-			log.Printf("Couldn't add %s to watcher: %v", path, err)
+			logger.Log(logger.LevelError, map[string]string{"path": path},
+				err, "adding path to watcher")
 		}
 	}
 }

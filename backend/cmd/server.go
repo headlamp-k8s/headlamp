@@ -1,19 +1,20 @@
 package main
 
 import (
-	"log"
 	"os"
 	"strings"
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 )
 
 func main() {
 	conf, err := config.Parse(os.Args)
 	if err != nil {
-		log.Fatalf("Error fetching config:%v", err)
+		logger.Log(logger.LevelError, nil, err, "fetching config:%v")
+		os.Exit(1)
 	}
 
 	cache := cache.New[interface{}]()

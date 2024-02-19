@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"strings"
 
-	zlog "github.com/rs/zerolog/log"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
@@ -169,7 +169,8 @@ func (c *Context) SetupProxy() error {
 
 	c.proxy = proxy
 
-	zlog.Info().Msgf("Proxy setup for context %q to cluster url %q", c.Name, c.Cluster.Server)
+	logger.Log(logger.LevelInfo, map[string]string{"context": c.Name, "clusterURL": c.Cluster.Server},
+		nil, "Proxy setup")
 
 	return nil
 }

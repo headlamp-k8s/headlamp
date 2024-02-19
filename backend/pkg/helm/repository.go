@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/gofrs/flock"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 
-	zlog "github.com/rs/zerolog/log"
 	"helm.sh/helm/v3/pkg/cli"
 	"helm.sh/helm/v3/pkg/getter"
 	"helm.sh/helm/v3/pkg/repo"
@@ -68,7 +68,7 @@ const timeoutForLock = 30 * time.Second
 func addRepository(name string, url string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("creating empty RepositoryConfig file")
+		logger.Log(logger.LevelError, nil, err, "creating empty RepositoryConfig file")
 		return err
 	}
 
@@ -80,20 +80,20 @@ func addRepository(name string, url string, settings *cli.EnvSettings) error {
 		defer func() {
 			err := fileLock.Unlock()
 			if err != nil {
-				zlog.Error().Err(err).Str("action", "add_repo").Msg("unlocking repository config file")
+				logger.Log(logger.LevelError, nil, err, "unlocking repository config file")
 			}
 		}()
 	}
 
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("locking repository config file")
+		logger.Log(logger.LevelError, nil, err, "locking repository config file")
 		return err
 	}
 
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("reading repo file")
+		logger.Log(logger.LevelError, nil, err, "reading repo file")
 		return err
 	}
 
@@ -105,14 +105,14 @@ func addRepository(name string, url string, settings *cli.EnvSettings) error {
 
 	repo, err := repo.NewChartRepository(newRepo, getter.All(settings))
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("creating chart repository")
+		logger.Log(logger.LevelError, nil, err, "creating chart repository")
 		return err
 	}
 
 	// download chart repo index
 	_, err = repo.DownloadIndexFile()
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("downloading index file")
+		logger.Log(logger.LevelError, nil, err, "downloading index file")
 		return err
 	}
 
@@ -121,7 +121,7 @@ func addRepository(name string, url string, settings *cli.EnvSettings) error {
 
 	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("writing to repo file")
+		logger.Log(logger.LevelError, nil, err, "writing repo file")
 		return err
 	}
 
@@ -134,7 +134,7 @@ func (h *Handler) AddRepo(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("parsing request")
+		logger.Log(logger.LevelError, nil, err, "parsing request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -156,7 +156,7 @@ func (h *Handler) AddRepo(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("encoding response")
+		logger.Log(logger.LevelError, nil, err, "encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -184,14 +184,14 @@ func createFullPath(p string) (*os.File, error) {
 func listRepositories(settings *cli.EnvSettings) ([]repositoryInfo, error) {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "list_repo").Msg("creating empty RepositoryConfig file")
+		logger.Log(logger.LevelError, nil, err, "creating empty RepositoryConfig file")
 		return nil, err
 	}
 
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "list_repo").Msg("reading repo file")
+		logger.Log(logger.LevelError, nil, err, "reading repo file")
 		return nil, err
 	}
 
@@ -226,7 +226,7 @@ func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "list_repo").Msg("encoding response")
+		logger.Log(logger.LevelError, nil, err, "encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -236,7 +236,7 @@ func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
 func RemoveRepository(name string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "remove_repo").Msg("creating empty RepositoryConfig file")
+		logger.Log(logger.LevelError, nil, err, "creating empty RepositoryConfig file")
 		return err
 	}
 
@@ -248,27 +248,27 @@ func RemoveRepository(name string, settings *cli.EnvSettings) error {
 		defer func() {
 			err := fileLock.Unlock()
 			if err != nil {
-				zlog.Error().Err(err).Str("action", "add_repo").Msg("unlocking repository config file")
+				logger.Log(logger.LevelError, nil, err, "unlocking repository config file")
 			}
 		}()
 	}
 
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "remove_repo").Msg("reading repo file")
+		logger.Log(logger.LevelError, nil, err, "reading repo file")
 		return err
 	}
 
 	isRemoved := repoFile.Remove(name)
 	if !isRemoved {
-		zlog.Error().Err(err).Str("action", "remove_repo").Msg("repository not found")
+		logger.Log(logger.LevelError, nil, err, "repository not found")
 		return err
 	}
 
 	// write repo file
 	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "remove_repo").Msg("writing repo file")
+		logger.Log(logger.LevelError, nil, err, "writing repo file")
 		return err
 	}
 
@@ -291,7 +291,7 @@ func (h *Handler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
 func UpdateRepository(name, url string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("creating empty RepositoryConfig file")
+		logger.Log(logger.LevelError, nil, err, "creating empty RepositoryConfig file")
 		return err
 	}
 
@@ -303,14 +303,14 @@ func UpdateRepository(name, url string, settings *cli.EnvSettings) error {
 		defer func() {
 			err := fileLock.Unlock()
 			if err != nil {
-				zlog.Error().Err(err).Str("action", "update_repo").Msg("unlocking repository config file")
+				logger.Log(logger.LevelError, nil, err, "unlocking repository config file")
 			}
 		}()
 	}
 
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("reading repo file")
+		logger.Log(logger.LevelError, nil, err, "reading repo file")
 		return err
 	}
 
@@ -322,7 +322,7 @@ func UpdateRepository(name, url string, settings *cli.EnvSettings) error {
 
 	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("writing repo file")
+		logger.Log(logger.LevelError, nil, err, "writing repo file")
 		return err
 	}
 
@@ -336,7 +336,7 @@ func (h *Handler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("parsing request")
+		logger.Log(logger.LevelError, nil, err, "parsing request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return

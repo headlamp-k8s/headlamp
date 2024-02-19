@@ -3,10 +3,10 @@ package portforward
 import (
 	"context"
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 )
 
 const storeKeyPrefix = "PORT_FORWARD_"
@@ -35,7 +35,7 @@ func portforwardstore(cache cache.Cache[interface{}], p portForward) {
 
 	err := cache.Set(context.Background(), key, p)
 	if err != nil {
-		log.Printf("Error storing portforward %s", err)
+		logger.Log(logger.LevelError, nil, err, "storing portforward")
 	}
 }
 
@@ -46,6 +46,9 @@ func portforwardstore(cache cache.Cache[interface{}], p portForward) {
 func stopOrDeletePortForward(cache cache.Cache[interface{}], cluster string, id string, isStopRequest bool) error {
 	portforward, err := getPortForwardByID(cache, cluster, id)
 	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": cluster, "id": id},
+			err, "getting portforward")
+
 		return err
 	}
 
@@ -57,6 +60,9 @@ func stopOrDeletePortForward(cache cache.Cache[interface{}], cluster string, id 
 	} else {
 		err := cache.Delete(context.Background(), portforwardKeyGenerator(portforward))
 		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": cluster, "id": id},
+				err, "deleting portforward")
+
 			return err
 		}
 	}
@@ -70,6 +76,9 @@ func getPortForwardList(cache cache.Cache[interface{}], cluster string) []portFo
 		return strings.HasPrefix(key, storeKeyPrefix+cluster)
 	})
 	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": cluster},
+			err, "getting portforward list")
+
 		return nil
 	}
 

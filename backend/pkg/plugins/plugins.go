@@ -2,9 +2,7 @@ package plugins
 
 import (
 	"context"
-	"fmt"
 	"io/fs"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -12,6 +10,7 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/utils"
 )
 
@@ -25,7 +24,7 @@ const (
 func Watch(path string, notify chan<- string) {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Println("watcher init error:", err)
+		logger.Log(logger.LevelError, nil, err, "creating watcher")
 	}
 	defer watcher.Close()
 
@@ -36,7 +35,7 @@ func Watch(path string, notify chan<- string) {
 		case event := <-watcher.Events:
 			notify <- event.Name + ":" + event.Op.String()
 		case err := <-watcher.Errors:
-			fmt.Println("Plugin watcher Error", err)
+			logger.Log(logger.LevelError, nil, err, "Plugin watcher Error")
 		}
 	}
 }
@@ -53,13 +52,17 @@ func periodicallyWatchSubfolders(watcher *fsnotify.Watcher, path string, interva
 			if d != nil && d.IsDir() && !utils.Contains(watcher.WatchList(), path) {
 				err := watcher.Add(path)
 				if err != nil {
-					log.Println("Error adding path to watcher", path, err)
+					logger.Log(logger.LevelError, map[string]string{"path": path},
+						err, "adding path to watcher")
+
 					return err
 				}
 				// when a folder is added, send events for all the files in the folder
 				entries, err := os.ReadDir(path)
 				if err != nil {
-					log.Println("Error reading dir", path, err)
+					logger.Log(logger.LevelError, map[string]string{"path": path},
+						err, "reading dir")
+
 					return err
 				}
 				for _, entry := range entries {
@@ -101,6 +104,9 @@ func GeneratePluginPaths(basePath string, staticPluginDir string, pluginDir stri
 func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error) {
 	files, err := os.ReadDir(pluginDir)
 	if err != nil && !os.IsNotExist(err) {
+		logger.Log(logger.LevelError, map[string]string{"pluginDir": pluginDir},
+			err, "reading plugin directory")
+
 		return nil, err
 	}
 
@@ -109,7 +115,8 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 	for _, f := range files {
 		if !f.IsDir() {
 			pluginPath := filepath.Join(pluginDir, f.Name())
-			log.Printf("Not including plugin path '%s' it is not a folder.\n", pluginPath)
+			logger.Log(logger.LevelInfo, map[string]string{"pluginPath": pluginPath},
+				nil, "Not including plugin path, it is not a folder")
 
 			continue
 		}
@@ -118,7 +125,9 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 
 		_, err := os.Stat(pluginPath)
 		if err != nil {
-			log.Printf("Not including plugin path '%s': %s\n", pluginPath, err)
+			logger.Log(logger.LevelInfo, map[string]string{"pluginPath": pluginPath},
+				err, "Not including plugin path, main.js not found")
+
 			continue
 		}
 
@@ -126,8 +135,9 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 
 		_, err = os.Stat(packageJSONPath)
 		if err != nil {
-			log.Printf("Warning, package.json not found at '%s': %s\n", packageJSONPath, err)
-			log.Printf("Please run 'headlamp-plugin extract' again with headlamp-plugin >= 0.6.0")
+			logger.Log(logger.LevelInfo, map[string]string{"packageJSONPath": packageJSONPath},
+				err, `Not including plugin path, package.json not found. 
+				Please run 'headlamp-plugin extract' again with headlamp-plugin >= 0.6.0`)
 		}
 
 		pluginFileURL := filepath.Join(baseURL, f.Name())
@@ -146,18 +156,18 @@ func HandlePluginEvents(basePath, staticPluginDir, pluginDir string,
 		// set the plugin refresh key to true
 		err := cache.Set(context.Background(), PluginRefreshKey, true)
 		if err != nil {
-			log.Println("Error setting plugin refresh key", err)
+			logger.Log(logger.LevelError, nil, err, "setting plugin refresh key")
 		}
 
 		// generate the plugin list
 		pluginList, err := GeneratePluginPaths(basePath, staticPluginDir, pluginDir)
 		if err != nil && !os.IsNotExist(err) {
-			log.Println("Error generating plugins path", err)
+			logger.Log(logger.LevelError, nil, err, "generating plugins path")
 		}
 
 		err = cache.Set(context.Background(), PluginListKey, pluginList)
 		if err != nil {
-			log.Println("Error setting plugin list key", err)
+			logger.Log(logger.LevelError, nil, err, "setting plugin list key")
 		}
 	}
 }
@@ -167,18 +177,22 @@ func PopulatePluginsCache(basePath, staticPluginDir, pluginDir string, cache cac
 	// set the plugin refresh key to false
 	err := cache.Set(context.Background(), PluginRefreshKey, false)
 	if err != nil {
-		log.Println("Error setting plugin refresh key", err)
+		logger.Log(logger.LevelError, map[string]string{"key": PluginRefreshKey},
+			err, "setting plugin refresh key")
 	}
 
 	// generate the plugin list
 	pluginList, err := GeneratePluginPaths(basePath, staticPluginDir, pluginDir)
 	if err != nil && !os.IsNotExist(err) {
-		log.Println("Error generating plugins path", err)
+		logger.Log(logger.LevelError,
+			map[string]string{"basePath": basePath, "staticPluginDir": staticPluginDir, "pluginDir": pluginDir},
+			err, "generating plugins path")
 	}
 
 	err = cache.Set(context.Background(), PluginListKey, pluginList)
 	if err != nil {
-		log.Println("Error setting plugin list key", err)
+		logger.Log(logger.LevelError, map[string]string{"key": PluginListKey},
+			err, "setting plugin list key")
 	}
 }
 
@@ -188,18 +202,19 @@ func PopulatePluginsCache(basePath, staticPluginDir, pluginDir string, cache cac
 func HandlePluginReload(cache cache.Cache[interface{}], w http.ResponseWriter) {
 	value, err := cache.Get(context.Background(), PluginRefreshKey)
 	if err != nil {
-		log.Println("Error getting plugin refresh key", err)
+		logger.Log(logger.LevelError, map[string]string{"key": PluginRefreshKey},
+			err, "getting plugin refresh key")
 	}
 
 	valueBool, ok := value.(bool)
 	if !ok {
-		log.Println("Error converting plugin refresh key to bool")
+		logger.Log(logger.LevelInfo, nil, nil, "converting plugin refresh key to bool")
 	}
 
 	if valueBool {
 		// We signal back to the frontend through a header.
 		// See apiProxy.ts in the frontend for how it handles this.
-		log.Println("Sending reload plugins signal to frontend")
+		logger.Log(logger.LevelInfo, nil, nil, "Sending reload plugins signal to frontend")
 
 		// Allow JavaScript access to X-Reload header. Because denied by default.
 		w.Header().Set("Access-Control-Expose-Headers", "X-Reload")
@@ -208,7 +223,8 @@ func HandlePluginReload(cache cache.Cache[interface{}], w http.ResponseWriter) {
 		// set the plugin refresh key to false
 		err := cache.Set(context.Background(), PluginRefreshKey, false)
 		if err != nil {
-			log.Println("Error setting plugin refresh key", err)
+			logger.Log(logger.LevelError, map[string]string{"key": PluginRefreshKey},
+				err, "setting plugin refresh key")
 		}
 	}
 }
