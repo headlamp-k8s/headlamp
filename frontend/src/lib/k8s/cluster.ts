@@ -327,9 +327,11 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
   class KubeObject {
     static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
     jsonData: T | null = null;
+    private readonly _clusterName: string;
 
     constructor(json: T) {
       this.jsonData = json;
+      this._clusterName = getCluster() || '';
     }
 
     static get className(): string {
@@ -632,11 +634,11 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         args.unshift(this.getNamespace()!);
       }
 
-      return this._class().apiEndpoint.delete(...args);
+      return this._class().apiEndpoint.delete(...args, {}, this._clusterName);
     }
 
     update(data: KubeObjectInterface) {
-      return this._class().put(data);
+      return this._class().apiEndpoint.put(data, {}, this._clusterName);
     }
 
     static put(data: KubeObjectInterface) {
@@ -655,14 +657,20 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
       type ApiEndpointWithScale = {
         scale: {
-          put: (data: { metadata: KubeMetadata; spec: { replicas: number } }) => Promise<any>;
+          put: (
+            data: { metadata: KubeMetadata; spec: { replicas: number } },
+            clusterName?: string
+          ) => Promise<any>;
         };
       };
 
-      return (this._class().apiEndpoint as ApiEndpointWithScale).scale.put({
-        metadata: this.metadata,
-        spec,
-      });
+      return (this._class().apiEndpoint as ApiEndpointWithScale).scale.put(
+        {
+          metadata: this.metadata,
+          spec,
+        },
+        this._clusterName
+      );
     }
 
     patch(body: OpPatch[]) {
@@ -674,7 +682,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       args.push(this.getName());
-      return this._class().apiEndpoint.patch(...args);
+      return this._class().apiEndpoint.patch(...args, {}, this._clusterName);
     }
 
     /** Performs a request to check if the user has the given permission.
