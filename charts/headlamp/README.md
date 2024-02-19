@@ -28,6 +28,7 @@ See [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAIN
 | affinity | object | `{}` | Affinity settings for pod assignment |
 | clusterRoleBinding.annotations | object | `{}` | Annotations to add to the cluster role binding |
 | clusterRoleBinding.create | bool | `true` | Specified whether a cluster role binding should be created |
+| env | list | `[]` | An optional list of environment variables |
 | fullnameOverride | string | `""` | Overrides the full name of the chart |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. One of Always, Never, IfNotPresent |
 | image.registry | string | `"ghcr.io"` | Container image registry |
