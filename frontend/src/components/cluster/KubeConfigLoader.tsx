@@ -3,8 +3,7 @@ import { Button, Checkbox, FormControl, Grid, Tooltip } from '@mui/material';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
+import { styled } from '@mui/system';
 import * as yaml from 'js-yaml';
 import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -79,60 +78,36 @@ function configWithSelectedClusters(config: kubeconfig, selectedClusters: string
   return newConfig;
 }
 
-const useStyles = makeStyles(theme => ({
-  dropzone: {
-    border: 1,
-    borderRadius: 1,
-    borderWidth: 2,
-    borderColor: 'rgba(0, 0, 0)',
-    borderStyle: 'dashed',
-    padding: '20px',
-    margin: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '&:hover': {
-      borderColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    '&:focus-within': {
-      borderColor: 'rgba(0, 0, 0, 0.5)',
-    },
+const DropZoneBox = styled(Box)({
+  border: 1,
+  borderRadius: 1,
+  borderWidth: 2,
+  borderColor: 'rgba(0, 0, 0)',
+  borderStyle: 'dashed',
+  padding: '20px',
+  margin: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  '&:hover': {
+    borderColor: 'rgba(0, 0, 0, 0.5)',
   },
-  blackButton: {
+  '&:focus-within': {
+    borderColor: 'rgba(0, 0, 0, 0.5)',
+  },
+});
+
+const WideButton = styled(Button)({
+  width: '100%',
+  maxWidth: '300px',
+});
+
+const BlackButton = styled(WideButton)(({ theme }) => ({
+  backgroundColor: theme.palette.sidebarBg,
+  color: theme.palette.primary.contrastText,
+  '&:hover': {
+    opacity: '0.8',
     backgroundColor: theme.palette.sidebarBg,
-    color: theme.palette.primary.contrastText,
-    '&:hover': {
-      opacity: '0.8',
-      backgroundColor: theme.palette.sidebarBg,
-    },
-  },
-  wideButton: {
-    width: '100%',
-    maxWidth: '300px',
-  },
-  centeredBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-  },
-  selectorBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    justifyContent: 'center',
-    padding: '15px',
-    width: '100%',
-    maxWidth: '300px',
-  },
-  selectorForm: {
-    overflowY: 'auto',
-    height: '150px',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    width: '100%',
   },
 }));
 
@@ -191,8 +166,6 @@ function KubeConfigLoader() {
   const dispatch = useDispatch();
   const { t } = useTranslation(['translation']);
 
-  const classes = useStyles();
-
   const onDrop = (acceptedFiles: Blob[]) => {
     setError('');
     const reader = new FileReader();
@@ -237,12 +210,7 @@ function KubeConfigLoader() {
       case Step.LoadKubeConfig:
         return (
           <Box>
-            <Box
-              border={1}
-              borderColor="secondary.main"
-              {...getRootProps()}
-              className={classes.dropzone}
-            >
+            <DropZoneBox border={1} borderColor="secondary.main" {...getRootProps()}>
               <FormControl>
                 <input {...getInputProps()} />
                 <Tooltip
@@ -258,11 +226,9 @@ function KubeConfigLoader() {
                   </Button>
                 </Tooltip>
               </FormControl>
-            </Box>
+            </DropZoneBox>
             <Box style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button onClick={() => history.goBack()} className={classes.wideButton}>
-                {t('translation|Back')}
-              </Button>
+              <WideButton onClick={() => history.goBack()}>{t('translation|Back')}</WideButton>
             </Box>
           </Box>
         );
@@ -280,8 +246,27 @@ function KubeConfigLoader() {
             <Typography>{t('translation|Select clusters')}</Typography>
             {fileContent.clusters ? (
               <>
-                <Box className={classes.selectorBox}>
-                  <FormControl className={classes.selectorForm}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    justifyContent: 'center',
+                    padding: '15px',
+                    width: '100%',
+                    maxWidth: '300px',
+                  }}
+                >
+                  <FormControl
+                    sx={{
+                      overflowY: 'auto',
+                      height: '150px',
+                      paddingLeft: '10px',
+                      paddingRight: '10px',
+                      width: '100%',
+                    }}
+                  >
                     {fileContent.contexts.map(context => {
                       return (
                         <FormControlLabel
@@ -308,28 +293,26 @@ function KubeConfigLoader() {
                     alignItems="stretch"
                   >
                     <Grid item>
-                      <Button
+                      <BlackButton
                         variant="contained"
                         color="primary"
                         onClick={() => {
                           setState(Step.ConfigureClusters);
                         }}
-                        className={clsx(classes.wideButton, classes.blackButton)}
                         disabled={selectedClusters.length === 0}
                       >
                         {t('translation|Next')}
-                      </Button>
+                      </BlackButton>
                     </Grid>
                     <Grid item>
-                      <Button
+                      <WideButton
                         onClick={() => {
                           setError('');
                           setState(Step.LoadKubeConfig);
                         }}
-                        className={classes.wideButton}
                       >
                         {t('translation|Back')}
-                      </Button>
+                      </WideButton>
                     </Grid>
                   </Grid>
                 </Box>
@@ -346,17 +329,21 @@ function KubeConfigLoader() {
         );
       case Step.Success:
         return (
-          <Box className={classes.centeredBox}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              textAlign: 'center',
+              alignItems: 'center',
+            }}
+          >
             <Box style={{ padding: '32px' }}>
               <Typography>{t('translation|Clusters successfully set up!')}</Typography>
             </Box>
-            <Button
-              variant="contained"
-              className={clsx(classes.wideButton, classes.blackButton)}
-              onClick={() => history.replace('/')}
-            >
+            <BlackButton variant="contained" onClick={() => history.replace('/')}>
               {t('translation|Finish')}
-            </Button>
+            </BlackButton>
           </Box>
         );
     }

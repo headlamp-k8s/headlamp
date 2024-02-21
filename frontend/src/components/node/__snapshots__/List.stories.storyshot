@@ -118,13 +118,13 @@ exports[`Storyshots node/List Nodes 1`] = `
                   Ready
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-chartCell css-1ciaiyl-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1oh10zp-MuiTableCell-root"
                   scope="col"
                 >
                   CPU
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-chartCell css-1ciaiyl-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1oh10zp-MuiTableCell-root"
                   scope="col"
                 >
                   Memory
@@ -200,7 +200,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                   </span>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
                 >
                   <div
                     class="recharts-responsive-container makeStyles-container"
@@ -208,7 +208,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                   />
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
                 >
                   <div
                     class="recharts-responsive-container makeStyles-container"
@@ -273,7 +273,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                   </span>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
                 >
                   <div
                     class="recharts-responsive-container makeStyles-container"
@@ -281,7 +281,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                   />
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
                 >
                   <div
                     class="recharts-responsive-container makeStyles-container"

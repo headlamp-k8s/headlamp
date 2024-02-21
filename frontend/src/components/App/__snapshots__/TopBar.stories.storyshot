@@ -11,7 +11,7 @@ exports[`Storyshots TopBar No Token 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1cx3lwj-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -66,7 +66,7 @@ exports[`Storyshots TopBar One Cluster 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1cx3lwj-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -134,7 +134,7 @@ exports[`Storyshots TopBar Processor Action 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1cx3lwj-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -192,7 +192,7 @@ exports[`Storyshots TopBar Token 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1cx3lwj-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -247,7 +247,7 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1cx3lwj-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -260,12 +260,12 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
         class="makeStyles-clusterTitle"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge makeStyles-button css-ltddg6-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge css-1cz0hnj-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
           <span
-            class="makeStyles-clusterName"
+            class="css-k5l2zq"
             title="ak8s-desktop"
           >
             Cluster: ak8s-desktop

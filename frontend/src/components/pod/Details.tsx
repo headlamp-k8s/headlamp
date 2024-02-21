@@ -4,7 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/system';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,18 +27,10 @@ import AuthVisible from '../common/Resource/AuthVisible';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
-const useStyle = makeStyles(theme => ({
-  containerFormControl: {
-    minWidth: '11rem',
-  },
-  linesFormControl: {
-    minWidth: '6rem',
-  },
-  switchControl: {
-    margin: 0,
-    paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-  },
+const PaddedFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
+  margin: 0,
+  paddingTop: theme.spacing(2),
+  paddingRight: theme.spacing(2),
 }));
 
 interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
@@ -46,7 +38,6 @@ interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
 }
 
 function PodLogViewer(props: PodLogViewerProps) {
-  const classes = useStyle();
   const { item, onClose, open, ...other } = props;
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [showPrevious, setShowPrevious] = React.useState<boolean>(false);
@@ -206,7 +197,7 @@ function PodLogViewer(props: PodLogViewerProps) {
       handleReconnect={handleReconnect}
       showReconnectButton={showReconnectButton}
       topActions={[
-        <FormControl className={classes.containerFormControl}>
+        <FormControl sx={{ minWidth: '11rem' }}>
           <InputLabel shrink id="container-name-chooser-label">
             {t('glossary|Container')}
           </InputLabel>
@@ -248,7 +239,7 @@ function PodLogViewer(props: PodLogViewerProps) {
             ))}
           </Select>
         </FormControl>,
-        <FormControl className={classes.linesFormControl}>
+        <FormControl sx={{ minWidth: '6rem' }}>
           <InputLabel shrink id="container-lines-chooser-label">
             {t('translation|Lines')}
           </InputLabel>
@@ -275,8 +266,7 @@ function PodLogViewer(props: PodLogViewerProps) {
                 )
           }
         >
-          <FormControlLabel
-            className={classes.switchControl}
+          <PaddedFormControlLabel
             label={t('translation|Show previous')}
             disabled={!hasContainerRestarted()}
             control={
@@ -290,8 +280,7 @@ function PodLogViewer(props: PodLogViewerProps) {
             }
           />
         </LightTooltip>,
-        <FormControlLabel
-          className={classes.switchControl}
+        <PaddedFormControlLabel
           label={t('translation|Timestamps')}
           control={
             <Switch
@@ -303,8 +292,7 @@ function PodLogViewer(props: PodLogViewerProps) {
             />
           }
         />,
-        <FormControlLabel
-          className={classes.switchControl}
+        <PaddedFormControlLabel
           label={t('translation|Follow')}
           control={
             <Switch

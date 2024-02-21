@@ -1,4 +1,5 @@
-import { SvgIcon } from '@mui/material';
+import { SvgIcon, Theme } from '@mui/material';
+import { SxProps } from '@mui/system';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -16,6 +17,8 @@ export interface AppLogoProps {
   themeName?: 'dark' | 'light';
   /** A class to use on your SVG. */
   className?: string;
+  /** SxProps to use on your SVG. */
+  sx?: SxProps<Theme>;
   [key: string]: any;
 }
 
@@ -26,10 +29,11 @@ export type AppLogoType =
   | null;
 
 export default function OriginalAppLogo(props: AppLogoProps) {
-  const { className, logoType, themeName } = props;
+  const { sx, className, logoType, themeName } = props;
 
   return (
     <SvgIcon
+      sx={sx}
       className={className}
       component={
         logoType === 'large'
