@@ -14,7 +14,7 @@ import { getCluster, timeAgo } from '../../lib/util';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { clusterAction } from '../../redux/clusterActionSlice';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { ActionButton, StatusLabelProps } from '../common';
+import { ActionButton, ConfirmDialog, StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
 import { DetailsGrid, OwnedPodsSection } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
@@ -44,6 +44,7 @@ export default function NodeDetails() {
   const [nodeFromAPI, nodeError] = Node.useGet(name);
   const [node, setNode] = useState(nodeFromAPI);
   const noMetrics = metricsError?.status === 404;
+  const [drainDialogOpen, setDrainDialogOpen] = useState(false);
 
   useEffect(() => {
     setNode(nodeFromAPI);
@@ -119,6 +120,10 @@ export default function NodeDetails() {
     }, 1000);
   }
 
+  function toggleDrainDialogVisibility() {
+    setDrainDialogOpen(drainDialogOpen => !drainDialogOpen);
+  }
+
   function handleNodeDrain(node: Node) {
     const cluster = getCluster();
     if (!cluster) return;
@@ -150,82 +155,104 @@ export default function NodeDetails() {
     );
   }
 
-  return (
-    <DetailsGrid
-      resourceType={Node}
-      name={name}
-      error={nodeError}
-      headerSection={item => (
-        <ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />
-      )}
-      withEvents
-      actions={item => {
-        const cordon = item?.jsonData?.spec?.unschedulable;
-        const cordonOrUncordon = cordon ? t('Uncordon') : t('Cordon');
+  function DrainDialog() {
+    return (
+      <>
+        <ConfirmDialog
+          title={t('Drain Node')}
+          description={t('Are you sure you want to drain the node {{name}}?', {
+            name: node?.metadata.name,
+          })}
+          onConfirm={() => {
+            setDrainDialogOpen(false);
+            handleNodeDrain(node);
+          }}
+          handleClose={() => setDrainDialogOpen(false)}
+          open={drainDialogOpen}
+        />
+      </>
+    );
+  }
 
-        return [
-          {
-            id: DefaultHeaderAction.NODE_TOGGLE_CORDON,
-            action: (
-              <AuthVisible item={item} authVerb="update">
-                <ActionButton
-                  description={cordonOrUncordon}
-                  icon={cordon ? 'mdi:check-circle-outline' : 'mdi:cancel'}
-                  onClick={() => handleNodeScheduleState(item, cordon)}
-                  iconButtonProps={{
-                    disabled: isupdatingNodeScheduleProperty,
-                  }}
-                />
-              </AuthVisible>
-            ),
-          },
-          {
-            id: DefaultHeaderAction.NODE_DRAIN,
-            action: (
-              <AuthVisible item={item} authVerb="delete">
-                <ActionButton
-                  description={t('Drain')}
-                  icon="mdi:delete-variant"
-                  onClick={() => handleNodeDrain(item)}
-                  iconButtonProps={{
-                    disabled: isNodeDrainInProgress,
-                  }}
-                />
-              </AuthVisible>
-            ),
-          },
-        ];
-      }}
-      extraInfo={item =>
-        item && [
-          {
-            name: t('translation|Ready'),
-            value: <NodeReadyLabel node={item} />,
-          },
-          {
-            name: t('translation|Conditions'),
-            value: <NodeConditionsLabel node={item} />,
-          },
-          {
-            name: t('Pod CIDR'),
-            value: item.spec.podCIDR,
-          },
-          ...getAddresses(item),
-        ]
-      }
-      extraSections={item =>
-        item && [
-          {
-            id: 'headlamp.node-system-info',
-            section: <SystemInfoSection node={item} />,
-          },
-          {
-            id: 'headlamp.node-owned-pods',
-            section: <OwnedPodsSection resource={item?.jsonData} />,
-          },
-        ]
-      }
-    />
+  return (
+    <>
+      <DrainDialog />
+      <DetailsGrid
+        resourceType={Node}
+        name={name}
+        error={nodeError}
+        headerSection={item => (
+          <ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />
+        )}
+        withEvents
+        actions={item => {
+          const cordon = item?.jsonData?.spec?.unschedulable;
+          const cordonOrUncordon = cordon ? t('Uncordon') : t('Cordon');
+
+          return [
+            {
+              id: DefaultHeaderAction.NODE_TOGGLE_CORDON,
+              action: (
+                <AuthVisible item={item} authVerb="update">
+                  <ActionButton
+                    description={cordonOrUncordon}
+                    icon={cordon ? 'mdi:check-circle-outline' : 'mdi:cancel'}
+                    onClick={() => handleNodeScheduleState(item, cordon)}
+                    iconButtonProps={{
+                      disabled: isupdatingNodeScheduleProperty,
+                    }}
+                  />
+                </AuthVisible>
+              ),
+            },
+            {
+              id: DefaultHeaderAction.NODE_DRAIN,
+              action: (
+                <AuthVisible item={item} authVerb="delete">
+                  <ActionButton
+                    description={t('Drain')}
+                    icon="mdi:delete-variant"
+                    onClick={() => toggleDrainDialogVisibility()}
+                    iconButtonProps={{
+                      disabled: isNodeDrainInProgress,
+                    }}
+                  />
+                </AuthVisible>
+              ),
+            },
+          ];
+        }}
+        extraInfo={item =>
+          item && [
+            {
+              name: t('translation|Ready'),
+              value: <NodeReadyLabel node={item} />,
+            },
+            {
+              name: t('translation|Conditions'),
+              value: <NodeConditionsLabel node={item} />,
+            },
+            {
+              name: t('Pod CIDR'),
+              value: item.spec.podCIDR,
+            },
+            ...getAddresses(item),
+          ]
+        }
+        extraSections={item =>
+          item && [
+            {
+              id: 'headlamp.node-system-info',
+              section: <SystemInfoSection node={item} />,
+            },
+            {
+              id: 'headlamp.node-owned-pods',
+              section: <OwnedPodsSection resource={item?.jsonData} />,
+            },
+          ]
+        }
+      />
+    </>
   );
 }
 

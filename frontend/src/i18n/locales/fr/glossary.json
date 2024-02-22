@@ -94,6 +94,8 @@
   "Drained node {{name}}.": "Nœud {{name}} vidé.",
   "Failed to drain node {{name}}.": "Échec de la vidange du nœud {{name}}.",
   "Draining node {{name}} cancelled.": "Vidange du nœud {{name}} annulée.",
+  "Drain Node": "",
+  "Are you sure you want to drain the node {{name}}?": "",
   "Uncordon": "Débloquer",
   "Cordon": "Bloquer",
   "Drain": "Vider",

@@ -94,6 +94,8 @@
   "Drained node {{name}}.": "Node {{name}} wurde entleert.",
   "Failed to drain node {{name}}.": "Fehler beim Entleeren des Knotens {{name}}.",
   "Draining node {{name}} cancelled.": "Entleerung des Knotens {{name}} abgebrochen.",
+  "Drain Node": "",
+  "Are you sure you want to drain the node {{name}}?": "",
   "Uncordon": "Planungssperre aufheben",
   "Cordon": "Planungssperre setzen",
   "Drain": "Entleeren",
