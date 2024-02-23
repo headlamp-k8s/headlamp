@@ -20,10 +20,9 @@
     "test": "jest"
   },
   "build": {
-    "appId": "com.kinvolk.headlamp",
+    "appId": "com.microsoft.Headlamp",
     "beforeBuild": "./scripts/build-backend.js",
     "afterPack": "./scripts/after-pack.js",
-    "afterSign": "mac/scripts/notarize.js",
     "asar": false,
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "protocols": {
@@ -77,6 +76,8 @@
       ]
     },
     "mac": {
+      "appId": "com.microsoft.Headlamp",
+      "sign": "./mac/scripts/codeSign.js",
       "target": [
         {
           "target": "dmg",
@@ -86,8 +87,8 @@
           ]
         }
       ],
-      "hardenedRuntime": true,
       "gatekeeperAssess": false,
+      "notarize": false,
       "entitlements": "mac/entitlements.mac.plist",
       "entitlementsInherit": "mac/entitlements.mac.plist",
       "extraResources": [
@@ -148,7 +149,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@electron/notarize": "^2.1.0",
     "electron": "^27.0.4",
-    "electron-builder": "^24.0.0",
+    "electron-builder": "^24.9.1",
     "fs-extra": "^8.1.0",
     "i18next-parser": "^7.7.0",
     "jest": "^27.4.7",
