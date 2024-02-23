@@ -2,7 +2,7 @@
  * This script is used to sign and notarize the Headlamp app for MacOS
  * using a tool from ESRP (Windows only). It is mainly called from CI.
  *
- * Usage: node esrp-notarize.js SIGN|NOTARIZE path-to-sign
+ * Usage: node esrp.js apple-sign|apple-notarize|windows-sign path-to-sign
  **/
 
 const crypto = require('crypto');
@@ -84,7 +84,7 @@ function getSHA256(filePath) {
   return hash.digest('hex');
 }
 
-const signOp = {
+const macSignOp = {
   KeyCode: 'CP-401337-Apple',
 
   OperationCode: 'MacAppDeveloperSign',
@@ -95,7 +95,7 @@ const signOp = {
 
   ToolVersion: '1.0',
 };
-const notarizeOp = {
+const macNotarizeOp = {
   KeyCode: 'CP-401337-Apple',
   OperationCode: 'MacAppNotarize',
   Parameters: {
@@ -105,12 +105,40 @@ const notarizeOp = {
   ToolVersion: '1.0',
 };
 
-function createSignJson(pathToSign, fileName = 'test_SignInput.json') {
-  return createJson(pathToSign, signOp, fileName);
+const winSignOps = [
+  {
+    KeyCode: 'CP-231522',
+    OperationCode: 'SigntoolSign',
+    Parameters: {
+      OpusName: 'Microsoft',
+      OpusInfo: 'http://www.microsoft.com',
+      Append: '/as',
+      FileDigest: '/fd "SHA256"',
+      PageHash: '/NPH',
+      TimeStamp: '/tr "http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer" /td sha256',
+    },
+    ToolName: 'sign',
+    ToolVersion: '1.0',
+  },
+  {
+    KeyCode: 'CP-231522',
+    OperationCode: 'SigntoolVerify',
+    Parameters: {},
+    ToolName: 'sign',
+    ToolVersion: '1.0',
+  },
+];
+
+function createMacSignJson(pathToSign, fileName = 'test_SignInput.json') {
+  return createJson(pathToSign, [macSignOp], fileName);
 }
 
-function createNotarizeJson(pathToSign, fileName = 'test_SignInput.json') {
-  return createJson(pathToSign, notarizeOp, fileName);
+function createMacNotarizeJson(pathToSign, fileName = 'test_SignInput.json') {
+  return createJson(pathToSign, [macNotarizeOp], fileName);
+}
+
+function createWinSignJson(pathToSign, fileName = 'test_SignInput.json') {
+  return createJson(pathToSign, winSignOps, fileName);
 }
 
 function createJson(pathToSign, op, fileName = 'test_SignInput.json') {
@@ -144,7 +172,7 @@ function createJson(pathToSign, op, fileName = 'test_SignInput.json') {
         Name: f.path,
       })),
       SigningInfo: {
-        Operations: [op],
+        Operations: [...op],
       },
     };
   };
@@ -158,6 +186,12 @@ function createJson(pathToSign, op, fileName = 'test_SignInput.json') {
   return filePath;
 }
 
+const SIGN_OPS = {
+  APPLE_SIGN: 'apple-sign',
+  APPLEN_OTARIZE: 'apple-notarize',
+  WINDOWS_SIGN: 'windows-sign',
+};
+
 /**
  * Signs the given file, or all files in a given directory if that's what's passed to it.
  * @param esrpTool - The path to the ESRP tool.
@@ -168,17 +202,18 @@ function sign(esrpTool, op, pathToSign) {
   const absPathToSign = path.resolve(pathToSign);
   const signJsonBase = path.basename(absPathToSign).split('.')[0];
   let signInputJson = '';
-  if (op === 'SIGN') {
-    signInputJson = createSignJson(absPathToSign, `${signJsonBase}-SignInput.json`);
-  } else if (op === 'NOTARIZE') {
-    signInputJson = createNotarizeJson(absPathToSign, `${signJsonBase}-SignInput.json`);
+  if (op === SIGN_OPS.APPLE_SIGN) {
+    signInputJson = createMacSignJson(absPathToSign, `${signJsonBase}-SignInput.json`);
+  } else if (op === SIGN_OPS.APPLEN_OTARIZE) {
+    signInputJson = createMacNotarizeJson(absPathToSign, `${signJsonBase}-SignInput.json`);
+  } else if (op === SIGN_OPS.WINDOWS_SIGN) {
+    signInputJson = createWinSignJson(absPathToSign, `${signJsonBase}-SignInput.json`);
   } else {
-    throw new Error('Invalid operation');
+    throw new Error('Invalid operation. The options are:', SIGN_OPS.join(', '));
   }
 
   const policyJson = path.resolve(os.tmpdir(), 'Policy.json');
   fs.writeFileSync(policyJson, JSON.stringify(POLICY_JSON, undefined, 2));
-
   const authJson = path.resolve(os.tmpdir(), 'Auth.json');
   fs.writeFileSync(authJson, JSON.stringify(AUTH_JSON, undefined, 2));
 
@@ -189,6 +224,11 @@ function sign(esrpTool, op, pathToSign) {
     process.exit(e.status !== null ? e.status ?? 1 : 1);
   }
 }
+
+module.exports = {
+  sign,
+  SIGN_OPS,
+};
 
 if (require.main === module) {
   const wantedOp = process.argv[2];

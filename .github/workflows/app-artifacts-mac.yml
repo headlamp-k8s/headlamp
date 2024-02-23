@@ -102,27 +102,19 @@ jobs:
     - name: Sign App
       shell: pwsh
       run: |
-        if ("${{ inputs.signBinaries }}" -eq "true") {
-          $env:ESRP_PATH="$(Get-Location)\Microsoft.EsrpClient.1.2.87\tools\EsrpClient.exe"
-          $env:HEADLAMP_WINDOWS_CLIENT_ID="${{ secrets.WINDOWS_CLIENT_ID }}"
-          $env:HEADLAMP_WINDOWS_SIGN_EMAIL="${{ secrets.WINDOWS_SIGN_EMAIL }}"
-        } else {
-          echo "Not signing binaries"
-        }
-        cd ./app/mac/scripts
-        node ./esrp-notarize.js SIGN ../../../dmgs/
+        $env:ESRP_PATH="$(Get-Location)\Microsoft.EsrpClient.1.2.87\tools\EsrpClient.exe"
+        $env:HEADLAMP_WINDOWS_CLIENT_ID="${{ secrets.WINDOWS_CLIENT_ID }}"
+        $env:HEADLAMP_WINDOWS_SIGN_EMAIL="${{ secrets.WINDOWS_SIGN_EMAIL }}"
+        cd ./app/scripts
+        node ./esrp.js apple-sign ../../dmgs/
     - name: Notarize App
       shell: pwsh
       run: |
-        if ("${{ inputs.signBinaries }}" -eq "true") {
-          $env:ESRP_PATH="$(Get-Location)\Microsoft.EsrpClient.1.2.87\tools\EsrpClient.exe"
-          $env:HEADLAMP_WINDOWS_CLIENT_ID="${{ secrets.WINDOWS_CLIENT_ID }}"
-          $env:HEADLAMP_WINDOWS_SIGN_EMAIL="${{ secrets.WINDOWS_SIGN_EMAIL }}"
-        } else {
-          echo "Not signing binaries"
-        }
-        cd ./app/mac/scripts
-        node ./esrp-notarize.js NOTARIZE ../../../dmgs/
+        $env:ESRP_PATH="$(Get-Location)\Microsoft.EsrpClient.1.2.87\tools\EsrpClient.exe"
+        $env:HEADLAMP_WINDOWS_CLIENT_ID="${{ secrets.WINDOWS_CLIENT_ID }}"
+        $env:HEADLAMP_WINDOWS_SIGN_EMAIL="${{ secrets.WINDOWS_SIGN_EMAIL }}"
+        cd ./app/scripts
+        node ./esrp.js apple-notarize ../../dmgs/
     - name: Upload Notarized
       uses: actions/upload-artifact@v4
       with:
