@@ -9,7 +9,7 @@ on:
         default: 'main'
       signBinaries:
         description: Sign the binaries
-        default: false
+        default: true
         type: boolean
 
 jobs:

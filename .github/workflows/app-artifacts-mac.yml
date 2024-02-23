@@ -9,7 +9,7 @@ on:
         default: 'main'
       signBinaries:
         description: Notarize app
-        default: false
+        default: true
         type: boolean
 jobs:
   build-mac:
