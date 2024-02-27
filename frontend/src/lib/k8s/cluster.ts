@@ -440,9 +440,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         args.unshift(opts?.namespace || null);
       }
 
-      if (onError) {
-        args.push(onError);
-      }
+      args.push(onError);
 
       const queryParams: QueryParameters = {};
       if (opts?.queryParams?.labelSelector) {
