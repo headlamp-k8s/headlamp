@@ -219,7 +219,19 @@ export interface KubeOwnerReference {
 }
 
 export interface ApiListOptions extends QueryParameters {
+  /** The namespace to list objects from. */
   namespace?: string | string[];
+  /** The cluster to list objects from. By default uses the current cluster being viewed. */
+  cluster?: string;
+}
+
+export interface ApiListSingleNamespaceOptions {
+  /** The namespace to get the object from. */
+  namespace?: string;
+  /** The parameters to be passed to the API endpoint. */
+  queryParams?: QueryParameters;
+  /** The cluster to get the object from. By default uses the current cluster being viewed. */
+  cluster?: string;
 }
 
 /**
@@ -278,7 +290,11 @@ export interface KubeManagedFields extends KubeManagedFieldsEntry {}
 // We have to define a KubeObject implementation here because the KubeObject
 // class is defined within the function and therefore not inferable.
 export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
-  apiList: (onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void) => any;
+  apiList: (
+    onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
+    onError?: (err: ApiError) => void,
+    opts?: ApiListSingleNamespaceOptions
+  ) => any;
   useApiList: (
     onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
     onError?: (err: ApiError) => void,
@@ -427,10 +443,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
       onError?: (err: ApiError) => void,
-      opts?: {
-        namespace?: string;
-        queryParams?: QueryParameters;
-      }
+      opts?: ApiListSingleNamespaceOptions
     ) {
       const createInstance = (item: T) => this.create(item) as U;
 
@@ -453,6 +466,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         queryParams['limit'] = opts.queryParams.limit;
       }
       args.push(queryParams);
+
+      args.push(opts?.cluster);
 
       return this.apiEndpoint.list.bind(null, ...args);
     }
@@ -486,6 +501,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       let namespaces: string[] = [];
       unset(queryParams, 'namespace');
 
+      const cluster = opts?.cluster;
+
       if (!!opts?.namespace) {
         if (typeof opts.namespace === 'string') {
           namespaces = [opts.namespace];
@@ -510,13 +527,14 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
             this.apiList(objList => onObjs(namespace, objList as U[]), onError, {
               namespace,
               queryParams,
+              cluster,
             })
           );
         }
       } else {
         // If we don't have a namespace set, then we only have one API call
         // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError, { queryParams }));
+        listCalls.push(this.apiList(listCallback, onError, { queryParams, cluster }));
       }
 
       useConnectApi(...listCalls);
@@ -527,7 +545,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
       const [objList, setObjList] = React.useState<U[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
-      const cluster = useCluster();
+      const currentCluster = useCluster();
+      const cluster = opts?.cluster || currentCluster;
 
       // Reset the list and error when the cluster changes.
       React.useEffect(() => {
@@ -557,7 +576,11 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onGet: (...args: any) => void,
       name: string,
       namespace?: string,
-      onError?: (err: ApiError | null) => void
+      onError?: (err: ApiError | null) => void,
+      opts?: {
+        queryParams?: QueryParameters;
+        cluster?: string;
+      }
     ) {
       const createInstance = (item: T) => this.create(item) as U;
       const args: any[] = [name, (obj: T) => onGet(createInstance(obj))];
@@ -566,9 +589,9 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         args.unshift(namespace);
       }
 
-      if (!!onError) {
-        args.push(onError);
-      }
+      args.push(onError);
+      args.push(opts?.queryParams);
+      args.push(opts?.cluster);
 
       return this.apiEndpoint.get.bind(null, ...args);
     }
@@ -577,17 +600,25 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onGet: (...args: any) => any,
       name: string,
       namespace?: string,
-      onError?: (err: ApiError | null) => void
+      onError?: (err: ApiError | null) => void,
+      opts?: {
+        queryParams?: QueryParameters;
+        cluster?: string;
+      }
     ) {
       // We do the type conversion here because we want to be able to use hooks that may not have
       // the exact signature as get callbacks.
       const getCallback = onGet as (item: U) => void;
-      useConnectApi(this.apiGet(getCallback, name, namespace, onError));
+      useConnectApi(this.apiGet(getCallback, name, namespace, onError, opts));
     }
 
     static useGet<U extends KubeObject>(
       name: string,
-      namespace?: string
+      namespace?: string,
+      opts?: {
+        queryParams?: QueryParameters;
+        cluster?: string;
+      }
     ): [U | null, ApiError | null, (items: U) => void, (err: ApiError | null) => void] {
       const [obj, setObj] = React.useState<U | null>(null);
       const [error, setError] = useErrorState(setObj);
@@ -615,7 +646,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         setError(err);
       }
 
-      this.useApiGet(onGet, name, namespace, onError);
+      this.useApiGet(onGet, name, namespace, onError, opts);
 
       // Return getters and then the setters as the getters are more likely to be used with
       // this function.
