@@ -102,16 +102,6 @@ exports[`Storyshots Settings/PluginSettingsDetail With Auto Save 1`] = `
       <div
         class="MuiStack-root css-niqf4j-MuiStack-root"
       />
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textError MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textError MuiButton-sizeMedium MuiButton-textSizeMedium css-1ftnhkx-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
-      >
-        Delete Plugin
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
     </div>
   </div>
 </div>
@@ -240,16 +230,6 @@ exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
           />
         </button>
       </div>
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textError MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textError MuiButton-sizeMedium MuiButton-textSizeMedium css-1ftnhkx-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
-      >
-        Delete Plugin
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
     </div>
   </div>
 </div>
