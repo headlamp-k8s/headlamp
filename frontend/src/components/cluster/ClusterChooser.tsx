@@ -27,16 +27,16 @@ const ClusterChooser = React.forwardRef(function ClusterChooser(
       size="large"
       variant="contained"
       onClick={clickHandler}
-      sx={{
-        color: 'clusterChooser.button.color',
-        background: 'clusterChooser.button.background',
+      sx={theme => ({
+        color: theme.palette.clusterChooser.button.color,
+        background: theme.palette.clusterChooser.button.background,
         '&:hover': {
-          background: 'clusterChooser.button.hover.background',
+          background: theme.palette.clusterChooser.button.hover.background,
         },
         maxWidth: '20em',
         textTransform: 'none',
         padding: '6px 22px',
-      }}
+      })}
       ref={ref}
     >
       <SpanClusterName title={cluster}>
