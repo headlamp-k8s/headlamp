@@ -18,6 +18,7 @@
   "All Clusters": "Todos los Clusters",
   "Name": "Nombre",
   "Status": "Estado",
+  "Warnings": "",
   "Load cluster": "Cargar cluster",
   "Something went wrong with cluster {{ cluster }}": "Algo ha fallado en el cluster {{ cluster }}",
   "Choose another cluster": "Elegir un otro cluster",
