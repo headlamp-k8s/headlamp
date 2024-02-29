@@ -5,7 +5,9 @@ import (
 	"io/fs"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
@@ -227,4 +229,29 @@ func HandlePluginReload(cache cache.Cache[interface{}], w http.ResponseWriter) {
 				err, "setting plugin refresh key")
 		}
 	}
+}
+
+// Delete deletes the plugin from the plugin directory.
+func Delete(pluginDir, filename string) error {
+	absPluginDir, err := filepath.Abs(pluginDir)
+	if err != nil {
+		return err
+	}
+
+	absPluginPath := path.Join(absPluginDir, filename)
+
+	if !isSubdirectory(absPluginDir, absPluginPath) {
+		return fmt.Errorf("plugin path '%s' is not a subdirectory of '%s'", absPluginPath, absPluginDir)
+	}
+
+	return os.RemoveAll(absPluginPath)
+}
+
+func isSubdirectory(parentDir, dirPath string) bool {
+	rel, err := filepath.Rel(parentDir, dirPath)
+	if err != nil {
+		return false
+	}
+
+	return !strings.HasPrefix(rel, "..") && !strings.HasPrefix(rel, ".")
 }

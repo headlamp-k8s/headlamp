@@ -97,6 +97,13 @@ ___
 [components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
 
 ___
+### PluginSettingsComponentType
+
+Ƭ **PluginSettingsComponentType**: `React.ComponentType`<[`PluginSettingsDetailsProps`](../interfaces/plugin_registry.PluginSettingsDetailsProps.md)\> \| `ReactElement` \| typeof `React.Component` \| ``null``
+
+#### Defined in
+[plugin/pluginsSlice.ts:24](https://github.com/headlamp-k8s/headlamp/blob/main/frontend/src/plugin/pluginsSlice.ts#L24)
+___
 
 ### sectionFunc
 
@@ -661,3 +668,50 @@ registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry))
 #### Defined in
 
 [plugin/registry.tsx:231](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L231)
+
+___
+### registerPluginSettings
+
+▸ **registerPluginSettings**(`name`,`component`,`displaySaveButton`): `void`
+
+**`example`**
+
+```tsx
+import { registerPluginSettings } from "@kinvolk/headlamp-plugin/lib";
+import { TextField } from "@mui/material";
+
+function MyPluginSettingsComponent(props: PluginSettingsDetailsProps) {
+  const { data, onDataChange } = props;
+
+  function onChange(value: string) {
+    if (onDataChange) {
+      onDataChange({ works: value });
+    }
+  }
+
+  return (
+    <TextField
+      value={data?.works || ""}
+      onChange={(e) => onChange(e.target.value)}
+      label="Normal Input"
+      variant="outlined"
+      fullWidth
+    />
+  );
+}
+const displaySaveButton = true;
+// Register a plugin settings component.
+registerPluginSettings(
+  "my-plugin",
+  MyPluginSettingsComponent,
+  displaySaveButton
+);
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `name` | `string` | The name of the plugin. |
+| `component` | `PluginSettingsComponentType` | The component to be rendered in the plugin settings page. |
+| `displaySaveButton` | `boolean` | Whether to display the save button. |

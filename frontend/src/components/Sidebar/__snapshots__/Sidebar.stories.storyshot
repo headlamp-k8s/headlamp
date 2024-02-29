@@ -102,7 +102,31 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
                     >
                       <ul
                         class="MuiList-root makeStyles-nested css-1mk9mw3-MuiList-root"
-                      />
+                      >
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/settings/plugins"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
+                                Plugins
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -274,7 +298,31 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
                     >
                       <ul
                         class="MuiList-root makeStyles-nested css-1mk9mw3-MuiList-root"
-                      />
+                      >
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/settings/plugins"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
+                                Plugins
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>

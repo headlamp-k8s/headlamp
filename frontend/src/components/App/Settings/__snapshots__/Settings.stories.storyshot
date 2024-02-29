@@ -174,7 +174,7 @@ exports[`Storyshots Settings General 1`] = `
               style="width: 100px;"
             >
               <div
-                aria-controls="mui-48"
+                aria-controls="mui-50"
                 aria-expanded="false"
                 aria-haspopup="listbox"
                 class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"

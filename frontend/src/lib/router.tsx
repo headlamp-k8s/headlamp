@@ -4,6 +4,7 @@ import AuthToken from '../components/account/Auth';
 import Home from '../components/App/Home';
 import NotificationList from '../components/App/Notifications/List';
 import PluginSettings from '../components/App/PluginSettings';
+import PluginSettingsDetails from '../components/App/PluginSettings/PluginSettingsDetails';
 import Settings from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
@@ -720,8 +721,19 @@ const defaultRoutes: {
     },
     useClusterURL: false,
     noAuthRequired: true,
-    disabled: !helpers.isElectron(),
     component: () => <PluginSettings />,
+  },
+  pluginDetails: {
+    path: '/settings/plugins/:name',
+    exact: true,
+    name: 'Plugin Details',
+    sidebar: {
+      item: 'plugins',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => <PluginSettingsDetails />,
   },
   portforwards: {
     path: '/portforwards',

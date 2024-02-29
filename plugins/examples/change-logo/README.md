@@ -1,6 +1,6 @@
 # Example Plugin: Changing The Logo
 
-This shows you how to change the Headlamp logo.
+This shows you how to change the Headlamp logo and make it user configurable.
 
 ![screenshot of the logo being changed](../../../docs/development/plugins/images/change-logo.png)
 
@@ -18,8 +18,10 @@ npm start
 - For an image, at a minimum you will need to provide a small logo and a big one.
 - There are two example svg images which you can check for sizes.
 - Click the logo to see the two states the logo can be in (small and big).
+- The logo can be configured by the user in the settings page of the plugin.
 
 The main code for the example plugin is in [src/index.tsx](src/index.tsx).
+The code for the plugin settings is in [src/settings.tsx](src/settings.tsx).
 
 See the API documentation for:
 

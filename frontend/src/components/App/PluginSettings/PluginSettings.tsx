@@ -1,12 +1,15 @@
-import { Switch } from '@mui/material';
+import { Switch, SwitchProps, Typography, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useFilterFunc } from '../../../lib/util';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { SectionBox, SimpleTable } from '../../common';
+import { Link as HeadlampLink, SectionBox, SimpleTable } from '../../common';
+import SectionFilterHeader from '../../common/SectionFilterHeader';
 
 /**
  * Interface of the component's props structure.
@@ -25,6 +28,65 @@ export interface PluginSettingsPureProps {
 
 /** PluginSettingsProp intentially left empty to remain malleable */
 export interface PluginSettingsProps {}
+
+const EnableSwitch = (props: SwitchProps) => {
+  const theme = useTheme();
+
+  return (
+    <Switch
+      focusVisibleClassName=".Mui-focusVisible"
+      disableRipple
+      sx={{
+        width: 42,
+        height: 26,
+        padding: 0,
+        '& .MuiSwitch-switchBase': {
+          padding: 0,
+          margin: '2px',
+
+          transitionDuration: '300ms',
+          '&.Mui-checked': {
+            transform: 'translateX(16px)',
+            color: '#fff',
+            '& + .MuiSwitch-track': {
+              backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#0078d4',
+              opacity: 1,
+              border: 0,
+            },
+            '&.Mui-disabled + .MuiSwitch-track': {
+              opacity: 0.5,
+            },
+          },
+          '&.Mui-focusVisible .MuiSwitch-thumb': {
+            color: '#33cf4d',
+            border: '6px solid #fff',
+          },
+          '&.Mui-disabled .MuiSwitch-thumb': {
+            color:
+              theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[600],
+          },
+          '&.Mui-disabled + .MuiSwitch-track': {
+            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+          },
+        },
+        '& .MuiSwitch-thumb': {
+          boxSizing: 'border-box',
+          width: 22,
+          height: 22,
+        },
+        '& .MuiSwitch-track': {
+          borderRadius: 26 / 2,
+          backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+          opacity: 1,
+          transition: theme.transitions.create(['background-color'], {
+            duration: 500,
+          }),
+        },
+      }}
+      {...props}
+    />
+  );
+};
 
 /** PluginSettingsPure is the main component to where we render the plugin data. */
 export function PluginSettingsPure(props: PluginSettingsPureProps) {
@@ -98,28 +160,65 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
 
   return (
     <>
-      <SectionBox title={t('translation|Plugins')}>
+      <SectionBox
+        title={<SectionFilterHeader title={t('translation|Plugins')} noNamespaceFilter />}
+      >
         <SimpleTable
           columns={[
             {
-              label: 'Name',
-              datum: 'name',
-            },
-            {
-              label: 'Description',
-              datum: 'description',
-            },
-            {
-              label: 'Homepage',
-              getter: plugin => {
-                return plugin.homepage ? plugin.homepage : plugin?.repository?.url;
-              },
-            },
-            {
-              label: 'Enable',
+              label: t('translation|Name'),
               getter: plugin => {
                 return (
-                  <Switch
+                  <>
+                    <Typography variant="subtitle1">
+                      <HeadlampLink
+                        routeName={'pluginDetails'}
+                        params={{ name: plugin.name }}
+                        align="right"
+                      >
+                        {plugin.name}
+                      </HeadlampLink>
+                    </Typography>
+                    <Typography variant="caption">{plugin.version}</Typography>
+                  </>
+                );
+              },
+              sort: (a, b) => a.name.localeCompare(b.name),
+            },
+            {
+              label: t('translation|Description'),
+              datum: 'description',
+              sort: true,
+            },
+            {
+              label: t('translation|Origin'),
+              getter: plugin => {
+                const url = plugin?.homepage || plugin?.repository?.url;
+                return plugin?.origin ? (
+                  url ? (
+                    <Link href={url}>{plugin?.origin}</Link>
+                  ) : (
+                    plugin?.origin
+                  )
+                ) : (
+                  t('translation|Unknown')
+                );
+              },
+              sort: true,
+            },
+            // TODO: Fetch the plugin status from the plugin settings store
+            {
+              label: t('translation|Status'),
+              getter: plugin => {
+                return plugin.isEnabled ? t('translation|Enabled') : t('translation|Disabled');
+              },
+              sort: true,
+            },
+            {
+              label: t('translation|Enable'),
+              getter: plugin => {
+                return (
+                  <EnableSwitch
                     aria-label={`Toggle ${plugin.name}`}
                     checked={plugin.isEnabled}
                     onChange={() => switchChangeHanlder(plugin)}
@@ -128,9 +227,11 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                   />
                 );
               },
+              sort: (a, b) => (a.isEnabled === b.isEnabled ? 0 : a.isEnabled ? -1 : 1),
             },
           ]}
           data={pluginChanges}
+          filterFunction={useFilterFunc<PluginInfo>(['.name'])}
         />
       </SectionBox>
       {enableSave && (

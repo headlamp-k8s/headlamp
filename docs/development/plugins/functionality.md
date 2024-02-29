@@ -166,3 +166,12 @@ React to Headlamp events with [registerHeadlampEventCallback](../api/modules/plu
 
 - Example plugin shows [How to show snackbars for Headlamp events](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/headlamp-events).
 - API reference for [registerHeadlampEventCallback](../api/modules/plugin_registry.md#registerheadlampeventcallback)
+
+
+### Plugin Settings
+
+The plugins can have user configurable settings that can be used to change the behavior of the plugin. The plugin settings can be created using [registerPluginSettings](../api/modules/plugin_registry.md#registerpluginsettings).
+
+- Example plugin shows [How to create plugin settings and use them](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
+
+![screenshot of the plugin settings](./images/plugin-settings.png)
