@@ -1,5 +1,6 @@
-import { ResourceClasses } from '.';
-import { apiFactoryWithNamespace } from './apiProxy';
+import React from 'react';
+import { CancellablePromise, ResourceClasses } from '.';
+import { ApiError, apiFactoryWithNamespace, QueryParameters } from './apiProxy';
 import { request } from './apiProxy';
 import { KubeMetadata, KubeObject, makeKubeObject } from './cluster';
 
@@ -108,6 +109,89 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
     }
 
     return objInstance;
+  }
+
+  static useListForClusters(clusterNames: string[], options?: { queryParams?: QueryParameters }) {
+    type EventErrorObj = {
+      [cluster: string]: {
+        warnings: Event[];
+        error?: ApiError | null;
+      };
+    };
+    const [clusters, setClusters] = React.useState<Set<string>>(new Set(clusterNames));
+    const [events, setEvents] = React.useState<EventErrorObj>({});
+    const queryParameters = Object.assign(
+      { limit: this.maxEventsLimit },
+      options?.queryParams ?? {}
+    );
+
+    // Make sure we only update when there are different cluster names
+    React.useEffect(() => {
+      let shouldUpdate = false;
+      for (const cluster of clusterNames) {
+        if (!clusters.has(cluster)) {
+          shouldUpdate = true;
+          break;
+        }
+      }
+      if (shouldUpdate) {
+        setClusters(new Set(clusterNames));
+      }
+    }, [clusters, clusterNames]);
+
+    React.useEffect(() => {
+      if (clusters.size === 0) {
+        console.debug('No clusters specified when fetching warnings');
+      }
+      const cancellables: CancellablePromise[] = [];
+      for (const cluster of clusters) {
+        const cancelFunc = Event.apiList(
+          (events: Event[]) => {
+            setEvents(prevWarnings => ({
+              ...prevWarnings,
+              [cluster]: {
+                warnings: events,
+                error: null,
+              },
+            }));
+          },
+          error => {
+            setEvents(prevWarnings => ({
+              ...prevWarnings,
+              [cluster]: {
+                warnings: [],
+                error,
+              },
+            }));
+          },
+          {
+            cluster: cluster,
+            queryParams: queryParameters,
+          }
+        )();
+        cancellables.push(cancelFunc);
+      }
+
+      return function cancelAllConnectedListings() {
+        for (const cancellable of cancellables) {
+          cancellable.then(c => c());
+        }
+      };
+    }, [clusters]);
+
+    return events;
+  }
+
+  static useWarningList(clusters: string[], options?: { queryParams?: QueryParameters }) {
+    const queryParameters = Object.assign(
+      {
+        limit: this.maxEventsLimit,
+        fieldSelector: 'type!=Normal',
+      },
+      options?.queryParams ?? {}
+    );
+
+    return this.useListForClusters(clusters, { queryParams: queryParameters });
   }
 }
 
