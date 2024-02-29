@@ -110,52 +110,54 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     actions.push(...preRenderFromFilterActions);
   }
 
-  if (!showFilters.show) {
-    actions.push(
-      <IconButton
-        aria-label={t('Show filter')}
-        onClick={() => setShowFilters({ show: true, userTriggered: true })}
-        size="medium"
-      >
-        <Icon icon="mdi:filter-variant" />
-      </IconButton>
-    );
-  } else {
-    actions.push(
-      <Grid container alignItems="flex-end" justifyContent="flex-end" spacing={1} wrap="nowrap">
-        {!noNamespaceFilter && (
+  if (!noSearch) {
+    if (!showFilters.show) {
+      actions.push(
+        <IconButton
+          aria-label={t('Show filter')}
+          onClick={() => setShowFilters({ show: true, userTriggered: true })}
+          size="medium"
+        >
+          <Icon icon="mdi:filter-variant" />
+        </IconButton>
+      );
+    } else {
+      actions.push(
+        <Grid container alignItems="flex-end" justifyContent="flex-end" spacing={1} wrap="nowrap">
+          {!noNamespaceFilter && (
+            <Grid item>
+              <NamespacesAutocomplete />
+            </Grid>
+          )}
           <Grid item>
-            <NamespacesAutocomplete />
+            <TextField
+              id="standard-search"
+              label={t('Search')}
+              type="search"
+              InputLabelProps={{ shrink: true }}
+              InputProps={{ role: 'search' }}
+              placeholder={t('Filter')}
+              value={filter.search}
+              onChange={event => {
+                dispatch(setSearchFilter(event.target.value));
+                setShowFilters({ show: true, userTriggered: true });
+              }}
+              inputRef={focusedRef}
+            />
           </Grid>
-        )}
-        <Grid item>
-          <TextField
-            id="standard-search"
-            label={t('Search')}
-            type="search"
-            InputLabelProps={{ shrink: true }}
-            InputProps={{ role: 'search' }}
-            placeholder={t('Filter')}
-            value={filter.search}
-            onChange={event => {
-              dispatch(setSearchFilter(event.target.value));
-              setShowFilters({ show: true, userTriggered: true });
-            }}
-            inputRef={focusedRef}
-          />
+          <Grid item>
+            <Button
+              variant="contained"
+              endIcon={<Icon icon="mdi:filter-variant-remove" />}
+              onClick={resetFilters}
+              aria-controls="standard-search"
+            >
+              {t('Clear')}
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Button
-            variant="contained"
-            endIcon={<Icon icon="mdi:filter-variant-remove" />}
-            onClick={resetFilters}
-            aria-controls="standard-search"
-          >
-            {t('Clear')}
-          </Button>
-        </Grid>
-      </Grid>
-    );
+      );
+    }
   }
 
   if (!!propsActions) {

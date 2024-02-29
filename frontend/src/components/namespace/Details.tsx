@@ -1,9 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import Namespace from '../../lib/k8s/namespace';
+import { LimitRange } from '../../lib/k8s/limitRange';
+import Namespace, { KubeNamespace } from '../../lib/k8s/namespace';
+import ResourceQuota from '../../lib/k8s/resourceQuota';
 import { StatusLabel } from '../common/Label';
 import { ConditionsSection, DetailsGrid, OwnedPodsSection } from '../common/Resource';
 import DetailsViewSection from '../DetailsViewSection';
+import { LimitRangeRenderer } from '../limitRange/List';
+import { ResourceQuotaRenderer } from '../resourceQuota/List';
 
 export default function NamespaceDetails() {
   const { name } = useParams<{ name: string }>();
@@ -34,8 +38,18 @@ export default function NamespaceDetails() {
             section: item?.status?.conditions && <ConditionsSection resource={item} />,
           },
           {
+            id: 'headlamp.namespace-owned-resourcequotas',
+            section: <NamespacedResourceQuotasSection resource={item?.jsonData} />,
+          },
+          {
+            id: 'headlamp.namespace-owned-limitranges',
+            section: <NamespacedLimitRangesSection resource={item?.jsonData} />,
+          },
+          {
             id: 'headlamp.namespace-owned-pods',
-            section: <OwnedPodsSection hideColumns={['namespace']} resource={item?.jsonData} />,
+            section: (
+              <OwnedPodsSection noSearch hideColumns={['namespace']} resource={item?.jsonData} />
+            ),
           },
           {
             id: 'headlamp.namespace-details-view',
@@ -43,6 +57,48 @@ export default function NamespaceDetails() {
           },
         ]
       }
+    />
+  );
+}
+
+export interface NamespacedLimitRangesSectionProps {
+  resource: KubeNamespace;
+}
+
+export function NamespacedLimitRangesSection(props: NamespacedLimitRangesSectionProps) {
+  const { resource } = props;
+
+  const [limitRanges, error] = LimitRange.useList({
+    namespace: resource.metadata.name,
+  });
+
+  return (
+    <LimitRangeRenderer
+      hideColumns={['namespace']}
+      limitRanges={limitRanges}
+      error={error}
+      noSearch
+    />
+  );
+}
+
+export interface NamespacedResourceQuotasSectionProps {
+  resource: KubeNamespace;
+}
+
+export function NamespacedResourceQuotasSection(props: NamespacedResourceQuotasSectionProps) {
+  const { resource } = props;
+
+  const [resourceQuotas, error] = ResourceQuota.useList({
+    namespace: resource.metadata.name,
+  });
+
+  return (
+    <ResourceQuotaRenderer
+      hideColumns={['namespace']}
+      resourceQuotas={resourceQuotas}
+      error={error}
+      noSearch
     />
   );
 }
