@@ -2,13 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"regexp"
 	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 )
 
 // Handles stateless cluster requests if kubeconfig is set and dynamic clusters are enabled.
@@ -25,12 +25,14 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 
 	contexts, err := kubeconfig.LoadContextsFromBase64String(kubeConfig, kubeconfig.DynamicCluster)
 	if err != nil {
-		log.Println("Error setting up contexts from kubeconfig", err)
+		logger.Log(logger.LevelError, nil, err, "loading contexts from kubeconfig")
+
 		return "", err
 	}
 
 	if len(contexts) == 0 {
-		log.Println("Error getting contexts from kubeconfig")
+		logger.Log(logger.LevelError, nil, nil, "getting contexts from kubeconfig")
+
 		return "", err
 	}
 
@@ -49,12 +51,16 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 			// They are stored in the proxy cache and accessed through the /config endpoint.
 			context.Internal = true
 			if err = c.kubeConfigStore.AddContextWithKeyAndTTL(&context, key, ContextCacheTTL); err != nil {
-				log.Println("Error: failed to store context to cache:", err)
+				logger.Log(logger.LevelError, map[string]string{"key": key},
+					err, "adding context to cache")
+
 				return "", err
 			}
 		} else {
 			if err = c.kubeConfigStore.UpdateTTL(key, ContextUpdateChacheTTL); err != nil {
-				log.Println("Error: failed to increase ttl: ", err)
+				logger.Log(logger.LevelError, map[string]string{"key": key},
+					err, "updating context ttl")
+
 				return "", err
 			}
 		}
@@ -80,7 +86,8 @@ func (c *HeadlampConfig) parseKubeConfig(w http.ResponseWriter, r *http.Request)
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&kubeconfigReq); err != nil {
 		// Handle the error, return a bad request response
-		log.Println("Error decoding config", err)
+		logger.Log(logger.LevelError, nil, err, "decoding config")
+
 		http.Error(w, "Invalid JSON request body", http.StatusBadRequest)
 	}
 
@@ -88,8 +95,9 @@ func (c *HeadlampConfig) parseKubeConfig(w http.ResponseWriter, r *http.Request)
 
 	contexts, setupErrors := parseClusterFromKubeConfig(kubeconfigs)
 	if len(setupErrors) > 0 {
-		log.Println("Error setting up contexts from kubeconfig", setupErrors)
-		http.Error(w, "Error setting up contexts from kubeconfig", http.StatusBadRequest)
+		logger.Log(logger.LevelError, nil, setupErrors, "setting up contexts from kubeconfig")
+
+		http.Error(w, "setting up contexts from kubeconfig", http.StatusBadRequest)
 
 		return
 	}
@@ -97,7 +105,8 @@ func (c *HeadlampConfig) parseKubeConfig(w http.ResponseWriter, r *http.Request)
 	clientConfig := clientConfig{contexts, c.enableDynamicClusters}
 
 	if err := json.NewEncoder(w).Encode(&clientConfig); err != nil {
-		log.Println("Error encoding config", err)
+		logger.Log(logger.LevelError, nil, err, "encoding config")
+
 		http.Error(w, "Invalid JSON request body", http.StatusBadRequest)
 	}
 }
@@ -168,6 +177,8 @@ func (c *HeadlampConfig) getContextKeyForRequest(r *http.Request) (string, error
 		// if kubeConfig is set and dynamic clusters are enabled then handle stateless cluster requests
 		key, err := c.handleStatelessReq(r, kubeConfig)
 		if err != nil {
+			logger.Log(logger.LevelError, nil, err, "handling stateless request")
+
 			return "", err
 		}
 

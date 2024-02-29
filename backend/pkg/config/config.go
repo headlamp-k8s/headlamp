@@ -5,13 +5,13 @@ import (
 	"flag"
 	"fmt"
 	"io/fs"
-	"log"
 	"os"
 	"os/user"
 	"path/filepath"
 	"runtime"
 	"strings"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/providers/basicflag"
 	"github.com/knadh/koanf/providers/env"
@@ -74,11 +74,15 @@ func Parse(args []string) (*Config, error) {
 
 	// First Load default args from flags
 	if err := k.Load(basicflag.Provider(f, "."), nil); err != nil {
+		logger.Log(logger.LevelError, nil, err, "loading default config from flags")
+
 		return nil, fmt.Errorf("error loading default config from flags: %w", err)
 	}
 
 	// Parse args
 	if err := f.Parse(args); err != nil {
+		logger.Log(logger.LevelError, nil, err, "parsing flags")
+
 		return nil, fmt.Errorf("error parsing flags: %w", err)
 	}
 
@@ -86,6 +90,8 @@ func Parse(args []string) (*Config, error) {
 	if err := k.Load(env.Provider("HEADLAMP_CONFIG_", ".", func(s string) string {
 		return strings.ReplaceAll(strings.ToLower(strings.TrimPrefix(s, "HEADLAMP_CONFIG_")), "_", "-")
 	}), nil); err != nil {
+		logger.Log(logger.LevelError, nil, err, "loading config from env")
+
 		return nil, fmt.Errorf("error loading config from env: %w", err)
 	}
 
@@ -102,15 +108,21 @@ func Parse(args []string) (*Config, error) {
 		}
 		return "", nil
 	}), nil); err != nil {
+		logger.Log(logger.LevelError, nil, err, "loading config from flags")
+
 		return nil, fmt.Errorf("error loading config from flags: %w", err)
 	}
 
 	if err := k.Unmarshal("", &config); err != nil {
+		logger.Log(logger.LevelError, nil, err, "unmarshalling config")
+
 		return nil, fmt.Errorf("error unmarshal config: %w", err)
 	}
 
 	// Validate parsed config
 	if err := config.Validate(); err != nil {
+		logger.Log(logger.LevelError, nil, err, "validating config")
+
 		return nil, err
 	}
 
@@ -177,7 +189,7 @@ func defaultPluginDir() string {
 	// https://pkg.go.dev/os#UserConfigDir
 	userConfigDir, err := os.UserConfigDir()
 	if err != nil {
-		log.Printf("error getting user config dir: %s\n", err)
+		logger.Log(logger.LevelError, nil, err, "getting user config dir")
 
 		return pluginDirDefault
 	}
@@ -193,7 +205,7 @@ func defaultPluginDir() string {
 	err = os.MkdirAll(pluginsConfigDir, fs.FileMode(fileMode))
 
 	if err != nil {
-		log.Printf("error creating plugins directory: %s\n", err)
+		logger.Log(logger.LevelError, nil, err, "creating plugins directory")
 
 		return pluginDirDefault
 	}
@@ -214,7 +226,8 @@ func folderExists(path string) bool {
 func GetDefaultKubeConfigPath() string {
 	user, err := user.Current()
 	if err != nil {
-		log.Fatalf(err.Error())
+		logger.Log(logger.LevelError, nil, err, "getting current user")
+		os.Exit(1)
 	}
 
 	homeDirectory := user.HomeDir

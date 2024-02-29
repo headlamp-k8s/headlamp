@@ -14,11 +14,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+const kubeConfigFilePath = "./test_data/kubeconfig1"
+
 func TestLoadAndStoreKubeConfigs(t *testing.T) {
 	contextStore := kubeconfig.NewContextStore()
 
 	t.Run("valid_file", func(t *testing.T) {
-		kubeConfigFile := "./test_data/kubeconfig1"
+		kubeConfigFile := kubeConfigFilePath
 
 		err := kubeconfig.LoadAndStoreKubeConfigs(contextStore, kubeConfigFile, kubeconfig.KubeConfig)
 		require.NoError(t, err)
@@ -44,7 +46,7 @@ func TestLoadAndStoreKubeConfigs(t *testing.T) {
 
 func TestLoadContextsFromKubeConfigFile(t *testing.T) {
 	t.Run("valid_file", func(t *testing.T) {
-		kubeConfigFile := "./test_data/kubeconfig1"
+		kubeConfigFile := kubeConfigFilePath
 
 		contexts, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
 		require.NoError(t, err)
@@ -98,7 +100,7 @@ func TestContext(t *testing.T) {
 func TestLoadContextsFromBase64String(t *testing.T) {
 	t.Run("valid_base64", func(t *testing.T) {
 		// Read the content of the kubeconfig file
-		kubeConfigFile := config.GetDefaultKubeConfigPath()
+		kubeConfigFile := kubeConfigFilePath
 		kubeConfigContent, err := os.ReadFile(kubeConfigFile)
 		require.NoError(t, err)
 
@@ -108,7 +110,7 @@ func TestLoadContextsFromBase64String(t *testing.T) {
 		contexts, err := kubeconfig.LoadContextsFromBase64String(base64String, kubeconfig.DynamicCluster)
 		require.NoError(t, err)
 
-		require.Equal(t, 1, len(contexts))
+		require.Equal(t, 2, len(contexts))
 		assert.Equal(t, kubeconfig.DynamicCluster, contexts[0].Source)
 	})
 

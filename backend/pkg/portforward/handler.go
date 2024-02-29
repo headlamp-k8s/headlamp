@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -18,6 +17,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -94,13 +94,17 @@ func getFreePort() (int, error) {
 }
 
 // StartPortForward handles the port forward request.
+//
+//nolint:funlen
 func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache[interface{}],
 	w http.ResponseWriter, r *http.Request,
 ) {
 	var p portForwardRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+		logger.Log(logger.LevelError, nil, err, "decoding portforward payload")
 		http.Error(w, "failed to marshal port forward payload "+err.Error(), http.StatusBadRequest)
+
 		return
 	}
 
@@ -117,7 +121,9 @@ func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache
 	}
 
 	if err := p.Validate(); err != nil {
+		logger.Log(logger.LevelError, nil, err, "validating portforward payload")
 		http.Error(w, err.Error(), http.StatusBadRequest)
+
 		return
 	}
 
@@ -125,7 +131,10 @@ func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache
 		// if no port is specified find a available port
 		freePort, err := getFreePort()
 		if err != nil || freePort == 0 {
+			logger.Log(logger.LevelError, nil, err, "getting free port")
 			http.Error(w, "can't find any available port "+err.Error(), http.StatusInternalServerError)
+
+			return
 		}
 
 		p.Port = strconv.Itoa(freePort)
@@ -133,19 +142,28 @@ func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache
 
 	kContext, err := kubeConfigStore.GetContext(p.Cluster)
 	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": p.Cluster},
+			err, "getting kubeconfig context")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+
+		return
 	}
 
 	err = startPortForward(kContext, cache, p, token)
 	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "starting portforward")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 
 	if err = json.NewEncoder(w).Encode(p); err != nil {
+		logger.Log(logger.LevelError, nil, err, "writing json payload to response write")
 		http.Error(w, "failed to write json payload to response write "+err.Error(), http.StatusInternalServerError)
+
+		return
 	}
 }
 
@@ -169,7 +187,6 @@ func startPortForward(kContext *kubeconfig.Context, cache cache.Cache[interface{
 
 	roundTripper, upgrader, err := spdy.RoundTripperFor(rConf)
 	if err != nil {
-		log.Printf("Error: failed to create round tripper: %s", err)
 		return fmt.Errorf("failed to create portforward request")
 	}
 
@@ -206,7 +223,7 @@ func startPortForward(kContext *kubeconfig.Context, cache cache.Cache[interface{
 
 	go func() {
 		if err = forwarder.ForwardPorts(); err != nil { // Locks until stopChan is closed.
-			log.Printf("Error: failed to forward ports: %s", err)
+			logger.Log(logger.LevelError, nil, err, "forwarding ports")
 			stopChan <- struct{}{}
 
 			portForwardToStore.Error = err.Error()
@@ -233,7 +250,7 @@ func startPortForward(kContext *kubeconfig.Context, cache cache.Cache[interface{
 					continue
 				}
 
-				log.Printf("portforward: failed to get pod: %s", err)
+				logger.Log(logger.LevelError, nil, err, "checking if pod is running")
 				stopChan <- struct{}{}
 
 				portForwardToStore.Error = err.Error()
@@ -287,20 +304,23 @@ func StopOrDeletePortForward(cache cache.Cache[interface{}], w http.ResponseWrit
 
 	err := json.NewDecoder(r.Body).Decode(&p)
 	if err != nil {
-		log.Printf("Error decoding delete portforward payload %s", err)
+		logger.Log(logger.LevelError, nil, err, "decoding delete portforward payload")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
 	}
 
 	if err := p.Validate(); err != nil {
+		logger.Log(logger.LevelError, nil, err, "validating delete portforward payload")
 		http.Error(w, err.Error(), http.StatusBadRequest)
+
 		return
 	}
 
 	err = stopOrDeletePortForward(cache, p.Cluster, p.ID, p.StopOrDelete)
 	if err == nil {
 		if _, err := w.Write([]byte("stopped")); err != nil {
+			logger.Log(logger.LevelError, nil, err, "writing response")
 			http.Error(w, "failed to write response "+err.Error(), http.StatusInternalServerError)
 		}
 
@@ -314,7 +334,9 @@ func StopOrDeletePortForward(cache cache.Cache[interface{}], w http.ResponseWrit
 func GetPortForwards(cache cache.Cache[interface{}], w http.ResponseWriter, r *http.Request) {
 	cluster := r.URL.Query().Get("cluster")
 	if cluster == "" {
+		logger.Log(logger.LevelError, nil, errors.New("cluster is required"), "getting portforwards")
 		http.Error(w, "cluster is required", http.StatusBadRequest)
+
 		return
 	}
 
@@ -323,7 +345,10 @@ func GetPortForwards(cache cache.Cache[interface{}], w http.ResponseWriter, r *h
 	w.Header().Set("Content-Type", "application/json")
 
 	if err := json.NewEncoder(w).Encode(ports); err != nil {
+		logger.Log(logger.LevelError, nil, err, "writing json payload to response")
 		http.Error(w, "failed to write json payload to response "+err.Error(), http.StatusInternalServerError)
+
+		return
 	}
 }
 
@@ -331,19 +356,25 @@ func GetPortForwards(cache cache.Cache[interface{}], w http.ResponseWriter, r *h
 func GetPortForwardByID(cache cache.Cache[interface{}], w http.ResponseWriter, r *http.Request) {
 	cluster := r.URL.Query().Get("cluster")
 	if cluster == "" {
+		logger.Log(logger.LevelError, nil, errors.New("cluster is required"), "getting portforward by id")
 		http.Error(w, "cluster is required", http.StatusBadRequest)
+
 		return
 	}
 
 	id := r.URL.Query().Get("id")
 	if id == "" {
+		logger.Log(logger.LevelError, nil, errors.New("id is required"), "getting portforward by id")
 		http.Error(w, "id is required", http.StatusBadRequest)
+
 		return
 	}
 
 	p, err := getPortForwardByID(cache, cluster, id)
 	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "getting portforward by id")
 		http.Error(w, "no portforward running with id "+id, http.StatusNotFound)
+
 		return
 	}
 
@@ -366,6 +397,9 @@ func GetPortForwardByID(cache cache.Cache[interface{}], w http.ResponseWriter, r
 	w.Header().Set("Content-Type", "application/json")
 
 	if err := json.NewEncoder(w).Encode(portForwardStruct); err != nil {
+		logger.Log(logger.LevelError, nil, err, "writing json payload to response")
 		http.Error(w, "failed to write json payload "+err.Error(), http.StatusInternalServerError)
+
+		return
 	}
 }

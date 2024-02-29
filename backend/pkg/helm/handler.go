@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
-	"github.com/rs/zerolog/log"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 
 	"helm.sh/helm/v3/pkg/action"
 	"helm.sh/helm/v3/pkg/cli"
@@ -39,7 +39,8 @@ func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*ac
 		namespace:    namespace,
 	}
 	logger := func(format string, a ...interface{}) {
-		log.Info().Str("namespace", namespace).Msg(format + "\n" + fmt.Sprintf("%v", a))
+		logger.Log(logger.LevelInfo, map[string]string{"namespace": namespace},
+			nil, format+"\n"+fmt.Sprintf("%v", a))
 	}
 
 	err := actionConfig.Init(restConfGetter, namespace, "secret", logger)
@@ -62,6 +63,9 @@ func NewHandlerWithSettings(clientConfig clientcmd.ClientConfig,
 ) (*Handler, error) {
 	actionConfig, err := NewActionConfig(clientConfig, namespace)
 	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"namespace": namespace},
+			err, "unable to create action config")
+
 		return nil, err
 	}
 
@@ -105,6 +109,8 @@ func (r *restConfigGetter) ToDiscoveryClient() (discovery.CachedDiscoveryInterfa
 func (r *restConfigGetter) ToRESTMapper() (meta.RESTMapper, error) {
 	discoveryClient, err := r.ToDiscoveryClient()
 	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "unable to create discovery client")
+
 		return nil, err
 	}
 
@@ -125,11 +131,17 @@ func (h *Handler) getReleaseStatus(actionName, releaseName string) (*stat, error
 
 	value, err := h.Cache.Get(context.Background(), key)
 	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"key": key},
+			err, "unable to get cache value")
+
 		return nil, err
 	}
 
 	valueBytes, err := json.Marshal(value)
 	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"key": key},
+			err, "unable to marshal cache value")
+
 		return nil, err
 	}
 
@@ -137,6 +149,9 @@ func (h *Handler) getReleaseStatus(actionName, releaseName string) (*stat, error
 
 	err = json.Unmarshal(valueBytes, &stat)
 	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"key": key},
+			err, "unable to unmarshal cache value")
+
 		return nil, err
 	}
 
@@ -161,6 +176,9 @@ func (h *Handler) setReleaseStatus(actionName, releaseName, status string, err e
 
 	cacheErr := h.Cache.SetWithTTL(context.Background(), key, stat, statusCacheTimeout)
 	if cacheErr != nil {
+		logger.Log(logger.LevelError, map[string]string{"key": key, "status": status},
+			cacheErr, "unable to set cache value")
+
 		return cacheErr
 	}
 
@@ -170,8 +188,7 @@ func (h *Handler) setReleaseStatus(actionName, releaseName, status string, err e
 func (h *Handler) setReleaseStatusSilent(actionName, releaseName, status string, err error) {
 	cacheErr := h.setReleaseStatus(actionName, releaseName, status, err)
 	if cacheErr != nil {
-		log.Error().Err(cacheErr).Str("action", actionName).
-			Str("releaseName", releaseName).Str("status", status).
-			Msg("unable to set status")
+		logger.Log(logger.LevelError, map[string]string{"releaseName": releaseName, "status": status},
+			cacheErr, "unable to set status")
 	}
 }
