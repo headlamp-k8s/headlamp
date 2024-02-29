@@ -16,6 +16,9 @@ const (
 	LevelError
 )
 
+// callerDepth is the depth of the caller in the stack.
+const callerDepth = 2
+
 // LogFunc is a function signature for logging.
 type LogFunc func(level uint, str map[string]string, err interface{}, msg string)
 
@@ -48,7 +51,7 @@ func log(level uint, str map[string]string, err interface{}, msg string) {
 		event.Str(k, v)
 	}
 
-	_, file, line, ok := runtime.Caller(1)
+	_, file, line, ok := runtime.Caller(callerDepth)
 	if ok {
 		event.Str("source", file)
 		event.Int("line", line)
