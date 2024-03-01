@@ -26,6 +26,7 @@ function createDemoData(arrSize: number, useHomepage?: boolean) {
       name: `plugin a ${i}`,
       description: `This is a plugin for this project PLUGIN A${i}`,
       isEnabled: i % 2 === 0,
+      isCompatible: i % 2 === 0,
     };
 
     if (useHomepage) {

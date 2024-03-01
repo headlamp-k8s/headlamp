@@ -210,6 +210,9 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             {
               label: t('translation|Status'),
               getter: plugin => {
+                if (plugin.isCompatible === false) {
+                  return t('translation|Incompatible');
+                }
                 return plugin.isEnabled ? t('translation|Enabled') : t('translation|Disabled');
               },
               sort: true,
@@ -217,6 +220,9 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             {
               label: t('translation|Enable'),
               getter: plugin => {
+                if (!plugin.isCompatible) {
+                  return null;
+                }
                 return (
                   <EnableSwitch
                     aria-label={`Toggle ${plugin.name}`}

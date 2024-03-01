@@ -40,6 +40,7 @@
   "Description": "Description",
   "Origin": "Origin",
   "Unknown": "Unknown",
+  "Incompatible": "Incompatible",
   "Enabled": "Enabled",
   "Disabled": "Disabled",
   "Enable": "Enable",
