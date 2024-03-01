@@ -1,4 +1,4 @@
-const { sign } = require('./codesign');
+const { sign, SIGN_OPS } = require('../scripts/esrp');
 
 exports.default = async function (configuration) {
   const esrpTool = process.env.ESRP_PATH;
@@ -15,7 +15,7 @@ exports.default = async function (configuration) {
 
   console.log('Signing', configuration.path);
   try {
-    sign(esrpTool, configuration.path);
+    sign(esrpTool, SIGN_OPS.WINDOWS_SIGN, configuration.path);
   } catch (e) {
     console.log('Failed to sign: ', e);
     process.exit(1);
