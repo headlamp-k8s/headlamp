@@ -5,6 +5,7 @@ import Link from '@mui/material/Link';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import helpers from '../../../helpers';
 import { useFilterFunc } from '../../../lib/util';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
@@ -167,7 +168,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
           columns={[
             {
               label: t('translation|Name'),
-              getter: plugin => {
+              getter: (plugin: PluginInfo) => {
                 return (
                   <>
                     <Typography variant="subtitle1">
@@ -183,7 +184,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                   </>
                 );
               },
-              sort: (a, b) => a.name.localeCompare(b.name),
+              sort: (a: PluginInfo, b: PluginInfo) => a.name.localeCompare(b.name),
             },
             {
               label: t('translation|Description'),
@@ -192,7 +193,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             },
             {
               label: t('translation|Origin'),
-              getter: plugin => {
+              getter: (plugin: PluginInfo) => {
                 const url = plugin?.homepage || plugin?.repository?.url;
                 return plugin?.origin ? (
                   url ? (
@@ -209,7 +210,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             // TODO: Fetch the plugin status from the plugin settings store
             {
               label: t('translation|Status'),
-              getter: plugin => {
+              getter: (plugin: PluginInfo) => {
                 if (plugin.isCompatible === false) {
                   return t('translation|Incompatible');
                 }
@@ -219,8 +220,8 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             },
             {
               label: t('translation|Enable'),
-              getter: plugin => {
-                if (!plugin.isCompatible) {
+              getter: (plugin: PluginInfo) => {
+                if (!plugin.isCompatible || !helpers.isElectron()) {
                   return null;
                 }
                 return (
@@ -233,9 +234,12 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                   />
                 );
               },
-              sort: (a, b) => (a.isEnabled === b.isEnabled ? 0 : a.isEnabled ? -1 : 1),
+              sort: (a: PluginInfo, b: PluginInfo) =>
+                a.isEnabled === b.isEnabled ? 0 : a.isEnabled ? -1 : 1,
             },
-          ]}
+          ]
+            // remove the enable column if we're not in app mode
+            .filter(el => !(el.label === t('translation|Enable') && !helpers.isElectron()))}
           data={pluginChanges}
           filterFunction={useFilterFunc<PluginInfo>(['.name'])}
         />

@@ -10,7 +10,8 @@ test('plugin settings page should have a title', async ({ page }) => {
 
 test('plugin settings page should have a table', async ({ page }) => {
   const headlampPage = new HeadlampPage(page);
-  const expectedHeaders = ['Name', 'Description', 'Origin', 'Status', 'Enable'];
+  const expectedHeaders = ['Name', 'Description', 'Origin', 'Status'];
+  // note: Enable column is only there in app mode.
 
   await headlampPage.authenticate();
   await headlampPage.navigateTopage('/settings/plugins', /Plugins/);
