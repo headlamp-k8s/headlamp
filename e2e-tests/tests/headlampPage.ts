@@ -6,9 +6,6 @@ export class HeadlampPage {
   async authenticate() {
     await this.page.goto('/');
 
-    // Expect a title "to contain" a substring.
-    this.hasTitleContaining(/Token/);
-
     // Expects the URL to contain c/main/token
     this.hasURLContaining(/.*token/);
 
@@ -57,8 +54,45 @@ export class HeadlampPage {
     expect(await pageContent).toContain(text);
   }
 
-  async navigateTopage(page: string) {
+  async navigateTopage(page: string, title: RegExp) {
     await this.page.goto(page);
+    await this.page.waitForLoadState('load');
+    await this.hasTitleContaining(title);
+  }
+
+  async logout() {
+    // Click on the account button to open the user menu
+    await this.page.click('button[aria-label="Account of current user"]');
+
+    // Wait for the logout option to be visible and click on it
+    await this.page.waitForSelector('a.MuiMenuItem-root:has-text("Log out")');
+    await this.page.click('a.MuiMenuItem-root:has-text("Log out")');
+    await this.page.waitForLoadState('load');
+
+    // Expects the URL to contain c/main/token
+    await this.hasURLContaining(/.*token/);
+  }
+
+  async tableHasHeaders(tableSelector: string, expectedHeaders: string[]) {
+    // Get all table headers
+    const headers = await this.page.$$eval(`${tableSelector} th`, ths =>
+      ths.map(th => {
+        if (th && th.textContent) {
+          return th.textContent.trim();
+        }
+      })
+    );
+
+    // Check if all expected headers are present in the table
+    for (const header of expectedHeaders) {
+      if (!headers.includes(header)) {
+        throw new Error(`Table does not contain header: ${header}`);
+      }
+    }
+  }
+
+  async clickOnPlugin(pluginName: string) {
+    await this.page.click(`a:has-text("${pluginName}")`);
     await this.page.waitForLoadState('load');
   }
 }
