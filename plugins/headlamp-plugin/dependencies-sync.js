@@ -46,9 +46,7 @@ const dependenciesFrontDoesNotHave = new Set([
 // Dependencies from frontend/package.json that aren't wanted by headlamp-plugin.
 // These won't be added to headlamp-plugin/package.json
 const dependenciesToNotCopy = [
-  '@types/nock',
   'husky',
-  'nock',
   'typedoc',
   'typedoc-hugo-theme',
   'typedoc-plugin-markdown',
