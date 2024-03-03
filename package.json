@@ -1,7 +1,9 @@
 {
   "devDependencies": {
     "@types/jest": "^29.5.3",
+    "@types/nock": "^11.1.0",
     "glob": "^10.3.3",
+    "nock": "^13.5.4",
     "node-fetch": "^3.3.2"
   }
 }
