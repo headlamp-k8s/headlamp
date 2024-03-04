@@ -19,7 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import Event, { KubeEvent } from '../../../lib/k8s/event';
+import { useClustersConf } from '../../../lib/k8s';
+import Event from '../../../lib/k8s/event';
 import { createRouteURL } from '../../../lib/router';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { DateLabel } from '../../common';
@@ -176,10 +177,14 @@ export default function Notifications() {
   const [anchorEl, setAnchorEl] = useState(null);
   const notifications = useTypedSelector(state => state.notifications.notifications);
   const dispatch = useDispatch();
-  const [events] = Event.useList({
-    fieldSelector: 'type!=Normal',
-    limit: defaultMaxNotificationsStored,
-  });
+  const clusters = useClustersConf();
+  const warnings = Event.useWarningList(
+    Object.values(clusters ?? {})?.map(c => c.name, {
+      queryParams: {
+        limit: defaultMaxNotificationsStored,
+      },
+    })
+  );
   const { t } = useTranslation();
   const history = useHistory();
   const maxNotificationsInPopup = 50;
@@ -194,29 +199,33 @@ export default function Notifications() {
       changed = currentNotifications.length > 0;
     }
 
-    if (events && events.length !== 0) {
-      events
-        .filter((event: KubeEvent) => event.type !== 'Normal')
-        .forEach((event: KubeEvent) => {
-          const alreadyInNotificationList = !!currentNotifications.find(
-            notification => notification.id === event.metadata.uid
-          );
+    for (const [cluster, warningsInfo] of Object.entries(warnings)) {
+      const clusterWarnings = warningsInfo.warnings || [];
+      if (clusterWarnings.length === 0) {
+        continue;
+      }
 
-          if (alreadyInNotificationList) {
-            return;
-          }
+      clusterWarnings.forEach((event: Event) => {
+        const alreadyInNotificationList = !!currentNotifications.find(
+          notification => notification.id === event.metadata.uid
+        );
 
-          const message = event.message;
-          const date = new Date(event.metadata.creationTimestamp).getTime();
-          const notification = new Notification({ message, date });
-          notification.id = event.metadata.uid;
-          notification.url = createRouteURL('cluster') + `?eventsFilter=${notification.id}`;
+        if (alreadyInNotificationList) {
+          return;
+        }
 
-          changed = true;
+        const message = event.message;
+        const date = new Date(event.metadata.creationTimestamp).getTime();
+        const notification = new Notification({ message, date, cluster });
+        notification.id = event.metadata.uid;
+        notification.url =
+          createRouteURL('cluster', { cluster }) + `?eventsFilter=${notification.id}`;
 
-          const notiJson = notification.toJSON();
-          notificationsToShow.push(notiJson);
-        });
+        changed = true;
+
+        const notiJson = notification.toJSON();
+        notificationsToShow.push(notiJson);
+      });
     }
 
     // It's important to dispatch only if something changed, otherwise we will get into an infinite loop.
@@ -224,7 +233,7 @@ export default function Notifications() {
       // we are here means the events list changed and we have now new set of events, so we will notify the store about it
       dispatch(setNotifications(notificationsToShow.concat(currentNotifications)));
     }
-  }, [events, notifications]);
+  }, [warnings, notifications]);
 
   const [areAllNotificationsInDeleteState, areThereUnseenNotifications, filteredNotifications] =
     useMemo(() => {

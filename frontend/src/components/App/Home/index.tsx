@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../../helpers';
-import { CancellablePromise, useClustersConf, useClustersVersion } from '../../../lib/k8s';
+import { useClustersConf, useClustersVersion } from '../../../lib/k8s';
 import { ApiError, deleteCluster } from '../../../lib/k8s/apiProxy';
 import { Cluster } from '../../../lib/k8s/cluster';
 import Event from '../../../lib/k8s/event';
@@ -161,58 +161,13 @@ function HomeComponent(props: HomeComponentProps) {
   const { t } = useTranslation(['translation', 'glossary']);
   const [versions, errors] = useClustersVersion(Object.values(clusters));
   const filterFunc = useFilterFunc<Cluster>(['.name']);
-  const [warnings, setWarnings] = React.useState<{ [clusterName: string]: number }>({});
   const maxWarnings = 50;
-
-  // Get the events for each cluster
-  React.useEffect(() => {
-    const cancellables: CancellablePromise[] = [];
-    const clustersToClear: string[] = [];
-    for (const cluster of Object.values(clusters)) {
-      if (!!errors[cluster.name]) {
-        clustersToClear.push(cluster.name);
-      }
-
-      const cancelFunc = Event.apiList(
-        (events: Event[]) => {
-          setWarnings(prevWarnings => ({
-            ...prevWarnings,
-            [cluster.name]: events.length,
-          }));
-        },
-        () => {
-          setWarnings(prevWarnings => ({ ...prevWarnings, [cluster.name]: -1 }));
-        },
-        {
-          cluster: cluster.name,
-          queryParams: {
-            fieldSelector: 'type!=Normal',
-            limit: maxWarnings,
-          },
-        }
-      )();
-      cancellables.push(cancelFunc);
-    }
-
-    if (clustersToClear.length > 0) {
-      setWarnings(prevWarnings => {
-        const newWarnings = { ...prevWarnings };
-        for (const cluster of clustersToClear) {
-          newWarnings[cluster] = -1;
-        }
-        return newWarnings;
-      });
-    }
-
-    return function cancelAllConnectedListings() {
-      for (const cancellable of cancellables) {
-        cancellable.then(c => c());
-      }
-    };
-  }, [clusters]);
+  const warningsMap = Event.useWarningList(Object.values(clusters).map(c => c.name));
 
   function renderWarningsText(clusterName: string) {
-    const numWarnings = warnings[clusterName] ?? -1;
+    const numWarnings =
+      (!!warningsMap[clusterName]?.error && -1) ||
+      (warningsMap[clusterName]?.warnings?.length ?? -1);
 
     if (numWarnings === -1) {
       return '⋯';
