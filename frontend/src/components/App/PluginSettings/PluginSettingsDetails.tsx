@@ -6,6 +6,7 @@ import { isValidElement, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import helpers from '../../../helpers';
 import { deletePlugin } from '../../../lib/k8s/apiProxy';
 import { ConfigStore } from '../../../plugin/configStore';
@@ -103,6 +104,7 @@ export function PluginSettingsDetailsPure(props: PluginSettingsDetailsPureProps)
   const [data, setData] = useState<{ [key: string]: any } | undefined>(config);
   const [enableSaveButton, setEnableSaveButton] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (!_.isEqual(config, data)) {
@@ -116,9 +118,10 @@ export function PluginSettingsDetailsPure(props: PluginSettingsDetailsPureProps)
     setData(data);
   }
 
-  function handleSave() {
+  async function handleSave() {
     if (onSave && data) {
-      onSave(data);
+      await onSave(data);
+      history.push('/settings/plugins');
     }
   }
 
@@ -130,8 +133,9 @@ export function PluginSettingsDetailsPure(props: PluginSettingsDetailsPureProps)
     onDelete();
   }
 
-  function handleCancel() {
-    setData(config);
+  async function handleCancel() {
+    await setData(config);
+    history.push('/settings/plugins');
   }
 
   let component;
