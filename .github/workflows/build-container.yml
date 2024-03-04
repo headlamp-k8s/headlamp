@@ -107,6 +107,13 @@ jobs:
         npm ci
         npx playwright install --with-deps
         HEADLAMP_TEST_URL=$SERVICE_URL npx playwright test
+        exit_code=$?
+        if [ $exit_code -ne 0 ]; then
+          echo "Playwright tests failed with exit code $exit_code"
+          exit 1
+        else
+          echo "Playwright tests passed successfully"
+        fi
     - uses: actions/upload-artifact@v4
       if: always()
       with:

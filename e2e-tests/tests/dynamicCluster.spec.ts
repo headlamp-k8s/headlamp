@@ -5,6 +5,12 @@ const fs = require('fs').promises;
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
+test('There is cluster choose button and main cluster is selected', async ({ page }) => {
+  const headlampPage = new HeadlampPage(page);
+  await headlampPage.authenticate();
+  await headlampPage.pageLocatorContent('button:has-text("Our Cluster Chooser button. Cluster: main")', 'Our Cluster Chooser button. Cluster: main');
+});
+
 test('Store modified kubeconfig to IndexDB and check if present', async ({ page }) => {
   const headlampPage = new HeadlampPage(page);
 
@@ -36,7 +42,7 @@ test('check test is present in cluster and working', async ({ page }) => {
 
   expect(storedKubeconfig).not.toBeNull();
 
-  await headlampPage.navigateTopage('/c/test');
+  await headlampPage.navigateTopage('/c/test', /Cluster/);
   await headlampPage.pageLocatorContent('h2:has-text("Overview")', 'Overview');
 });
 
