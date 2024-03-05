@@ -20,18 +20,19 @@ import Settings, { store } from './settings';
  * it's easier to make it look good with light and dark themes.
  */
 function SimpleLogo(props: AppLogoProps) {
-  const { logoType, className } = props;
+  const { logoType, className, sx } = props;
 
   const useConf = store.useConfig();
   const config = useConf();
 
   return config?.url ? (
-    <Avatar src={config?.url} alt="logo" className={className} />
+    <Avatar src={config?.url} alt="logo" className={className} sx={sx} />
   ) : (
     <SvgIcon
       className={className}
       component={logoType === 'large' ? LogoWithTextLight : LogoLight}
       viewBox="0 0 auto 32"
+      sx={sx}
     />
   );
 }
