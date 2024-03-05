@@ -131,23 +131,6 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
                   />
                 </button>
               </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
-              >
-                Enable
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
             </tr>
           </thead>
           <tbody
@@ -188,31 +171,6 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -247,31 +205,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -309,31 +243,6 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -368,31 +277,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -429,31 +314,6 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 Enabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
               </td>
             </tr>
           </tbody>
@@ -678,23 +538,6 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
                   />
                 </button>
               </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
-              >
-                Enable
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
             </tr>
           </thead>
           <tbody
@@ -735,31 +578,6 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -794,31 +612,7 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -856,31 +650,6 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -915,31 +684,7 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -976,31 +721,6 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 Enabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
               </td>
             </tr>
           </tbody>
@@ -1142,23 +862,6 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
                   />
                 </button>
               </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
-              >
-                Enable
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
             </tr>
           </thead>
           <tbody
@@ -1199,31 +902,6 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -1258,31 +936,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1320,31 +974,6 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -1379,31 +1008,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1440,31 +1045,6 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 Enabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
               </td>
             </tr>
           </tbody>
@@ -1606,23 +1186,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
                   />
                 </button>
               </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
-              >
-                Enable
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
             </tr>
           </thead>
           <tbody
@@ -1663,31 +1226,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -1722,31 +1260,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1784,31 +1298,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -1843,31 +1332,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1905,31 +1370,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -1964,31 +1404,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 5"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 5"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2026,31 +1442,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 6"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 6"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -2085,31 +1476,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 7"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 7"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2147,31 +1514,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 8"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 8"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -2206,31 +1548,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 9"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 9"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2268,31 +1586,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 10"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 10"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -2327,31 +1620,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 11"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 11"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2389,31 +1658,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 12"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 12"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -2448,31 +1692,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 13"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 13"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2509,31 +1729,6 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 Enabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 14"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 14"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
               </td>
             </tr>
           </tbody>
@@ -2675,23 +1870,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
                   />
                 </button>
               </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
-              >
-                Enable
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
             </tr>
           </thead>
           <tbody
@@ -2732,31 +1910,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -2791,31 +1944,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2853,31 +1982,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -2912,31 +2016,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2974,31 +2054,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -3033,31 +2088,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 5"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 5"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -3095,31 +2126,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 6"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 6"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -3154,31 +2160,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 7"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 7"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -3216,31 +2198,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 8"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 8"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -3275,31 +2232,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 9"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 9"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -3337,31 +2270,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 10"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 10"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -3396,31 +2304,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 11"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 11"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -3458,31 +2342,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               >
                 Enabled
               </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 12"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 12"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
-              </td>
             </tr>
             <tr
               class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
@@ -3517,31 +2376,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                Disabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 13"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 13"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -3578,31 +2413,6 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 Enabled
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-f9y9v3-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 14"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 14"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
               </td>
             </tr>
           </tbody>

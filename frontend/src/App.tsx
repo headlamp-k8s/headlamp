@@ -10,7 +10,6 @@ import i18n from './i18n/config';
 import { useElectronI18n } from './i18n/electronI18n';
 import ThemeProviderNexti18n from './i18n/ThemeProviderNexti18n';
 import themes, { getThemeName, usePrefersColorScheme } from './lib/themes';
-import Plugins from './plugin/Plugins';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
@@ -34,7 +33,6 @@ function App() {
   return (
     <ErrorBoundary fallback={<ErrorComponent />}>
       <Provider store={store}>
-        <Plugins />
         <AppWithRedux>
           <AppContainer />
         </AppWithRedux>

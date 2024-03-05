@@ -175,7 +175,7 @@ export const executeClusterAction = createAsyncThunk(
           url: startUrl,
           buttons: [
             {
-              label: i18next.t('frequent|Cancel'),
+              label: i18next.t('translation|Cancel'),
               actionToDispatch: uniqueCancelActionType,
             },
           ],
