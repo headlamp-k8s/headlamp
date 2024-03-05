@@ -155,6 +155,7 @@ const filterSlice = createSlice({
      */
     resetFilter(state) {
       state.namespaces = new Set();
+      state.statuses = new Set();
       state.search = '';
     },
   },
