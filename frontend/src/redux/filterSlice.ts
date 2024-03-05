@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JSONPath } from 'jsonpath-plus';
 import { KubeObjectInterface } from '../lib/k8s/cluster';
+import { KubeCRD } from '../lib/k8s/crd';
 import { KubeEvent } from '../lib/k8s/event';
 
 export interface FilterState {
@@ -8,11 +9,14 @@ export interface FilterState {
   namespaces: Set<string>;
   /** The search string to filter on. */
   search: string;
+  /** The statuses to filter on. */
+  statuses: Set<string>;
 }
 
 export const initialState: FilterState = {
   namespaces: new Set(),
   search: '',
+  statuses: new Set(),
 };
 
 /**
@@ -39,6 +43,14 @@ export function filterResource(
     return false;
   }
 
+  let status: string = '';
+  let phase: string = '';
+  if (isKubeCRD(item)) {
+    const kubeCRD: KubeCRD = item as KubeCRD;
+    status = kubeCRD?.status;
+    phase = kubeCRD?.status?.phase;
+  }
+
   if (filter.search) {
     const filterString = filter.search.toLowerCase();
     const usedMatchCriteria = [
@@ -47,9 +59,11 @@ export function filterResource(
       item.metadata.name.toLowerCase(),
       ...Object.keys(item.metadata.labels || {}).map(item => item.toLowerCase()),
       ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
+      status.toLowerCase(),
+      phase.toLowerCase(),
     ];
 
-    matches = !!usedMatchCriteria.find(item => item.includes(filterString));
+    if (item) matches = !!usedMatchCriteria.find(item => item.includes(filterString));
     if (matches) {
       return true;
     }
@@ -125,6 +139,12 @@ const filterSlice = createSlice({
       state.namespaces = new Set(action.payload);
     },
     /**
+     * Sets the namespace filter with an array of strings.
+     */
+    setStatusFilter(state, action: PayloadAction<string[]>) {
+      state.statuses = new Set(action.payload);
+    },
+    /**
      * Sets the search filter with a string.
      */
     setSearchFilter(state, action: PayloadAction<string>) {
@@ -140,6 +160,11 @@ const filterSlice = createSlice({
   },
 });
 
-export const { setNamespaceFilter, setSearchFilter, resetFilter } = filterSlice.actions;
+export const { setNamespaceFilter, setStatusFilter, setSearchFilter, resetFilter } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;
+
+function isKubeCRD(obj: KubeObjectInterface | KubeEvent): boolean {
+  return (obj as KubeCRD).spec !== undefined;
+}
