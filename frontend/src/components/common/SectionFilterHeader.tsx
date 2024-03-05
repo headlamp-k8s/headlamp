@@ -117,7 +117,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   if (!showFilters.show) {
     actions.push(
       <IconButton
-        aria-label={t('Show filter')}
+        aria-label={t('translation|Show filter')}
         onClick={() => setShowFilters({ show: true, userTriggered: true })}
         size="medium"
       >
@@ -140,7 +140,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
         <Grid item>
           <TextField
             id="standard-search"
-            label={t('Search')}
+            label={t('translation|Search')}
             type="search"
             InputLabelProps={{ shrink: true }}
             InputProps={{ role: 'search' }}
@@ -160,7 +160,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             onClick={resetFilters}
             aria-controls="standard-search"
           >
-            {t('Clear')}
+            {t('translation|Clear')}
           </Button>
         </Grid>
       </Grid>
