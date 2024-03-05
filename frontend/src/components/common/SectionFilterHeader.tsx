@@ -14,9 +14,11 @@ import { resetFilter, setNamespaceFilter, setSearchFilter } from '../../redux/fi
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NamespacesAutocomplete } from './NamespacesAutocomplete';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
+import { StatusesAutocomplete } from './StatusFilter';
 
 export interface SectionFilterHeaderProps extends SectionHeaderProps {
   noNamespaceFilter?: boolean;
+  noStatusFilter?: boolean;
   noSearch?: boolean;
   preRenderFromFilterActions?: React.ReactNode[];
 }
@@ -24,6 +26,7 @@ export interface SectionFilterHeaderProps extends SectionHeaderProps {
 export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const {
     noNamespaceFilter = false,
+    noStatusFilter = false,
     noSearch = false,
     actions: propsActions = [],
     preRenderFromFilterActions,
@@ -34,6 +37,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const location = useLocation();
   const history = useHistory();
   const hasNamespaceFilters = !noNamespaceFilter && filter.namespaces.size > 0;
+  const hasStatusFilters = !noStatusFilter && filter.statuses.size > 0;
   const hasSearch = !noSearch && !!filter.search;
   const { t } = useTranslation();
 
@@ -58,7 +62,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   }
 
   useHotkeys('ctrl+shift+f', () => {
-    if (!noSearch || !noNamespaceFilter) {
+    if (!noSearch || !noNamespaceFilter || !noStatusFilter) {
       setShowFilters({ show: true, userTriggered: true });
     }
   });
@@ -99,7 +103,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   React.useEffect(() => {
     setShowFilters(state => {
       return {
-        show: hasSearch || hasNamespaceFilters || state.userTriggered,
+        show: hasSearch || hasNamespaceFilters || hasStatusFilters || state.userTriggered,
         userTriggered: state.userTriggered,
       };
     });
@@ -110,54 +114,57 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     actions.push(...preRenderFromFilterActions);
   }
 
-  if (!noSearch) {
-    if (!showFilters.show) {
-      actions.push(
-        <IconButton
-          aria-label={t('Show filter')}
-          onClick={() => setShowFilters({ show: true, userTriggered: true })}
-          size="medium"
-        >
-          <Icon icon="mdi:filter-variant" />
-        </IconButton>
-      );
-    } else {
-      actions.push(
-        <Grid container alignItems="flex-end" justifyContent="flex-end" spacing={1} wrap="nowrap">
-          {!noNamespaceFilter && (
-            <Grid item>
-              <NamespacesAutocomplete />
-            </Grid>
-          )}
+  if (!showFilters.show) {
+    actions.push(
+      <IconButton
+        aria-label={t('Show filter')}
+        onClick={() => setShowFilters({ show: true, userTriggered: true })}
+        size="medium"
+      >
+        <Icon icon="mdi:filter-variant" />
+      </IconButton>
+    );
+  } else {
+    actions.push(
+      <Grid container alignItems="flex-end" justifyContent="flex-end" spacing={1} wrap="nowrap">
+        {!noStatusFilter && (
           <Grid item>
-            <TextField
-              id="standard-search"
-              label={t('Search')}
-              type="search"
-              InputLabelProps={{ shrink: true }}
-              InputProps={{ role: 'search' }}
-              placeholder={t('Filter')}
-              value={filter.search}
-              onChange={event => {
-                dispatch(setSearchFilter(event.target.value));
-                setShowFilters({ show: true, userTriggered: true });
-              }}
-              inputRef={focusedRef}
-            />
+            <StatusesAutocomplete />
           </Grid>
+        )}
+        {!noNamespaceFilter && (
           <Grid item>
-            <Button
-              variant="contained"
-              endIcon={<Icon icon="mdi:filter-variant-remove" />}
-              onClick={resetFilters}
-              aria-controls="standard-search"
-            >
-              {t('Clear')}
-            </Button>
+            <NamespacesAutocomplete />
           </Grid>
+        )}
+        <Grid item>
+          <TextField
+            id="standard-search"
+            label={t('Search')}
+            type="search"
+            InputLabelProps={{ shrink: true }}
+            InputProps={{ role: 'search' }}
+            placeholder={t('Filter')}
+            value={filter.search}
+            onChange={event => {
+              dispatch(setSearchFilter(event.target.value));
+              setShowFilters({ show: true, userTriggered: true });
+            }}
+            inputRef={focusedRef}
+          />
         </Grid>
-      );
-    }
+        <Grid item>
+          <Button
+            variant="contained"
+            endIcon={<Icon icon="mdi:filter-variant-remove" />}
+            onClick={resetFilters}
+            aria-controls="standard-search"
+          >
+            {t('Clear')}
+          </Button>
+        </Grid>
+      </Grid>
+    );
   }
 
   if (!!propsActions) {
