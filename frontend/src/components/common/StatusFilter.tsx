@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
+import ListItem from '@mui/material/ListItem';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -56,7 +57,7 @@ export function PureStatusesAutocomplete({
       // is useful since the label is ellipsized and this we get to see it change.
       value={[...filter.statuses.values()].reverse()}
       renderOption={(props, option, { selected }) => (
-        <li {...props}>
+        <ListItem {...props}>
           <Checkbox
             icon={<Icon icon="mdi:checkbox-blank-outline" />}
             checkedIcon={<Icon icon="mdi:check-box-outline" />}
@@ -66,7 +67,7 @@ export function PureStatusesAutocomplete({
             checked={selected}
           />
           {option}
-        </li>
+        </ListItem>
       )}
       renderTags={(tags: string[]) => {
         if (tags.length === 0) {
@@ -92,8 +93,10 @@ export function PureStatusesAutocomplete({
               : statusesToShow}
             {tags.length > joinnedStatuses && (
               <>
-                <span>,&nbsp;</span>
-                <b>{`+${tags.length - joinnedStatuses}`}</b>
+                <Box component="span" marginRight={1}>
+                  ,
+                </Box>
+                +<Box component="span" fontWeight="bold">{`+${tags.length - joinnedStatuses}`}</Box>
               </>
             )}
           </Typography>
