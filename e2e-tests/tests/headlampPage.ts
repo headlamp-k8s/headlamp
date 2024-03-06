@@ -47,6 +47,7 @@ export class HeadlampPage {
   }
 
   async checkPageContent(text: string) {
+    await this.page.waitForSelector(`:has-text("${text}")`);
     const pageContent = await this.page.content();
     expect(pageContent).toContain(text);
   }
@@ -96,5 +97,26 @@ export class HeadlampPage {
   async clickOnPlugin(pluginName: string) {
     await this.page.click(`a:has-text("${pluginName}")`);
     await this.page.waitForLoadState('load');
+  }
+
+  async checkRows() {
+    // Get value of rows per page
+    const rowsDisplayed1 = await this.getRowsDisplayed();
+
+    // Click on the next page button
+    const nextPageButton = this.page.getByTitle('Next page');
+    await nextPageButton.click();
+
+    // Get value of rows per page after clicking next page button
+    const rowsDisplayed2 = await this.getRowsDisplayed();
+
+    // Check if the rows displayed are different
+    expect(rowsDisplayed1).not.toBe(rowsDisplayed2);
+  }
+
+  async getRowsDisplayed() {
+    const paginationCaption = this.page.locator("p:has-text(' of ')");
+    const captionText = await paginationCaption.textContent();
+    return captionText;
   }
 }
