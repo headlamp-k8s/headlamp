@@ -47,8 +47,8 @@ export function filterResource(
   let phase: string = '';
   if (isKubeCRD(item)) {
     const kubeCRD: KubeCRD = item as KubeCRD;
-    status = kubeCRD?.status;
-    phase = kubeCRD?.status?.phase;
+    status = String(kubeCRD?.status);
+    phase = String(kubeCRD?.status?.phase);
   }
 
   if (filter.search) {
