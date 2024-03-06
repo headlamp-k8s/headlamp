@@ -20,7 +20,7 @@ import Settings, { store } from './settings';
  * it's easier to make it look good with light and dark themes.
  */
 function SimpleLogo(props: AppLogoProps) {
-  const { logoType, className, sx } = props;
+  const { logoType, className } = props;
 
   const useConf = store.useConfig();
   const config = useConf();
