@@ -278,16 +278,17 @@ export async function fetchAndExecutePlugins(
 
   if (Object.keys(incompatiblePlugins).length > 0) {
     onIncompatible(incompatiblePlugins);
-    const packagesIncompatibleSet: PluginInfo[] = updatedSettingsPackages.map(
-      (plugin: PluginInfo) => {
-        return {
-          ...plugin,
-          isCompatible: !incompatiblePlugins[plugin.name],
-        };
-      }
-    );
-    onSettingsChange(packagesIncompatibleSet);
   }
+
+  const packagesIncompatibleSet: PluginInfo[] = updatedSettingsPackages.map(
+    (plugin: PluginInfo) => {
+      return {
+        ...plugin,
+        isCompatible: !incompatiblePlugins[plugin.name],
+      };
+    }
+  );
+  onSettingsChange(packagesIncompatibleSet);
 
   sourcesToExecute.forEach((source, index) => {
     // Execute plugins inside a context (not in global/window)
