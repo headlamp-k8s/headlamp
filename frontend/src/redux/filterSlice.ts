@@ -49,15 +49,7 @@ export function filterResource(
     const kubeCRD: KubeCRD = item as KubeCRD;
     status = String(kubeCRD?.status);
     phase = String(kubeCRD?.status?.phase);
-    if ((status.length > 0 || phase.length > 0) && filter.statuses.size > 0) {
-      matches = filter.statuses.has(status) || filter.statuses.has(phase);
-    }
   }
-
-  if (!matches) {
-    return false;
-  }
-
 
   if (filter.search) {
     const filterString = filter.search.toLowerCase();
