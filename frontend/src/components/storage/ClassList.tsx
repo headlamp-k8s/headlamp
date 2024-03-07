@@ -10,6 +10,7 @@ export default function ClassList() {
       title={t('Storage Classes')}
       headerProps={{
         noNamespaceFilter: true,
+        noStatusFilter: true,
       }}
       resourceClass={StorageClass}
       columns={[

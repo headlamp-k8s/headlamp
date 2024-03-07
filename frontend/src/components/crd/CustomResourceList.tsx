@@ -174,6 +174,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
       title={title}
       headerProps={{
         noNamespaceFilter: !crd.isNamespaced,
+        noStatusFilter: !crd.status,
       }}
       resourceClass={CRClass}
       columns={cols}

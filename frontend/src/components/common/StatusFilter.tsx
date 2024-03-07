@@ -17,7 +17,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 export interface PureStatusesAutocompleteProps {
   statusNames: string[];
   onChange: (event: React.ChangeEvent<{}>, newValue: string[]) => void;
-  filter: { statuses: Set<string>; search: string };
+  filter?: { statuses: Set<string>; search: string };
 }
 
 export function PureStatusesAutocomplete({
@@ -55,7 +55,7 @@ export function PureStatusesAutocomplete({
       inputValue={statusInput}
       // We reverse the namespaces so the last chosen appear as the first in the label. This
       // is useful since the label is ellipsized and this we get to see it change.
-      value={[...filter.statuses.values()].reverse()}
+      value={filter && [...filter.statuses.values()].reverse()}
       renderOption={(props, option, { selected }) => (
         <ListItem {...props}>
           <Checkbox
@@ -111,7 +111,7 @@ export function PureStatusesAutocomplete({
             fullWidth
             InputLabelProps={{ shrink: true }}
             style={{ marginTop: 0 }}
-            placeholder={[...filter.statuses.values()].length > 0 ? '' : 'Filter'}
+            placeholder={filter && [...filter.statuses.values()].length > 0 ? '' : 'Filter'}
           />
         </Box>
       )}
@@ -130,7 +130,7 @@ export function StatusesAutocomplete() {
   React.useEffect(() => {
     const allowedStatuses = ['Running', 'Pending', 'Failed', 'Succeeded'];
     setStatusNames(allowedStatuses);
-  });
+  }, []);
 
   const onChange = (event: React.ChangeEvent<{}>, newValue: string[]) => {
     addQuery({ status: newValue.join(' ') }, { status: '' }, history, location, '');

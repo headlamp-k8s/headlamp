@@ -66,10 +66,11 @@ export interface JobsListRendererProps {
   hideColumns?: 'namespace'[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
+  noStatusFilter?: boolean;
 }
 
 export function JobsListRenderer(props: JobsListRendererProps) {
-  const { jobs, error, hideColumns = [], reflectTableInURL = 'jobs', noNamespaceFilter } = props;
+  const { jobs, error, hideColumns = [], reflectTableInURL = 'jobs', noNamespaceFilter, noStatusFilter } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   function getCompletions(job: Job) {
@@ -89,6 +90,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
       title={t('Jobs')}
       headerProps={{
         noNamespaceFilter,
+        noStatusFilter,
       }}
       hideColumns={hideColumns}
       errorMessage={error}

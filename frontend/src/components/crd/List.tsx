@@ -11,6 +11,7 @@ export default function CustomResourceDefinitionList() {
       title={t('glossary|Custom Resources')}
       headerProps={{
         noNamespaceFilter: true,
+        noStatusFilter: true,
       }}
       resourceClass={CRD}
       columns={[

@@ -11,6 +11,7 @@ export default function IngressClassList() {
       title={t('Ingress Classes')}
       headerProps={{
         noNamespaceFilter: true,
+        noStatusFilter: true,
       }}
       resourceClass={IngressClass}
       columns={[

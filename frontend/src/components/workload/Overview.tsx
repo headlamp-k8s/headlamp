@@ -140,6 +140,7 @@ export default function Overview() {
         data={getJointItems()}
         headerProps={{
           noNamespaceFilter: false,
+          noStatusFilter: false,
         }}
         id="headlamp-workloads"
       />
