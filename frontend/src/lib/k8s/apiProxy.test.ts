@@ -4,13 +4,19 @@ import * as apiProxy from './apiProxy';
 const baseApiUrl = 'http://localhost';
 const mockResponse = { data: 'mock response' };
 const clusterName = 'test-cluster';
+const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
+const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
 
 // describe('apiFactory', () => {
 //   const mockSingleResource = ['groupA', 'v1', 'resourceA'];
 //   const mockMultipleResource = [['groupB', 'v1', 'resourceB'], ['groupC', 'v1', 'resourceC']];
 
-//   beforeEach(() => {
+//   beforeAll(() => {
+//     nock.cleanAll();
 //     nock.disableNetConnect();
+//   });
+
+//   beforeEach(() => {
 //     nock(baseApiUrl)
 //       // Successful GET request on single resource
 //       .persist()
@@ -23,15 +29,30 @@ const clusterName = 'test-cluster';
 //       .persist()
 //       .get(`/clusters/${clusterName}/apis/${mockMultipleResource[1][0]}/${mockMultipleResource[1][1]}/${mockMultipleResource[1][2]}`)
 //       .reply(200, mockResponse);
+//       console.log(baseApiUrl + `/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`)
 //   });
 
 //   afterEach(() => {
 //     nock.cleanAll();
+//   });
+
+//   afterAll(() => {
 //     nock.enableNetConnect();
 //   });
 
 //   it('Successfully creates API client for single resource', async () => {
 //     const client = apiProxy.apiFactory(mockSingleResource[0], mockSingleResource[1], mockSingleResource[2]);
+//     const cb = jest.fn(((...args) => {console.log('<<<<>>>>>>>>>', args)}));
+//     const errCb = jest.fn();
+
+//     await client.list(cb, errCb, {}, clusterName);
+//     await new Promise(resolve => setTimeout(resolve, 250));
+//     expect(cb).toHaveBeenCalledWith(mockResponse);
+//   });
+
+//   it('Successfully creates API client for multiple resources', async () => {
+//     const client = apiProxy.apiFactory([mockMultipleResource[0][0], mockMultipleResource[0][1], mockMultipleResource[0][2]],
+//       [mockMultipleResource[1][0], mockMultipleResource[1][1], mockMultipleResource[1][2]]);
 //     const cb = jest.fn();
 //     const errCb = jest.fn();
 
@@ -43,8 +64,6 @@ const clusterName = 'test-cluster';
 describe('get, post, patch, put, delete', () => {
   const testPath = '/test/url';
   const testData = { key: 'value' };
-  const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
-  const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
 
   beforeAll(() => {
     nock.disableNetConnect();
@@ -165,3 +184,145 @@ describe('get, post, patch, put, delete', () => {
     await expect(promise).rejects.toThrow(`${errorResponse.error}`);
   });
 });
+
+// describe('streamResult', () => {
+
+// });
+
+// describe('streamResults', () => {
+
+// });
+
+// describe('stream', () => {
+
+// });
+
+// describe('apply', () => {
+
+// });
+
+// describe('metrics', () => {
+
+// });
+
+describe('testAuth', () => {
+  const apiPath = '/apis/authorization.k8s.io/v1/selfsubjectrulesreviews';
+  const spec = { namespace: 'default' };
+
+  beforeEach(() => {
+    nock(baseApiUrl)
+      .persist()
+      .post(`/clusters/${clusterName}` + apiPath, { spec })
+      .reply(200, mockResponse);
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
+  it('Successfully handles authentication', async () => {
+    const response = await apiProxy.testAuth(clusterName);
+    expect(response).toEqual(mockResponse);
+  });
+
+  it.each([
+    [401, errorResponse401],
+    [500, errorResponse500],
+  ])(
+    'Successfully handles authentication with error status %d',
+    async (statusCode, errorResponse) => {
+      nock.cleanAll();
+      nock(baseApiUrl)
+        .persist()
+        .post(`/clusters/${clusterName}` + apiPath, { spec })
+        .reply(statusCode, { message: errorResponse.error });
+
+      await expect(apiProxy.testAuth(clusterName)).rejects.toThrow(`${errorResponse.error}`);
+    }
+  );
+});
+
+describe('testClusterHealth', () => {
+  const apiPath = '/healthz';
+  const successResponse = 'ok';
+
+  beforeEach(() => {
+    nock(baseApiUrl)
+      .persist()
+      .get(`/clusters/${clusterName}` + apiPath)
+      .reply(200, successResponse, { 'Content-Type': 'text/plain' });
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
+  it('Successfully checks cluster health', async () => {
+    const response = await apiProxy.testClusterHealth(clusterName);
+    const body = await response.text();
+    expect(body).toEqual(successResponse);
+  });
+
+  it.each([
+    [401, errorResponse401],
+    [500, errorResponse500],
+  ])(
+    'Successfully handles cluster health check with error status %d',
+    async (statusCode, errorResponse) => {
+      nock.cleanAll();
+      nock(baseApiUrl)
+        .persist()
+        .get(`/clusters/${clusterName}` + apiPath)
+        .reply(statusCode, { message: errorResponse.error });
+
+      await expect(apiProxy.testClusterHealth(clusterName)).rejects.toThrow(
+        `${errorResponse.error}`
+      );
+    }
+  );
+});
+
+describe('setCluster, deleteCluster', () => {
+  beforeAll(() => {
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
+  afterAll(() => {
+    nock.enableNetConnect();
+  });
+
+  it('Successfully deletes a cluster', async () => {
+    nock(baseApiUrl).persist().delete(`/cluster/${clusterName}`).reply(200, mockResponse);
+
+    const response = await apiProxy.deleteCluster(clusterName);
+    expect(response).toEqual(mockResponse);
+  });
+
+  it.each([
+    [401, errorResponse401],
+    [500, errorResponse500],
+  ])(
+    'Successfully handles deleteCluster with error status %d',
+    async (statusCode, errorResponse) => {
+      nock.cleanAll();
+      nock(baseApiUrl)
+        .persist()
+        .delete(`/cluster/${clusterName}`)
+        .reply(statusCode, { message: errorResponse.error });
+
+      await expect(apiProxy.deleteCluster(clusterName)).rejects.toThrow(`${errorResponse.error}`);
+    }
+  );
+});
+
+// describe('startPortForward, stopOrDeletePortForward, listPortForward', () => {
+
+// });
+
+// describe('drainNode, drainNodeStatus', () => {
+
+// });
