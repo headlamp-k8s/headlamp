@@ -162,7 +162,9 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
   return (
     <>
       <SectionBox
-        title={<SectionFilterHeader title={t('translation|Plugins')} noNamespaceFilter noStatusFilter />}
+        title={
+          <SectionFilterHeader title={t('translation|Plugins')} noNamespaceFilter noStatusFilter />
+        }
       >
         <SimpleTable
           columns={[

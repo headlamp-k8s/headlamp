@@ -76,7 +76,15 @@ export interface PodListProps {
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter, noStatusFilter, noSearch } = props;
+  const {
+    pods,
+    error,
+    hideColumns = [],
+    reflectTableInURL = 'pods',
+    noNamespaceFilter,
+    noStatusFilter,
+    noSearch,
+  } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (

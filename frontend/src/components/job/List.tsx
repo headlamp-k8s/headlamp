@@ -70,7 +70,14 @@ export interface JobsListRendererProps {
 }
 
 export function JobsListRenderer(props: JobsListRendererProps) {
-  const { jobs, error, hideColumns = [], reflectTableInURL = 'jobs', noNamespaceFilter, noStatusFilter } = props;
+  const {
+    jobs,
+    error,
+    hideColumns = [],
+    reflectTableInURL = 'jobs',
+    noNamespaceFilter,
+    noStatusFilter,
+  } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   function getCompletions(job: Job) {

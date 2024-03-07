@@ -28,7 +28,8 @@ export default function ResourceListView(
   );
   const withNamespaceFilter = (props as ResourceListViewWithResourceClassProps).resourceClass
     ?.isNamespaced;
-  const withStatusFilter = (props as ResourceListViewWithResourceClassProps).resourceClass?.status !== undefined;
+  const withStatusFilter =
+    (props as ResourceListViewWithResourceClassProps).resourceClass?.status !== undefined;
   return (
     <SectionBox
       title={
