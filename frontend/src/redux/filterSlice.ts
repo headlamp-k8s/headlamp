@@ -43,14 +43,12 @@ export function filterResource(
     return false;
   }
 
-  let status: string = '';
   let phase: string = '';
   if (isKubeCRD(item)) {
     const kubeCRD: KubeCRD = item as KubeCRD;
-    status = kubeCRD?.status ? kubeCRD?.status : '';
     phase = kubeCRD?.status?.phase ? kubeCRD?.status?.phase : '';;
-    if ((status.length > 0 || phase.length > 0) && filter.statuses.size > 0) {
-      matches = filter.statuses.has(status) || filter.statuses.has(phase);
+    if (phase.length > 0 && filter.statuses.size > 0) {
+      matches = filter.statuses.has(phase);
     }
   }
 
@@ -67,7 +65,6 @@ export function filterResource(
       item.metadata.name.toLowerCase(),
       ...Object.keys(item.metadata.labels || {}).map(item => item.toLowerCase()),
       ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
-      status.toLowerCase(),
       phase.toLowerCase(),
     ];
 
