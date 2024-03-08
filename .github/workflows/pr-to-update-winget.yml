@@ -1,0 +1,33 @@
+name: draft PR for updating winget
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  create-winget-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Create node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Run winget script
+        run: |
+          cd app/windows/winget
+          npm install
+          # This is where I am not sure if we can use the github context
+          # to pass the tag name and release URL to the script
+          # Need to ask:
+          # 1. Can we use the github context in the script?
+          # 2. If yes, how to pass the tag name and release URL to the script?
+
+          # > would i need to update the winget script to have a param to run on defaults to grab the latest release?
+          # May need a personal access token to create the PR
+          # node winget-create.js ${{ github.event.release.tag_name }} ${{ github.event.release.html_url }}
