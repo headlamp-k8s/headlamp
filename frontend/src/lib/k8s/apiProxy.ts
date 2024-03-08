@@ -767,7 +767,11 @@ function simpleApiFactoryWithNamespace(
         console.debug('k8s/apiProxy@simpleApiFactoryWithNamespace list', { cluster, queryParams });
       }
 
-      return streamResultsForCluster(url(namespace), { cb, errCb, cluster }, queryParams);
+      return streamResultsForCluster(
+        url(namespace, cluster, true),
+        { cb, errCb, cluster },
+        queryParams
+      );
     },
     get: (
       namespace: string,
@@ -811,8 +815,15 @@ function simpleApiFactoryWithNamespace(
 
   return results;
 
-  function url(namespace: string) {
-    return namespace ? `${apiRoot}/namespaces/${namespace}/${resource}` : `${apiRoot}/${resource}`;
+  function url(namespace: string, cluster?: string, checkDefaultNamespace?: boolean) {
+    let ns = namespace;
+
+    if (checkDefaultNamespace) {
+      const clusterName = cluster || getCluster() || '';
+      ns = getClusterDefaultNamespace(clusterName, true);
+    }
+
+    return ns ? `${apiRoot}/namespaces/${ns}/${resource}` : `${apiRoot}/${resource}`;
   }
 }
 
