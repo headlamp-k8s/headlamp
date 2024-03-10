@@ -10,6 +10,7 @@ import {
   ResourceTableFromResourceClassProps,
   ResourceTableProps,
 } from '../common/Resource/ResourceTable';
+import { CreateNamespaceButton } from './CreateNamespaceButton';
 
 export default function NamespacesList() {
   const { t } = useTranslation(['glossary', 'translation']);
@@ -86,12 +87,15 @@ export default function NamespacesList() {
     }, [allowedNamespaces]);
 
   return (
-    <ResourceListView
-      title={t('Namespaces')}
-      headerProps={{
-        noNamespaceFilter: true,
-      }}
-      {...resourceTableProps}
-    />
+    <>
+      <ResourceListView
+        title={t('Namespaces')}
+        headerProps={{
+          titleSideActions: [<CreateNamespaceButton />],
+          noNamespaceFilter: true,
+        }}
+        {...resourceTableProps}
+      />
+    </>
   );
 }
