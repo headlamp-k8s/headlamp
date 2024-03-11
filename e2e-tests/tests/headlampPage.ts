@@ -6,6 +6,8 @@ export class HeadlampPage {
   async authenticate() {
     await this.page.goto('/');
 
+    await this.page.waitForSelector('h1:has-text("Authentication")');
+
     // Expects the URL to contain c/main/token
     this.hasURLContaining(/.*token/);
 
