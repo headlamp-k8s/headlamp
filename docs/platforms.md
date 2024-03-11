@@ -17,6 +17,7 @@ The "works" column refers to the overall Kubernetes related functionality when r
 Platform<div style="min-width: 300px"></div>    | Works | Comments
 ----------------------------------------------|:-----:|------------------------------------------------------------------------------------------
 [Amazon EKS](https://aws.amazon.com/eks/)                     |  ✔️     | - As reported [here](https://github.com/headlamp-k8s/headlamp/issues/266).
+[Azure Kubernetes AKS](https://azure.microsoft.com/products/kubernetes-service)                     |  ✔️     | Worked fine in-cluster and also working perfectly while using kubeconfig file with headlamp application.
 [DigitalOcean Kubernetes](https://www.digitalocean.com/products/kubernetes/)        | ❔    | - Have you tried Headlamp on this platform? Please report your experience.
 [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) | ❔    | - Have you tried Headlamp on this platform? Please report your experience.
 [K3s](https://k3s.io/)                                         | ✔️     | - Simple to install / expose with the regular [in-cluster instructions](https://headlamp.dev/docs/latest/installation/in-cluster/).
