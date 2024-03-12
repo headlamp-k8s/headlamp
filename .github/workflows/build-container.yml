@@ -12,6 +12,7 @@ on:
     - Makefile
     - '.github/**'
     - Dockerfile
+    - Dockerfile.plugins
     - 'e2e-tests/**'
 
 jobs:
@@ -28,7 +29,22 @@ jobs:
       # now you can run kubectl to see the pods in the cluster
     - name: Try the cluster!
       run: kubectl get pods -A
+    - name: Restore image-cache Folder
+      id: cache-image-restore
+      uses: actions/cache/restore@v4
+      with:
+        path: ~/image-cache
+        # cache the container image image. All the paths this PR depends on except the e2e-tests folder for the key.
+        key: ${{ runner.os }}-image-${{ hashFiles('backend/pkg/**', 'backend/cmd/**', 'frontend/src/**', 'frontend/package.json', 'frontend/package-lock.json', 'Makefile', '.github/**', 'Dockerfile', 'Dockerfile.plugins') }}
+    - name: Restore Cached Docker Images
+      if: steps.cache-image-restore.outputs.cache-hit == 'true'
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        docker load -i ~/image-cache/headlamp-plugins-test.tar
+        docker load -i ~/image-cache/headlamp.tar
     - name: Make a .plugins folder for testing later
+      if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         echo "Extract pod-counter plugin into .plugins folder, which will be copied into image later by 'make image'."
         cd plugins/examples/pod-counter
@@ -41,10 +57,12 @@ jobs:
         cd ../../
         ls -laR .plugins
     - name: Remove unnecessary files
+      if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         sudo rm -rf /usr/share/dotnet
         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - name: Build image
+      if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
@@ -53,6 +71,7 @@ jobs:
         echo -n "verifying images:"
         docker images
     - name: Test .plugins folder
+      if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
@@ -86,7 +105,7 @@ jobs:
     - name: Run e2e tests
       run: |
         echo "------------------sleeping 3...------------------"
-        sleep 3
+        sleep 6
         minikube service list
         minikube service headlamp -n kube-system --url
         kubectl get deployments -n kube-system
@@ -114,6 +133,21 @@ jobs:
         else
           echo "Playwright tests passed successfully"
         fi
+    - name: Save Docker Images to Tar files in image-cache Folder
+      if: steps.cache-image-restore.outputs.cache-hit != 'true'
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        mkdir -p ~/image-cache
+        docker save -o ~/image-cache/headlamp-plugins-test.tar ghcr.io/headlamp-k8s/headlamp-plugins-test
+        docker save -o ~/image-cache/headlamp.tar ghcr.io/headlamp-k8s/headlamp
+    - name: Cache image-cache Folder
+      if: steps.cache-image-restore.outputs.cache-hit != 'true'
+      id: cache-image-save
+      uses: actions/cache/save@v4
+      with:
+        path: ~/image-cache
+        key: ${{ steps.cache-image-restore.outputs.cache-primary-key }}
     - uses: actions/upload-artifact@v4
       if: always()
       with:
