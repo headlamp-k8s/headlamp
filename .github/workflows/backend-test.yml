@@ -19,7 +19,7 @@ jobs:
     
       - uses: actions/setup-go@v5
         with:
-          go-version: 1.20.5
+          go-version: 1.22.0
     
       - name: Install dependencies
         run: |
