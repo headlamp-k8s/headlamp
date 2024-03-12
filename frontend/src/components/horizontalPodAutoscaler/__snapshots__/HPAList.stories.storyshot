@@ -77,7 +77,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -252,10 +252,10 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root"
+                  class="css-12ju9pi"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -264,7 +264,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -343,10 +343,10 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root"
+                  class="css-12ju9pi"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -355,7 +355,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -434,10 +434,10 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root"
+                  class="css-12ju9pi"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -446,7 +446,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -525,10 +525,10 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root"
+                  class="css-12ju9pi"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -537,7 +537,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -616,10 +616,10 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 style="min-width: 100%;"
               >
                 <div
-                  class="makeStyles-root"
+                  class="css-12ju9pi"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
@@ -628,7 +628,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault makeStyles-chip css-6q2vly-MuiChip-root"
+                    class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-a43g8z-MuiChip-root"
                   >
                     <span
                       class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"

@@ -1,5 +1,5 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Button, IconButton, Paper, TableContainer } from '@mui/material';
+import { Button, IconButton, Paper, SxProps, TableContainer, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -115,6 +115,7 @@ export interface SimpleTableProps {
   showPagination?: boolean;
   /** The style for the table */
   className?: string;
+  sx?: SxProps<Theme>;
 }
 
 interface ColumnSortButtonProps {
@@ -186,6 +187,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     noTableHeader = false,
     reflectInURL,
     className,
+    sx,
   } = props;
   const shouldReflectInURL = reflectInURL !== undefined && reflectInURL !== false;
   const prefix = reflectInURL === true ? '' : reflectInURL || '';
@@ -368,6 +370,7 @@ export default function SimpleTable(props: SimpleTableProps) {
   ) : (
     <TableContainer
       className={clsx(classes.tableContainer, className)}
+      sx={sx}
       component={Paper}
       variant="outlined"
     >

@@ -1,12 +1,9 @@
-import makeStyles from '@mui/styles/makeStyles';
-import React from 'react';
+import { styled } from '@mui/system';
 
-const useStyle = makeStyles(() => ({
-  editor: {
-    width: '100%',
-    minHeight: '40vh',
-  },
-}));
+const SizedTextarea = styled('textarea')({
+  width: '100%',
+  minHeight: '40vh',
+});
 
 export interface SimpleEditorProps {
   /** Programming language. */
@@ -19,15 +16,12 @@ export interface SimpleEditorProps {
 
 /** A very basic code editor. */
 function SimpleEditor({ language, value, onChange }: SimpleEditorProps) {
-  const classes = useStyle();
-
   // TextareaAutosize doesn't react well within a dialog/tab
   return (
-    <textarea
+    <SizedTextarea
       aria-label={`${language} Code`}
       onChange={event => onChange(event.target.value, event)}
       value={value}
-      className={classes.editor}
       spellCheck="false"
     />
   );

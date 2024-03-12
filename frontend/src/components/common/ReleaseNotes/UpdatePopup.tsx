@@ -1,17 +1,15 @@
 import { Icon } from '@iconify/react';
 import { Box, Button, Snackbar } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/system';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    '& .MuiSnackbarContent-root': {
-      backgroundColor: 'rgb(49, 49, 49)',
-      color: '#fff',
-    },
+const ColoredSnackbar = styled(Snackbar)({
+  '& .MuiSnackbarContent-root': {
+    backgroundColor: 'rgb(49, 49, 49)',
+    color: '#fff',
   },
-}));
+});
 
 function UpdatePopup(props: {
   releaseDownloadURL?: string | null;
@@ -19,15 +17,19 @@ function UpdatePopup(props: {
   releaseFetchFailed?: boolean;
   skipUpdateHandler: () => void;
 }) {
-  const classes = useStyles();
   const [show, setShow] = React.useState(true);
   const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
   const { t } = useTranslation();
 
   if (fetchingRelease && !releaseDownloadURL) {
     return (
-      <Snackbar
-        className={classes.root}
+      <ColoredSnackbar
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: 'rgb(49, 49, 49)',
+            color: '#fff',
+          },
+        }}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -58,8 +60,7 @@ function UpdatePopup(props: {
 
   if (releaseFetchFailed && !releaseDownloadURL) {
     return (
-      <Snackbar
-        className={classes.root}
+      <ColoredSnackbar
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -80,8 +81,7 @@ function UpdatePopup(props: {
 
   if (fetchingRelease && !releaseDownloadURL) {
     return (
-      <Snackbar
-        className={classes.root}
+      <ColoredSnackbar
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -112,8 +112,7 @@ function UpdatePopup(props: {
 
   if (releaseFetchFailed && !releaseDownloadURL) {
     return (
-      <Snackbar
-        className={classes.root}
+      <ColoredSnackbar
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -133,12 +132,11 @@ function UpdatePopup(props: {
   }
 
   return (
-    <Snackbar
+    <ColoredSnackbar
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right',
       }}
-      className={classes.root}
       open={show}
       autoHideDuration={100000}
       ContentProps={{

@@ -12,7 +12,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -102,7 +102,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -119,7 +119,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     terminated
                   </span>
@@ -148,7 +148,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-01-01T00:00:00.000Z
                   </span>
@@ -220,7 +220,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.1
                   </span>
@@ -234,7 +234,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.2
                   </span>
@@ -291,7 +291,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -431,7 +431,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -693,7 +693,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-4cxybv"
@@ -740,7 +740,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     containerd://007cdc266ae70e22e73a077c1c31b71b6c407b3f3817c84da10608dd3b7a82bd
                   </span>
@@ -754,7 +754,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     IfNotPresent
                   </span>
@@ -794,7 +794,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     /bin/sh -c exit 1
                   </span>
@@ -856,7 +856,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -985,7 +985,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -1075,7 +1075,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -1092,7 +1092,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     initializing
                   </span>
@@ -1121,7 +1121,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-01-01T00:00:00.000Z
                   </span>
@@ -1186,7 +1186,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.1
                   </span>
@@ -1200,7 +1200,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.2
                   </span>
@@ -1257,7 +1257,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -1397,7 +1397,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -1668,7 +1668,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-4cxybv"
@@ -1723,7 +1723,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     Always
                   </span>
@@ -1752,7 +1752,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     sh -c echo The app is running! && sleep 3600
                   </span>
@@ -1785,7 +1785,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-4cxybv"
@@ -1832,7 +1832,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     containerd://5fd564933040cc489ad0774b3f4d99866547cfef02a5277d7459a0fc800c9307
                   </span>
@@ -1846,7 +1846,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     Always
                   </span>
@@ -1886,7 +1886,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     sh -c until nslookup myservice; do echo waiting for myservice; sleep 2; done;
                   </span>
@@ -1946,7 +1946,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     Always
                   </span>
@@ -1975,7 +1975,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     sh -c until nslookup mydb; do echo waiting for mydb; sleep 2; done;
                   </span>
@@ -2037,7 +2037,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -2166,7 +2166,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -2256,7 +2256,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -2273,7 +2273,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     liveness-http
                   </span>
@@ -2302,7 +2302,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-01-01T00:00:00.000Z
                   </span>
@@ -2374,7 +2374,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.1
                   </span>
@@ -2388,7 +2388,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.2
                   </span>
@@ -2445,7 +2445,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -2585,7 +2585,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -2849,7 +2849,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-4cxybv"
@@ -2906,7 +2906,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     containerd://29f9695acc1968213087b71914dde17337b142aa63603113a4d03feabba1514c
                   </span>
@@ -2920,7 +2920,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     Always
                   </span>
@@ -3103,7 +3103,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -3232,7 +3232,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -3322,7 +3322,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -3339,7 +3339,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     imagepullbackoff
                   </span>
@@ -3368,7 +3368,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-01-01T00:00:00.000Z
                   </span>
@@ -3433,7 +3433,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.1
                   </span>
@@ -3447,7 +3447,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.2
                   </span>
@@ -3504,7 +3504,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -3644,7 +3644,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -3908,7 +3908,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-4cxybv"
@@ -3973,7 +3973,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     IfNotPresent
                   </span>
@@ -4050,7 +4050,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -4179,7 +4179,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -4269,7 +4269,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -4286,7 +4286,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     running
                   </span>
@@ -4315,7 +4315,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-01-01T00:00:00.000Z
                   </span>
@@ -4380,7 +4380,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.1
                   </span>
@@ -4394,7 +4394,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.2
                   </span>
@@ -4451,7 +4451,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -4591,7 +4591,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -4841,7 +4841,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-4cxybv"
@@ -4888,7 +4888,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584
                   </span>
@@ -4902,7 +4902,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     IfNotPresent
                   </span>
@@ -4954,12 +4954,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                           class="MuiBox-root css-1hckbtd"
                         >
                           <span
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                           >
                             TCP:
                           </span>
                           <span
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                           >
                             80
                           </span>
@@ -5025,7 +5025,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -5154,7 +5154,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -5244,7 +5244,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -5261,7 +5261,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     successful
                   </span>
@@ -5290,7 +5290,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-01-01T00:00:00.000Z
                   </span>
@@ -5355,7 +5355,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.1
                   </span>
@@ -5369,7 +5369,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     0.0.0.2
                   </span>
@@ -5426,7 +5426,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -5566,7 +5566,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -5834,7 +5834,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-4cxybv"
@@ -5881,7 +5881,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     containerd://d64ce854c96f53b2aaa00a975d026ffe5d7b862370a95abe88f2c033e01ae843
                   </span>
@@ -5895,7 +5895,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     IfNotPresent
                   </span>
@@ -5935,7 +5935,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     /bin/sh -c echo Succeeded
                   </span>
@@ -5997,7 +5997,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"

@@ -1,6 +1,5 @@
 import { FormControlLabel, Switch } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -23,15 +22,8 @@ import {
   PodsStatusCircleChart,
 } from './Charts';
 
-const useOverviewStyle = makeStyles({
-  chartItem: {
-    maxWidth: '300px',
-  },
-});
-
 export default function Overview() {
   const { t } = useTranslation(['translation']);
-  const classes = useOverviewStyle();
 
   const [pods] = Pod.useList();
   const [nodes] = Node.useList();
@@ -48,16 +40,16 @@ export default function Overview() {
           <Empty color="error">{t('translation|No permissions to list pods.')}</Empty>
         ) : (
           <Grid container justifyContent="flex-start" alignItems="stretch" spacing={4}>
-            <Grid item xs className={classes.chartItem}>
+            <Grid item xs sx={{ maxWidth: '300px' }}>
               <CpuCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
             </Grid>
-            <Grid item xs className={classes.chartItem}>
+            <Grid item xs sx={{ maxWidth: '300px' }}>
               <MemoryCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
             </Grid>
-            <Grid item xs className={classes.chartItem}>
+            <Grid item xs sx={{ maxWidth: '300px' }}>
               <PodsStatusCircleChart items={pods} />
             </Grid>
-            <Grid item xs className={classes.chartItem}>
+            <Grid item xs sx={{ maxWidth: '300px' }}>
               <NodesStatusCircleChart items={nodes} />
             </Grid>
           </Grid>
@@ -68,18 +60,8 @@ export default function Overview() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  eventLabel: {
-    [theme.breakpoints.up('md')]: {
-      minWidth: '180px',
-      display: 'unset',
-    },
-  },
-}));
-
 function EventsSection() {
   const EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY = 'EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY';
-  const classes = useStyles();
   const { t } = useTranslation(['translation', 'glossary']);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -120,7 +102,15 @@ function EventsSection() {
 
   function makeStatusLabel(event: Event) {
     return (
-      <StatusLabel status={event.type === 'Normal' ? '' : 'warning'} className={classes.eventLabel}>
+      <StatusLabel
+        status={event.type === 'Normal' ? '' : 'warning'}
+        sx={theme => ({
+          [theme.breakpoints.up('md')]: {
+            minWidth: '180px',
+            display: 'unset',
+          },
+        })}
+      >
         {event.reason}
       </StatusLabel>
     );

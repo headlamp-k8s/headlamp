@@ -6,7 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -26,38 +25,6 @@ enum Channel {
   Resize,
 }
 
-const useStyle = makeStyles(theme => ({
-  dialogContent: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    '& .xterm ': {
-      height: '100vh', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
-      '& .xterm-viewport': {
-        width: 'initial !important', // BugFix: https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440
-      },
-    },
-    '& #xterm-container': {
-      overflow: 'hidden',
-      width: '100%',
-      '& .terminal.xterm': {
-        padding: 10,
-      },
-    },
-  },
-  containerFormControl: {
-    minWidth: '11rem',
-  },
-  terminalBox: {
-    paddingTop: theme.spacing(1),
-    flex: 1,
-    width: '100%',
-    overflow: 'hidden',
-    display: 'flex',
-    flexDirection: 'column-reverse',
-  },
-}));
-
 interface TerminalProps extends DialogProps {
   item: Pod;
   isAttach?: boolean;
@@ -74,7 +41,6 @@ type execReturn = ReturnType<Pod['exec']>;
 
 export default function Terminal(props: TerminalProps) {
   const { item, onClose, isAttach, ...other } = props;
-  const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = useState<string | null>(getDefaultContainer());
   const execOrAttachRef = React.useRef<execReturn | null>(null);
@@ -412,9 +378,28 @@ export default function Terminal(props: TerminalProps) {
       }
       {...other}
     >
-      <DialogContent className={classes.dialogContent}>
+      <DialogContent
+        sx={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          '& .xterm ': {
+            height: '100vh', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
+            '& .xterm-viewport': {
+              width: 'initial !important', // BugFix: https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440
+            },
+          },
+          '& #xterm-container': {
+            overflow: 'hidden',
+            width: '100%',
+            '& .terminal.xterm': {
+              padding: 10,
+            },
+          },
+        }}
+      >
         <Box>
-          <FormControl className={classes.containerFormControl}>
+          <FormControl sx={{ minWidth: '11rem' }}>
             <InputLabel shrink id="container-name-chooser-label">
               {t('glossary|Container')}
             </InputLabel>
@@ -457,7 +442,16 @@ export default function Terminal(props: TerminalProps) {
             </Select>
           </FormControl>
         </Box>
-        <Box className={classes.terminalBox}>
+        <Box
+          sx={theme => ({
+            paddingTop: theme.spacing(1),
+            flex: 1,
+            width: '100%',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column-reverse',
+          })}
+        >
           <div
             id="xterm-container"
             ref={x => setTerminalContainerRef(x)}

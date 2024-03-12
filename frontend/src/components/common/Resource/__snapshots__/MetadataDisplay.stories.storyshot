@@ -17,7 +17,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           my-new-kind
         </span>
@@ -46,7 +46,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           2021-06-02T00:00:00.000Z
         </span>
@@ -118,7 +118,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           my-new-kind
         </span>
@@ -147,7 +147,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           2021-06-02T00:00:00.000Z
         </span>
@@ -206,7 +206,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           Some extra value 1
         </span>
@@ -220,7 +220,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           Some extra value 2
         </span>
@@ -234,7 +234,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           Some extra value 3
         </span>
@@ -261,7 +261,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           my-new-kind
         </span>
@@ -290,7 +290,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
       >
         <span
-          class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
         >
           2021-06-02T00:00:00.000Z
         </span>

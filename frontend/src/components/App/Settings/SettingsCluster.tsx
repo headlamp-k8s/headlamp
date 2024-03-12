@@ -13,17 +13,9 @@ import { setConfig } from '../../../redux/configSlice';
 import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   input: {
     maxWidth: 250,
-  },
-  blackButton: {
-    backgroundColor: theme.palette.sidebarBg,
-    color: theme.palette.primary.contrastText,
-    '&:hover': {
-      opacity: '0.8',
-      backgroundColor: theme.palette.sidebarBg,
-    },
   },
 }));
 

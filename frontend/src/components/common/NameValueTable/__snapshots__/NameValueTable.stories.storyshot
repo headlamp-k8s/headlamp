@@ -22,7 +22,7 @@ exports[`Storyshots NameValueTable With Children 1`] = `
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
     >
       <span
-        class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
       >
         MyValue0
       </span>
@@ -36,7 +36,7 @@ exports[`Storyshots NameValueTable With Children 1`] = `
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
     >
       <span
-        class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
       >
         MyValue1
       </span>
@@ -50,7 +50,7 @@ exports[`Storyshots NameValueTable With Children 1`] = `
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
     >
       <span
-        class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
       >
         MyValue2
       </span>
@@ -73,7 +73,7 @@ exports[`Storyshots NameValueTable With Hidden Last Children 1`] = `
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
     >
       <span
-        class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
       >
         MyValue0
       </span>
@@ -87,7 +87,7 @@ exports[`Storyshots NameValueTable With Hidden Last Children 1`] = `
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
     >
       <span
-        class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
       >
         MyValue1
       </span>

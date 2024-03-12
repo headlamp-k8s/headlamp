@@ -1,30 +1,25 @@
-import { Chip, Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Chip } from '@mui/material';
+import { styled } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import HPA from '../../lib/k8s/hpa';
 import { Link } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      justifyContent: 'left',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
-    },
-    chip: {
-      paddingTop: '2px',
-      paddingBottom: '2px',
-    },
-  })
-);
+const RootDiv = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'left',
+  flexWrap: 'wrap',
+  '& > *': {
+    margin: theme.spacing(0.5),
+  },
+}));
+
+const PaddedChip = styled(Chip)({
+  paddingTop: '2px',
+  paddingBottom: '2px',
+});
 
 export default function HpaList() {
-  const classes = useStyles();
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (
@@ -51,18 +46,11 @@ export default function HpaList() {
             const metrics = hpa.metrics(t);
             if (metrics.length) {
               value.push(
-                <Chip
-                  className={classes.chip}
-                  label={metrics[0].shortValue}
-                  variant="outlined"
-                  size="small"
-                  key="1"
-                />
+                <PaddedChip label={metrics[0].shortValue} variant="outlined" size="small" key="1" />
               );
               if (metrics.length > 1) {
                 value.push(
-                  <Chip
-                    className={classes.chip}
+                  <PaddedChip
                     label={metrics.length - 1 + t('translation|more…')}
                     variant="outlined"
                     size="small"
@@ -71,7 +59,7 @@ export default function HpaList() {
                 );
               }
             }
-            return <div className={classes.root}>{value}</div>;
+            return <RootDiv>{value}</RootDiv>;
           },
           cellProps: {
             style: {

@@ -1,5 +1,4 @@
 import { Box, Button } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
@@ -15,34 +14,6 @@ export interface PureAlertNotificationProps {
   checkerFunction(): Promise<any>;
 }
 
-const useStyle = makeStyles(theme => ({
-  box: {
-    color: theme.palette.common.white,
-    textAlign: 'center',
-    display: 'flex',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(0.5),
-    justifyContent: 'center',
-    position: 'fixed',
-    zIndex: theme.zIndex.snackbar + 1,
-    width: '100%',
-    top: '0',
-    height: '3.8vh',
-  },
-  button: {
-    color: theme.palette.error.main,
-    borderColor: theme.palette.error.main,
-    background: theme.palette.common.white,
-    lineHeight: '1',
-    marginLeft: theme.spacing(1),
-    '&:hover': {
-      color: theme.palette.common.white,
-      borderColor: theme.palette.common.white,
-      background: theme.palette.error.dark,
-    },
-  },
-}));
-
 // Routes where we don't show the alert notification.
 // Because maybe they already offer context about the cluster health or
 // some other reason.
@@ -55,7 +26,6 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const classes = useStyle();
 
   function registerSetInterval(): NodeJS.Timeout {
     return setInterval(() => {
@@ -129,11 +99,38 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
   }
 
   return (
-    <Box className={classes.box} bgcolor="error.main" paddingRight={sidebarWidth}>
+    <Box
+      sx={theme => ({
+        color: theme.palette.common.white,
+        textAlign: 'center',
+        display: 'flex',
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(0.5),
+        justifyContent: 'center',
+        position: 'fixed',
+        zIndex: theme.zIndex.snackbar + 1,
+        width: '100%',
+        top: '0',
+        height: '3.8vh',
+      })}
+      bgcolor="error.main"
+      paddingRight={sidebarWidth}
+    >
       <Box>
         {t('Something went wrong.')}
         <Button
-          className={classes.button}
+          sx={theme => ({
+            color: theme.palette.error.main,
+            borderColor: theme.palette.error.main,
+            background: theme.palette.common.white,
+            lineHeight: '1',
+            marginLeft: theme.spacing(1),
+            '&:hover': {
+              color: theme.palette.common.white,
+              borderColor: theme.palette.common.white,
+              background: theme.palette.error.dark,
+            },
+          })}
           onClick={() => setNetworkStatusCheckTimeFactor(0)}
           size="small"
         >

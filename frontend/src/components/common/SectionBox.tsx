@@ -1,6 +1,4 @@
-import { Theme } from '@mui/material';
 import Box, { BoxProps } from '@mui/material/Box';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import BackLink, { BackLinkProps } from './BackLink';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
@@ -13,19 +11,6 @@ export interface SectionBoxProps extends Omit<BoxProps, 'title'> {
   backLink?: BackLinkProps['to'] | boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  box: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
-  },
-}));
-
 export function SectionBox(props: SectionBoxProps) {
   const {
     title,
@@ -35,8 +20,6 @@ export function SectionBox(props: SectionBoxProps) {
     backLink,
     ...otherProps
   } = props;
-
-  const classes = useStyles();
 
   let titleElem: React.ReactNode;
   // If backLink is a boolean, then we want to use the browser's history if true.
@@ -53,7 +36,19 @@ export function SectionBox(props: SectionBoxProps) {
       {actualBackLink !== undefined && <BackLink to={actualBackLink} />}
       <Box py={0} {...outterBoxProps}>
         {title && titleElem}
-        <Box className={classes.box} {...otherProps}>
+        <Box
+          sx={theme => ({
+            paddingTop: 0,
+            paddingBottom: 0,
+            paddingLeft: theme.spacing(2),
+            paddingRight: theme.spacing(2),
+            [theme.breakpoints.down('sm')]: {
+              paddingLeft: 0,
+              paddingRight: 0,
+            },
+          })}
+          {...otherProps}
+        >
           {React.Children.toArray(children)}
         </Box>
       </Box>
