@@ -3,7 +3,7 @@
 ARG IMAGE_BASE=alpine:3.18
 FROM ${IMAGE_BASE} as image-base
 
-FROM --platform=${BUILDPLATFORM} golang:1.20 as backend-build
+FROM --platform=${BUILDPLATFORM} golang:1.22 as backend-build
 
 WORKDIR /headlamp
 
