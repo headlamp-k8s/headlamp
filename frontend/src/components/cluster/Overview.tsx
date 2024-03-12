@@ -10,6 +10,7 @@ import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
 import { setSearchFilter } from '../../redux/filterSlice';
+import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { DateLabel, Link, PageGrid, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -90,6 +91,7 @@ function EventsSection() {
     Boolean(JSON.parse(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY) || 'false'))
   );
   const [events, eventsError] = Event.useList({ limit: Event.maxLimit });
+  const dispatchEventsEvent = useEventCallback(HeadlampEventType.OBJECT_EVENTS);
 
   const warningActionFilterFunc = (event: KubeEvent) => {
     if (!filterFunc(event)) {
@@ -113,10 +115,10 @@ function EventsSection() {
     dispatch(setSearchFilter(eventsFilter));
   }, [eventsFilter]);
 
-  const numWarnings = React.useMemo(
-    () => events?.filter(e => e.type === 'Warning').length ?? '?',
-    [events]
-  );
+  const numWarnings = React.useMemo(() => {
+    dispatchEventsEvent(events || []);
+    return events?.filter(e => e.type === 'Warning').length ?? '?';
+  }, [events]);
 
   function makeStatusLabel(event: Event) {
     return (
