@@ -458,6 +458,22 @@ func (req *InstallRequest) Validate() error {
 	return validate.Struct(req)
 }
 
+func (h *Handler) returnResponse(w http.ResponseWriter, reqName string, statusCode int, message string) {
+	response := map[string]string{
+		"message": message,
+	}
+
+	w.WriteHeader(statusCode)
+
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		utils.HandleError(w, reqName, err, "encoding response", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+}
+
 func (h *Handler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 	// parse request
 	var req InstallRequest
@@ -488,23 +504,7 @@ func (h *Handler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 		h.installRelease(req)
 	}(h)
 
-	// Return response
-	response := map[string]string{
-		"message": "install request accepted",
-	}
-
-	w.WriteHeader(http.StatusAccepted)
-
-	err = json.NewEncoder(w).Encode(response)
-	if err != nil {
-		logger.Log(logger.LevelError, map[string]string{"releaseName": req.Name, "chart": req.Chart},
-			err, "encoding response")
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
+	h.returnResponse(w, req.Name, http.StatusAccepted, "install request accepted")
 }
 
 // Returns the chart, and err, and if dependencyUpdate is true then we also update the chart dependencies.
@@ -658,20 +658,7 @@ func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 		h.upgradeRelease(req)
 	}(h)
 
-	// Return response
-	response := map[string]string{
-		"message": "upgrade request accepted",
-	}
-
-	w.WriteHeader(http.StatusAccepted)
-
-	err = json.NewEncoder(w).Encode(response)
-	if err != nil {
-		utils.HandleError(w, req.Name, err, "encoding response", http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
+	h.returnResponse(w, req.Name, http.StatusAccepted, "upgrade request accepted")
 }
 
 func (h *Handler) logActionState(zlog *zerolog.Event,
