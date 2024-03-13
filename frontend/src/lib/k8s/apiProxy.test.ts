@@ -2,14 +2,40 @@ import nock from 'nock';
 import * as apiProxy from './apiProxy';
 
 const baseApiUrl = 'http://localhost';
-const mockResponse = { data: 'mock response' };
+const mockResponse = { message: 'mock response' };
 const clusterName = 'test-cluster';
+const namespace = 'default';
 const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
 const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
 
 // describe('apiFactory', () => {
 //   const mockSingleResource = ['groupA', 'v1', 'resourceA'];
 //   const mockMultipleResource = [['groupB', 'v1', 'resourceB'], ['groupC', 'v1', 'resourceC']];
+//   const mockKubeConfigMap = {
+//     apiVersion: 'v1',
+//     kind: 'ConfigMap',
+//     metadata: {
+//       creationTimestamp: '2023-04-27T20:31:27Z',
+//       name: 'my-pvc',
+//       namespace: 'default',
+//       resourceVersion: '1234',
+//       uid: 'abc-1234',
+//     },
+//     data: {
+//       storageClassName: 'default',
+//       volumeMode: 'Filesystem',
+//       volumeName: 'pvc-abc-1234',
+//     },
+//   };
+//   const newMockResponse = {
+//     apiVersion: 'v1',
+//     items: [mockKubeConfigMap],
+//     kind: 'ConfigMapList',
+//     metadata: {
+//       resourceVersion: '1234',
+//       selfLink: '/api/v1/namespaces/default/configmaps',
+//     },
+//   }
 
 //   beforeAll(() => {
 //     nock.cleanAll();
@@ -21,14 +47,14 @@ const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorize
 //       // Successful GET request on single resource
 //       .persist()
 //       .get(`/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`)
-//       .reply(200, mockResponse)
+//       .reply(200, JSON.stringify(newMockResponse))
 //       // Successful GET request on multiple resources
 //       .persist()
 //       .get(`/clusters/${clusterName}/apis/${mockMultipleResource[0][0]}/${mockMultipleResource[0][1]}/${mockMultipleResource[0][2]}`)
-//       .reply(200, mockResponse)
+//       .reply(200, JSON.stringify(newMockResponse))
 //       .persist()
 //       .get(`/clusters/${clusterName}/apis/${mockMultipleResource[1][0]}/${mockMultipleResource[1][1]}/${mockMultipleResource[1][2]}`)
-//       .reply(200, mockResponse);
+//       .reply(200, JSON.stringify(newMockResponse));
 //       console.log(baseApiUrl + `/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`)
 //   });
 
@@ -194,7 +220,69 @@ describe('get, post, patch, put, delete', () => {
 // });
 
 // describe('stream', () => {
+//   const testUrl = 'ws://localhost';
+//   const errorMessage = { error: 'Error in api stream' };
 
+//   beforeAll(() => {
+//     jest.setTimeout(10000);
+//     defineGlobalWebSocketMock();
+//   });
+
+//   afterEach(() => {
+//     jest.clearAllMocks();
+//   });
+
+//   function defineGlobalWebSocketMock(triggerError = false) {
+//     global.WebSocket = jest.fn().mockImplementation((url, protocols) => {
+//       return {
+//         url,
+//         protocols,
+//         addEventListener: jest.fn((event, callback) => {
+//           if (event === 'message' && !triggerError) {
+//             setTimeout(() => callback({ data: JSON.stringify(mockResponse) }), 100);
+//           } else if (event === 'error' && triggerError) {
+//             setTimeout(() => callback(errorMessage), 100);
+//           }
+//         }),
+//         removeEventListener: jest.fn(),
+//         close: jest.fn(),
+//         readyState: WebSocket.OPEN,
+//       };
+//     }) as unknown as typeof WebSocket;
+
+//     Object.defineProperties(global.WebSocket, {
+//       CONNECTING: { value: 0, enumerable: true},
+//       OPEN: { value: 1, enumerable: true},
+//       CLOSING: { value: 2, enumerable: true},
+//       CLOSED: { value: 3, enumerable: true},
+//     });
+//   }
+
+//   it('Successfully connects to the server and receives messages', async () => {
+//     const cb = jest.fn();
+//     const failCb = jest.fn();
+
+//     apiProxy.stream(testUrl, cb, { failCb });
+
+//     await new Promise((r) => setTimeout(r, 200));
+
+//     expect(cb).toHaveBeenCalledWith(JSON.stringify(mockResponse));
+//     expect(failCb).not.toHaveBeenCalled();
+//   });
+
+//   it('Successfully handles WebSocket errors', async () => {
+//     defineGlobalWebSocketMock(true);
+
+//     const cb = jest.fn();
+//     const failCb = jest.fn();
+
+//     apiProxy.stream(testUrl, cb, { failCb });
+
+//     await new Promise((r) => setTimeout(r, 200));
+
+//     expect(cb).not.toHaveBeenCalled();
+//     expect(failCb).toEqual(errorMessage);
+//   });
 // });
 
 // describe('apply', () => {
@@ -207,7 +295,7 @@ describe('get, post, patch, put, delete', () => {
 
 describe('testAuth', () => {
   const apiPath = '/apis/authorization.k8s.io/v1/selfsubjectrulesreviews';
-  const spec = { namespace: 'default' };
+  const spec = { namespace: namespace };
 
   beforeEach(() => {
     nock(baseApiUrl)
@@ -250,7 +338,7 @@ describe('testClusterHealth', () => {
     nock(baseApiUrl)
       .persist()
       .get(`/clusters/${clusterName}` + apiPath)
-      .reply(200, successResponse, { 'Content-Type': 'text/plain' });
+      .reply(200, successResponse, { 'content-type': 'text/plain' });
   });
 
   afterEach(() => {
@@ -319,10 +407,170 @@ describe('setCluster, deleteCluster', () => {
   );
 });
 
-// describe('startPortForward, stopOrDeletePortForward, listPortForward', () => {
+describe('startPortForward, stopOrDeletePortForward, listPortForward', () => {
+  const podname = 'test-pod';
+  const containerPort = 8080;
+  const service = 'test-service';
+  const serviceNamespace = 'default';
+  const port = '8080';
+  const mockId = '1234';
+  const mockStartResponse = { message: 'Port forwarding started' };
+  const mockStopResponse = { message: 'Port forwarding stopped' };
+  const mockListResponse = [
+    {
+      id: mockId,
+      podname: podname,
+      containerPort: containerPort,
+      service: service,
+      namespace: namespace,
+    },
+  ];
 
-// });
+  beforeEach(() => {
+    (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+      .fn()
+      .mockImplementation((url, options) => {
+        if (url.includes('portforward') && !url.includes('list')) {
+          if (options.method === 'POST' && url.includes('portforward')) {
+            return Promise.resolve(
+              new Response(JSON.stringify(mockStartResponse), {
+                status: 200,
+                headers: { 'content-type': 'application/json' },
+              })
+            );
+          } else if (options.method === 'DELETE' && url.includes('portforward')) {
+            return Promise.resolve(
+              new Response(JSON.stringify(mockStopResponse), {
+                status: 200,
+                headers: { 'content-type': 'application/json' },
+              })
+            );
+          }
+        } else if (url.includes('portforward') && url.includes('list')) {
+          return Promise.resolve(
+            new Response(JSON.stringify(mockListResponse), {
+              status: 200,
+              headers: { 'content-type': 'application/json' },
+            })
+          );
+        }
+        return Promise.reject(new Error('Not Found'));
+      });
+  });
 
-// describe('drainNode, drainNodeStatus', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
-// });
+  it('Successfully starts a port forward', async () => {
+    const response = await apiProxy.startPortForward(
+      clusterName,
+      namespace,
+      podname,
+      containerPort,
+      service,
+      serviceNamespace,
+      port,
+      baseApiUrl,
+      mockId
+    );
+    expect(response).toEqual(mockStartResponse);
+  });
+
+  it('Successfully deletes a port forward', async () => {
+    const response = await apiProxy.stopOrDeletePortForward(clusterName, mockId);
+    const data = JSON.parse(response);
+    expect(data).toEqual(mockStopResponse);
+  });
+
+  it('Successfully list port forwards', async () => {
+    const response = await apiProxy.listPortForward(clusterName);
+    expect(response).toEqual(mockListResponse);
+  });
+});
+
+describe('drainNode, drainNodeStatus', () => {
+  const nodeName = 'test-node';
+  const drainNodeErrorResponse = 'Something went wrong';
+
+  beforeEach(() => {
+    (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+      .fn()
+      .mockImplementation((url, options) => {
+        if (options.method === 'POST' && url.includes('drain-node')) {
+          if (options.body.includes(nodeName)) {
+            return Promise.resolve(
+              new Response(JSON.stringify(mockResponse), {
+                status: 200,
+                headers: { 'content-type': 'application/json' },
+              })
+            );
+          }
+        } else if (url.includes('drain-node-status')) {
+          return Promise.resolve(
+            new Response(JSON.stringify(mockResponse), {
+              status: 200,
+              headers: { 'content-type': 'application/json' },
+            })
+          );
+        } else {
+          return Promise.reject(new Error('Not Found'));
+        }
+      });
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it('Successfully drains a node', async () => {
+    const response = await apiProxy.drainNode(clusterName, nodeName);
+    expect(response).toEqual(mockResponse);
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('drain-node'),
+      expect.objectContaining({
+        method: 'POST',
+        headers: { map: expect.objectContaining({ 'content-type': 'application/json' }) },
+        body: JSON.stringify({ cluster: clusterName, nodeName }),
+      })
+    );
+  });
+
+  it('Successfully handles drainNode with error', async () => {
+    (global.fetch as jest.MockedFunction<typeof fetch>) = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false,
+        json: () => Promise.resolve(drainNodeErrorResponse),
+      });
+    });
+
+    await expect(apiProxy.drainNode(clusterName, 'invalid-node')).rejects.toThrow(
+      drainNodeErrorResponse
+    );
+  });
+
+  it('Successfully gets drain node status', async () => {
+    const response = await apiProxy.drainNodeStatus(clusterName, nodeName);
+    expect(response).toEqual(mockResponse);
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('drain-node-status'),
+      expect.objectContaining({
+        method: 'GET',
+        headers: { map: expect.objectContaining({ 'content-type': 'application/json' }) },
+      })
+    );
+  });
+
+  it('Successfully handles drainNodeStatus with error', async () => {
+    (global.fetch as jest.MockedFunction<typeof fetch>) = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false,
+        json: () => Promise.resolve(drainNodeErrorResponse),
+      });
+    });
+
+    await expect(apiProxy.drainNodeStatus(clusterName, 'invalid-node')).rejects.toThrow(
+      drainNodeErrorResponse
+    );
+  });
+});
