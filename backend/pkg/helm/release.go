@@ -9,7 +9,6 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/schema"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
-	"github.com/headlamp-k8s/headlamp/backend/pkg/utils"
 
 	"github.com/rs/zerolog"
 	zlog "github.com/rs/zerolog/log"
@@ -458,6 +457,11 @@ func (req *InstallRequest) Validate() error {
 	return validate.Struct(req)
 }
 
+func handleError(w http.ResponseWriter, releaseName string, err error, message string, status int) {
+	logger.Log(logger.LevelError, map[string]string{"releaseName": releaseName}, err, message)
+	http.Error(w, err.Error(), status)
+}
+
 func (h *Handler) returnResponse(w http.ResponseWriter, reqName string, statusCode int, message string) {
 	response := map[string]string{
 		"message": message,
@@ -467,7 +471,7 @@ func (h *Handler) returnResponse(w http.ResponseWriter, reqName string, statusCo
 
 	err := json.NewEncoder(w).Encode(response)
 	if err != nil {
-		utils.HandleError(w, reqName, err, "encoding response", http.StatusInternalServerError)
+		handleError(w, reqName, err, "encoding response", http.StatusInternalServerError)
 		return
 	}
 
@@ -631,26 +635,26 @@ func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		utils.HandleError(w, req.Name, err, "parsing request for upgrade release", http.StatusBadRequest)
+		handleError(w, req.Name, err, "parsing request for upgrade release", http.StatusBadRequest)
 		return
 	}
 
 	err = req.Validate()
 	if err != nil {
-		utils.HandleError(w, req.Name, err, "validating request for upgrade release", http.StatusBadRequest)
+		handleError(w, req.Name, err, "validating request for upgrade release", http.StatusBadRequest)
 		return
 	}
 
 	// check if release exists
 	_, err = h.Configuration.Releases.Deployed(req.Name)
 	if err == driver.ErrReleaseNotFound {
-		utils.HandleError(w, req.Name, err, "release not found", http.StatusNotFound)
+		handleError(w, req.Name, err, "release not found", http.StatusNotFound)
 		return
 	}
 
 	err = h.setReleaseStatus("upgrade", req.Name, processing, nil)
 	if err != nil {
-		utils.HandleError(w, req.Name, err, "setting status", http.StatusInternalServerError)
+		handleError(w, req.Name, err, "setting status", http.StatusInternalServerError)
 		return
 	}
 
