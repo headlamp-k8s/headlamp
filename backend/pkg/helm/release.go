@@ -9,6 +9,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/schema"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/utils"
 
 	"github.com/rs/zerolog"
 	zlog "github.com/rs/zerolog/log"
@@ -624,45 +625,32 @@ func (req *UpgradeReleaseRequest) Validate() error {
 	return validate.Struct(req)
 }
 
-//nolint:funlen
 func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 	// Parse request and validate
 	var req UpgradeReleaseRequest
 
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		logger.Log(logger.LevelError, map[string]string{"releaseName": req.Name},
-			err, "parsing request for upgrade release")
-		http.Error(w, err.Error(), http.StatusBadRequest)
-
+		utils.HandleError(w, req.Name, err, "parsing request for upgrade release", http.StatusBadRequest)
 		return
 	}
 
 	err = req.Validate()
 	if err != nil {
-		logger.Log(logger.LevelError, map[string]string{"releaseName": req.Name},
-			err, "validating request for upgrade release")
-		http.Error(w, err.Error(), http.StatusBadRequest)
-
+		utils.HandleError(w, req.Name, err, "validating request for upgrade release", http.StatusBadRequest)
 		return
 	}
 
 	// check if release exists
 	_, err = h.Configuration.Releases.Deployed(req.Name)
 	if err == driver.ErrReleaseNotFound {
-		logger.Log(logger.LevelError, map[string]string{"releaseName": req.Name, "chart": req.Chart},
-			err, "release not found")
-		http.Error(w, err.Error(), http.StatusNotFound)
-
+		utils.HandleError(w, req.Name, err, "release not found", http.StatusNotFound)
 		return
 	}
 
 	err = h.setReleaseStatus("upgrade", req.Name, processing, nil)
 	if err != nil {
-		logger.Log(logger.LevelError, map[string]string{"releaseName": req.Name},
-			err, "setting status")
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
+		utils.HandleError(w, req.Name, err, "setting status", http.StatusInternalServerError)
 		return
 	}
 
@@ -679,10 +667,7 @@ func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		logger.Log(logger.LevelError, map[string]string{"releaseName": req.Name, "chart": req.Chart},
-			err, "encoding response")
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
+		utils.HandleError(w, req.Name, err, "encoding response", http.StatusInternalServerError)
 		return
 	}
 
