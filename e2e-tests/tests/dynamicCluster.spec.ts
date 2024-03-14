@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from '@playwright/test';
 import { HeadlampPage } from './headlampPage';
 const yaml = require('yaml');
 const fs = require('fs').promises;
@@ -8,7 +8,10 @@ const exec = util.promisify(require('child_process').exec);
 test('There is cluster choose button and main cluster is selected', async ({ page }) => {
   const headlampPage = new HeadlampPage(page);
   await headlampPage.authenticate();
-  await headlampPage.pageLocatorContent('button:has-text("Our Cluster Chooser button. Cluster: main")', 'Our Cluster Chooser button. Cluster: main');
+  await headlampPage.pageLocatorContent(
+    'button:has-text("Our Cluster Chooser button. Cluster: main")',
+    'Our Cluster Chooser button. Cluster: main'
+  );
 });
 
 test('Store modified kubeconfig to IndexDB and check if present', async ({ page }) => {
@@ -46,7 +49,7 @@ test('check test is present in cluster and working', async ({ page }) => {
   await headlampPage.pageLocatorContent('h2:has-text("Overview")', 'Overview');
 });
 
-const getBase64EncodedKubeconfig = async (page) => {
+const getBase64EncodedKubeconfig = async () => {
   // Use kubectl command-line tool to get the kubeconfig
   const { stdout, stderr } = await exec('kubectl config view --output json');
   if (stderr) {
@@ -70,17 +73,20 @@ const getBase64EncodedKubeconfig = async (page) => {
   // Get the contents of certificate-authority file and convert to base64
   const caFilePath = kubeconfig.clusters[0].cluster['certificate-authority'];
   const caFileContent = await fs.readFile(caFilePath, 'utf-8');
-  kubeconfig.clusters[0].cluster['certificate-authority-data'] = Buffer.from(caFileContent).toString('base64');
+  kubeconfig.clusters[0].cluster['certificate-authority-data'] =
+    Buffer.from(caFileContent).toString('base64');
 
   // Get the contents of client-certificate file and convert to base64
   const clientCertFilePath = kubeconfig.users[0].user['client-certificate'];
   const clientCertFileContent = await fs.readFile(clientCertFilePath, 'utf-8');
-  kubeconfig.users[0].user['client-certificate-data'] = Buffer.from(clientCertFileContent).toString('base64');
+  kubeconfig.users[0].user['client-certificate-data'] =
+    Buffer.from(clientCertFileContent).toString('base64');
 
   // Get the contents of client-key file and convert to base64
   const clientKeyFilePath = kubeconfig.users[0].user['client-key'];
   const clientKeyFileContent = await fs.readFile(clientKeyFilePath, 'utf-8');
-  kubeconfig.users[0].user['client-key-data'] = Buffer.from(clientKeyFileContent).toString('base64');
+  kubeconfig.users[0].user['client-key-data'] =
+    Buffer.from(clientKeyFileContent).toString('base64');
 
   // Remove client-key, client-certificate, and certificate-authority keys
   delete kubeconfig.users[0].user['client-key'];
@@ -97,7 +103,7 @@ const getBase64EncodedKubeconfig = async (page) => {
 };
 
 const saveKubeconfigToIndexDB = async (page, base64EncodedKubeconfig) => {
-  await page.evaluate((base64EncodedKubeconfig) => {
+  await page.evaluate(base64EncodedKubeconfig => {
     // Open or create an IndexDB database
     const request = indexedDB.open('kubeconfigs', 1);
 
@@ -140,7 +146,7 @@ const saveKubeconfigToIndexDB = async (page, base64EncodedKubeconfig) => {
   }, base64EncodedKubeconfig);
 };
 
-const getKubeconfigFromIndexDB = async (page) => {
+const getKubeconfigFromIndexDB = async page => {
   const storedKubeconfig = await page.evaluate(() => {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open('kubeconfigs', 1);

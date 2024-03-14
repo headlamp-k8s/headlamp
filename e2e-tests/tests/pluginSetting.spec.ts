@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test } from '@playwright/test';
 import { HeadlampPage } from './headlampPage';
 
 test('plugin settings page should have a title', async ({ page }) => {

@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { HeadlampPage } from './headlampPage';
-import { ServicesPage } from './servicesPage';
 import { SecurityPage } from './securityPage';
+import { ServicesPage } from './servicesPage';
 
 // --- Plugins tests start --- //
 test('GET /plugins/list returns plugins list', async ({ page }) => {
@@ -48,7 +48,7 @@ test('headlamp service page should contain port', async ({ page }) => {
   await headlampPage.authenticate();
   await servicesPage.navigateToServices();
   await servicesPage.clickOnServicesSection();
-  await servicesPage.goToParticularService("headlamp");
+  await servicesPage.goToParticularService('headlamp');
 
   // Check if there is text "TCP" on the page
   await headlampPage.checkPageContent('TCP');
