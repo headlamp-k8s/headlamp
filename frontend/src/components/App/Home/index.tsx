@@ -19,6 +19,7 @@ import { createRouteURL } from '../../../lib/router';
 import { useFilterFunc, useId } from '../../../lib/util';
 import { setConfig } from '../../../redux/configSlice';
 import { Link, PageGrid, SectionBox, SectionFilterHeader } from '../../common';
+import { ConfirmDialog } from '../../common';
 import ResourceTable from '../../common/Resource/ResourceTable';
 import RecentClusters from './RecentClusters';
 
@@ -28,6 +29,7 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const menuId = useId('context-menu');
+  const [openConfirmDialog, setOpenConfirmDialog] = React.useState(false);
 
   function removeCluster(cluster: Cluster) {
     deleteCluster(cluster.name || '')
@@ -89,7 +91,7 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
         {helpers.isElectron() && cluster.meta_data?.source === 'dynamic_cluster' && (
           <MenuItem
             onClick={() => {
-              removeCluster(cluster);
+              setOpenConfirmDialog(true);
               handleMenuClose();
             }}
           >
@@ -97,6 +99,22 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
           </MenuItem>
         )}
       </Menu>
+
+      <ConfirmDialog
+        open={openConfirmDialog}
+        handleClose={() => setOpenConfirmDialog(false)}
+        onConfirm={() => {
+          setOpenConfirmDialog(false);
+          removeCluster(cluster);
+        }}
+        title={t('translation|Delete Cluster')}
+        description={t(
+          'translation|Are you sure you want to remove the cluster "{{ clusterName }}"?',
+          {
+            clusterName: cluster.name,
+          }
+        )}
+      />
     </>
   );
 }

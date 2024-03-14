@@ -326,6 +326,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
+                        <div />
                       </div>
                     </td>
                   </tr>
@@ -390,6 +391,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
+                        <div />
                       </div>
                     </td>
                   </tr>
@@ -454,6 +456,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
+                        <div />
                       </div>
                     </td>
                   </tr>
