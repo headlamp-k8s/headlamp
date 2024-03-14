@@ -230,7 +230,6 @@ export default function EditorDialog(props: EditorDialogProps) {
       res.format = 'yaml';
       try {
         res.obj = yaml.loadAll(code) as KubeObjectInterface[];
-        return res;
       } catch (e) {
         res.error = new Error((e as Error).message || t('Invalid YAML'));
       }
