@@ -12,6 +12,12 @@ Re-exports [ApiListOptions](../interfaces/lib_k8s_cluster.ApiListOptions.md)
 
 ___
 
+### ApiListSingleNamespaceOptions
+
+Re-exports [ApiListSingleNamespaceOptions](../interfaces/lib_k8s_cluster.ApiListSingleNamespaceOptions.md)
+
+___
+
 ### AuthRequestResourceAttrs
 
 Re-exports [AuthRequestResourceAttrs](../interfaces/lib_k8s_cluster.AuthRequestResourceAttrs.md)

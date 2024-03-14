@@ -16,7 +16,7 @@ The certificate authority data
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:56](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L56)
+[lib/k8s/apiProxy.ts:61](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L61)
 
 ___
 
@@ -28,7 +28,7 @@ Whether the server's certificate should not be checked for validity
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:54](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L54)
+[lib/k8s/apiProxy.ts:59](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L59)
 
 ___
 
@@ -40,7 +40,7 @@ KubeConfig (base64 encoded)
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:58](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L58)
+[lib/k8s/apiProxy.ts:63](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L63)
 
 ___
 
@@ -52,7 +52,7 @@ The name of the cluster (has to be unique, or it will override an existing clust
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:50](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L50)
+[lib/k8s/apiProxy.ts:55](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L55)
 
 ___
 
@@ -64,4 +64,4 @@ The cluster URL
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:52](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L52)
+[lib/k8s/apiProxy.ts:57](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L57)

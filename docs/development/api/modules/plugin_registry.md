@@ -18,9 +18,25 @@ slug: "plugin_registry"
 
 - [AppLogoProps](../interfaces/plugin_registry.AppLogoProps.md)
 - [ClusterChooserProps](../interfaces/plugin_registry.ClusterChooserProps.md)
+- [CreateResourceEvent](../interfaces/plugin_registry.CreateResourceEvent.md)
+- [DeleteResourceEvent](../interfaces/plugin_registry.DeleteResourceEvent.md)
 - [DetailsViewSectionProps](../interfaces/plugin_registry.DetailsViewSectionProps.md)
+- [EditResourceEvent](../interfaces/plugin_registry.EditResourceEvent.md)
+- [ErrorBoundaryEvent](../interfaces/plugin_registry.ErrorBoundaryEvent.md)
+- [EventListEvent](../interfaces/plugin_registry.EventListEvent.md)
+- [HeadlampEvent](../interfaces/plugin_registry.HeadlampEvent.md)
+- [LogsEvent](../interfaces/plugin_registry.LogsEvent.md)
+- [PluginLoadingErrorEvent](../interfaces/plugin_registry.PluginLoadingErrorEvent.md)
+- [PluginSettingsDetailsProps](../interfaces/plugin_registry.PluginSettingsDetailsProps.md)
+- [PluginsLoadedEvent](../interfaces/plugin_registry.PluginsLoadedEvent.md)
+- [PodAttachEvent](../interfaces/plugin_registry.PodAttachEvent.md)
+- [ResourceDetailsViewLoadedEvent](../interfaces/plugin_registry.ResourceDetailsViewLoadedEvent.md)
+- [ResourceListViewLoadedEvent](../interfaces/plugin_registry.ResourceListViewLoadedEvent.md)
+- [RestartResourceEvent](../interfaces/plugin_registry.RestartResourceEvent.md)
+- [ScaleResourceEvent](../interfaces/plugin_registry.ScaleResourceEvent.md)
 - [SectionFuncProps](../interfaces/plugin_registry.SectionFuncProps.md)
 - [SidebarEntryProps](../interfaces/plugin_registry.SidebarEntryProps.md)
+- [TerminalEvent](../interfaces/plugin_registry.TerminalEvent.md)
 
 ## Type aliases
 
@@ -44,7 +60,7 @@ slug: "plugin_registry"
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:59](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/redux/actionButtonsSlice.ts#L59)
+[redux/actionButtonsSlice.ts:59](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/actionButtonsSlice.ts#L59)
 
 ___
 
@@ -54,7 +70,7 @@ ___
 
 #### Defined in
 
-[components/App/AppLogo.tsx:23](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/App/AppLogo.tsx#L23)
+[components/App/AppLogo.tsx:25](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/App/AppLogo.tsx#L25)
 
 ___
 
@@ -64,7 +80,7 @@ ___
 
 #### Defined in
 
-[components/cluster/ClusterChooser.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/cluster/ClusterChooser.tsx#L10)
+[components/cluster/ClusterChooser.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/cluster/ClusterChooser.tsx#L10)
 
 ___
 
@@ -74,7 +90,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:69](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L69)
+[plugin/registry.tsx:114](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L114)
 
 ___
 
@@ -84,7 +100,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:70](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L70)
+[plugin/registry.tsx:115](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L115)
 
 ___
 
@@ -94,15 +110,44 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
+[components/DetailsViewSection/DetailsViewSection.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L10)
 
 ___
-### PluginSettingsComponentType
 
-Ƭ **PluginSettingsComponentType**: `React.ComponentType`<[`PluginSettingsDetailsProps`](../interfaces/plugin_registry.PluginSettingsDetailsProps.md)\> \| `ReactElement` \| typeof `React.Component` \| ``null``
+### HeadlampEventCallback
+
+Ƭ **HeadlampEventCallback**: (`data`: [`HeadlampEvent`](../interfaces/plugin_registry.HeadlampEvent.md)) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HeadlampEvent`](../interfaces/plugin_registry.HeadlampEvent.md) |
+
+##### Returns
+
+`void`
 
 #### Defined in
-[plugin/pluginsSlice.ts:24](https://github.com/headlamp-k8s/headlamp/blob/main/frontend/src/plugin/pluginsSlice.ts#L24)
+
+[redux/headlampEventSlice.ts:278](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/headlampEventSlice.ts#L278)
+
+___
+
+### PluginSettingsComponentType
+
+Ƭ **PluginSettingsComponentType**: `React.ComponentType`<[`PluginSettingsDetailsProps`](../interfaces/plugin_registry.PluginSettingsDetailsProps.md)\> \| `ReactElement` \| ``null``
+
+PluginSettingsComponentType is the type of the component associated with the plugin's settings.
+
+#### Defined in
+
+[plugin/pluginsSlice.ts:24](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/pluginsSlice.ts#L24)
+
 ___
 
 ### sectionFunc
@@ -127,9 +172,19 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:61](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L61)
+[plugin/registry.tsx:106](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L106)
 
 ## Variables
+
+### DefaultHeadlampEvents
+
+• **DefaultHeadlampEvents**: typeof `HeadlampEventType` = `HeadlampEventType`
+
+#### Defined in
+
+[plugin/registry.tsx:100](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L100)
+
+___
 
 ### DetailsViewDefaultHeaderActions
 
@@ -137,7 +192,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:56](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L56)
+[plugin/registry.tsx:101](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L101)
 
 ## Functions
 
@@ -153,7 +208,7 @@ Returns headers for making API calls to the headlamp-server backend.
 
 #### Defined in
 
-[helpers/index.ts:368](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/helpers/index.ts#L368)
+[helpers/index.ts:368](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/helpers/index.ts#L368)
 
 ___
 
@@ -196,7 +251,7 @@ registerAppBarAction(ConsoleLogger);
 
 #### Defined in
 
-[plugin/registry.tsx:401](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L401)
+[plugin/registry.tsx:446](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L446)
 
 ___
 
@@ -230,7 +285,7 @@ More complete logo example in plugins/examples/change-logo:
 
 #### Defined in
 
-[plugin/registry.tsx:501](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L501)
+[plugin/registry.tsx:546](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L546)
 
 ___
 
@@ -264,7 +319,7 @@ registerClusterChooser(({ clickHandler, cluster }: ClusterChooserProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:524](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L524)
+[plugin/registry.tsx:569](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L569)
 
 ___
 
@@ -305,7 +360,7 @@ registerDetailsViewHeaderAction(IconAction);
 
 #### Defined in
 
-[plugin/registry.tsx:305](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L305)
+[plugin/registry.tsx:350](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L350)
 
 ___
 
@@ -340,7 +395,7 @@ More complete detail view example in plugins/examples/details-view:
 
 #### Defined in
 
-[plugin/registry.tsx:328](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L328)
+[plugin/registry.tsx:373](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L373)
 
 ___
 
@@ -382,7 +437,7 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:435](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L435)
+[plugin/registry.tsx:480](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L480)
 
 ___
 
@@ -433,7 +488,7 @@ registerDetailsViewSectionsProcessor(function addTopSection( resource, sections 
 
 #### Defined in
 
-[plugin/registry.tsx:473](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L473)
+[plugin/registry.tsx:518](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L518)
 
 ___
 
@@ -463,7 +518,108 @@ registerGetTokenFunction(() => {
 
 #### Defined in
 
-[plugin/registry.tsx:558](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L558)
+[plugin/registry.tsx:603](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L603)
+
+___
+
+### registerHeadlampEventCallback
+
+▸ **registerHeadlampEventCallback**(`callback`): `void`
+
+Add a callback for headlamp events.
+
+**`example`**
+
+```ts
+import {
+  DefaultHeadlampEvents,
+  registerHeadlampEventCallback,
+  HeadlampEvent,
+} from '@kinvolk/headlamp-plugin/lib';
+
+registerHeadlampEventCallback((event: HeadlampEvent) => {
+  if (event.type === DefaultHeadlampEvents.ERROR_BOUNDARY) {
+    console.error('Error:', event.data);
+  } else {
+    console.log(`Headlamp event of type ${event.type}: ${event.data}`)
+  }
+});
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `callback` | [`HeadlampEventCallback`](plugin_registry.md#headlampeventcallback) | The callback to add. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:629](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L629)
+
+___
+
+### registerPluginSettings
+
+▸ **registerPluginSettings**(`name`, `component`, `displaySaveButton?`): `void`
+
+Register a plugin settings component.
+
+**`example`**
+
+```tsx
+import { registerPluginSettings } from '@kinvolk/headlamp-plugin/lib';
+import { TextField } from '@mui/material';
+
+function MyPluginSettingsComponent(props: PluginSettingsDetailsProps) {
+  const { data, onDataChange } = props;
+
+  function onChange(value: string) {
+    if (onDataChange) {
+      onDataChange({ works: value });
+    }
+  }
+
+  return (
+    <TextField
+      value={data?.works || ''}
+      onChange={e => onChange(e.target.value)}
+      label="Normal Input"
+      variant="outlined"
+      fullWidth
+    />
+  );
+}
+
+const displaySaveButton = true;
+// Register a plugin settings component.
+registerPluginSettings('my-plugin', MyPluginSettingsComponent, displaySaveButton);
+```
+
+More complete plugin settings example in plugins/examples/change-logo:
+
+**`see`** [Change Logo Example](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/change-logo)
+
+#### Parameters
+
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `name` | `string` | `undefined` | The name of the plugin. |
+| `component` | [`PluginSettingsComponentType`](plugin_registry.md#pluginsettingscomponenttype) | `undefined` | The component to use for the settings. |
+| `displaySaveButton` | `boolean` | `false` | Whether to display the save button. |
+
+#### Returns
+
+`void`
+
+void
+
+#### Defined in
+
+[plugin/registry.tsx:675](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L675)
 
 ___
 
@@ -505,7 +661,7 @@ registerResourceTableColumnsProcessor(function ageRemover({ id, columns }) {
 
 #### Defined in
 
-[plugin/registry.tsx:359](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L359)
+[plugin/registry.tsx:404](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L404)
 
 ___
 
@@ -545,7 +701,7 @@ registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:277](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L277)
+[plugin/registry.tsx:322](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L322)
 
 ___
 
@@ -575,7 +731,7 @@ registerRouteFilter(route => (route.path === '/workloads' ? null : route));
 
 #### Defined in
 
-[plugin/registry.tsx:250](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L250)
+[plugin/registry.tsx:295](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L295)
 
 ___
 
@@ -605,7 +761,7 @@ registerSetTokenFunction((cluster: string, token: string | null) => {
 
 #### Defined in
 
-[plugin/registry.tsx:540](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L540)
+[plugin/registry.tsx:585](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L585)
 
 ___
 
@@ -637,7 +793,7 @@ registerSidebarEntry({ parent: 'cluster', name: 'traces', label: 'Traces', url: 
 
 #### Defined in
 
-[plugin/registry.tsx:196](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L196)
+[plugin/registry.tsx:241](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L241)
 
 ___
 
@@ -667,51 +823,59 @@ registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry))
 
 #### Defined in
 
-[plugin/registry.tsx:231](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L231)
+[plugin/registry.tsx:276](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L276)
 
 ___
-### registerPluginSettings
 
-▸ **registerPluginSettings**(`name`,`component`,`displaySaveButton`): `void`
+### runCommand
+
+▸ **runCommand**(`command`, `args`, `options`): `Object`
+
+Runs a shell command and returns an object that mimics the interface of a ChildProcess object returned by Node's spawn function.
+
+This function is intended to be used only when Headlamp is in app mode.
+
+**`see`** handleRunCommand in app/electron/main.ts
+
+This function uses the desktopApi.send and desktopApi.receive methods to communicate with the main process.
 
 **`example`**
 
-```tsx
-import { registerPluginSettings } from "@kinvolk/headlamp-plugin/lib";
-import { TextField } from "@mui/material";
-
-function MyPluginSettingsComponent(props: PluginSettingsDetailsProps) {
-  const { data, onDataChange } = props;
-
-  function onChange(value: string) {
-    if (onDataChange) {
-      onDataChange({ works: value });
-    }
-  }
-
-  return (
-    <TextField
-      value={data?.works || ""}
-      onChange={(e) => onChange(e.target.value)}
-      label="Normal Input"
-      variant="outlined"
-      fullWidth
-    />
-  );
-}
-const displaySaveButton = true;
-// Register a plugin settings component.
-registerPluginSettings(
-  "my-plugin",
-  MyPluginSettingsComponent,
-  displaySaveButton
-);
+```ts
+  const minikube = runCommand('minikube', ['status']);
+  minikube.stdout.on('data', (data) => {
+    console.log('stdout:', data);
+  });
+  minikube.stderr.on('data', (data) => {
+    console.log('stderr:', data);
+  });
+  minikube.on('exit', (code) => {
+    console.log('exit code:', code);
+  });
 ```
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `name` | `string` | The name of the plugin. |
-| `component` | `PluginSettingsComponentType` | The component to be rendered in the plugin settings page. |
-| `displaySaveButton` | `boolean` | Whether to display the save button. |
+| `command` | ``"minikube"`` \| ``"az"`` | The command to run. |
+| `args` | `string`[] | An array of arguments to pass to the command. |
+| `options` | `Object` | - |
+
+#### Returns
+
+`Object`
+
+An object with `stdout`, `stderr`, and `on` properties. You can listen for 'data' events on `stdout` and `stderr`, and 'exit' events with `on`.
+
+| Name | Type |
+| :------ | :------ |
+| `stderr` | { `on`: (`event`: `string`, `listener`: (`chunk`: `any`) => `void`) => `void`  } |
+| `stderr.on` | [object Object] |
+| `stdout` | { `on`: (`event`: `string`, `listener`: (`chunk`: `any`) => `void`) => `void`  } |
+| `stdout.on` | [object Object] |
+| `on` | (`event`: `string`, `listener`: (`code`: ``null`` \| `number`) => `void`) => `void` |
+
+#### Defined in
+
+[components/App/runCommand.ts:27](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/App/runCommand.ts#L27)

@@ -18,7 +18,7 @@ The API group.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:586](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L586)
+[lib/k8s/apiProxy.ts:623](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L623)
 
 ___
 
@@ -30,7 +30,7 @@ The resource name.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:590](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L590)
+[lib/k8s/apiProxy.ts:627](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L627)
 
 ___
 
@@ -42,4 +42,4 @@ The API version.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:588](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L588)
+[lib/k8s/apiProxy.ts:625](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/apiProxy.ts#L625)
