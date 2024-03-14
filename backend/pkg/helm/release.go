@@ -50,8 +50,6 @@ type ListReleaseResponse struct {
 }
 
 // Returns (releases, error) given the request and helm configuration.
-//
-//nolint:gocognit
 func getReleases(req ListReleaseRequest, config *action.Configuration) ([]*release.Release, error) {
 	// Get list client
 	listClient := action.NewList(config)
