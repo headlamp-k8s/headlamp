@@ -102,7 +102,7 @@
     "test": "cross-env UNDER_TEST=true react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --cache -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin  ../e2e-tests/tests/*.ts ../e2e-tests/playwright.config.ts --ignore-pattern ../plugins/headlamp-plugin/template --ignore-pattern ../plugins/headlamp-plugin/lib/",
-    "format": "prettier --config package.json --write src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js ../e2e-tests/tests/*.ts ../e2e-tests/playwright.config.ts",
+    "format": "prettier --config package.json --write --cache src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js ../e2e-tests/tests/*.ts ../e2e-tests/playwright.config.ts",
     "format-check": "prettier --config package.json --check src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js ../e2e-tests/tests/*.ts ../e2e-tests/playwright.config.ts",
     "storybook": "storybook dev -p 6006 -s public",
     "build-typedoc": "npx typedoc",
