@@ -13,6 +13,7 @@ import { decodeToken } from 'react-jwt';
 import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
 import {
+  deleteClusterKubeconfig,
   findKubeconfigByClusterName,
   getUserIdFromLocalStorage,
   storeStatelessClusterKubeconfig,
@@ -1618,6 +1619,14 @@ export async function setCluster(clusterReq: ClusterRequest) {
 }
 
 export async function deleteCluster(cluster: string) {
+  if (cluster) {
+    const kubeconfig = await findKubeconfigByClusterName(cluster);
+    if (kubeconfig !== null) {
+      await deleteClusterKubeconfig(cluster);
+      return window.location.reload();
+    }
+  }
+
   return request(
     `/cluster/${cluster}`,
     { method: 'DELETE', headers: { ...getHeadlampAPIHeaders() } },
