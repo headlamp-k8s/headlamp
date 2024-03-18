@@ -909,7 +909,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
  * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
  */
 function lint(packageFolder, fix) {
-  const script = `eslint -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/${
+  const script = `eslint --cache -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/${
     fix ? ' --fix' : ''
   }`;
   return runScriptOnPackages(packageFolder, 'lint', script, {});
