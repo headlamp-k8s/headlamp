@@ -23,6 +23,7 @@ slug: "_index"
 - [lib/k8s/ingress](modules/lib_k8s_ingress.md)
 - [lib/k8s/ingressClass](modules/lib_k8s_ingressClass.md)
 - [lib/k8s/job](modules/lib_k8s_job.md)
+- [lib/k8s/kubeconfig](modules/lib_k8s_kubeconfig.md)
 - [lib/k8s/lease](modules/lib_k8s_lease.md)
 - [lib/k8s/limitRange](modules/lib_k8s_limitRange.md)
 - [lib/k8s/mutatingWebhookConfiguration](modules/lib_k8s_mutatingWebhookConfiguration.md)
