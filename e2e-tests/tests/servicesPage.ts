@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
 export class ServicesPage {
-  constructor(private page: Page) { }
+  constructor(private page: Page) {}
 
   async navigateToServices() {
     // Click on the "Network" button
@@ -17,7 +17,7 @@ export class ServicesPage {
     await this.page.click('span:has-text("Services")');
     // Wait for the page to load
     await this.page.waitForLoadState('load');
-  } 
+  }
 
   async goToParticularService(serviceName: string) {
     // Click on the particular service

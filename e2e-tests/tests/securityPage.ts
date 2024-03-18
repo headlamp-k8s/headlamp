@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
 export class SecurityPage {
-  constructor(private page: Page) { }
+  constructor(private page: Page) {}
 
   async navigateToSecurity() {
     // Click on the "Security" button

@@ -1,7 +1,7 @@
-import { Page, expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class HeadlampPage {
-  constructor(private page: Page) { }
+  constructor(private page: Page) {}
 
   async authenticate() {
     await this.page.goto('/');
@@ -15,7 +15,7 @@ export class HeadlampPage {
     this.hasToken(token);
 
     // Fill in the token
-    await this.page.locator("#token").fill(token);
+    await this.page.locator('#token').fill(token);
 
     // Click on the "Authenticate" button and wait for navigation
     await Promise.all([

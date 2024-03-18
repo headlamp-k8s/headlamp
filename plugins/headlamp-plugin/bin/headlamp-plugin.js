@@ -543,7 +543,7 @@ function build(packageFolder) {
 function format(packageFolder, check) {
   const cmdLine = check
     ? `prettier --config package.json --check src`
-    : 'prettier --config package.json --write src';
+    : 'prettier --config package.json --write --cache src';
   return runScriptOnPackages(packageFolder, 'format', cmdLine, {});
 }
 
