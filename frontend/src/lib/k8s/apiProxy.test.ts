@@ -37,11 +37,6 @@ const modifiedConfigMap = {
   metadata: { ...mockConfigMap.metadata, resourceVersion: '5678' },
   data: { ...mockConfigMap.data, volumeName: 'pvc-xyz-5678' },
 };
-// const modifiedConfigMapList = {
-//   ...mockConfigMapList,
-//   items: [modifiedConfigMap],
-//   metadata: { ...mockConfigMapList.metadata, resourceVersion: '5678' },
-// };
 
 describe('apiFactory', () => {
   const mockSingleResource: [group: string, version: string, resource: string] = [
@@ -81,7 +76,7 @@ describe('apiFactory', () => {
     const client = apiProxy.apiFactory(...mockSingleResource);
     client.list(cb, errCb, {}, clusterName);
 
-    mockServer.on('connection', async socket => {
+    mockServer.on('connection', async (socket: any) => {
       expect(cb).toHaveBeenNthCalledWith(1, []);
 
       socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
@@ -348,7 +343,7 @@ describe('streamResultsForCluster', () => {
       { watch: '1' }
     );
 
-    mockServer.on('connection', async socket => {
+    mockServer.on('connection', async (socket: any) => {
       expect(cb).toHaveBeenNthCalledWith(1, []);
 
       socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
@@ -399,7 +394,6 @@ describe('streamResultsForCluster', () => {
 //           closeCalled = true;
 //         }),
 //         readyState: WebSocket.OPEN,
-//         dispatchEvent: jest.fn(),
 //       };
 //     }) as unknown as typeof WebSocket;
 
