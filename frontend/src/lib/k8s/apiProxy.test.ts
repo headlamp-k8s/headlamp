@@ -320,12 +320,15 @@ describe('streamResultsForCluster', () => {
   let mockServer: WS;
 
   beforeEach(() => {
+    nock(baseApiUrl)
+      .get(`/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`)
+      .query({ watch: '1' })
+      .reply(200, mockConfigMapList);
+
     mockServer = new WS(
       `ws://localhost/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`
     );
-    nock(baseApiUrl)
-      .get(`/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps?watch=1`)
-      .reply(200, mockConfigMapList);
+    console.error = jest.fn();
   });
 
   afterEach(() => {
@@ -357,53 +360,56 @@ describe('streamResultsForCluster', () => {
       done();
     });
   });
+
+  it('Successfully handles ERROR type', done => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
+
+    apiProxy.streamResultsForCluster(
+      `/apis/v1/namespaces/${namespace}/configmaps`,
+      { cb, errCb, cluster: clusterName },
+      { watch: '1' }
+    );
+
+    mockServer.on('connection', async socket => {
+      const errorMessage = {
+        type: 'ERROR',
+        object: {
+          reason: 'InternalError',
+          message: 'Mock internal error message.',
+          actionType: 'ERROR',
+        },
+      };
+      socket.send(JSON.stringify(errorMessage));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(console.error).toHaveBeenCalledWith(
+        'Error in update',
+        expect.objectContaining({
+          object: expect.objectContaining({
+            actionType: errorMessage.object.actionType,
+            message: errorMessage.object.message,
+            reason: errorMessage.object.reason,
+          }),
+          type: errorMessage.type,
+        })
+      );
+      done();
+    });
+  });
 });
 
 // describe('stream', () => {
-//   const testUrl = 'ws://localhost';
+//   const testUrl = 'ws://localhost/clusters/test-cluster/apis/v1/namespaces/default/configmaps?watch=1&resourceVersion=1234';
 //   const errorMessage = { error: 'Error in api stream' };
-//   let closeCalled;
-
-//   beforeAll(() => {
-//     defineGlobalWebSocketMock();
-//   });
+//   let server: WS;
 
 //   beforeEach(() => {
-//     console.error = jest.fn();
+//     server = new WS(testUrl);
 //   });
 
 //   afterEach(() => {
-//     jest.clearAllMocks();
+//     WS.clean();
 //   });
-
-//   // Helper to mock WebSocket and allow for error handling
-//   function defineGlobalWebSocketMock(triggerError = false) {
-//     global.WebSocket = jest.fn().mockImplementation((url, protocols) => {
-//       return {
-//         url,
-//         protocols,
-//         addEventListener: jest.fn((event, callback) => {
-//           if (event === 'message' && !triggerError) {
-//             setTimeout(() => callback({ data: JSON.stringify(mockResponse) }), 100);
-//           } else if (event === 'error' && triggerError) {
-//             setTimeout(() => callback(errorMessage), 100);
-//           }
-//         }),
-//         removeEventListener: jest.fn(),
-//         close: jest.fn(() => {
-//           closeCalled = true;
-//         }),
-//         readyState: WebSocket.OPEN,
-//       };
-//     }) as unknown as typeof WebSocket;
-
-//     Object.defineProperties(global.WebSocket, {
-//       CONNECTING: { value: 0, enumerable: true },
-//       OPEN: { value: 1, enumerable: true },
-//       CLOSING: { value: 2, enumerable: true },
-//       CLOSED: { value: 3, enumerable: true },
-//     });
-//   }
 
 //   it('Successfully connects to the server and receives messages', async () => {
 //     const cb = jest.fn();
@@ -411,43 +417,60 @@ describe('streamResultsForCluster', () => {
 
 //     apiProxy.stream(testUrl, cb, { failCb });
 
-//     await new Promise(r => setTimeout(r, 100));
+//     console.log("Trying to connect to server...");
+//     await server.connected;
+//     console.log("Trying to send message...");
+//     server.send(JSON.stringify(mockResponse));
+//     console.log("Message sent.");
 
-//     expect(cb).toHaveBeenCalledWith(JSON.stringify(mockResponse));
+//     await new Promise((r) => setTimeout(r, 100));
+//     expect(cb).toHaveBeenCalledTimes(1);
+//     // expect(cb).toHaveBeenCalledWith(mockResponse);
+//     // expect(failCb).not.toHaveBeenCalled();
+
+//     // console.log("Waiting to connect to server...");
+//     // mockServer.on('connection', async (socket: any) => {
+//     //   console.log("Connected to server. Sending message...");
+//     //   socket.send(JSON.stringify(mockResponse));
+//     //   console.log("Message sent.");
+//     //   await new Promise((r) => setTimeout(r, 100));
+//     //   expect(cb).toHaveBeenCalledTimes(1);
+//     //   expect(cb).toHaveBeenCalledWith(mockResponse);
+//     //   expect(failCb).not.toHaveBeenCalled();
+//     // });
+//   });
+
+// it('Successfully handles WebSocket errors', async () => {
+//   const cb = jest.fn();
+//   const failCb = jest.fn();
+
+//   apiProxy.stream(testUrl, cb, { failCb });
+
+//   mockServer.on('connection', async (socket: any) => {
+//     socket.close();
+//     expect(cb).not.toHaveBeenCalled();
 //     expect(failCb).not.toHaveBeenCalled();
+//     // expect(console.error).toHaveBeenCalledWith(errorMessage.error, {
+//     //   err: errorMessage,
+//     //   path: testUrl,
+//     // });
 //   });
+// });
 
-//   it('Successfully handles WebSocket errors', async () => {
-//     defineGlobalWebSocketMock(true);
+// it('Successfully cancels the stream', async () => {
+//   const cb = jest.fn();
+//   const failCb = jest.fn();
+//   closeCalled = false;
 
-//     const cb = jest.fn();
-//     const failCb = jest.fn();
+//   const { cancel } = apiProxy.stream(testUrl, cb, { failCb });
 
-//     apiProxy.stream(testUrl, cb, { failCb });
+//   await new Promise(r => setTimeout(r, 50));
+//   cancel();
+//   await new Promise(r => setTimeout(r, 50));
 
-//     await new Promise(r => setTimeout(r, 100));
-
-//     expect(cb).not.toHaveBeenCalled();
-//     expect(console.error).toHaveBeenCalledWith(errorMessage.error, {
-//       err: errorMessage,
-//       path: testUrl,
-//     });
-//   });
-
-//   it('Successfully cancels the stream', async () => {
-//     const cb = jest.fn();
-//     const failCb = jest.fn();
-//     closeCalled = false;
-
-//     const { cancel } = apiProxy.stream(testUrl, cb, { failCb });
-
-//     await new Promise(r => setTimeout(r, 50));
-//     cancel();
-//     await new Promise(r => setTimeout(r, 50));
-
-//     expect(closeCalled).toBe(true);
-//     expect(cb).not.toHaveBeenCalled();
-//   });
+//   expect(closeCalled).toBe(true);
+//   expect(cb).not.toHaveBeenCalled();
+// });
 // });
 
 // describe('apply', () => {
