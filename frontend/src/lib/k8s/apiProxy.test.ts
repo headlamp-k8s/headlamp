@@ -400,6 +400,7 @@ describe('stream', () => {
           closeCalled = true;
         }),
         readyState: WebSocket.OPEN,
+        dispatchEvent: jest.fn(),
       };
     }) as unknown as typeof WebSocket;
 
