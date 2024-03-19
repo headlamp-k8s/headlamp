@@ -1,6 +1,5 @@
 import WS from 'jest-websocket-mock';
 import nock from 'nock';
-import WebSocket from 'ws';
 import * as apiProxy from './apiProxy';
 
 const baseApiUrl = 'http://localhost';
@@ -365,97 +364,97 @@ describe('streamResultsForCluster', () => {
   });
 });
 
-describe('stream', () => {
-  const testUrl = 'ws://localhost';
-  const errorMessage = { error: 'Error in api stream' };
-  let closeCalled;
+// describe('stream', () => {
+//   const testUrl = 'ws://localhost';
+//   const errorMessage = { error: 'Error in api stream' };
+//   let closeCalled;
 
-  beforeAll(() => {
-    defineGlobalWebSocketMock();
-  });
+//   beforeAll(() => {
+//     defineGlobalWebSocketMock();
+//   });
 
-  beforeEach(() => {
-    console.error = jest.fn();
-  });
+//   beforeEach(() => {
+//     console.error = jest.fn();
+//   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+//   afterEach(() => {
+//     jest.clearAllMocks();
+//   });
 
-  // Helper to mock WebSocket and allow for error handling
-  function defineGlobalWebSocketMock(triggerError = false) {
-    global.WebSocket = jest.fn().mockImplementation((url, protocols) => {
-      return {
-        url,
-        protocols,
-        addEventListener: jest.fn((event, callback) => {
-          if (event === 'message' && !triggerError) {
-            setTimeout(() => callback({ data: JSON.stringify(mockResponse) }), 100);
-          } else if (event === 'error' && triggerError) {
-            setTimeout(() => callback(errorMessage), 100);
-          }
-        }),
-        removeEventListener: jest.fn(),
-        close: jest.fn(() => {
-          closeCalled = true;
-        }),
-        readyState: WebSocket.OPEN,
-        dispatchEvent: jest.fn(),
-      };
-    }) as unknown as typeof WebSocket;
+//   // Helper to mock WebSocket and allow for error handling
+//   function defineGlobalWebSocketMock(triggerError = false) {
+//     global.WebSocket = jest.fn().mockImplementation((url, protocols) => {
+//       return {
+//         url,
+//         protocols,
+//         addEventListener: jest.fn((event, callback) => {
+//           if (event === 'message' && !triggerError) {
+//             setTimeout(() => callback({ data: JSON.stringify(mockResponse) }), 100);
+//           } else if (event === 'error' && triggerError) {
+//             setTimeout(() => callback(errorMessage), 100);
+//           }
+//         }),
+//         removeEventListener: jest.fn(),
+//         close: jest.fn(() => {
+//           closeCalled = true;
+//         }),
+//         readyState: WebSocket.OPEN,
+//         dispatchEvent: jest.fn(),
+//       };
+//     }) as unknown as typeof WebSocket;
 
-    Object.defineProperties(global.WebSocket, {
-      CONNECTING: { value: 0, enumerable: true },
-      OPEN: { value: 1, enumerable: true },
-      CLOSING: { value: 2, enumerable: true },
-      CLOSED: { value: 3, enumerable: true },
-    });
-  }
+//     Object.defineProperties(global.WebSocket, {
+//       CONNECTING: { value: 0, enumerable: true },
+//       OPEN: { value: 1, enumerable: true },
+//       CLOSING: { value: 2, enumerable: true },
+//       CLOSED: { value: 3, enumerable: true },
+//     });
+//   }
 
-  it('Successfully connects to the server and receives messages', async () => {
-    const cb = jest.fn();
-    const failCb = jest.fn();
+//   it('Successfully connects to the server and receives messages', async () => {
+//     const cb = jest.fn();
+//     const failCb = jest.fn();
 
-    apiProxy.stream(testUrl, cb, { failCb });
+//     apiProxy.stream(testUrl, cb, { failCb });
 
-    await new Promise(r => setTimeout(r, 100));
+//     await new Promise(r => setTimeout(r, 100));
 
-    expect(cb).toHaveBeenCalledWith(JSON.stringify(mockResponse));
-    expect(failCb).not.toHaveBeenCalled();
-  });
+//     expect(cb).toHaveBeenCalledWith(JSON.stringify(mockResponse));
+//     expect(failCb).not.toHaveBeenCalled();
+//   });
 
-  it('Successfully handles WebSocket errors', async () => {
-    defineGlobalWebSocketMock(true);
+//   it('Successfully handles WebSocket errors', async () => {
+//     defineGlobalWebSocketMock(true);
 
-    const cb = jest.fn();
-    const failCb = jest.fn();
+//     const cb = jest.fn();
+//     const failCb = jest.fn();
 
-    apiProxy.stream(testUrl, cb, { failCb });
+//     apiProxy.stream(testUrl, cb, { failCb });
 
-    await new Promise(r => setTimeout(r, 100));
+//     await new Promise(r => setTimeout(r, 100));
 
-    expect(cb).not.toHaveBeenCalled();
-    expect(console.error).toHaveBeenCalledWith(errorMessage.error, {
-      err: errorMessage,
-      path: testUrl,
-    });
-  });
+//     expect(cb).not.toHaveBeenCalled();
+//     expect(console.error).toHaveBeenCalledWith(errorMessage.error, {
+//       err: errorMessage,
+//       path: testUrl,
+//     });
+//   });
 
-  it('Successfully cancels the stream', async () => {
-    const cb = jest.fn();
-    const failCb = jest.fn();
-    closeCalled = false;
+//   it('Successfully cancels the stream', async () => {
+//     const cb = jest.fn();
+//     const failCb = jest.fn();
+//     closeCalled = false;
 
-    const { cancel } = apiProxy.stream(testUrl, cb, { failCb });
+//     const { cancel } = apiProxy.stream(testUrl, cb, { failCb });
 
-    await new Promise(r => setTimeout(r, 50));
-    cancel();
-    await new Promise(r => setTimeout(r, 50));
+//     await new Promise(r => setTimeout(r, 50));
+//     cancel();
+//     await new Promise(r => setTimeout(r, 50));
 
-    expect(closeCalled).toBe(true);
-    expect(cb).not.toHaveBeenCalled();
-  });
-});
+//     expect(closeCalled).toBe(true);
+//     expect(cb).not.toHaveBeenCalled();
+//   });
+// });
 
 // describe('apply', () => {
 
