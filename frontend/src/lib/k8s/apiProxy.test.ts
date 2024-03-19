@@ -1,91 +1,126 @@
+import WS from 'jest-websocket-mock';
 import nock from 'nock';
+import WebSocket from 'ws';
 import * as apiProxy from './apiProxy';
 
 const baseApiUrl = 'http://localhost';
 const mockResponse = { message: 'mock response' };
 const clusterName = 'test-cluster';
+const podName = 'test-pod';
 const namespace = 'default';
 const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
 const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
+const mockConfigMap = {
+  apiVersion: 'v1',
+  kind: 'ConfigMap',
+  metadata: {
+    name: 'my-pvc',
+    namespace: 'default',
+    resourceVersion: '1234',
+  },
+  data: {
+    storageClassName: 'default',
+    volumeMode: 'Filesystem',
+    volumeName: 'pvc-abc-1234',
+  },
+};
+const mockConfigMapList = {
+  apiVersion: 'v1',
+  items: [],
+  kind: 'ConfigMapList',
+  metadata: {
+    resourceVersion: '1234',
+    selfLink: '/api/v1/namespaces/default/configmaps',
+  },
+};
+const modifiedConfigMap = {
+  ...mockConfigMap,
+  metadata: { ...mockConfigMap.metadata, resourceVersion: '5678' },
+  data: { ...mockConfigMap.data, volumeName: 'pvc-xyz-5678' },
+};
+// const modifiedConfigMapList = {
+//   ...mockConfigMapList,
+//   items: [modifiedConfigMap],
+//   metadata: { ...mockConfigMapList.metadata, resourceVersion: '5678' },
+// };
 
-// describe('apiFactory', () => {
-//   const mockSingleResource = ['groupA', 'v1', 'resourceA'];
-//   const mockMultipleResource = [['groupB', 'v1', 'resourceB'], ['groupC', 'v1', 'resourceC']];
-//   const mockKubeConfigMap = {
-//     apiVersion: 'v1',
-//     kind: 'ConfigMap',
-//     metadata: {
-//       creationTimestamp: '2023-04-27T20:31:27Z',
-//       name: 'my-pvc',
-//       namespace: 'default',
-//       resourceVersion: '1234',
-//       uid: 'abc-1234',
-//     },
-//     data: {
-//       storageClassName: 'default',
-//       volumeMode: 'Filesystem',
-//       volumeName: 'pvc-abc-1234',
-//     },
-//   };
-//   const newMockResponse = {
-//     apiVersion: 'v1',
-//     items: [mockKubeConfigMap],
-//     kind: 'ConfigMapList',
-//     metadata: {
-//       resourceVersion: '1234',
-//       selfLink: '/api/v1/namespaces/default/configmaps',
-//     },
-//   }
+describe('apiFactory', () => {
+  const mockSingleResource: [group: string, version: string, resource: string] = [
+    'groupA',
+    'v1',
+    'resourceA',
+  ];
+  // const mockMultipleResource: [group: string, version: string, resource: string][] = [['groupB', 'v1', 'resourceB'], ['groupC', 'v1', 'resourceC'], ['groupD', 'v1', 'resourceD']];
+  let mockServer: WS;
+  // let mockServers: Record<string, WS> = {};
 
-//   beforeAll(() => {
-//     nock.cleanAll();
-//     nock.disableNetConnect();
-//   });
+  beforeEach(() => {
+    nock(baseApiUrl)
+      .persist()
+      .get(
+        uri =>
+          uri.includes('resourceA') ||
+          uri.includes('resourceB') ||
+          uri.includes('resourceC') ||
+          uri.includes('resourceD')
+      )
+      .reply(200, mockConfigMapList);
+  });
 
-//   beforeEach(() => {
-//     nock(baseApiUrl)
-//       // Successful GET request on single resource
-//       .persist()
-//       .get(`/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`)
-//       .reply(200, JSON.stringify(newMockResponse))
-//       // Successful GET request on multiple resources
-//       .persist()
-//       .get(`/clusters/${clusterName}/apis/${mockMultipleResource[0][0]}/${mockMultipleResource[0][1]}/${mockMultipleResource[0][2]}`)
-//       .reply(200, JSON.stringify(newMockResponse))
-//       .persist()
-//       .get(`/clusters/${clusterName}/apis/${mockMultipleResource[1][0]}/${mockMultipleResource[1][1]}/${mockMultipleResource[1][2]}`)
-//       .reply(200, JSON.stringify(newMockResponse));
-//       console.log(baseApiUrl + `/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`)
-//   });
+  afterEach(() => {
+    nock.cleanAll();
+    WS.clean();
+  });
 
-//   afterEach(() => {
-//     nock.cleanAll();
-//   });
+  it('Successfully creates API client for single resource', done => {
+    mockServer = new WS(
+      `ws://localhost/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`
+    );
 
-//   afterAll(() => {
-//     nock.enableNetConnect();
-//   });
+    const cb = jest.fn();
+    const errCb = jest.fn();
+    const client = apiProxy.apiFactory(...mockSingleResource);
+    client.list(cb, errCb, {}, clusterName);
 
-//   it('Successfully creates API client for single resource', async () => {
-//     const client = apiProxy.apiFactory(mockSingleResource[0], mockSingleResource[1], mockSingleResource[2]);
-//     const cb = jest.fn(((...args) => {console.log('<<<<>>>>>>>>>', args)}));
-//     const errCb = jest.fn();
+    mockServer.on('connection', async socket => {
+      expect(cb).toHaveBeenNthCalledWith(1, []);
 
-//     await client.list(cb, errCb, {}, clusterName);
-//     await new Promise(resolve => setTimeout(resolve, 250));
-//     expect(cb).toHaveBeenCalledWith(mockResponse);
-//   });
+      socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
 
-//   it('Successfully creates API client for multiple resources', async () => {
-//     const client = apiProxy.apiFactory([mockMultipleResource[0][0], mockMultipleResource[0][1], mockMultipleResource[0][2]],
-//       [mockMultipleResource[1][0], mockMultipleResource[1][1], mockMultipleResource[1][2]]);
-//     const cb = jest.fn();
-//     const errCb = jest.fn();
+      socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
 
-//     await client.list(cb, errCb, {}, clusterName);
-//     expect(cb).toHaveBeenCalledWith(mockResponse);
-//   });
-// });
+      done();
+    });
+  });
+
+  // it('Successfully creates API client for multiple resources', (done) => {
+  //     const cb = jest.fn((...args) => {
+  //     console.log(`Callback invoked for multipleResourceTest with args:`, args);
+  //   });
+  //   const errCb = jest.fn();
+
+  //   mockMultipleResource.forEach(([group, version, resource]) => {
+  //     mockServers[resource] = new WS(`ws://localhost/clusters/${clusterName}/apis/${group}/${version}/${resource}`);
+  //     const client = apiProxy.apiFactory(group, version, resource);
+  //     client.list(cb, errCb, {}, clusterName);
+
+  //     mockServers[resource].on('connection', async(socket) => {
+  //       socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+  //       await new Promise((resolve) => setTimeout(resolve, 100));
+
+  //       socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+  //       await new Promise((resolve) => setTimeout(resolve, 100));
+  //     });
+  //   });
+
+  //   expect(cb).toHaveBeenCalledTimes(mockMultipleResource.length);
+  //   done();
+  // });
+});
 
 describe('get, post, patch, put, delete', () => {
   const testPath = '/test/url';
@@ -211,13 +246,124 @@ describe('get, post, patch, put, delete', () => {
   });
 });
 
-// describe('streamResult', () => {
-
-// });
-
 // describe('streamResults', () => {
 
 // });
+
+// describe('streamResult', () => {
+//   let closeCalled: any;
+//   const fullUrl = `${baseApiUrl}/namespaces/${namespace}/pods/${podName}?watch=1&fieldSelector=metadata.name=${podName}&key=value`;
+
+//   beforeAll(() => {
+//     defineGlobalWebSocketMock();
+//     nock(baseApiUrl)
+//       .persist()
+//       .get(`/namespaces/${namespace}/pods/${podName}`)
+//       .query(true)
+//       .reply(200, mockResponse);
+//   });
+
+//   beforeEach(() => {
+//     console.error = jest.fn();
+//     console.debug = jest.fn(); // Assuming the implementation uses console.debug for logs
+//     closeCalled = false;
+//   });
+
+//   afterEach(() => {
+//     jest.clearAllMocks();
+//     nock.cleanAll();
+//   });
+
+//   // Helper to mock WebSocket and allow for error handling and successful message reception
+//   function defineGlobalWebSocketMock(triggerError = false) {
+//     global.WebSocket = jest.fn().mockImplementation((url, protocols) => {
+//       if (url !== fullUrl) {
+//         throw new Error(`Unexpected WebSocket URL: ${url}`);
+//       }
+//       return {
+//         url,
+//         protocols,
+//         addEventListener: jest.fn((event, callback) => {
+//           if (event === 'message' && !triggerError) {
+//             setTimeout(() => callback({ data: JSON.stringify(mockResponse) }), 150);
+//           } else if (event === 'error' && triggerError) {
+//             setTimeout(() => callback({ error: 'WebSocket error' }), 150);
+//           }
+//         }),
+//         removeEventListener: jest.fn(),
+//         close: jest.fn(() => {
+//           closeCalled = true;
+//         }),
+//         readyState: WebSocket.OPEN,
+//       };
+//     }) as unknown as typeof WebSocket;
+
+//     Object.defineProperties(global.WebSocket, {
+//       CONNECTING: { value: 0, enumerable: true },
+//       OPEN: { value: 1, enumerable: true },
+//       CLOSING: { value: 2, enumerable: true },
+//       CLOSED: { value: 3, enumerable: true },
+//     });
+//   }
+
+//   it('Successfully streams initial and subsequent results', async () => {
+//     const cb = jest.fn();
+//     const errCb = jest.fn();
+
+//     const cancelStream = await apiProxy.streamResult(baseApiUrl, podName, cb, errCb, {}, clusterName);
+
+//     await new Promise(r => setTimeout(r, 200)); // Wait for both initial response and WebSocket message
+
+//     expect(cb).toHaveBeenCalledTimes(2);
+//     expect(cb).toHaveBeenCalledWith(mockResponse);
+//     expect(errCb).not.toHaveBeenCalled();
+//     cancelStream();
+//     expect(closeCalled).toBe(true);
+//   });
+// });
+
+describe('streamResultsForCluster', () => {
+  let mockServer: WS;
+
+  beforeEach(() => {
+    mockServer = new WS(
+      `ws://localhost/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`
+    );
+    nock(baseApiUrl)
+      .get(`/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps?watch=1`)
+      .reply(200, mockConfigMapList);
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    WS.clean();
+  });
+
+  it('Successfully handles added object', done => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
+
+    apiProxy.streamResultsForCluster(
+      `/apis/v1/namespaces/${namespace}/configmaps`,
+      { cb, errCb, cluster: clusterName },
+      { watch: '1' }
+    );
+
+    mockServer.on('connection', async socket => {
+      expect(cb).toHaveBeenNthCalledWith(1, []);
+
+      socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+
+      socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
+
+      done();
+    });
+  });
+});
 
 describe('stream', () => {
   const testUrl = 'ws://localhost';
@@ -433,7 +579,6 @@ describe('setCluster, deleteCluster', () => {
 });
 
 describe('startPortForward, stopOrDeletePortForward, listPortForward', () => {
-  const podname = 'test-pod';
   const containerPort = 8080;
   const service = 'test-service';
   const serviceNamespace = 'default';
@@ -444,7 +589,7 @@ describe('startPortForward, stopOrDeletePortForward, listPortForward', () => {
   const mockListResponse = [
     {
       id: mockId,
-      podname: podname,
+      podname: podName,
       containerPort: containerPort,
       service: service,
       namespace: namespace,
@@ -491,7 +636,7 @@ describe('startPortForward, stopOrDeletePortForward, listPortForward', () => {
     const response = await apiProxy.startPortForward(
       clusterName,
       namespace,
-      podname,
+      podName,
       containerPort,
       service,
       serviceNamespace,
