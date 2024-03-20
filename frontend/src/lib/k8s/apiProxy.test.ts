@@ -9,6 +9,9 @@ const podName = 'test-pod';
 const namespace = 'default';
 const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
 const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
+const streamResultsUrl = `/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`;
+
+// Mocked resources for stream functions
 const mockConfigMap = {
   apiVersion: 'v1',
   kind: 'ConfigMap',
@@ -241,7 +244,39 @@ describe('get, post, patch, put, delete', () => {
 });
 
 // describe('streamResults', () => {
+//   const testUrl = `/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`;
 
+//   let mockServer: WS;
+
+//   beforeEach(() => {
+//     nock(baseApiUrl)
+//       .get(testUrl)
+//       .query({ watch: '1' })
+//       .reply(200, mockConfigMapList);
+
+//     mockServer = new WS(
+//       `ws://localhost/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`
+//     );
+//     console.error = jest.fn();
+//   });
+
+//   afterEach(() => {
+//     nock.cleanAll();
+//     WS.clean();
+//   });
+
+//   it('Successfully starts a stream and receives data', async () => {
+//     const cb = jest.fn();
+//     const errCb = jest.fn();
+
+//     const cancel = await apiProxy.streamResults(testUrl, cb, errCb, { watch: '1'});
+
+//     mockServer.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+//     await new Promise(resolve => setTimeout(resolve, 100));
+//     expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+
+//     cancel();
+//   })
 // });
 
 // describe('streamResult', () => {
@@ -316,7 +351,7 @@ describe('get, post, patch, put, delete', () => {
 //   });
 // });
 
-describe('streamResultsForCluster', () => {
+describe('streamResults, streamResultsForCluster', () => {
   let mockServer: WS;
 
   beforeEach(() => {
@@ -336,7 +371,22 @@ describe('streamResultsForCluster', () => {
     WS.clean();
   });
 
-  it('Successfully handles added object', done => {
+  it('streamResults: Successfully starts a stream and receives data', async () => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
+
+    apiProxy.streamResults(streamResultsUrl, cb, errCb, { watch: '1' });
+
+    mockServer.on('connection', async (socket: any) => {
+      expect(cb).toHaveBeenNthCalledWith(1, []);
+
+      socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+    });
+  });
+
+  it('streamResultsForCluster: Successfully handles ADDED, MODIFIED, and DELETED types', done => {
     const cb = jest.fn();
     const errCb = jest.fn();
 
@@ -357,11 +407,15 @@ describe('streamResultsForCluster', () => {
       await new Promise(resolve => setTimeout(resolve, 100));
       expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
 
+      socket.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(4, []);
+
       done();
     });
   });
 
-  it('Successfully handles ERROR type', done => {
+  it('streamResultsForCluster: Successfully handles ERROR type', done => {
     const cb = jest.fn();
     const errCb = jest.fn();
 
@@ -371,7 +425,7 @@ describe('streamResultsForCluster', () => {
       { watch: '1' }
     );
 
-    mockServer.on('connection', async socket => {
+    mockServer.on('connection', async (socket: any) => {
       const errorMessage = {
         type: 'ERROR',
         object: {
@@ -394,6 +448,29 @@ describe('streamResultsForCluster', () => {
         })
       );
       done();
+    });
+  });
+
+  it('streamResultsForCluster: Successfully handles stream cancellation', async () => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
+
+    const cancel = await apiProxy.streamResultsForCluster(
+      `/apis/v1/namespaces/${namespace}/configmaps`,
+      { cb, errCb, cluster: clusterName },
+      { watch: '1' }
+    );
+
+    mockServer.on('connection', async socket => {
+      socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+
+      cancel();
+
+      socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
     });
   });
 });
