@@ -41,15 +41,21 @@ const modifiedConfigMap = {
   data: { ...mockConfigMap.data, volumeName: 'pvc-xyz-5678' },
 };
 
+// describe('clusterRequest', () => {});
+
 describe('apiFactory', () => {
   const mockSingleResource: [group: string, version: string, resource: string] = [
     'groupA',
     'v1',
     'resourceA',
   ];
-  // const mockMultipleResource: [group: string, version: string, resource: string][] = [['groupB', 'v1', 'resourceB'], ['groupC', 'v1', 'resourceC'], ['groupD', 'v1', 'resourceD']];
+  const mockMultipleResource: [group: string, version: string, resource: string][] = [
+    ['groupB', 'v1', 'resourceB'],
+    ['groupC', 'v1', 'resourceC'],
+    ['groupD', 'v1', 'resourceD'],
+  ];
   let mockServer: WS;
-  // let mockServers: Record<string, WS> = {};
+  const mockServers: any = {};
 
   beforeEach(() => {
     nock(baseApiUrl)
@@ -94,32 +100,42 @@ describe('apiFactory', () => {
     });
   });
 
-  // it('Successfully creates API client for multiple resources', (done) => {
-  //     const cb = jest.fn((...args) => {
-  //     console.log(`Callback invoked for multipleResourceTest with args:`, args);
-  //   });
-  //   const errCb = jest.fn();
+  it('Successfully creates API client for multiple resources', async () => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
 
-  //   mockMultipleResource.forEach(([group, version, resource]) => {
-  //     mockServers[resource] = new WS(`ws://localhost/clusters/${clusterName}/apis/${group}/${version}/${resource}`);
-  //     const client = apiProxy.apiFactory(group, version, resource);
-  //     client.list(cb, errCb, {}, clusterName);
+    const connections = mockMultipleResource.map(([group, version, resource]) => {
+      return new Promise<void>(resolve => {
+        mockServers[resource] = new WS(
+          `ws://localhost/clusters/${clusterName}/apis/${group}/${version}/${resource}`
+        );
+        const client = apiProxy.apiFactory(group, version, resource);
+        client.list(cb, errCb, {}, clusterName);
 
-  //     mockServers[resource].on('connection', async(socket) => {
-  //       socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-  //       await new Promise((resolve) => setTimeout(resolve, 100));
+        mockServers[resource].on('connection', async (socket: any) => {
+          expect(cb).toHaveBeenCalledWith([]);
 
-  //       socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
-  //       await new Promise((resolve) => setTimeout(resolve, 100));
-  //     });
-  //   });
+          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+          await new Promise(resolve => setTimeout(resolve, 100));
+          expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
 
-  //   expect(cb).toHaveBeenCalledTimes(mockMultipleResource.length);
-  //   done();
-  // });
+          socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+          await new Promise(resolve => setTimeout(resolve, 100));
+          expect(cb).toHaveBeenCalledWith([{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
+
+          resolve();
+        });
+      });
+    });
+
+    await Promise.all(connections);
+    expect(cb).toHaveBeenCalledTimes(3 * mockMultipleResource.length);
+  });
 });
 
-describe('get, post, patch, put, delete', () => {
+// describe('apiFactoryWithNamespace', () => {});
+
+describe('request, post, patch, put, delete', () => {
   const testPath = '/test/url';
   const testData = { key: 'value' };
 
@@ -242,42 +258,6 @@ describe('get, post, patch, put, delete', () => {
     await expect(promise).rejects.toThrow(`${errorResponse.error}`);
   });
 });
-
-// describe('streamResults', () => {
-//   const testUrl = `/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`;
-
-//   let mockServer: WS;
-
-//   beforeEach(() => {
-//     nock(baseApiUrl)
-//       .get(testUrl)
-//       .query({ watch: '1' })
-//       .reply(200, mockConfigMapList);
-
-//     mockServer = new WS(
-//       `ws://localhost/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`
-//     );
-//     console.error = jest.fn();
-//   });
-
-//   afterEach(() => {
-//     nock.cleanAll();
-//     WS.clean();
-//   });
-
-//   it('Successfully starts a stream and receives data', async () => {
-//     const cb = jest.fn();
-//     const errCb = jest.fn();
-
-//     const cancel = await apiProxy.streamResults(testUrl, cb, errCb, { watch: '1'});
-
-//     mockServer.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-//     await new Promise(resolve => setTimeout(resolve, 100));
-//     expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
-
-//     cancel();
-//   })
-// });
 
 // describe('streamResult', () => {
 //   let closeCalled: any;
