@@ -80,32 +80,32 @@ function prepareRoutes(
       icon: 'mdi:circle-slice-2',
       subList: [
         {
-          name: 'Pods',
-          label: t('glossary|Pods'),
-        },
-        {
-          name: 'Deployments',
-          label: t('glossary|Deployments'),
-        },
-        {
-          name: 'StatefulSets',
-          label: t('glossary|Stateful Sets'),
+          name: 'CronJobs',
+          label: t('glossary|CronJobs'),
         },
         {
           name: 'DaemonSets',
           label: t('glossary|Daemon Sets'),
         },
         {
-          name: 'ReplicaSets',
-          label: t('glossary|Replica Sets'),
+          name: 'Deployments',
+          label: t('glossary|Deployments'),
         },
         {
           name: 'Jobs',
           label: t('glossary|Jobs'),
         },
         {
-          name: 'CronJobs',
-          label: t('glossary|CronJobs'),
+          name: 'Pods',
+          label: t('glossary|Pods'),
+        },
+        {
+          name: 'ReplicaSets',
+          label: t('glossary|Replica Sets'),
+        },
+        {
+          name: 'StatefulSets',
+          label: t('glossary|Stateful Sets'),
         },
       ],
     },
