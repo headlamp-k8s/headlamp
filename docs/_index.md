@@ -17,3 +17,7 @@ Check out our [contributing](./contributing.md) section and join the
 discussion on the
 [#headlamp](https://kubernetes.slack.com/messages/headlamp) channel
 in the Kubernetes Slack.
+
+## Frequently Asked Questions
+
+For more information about Headlamp, see the [Headlamp FAQ](https://www.headlamp.dev/docs/latest/faq).

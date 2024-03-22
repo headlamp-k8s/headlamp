@@ -86,3 +86,7 @@ biggest changes planned so far.
 ## License
 
 Headlamp is released under the terms of the [Apache 2.0](./LICENSE) license.
+
+## Frequently Asked Questions
+
+For more information about Headlamp, see the [Headlamp FAQ](https://www.headlamp.dev/docs/latest/faq).
