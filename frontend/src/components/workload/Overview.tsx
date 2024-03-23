@@ -81,6 +81,7 @@ export default function Overview() {
     Job,
     CronJob,
   ];
+
   workloads.forEach((workloadClass: KubeObject) => {
     workloadClass.useApiList(
       (items: InstanceType<typeof workloadClass>[]) => {
