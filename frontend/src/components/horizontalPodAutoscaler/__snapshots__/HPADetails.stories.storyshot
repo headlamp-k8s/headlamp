@@ -12,7 +12,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -120,7 +120,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -137,7 +137,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     php-apache
                   </span>
@@ -166,7 +166,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-10-20T11:10:58.000Z
                   </span>
@@ -316,7 +316,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     1 current / 1 desired
                   </span>
@@ -357,7 +357,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -587,7 +587,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded css-172kgz0-MuiPaper-root"
@@ -622,7 +622,7 @@ exports[`Storyshots hpa/HpaDetailsView Error 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -715,7 +715,7 @@ exports[`Storyshots hpa/HpaDetailsView No Item Yet 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >

@@ -1,6 +1,6 @@
 import { Icon, IconProps } from '@iconify/react';
 import Grid from '@mui/material/Grid';
-import { useTheme } from '@mui/material/styles';
+import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
@@ -9,20 +9,6 @@ import { DateFormatOptions, localeDate, timeAgo } from '../../lib/util';
 import { LightTooltip, TooltipIcon } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
-  nameLabel: {
-    color: theme.palette.text.secondary,
-    fontSize: theme.typography.pxToRem(16),
-    textAlign: 'right',
-  },
-  nameLabelItem: {
-    textAlign: 'right',
-    flex: '0 0 200px',
-  },
-  valueLabel: {
-    color: theme.palette.text.primary,
-    fontSize: theme.typography.pxToRem(16),
-    wordBreak: 'break-word',
-  },
   statusLabel: {
     color: theme.palette.primary.contrastText,
     fontSize: theme.typography.pxToRem(14),
@@ -42,12 +28,18 @@ export interface InfoLabelProps {
 }
 
 export function InfoLabel(props: React.PropsWithChildren<InfoLabelProps>) {
-  const classes = useStyles();
   const { name, value = null } = props;
 
   return (
     <Grid container item spacing={2} justifyContent="flex-start" alignItems="flex-start">
-      <Grid item xs className={classes.nameLabelItem}>
+      <Grid
+        item
+        xs
+        sx={{
+          textAlign: 'right',
+          flex: '0 0 200px',
+        }}
+      >
         <NameLabel>{name}</NameLabel>{' '}
       </Grid>
       <Grid item xs>
@@ -58,18 +50,30 @@ export function InfoLabel(props: React.PropsWithChildren<InfoLabelProps>) {
 }
 
 export function NameLabel(props: React.PropsWithChildren<{}>) {
-  const classes = useStyles();
   return (
-    <Typography className={classes.nameLabel} component="span">
+    <Typography
+      sx={theme => ({
+        color: theme.palette.text.secondary,
+        fontSize: theme.typography.pxToRem(16),
+        textAlign: 'right',
+      })}
+      component="span"
+    >
       {props.children}
     </Typography>
   );
 }
 
 export function ValueLabel(props: React.PropsWithChildren<{}>) {
-  const classes = useStyles();
   return (
-    <Typography className={classes.valueLabel} component="span">
+    <Typography
+      sx={theme => ({
+        color: theme.palette.text.primary,
+        fontSize: theme.typography.pxToRem(16),
+        wordBreak: 'break-word',
+      })}
+      component="span"
+    >
       {props.children}
     </Typography>
   );
@@ -77,11 +81,12 @@ export function ValueLabel(props: React.PropsWithChildren<{}>) {
 
 export interface StatusLabelProps {
   status: 'success' | 'warning' | 'error' | '';
+  sx?: SxProps<Theme>;
   [otherProps: string]: any;
 }
 
 export function StatusLabel(props: StatusLabelProps) {
-  const { status, className = '', ...other } = props;
+  const { status, sx, className = '', ...other } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -95,6 +100,7 @@ export function StatusLabel(props: StatusLabelProps) {
 
   return (
     <Typography
+      sx={sx}
       className={clsx(classes.statusLabel, className)}
       style={{
         backgroundColor: bgColor,

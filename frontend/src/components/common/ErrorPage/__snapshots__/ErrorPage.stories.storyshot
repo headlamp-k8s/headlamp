@@ -10,7 +10,7 @@ exports[`Storyshots common/GenericError Component Message 1`] = `
     >
       <img
         alt=""
-        class="makeStyles-img"
+        class="css-8atqhb"
         src="headlamp-broken.svg"
       />
       <h1
@@ -42,7 +42,7 @@ exports[`Storyshots common/GenericError Component Title 1`] = `
     >
       <img
         alt=""
-        class="makeStyles-img"
+        class="css-8atqhb"
         src="headlamp-broken.svg"
       />
       <h1
@@ -86,7 +86,7 @@ exports[`Storyshots common/GenericError Default 1`] = `
     >
       <img
         alt=""
-        class="makeStyles-img"
+        class="css-8atqhb"
         src="headlamp-broken.svg"
       />
       <h1
@@ -121,7 +121,7 @@ exports[`Storyshots common/GenericError Different Image 1`] = `
     >
       <img
         alt=""
-        class="makeStyles-img"
+        class="css-8atqhb"
         src="headlamp-404.svg"
       />
       <h1
@@ -187,7 +187,7 @@ exports[`Storyshots common/GenericError String Graphic 1`] = `
     >
       <img
         alt=""
-        class="makeStyles-img"
+        class="css-8atqhb"
         src="Oh no!"
       />
       <h1
@@ -222,7 +222,7 @@ exports[`Storyshots common/GenericError String Message 1`] = `
     >
       <img
         alt=""
-        class="makeStyles-img"
+        class="css-8atqhb"
         src="headlamp-broken.svg"
       />
       <h1

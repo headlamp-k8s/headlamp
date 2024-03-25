@@ -12,7 +12,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -77,7 +77,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -94,7 +94,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     mydefinition.phonyresources.io
                   </span>
@@ -108,7 +108,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2021-12-15T14:57:13.000Z
                   </span>
@@ -122,7 +122,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     my.phonyresources.io
                   </span>
@@ -136,7 +136,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     v1
                   </span>
@@ -150,7 +150,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     Namespaced
                   </span>
@@ -206,7 +206,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -310,7 +310,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -403,7 +403,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded css-172kgz0-MuiPaper-root"
@@ -503,7 +503,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -708,7 +708,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -901,7 +901,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"

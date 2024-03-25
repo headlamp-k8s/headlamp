@@ -12,7 +12,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -93,7 +93,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -110,7 +110,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     webhook-admission-controller
                   </span>
@@ -124,7 +124,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-10-14T11:25:22.000Z
                   </span>
@@ -210,7 +210,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <dl
               class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
@@ -224,7 +224,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   webhook-admission-controller.example.com
                 </span>
@@ -238,7 +238,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   v1beta1
                 </span>
@@ -311,7 +311,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   Fail
                 </span>
@@ -325,7 +325,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   Exact
                 </span>
@@ -339,7 +339,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   NoneOnDryRun
                 </span>
@@ -353,7 +353,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   10
                 </span>
@@ -405,7 +405,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   Never
                 </span>
@@ -533,7 +533,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -662,7 +662,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -743,7 +743,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
           <div
             aria-busy="false"
             aria-live="polite"
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiBox-root css-0"
@@ -760,7 +760,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     webhook-admission-controller
                   </span>
@@ -774,7 +774,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                   >
                     2022-10-14T11:25:22.000Z
                   </span>
@@ -860,7 +860,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <dl
               class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
@@ -874,7 +874,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   webhook-admission-controller.example.com
                 </span>
@@ -888,7 +888,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   v1beta1
                 </span>
@@ -902,7 +902,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   https://localhost:8443/mutate-nodes
                 </span>
@@ -958,7 +958,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   Fail
                 </span>
@@ -972,7 +972,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   Exact
                 </span>
@@ -986,7 +986,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   NoneOnDryRun
                 </span>
@@ -1000,7 +1000,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   10
                 </span>
@@ -1052,7 +1052,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <span
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
                 >
                   Never
                 </span>
@@ -1180,7 +1180,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
             </div>
           </div>
           <div
-            class="makeStyles-box MuiBox-root css-0"
+            class="MuiBox-root css-1txv3mw"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"

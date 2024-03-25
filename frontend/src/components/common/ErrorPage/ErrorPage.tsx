@@ -1,15 +1,13 @@
 import { Grid, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/system';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import headlampBrokenImage from '../../../assets/headlamp-broken.svg';
 
-const useStyles = makeStyles(() => ({
-  img: {
-    width: '100%',
-  },
-}));
+const WidthImg = styled('img')({
+  width: '100%',
+});
 
 export interface ErrorComponentProps {
   /** The main title to display. By default it is: "Uh-oh! Something went wrong." */
@@ -31,7 +29,6 @@ export default function ErrorComponent(props: ErrorComponentProps) {
     withTypography = true,
     graphic = headlampBrokenImage,
   } = props;
-  const classes = useStyles();
   return (
     <Grid
       container
@@ -42,11 +39,7 @@ export default function ErrorComponent(props: ErrorComponentProps) {
       sx={{ textAlign: 'center' }}
     >
       <Grid item xs={12}>
-        {typeof graphic === 'string' ? (
-          <img src={graphic} alt="" className={classes.img} />
-        ) : (
-          graphic
-        )}
+        {typeof graphic === 'string' ? <WidthImg src={graphic} alt="" /> : graphic}
         {withTypography ? (
           <Typography variant="h1" sx={{ fontSize: '2.125rem', lineHeight: 1.2, fontWeight: 400 }}>
             {title}

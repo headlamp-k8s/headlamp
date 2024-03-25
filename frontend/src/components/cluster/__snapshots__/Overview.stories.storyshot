@@ -38,19 +38,19 @@ exports[`Storyshots cluster/Overview Events 1`] = `
               </div>
             </div>
             <div
-              class="makeStyles-box MuiBox-root css-opkpcd"
+              class="MuiBox-root css-lpikod"
             >
               <div
                 class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-13cu5dn-MuiGrid-root"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
                   >
                     <div
-                      class="makeStyles-tileBox MuiBox-root css-k008qs"
+                      class="MuiBox-root css-qrw4x1"
                     >
                       <div
                         class="MuiBox-root css-1sl8dhm"
@@ -59,13 +59,13 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                           class="MuiBox-root css-0"
                         >
                           <p
-                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-16da70x-MuiTypography-root"
                           >
                             CPU Usage
                           </p>
                         </div>
                         <p
-                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
                         >
                           0.00 / 36 units
                         </p>
@@ -143,13 +143,13 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   </div>
                 </div>
                 <div
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
                   >
                     <div
-                      class="makeStyles-tileBox MuiBox-root css-k008qs"
+                      class="MuiBox-root css-qrw4x1"
                     >
                       <div
                         class="MuiBox-root css-1sl8dhm"
@@ -158,13 +158,13 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                           class="MuiBox-root css-0"
                         >
                           <p
-                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-16da70x-MuiTypography-root"
                           >
                             Memory Usage
                           </p>
                         </div>
                         <p
-                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
                         >
                           0.00 / 143.63 GB
                         </p>
@@ -242,13 +242,13 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   </div>
                 </div>
                 <div
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
                   >
                     <div
-                      class="makeStyles-tileBox MuiBox-root css-k008qs"
+                      class="MuiBox-root css-qrw4x1"
                     >
                       <div
                         class="MuiBox-root css-1sl8dhm"
@@ -257,14 +257,14 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                           class="MuiBox-root css-0"
                         >
                           <p
-                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-16da70x-MuiTypography-root"
                           >
                             Pods
                           </p>
                           
                         </div>
                         <p
-                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
                         >
                           4 / 8 Requested
                         </p>
@@ -345,13 +345,13 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   </div>
                 </div>
                 <div
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
                   >
                     <div
-                      class="makeStyles-tileBox MuiBox-root css-k008qs"
+                      class="MuiBox-root css-qrw4x1"
                     >
                       <div
                         class="MuiBox-root css-1sl8dhm"
@@ -360,14 +360,14 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                           class="MuiBox-root css-0"
                         >
                           <p
-                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-16da70x-MuiTypography-root"
                           >
                             Nodes
                           </p>
                           
                         </div>
                         <p
-                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
                         >
                           2 / 2 Ready
                         </p>
@@ -564,7 +564,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
               </div>
             </div>
             <div
-              class="makeStyles-box MuiBox-root css-0"
+              class="MuiBox-root css-1txv3mw"
             >
               <div
                 class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -720,7 +720,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                       >
                         <span
                           aria-label="Started"
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel makeStyles-eventLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-19rs0eg-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
@@ -789,7 +789,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                       >
                         <span
                           aria-label="FailedGetResourceMetric"
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel makeStyles-eventLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-19rs0eg-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                           style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                         >

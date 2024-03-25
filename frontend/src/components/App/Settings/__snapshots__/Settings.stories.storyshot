@@ -3,7 +3,7 @@
 exports[`Storyshots Settings General 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
@@ -70,7 +70,7 @@ exports[`Storyshots Settings General 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <dl
         class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
@@ -131,12 +131,12 @@ exports[`Storyshots Settings General 1`] = `
           class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell makeStyles-valueCol css-r0umuq-MuiGrid-root"
         >
           <div
-            class="MuiButtonGroup-root MuiButtonGroup-outlined makeStyles-buttonGroup css-edsu1d-MuiButtonGroup-root"
+            class="MuiButtonGroup-root MuiButtonGroup-outlined css-1b41vff-MuiButtonGroup-root"
             role="group"
           >
             <button
               aria-label="light theme"
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge makeStyles-button MuiButtonGroup-firstButton css-ltddg6-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButtonGroup-firstButton css-put5n8-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -147,7 +147,7 @@ exports[`Storyshots Settings General 1`] = `
             </button>
             <button
               aria-label="dark theme"
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge makeStyles-button MuiButtonGroup-lastButton css-2spsk4-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButtonGroup-lastButton css-j5ggku-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >

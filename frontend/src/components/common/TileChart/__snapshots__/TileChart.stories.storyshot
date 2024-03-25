@@ -3,10 +3,10 @@
 exports[`Storyshots Charts/TileChart With Progress 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
   >
     <div
-      class="makeStyles-tileBox MuiBox-root css-k008qs"
+      class="MuiBox-root css-qrw4x1"
     >
       <div
         class="MuiBox-root css-1sl8dhm"
@@ -15,14 +15,14 @@ exports[`Storyshots Charts/TileChart With Progress 1`] = `
           class="MuiBox-root css-0"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-16da70x-MuiTypography-root"
           >
             My chart
           </p>
           
         </div>
         <p
-          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
         >
           Progress so far
         </p>
@@ -107,10 +107,10 @@ exports[`Storyshots Charts/TileChart With Progress 1`] = `
 exports[`Storyshots Charts/TileChart Without Progress 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
   >
     <div
-      class="makeStyles-tileBox MuiBox-root css-k008qs"
+      class="MuiBox-root css-qrw4x1"
     >
       <div
         class="MuiBox-root css-1sl8dhm"
@@ -119,7 +119,7 @@ exports[`Storyshots Charts/TileChart Without Progress 1`] = `
           class="MuiBox-root css-0"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-16da70x-MuiTypography-root"
           >
             My chart
           </p>
@@ -130,7 +130,7 @@ exports[`Storyshots Charts/TileChart Without Progress 1`] = `
           </div>
         </div>
         <p
-          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
         >
           Progress so far
         </p>

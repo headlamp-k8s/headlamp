@@ -49,7 +49,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -387,7 +387,7 @@ exports[`Storyshots Settings/PluginSettings Empty 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded css-172kgz0-MuiPaper-root"
@@ -456,7 +456,7 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -780,7 +780,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -1104,7 +1104,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
@@ -1788,7 +1788,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
       </div>
     </div>
     <div
-      class="makeStyles-box MuiBox-root css-0"
+      class="MuiBox-root css-1txv3mw"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
