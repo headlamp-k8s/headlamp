@@ -292,19 +292,19 @@ function start() {
   config.mode = 'development';
   process.env['BABEL_ENV'] = 'development';
   copyToPluginsFolder(config);
+  let exitCode = 0;
   webpack(config, (err, stats) => {
     // We are checking the exit code of the compileMessages function.
     // It should be 0 if there are no errors, and 1 if there are errors.
-    const exitCode = compileMessages(err, stats);
+    exitCode = compileMessages(err, stats);
     if (exitCode !== 0) {
       console.error('Failed to start watching for changes.');
     } else {
       console.log('Watching for changes to plugin...');
     }
-    process.exit(exitCode);
   });
 
-  return 0;
+  return exitCode;
 }
 
 /**
