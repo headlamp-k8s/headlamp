@@ -73,14 +73,15 @@ export default function Overview() {
   }
 
   const workloads: KubeObject[] = [
-    DaemonSet,
+    Pod,
     Deployment,
+    StatefulSet,
+    DaemonSet,
+    ReplicaSet,
     Job,
     CronJob,
-    ReplicaSet,
-    StatefulSet,
-    Pod,
   ];
+
   workloads.forEach((workloadClass: KubeObject) => {
     workloadClass.useApiList(
       (items: InstanceType<typeof workloadClass>[]) => {
