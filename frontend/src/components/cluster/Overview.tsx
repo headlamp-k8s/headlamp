@@ -80,6 +80,7 @@ const useStyles = makeStyles(theme => ({
 function EventsSection() {
   const EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY = 'EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY';
   const classes = useStyles();
+  const EVENT_WARNING_SWITCH_DEFAULT = true;
   const { t } = useTranslation(['translation', 'glossary']);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -87,7 +88,12 @@ function EventsSection() {
   const dispatch = useDispatch();
   const filterFunc = useFilterFunc(['.jsonData.involvedObject.kind']);
   const [isWarningEventSwitchChecked, setIsWarningEventSwitchChecked] = React.useState(
-    Boolean(JSON.parse(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY) || 'false'))
+    Boolean(
+      JSON.parse(
+        localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY) ||
+          EVENT_WARNING_SWITCH_DEFAULT.toString()
+      )
+    )
   );
   const [events, eventsError] = Event.useList({ limit: Event.maxLimit });
 
