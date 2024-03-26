@@ -35,7 +35,6 @@ import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import { setWhetherSidebarOpen } from '../Sidebar/sidebarSlice';
 import { AppLogo } from './AppLogo';
-import Notifications from './Notifications';
 
 export interface TopBarProps {}
 
@@ -328,11 +327,7 @@ export function PureTopBar({
     ...appBarActions,
     {
       id: DefaultAppBarAction.NOTIFICATION,
-      action: (
-        <MenuItem onClick={handleMenuClose}>
-          <Notifications />
-        </MenuItem>
-      ),
+      action: null,
     },
     {
       id: DefaultAppBarAction.SETTINGS,
@@ -391,7 +386,7 @@ export function PureTopBar({
     ...appBarActions,
     {
       id: DefaultAppBarAction.NOTIFICATION,
-      action: <Notifications />,
+      action: null,
     },
     {
       id: DefaultAppBarAction.SETTINGS,
