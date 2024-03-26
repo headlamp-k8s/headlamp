@@ -29,7 +29,7 @@ async function checkKeys() {
    * Allowlist function scans the json and return if the word is within the allowlist
    */
   function allowlistScan(word: string, lang: string) {
-    return allowlist[lang].some((item: any) => item.wordKey === word);
+    return allowlist[lang].some((item: any) => item === word);
   }
 
   /*

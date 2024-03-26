@@ -31,6 +31,7 @@ import VersionButton from './VersionButton';
 export const drawerWidth = 240;
 export const mobileDrawerWidth = 320;
 export const drawerWidthClosed = 64;
+export const topBarHeight = 64;
 
 // exported for backwards compatibility for plugins
 export { DefaultSidebars };
@@ -48,6 +49,9 @@ const useStyle = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     background: theme.palette.sidebarBg,
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: `${topBarHeight}px`,
+    },
   },
   drawerClose: {
     transition: theme.transitions.create('width', {

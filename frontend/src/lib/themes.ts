@@ -196,6 +196,9 @@ const commonRules = {
     },
     MuiAppBar: {
       styleOverrides: {
+        root: {
+          height: '64px',
+        },
         colorPrimary: {
           backgroundColor: '#f5f5f5',
         },

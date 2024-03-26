@@ -112,7 +112,12 @@ export default function NavigationTabs() {
           tabChangeHandler(index);
         }}
         defaultIndex={defaultIndex}
-        sx={{ maxWidth: '85vw' }}
+        sx={{
+          maxWidth: '85vw',
+          [theme.breakpoints.down('sm')]: {
+            paddingTop: '10px',
+          },
+        }}
         ariaLabel={t('translation|Navigation Tabs')}
       />
       <Divider />
