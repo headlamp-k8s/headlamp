@@ -91,6 +91,7 @@ export default function NotificationList() {
         <SectionFilterHeader
           title={t('translation|Notifications')}
           noNamespaceFilter
+          noStatusFilter
           actions={[<NotificationActionMenu />]}
         />
       }

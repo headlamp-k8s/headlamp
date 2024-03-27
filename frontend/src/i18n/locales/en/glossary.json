@@ -25,6 +25,7 @@
   "Containers": "Containers",
   "Container Spec": "Container Spec",
   "Ephemeral Containers": "Ephemeral Containers",
+  "Statuses": "Statuses",
   "Container": "Container",
   "Config Maps": "Config Maps",
   "Definition": "Definition",

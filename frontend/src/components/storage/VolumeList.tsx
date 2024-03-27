@@ -13,6 +13,7 @@ export default function VolumeList() {
       title={t('Persistent Volumes')}
       headerProps={{
         noNamespaceFilter: true,
+        noStatusFilter: true,
       }}
       resourceClass={PersistentVolume}
       columns={[

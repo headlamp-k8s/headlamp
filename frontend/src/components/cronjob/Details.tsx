@@ -301,6 +301,7 @@ export default function CronJobDetails() {
             error={CronJob.getErrorMessage(jobsError)}
             hideColumns={['namespace']}
             noNamespaceFilter
+            noStatusFilter
           />,
         ]
       }

@@ -206,6 +206,7 @@ function HomeComponent(props: HomeComponentProps) {
           <SectionFilterHeader
             title={t('All Clusters')}
             noNamespaceFilter
+            noStatusFilter
             headerStyle="subsection"
           />
         }

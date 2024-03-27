@@ -71,6 +71,7 @@ export interface PodListProps {
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
+  noStatusFilter?: boolean;
   noSearch?: boolean;
 }
 
@@ -81,6 +82,7 @@ export function PodListRenderer(props: PodListProps) {
     hideColumns = [],
     reflectTableInURL = 'pods',
     noNamespaceFilter,
+    noStatusFilter,
     noSearch,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
@@ -90,6 +92,7 @@ export function PodListRenderer(props: PodListProps) {
       title={t('Pods')}
       headerProps={{
         noNamespaceFilter,
+        noStatusFilter,
         noSearch,
       }}
       hideColumns={hideColumns}

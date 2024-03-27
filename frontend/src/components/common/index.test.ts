@@ -36,6 +36,7 @@ const checkExports = [
   'SectionHeader',
   'ShowHideLabel',
   'SimpleTable',
+  'StatusFilter',
   'Tabs',
   'Terminal',
   'TileChart',
