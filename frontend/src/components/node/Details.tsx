@@ -1,4 +1,5 @@
 import { InlineIcon } from '@iconify/react';
+import { Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import _ from 'lodash';
@@ -16,10 +17,11 @@ import { clusterAction } from '../../redux/clusterActionSlice';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { ActionButton, ConfirmDialog, StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
-import { DetailsGrid, OwnedPodsSection } from '../common/Resource';
+import { ConditionsSection, DetailsGrid, OwnedPodsSection } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
+import { NodeTaintsLabel } from './utils';
 
 function NodeConditionsLabel(props: { node: Node }) {
   const { node } = props;
@@ -225,6 +227,10 @@ export default function NodeDetails() {
         extraInfo={item =>
           item && [
             {
+              name: t('translation|Taints'),
+              value: <NodeTaintsLabel node={item} />,
+            },
+            {
               name: t('translation|Ready'),
               value: <NodeReadyLabel node={item} />,
             },
@@ -244,6 +250,10 @@ export default function NodeDetails() {
             {
               id: 'headlamp.node-system-info',
               section: <SystemInfoSection node={item} />,
+            },
+            {
+              id: 'headlamp.node-conditions',
+              section: <ConditionsSection resource={item} />,
             },
             {
               id: 'headlamp.node-owned-pods',
@@ -283,20 +293,29 @@ function ChartsSection(props: ChartsSectionProps) {
     <Box py={2}>
       <Grid
         container
-        justifyContent="space-around"
         style={{
           marginBottom: '2rem',
         }}
         alignItems="stretch"
-        spacing={4}
+        spacing={2}
       >
-        <Grid item xs>
-          <HeaderLabel value={getUptime()} label={t('Uptime')} />
+        <Grid item xs={4}>
+          <Paper
+            sx={theme => ({
+              background: theme.palette.squareButton.background,
+              padding: theme.spacing(2),
+              height: '100%',
+              maxWidth: '300px',
+              margin: '0 auto',
+            })}
+          >
+            <HeaderLabel value={getUptime()} label={t('Uptime')} />
+          </Paper>
         </Grid>
-        <Grid item xs>
+        <Grid item xs={4}>
           <CpuCircularChart items={node && [node]} itemsMetrics={metrics} noMetrics={noMetrics} />
         </Grid>
-        <Grid item xs>
+        <Grid item xs={4}>
           <MemoryCircularChart
             items={node && [node]}
             itemsMetrics={metrics}

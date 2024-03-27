@@ -10,9 +10,21 @@ export interface KubeNode extends KubeObjectInterface {
       address: string;
       type: string;
     }[];
+    allocatable: {
+      cpu: any;
+      memory: any;
+      ephemeralStorage: any;
+      hugepages_1Gi: any;
+      hugepages_2Mi: any;
+      pods: any;
+    };
     capacity: {
       cpu: any;
       memory: any;
+      ephemeralStorage: any;
+      hugepages_1Gi: any;
+      hugepages_2Mi: any;
+      pods: any;
     };
     conditions: (Omit<KubeCondition, 'lastProbeTime' | 'lastUpdateTime'> & {
       lastHeartbeatTime: string;
@@ -32,6 +44,10 @@ export interface KubeNode extends KubeObjectInterface {
   };
   spec: {
     podCIDR: string;
+    taints: {
+      key: string;
+      effect: string;
+    }[];
     [otherProps: string]: any;
   };
 }

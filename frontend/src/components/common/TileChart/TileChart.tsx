@@ -20,6 +20,7 @@ export function TileChart(props: TileChartProps) {
         padding: theme.spacing(2),
         height: '100%',
         maxWidth: '300px',
+        margin: '0 auto',
       })}
     >
       <Box
