@@ -100,6 +100,7 @@
     "imports-loader": "^1.1.0",
     "is-plain-object": "^5.0.0",
     "jest-canvas-mock": "^2.4.0",
+    "jest-html-reporter": "^3.10.2",
     "jest-websocket-mock": "^2.5.0",
     "js-base64": "^3.7.2",
     "js-yaml": "^4.1.0",
