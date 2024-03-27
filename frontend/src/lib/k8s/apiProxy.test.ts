@@ -1,5 +1,6 @@
 import WS from 'jest-websocket-mock';
 import nock from 'nock';
+import * as cluster from '../cluster';
 import * as apiProxy from './apiProxy';
 
 const baseApiUrl = 'http://localhost';
@@ -10,6 +11,14 @@ const namespace = 'default';
 const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
 const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
 const streamResultsUrl = `/clusters/${clusterName}/apis/v1/namespaces/${namespace}/configmaps`;
+const errorMessage = {
+  type: 'ERROR',
+  object: {
+    reason: 'InternalError',
+    message: 'Mock internal error message.',
+    actionType: 'ERROR',
+  },
+};
 
 // Mocked resources
 const mockSingleResource: [group: string, version: string, resource: string] = [
@@ -307,86 +316,133 @@ describe('request, post, patch, put, delete', () => {
   });
 });
 
-// describe('streamResult', () => {
-//   const resourceUrl = `/apis/v1/namespaces/${namespace}/configmaps`;
-//   let mockServer: WS;
+describe('streamResult', () => {
+  const resourceUrl = `/apis/v1/namespaces/${namespace}/configmaps`;
+  let mockServer: WS;
+  let getClusterSpy: jest.SpyInstance;
 
-//   beforeEach(() => {
-//     nock(baseApiUrl)
-//       .get(`${streamResultsUrl}/${mockConfigMap.metadata.name}`)
-//       .query(true)
-//       .reply(200, mockConfigMap);
+  beforeEach(() => {
+    nock(baseApiUrl)
+      .get(`${streamResultsUrl}/${mockConfigMap.metadata.name}`)
+      .query(true)
+      .reply(200, mockConfigMap);
 
-//     mockServer = new WS(`ws://localhost${streamResultsUrl}`);
-//     console.log("Websocket URL:" + `ws://localhost${streamResultsUrl}`);
-//   });
+    mockServer = new WS(`ws://localhost${streamResultsUrl}`);
+    console.error = jest.fn();
+    getClusterSpy = jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+  });
 
-//   afterEach(() => {
-//     jest.clearAllMocks();
-//     nock.cleanAll();
-//     WS.clean();
-//   });
+  afterEach(() => {
+    nock.cleanAll();
+    WS.clean();
+    getClusterSpy.mockRestore();
+  });
 
-//   // error: failed to construct websocket (1 arg required, 0 present)
-//   it('Successfully streams initial and subsequent results', done => {
-//     const cb = jest.fn();
-//     const errCb = jest.fn();
+  it('Successfully handles ADDED, MODIFIED, and DELETED types', done => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
 
-//     apiProxy.streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, { watch: '1' });
+    apiProxy.streamResult(resourceUrl, mockConfigMap.metadata.name, cb, errCb, { watch: '1' });
 
-//     mockServer.on('connection', async (socket: any) => {
-//       socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-//       await new Promise(resolve => setTimeout(resolve, 100));
-//       expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
-//       expect(errCb).toHaveBeenCalled();
+    mockServer.on('connection', async (socket: any) => {
+      expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
 
-//       done();
-//     });
+      socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
 
-//     // await mockServer.connected;
+      socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(3, modifiedConfigMap);
 
-//     // mockServer.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-//     // await new Promise(resolve => setTimeout(resolve, 100));
-//     // expect(cb).toHaveBeenNthCalled(1, mockConfigMap);
-//     // expect(errCb).not.toHaveBeenCalled();
-//   });
-// });
+      socket.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(4, mockConfigMap);
+
+      done();
+    });
+  });
+
+  it('Successfully handles error messages', done => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
+
+    apiProxy.streamResult(resourceUrl, mockConfigMap.metadata.name, cb, errCb, { watch: '1' });
+
+    mockServer.on('connection', async (socket: any) => {
+      expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
+
+      socket.send(JSON.stringify(errorMessage));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(2, errorMessage.object);
+
+      done();
+    });
+  });
+
+  it('Successfully handles stream cancellation', done => {
+    const cb = jest.fn();
+    const errCb = jest.fn();
+    apiProxy
+      .streamResult(resourceUrl, mockConfigMap.metadata.name, cb, errCb, { watch: '1' })
+      .then(cancel => {
+        mockServer.on('connection', async (socket: any) => {
+          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+
+          setTimeout(() => {
+            expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
+            cancel();
+            socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+
+            setTimeout(() => {
+              expect(cb).toHaveBeenCalledTimes(2);
+              done();
+            }, 100);
+          }, 100);
+        });
+      })
+      .catch(err => done(err));
+  });
+});
 
 describe('streamResults, streamResultsForCluster', () => {
   let mockServer: WS;
+  let getClusterSpy: jest.SpyInstance;
 
   beforeEach(() => {
     nock(baseApiUrl).get(streamResultsUrl).query(true).reply(200, mockConfigMapList);
 
     mockServer = new WS(`ws://localhost${streamResultsUrl}`);
     console.error = jest.fn();
+    getClusterSpy = jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
   });
 
   afterEach(() => {
     nock.cleanAll();
     WS.clean();
+    getClusterSpy.mockRestore();
   });
 
-  // describe('streamResults', () => {
-  //   // this test is not connecting to the server
-  //   it('streamResults: Successfully starts a stream and receives data', done => {
-  //     const cb = jest.fn();
-  //     const errCb = jest.fn();
+  describe('streamResults', () => {
+    it('Successfully starts a stream and receives data', done => {
+      const cb = jest.fn();
+      const errCb = jest.fn();
 
-  //     apiProxy.streamResults(`/apis/v1/namespaces/default/configmaps`, cb, errCb, {});
+      apiProxy.streamResults(`/apis/v1/namespaces/${namespace}/configmaps`, cb, errCb, {
+        watch: '1',
+      });
 
-  //     mockServer.on('connection', async (socket: any) => {
-  //       console.log("Connected to server");
-  //       expect(cb).toHaveBeenNthCalledWith(1, []);
+      mockServer.on('connection', async (socket: any) => {
+        expect(cb).toHaveBeenNthCalledWith(1, []);
 
-  //       socket.send(JSON.stringify({ type: 'ADDED', ...mockConfigMap }));
-  //       await new Promise(resolve => setTimeout(resolve, 100));
-  //       expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+        socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+        await new Promise(resolve => setTimeout(resolve, 100));
+        expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
 
-  //       done();
-  //     });
-  //   });
-  // });
+        done();
+      });
+    });
+  });
 
   describe('streamResultsForCluster', () => {
     it('Successfully handles ADDED, MODIFIED, and DELETED types', done => {
@@ -418,7 +474,7 @@ describe('streamResults, streamResultsForCluster', () => {
       });
     });
 
-    it('Successfully handles ERROR type', done => {
+    it('Successfully handles error messages', done => {
       const cb = jest.fn();
       const errCb = jest.fn();
 
@@ -429,14 +485,6 @@ describe('streamResults, streamResultsForCluster', () => {
       );
 
       mockServer.on('connection', async (socket: any) => {
-        const errorMessage = {
-          type: 'ERROR',
-          object: {
-            reason: 'InternalError',
-            message: 'Mock internal error message.',
-            actionType: 'ERROR',
-          },
-        };
         socket.send(JSON.stringify(errorMessage));
         await new Promise(resolve => setTimeout(resolve, 100));
         expect(console.error).toHaveBeenCalledWith(
@@ -485,72 +533,73 @@ describe('streamResults, streamResultsForCluster', () => {
   });
 });
 
-// need to figure out how to mock messages
-// describe('stream', () => {
-//   // const testUrl = 'ws://localhost/clusters/test-cluster/apis/v1/namespaces/default/configmaps?watch=1&resourceVersion=1234';
-//   const errorMessage = { error: 'Error in api stream' };
-//   // const streamMessage = {
-//   //   type: 'ADDED',
-//   //   object: {
-//   //     ...mockResponse,
-//   //     metadata: { uid: 'test-uid' }
-//   //   }
-//   // };
+describe('stream', () => {
+  const streamUrl = '/test/stream/url';
+  let mockServer: WS;
+  let getClusterSpy: jest.SpyInstance;
 
-//   let server: WS;
+  beforeEach(() => {
+    mockServer = new WS(`ws://localhost/clusters/${clusterName}${streamUrl}`);
+    getClusterSpy = jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+  });
 
-//   beforeEach(() => {
-//     server = new WS(`ws://localhost${streamResultsUrl}`);
-//   });
+  afterEach(() => {
+    WS.clean();
+    getClusterSpy.mockRestore();
+  });
 
-//   afterEach(() => {
-//     WS.clean();
-//   });
+  it('Successfully connects to the server and receives messages', done => {
+    const cb = jest.fn();
+    const connectCb = jest.fn();
+    const failCb = jest.fn();
 
-//   it('Successfully connects to the server and receives messages', done => {
-//     const cb = jest.fn();
-//     const connectCb = jest.fn();
-//     const failCb = jest.fn();
+    apiProxy.stream(streamUrl, cb, { connectCb, failCb, isJson: true });
 
-//     apiProxy.stream(streamResultsUrl, cb, { connectCb, failCb, isJson: true } );
+    mockServer.on('connection', async (socket: any) => {
+      expect(connectCb).toHaveBeenCalled();
 
-//     server.on('connection', async (socket: any) => {
-//       expect(connectCb).toHaveBeenCalled();
-//       done();
-//     });
-//   });
+      socket.send(JSON.stringify(mockResponse));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).toHaveBeenNthCalledWith(1, mockResponse);
 
-//   it('Successfully handles WebSocket errors', done => {
-//     const cb = jest.fn();
-//     const connectCb = jest.fn();
-//     const failCb = jest.fn();
+      done();
+    });
+  });
 
-//     apiProxy.stream(baseApiUrl, cb, { connectCb, failCb, isJson: true });
+  it('Successfully handles WebSocket errors', done => {
+    const cb = jest.fn();
+    const connectCb = jest.fn();
+    const failCb = jest.fn();
 
-//     server.on('connection', async (socket: any) => {
-//       socket.close();
-//       expect(cb).not.toHaveBeenCalled();
-//       expect(failCb).not.toHaveBeenCalled();
-//       expect(console.error).toHaveBeenCalled();
-//       done();
-//     });
-//   });
+    apiProxy.stream(streamUrl, cb, { connectCb, failCb, isJson: true });
 
-//   // it('Successfully cancels the stream', async () => {
-//   //   const cb = jest.fn();
-//   //   const failCb = jest.fn();
-//   //   closeCalled = false;
+    mockServer.on('connection', async (socket: any) => {
+      socket.close();
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(failCb).toHaveBeenCalled();
 
-//   //   const { cancel } = apiProxy.stream(testUrl, cb, { failCb });
+      done();
+    });
+  });
 
-//   //   await new Promise(r => setTimeout(r, 50));
-//   //   cancel();
-//   //   await new Promise(r => setTimeout(r, 50));
+  it('Successfully handles stream cancellation', done => {
+    const cb = jest.fn();
+    const connectCb = jest.fn();
+    const failCb = jest.fn();
 
-//   //   expect(closeCalled).toBe(true);
-//   //   expect(cb).not.toHaveBeenCalled();
-//   // });
-// });
+    const { cancel } = apiProxy.stream(streamUrl, cb, { connectCb, failCb, isJson: true });
+
+    mockServer.on('connection', async () => {
+      cancel();
+
+      mockServer.send(JSON.stringify(mockResponse));
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cb).not.toHaveBeenCalled();
+
+      done();
+    });
+  });
+});
 
 // describe('apply', () => {
 
