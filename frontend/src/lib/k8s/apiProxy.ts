@@ -1600,7 +1600,19 @@ export async function setCluster(clusterReq: ClusterRequest) {
 
   if (kubeconfig) {
     await storeStatelessClusterKubeconfig(kubeconfig);
-    return;
+    // We just send parsed kubeconfig from the backend to the frontend.
+    return request(
+      '/parseKubeConfig',
+      {
+        method: 'POST',
+        body: JSON.stringify(clusterReq),
+        headers: {
+          ...JSON_HEADERS,
+        },
+      },
+      false,
+      false
+    );
   }
 
   return request(
