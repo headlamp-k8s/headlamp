@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setCluster } from '../../lib/k8s/apiProxy';
-import { setConfig } from '../../redux/configSlice';
+import { setStatelessConfig } from '../../redux/configSlice';
 import { DialogTitle } from '../common/Dialog';
 import Loader from '../common/Loader';
 import { ClusterDialog } from './Chooser';
@@ -145,10 +145,10 @@ function KubeConfigLoader() {
         const selectedClusterConfig = configWithSelectedClusters(fileContent, selectedClusters);
         setCluster({ kubeconfig: btoa(yaml.dump(selectedClusterConfig)) })
           .then(res => {
-            if (res.clusters.length > 0) {
-              dispatch(setConfig(res));
-              setState(Step.Success);
+            if (res?.clusters?.length > 0) {
+              dispatch(setStatelessConfig(res));
             }
+            setState(Step.Success);
           })
           .catch(e => {
             console.debug('Error setting up clusters from kubeconfig:', e);
