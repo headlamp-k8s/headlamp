@@ -47,7 +47,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-cmkit5-MuiPaper-root"
                   >
                     <div
                       class="MuiBox-root css-qrw4x1"
@@ -146,7 +146,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-cmkit5-MuiPaper-root"
                   >
                     <div
                       class="MuiBox-root css-qrw4x1"
@@ -245,7 +245,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-cmkit5-MuiPaper-root"
                   >
                     <div
                       class="MuiBox-root css-qrw4x1"
@@ -348,7 +348,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-18ph6tx-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-gij5ii-MuiPaper-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-cmkit5-MuiPaper-root"
                   >
                     <div
                       class="MuiBox-root css-qrw4x1"

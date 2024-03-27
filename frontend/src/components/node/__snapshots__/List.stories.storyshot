@@ -112,12 +112,6 @@ exports[`Storyshots node/List Nodes 1`] = `
                   </button>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                  scope="col"
-                >
-                  Ready
-                </th>
-                <th
                   class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1oh10zp-MuiTableCell-root"
                   scope="col"
                 >
@@ -128,6 +122,18 @@ exports[`Storyshots node/List Nodes 1`] = `
                   scope="col"
                 >
                   Memory
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                  scope="col"
+                >
+                  Ready
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                  scope="col"
+                >
+                  Taints
                 </th>
                 <th
                   class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -190,16 +196,6 @@ exports[`Storyshots node/List Nodes 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
-                  >
-                    Yes
-                  </span>
-                </td>
-                <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
                 >
                   <div
@@ -213,6 +209,23 @@ exports[`Storyshots node/List Nodes 1`] = `
                   <div
                     class="recharts-responsive-container makeStyles-container"
                     style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                  >
+                    Yes
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <div
+                    class="MuiBox-root css-am63uh"
                   />
                 </td>
                 <td
@@ -263,6 +276,22 @@ exports[`Storyshots node/List Nodes 1`] = `
                   </a>
                 </td>
                 <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 >
                   <span
@@ -273,25 +302,16 @@ exports[`Storyshots node/List Nodes 1`] = `
                   </span>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 >
                   <div
-                    class="recharts-responsive-container makeStyles-container"
-                    style="width: 95%; height: 20px;"
-                  />
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-jdxrqv-MuiTableCell-root"
-                >
-                  <div
-                    class="recharts-responsive-container makeStyles-container"
-                    style="width: 95%; height: 20px;"
+                    class="MuiBox-root css-am63uh"
                   />
                 </td>
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 >
-                  agent
+                  
                 </td>
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
