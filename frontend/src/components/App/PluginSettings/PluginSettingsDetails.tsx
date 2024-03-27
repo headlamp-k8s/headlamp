@@ -34,6 +34,8 @@ const PluginSettingsDetailsInitializer = (props: { plugin: PluginInfo }) => {
         // update the plugin list
         const dispatch = useDispatch();
         dispatch(reloadPage());
+
+        // @todo error is not handled here.
       })
       .finally(() => {
         // redirect /plugins page
