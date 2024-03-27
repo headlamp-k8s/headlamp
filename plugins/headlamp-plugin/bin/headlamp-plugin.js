@@ -13,6 +13,10 @@ const child_process = require('child_process');
 const validate = require('validate-npm-package-name');
 const yargs = require('yargs/yargs');
 const headlampPluginPkg = require('../package.json');
+const { table, getBorderCharacters } = require('table');
+const https = require('https');
+const tar = require('tar');
+const zlib = require('zlib');
 
 /**
  * Creates a new plugin folder.
@@ -977,6 +981,140 @@ function test(packageFolder) {
 const headlampPluginBin = fs.realpathSync(process.argv[1]);
 console.log('headlampPluginBin path:', headlampPluginBin);
 
+function checkValidPluginFolder(folder) {
+  if (!fs.existsSync(folder)) {
+    return false;
+  }
+  // Check if the folder contains main.js and package.json
+  const mainJsPath = path.join(folder, 'main.js');
+  const packageJsonPath = path.join(folder, 'package.json');
+  if (!fs.existsSync(mainJsPath) || !fs.existsSync(packageJsonPath)) {
+    return false;
+  }
+  return true;
+}
+
+function defaultPluginsDir() {
+  const paths = envPaths('Headlamp', { suffix: '' });
+  const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
+  return path.join(configDir, 'plugins');
+}
+
+function list(folder, jsonOutput = false) {
+  const pluginsData = [];
+
+  // Read all entries in the specified folder
+  const entries = fs.readdirSync(folder, { withFileTypes: true });
+
+  // Filter out directories (plugins)
+  const pluginFolders = entries.filter(entry => entry.isDirectory());
+
+  // Iterate through each plugin folder
+  for (const pluginFolder of pluginFolders) {
+    const pluginDir = path.join(folder, pluginFolder.name);
+
+    if (checkValidPluginFolder(pluginDir)) {
+      // Read package.json to get the plugin name and version
+      const packageJsonPath = path.join(pluginDir, 'package.json');
+      const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+      const pluginName = packageJson.name || pluginFolder.name;
+      const pluginVersion = packageJson.version || 'N/A'; // Default to 'N/A' if version is not specified
+
+      // Store plugin data (folder name and plugin name)
+      pluginsData.push([pluginName, pluginVersion, pluginFolder.name]);
+    }
+  }
+
+  if (jsonOutput) {
+    const jsonData = pluginsData.map(([pluginName, pluginVersion, folderName]) => ({
+      pluginName,
+      pluginVersion,
+      folderName,
+    }));
+    console.log(JSON.stringify(jsonData, null, 2));
+  } else {
+    const formattedTable = table([['Plugin Name', 'Version', 'Folder Name'], ...pluginsData], {
+      border: getBorderCharacters('void'),
+    });
+    console.log(formattedTable);
+  }
+}
+
+function downloadTarball(url, targetPath) {
+  return new Promise((resolve, reject) => {
+    const requestOptions = {
+      headers: {
+        'User-Agent': 'Mozilla/5.0', // Add a user agent header to avoid certain server restrictions
+      },
+    };
+
+    const request = https.get(url, requestOptions, response => {
+      const statusCode = response.statusCode;
+      if (statusCode >= 300 && statusCode < 400 && response.headers.location) {
+        // Handle redirection
+        const redirectUrl = response.headers.location;
+        console.log(`Redirecting to: ${redirectUrl}`);
+        request.abort(); // Abort the current request
+
+        // Make a new request to the redirected URL
+        downloadTarball(redirectUrl, targetPath).then(resolve).catch(reject);
+      } else if (statusCode === 200) {
+        // If the response is successful, pipe the data to the target file
+        response
+          .pipe(zlib.createGunzip())
+          .pipe(tar.x({ C: targetPath, strip: 1 }))
+          .on('error', reject)
+          .on('finish', resolve);
+      } else {
+        reject(new Error(`Failed to download tarball. Status code: ${statusCode}`));
+      }
+    });
+
+    request.on('error', reject);
+  });
+}
+
+async function install(URL, folder) {
+  try {
+    // Create the target folder if it doesn't exist
+    if (!fs.existsSync(folder)) {
+      fs.mkdirSync(folder, { recursive: true });
+    }
+
+    // Download the tarball and extract it to the specified folder
+    console.log('Downloading and extracting plugin...');
+    await downloadTarball(URL, folder);
+    console.log('Download and extraction completed successfully.');
+  } catch (err) {
+    console.error('Error:', err.message);
+  }
+}
+
+function uninstall(name, folder) {
+  const pluginDir = path.join(folder, name);
+  if (checkValidPluginFolder(pluginDir)) {
+    // Delete the plugin folder
+    fs.rmSync(pluginDir, {
+      recursive: true,
+      force: true,
+    });
+    console.log(`Uninstalled the plugin "${name}" from the folder "${pluginDir}".`);
+  } else {
+    console.error(`The folder "${pluginDir}" does not contain a valid plugin.`);
+  }
+}
+
+function update(name, folder, version) {
+  // check if the plugin is available in artifacthub
+
+  // download the plugin
+
+  // delete the old plugin
+
+  // extract the new plugin
+  console.log('Updating the plugin', name, 'from the folder', folder, 'to version', version);
+}
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
@@ -1161,6 +1299,88 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = test(argv.package);
+    }
+  )
+  .command(
+    'list',
+    'List. lists all the plugins that are installed',
+    yargs => {
+      yargs
+        .option('folder', {
+          describe: 'Folder to list the plugins',
+          type: 'string',
+          default: defaultPluginsDir(),
+        })
+        .option('json', {
+          alias: 'j',
+          describe: 'Output as json',
+          type: 'boolean',
+          default: false,
+        });
+    },
+    argv => {
+      process.exitCode = list(argv.folder, argv.json);
+    }
+  )
+  .command(
+    'install [URL]',
+    'Install. installs the plugin from the URL',
+    yargs => {
+      yargs
+        .positional('URL', {
+          describe: 'URL of the plugin to install',
+          type: 'string',
+        })
+        .option('folder', {
+          describe: 'Folder to install the plugin',
+          type: 'string',
+          default: defaultPluginsDir(),
+        });
+    },
+    argv => {
+      process.exitCode = install(argv.URL, argv.folder);
+    }
+  )
+  .command(
+    'uninstall [name]',
+    'Uninstall. uninstalls the plugin',
+    yargs => {
+      yargs
+        .positional('name', {
+          describe: 'Name of the plugin to uninstall',
+          type: 'string',
+        })
+        .option('folder', {
+          describe: 'Folder to uninstall the plugin',
+          type: 'string',
+          default: defaultPluginsDir(),
+        });
+    },
+    argv => {
+      process.exitCode = uninstall(argv.name, argv.folder);
+    }
+  )
+  .command(
+    'update [name]',
+    'Update. updates the plugin',
+    yargs => {
+      yargs
+        .positional('name', {
+          describe: 'Name of the plugin to update',
+          type: 'string',
+        })
+        .option('folder', {
+          describe: 'Folder to update the plugin',
+          type: 'string',
+          default: defaultPluginsDir(),
+        })
+        .option('version', {
+          describe: 'Version of the plugin to update to, defaults to latest',
+          type: 'string',
+        });
+    },
+    argv => {
+      process.exitCode = update(argv.name, argv.folder, argv.version);
     }
   )
   .demandCommand(1, '')
