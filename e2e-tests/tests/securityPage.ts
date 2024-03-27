@@ -18,4 +18,13 @@ export class SecurityPage {
     // Wait for the page to load
     await this.page.waitForLoadState('load');
   }
+
+  async clickOnRolesSection() {
+    // Wait for the Service Accounts tab to load
+    await this.page.waitForSelector('span:has-text("Roles")');
+    // Click on the "Service Accounts" section
+    await this.page.click('span:has-text("Roles")');
+    // Wait for the page to load
+    await this.page.waitForLoadState('load');
+  }
 }

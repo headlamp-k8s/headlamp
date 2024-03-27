@@ -86,4 +86,20 @@ test('404 page is present', async ({ page }) => {
   await headlampPage.authenticate();
   await headlampPage.navigateTopage('/404test', /Whoops! This page doesn't exist/);
 });
+
+test('pagination goes to next page', async ({ page }) => {
+  const headlampPage = new HeadlampPage(page);
+  await headlampPage.authenticate();
+
+  const securityPage = new SecurityPage(page);
+  await securityPage.navigateToSecurity();
+  await securityPage.clickOnRolesSection();
+
+  // Check if there is text "Rows per page" on the page
+  await headlampPage.checkPageContent('Rows per page');
+
+  // Check working of pagination
+  await headlampPage.checkRows();
+});
+
 // --- Headlamp tests end --- //
