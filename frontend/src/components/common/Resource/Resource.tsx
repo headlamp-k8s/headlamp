@@ -676,7 +676,11 @@ export function ContainerInfo(props: ContainerInfoProps) {
       label = t('translation|Running');
     } else if (!!status.state.terminated) {
       statusType = status.state.terminated.exitCode === 0 ? '' : 'error';
-      label = t('translation|Error');
+      if (status.state.terminated.exitCode === 0) {
+        label = t('translation|Terminated');
+      } else {
+        label = t('translation|Error');
+      }
     }
 
     const tooltipID = 'container-state-message-' + container.name;
