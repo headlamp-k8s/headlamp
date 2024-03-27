@@ -161,6 +161,52 @@ exports[`Storyshots Settings General 1`] = `
         <dt
           class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
         >
+          Drawer Mode
+        </dt>
+        <dd
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell makeStyles-valueCol css-r0umuq-MuiGrid-root"
+        >
+          <label
+            class="MuiFormControlLabel-root"
+          >
+            <span
+              class="MuiSwitch-root"
+            >
+              <span
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-1 MuiSwitch-switchBase MuiSwitch-colorPrimary"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <input
+                    class="PrivateSwitchBase-input-4 MuiSwitch-input"
+                    name="drawerMode"
+                    type="checkbox"
+                    value=""
+                  />
+                  <span
+                    class="MuiSwitch-thumb"
+                  />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </span>
+              <span
+                class="MuiSwitch-track"
+              />
+            </span>
+            <span
+              class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+            >
+              Drawer Mode
+            </span>
+          </label>
+        </dd>
+        <dt
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+        >
           Number of rows for tables
         </dt>
         <dd

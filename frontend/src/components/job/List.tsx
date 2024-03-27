@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import Job from '../../lib/k8s/job';
 import { formatDuration } from '../../lib/util';
-import { LightTooltip, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
+import { useTypedSelector } from '../../redux/reducers/reducers';
+import { LightTooltip, Link, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export function makePodStatusLabel(job: Job) {
@@ -71,6 +72,7 @@ export interface JobsListRendererProps {
 export function JobsListRenderer(props: JobsListRendererProps) {
   const { jobs, error, hideColumns = [], reflectTableInURL = 'jobs', noNamespaceFilter } = props;
   const { t } = useTranslation(['glossary', 'translation']);
+  const drawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
 
   function getCompletions(job: Job) {
     return `${job.spec.completions}/${job.spec.parallelism}`;
@@ -93,7 +95,22 @@ export function JobsListRenderer(props: JobsListRendererProps) {
       hideColumns={hideColumns}
       errorMessage={error}
       columns={[
-        'name',
+        // 'name',
+        {
+          id: 'name',
+          label: t('translation|Name'),
+          getter: (job: Job) => {
+            if (drawerEnabled) {
+              return (
+                <>
+                  <Link kubeObject={job} drawerEnabled={drawerEnabled} />
+                </>
+              );
+            }
+
+            return <Link kubeObject={job} />;
+          },
+        },
         'namespace',
         {
           id: 'completions',

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import DaemonSet from '../../lib/k8s/daemonSet';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SectionBox, SimpleTable } from '../common';
 import {
   ContainersSection,
@@ -67,12 +68,15 @@ function TolerationsSection(props: TolerationsSection) {
 export default function DaemonSetDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { t } = useTranslation(['glossary', 'translation']);
+  const isDetailDrawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
+  const currentDrawerNamespace = useTypedSelector(state => state.drawerMode.currentDrawerNamespace);
+  const currentDrawerName = useTypedSelector(state => state.drawerMode.currentDrawerName);
 
   return (
     <DetailsGrid
       resourceType={DaemonSet}
-      name={name}
-      namespace={namespace}
+      name={isDetailDrawerEnabled ? currentDrawerName : name}
+      namespace={isDetailDrawerEnabled ? currentDrawerNamespace : namespace}
       withEvents
       extraInfo={item =>
         item && [

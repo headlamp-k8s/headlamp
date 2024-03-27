@@ -1,18 +1,35 @@
 import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import DaemonSet from '../../lib/k8s/daemonSet';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { LightTooltip } from '../common';
+import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function DaemonSetList() {
   const { t } = useTranslation(['glossary', 'translation']);
+  const drawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
 
   return (
     <ResourceListView
       title={t('Daemon Sets')}
       resourceClass={DaemonSet}
       columns={[
-        'name',
+        {
+          id: 'name',
+          label: t('translation|Name'),
+          getter: (daemonSet: DaemonSet) => {
+            if (drawerEnabled) {
+              return (
+                <>
+                  <Link kubeObject={daemonSet} drawerEnabled={drawerEnabled} />
+                </>
+              );
+            }
+
+            return <Link kubeObject={daemonSet} />;
+          },
+        },
         'namespace',
         {
           id: 'pods',

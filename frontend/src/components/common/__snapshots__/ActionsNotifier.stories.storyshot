@@ -5,7 +5,7 @@ exports[`Storyshots ActionsNotifier None 1`] = `<div />`;
 exports[`Storyshots ActionsNotifier Some 1`] = `
 <div>
   <div
-    class="SnackbarContainer-bottom SnackbarContainer-left SnackbarContainer-root css-uwcd5u"
+    class="makeStyles-bottom-8 makeStyles-left-9 makeStyles-root-5"
   >
     <div
       class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
@@ -18,22 +18,22 @@ exports[`Storyshots ActionsNotifier Some 1`] = `
           class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
         >
           <div
-            class="SnackbarItem-wrappedRoot css-1erfie"
+            class="SnackbarItem-root-12 SnackbarItem-wrappedRoot-27 SnackbarItem-anchorOriginBottomLeft-18"
           >
             <div
               aria-describedby="notistack-snackbar"
-              class="SnackbarContent-root SnackbarItem-contentRoot css-hped4j"
+              class="ForwardRef-root-28 SnackbarItem-contentRoot-19"
               role="alert"
               style="webkit-transform: none; transform: none; webkit-transition: -webkit-transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms; transition: transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;"
             >
               <div
-                class="SnackbarItem-message"
+                class="SnackbarItem-message-25"
                 id="notistack-snackbar"
               >
                 Some message
               </div>
               <div
-                class="SnackbarItem-action"
+                class="SnackbarItem-action-26"
               >
                 <button
                   class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall css-u3zvl7-MuiButtonBase-root-MuiButton-root"

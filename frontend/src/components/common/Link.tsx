@@ -1,8 +1,16 @@
 import MuiLink from '@mui/material/Link';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { makeKubeObject } from '../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
+import {
+  setDetailDrawerOpen,
+  updateDrawerCluster,
+  updateDrawerName,
+  updateDrawerNamespace,
+  updateDrawerResource,
+} from '../../redux/drawerModeSlice';
 import { LightTooltip } from './Tooltip';
 
 export interface LinkBaseProps {
@@ -21,6 +29,7 @@ export interface LinkProps extends LinkBaseProps {
   state?: {
     [prop: string]: any;
   };
+  drawerEnabled?: boolean;
 }
 
 export interface LinkObjectProps extends LinkBaseProps {
@@ -30,11 +39,60 @@ export interface LinkObjectProps extends LinkBaseProps {
 
 function PureLink(props: React.PropsWithChildren<LinkProps | LinkObjectProps>) {
   if ((props as LinkObjectProps).kubeObject) {
-    const { kubeObject, ...otherProps } = props as LinkObjectProps;
+    const { kubeObject, drawerEnabled, ...otherProps } = props as LinkObjectProps;
+    const dispatch = useDispatch();
+
+    function drawerLinkHandler(event: any) {
+      // this will be use to determine if the drawer needs to open when the link is clicked or change pages
+      const drawerResourcesAllowed = [
+        'pods',
+        'deployments',
+        'replicasets',
+        'jobs',
+        'cronjobs',
+        'daemonsets',
+        'statefulsets',
+      ];
+
+      console.log('LINK STRING: ', kubeObject.getDetailsLink());
+      const url = kubeObject.getDetailsLink();
+      const urlPieces = url.split('/');
+      console.log('URL PIECES: ', urlPieces);
+      const linkCluster = urlPieces[2];
+      const linkResource = urlPieces[3];
+      const linkNamespace = urlPieces[4];
+      const linkName = urlPieces[5];
+
+      // if the resource bit from the url matches the resources allowed, then open the drawer
+      if (drawerResourcesAllowed.includes(linkResource)) {
+        event.preventDefault();
+        // window.history.pushState({}, '', url);
+
+        dispatch(updateDrawerCluster(linkCluster));
+        dispatch(updateDrawerResource(linkResource));
+        dispatch(updateDrawerNamespace(linkNamespace));
+        dispatch(updateDrawerName(linkName));
+        dispatch(setDetailDrawerOpen(true));
+      }
+    }
+
     return (
-      <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()} {...otherProps}>
-        {props.children || kubeObject.getName()}
-      </MuiLink>
+      <>
+        {drawerEnabled === true ? (
+          <MuiLink
+            component={RouterLink}
+            to={kubeObject.getDetailsLink()}
+            {...otherProps}
+            onClick={drawerLinkHandler}
+          >
+            {props.children || kubeObject.getName()}
+          </MuiLink>
+        ) : (
+          <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()} {...otherProps}>
+            {props.children || kubeObject.getName()}
+          </MuiLink>
+        )}
+      </>
     );
   }
 
