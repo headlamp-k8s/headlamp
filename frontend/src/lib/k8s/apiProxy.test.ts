@@ -731,9 +731,60 @@ describe('apply', () => {
   });
 });
 
-// describe('metrics', () => {
+describe('metrics', () => {
+  let cancelMetrics: Function;
 
-// });
+  afterEach(() => {
+    nock.cleanAll();
+
+    if (cancelMetrics) {
+      cancelMetrics();
+    }
+  });
+
+  it('Successfully retrieves metrics', async () => {
+    const mockMetrics = [{ metricName: 'cpu_usage', value: '42' }];
+    const onMetrics = jest.fn();
+    const onError = jest.fn();
+
+    nock(baseApiUrl)
+      .persist()
+      .get('/apis/metrics.k8s.io/v1/nodes')
+      .reply(200, { items: mockMetrics });
+
+    cancelMetrics = await apiProxy.metrics('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+    await new Promise(resolve => setTimeout(resolve, 100));
+    expect(onMetrics).toHaveBeenCalledWith(mockMetrics);
+    expect(onError).not.toHaveBeenCalled();
+  });
+
+  it('Successfully handles metrics with error status 500', async () => {
+    const onMetrics = jest.fn();
+    const onError = jest.fn();
+
+    nock(baseApiUrl).get('/apis/metrics.k8s.io/v1/nodes').reply(500, errorResponse500);
+
+    cancelMetrics = await apiProxy.metrics('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+    await new Promise(resolve => setTimeout(resolve, 100));
+    expect(onMetrics).not.toHaveBeenCalled();
+    expect(onError).toHaveBeenCalled();
+  });
+
+  it('Successfully handles metrics cancellation', async () => {
+    const onMetrics = jest.fn();
+    const onError = jest.fn();
+
+    nock(baseApiUrl).get('/apis/metrics.k8s.io/v1/nodes').reply(200, { items: [] });
+
+    cancelMetrics = await apiProxy.metrics('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+
+    cancelMetrics();
+
+    await new Promise(resolve => setTimeout(resolve, 200));
+    expect(onMetrics).toHaveBeenNthCalledWith(1, []);
+    expect(onError).not.toHaveBeenCalled();
+  });
+});
 
 describe('testAuth', () => {
   const apiPath = '/apis/authorization.k8s.io/v1/selfsubjectrulesreviews';
