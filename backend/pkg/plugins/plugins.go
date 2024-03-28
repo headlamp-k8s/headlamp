@@ -77,20 +77,20 @@ func periodicallyWatchSubfolders(watcher *fsnotify.Watcher, path string, interva
 	}
 }
 
-// GeneratePluginPaths takes the basePath, staticPluginDir and pluginDir and returns a list of plugin paths.
-func GeneratePluginPaths(basePath string, staticPluginDir string, pluginDir string) ([]string, error) {
+// GeneratePluginPaths takes the staticPluginDir and pluginDir and returns a list of plugin paths.
+func GeneratePluginPaths(staticPluginDir string, pluginDir string) ([]string, error) {
 	var pluginListURLStatic []string
 
 	if staticPluginDir != "" {
 		var err error
 
-		pluginListURLStatic, err = pluginBasePathListForDir(staticPluginDir, filepath.Join(basePath, "static-plugins"))
+		pluginListURLStatic, err = pluginBasePathListForDir(staticPluginDir, "static-plugins")
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	pluginListURL, err := pluginBasePathListForDir(pluginDir, filepath.Join(basePath, "plugins"))
+	pluginListURL, err := pluginBasePathListForDir(pluginDir, "plugins")
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +152,7 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 
 // HandlePluginEvents handles the plugin events by updating the plugin list
 // and plugin refresh key in the cache.
-func HandlePluginEvents(basePath, staticPluginDir, pluginDir string,
+func HandlePluginEvents(staticPluginDir, pluginDir string,
 	notify <-chan string, cache cache.Cache[interface{}],
 ) {
 	for range notify {
@@ -163,7 +163,7 @@ func HandlePluginEvents(basePath, staticPluginDir, pluginDir string,
 		}
 
 		// generate the plugin list
-		pluginList, err := GeneratePluginPaths(basePath, staticPluginDir, pluginDir)
+		pluginList, err := GeneratePluginPaths(staticPluginDir, pluginDir)
 		if err != nil && !os.IsNotExist(err) {
 			logger.Log(logger.LevelError, nil, err, "generating plugins path")
 		}
@@ -176,7 +176,7 @@ func HandlePluginEvents(basePath, staticPluginDir, pluginDir string,
 }
 
 // PopulatePluginsCache populates the plugin list and plugin refresh key in the cache.
-func PopulatePluginsCache(basePath, staticPluginDir, pluginDir string, cache cache.Cache[interface{}]) {
+func PopulatePluginsCache(staticPluginDir, pluginDir string, cache cache.Cache[interface{}]) {
 	// set the plugin refresh key to false
 	err := cache.Set(context.Background(), PluginRefreshKey, false)
 	if err != nil {
@@ -185,10 +185,10 @@ func PopulatePluginsCache(basePath, staticPluginDir, pluginDir string, cache cac
 	}
 
 	// generate the plugin list
-	pluginList, err := GeneratePluginPaths(basePath, staticPluginDir, pluginDir)
+	pluginList, err := GeneratePluginPaths(staticPluginDir, pluginDir)
 	if err != nil && !os.IsNotExist(err) {
 		logger.Log(logger.LevelError,
-			map[string]string{"basePath": basePath, "staticPluginDir": staticPluginDir, "pluginDir": pluginDir},
+			map[string]string{"staticPluginDir": staticPluginDir, "pluginDir": pluginDir},
 			err, "generating plugins path")
 	}
 
