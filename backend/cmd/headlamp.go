@@ -310,13 +310,13 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	logger.Log(logger.LevelInfo, nil, nil, "Helm support: "+fmt.Sprint(config.enableHelm))
 	logger.Log(logger.LevelInfo, nil, nil, "Proxy URLs: "+fmt.Sprint(config.proxyURLs))
 
-	plugins.PopulatePluginsCache(config.baseURL, config.staticPluginDir, config.pluginDir, config.cache)
+	plugins.PopulatePluginsCache(config.staticPluginDir, config.pluginDir, config.cache)
 
 	if !config.useInCluster {
 		// in-cluster mode is unlikely to want reloading plugins.
 		pluginEventChan := make(chan string)
 		go plugins.Watch(config.pluginDir, pluginEventChan)
-		go plugins.HandlePluginEvents(config.baseURL, config.staticPluginDir, config.pluginDir, pluginEventChan, config.cache)
+		go plugins.HandlePluginEvents(config.staticPluginDir, config.pluginDir, pluginEventChan, config.cache)
 		// in-cluster mode is unlikely to want reloading kubeconfig.
 		go kubeconfig.LoadAndWatchFiles(config.kubeConfigStore, kubeConfigPath, kubeconfig.KubeConfig)
 	}
