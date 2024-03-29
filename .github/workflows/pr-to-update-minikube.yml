@@ -67,16 +67,18 @@ jobs:
             git push origin --delete "update_headlamp_$HEADLAMP_VERSION"
           fi
           git checkout -b "update_headlamp_$HEADLAMP_VERSION"
+          OLD_HEADLAMP_VERSION=$(DEP=headlamp make get-dependency-version)
           sed -i "s/headlamp-k8s\/headlamp:v.*/headlamp-k8s\/headlamp:$LATEST_HEADLAMP_TAG@$LATEST_HEADLAMP_SHA\",/g" ./pkg/minikube/assets/addons.go
+          NEW_HEADLAMP_VERSION=$(DEP=headlamp make get-dependency-version)
           git diff
           git add ./pkg/minikube/assets/addons.go
           git status
-          git commit --signoff -m "Update Headlamp container version to $HEADLAMP_VERSION"
+          git commit --signoff -m "Addon headlamp: Update headlamp-k8s/headlamp image from $OLD_HEADLAMP_VERSION to $NEW_HEADLAMP_VERSION"
           git status
           git log -1
           git push origin "update_headlamp_$HEADLAMP_VERSION" -f
           gh pr create \
-          --title "Upgrade Headlamp version to $HEADLAMP_VERSION" \
+          --title "Addon headlamp: Update headlamp-k8s/headlamp image from $OLD_HEADLAMP_VERSION to $NEW_HEADLAMP_VERSION" \
           --repo "kubernetes/minikube" \
           --head "headlamp-k8s:update_headlamp_$HEADLAMP_VERSION" \
           --base "master"  \
