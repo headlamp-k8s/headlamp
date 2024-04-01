@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
