@@ -868,4 +868,35 @@ describe('apiProxy', () => {
       }
     );
   });
+
+  describe('setCluster, deleteCluster', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
+    describe('deleteCluster', () => {
+      it('Successfully deletes a cluster', async () => {
+        nock(baseApiUrl).persist().delete(`/cluster/${clusterName}`).reply(200, mockResponse);
+
+        const response = await apiProxy.deleteCluster(clusterName);
+        expect(response).toEqual(mockResponse);
+      });
+
+      it.each([
+        [401, errorResponse401],
+        [500, errorResponse500],
+      ])(
+        'Successfully handles deleteCluster with error status %d',
+        async (statusCode, errorResponse) => {
+          nock.cleanAll();
+          nock(baseApiUrl)
+            .persist()
+            .delete(`/cluster/${clusterName}`)
+            .reply(statusCode, { message: errorResponse.error });
+
+          await expect(apiProxy.deleteCluster(clusterName)).rejects.toThrow(errorResponse.error);
+        }
+      );
+    });
+  });
 });
