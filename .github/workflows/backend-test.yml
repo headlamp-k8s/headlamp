@@ -5,6 +5,11 @@ on:
     paths:
       - 'backend/**'
 
+permissions:
+  contents: read
+  # We need to write a comment for the coverage change message.
+  issues: write
+
 env:
   HEADLAMP_RUN_INTEGRATION_TESTS: true
 
@@ -91,7 +96,9 @@ jobs:
           comment="Backend Code coverage changed from $base_coverage% to $testcoverage%. Change: $coverage_diff% $emoji."
           echo "$comment"
           if [[ "${{github.event.pull_request.head.repo.full_name}}" == "${{github.repository}}" ]]; then
-            gh issue comment ${{github.event.number}} --body "${comment}"
+            # Forks (like dependabot ones) do not have permission to comment on the PR,
+            #   so do not fail the action if this fails.
+            gh issue comment ${{github.event.number}} --body "${comment}" || true            
           else
             echo "Pull request raised from a fork. Skipping comment."
           fi
