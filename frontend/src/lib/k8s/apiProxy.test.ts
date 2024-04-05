@@ -831,4 +831,41 @@ describe('apiProxy', () => {
       }
     );
   });
+
+  describe('testClusterHealth', () => {
+    const apiPath = '/healthz';
+
+    beforeEach(() => {
+      nock(baseApiUrl)
+        .persist()
+        .get(`/clusters/${clusterName}${apiPath}`)
+        .reply(200, 'ok', { 'content-type': 'text/plain' });
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
+    it('Successfully checks cluster health', async () => {
+      const response = await apiProxy.testClusterHealth(clusterName);
+      const body = await response.text();
+      expect(body).toEqual('ok');
+    });
+
+    it.each([
+      [401, errorResponse401],
+      [500, errorResponse500],
+    ])(
+      'Successfully handles cluster health check with error status %d',
+      async (statusCode, errorResponse) => {
+        nock.cleanAll();
+        nock(baseApiUrl)
+          .persist()
+          .get(`/clusters/${clusterName}${apiPath}`)
+          .reply(statusCode, { message: errorResponse.error });
+
+        await expect(apiProxy.testClusterHealth(clusterName)).rejects.toThrow(errorResponse.error);
+      }
+    );
+  });
 });
