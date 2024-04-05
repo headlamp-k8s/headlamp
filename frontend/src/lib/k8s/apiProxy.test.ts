@@ -1077,4 +1077,53 @@ describe('apiProxy', () => {
       });
     });
   });
+
+  describe('deletePlugin', () => {
+    const pluginName = 'test-plugin';
+    const fakePluginName = 'fake-plugin';
+
+    beforeEach(() => {
+      (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+        .fn()
+        .mockImplementation((url, options) => {
+          if (url.endsWith(`/plugins/${pluginName}`) && options.method === 'DELETE') {
+            return Promise.resolve(
+              new Response(JSON.stringify(mockResponse), {
+                status: 200,
+                headers: { 'content-type': 'application/json' },
+              })
+            );
+          } else if (url.endsWith(`/plugins/${fakePluginName}`) && options.method === 'DELETE') {
+            return Promise.resolve(
+              new Response(JSON.stringify({ message: 'Plugin not found' }), {
+                status: 404,
+                headers: { 'content-type': 'application/json' },
+              })
+            );
+          } else {
+            return Promise.reject(new Error('Not Found'));
+          }
+        });
+    });
+
+    afterEach(() => {
+      jest.resetAllMocks();
+    });
+
+    it('Successfully deletes a plugin', async () => {
+      const response = await apiProxy.deletePlugin(pluginName);
+      expect(response).toEqual(mockResponse);
+      expect(fetch).toHaveBeenCalledWith(
+        expect.stringContaining(`plugins/${pluginName}`),
+        expect.objectContaining({
+          method: 'DELETE',
+          headers: {},
+        })
+      );
+    });
+
+    it('Successfully handles deletePlugin with error', async () => {
+      await expect(apiProxy.deletePlugin(fakePluginName)).rejects.toThrow('Plugin not found');
+    });
+  });
 });
