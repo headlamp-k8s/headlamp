@@ -591,4 +591,68 @@ describe('apiProxy', () => {
       });
     });
   });
+
+  describe('stream', () => {
+    let mockServer: WS;
+    let cb: jest.Mock;
+    let connectCb: jest.Mock;
+    let failCb: jest.Mock;
+
+    beforeEach(() => {
+      cb = jest.fn();
+      connectCb = jest.fn();
+      failCb = jest.fn();
+
+      mockServer = new WS(`${wsUrl}/clusters/${clusterName}${testPath}`);
+      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      jest.spyOn(console, 'warn').mockImplementation();
+    });
+
+    afterEach(() => {
+      WS.clean();
+      jest.restoreAllMocks();
+    });
+
+    it('Successfully connects to the server and receives messages', done => {
+      expect.assertions(2);
+
+      apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
+
+      mockServer.on('connection', async (socket: any) => {
+        expect(connectCb).toHaveBeenCalled();
+
+        socket.send(JSON.stringify(mockResponse));
+        expect(cb).toHaveBeenNthCalledWith(1, mockResponse);
+
+        done();
+      });
+    });
+
+    it('Successfully handles WebSocket errors', done => {
+      apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
+
+      mockServer.on('connection', async (socket: any) => {
+        socket.close();
+
+        // Sleep to avoid timing out
+        await new Promise(resolve => setTimeout(resolve, 100));
+        expect(failCb).toHaveBeenCalled();
+
+        done();
+      });
+    });
+
+    it('Successfully handles stream cancellation', done => {
+      const { cancel } = apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
+
+      mockServer.on('connection', async () => {
+        cancel();
+
+        mockServer.send(JSON.stringify(mockResponse));
+        expect(cb).not.toHaveBeenCalled();
+
+        done();
+      });
+    });
+  });
 });
