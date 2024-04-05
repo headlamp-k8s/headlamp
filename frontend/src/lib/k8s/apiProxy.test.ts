@@ -14,6 +14,7 @@ const wsUrl = 'ws://localhost';
 const testPath = '/test/url';
 const mockResponse = { message: 'mock response' };
 const clusterName = 'test-cluster';
+const podName = 'test-pod';
 const namespace = 'default';
 const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
 const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
@@ -897,6 +898,93 @@ describe('apiProxy', () => {
           await expect(apiProxy.deleteCluster(clusterName)).rejects.toThrow(errorResponse.error);
         }
       );
+    });
+  });
+
+  describe('startPortForward, stopOrDeletePortForward, listPortForward', () => {
+    const containerPort = 8080;
+    const service = 'test-service';
+    const serviceNamespace = 'default';
+    const port = '8080';
+    const mockId = '1234';
+    const mockStartResponse = { message: 'Port forwarding started' };
+    const mockStopResponse = { message: 'Port forwarding stopped' };
+    const mockListResponse = [
+      {
+        id: mockId,
+        podname: podName,
+        containerPort: containerPort,
+        service: service,
+        namespace: namespace,
+      },
+    ];
+
+    beforeEach(() => {
+      (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+        .fn()
+        .mockImplementation((url, options) => {
+          if (url.includes('portforward') && !url.includes('list')) {
+            if (options.method === 'POST' && url.includes('portforward')) {
+              return Promise.resolve(
+                new Response(JSON.stringify(mockStartResponse), {
+                  status: 200,
+                  headers: { 'content-type': 'application/json' },
+                })
+              );
+            } else if (options.method === 'DELETE' && url.includes('portforward')) {
+              return Promise.resolve(
+                new Response(JSON.stringify(mockStopResponse), {
+                  status: 200,
+                  headers: { 'content-type': 'application/json' },
+                })
+              );
+            }
+          } else if (url.includes('portforward') && url.includes('list')) {
+            return Promise.resolve(
+              new Response(JSON.stringify(mockListResponse), {
+                status: 200,
+                headers: { 'content-type': 'application/json' },
+              })
+            );
+          }
+          return Promise.reject(new Error('Not Found'));
+        });
+    });
+
+    afterEach(() => {
+      jest.resetAllMocks();
+    });
+
+    describe('startPortForward', () => {
+      it('Successfully starts a port forward', async () => {
+        const response = await apiProxy.startPortForward(
+          clusterName,
+          namespace,
+          podName,
+          containerPort,
+          service,
+          serviceNamespace,
+          port,
+          baseApiUrl,
+          mockId
+        );
+        expect(response).toEqual(mockStartResponse);
+      });
+    });
+
+    describe('stopOrDeletePortForward', () => {
+      it('Successfully deletes a port forward', async () => {
+        const response = await apiProxy.stopOrDeletePortForward(clusterName, mockId);
+        const data = JSON.parse(response);
+        expect(data).toEqual(mockStopResponse);
+      });
+    });
+
+    describe('listPortForward', () => {
+      it('Successfully list port forwards', async () => {
+        const response = await apiProxy.listPortForward(clusterName);
+        expect(response).toEqual(mockListResponse);
+      });
     });
   });
 });
