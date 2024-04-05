@@ -794,4 +794,41 @@ describe('apiProxy', () => {
       expect(onError).not.toHaveBeenCalled();
     });
   });
+
+  describe('testAuth', () => {
+    const apiPath = '/apis/authorization.k8s.io/v1/selfsubjectrulesreviews';
+    const spec = { namespace: namespace };
+
+    beforeEach(() => {
+      nock(baseApiUrl)
+        .persist()
+        .post(`/clusters/${clusterName}${apiPath}`, { spec })
+        .reply(200, mockResponse);
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
+    it('Successfully handles authentication', async () => {
+      const response = await apiProxy.testAuth(clusterName);
+      expect(response).toEqual(mockResponse);
+    });
+
+    it.each([
+      [401, errorResponse401],
+      [500, errorResponse500],
+    ])(
+      'Successfully handles authentication with error status %d',
+      async (statusCode, errorResponse) => {
+        nock.cleanAll();
+        nock(baseApiUrl)
+          .persist()
+          .post(`/clusters/${clusterName}${apiPath}`, { spec })
+          .reply(statusCode, { message: errorResponse.error });
+
+        await expect(apiProxy.testAuth(clusterName)).rejects.toThrow(errorResponse.error);
+      }
+    );
+  });
 });
