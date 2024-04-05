@@ -655,4 +655,81 @@ describe('apiProxy', () => {
       });
     });
   });
+
+  describe('apply', () => {
+    beforeEach(() => {
+      nock(baseApiUrl)
+        .get(`/clusters/test-cluster/api/v1`)
+        .reply(200, {
+          kind: 'APIResourceList',
+          resources: [
+            {
+              kind: 'ConfigMap',
+              name: 'configmaps',
+              namespaced: true,
+            },
+          ],
+        });
+
+      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      jest.spyOn(console, 'warn').mockImplementation();
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+      jest.restoreAllMocks();
+    });
+
+    it('Successfully creates a new resource with POST', async () => {
+      nock(baseApiUrl)
+        .post(`/clusters/${clusterName}/api/v1/namespaces/${namespace}/configmaps`)
+        .reply(201, mockConfigMap);
+
+      const response = await apiProxy.apply(mockConfigMap);
+      expect(response).toEqual(mockConfigMap);
+    });
+
+    it('Successfully updates an existing resource with PUT', async () => {
+      nock(baseApiUrl)
+        .post(`/clusters/${clusterName}/api/v1/namespaces/${namespace}/configmaps`)
+        .reply(409, errorMessage);
+
+      nock(baseApiUrl)
+        .put(
+          `/clusters/${clusterName}/api/v1/namespaces/${namespace}/configmaps/${mockConfigMap.metadata.name}`
+        )
+        .reply(200, modifiedConfigMap);
+
+      const response = await apiProxy.apply(mockConfigMap);
+      expect(response).toEqual(modifiedConfigMap);
+    });
+
+    it('Successfully handles failing POST and PUT requests', async () => {
+      nock(baseApiUrl)
+        .post(`/clusters/${clusterName}/api/v1/namespaces/${namespace}/configmaps`)
+        .reply(409, errorMessage);
+
+      nock(baseApiUrl)
+        .put(
+          `/clusters/${clusterName}/api/v1/namespaces/${namespace}/configmaps/${mockConfigMap.metadata.name}`
+        )
+        .reply(500, errorResponse500);
+
+      await expect(apiProxy.apply(mockConfigMap)).rejects.toThrow(errorResponse500.error);
+    });
+
+    it('Successfully assigns default namespace if not given', async () => {
+      const configMapWithoutNamespace = {
+        ...mockConfigMap,
+        metadata: { ...mockConfigMap.metadata, namespace: undefined },
+      };
+
+      nock(baseApiUrl)
+        .post(`/clusters/${clusterName}/api/v1/namespaces/${namespace}/configmaps`)
+        .reply(201, mockConfigMap);
+
+      const response = await apiProxy.apply(configMapWithoutNamespace);
+      expect(response).toEqual(mockConfigMap);
+    });
+  });
 });
