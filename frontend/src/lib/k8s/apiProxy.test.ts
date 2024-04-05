@@ -987,4 +987,94 @@ describe('apiProxy', () => {
       });
     });
   });
+
+  describe('drainNode, drainNodeStatus', () => {
+    const nodeName = 'test-node';
+    const drainNodeErrorResponse = 'Something went wrong';
+
+    beforeEach(() => {
+      (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+        .fn()
+        .mockImplementation((url, options) => {
+          if (options.method === 'POST' && url.includes('drain-node')) {
+            if (options.body.includes(nodeName)) {
+              return Promise.resolve(
+                new Response(JSON.stringify(mockResponse), {
+                  status: 200,
+                  headers: { 'content-type': 'application/json' },
+                })
+              );
+            }
+          } else if (url.includes('drain-node-status')) {
+            return Promise.resolve(
+              new Response(JSON.stringify(mockResponse), {
+                status: 200,
+                headers: { 'content-type': 'application/json' },
+              })
+            );
+          } else {
+            return Promise.reject(new Error('Not Found'));
+          }
+        });
+    });
+
+    afterEach(() => {
+      jest.resetAllMocks();
+    });
+
+    describe('drainNode', () => {
+      it('Successfully drains a node', async () => {
+        const response = await apiProxy.drainNode(clusterName, nodeName);
+        expect(response).toEqual(mockResponse);
+        expect(fetch).toHaveBeenCalledWith(
+          expect.stringContaining('drain-node'),
+          expect.objectContaining({
+            method: 'POST',
+            headers: { map: expect.objectContaining({ 'content-type': 'application/json' }) },
+            body: JSON.stringify({ cluster: clusterName, nodeName }),
+          })
+        );
+      });
+
+      it('Successfully handles drainNode with error', async () => {
+        (global.fetch as jest.MockedFunction<typeof fetch>) = jest.fn().mockImplementation(() => {
+          return Promise.resolve({
+            ok: false,
+            json: () => Promise.resolve(drainNodeErrorResponse),
+          });
+        });
+
+        await expect(apiProxy.drainNode(clusterName, 'invalid-node')).rejects.toThrow(
+          drainNodeErrorResponse
+        );
+      });
+    });
+
+    describe('drainNodeStatus', () => {
+      it('Successfully gets drain node status', async () => {
+        const response = await apiProxy.drainNodeStatus(clusterName, nodeName);
+        expect(response).toEqual(mockResponse);
+        expect(fetch).toHaveBeenCalledWith(
+          expect.stringContaining('drain-node-status'),
+          expect.objectContaining({
+            method: 'GET',
+            headers: { map: expect.objectContaining({ 'content-type': 'application/json' }) },
+          })
+        );
+      });
+
+      it('Successfully handles drainNodeStatus with error', async () => {
+        (global.fetch as jest.MockedFunction<typeof fetch>) = jest.fn().mockImplementation(() => {
+          return Promise.resolve({
+            ok: false,
+            json: () => Promise.resolve(drainNodeErrorResponse),
+          });
+        });
+
+        await expect(apiProxy.drainNodeStatus(clusterName, 'invalid-node')).rejects.toThrow(
+          drainNodeErrorResponse
+        );
+      });
+    });
+  });
 });
