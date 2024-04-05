@@ -471,4 +471,124 @@ describe('apiProxy', () => {
         .catch(err => done(err));
     });
   });
+
+  describe('streamResults, streamResultsForCluster', () => {
+    let mockServer: WS;
+    let cb: jest.Mock;
+    let errCb: jest.Mock;
+
+    beforeEach(() => {
+      nock(baseApiUrl)
+        .get(`/clusters/${clusterName}${streamResultsUrl}`)
+        .query(true)
+        .reply(200, mockConfigMapList);
+
+      cb = jest.fn();
+      errCb = jest.fn();
+
+      mockServer = new WS(`${wsUrl}/clusters/${clusterName}${streamResultsUrl}`);
+      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      jest.spyOn(console, 'error').mockImplementation();
+      jest.spyOn(console, 'warn').mockImplementation();
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+      WS.clean();
+      jest.restoreAllMocks();
+    });
+
+    describe('streamResults', () => {
+      it('Successfully starts a stream and receives data', done => {
+        expect.assertions(2);
+
+        apiProxy.streamResults(streamResultsUrl, cb, errCb, {
+          watch: '1',
+        });
+
+        mockServer.on('connection', async (socket: any) => {
+          expect(cb).toHaveBeenNthCalledWith(1, []);
+
+          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+          expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+
+          done();
+        });
+      });
+    });
+
+    describe('streamResultsForCluster', () => {
+      it('Successfully handles ADDED, MODIFIED, and DELETED types', done => {
+        expect.assertions(4);
+
+        apiProxy.streamResultsForCluster(
+          streamResultsUrl,
+          { cb, errCb, cluster: clusterName },
+          { watch: '1' }
+        );
+
+        mockServer.on('connection', async (socket: any) => {
+          expect(cb).toHaveBeenNthCalledWith(1, []);
+
+          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+          expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+
+          socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+          expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
+
+          socket.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
+          expect(cb).toHaveBeenNthCalledWith(4, []);
+
+          done();
+        });
+      });
+
+      it('Successfully handles error messages', done => {
+        apiProxy.streamResultsForCluster(
+          streamResultsUrl,
+          { cb, errCb, cluster: clusterName },
+          { watch: '1' }
+        );
+
+        mockServer.on('connection', async (socket: any) => {
+          socket.send(JSON.stringify(errorMessage));
+          expect(console.error).toHaveBeenCalledWith(
+            'Error in update',
+            expect.objectContaining({
+              object: expect.objectContaining({
+                actionType: errorMessage.object.actionType,
+                message: errorMessage.object.message,
+                reason: errorMessage.object.reason,
+              }),
+              type: errorMessage.type,
+            })
+          );
+          done();
+        });
+      });
+
+      it('Successfully handles stream cancellation', done => {
+        expect.assertions(2);
+
+        apiProxy
+          .streamResultsForCluster(
+            streamResultsUrl,
+            { cb, errCb, cluster: clusterName },
+            { watch: '1' }
+          )
+          .then(cancel => {
+            mockServer.on('connection', async socket => {
+              socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+              expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+              cancel();
+              socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+
+              expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+              done();
+            });
+          })
+          .catch(err => done(err));
+      });
+    });
+  });
 });
