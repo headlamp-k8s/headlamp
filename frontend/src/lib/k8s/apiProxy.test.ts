@@ -732,4 +732,66 @@ describe('apiProxy', () => {
       expect(response).toEqual(mockConfigMap);
     });
   });
+
+  describe('metrics', () => {
+    let onMetrics: jest.Mock;
+    let onError: jest.Mock;
+
+    beforeEach(() => {
+      onMetrics = jest.fn();
+      onError = jest.fn();
+      jest.spyOn(console, 'warn').mockImplementation();
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+      jest.restoreAllMocks();
+    });
+
+    it('Successfully retrieves metrics', async () => {
+      expect.assertions(2);
+
+      const mockMetrics = [{ metricName: 'cpu_usage', value: '42' }];
+
+      nock(baseApiUrl)
+        .persist()
+        .get('/apis/metrics.k8s.io/v1/nodes')
+        .reply(200, { items: mockMetrics });
+
+      apiProxy.metrics('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+
+      // Sleep to avoid timing out
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(onMetrics).toHaveBeenCalledWith(mockMetrics);
+      expect(onError).not.toHaveBeenCalled();
+    });
+
+    it('Successfully handles metrics with error status 500', async () => {
+      expect.assertions(2);
+
+      nock(baseApiUrl).get('/apis/metrics.k8s.io/v1/nodes').reply(500, errorResponse500);
+
+      apiProxy.metrics('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+
+      // Sleep to avoid timing out
+      await new Promise(resolve => setTimeout(resolve, 100));
+      expect(onMetrics).not.toHaveBeenCalled();
+      expect(onError).toHaveBeenCalled();
+    });
+
+    it('Successfully handles metrics cancellation', async () => {
+      expect.assertions(2);
+
+      nock(baseApiUrl).get('/apis/metrics.k8s.io/v1/nodes').reply(200, { items: [] });
+
+      const cancel = await apiProxy.metrics('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+
+      cancel();
+
+      // Sleep to avoid timing out
+      await new Promise(resolve => setTimeout(resolve, 200));
+      expect(onMetrics).toHaveBeenNthCalledWith(1, []);
+      expect(onError).not.toHaveBeenCalled();
+    });
+  });
 });
