@@ -6,6 +6,7 @@
 import WS from 'jest-websocket-mock';
 import nock from 'nock';
 import * as auth from '../auth';
+import * as cluster from '../cluster';
 import * as apiProxy from './apiProxy';
 
 const baseApiUrl = 'http://localhost';
@@ -16,6 +17,15 @@ const clusterName = 'test-cluster';
 const namespace = 'default';
 const errorResponse401 = { error: 'Unauthorized', message: 'Unauthorized' };
 const errorResponse500 = { error: 'Internal Server Error', message: 'Unauthorized' };
+const streamResultsUrl = `/apis/v1/namespaces/${namespace}/configmaps`;
+const errorMessage = {
+  type: 'ERROR',
+  object: {
+    reason: 'InternalError',
+    message: 'Mock internal error message.',
+    actionType: 'ERROR',
+  },
+};
 
 const mockSingleResource: [group: string, version: string, resource: string] = [
   'groupA',
@@ -373,6 +383,92 @@ describe('apiProxy', () => {
         }
         await expect(promise).rejects.toThrow(errorResponse.error);
       });
+    });
+  });
+
+  describe('streamResult', () => {
+    let mockServer: WS;
+    let cb: jest.Mock;
+    let errCb: jest.Mock;
+
+    beforeEach(() => {
+      nock(baseApiUrl)
+        .get(`/clusters/${clusterName}${streamResultsUrl}/${mockConfigMap.metadata.name}`)
+        .query(true)
+        .reply(200, mockConfigMap);
+
+      cb = jest.fn();
+      errCb = jest.fn();
+
+      mockServer = new WS(`${wsUrl}/clusters/${clusterName}${streamResultsUrl}`);
+      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      jest.spyOn(console, 'error').mockImplementation();
+      jest.spyOn(console, 'warn').mockImplementation();
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+      WS.clean();
+      jest.restoreAllMocks();
+    });
+
+    it('Successfully handles ADDED, MODIFIED, and DELETED types', done => {
+      expect.assertions(4);
+
+      apiProxy.streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, {
+        watch: '1',
+      });
+
+      mockServer.on('connection', async (socket: any) => {
+        expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
+
+        socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+        expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
+
+        socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+        expect(cb).toHaveBeenNthCalledWith(3, modifiedConfigMap);
+
+        socket.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
+        expect(cb).toHaveBeenNthCalledWith(4, mockConfigMap);
+
+        done();
+      });
+    });
+
+    it('Successfully handles error messages', done => {
+      expect.assertions(2);
+
+      apiProxy.streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, {
+        watch: '1',
+      });
+
+      mockServer.on('connection', async (socket: any) => {
+        expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
+
+        socket.send(JSON.stringify(errorMessage));
+        expect(cb).toHaveBeenNthCalledWith(2, errorMessage.object);
+
+        done();
+      });
+    });
+
+    it('Successfully handles stream cancellation', done => {
+      expect.assertions(2);
+
+      apiProxy
+        .streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, { watch: '1' })
+        .then(cancel => {
+          mockServer.on('connection', async (socket: any) => {
+            socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+            expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
+            cancel();
+            socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+
+            expect(cb).toHaveBeenCalledTimes(2);
+            done();
+          });
+        })
+        .catch(err => done(err));
     });
   });
 });
