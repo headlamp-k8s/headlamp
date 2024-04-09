@@ -1,6 +1,8 @@
+import { KubeNode } from '../../lib/k8s/node';
+
 const creationTimestamp = new Date('2022-01-01').toISOString();
 
-export const NODE_DUMMY_DATA = [
+export const NODE_DUMMY_DATA: KubeNode[] = [
   {
     kind: 'Node',
     apiVersion: 'v1',
@@ -19,10 +21,15 @@ export const NODE_DUMMY_DATA = [
     },
     status: {
       addresses: [],
-      allocatable: {},
+      allocatable: {
+        cpu: '',
+        ephemeralStorage: '',
+        hugepages_1Gi: '',
+        hugepages_2Mi: '',
+        memory: '',
+        pods: '',
+      },
       conditions: [],
-      daemonEndpoints: {},
-      images: [],
       capacity: {
         cpu: '',
         ephemeralStorage: '',
@@ -43,7 +50,6 @@ export const NODE_DUMMY_DATA = [
         osImage: '',
         systemUUID: '',
       },
-      phase: '',
     },
   },
 ];

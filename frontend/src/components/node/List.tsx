@@ -4,6 +4,7 @@ import { HoverInfoLabel } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { UsageBarChart } from './Charts';
 import { NodeReadyLabel } from './Details';
+import { NodeTaintsLabel } from './utils';
 
 export default function NodeList() {
   const [nodeMetrics, metricsError] = Node.useMetrics();
@@ -20,12 +21,6 @@ export default function NodeList() {
       resourceClass={Node}
       columns={[
         'name',
-        {
-          id: 'ready',
-          label: t('translation|Ready'),
-          gridTemplate: 'minmax(100px, .5fr)',
-          getter: node => <NodeReadyLabel node={node} />,
-        },
         {
           id: 'cpu',
           label: t('CPU'),
@@ -57,10 +52,26 @@ export default function NodeList() {
           ),
         },
         {
+          id: 'ready',
+          label: t('translation|Ready'),
+          gridTemplate: 'minmax(100px, .3fr)',
+          getter: node => <NodeReadyLabel node={node} />,
+        },
+        {
+          id: 'taints',
+          label: t('translation|Taints'),
+          getter: (item: Node) => <NodeTaintsLabel node={item} />,
+        },
+        {
           id: 'roles',
           label: t('Roles'),
-          getter: node => node.metadata.labels['kubernetes.io/role'],
-          gridTemplate: 'minmax(120px, .5fr)',
+          gridTemplate: 'minmax(100px, .5fr)',
+          getter: node => {
+            return Object.keys(node.metadata.labels)
+              .filter((t: String) => t.startsWith('node-role.kubernetes.io/'))
+              .map(t => t.replace('node-role.kubernetes.io/', ''))
+              .join(',');
+          },
         },
         {
           id: 'internalIP',
