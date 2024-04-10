@@ -31,7 +31,8 @@ FROM --platform=${BUILDPLATFORM} node:18 as frontend-build
 
 # We need .git and app/ in order to get the version and git version for the frontend/.env file
 # that's generated when building the frontend.
-COPY ./.git /headlamp/.git
+COPY .git/ ./headlamp/.git/
+
 COPY app/package.json /headlamp/app/package.json
 
 # Keep npm install separated so source changes don't trigger install
