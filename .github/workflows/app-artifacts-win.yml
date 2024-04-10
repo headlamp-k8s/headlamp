@@ -14,6 +14,9 @@ on:
 
 jobs:
   build-windows:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v4
@@ -41,11 +44,17 @@ jobs:
       uses: crazy-max/ghaction-chocolatey@v1
       with:
         args: install make
+    - name: Azure login
+      if: ${{ inputs.signBinaries }}
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.WINDOWS_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZ_TENANT_ID }}
+        subscription-id: ${{ secrets.AZ_SUBSCRIPTION_ID }}
     - name: Fetch certificates
       if: ${{ inputs.signBinaries }}
       shell: pwsh
       run: |
-        az login --service-principal -u ${{ secrets.WINDOWS_CLIENT_ID }} -p ${{ secrets.AZ_LOGIN_PASS }}  --tenant 72f988bf-86f1-41af-91ab-2d7cd011db47
         az keyvault secret download --subscription ${{ secrets.AZ_SUBSCRIPTION_ID }} --vault-name headlamp --name HeadlampAuthCert --file c:\HeadlampAuthCert.pfx --encoding base64
         az keyvault secret download --subscription ${{ secrets.AZ_SUBSCRIPTION_ID }} --vault-name headlamp --name ESRPHeadlampReqCert --file c:\HeadlampReqCert.pfx --encoding base64
     - name: Set up certificates
