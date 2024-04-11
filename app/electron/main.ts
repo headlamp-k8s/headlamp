@@ -1,5 +1,12 @@
 import 'regenerator-runtime/runtime';
-import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
+import {
+  ChildProcess,
+  ChildProcessWithoutNullStreams,
+  execSync,
+  fork,
+  spawn,
+  StdioOptions,
+} from 'child_process';
 import { randomBytes } from 'crypto';
 import dotenv from 'dotenv';
 import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
@@ -661,7 +668,11 @@ function startElecron() {
        * Options to pass to the command.
        * See https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
        */
-      options: {};
+      options: {
+        env?: { [key: string]: any };
+        stdio?: StdioOptions;
+        silent?: boolean;
+      };
     }
 
     /**
@@ -675,8 +686,9 @@ function startElecron() {
      * @param eventData - The data sent from the renderer process.
      */
     function handleRunCommand(event: IpcMainEvent, eventData: CommandData): void {
+      console.log('command:', eventData.command, 'args:', eventData.args);
       // Only allow "minikube", and "az" commands
-      const validCommands = ['minikube', 'az'];
+      const validCommands = ['minikube', 'az', 'node', 'which'];
       if (!validCommands.includes(eventData.command)) {
         console.error(
           `Invalid command: ${eventData.command}, only valid commands are: ${JSON.stringify(
@@ -686,23 +698,59 @@ function startElecron() {
         return;
       }
 
-      const child: ChildProcessWithoutNullStreams = spawn(
-        eventData.command,
-        eventData.args,
-        eventData.options
-      );
+      if (!eventData.options) {
+        eventData.options = {};
+      }
 
-      child.stdout.on('data', (data: string | Buffer) => {
-        event.sender.send('command-stdout', eventData.id, data.toString());
-      });
+      // if command begins with node use fork
+      if (eventData.command === 'node') {
+        console.log('command is node', eventData);
+        // add ELECTRON_RUN_AS_NODE: 1 to options.env
+        if (!eventData.options?.env) {
+          eventData.options.env = {};
+        }
+        eventData.options.env['ELECTRON_RUN_AS_NODE'] = '1';
+        // eventData.options.stdio = "pipe";
+        eventData.options.silent = true;
+        const child: ChildProcess = fork(
+          eventData.args[0],
+          eventData.args.slice(1),
+          eventData.options
+        );
 
-      child.stderr.on('data', (data: string | Buffer) => {
-        event.sender.send('command-stderr', eventData.id, data.toString());
-      });
+        if (child.stdout !== null) {
+          child.stdout?.on('data', (data: string | Buffer) => {
+            event.sender.send('command-stdout', eventData.id, data.toString());
+          });
+        }
+        if (child.stderr !== null) {
+          child.stderr.on('data', (data: string | Buffer) => {
+            event.sender.send('command-stderr', eventData.id, data.toString());
+          });
+        }
+        child.on('exit', (code: number | null) => {
+          console.log('fork exit', code);
+          event.sender.send('command-exit', eventData.id, code);
+        });
+      } else {
+        const child = spawn(eventData.command, eventData.args, eventData.options);
 
-      child.on('exit', (code: number | null) => {
-        event.sender.send('command-exit', eventData.id, code);
-      });
+        if (child.stdout !== null) {
+          child.stdout.on('data', (data: string | Buffer) => {
+            event.sender.send('command-stdout', eventData.id, data.toString());
+          });
+        }
+
+        if (child.stderr !== null) {
+          child.stderr.on('data', (data: string | Buffer) => {
+            event.sender.send('command-stderr', eventData.id, data.toString());
+          });
+        }
+
+        child.on('exit', (code: number | null) => {
+          event.sender.send('command-exit', eventData.id, code);
+        });
+      }
     }
 
     ipcMain.on('run-command', handleRunCommand);
