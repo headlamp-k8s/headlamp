@@ -61,6 +61,19 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
     return this.getValue('message');
   }
 
+  get source() {
+    return this.getValue('source');
+  }
+
+  get count() {
+    const series = this.getValue('series');
+    if (!!series) {
+      return series.count;
+    }
+
+    return this.getValue('count');
+  }
+
   get lastOccurrence() {
     const series = this.getValue('series');
     if (!!series) {
@@ -78,6 +91,21 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
     }
 
     const firstTimestamp = this.getValue('firstTimestamp');
+    if (!!firstTimestamp) {
+      return firstTimestamp;
+    }
+
+    const creationTimestamp = this.metadata.creationTimestamp;
+    return creationTimestamp;
+  }
+
+  get firstOccurrence() {
+    const eventTime = this.getValue('eventTime');
+    if (!!eventTime) {
+      return eventTime;
+    }
+
+    const firstTimestamp = this.firstTimestamp;
     if (!!firstTimestamp) {
       return firstTimestamp;
     }
