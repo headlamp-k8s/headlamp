@@ -922,17 +922,17 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     >
-                      Normal
+                      Warning
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     >
-                      Created
+                      FailedGetResourceMetric
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     >
-                      kubelet
+                      horizontal-pod-autoscaler
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -942,23 +942,16 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                       >
                         <label
                           class="makeStyles-fullText"
-                          id=""
+                          id="abc123456"
                         >
-                          Created
+                          failed to get cpu utilization: missing request for cpu
                         </label>
                       </div>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     >
-                      <p
-                        aria-label="2021-03-01T00:00:00.000Z"
-                        class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
-                        data-mui-internal-clone-element="true"
-                      >
-                        3mo
-                        <span />
-                      </p>
+                      3 months (10 times over 3 months)
                     </td>
                   </tr>
                 </tbody>
