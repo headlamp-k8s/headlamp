@@ -70,6 +70,66 @@ Event.useList = () => {
       },
       type: 'Warning',
     },
+    {
+      apiVersion: 'v1',
+      kind: 'Event',
+      metadata: {
+        name: 'nginx-deployment-12345',
+        namespace: 'default',
+        creationTimestamp: '2024-02-12T20:07:10Z',
+        uid: 'b123456',
+        resourceVersion: '1',
+      },
+      involvedObject: {
+        kind: 'Pod',
+        name: 'nginx-deployment-1234567890-abcde',
+        namespace: 'default',
+        uid: 'b1234',
+      },
+      reason: 'FailedGetResourceMetric',
+      message: 'failed to get cpu utilization: missing request for cpu',
+      source: {
+        component: 'horizontal-pod-autoscaler',
+      },
+      firstTimestamp: '2024-02-13T14:42:17Z',
+      lastTimestamp: '2024-02-13T14:42:17Z',
+      type: 'Warning',
+      series: {
+        count: 10,
+        lastObservedTime: '2024-02-13T14:42:17Z',
+      },
+    },
+    {
+      apiVersion: 'v1',
+      kind: 'Event',
+      metadata: {
+        name: 'nginx-deployment-12346',
+        namespace: 'default',
+        creationTimestamp: '2024-02-12T20:07:10Z',
+        uid: 'abc123456',
+        resourceVersion: '1',
+      },
+      involvedObject: {
+        kind: 'Pod',
+        name: 'nginx-deployment-abcd-1234567890',
+        namespace: 'default',
+        uid: 'b1234',
+      },
+      reason: 'FailedGetResourceMetric',
+      message: 'failed to get cpu utilization: missing request for cpu',
+      source: {
+        component: 'horizontal-pod-autoscaler',
+      },
+      firstTimestamp: null,
+      lastTimestamp: null,
+      type: 'Warning',
+      series: {
+        count: 10,
+        lastObservedTime: '2024-02-13T15:42:17Z',
+      },
+      reportingComponent: '',
+      reportingInstance: '',
+    },
   ].map((data: any) => new Event(data));
   return [objList, null, () => {}, () => {}] as any;
 };
