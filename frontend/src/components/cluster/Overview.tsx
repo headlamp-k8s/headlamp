@@ -185,12 +185,7 @@ function EventsSection() {
         },
         {
           label: t('Last Seen'),
-          getter: event => (
-            <DateLabel
-              date={event.lastTimestamp || event.metadata.creationTimestamp}
-              format="mini"
-            />
-          ),
+          getter: event => <DateLabel date={event.lastOccurrence} format="mini" />,
           cellProps: { style: { textAlign: 'right' } },
           gridTemplate: 'minmax(150px, 0.5fr)',
           sort: (e1: Event, e2: Event) => {
