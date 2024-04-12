@@ -12,6 +12,11 @@ This package is published to the npm package index separately from Headlamp.
 ```
 headlamp-plugin --help
 
+  headlamp-plugin.js list                   List all installed plugins
+  headlamp-plugin.js install [URL]          Install a plugin from artifacthub
+                                            URL
+  headlamp-plugin.js uninstall [name]       Uninstall a plugin by name
+  headlamp-plugin.js update [name]          Update a plugin by name
   headlamp-plugin.js build [package]        Build the plugin, or folder of
                                             plugins. <package> defaults to
                                             current working directory.
@@ -40,11 +45,12 @@ headlamp-plugin --help
                                             directory. Can also be a folder of
                                             packages.
   headlamp-plugin.js upgrade [package]      Upgrade the plugin to latest
-  <skip-package-updates>                    headlamp-plugin; audits, formats,
-  <headlamp-plugin-version>                 lints and type checks.<package>
-                                            defaults to current working
-                                            directory. Can also be a folder of
-                                            packages.
+                                            headlamp-plugin; upgrades
+                                            headlamp-plugin and audits packages,
+                                            formats, lints, type
+                                            checks.<package> defaults to current
+                                            working directory. Can also be a
+                                            folder of packages.
   headlamp-plugin.js test [package]         Test. <package> defaults to current
                                             working directory. Can also be a
                                             folder of packages.

@@ -13,6 +13,7 @@ const child_process = require('child_process');
 const validate = require('validate-npm-package-name');
 const yargs = require('yargs/yargs');
 const headlampPluginPkg = require('../package.json');
+const { addCommands } = require('../plugin-management-utils.js');
 
 /**
  * Creates a new plugin folder.
@@ -977,7 +978,9 @@ function test(packageFolder) {
 const headlampPluginBin = fs.realpathSync(process.argv[1]);
 console.log('headlampPluginBin path:', headlampPluginBin);
 
-yargs(process.argv.slice(2))
+const yargsInstance = yargs(process.argv.slice(2));
+addCommands(yargsInstance);
+yargsInstance
   .command(
     'build [package]',
     'Build the plugin, or folder of plugins. <package> defaults to current working directory.',
