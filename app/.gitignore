@@ -8,3 +8,4 @@
 /electron/preload.js
 /electron/windowSize.js
 electron/windowSize.test.js
+plugin-management.js
