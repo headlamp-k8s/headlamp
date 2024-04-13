@@ -8,12 +8,10 @@ import {
   IconButton,
   ListItem,
   Popover,
-  Theme,
   Tooltip,
   Typography,
   useTheme,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -34,48 +32,12 @@ import {
   updateNotifications,
 } from './notificationsSlice';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  notificationItem: {
-    '&.MuiMenuItem-root': {
-      borderBottom: `1px solid ${theme.palette.notificationBorderColor}`,
-      padding: '1rem',
-    },
-  },
-  notificationMessage: {
-    '&': {
-      wordBreak: 'break-word',
-      whiteSpace: 'normal',
-    },
-  },
-  root: {
-    '& .MuiPaper-root': {
-      width: '30vw',
-      minWidth: '300px',
-      maxHeight: '70vh',
-    },
-  },
-  errorItem: {
-    '&': {
-      color: theme.palette.error,
-    },
-  },
-  notificationsBox: {
-    borderBottom: `1px solid ${theme.palette.notificationBorderColor}`,
-    padding: theme.spacing(1),
-  },
-  notificationButton: {
-    textTransform: 'none',
-    paddingTop: 0,
-  },
-}));
-
 function NotificationsList(props: {
   notifications: NotificationIface[];
   clickEventHandler: (notification?: NotificationIface, closeMenu?: boolean) => void;
 }) {
   const { notifications, clickEventHandler } = props;
   const { t } = useTranslation();
-  const classes = useStyles();
   const history = useHistory();
   const theme = useTheme();
   const config = useTypedSelector(state => state.config);
@@ -108,7 +70,12 @@ function NotificationsList(props: {
       <ListItem
         button
         key={`${notification}__${index}`}
-        className={classes.notificationItem}
+        sx={{
+          '&.MuiMenuItem-root': {
+            borderBottom: `1px solid ${theme.palette.notificationBorderColor}`,
+            padding: '1rem',
+          },
+        }}
         style={style}
       >
         <Grid
@@ -173,7 +140,6 @@ function NotificationsList(props: {
 }
 
 export default function Notifications() {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const notifications = useTypedSelector(state => state.notifications.notifications);
   const dispatch = useDispatch();
@@ -307,7 +273,13 @@ export default function Notifications() {
         keepMounted={false}
         open={show}
         onClose={handleClose}
-        className={classes.root}
+        sx={{
+          '& .MuiPaper-root': {
+            width: '30vw',
+            minWidth: '300px',
+            maxHeight: '70vh',
+          },
+        }}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
@@ -318,7 +290,12 @@ export default function Notifications() {
         }}
         id={notificationMenuId}
       >
-        <Box className={classes.notificationsBox}>
+        <Box
+          sx={theme => ({
+            borderBottom: `1px solid ${theme.palette.notificationBorderColor}`,
+            padding: theme.spacing(1),
+          })}
+        >
           <Grid container direction="row" justifyContent="space-between" alignItems="center">
             <Grid item>
               <Box mx={1}>
@@ -329,7 +306,10 @@ export default function Notifications() {
             </Grid>
             <Grid item>
               <Button
-                className={classes.notificationButton}
+                sx={{
+                  textTransform: 'none',
+                  paddingTop: 0,
+                }}
                 color="primary"
                 onClick={handleNotificationMarkAllRead}
                 disabled={areAllNotificationsInDeleteState || !areThereUnseenNotifications}
@@ -337,7 +317,10 @@ export default function Notifications() {
                 {t('translation|Mark all as read')}
               </Button>
               <Button
-                className={classes.notificationButton}
+                sx={{
+                  textTransform: 'none',
+                  paddingTop: 0,
+                }}
                 color="primary"
                 onClick={handleNotificationClear}
                 disabled={areAllNotificationsInDeleteState}
