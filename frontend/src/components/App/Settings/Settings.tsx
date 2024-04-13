@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -13,17 +12,7 @@ import { useSettings } from './hook';
 import NumRowsInput from './NumRowsInput';
 import ThemeChangeButton from './ThemeChangeButton';
 
-const useStyles = makeStyles(theme => ({
-  valueCol: {
-    width: '60%',
-    [theme.breakpoints.down('sm')]: {
-      width: 'unset',
-    },
-  },
-}));
-
 export default function Settings() {
-  const classes = useStyles();
   const { t } = useTranslation(['translation']);
   const settingsObj = useSettings();
   const storedTimezone = settingsObj.timezone;
@@ -59,7 +48,14 @@ export default function Settings() {
       backLink
     >
       <NameValueTable
-        valueCellProps={{ className: classes.valueCol }}
+        valueCellProps={{
+          sx: theme => ({
+            width: '60%',
+            [theme.breakpoints.down('sm')]: {
+              width: 'unset',
+            },
+          }),
+        }}
         rows={[
           {
             name: t('translation|Language'),

@@ -81,7 +81,7 @@ exports[`Storyshots Settings General 1`] = `
           Language
         </dt>
         <dd
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell makeStyles-valueCol css-r0umuq-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-9f9ori-MuiGrid-root"
         >
           <div
             class="MuiFormControl-root css-k2e4wk-MuiFormControl-root"
@@ -128,7 +128,7 @@ exports[`Storyshots Settings General 1`] = `
           Theme
         </dt>
         <dd
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell makeStyles-valueCol css-r0umuq-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-9f9ori-MuiGrid-root"
         >
           <div
             class="MuiButtonGroup-root MuiButtonGroup-outlined css-1b41vff-MuiButtonGroup-root"
@@ -164,7 +164,7 @@ exports[`Storyshots Settings General 1`] = `
           Number of rows for tables
         </dt>
         <dd
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell makeStyles-valueCol css-r0umuq-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-9f9ori-MuiGrid-root"
         >
           <div
             class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
@@ -210,7 +210,7 @@ exports[`Storyshots Settings General 1`] = `
           Timezone to display for dates
         </dt>
         <dd
-          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell makeStyles-valueCol css-r0umuq-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-9f9ori-MuiGrid-root"
         >
           <div
             class="MuiBox-root css-10rqxfs"
