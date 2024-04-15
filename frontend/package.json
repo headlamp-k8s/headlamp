@@ -153,6 +153,12 @@
     ],
     "../plugins/examples/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
+    ],
+    "../e2e-tests/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --config package.json --write"
+    ],
+    "../e2e-tests/**/*.{ts,tsx}": [
+      "eslint -c package.json --fix --resolve-plugins-relative-to ."
     ]
   },
   "eslintConfig": {
