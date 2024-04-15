@@ -1,9 +1,9 @@
-import { Page, expect, } from "@playwright/test";
+import { expect,Page,  } from "@playwright/test";
 
 export class podsPage {
     constructor(private page: Page) { }
 
-    async navigateToPods(baseURL?: string) {
+    async navigateToPods() {
 
         await this.page.click('span:has-text("Workloads")');
         await this.page.waitForLoadState("load");
