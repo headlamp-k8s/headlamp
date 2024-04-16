@@ -10,55 +10,6 @@ import { ISearchOptions, SearchAddon } from 'xterm-addon-search';
 import ActionButton from './ActionButton';
 import { Dialog, DialogProps } from './Dialog';
 
-interface styleProps {
-  isFullScreen: boolean;
-}
-
-const useStyle = makeStyles(theme => ({
-  dialogContent: {
-    height: '80%',
-    minHeight: '80%',
-    display: 'flex',
-    flexDirection: 'column',
-    '& .xterm ': {
-      height: '100vh', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
-      '& .xterm-viewport': {
-        width: 'initial !important', // BugFix: https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440
-      },
-    },
-    '& #xterm-container': {
-      overflow: 'hidden',
-      width: '100%',
-      height: '100%',
-      '& .terminal.xterm': {
-        padding: 10,
-      },
-    },
-  },
-  logBox: {
-    paddingTop: theme.spacing(1),
-    flex: 1,
-    width: '100%',
-    overflow: 'hidden',
-    display: 'flex',
-    flexDirection: 'column-reverse',
-    position: 'relative',
-  },
-  terminalCode: {
-    color: theme.palette.common.white,
-  },
-  terminal: {
-    backgroundColor: theme.palette.common.black,
-    height: ({ isFullScreen }: styleProps) => (isFullScreen ? '100vh' : '500px'),
-    width: '100%',
-    overflow: 'scroll',
-    marginTop: theme.spacing(3),
-  },
-  containerFormControl: {
-    minWidth: '11rem',
-  },
-}));
-
 export interface LogViewerProps extends DialogProps {
   logs: string[];
   title?: string;
@@ -90,8 +41,6 @@ export function LogViewer(props: LogViewerProps) {
     showReconnectButton = false,
     ...other
   } = props;
-  const [isFullScreen, setIsFullScreen] = React.useState(false);
-  const classes = useStyle({ isFullScreen });
   const { t } = useTranslation();
   const xtermRef = React.useRef<XTerminal | null>(null);
   const fitAddonRef = React.useRef<any>(null);
@@ -182,14 +131,29 @@ export function LogViewer(props: LogViewerProps) {
   }
 
   return (
-    <Dialog
-      title={title}
-      withFullScreen
-      onFullScreenToggled={setIsFullScreen}
-      onClose={onClose}
-      {...other}
-    >
-      <DialogContent className={classes.dialogContent}>
+    <Dialog title={title} withFullScreen onClose={onClose} {...other}>
+      <DialogContent
+        sx={{
+          height: '80%',
+          minHeight: '80%',
+          display: 'flex',
+          flexDirection: 'column',
+          '& .xterm ': {
+            height: '100vh', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
+            '& .xterm-viewport': {
+              width: 'initial !important', // BugFix: https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440
+            },
+          },
+          '& #xterm-container': {
+            overflow: 'hidden',
+            width: '100%',
+            height: '100%',
+            '& .terminal.xterm': {
+              padding: 10,
+            },
+          },
+        }}
+      >
         <Grid container justifyContent="space-between" alignItems="center" wrap="nowrap">
           <Grid item container spacing={1}>
             {topActions.map((component, i) => (
@@ -220,7 +184,17 @@ export function LogViewer(props: LogViewerProps) {
             />
           </Grid>
         </Grid>
-        <Box className={classes.logBox}>
+        <Box
+          sx={theme => ({
+            paddingTop: theme.spacing(1),
+            flex: 1,
+            width: '100%',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column-reverse',
+            position: 'relative',
+          })}
+        >
           {showReconnectButton && (
             <Button onClick={handleReconnect} color="info" variant="contained">
               Reconnect
