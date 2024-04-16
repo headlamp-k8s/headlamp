@@ -19,7 +19,7 @@ npm run start
 There's some basic code inside src/index.tsx.
 
 Now run Headlamp (the desktop app or the
-[development version](../index.md##run-the-code)),
+[development version](../_index.md#run-the-code)),
 and your plugin should be loaded.
 
 Using the above commands means that Headlamp will **automatically reload**
