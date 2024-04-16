@@ -955,7 +955,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1053,7 +1053,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1151,7 +1151,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1249,7 +1249,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1347,7 +1347,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo

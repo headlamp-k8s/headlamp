@@ -255,7 +255,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
                     k8s-app: kube-dns
@@ -270,7 +270,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
                     Allowed disruptions
@@ -279,7 +279,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                   </span>
                   <br />
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
                     Current
@@ -288,7 +288,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                   </span>
                   <br />
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
                     Desired
@@ -297,7 +297,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                   </span>
                   <br />
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
                     Total

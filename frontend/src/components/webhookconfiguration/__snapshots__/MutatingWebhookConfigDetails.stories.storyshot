@@ -630,7 +630,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                     >
                       <p
                         aria-label="2021-03-01T00:00:00.000Z"
-                        class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                         data-mui-internal-clone-element="true"
                       >
                         3mo
@@ -1277,7 +1277,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                     >
                       <p
                         aria-label="2021-03-01T00:00:00.000Z"
-                        class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                         data-mui-internal-clone-element="true"
                       >
                         3mo

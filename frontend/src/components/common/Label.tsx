@@ -2,25 +2,9 @@ import { Icon, IconProps } from '@iconify/react';
 import Grid from '@mui/material/Grid';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
 import React from 'react';
 import { DateFormatOptions, localeDate, timeAgo } from '../../lib/util';
 import { LightTooltip, TooltipIcon } from './Tooltip';
-
-const useStyles = makeStyles(theme => ({
-  statusLabel: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.typography.pxToRem(14),
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-    display: 'inline-block',
-    textAlign: 'center',
-    alignItems: 'center',
-  },
-}));
 
 export interface InfoLabelProps {
   name: string;
@@ -87,7 +71,6 @@ export interface StatusLabelProps {
 
 export function StatusLabel(props: StatusLabelProps) {
   const { status, sx, className = '', ...other } = props;
-  const classes = useStyles();
   const theme = useTheme();
 
   const statuses = ['success', 'warning', 'error'];
@@ -100,8 +83,19 @@ export function StatusLabel(props: StatusLabelProps) {
 
   return (
     <Typography
-      sx={sx}
-      className={clsx(classes.statusLabel, className)}
+      sx={{
+        color: theme.palette.primary.contrastText,
+        fontSize: theme.typography.pxToRem(14),
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1),
+        paddingTop: theme.spacing(0.5),
+        paddingBottom: theme.spacing(0.5),
+        display: 'inline-block',
+        textAlign: 'center',
+        alignItems: 'center',
+        ...sx,
+      }}
+      className={className}
       style={{
         backgroundColor: bgColor,
         color,
@@ -118,18 +112,6 @@ export function makeStatusLabel(label: string, successStatusName: string) {
   );
 }
 
-const useHeaderLabelStyles = makeStyles(() => ({
-  value: {
-    fontSize: '3rem;',
-  },
-  label: {
-    textAlign: 'center',
-    fontSize: '1.2em',
-    flexGrow: 1,
-    fontWeight: 'bold',
-  },
-}));
-
 export interface HeaderLabelProps {
   label: string;
   value: string;
@@ -137,20 +119,33 @@ export interface HeaderLabelProps {
 }
 
 export function HeaderLabel(props: HeaderLabelProps) {
-  const classes = useHeaderLabelStyles();
   const { value, label, tooltip } = props;
 
   return (
     <Grid container alignItems="center" direction="column">
       <Grid item>
-        <Typography className={classes.label} display="inline">
+        <Typography
+          sx={{
+            textAlign: 'center',
+            fontSize: '1.2em',
+            flexGrow: 1,
+            fontWeight: 'bold',
+          }}
+          display="inline"
+        >
           {label}
         </Typography>
         {!!tooltip && <TooltipIcon>{tooltip}</TooltipIcon>}
       </Grid>
       <Grid item container alignItems="center" justifyContent="center">
         <Grid item>
-          <Typography className={classes.value}>{value}</Typography>
+          <Typography
+            sx={{
+              fontSize: '3rem;',
+            }}
+          >
+            {value}
+          </Typography>
         </Grid>
       </Grid>
     </Grid>
@@ -166,35 +161,30 @@ export interface HoverInfoLabelProps {
   iconPosition?: 'start' | 'end';
 }
 
-const useHoverInfoLabelStyles = makeStyles({
-  display: {
-    display: 'inline-flex',
-  },
-  noWrap: {
-    whiteSpace: 'nowrap',
-  },
-  icon: {
-    marginRight: '0.2rem',
-    marginLeft: '0.2rem',
-    alignSelf: 'center',
-  },
-});
-
 export function HoverInfoLabel(props: HoverInfoLabelProps) {
   const { label, hoverInfo, icon = null, iconProps = {}, labelProps, iconPosition = 'end' } = props;
-  const classes = useHoverInfoLabelStyles();
   const labelFirst = iconPosition === 'end';
 
   return (
     <LightTooltip title={hoverInfo || ''}>
-      <Typography className={clsx(classes.noWrap, classes.display)} {...labelProps}>
+      <Typography
+        sx={{
+          display: 'inline-flex',
+          whiteSpace: 'nowrap',
+        }}
+        {...labelProps}
+      >
         {labelFirst && label}
         {hoverInfo && (
           <Icon
             icon={icon || 'mdi:information-outline'}
             width="1rem"
             height="1rem"
-            className={classes.icon}
+            style={{
+              marginRight: '0.2rem',
+              marginLeft: '0.2rem',
+              alignSelf: 'center',
+            }}
             {...iconProps}
           />
         )}

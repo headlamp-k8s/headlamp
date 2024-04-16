@@ -983,7 +983,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     data-index="3"
                   >
                     <span
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                       style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                     >
                       Yes
@@ -1027,7 +1027,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                   >
                     <p
                       aria-label="2023-07-13T23:28:40.000Z"
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                       data-mui-internal-clone-element="true"
                     >
                       3mo
@@ -1073,7 +1073,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     data-index="3"
                   >
                     <span
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                       style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                     >
                       Yes
@@ -1117,7 +1117,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                   >
                     <p
                       aria-label="2023-06-30T11:49:44.000Z"
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                       data-mui-internal-clone-element="true"
                     >
                       3mo

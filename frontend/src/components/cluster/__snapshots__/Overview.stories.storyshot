@@ -1237,7 +1237,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <span
                             aria-label="FailedGetResourceMetric"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1tmhfi1-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                             style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                           >
@@ -1265,7 +1265,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <p
                             aria-label="2024-02-13T15:42:17.000Z"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                           >
                             3mo
@@ -1311,7 +1311,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <span
                             aria-label="FailedGetResourceMetric"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1tmhfi1-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                             style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                           >
@@ -1339,7 +1339,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <p
                             aria-label="2024-02-13T14:42:17.000Z"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                           >
                             3mo
@@ -1385,7 +1385,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <span
                             aria-label="FailedGetResourceMetric"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1tmhfi1-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                             style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                           >
@@ -1413,7 +1413,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <p
                             aria-label="2023-07-13T14:42:17.000Z"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                           >
                             3mo

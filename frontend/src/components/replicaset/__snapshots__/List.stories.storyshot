@@ -1035,7 +1035,7 @@ pod-template-hash=b123456
                   >
                     <p
                       aria-label="2023-07-07T05:36:02.000Z"
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                       data-mui-internal-clone-element="true"
                     >
                       3mo
@@ -1131,7 +1131,7 @@ pod-template-hash=a123456
                   >
                     <p
                       aria-label="2023-05-25T05:15:05.000Z"
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                       data-mui-internal-clone-element="true"
                     >
                       3mo

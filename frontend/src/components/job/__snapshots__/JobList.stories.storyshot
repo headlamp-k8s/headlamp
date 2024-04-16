@@ -907,7 +907,7 @@ exports[`Storyshots Job/List Items 1`] = `
                     data-mui-internal-clone-element="true"
                   >
                     <span
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                       style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                     >
                       Complete
@@ -957,7 +957,7 @@ exports[`Storyshots Job/List Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1007,7 +1007,7 @@ exports[`Storyshots Job/List Items 1`] = `
                     data-mui-internal-clone-element="true"
                   >
                     <span
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                       style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                     >
                       Failed
@@ -1057,7 +1057,7 @@ exports[`Storyshots Job/List Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1107,7 +1107,7 @@ exports[`Storyshots Job/List Items 1`] = `
                     data-mui-internal-clone-element="true"
                   >
                     <span
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                       style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                     >
                       Suspended
@@ -1157,7 +1157,7 @@ exports[`Storyshots Job/List Items 1`] = `
                 >
                   <p
                     aria-label="2020-01-01T00:00:00.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo

@@ -3,7 +3,7 @@
 exports[`Storyshots Label/StatusLabel Error 1`] = `
 <div>
   <span
-    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
     style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
   >
     error
@@ -14,7 +14,7 @@ exports[`Storyshots Label/StatusLabel Error 1`] = `
 exports[`Storyshots Label/StatusLabel Success 1`] = `
 <div>
   <span
-    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
   >
     success
@@ -25,7 +25,7 @@ exports[`Storyshots Label/StatusLabel Success 1`] = `
 exports[`Storyshots Label/StatusLabel Warning 1`] = `
 <div>
   <span
-    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
     style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
   >
     warning

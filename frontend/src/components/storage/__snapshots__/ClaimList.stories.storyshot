@@ -1031,7 +1031,7 @@ exports[`Storyshots PersistentVolumeClaim/ListView Items 1`] = `
                   data-index="7"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Bound
@@ -1043,7 +1043,7 @@ exports[`Storyshots PersistentVolumeClaim/ListView Items 1`] = `
                 >
                   <p
                     aria-label="2023-04-27T20:31:27.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1129,7 +1129,7 @@ exports[`Storyshots PersistentVolumeClaim/ListView Items 1`] = `
                   data-index="7"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Bound
@@ -1141,7 +1141,7 @@ exports[`Storyshots PersistentVolumeClaim/ListView Items 1`] = `
                 >
                   <p
                     aria-label="2023-04-27T20:31:27.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
@@ -1216,7 +1216,7 @@ exports[`Storyshots PersistentVolumeClaim/ListView Items 1`] = `
                   data-index="7"
                 >
                   <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Bound
@@ -1228,7 +1228,7 @@ exports[`Storyshots PersistentVolumeClaim/ListView Items 1`] = `
                 >
                   <p
                     aria-label="2023-04-27T20:31:27.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo
