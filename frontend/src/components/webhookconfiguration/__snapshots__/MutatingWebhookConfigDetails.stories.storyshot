@@ -148,7 +148,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                         class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
                       >
                         <p
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                         >
                           admissions.enforcer/disabled: true
                         </p>
@@ -367,12 +367,12 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook: true
                 </p>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook in (true)
                 </p>
@@ -386,12 +386,12 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook: true
                 </p>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook in (true)
                 </p>
@@ -798,7 +798,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                         class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
                       >
                         <p
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                         >
                           admissions.enforcer/disabled: true
                         </p>
@@ -1014,12 +1014,12 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook: true
                 </p>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook in (true)
                 </p>
@@ -1033,12 +1033,12 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook: true
                 </p>
                 <p
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1os2m0i-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
                 >
                   validating-webhook in (true)
                 </p>

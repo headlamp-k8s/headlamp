@@ -3,33 +3,31 @@ import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResourceClasses } from '../../../lib/k8s';
 import { KubeObject, KubeObjectInterface, KubeOwnerReference } from '../../../lib/k8s/cluster';
+import Theme from '../../../lib/themes';
 import { localeDate } from '../../../lib/util';
 import { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
 import Link from '../Link';
 import { LightTooltip } from '../Tooltip';
 
-export const useMetadataDisplayStyles = makeStyles(theme => ({
-  metadataValueLabel: {
-    color: theme.palette.text.primary,
-    backgroundColor: theme.palette.metadataBgColor,
-    fontSize: theme.typography.pxToRem(16),
-    wordBreak: 'break-word',
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    overflowWrap: 'anywhere',
-    textOverflow: 'ellipsis',
-  },
-}));
-
 type ExtraRowsFunc = (resource: KubeObjectInterface) => NameValueTableRow[] | null;
+
+export const metadataStyles = (theme: typeof Theme.light) => ({
+  color: theme.palette.text.primary,
+  backgroundColor: theme.palette.metadataBgColor,
+  fontSize: theme.typography.pxToRem(16),
+  wordBreak: 'break-word',
+  paddingLeft: theme.spacing(1),
+  paddingRight: theme.spacing(1),
+  marginRight: theme.spacing(1),
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  overflowWrap: 'anywhere',
+  textOverflow: 'ellipsis',
+});
 
 export interface MetadataDisplayProps {
   resource: KubeObject;
@@ -152,7 +150,6 @@ interface MetadataDictGridProps {
 }
 
 export function MetadataDictGrid(props: MetadataDictGridProps) {
-  const classes = useMetadataDisplayStyles({});
   const { dict, showKeys = true, gridProps } = props;
   const [expanded, setExpanded] = React.useState(false);
   const defaultNumShown = 20;
@@ -160,7 +157,25 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   const keys = Object.keys(dict || []);
 
   const MetadataEntry = React.forwardRef((props: TypographyProps, ref: any) => {
-    return <Typography {...props} className={classes.metadataValueLabel} ref={ref} />;
+    return (
+      <Typography
+        {...props}
+        sx={theme => ({
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.metadataBgColor,
+          fontSize: theme.typography.pxToRem(16),
+          wordBreak: 'break-word',
+          paddingLeft: theme.spacing(1),
+          paddingRight: theme.spacing(1),
+          marginRight: theme.spacing(1),
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          overflowWrap: 'anywhere',
+          textOverflow: 'ellipsis',
+        })}
+        ref={ref}
+      />
+    );
   });
 
   function makeLabel(key: string | number) {

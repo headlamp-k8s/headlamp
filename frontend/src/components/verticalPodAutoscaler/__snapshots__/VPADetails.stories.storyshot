@@ -165,7 +165,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                         <p
                           aria-label="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"autoscaling.k8s.io/v1\\",\\"kind\\":\\"VerticalPodAutoscaler\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"multi-container-vpa\\",\\"namespace\\":\\"default\\"},\\"spec\\":{\\"resourcePolicy\\":{\\"containerPolicies\\":[{\\"containerName\\":\\"web-container\\",\\"controlledResources\\":[\\"cpu\\",\\"memory\\"],\\"controlledValues\\":\\"RequestsAndLimits\\",\\"minAllowed\\":{\\"cpu\\":\\"80m\\",\\"memory\\":\\"512Mi\\"}},{\\"containerName\\":\\"db-container\\",\\"controlledResources\\":[\\"cpu\\",\\"memory\\"],\\"controlledValues\\":\\"RequestsAndLimits\\",\\"minAllowed\\":{\\"cpu\\":\\"1000m\\",\\"memory\\":\\"2Gi\\"}}]},\\"targetRef\\":{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"name\\":\\"multi-container-deployment\\"},\\"updatePolicy\\":{\\"updateMode\\":\\"Auto\\"}}}
 "
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                         >
                           kubectl.kubernetes.io/last-applied-configuration: …

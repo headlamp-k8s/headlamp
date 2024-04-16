@@ -8,12 +8,11 @@ import NetworkPolicy, {
   NetworkPolicyIngressRule,
   NetworkPolicyPort,
 } from '../../lib/k8s/networkpolicy';
-import { DetailsGrid, NameValueTable, SectionBox, useMetadataDisplayStyles } from '../common';
+import { DetailsGrid, metadataStyles, NameValueTable, SectionBox } from '../common';
 
 export function NetworkPolicyDetails() {
   const { t } = useTranslation(['glossary', 'translation']);
   const { name, namespace } = useParams<{ name: string; namespace: string }>();
-  const classes = useMetadataDisplayStyles();
 
   function prepareMatchLabelsAndExpressions(
     matchLabels: LabelSelector['matchLabels'],
@@ -25,12 +24,12 @@ export function NetworkPolicyDetails() {
     return (
       <>
         {matchLabelsSimplified.map(label => (
-          <Typography className={classes.metadataValueLabel} display="inline">
+          <Typography sx={metadataStyles} display="inline">
             {label}
           </Typography>
         ))}
         {matchExpressionsSimplified.map(expression => (
-          <Typography className={classes.metadataValueLabel} display="inline">
+          <Typography sx={metadataStyles} display="inline">
             {expression}
           </Typography>
         ))}

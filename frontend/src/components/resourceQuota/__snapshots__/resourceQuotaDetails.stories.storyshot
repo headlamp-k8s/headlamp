@@ -192,7 +192,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
                         <p
                           aria-label="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ResourceQuota\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"test-cpu-quota\\",\\"namespace\\":\\"test\\"},\\"spec\\":{\\"hard\\":{\\"limits.cpu\\":\\"300m\\",\\"requests.cpu\\":\\"200m\\"}}}
 "
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                         >
                           kubectl.kubernetes.io/last-applied-configuration: …

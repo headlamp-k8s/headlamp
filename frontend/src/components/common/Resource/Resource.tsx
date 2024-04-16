@@ -47,7 +47,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import InnerTable from '../InnerTable';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
-import { useMetadataDisplayStyles } from '.';
+import { metadataStyles } from '.';
 import { MainInfoSection, MainInfoSectionProps } from './MainInfoSection/MainInfoSection';
 import { MainInfoHeader } from './MainInfoSection/MainInfoSectionHeader';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
@@ -598,14 +598,12 @@ export function VolumeMounts(props: VolumeMountsProps) {
 }
 
 export function LivenessProbes(props: { liveness: KubeContainer['livenessProbe'] }) {
-  const classes = useMetadataDisplayStyles({});
-
   const { liveness } = props;
 
   function LivenessProbeItem(props: { children: React.ReactNode }) {
     return props.children ? (
       <Box p={0.5}>
-        <Typography className={classes.metadataValueLabel} display="inline">
+        <Typography sx={metadataStyles} display="inline">
           {props.children}
         </Typography>
       </Box>

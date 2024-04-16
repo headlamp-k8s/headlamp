@@ -70,7 +70,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label1: My Label 1
               </p>
@@ -79,7 +79,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label2: My Label 2
               </p>
@@ -88,7 +88,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label3: My Label 3
               </p>
@@ -171,7 +171,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label1: My Label 1
               </p>
@@ -180,7 +180,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label2: My Label 2
               </p>
@@ -189,7 +189,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label3: My Label 3
               </p>
@@ -314,7 +314,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label1: My Label 1
               </p>
@@ -323,7 +323,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label2: My Label 2
               </p>
@@ -332,7 +332,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
               class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
             >
               <p
-                class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
               >
                 label3: My Label 3
               </p>

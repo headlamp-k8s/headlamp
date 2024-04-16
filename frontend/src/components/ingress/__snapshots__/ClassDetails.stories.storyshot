@@ -473,7 +473,7 @@ exports[`Storyshots IngressClass/DetailsView With Default 1`] = `
                         class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
                       >
                         <p
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                         >
                           ingressclass.kubernetes.io/is-default-class: true
                         </p>

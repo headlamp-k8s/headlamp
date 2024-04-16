@@ -190,7 +190,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                         class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
                       >
                         <p
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                         >
                           addonmanager.kubernetes.io/mode: Reconcile
                         </p>
@@ -219,7 +219,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                         <p
                           aria-label="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"policy/v1beta1\\",\\"kind\\":\\"PodDisruptionBudget\\",\\"metadata\\":{\\"annotations\\":{},\\"labels\\":{\\"addonmanager.kubernetes.io/mode\\":\\"Reconcile\\"},\\"name\\":\\"coredns-pdb\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"minAvailable\\":1,\\"selector\\":{\\"matchLabels\\":{\\"k8s-app\\":\\"kube-dns\\"}}}}
 "
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                         >
                           kubectl.kubernetes.io/last-applied-configuration: …

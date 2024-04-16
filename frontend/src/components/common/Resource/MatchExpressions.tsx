@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { matchExpressionSimplifier, matchLabelsSimplifier } from '../../../lib/k8s';
 import { LabelSelector } from '../../../lib/k8s/cluster';
-import { useMetadataDisplayStyles } from '.';
+import { metadataStyles } from '.';
 
 export interface MatchExpressionsProps {
   matchLabels?: LabelSelector['matchLabels'];
@@ -10,7 +10,6 @@ export interface MatchExpressionsProps {
 
 export function MatchExpressions(props: MatchExpressionsProps) {
   const { matchLabels = {}, matchExpressions = [] } = props;
-  const classes = useMetadataDisplayStyles();
 
   function prepareMatchLabelsAndExpressions(
     matchLabels: LabelSelector['matchLabels'],
@@ -22,12 +21,12 @@ export function MatchExpressions(props: MatchExpressionsProps) {
     return (
       <>
         {matchLabelsSimplified.map(label => (
-          <Typography className={classes.metadataValueLabel} display="inline" key={label}>
+          <Typography sx={metadataStyles} display="inline" key={label}>
             {label}
           </Typography>
         ))}
         {matchExpressionsSimplified.map(expression => (
-          <Typography className={classes.metadataValueLabel} display="inline" key={expression}>
+          <Typography sx={metadataStyles} display="inline" key={expression}>
             {expression}
           </Typography>
         ))}
