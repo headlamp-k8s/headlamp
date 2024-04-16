@@ -8,7 +8,7 @@ exports[`Storyshots Charts/PercentageCircle No Data 1`] = `
     class="MuiBox-root css-2esbmj"
   >
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-title css-1ezega9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 css-b7twky-MuiTypography-root"
     >
       CPU usage
     </p>
@@ -48,13 +48,13 @@ exports[`Storyshots Charts/PercentageCircle Percent 50 1`] = `
     class="MuiBox-root css-2esbmj"
   >
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-title css-1ezega9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 css-b7twky-MuiTypography-root"
     >
       Pods
     </p>
     <div
-      class="recharts-wrapper makeStyles-chart"
-      style="position: relative; cursor: default; width: 160px; height: 160px;"
+      class="recharts-wrapper"
+      style="position: relative; cursor: default; width: 160px; height: 160px; margin-left: auto; margin-right: auto;"
     >
       <svg
         class="recharts-surface"
@@ -114,7 +114,7 @@ exports[`Storyshots Charts/PercentageCircle Percent 50 1`] = `
       </svg>
     </div>
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-legend css-1ezega9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 css-1linoo0-MuiTypography-root"
     >
       5 / 10 Requested
     </p>
@@ -130,13 +130,13 @@ exports[`Storyshots Charts/PercentageCircle Percent 100 1`] = `
     class="MuiBox-root css-2esbmj"
   >
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-title css-1ezega9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 css-b7twky-MuiTypography-root"
     >
       Pods
     </p>
     <div
-      class="recharts-wrapper makeStyles-chart"
-      style="position: relative; cursor: default; width: 160px; height: 160px;"
+      class="recharts-wrapper"
+      style="position: relative; cursor: default; width: 160px; height: 160px; margin-left: auto; margin-right: auto;"
     >
       <svg
         class="recharts-surface"
@@ -196,7 +196,7 @@ exports[`Storyshots Charts/PercentageCircle Percent 100 1`] = `
       </svg>
     </div>
     <p
-      class="MuiTypography-root MuiTypography-body1 makeStyles-legend css-1ezega9-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-body1 css-1linoo0-MuiTypography-root"
     >
       9 / 9 Requested
     </p>

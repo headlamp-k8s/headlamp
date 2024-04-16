@@ -965,7 +965,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     data-index="1"
                   >
                     <div
-                      class="recharts-responsive-container makeStyles-container"
+                      class="recharts-responsive-container css-a9n7s9"
                       style="width: 95%; height: 20px;"
                     />
                   </td>
@@ -974,7 +974,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     data-index="2"
                   >
                     <div
-                      class="recharts-responsive-container makeStyles-container"
+                      class="recharts-responsive-container css-a9n7s9"
                       style="width: 95%; height: 20px;"
                     />
                   </td>
@@ -1055,7 +1055,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     data-index="1"
                   >
                     <div
-                      class="recharts-responsive-container makeStyles-container"
+                      class="recharts-responsive-container css-a9n7s9"
                       style="width: 95%; height: 20px;"
                     />
                   </td>
@@ -1064,7 +1064,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     data-index="2"
                   >
                     <div
-                      class="recharts-responsive-container makeStyles-container"
+                      class="recharts-responsive-container css-a9n7s9"
                       style="width: 95%; height: 20px;"
                     />
                   </td>
