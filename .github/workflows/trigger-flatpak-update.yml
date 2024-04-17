@@ -7,10 +7,17 @@ on:
     - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   trigger_flatpak_update:
     name: Trigger Flatpak Headlamp version update
     runs-on: ubuntu-latest
+
+    permissions:
+      secrets: read # needed to fetch gh token
+
     steps:
       - name: Trigger via gh
         env:

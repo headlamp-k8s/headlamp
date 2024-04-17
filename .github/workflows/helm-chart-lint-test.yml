@@ -6,6 +6,9 @@ on:
       - charts/**
       - '!charts/**/README.md'
 
+permissions:
+  contents: read
+
 jobs:
   lint-test:
     runs-on: ubuntu-22.04
@@ -39,7 +42,7 @@ jobs:
         run: ct lint --config .github/ct.yaml
 
       - name: Setup Minikube
-        uses: medyagh/setup-minikube@master
+        uses: medyagh/setup-minikube@latest
 
       - name: Build image & Run chart-testing (install)
         run: |

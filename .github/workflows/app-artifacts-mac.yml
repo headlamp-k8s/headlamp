@@ -11,9 +11,17 @@ on:
         description: Notarize app
         default: true
         type: boolean
+
+permissions:
+  contents: read
+
 jobs:
   build-mac:
     runs-on: macos-latest
+    permissions:
+      contents: read
+      secrets: read
+      actions: write # needed to upload artifacts
     steps:
     - uses: actions/checkout@v4
       with:
@@ -61,8 +69,9 @@ jobs:
         retention-days: 1
   notarize:
     permissions:
-      id-token: write
+      id-token: write # For fetching an OpenID Connect (OIDC) token
       contents: read
+      secrets: read
     runs-on: windows-latest
     needs: build-mac
     if: ${{ inputs.signBinaries }}
@@ -135,6 +144,9 @@ jobs:
   stapler:
     runs-on: macos-latest
     needs: notarize
+    permissions:
+      actions: write # for downloading and uploading artifacts
+      contents: read
     if: ${{ inputs.signBinaries }}
     steps:
     - name: Download artifact

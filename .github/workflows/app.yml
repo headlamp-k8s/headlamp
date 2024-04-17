@@ -18,6 +18,9 @@ on:
     - 'app/**'
     - 'backend/**'
 
+permissions:
+  contents: read
+
 jobs:
   build-linux:
     runs-on: ubuntu-22.04

@@ -18,6 +18,9 @@ on:
     - 'app/**'
     - 'plugins/**'
 
+permissions:
+  contents: read
+
 jobs:
   build:
 

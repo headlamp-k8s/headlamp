@@ -8,6 +8,9 @@ on:
         required: true
         default: 'X.Y.Z'
 
+permissions:
+  contents: read
+
 jobs:
   build:
     permissions:
@@ -18,7 +21,7 @@ jobs:
       - name: Create Release Draft
         uses: softprops/action-gh-release@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           draft: true
           name: ${{ github.event.inputs.releaseName }}
           body: |

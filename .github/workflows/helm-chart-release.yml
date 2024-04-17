@@ -1,5 +1,7 @@
 name: Release Charts
 
+# See https://github.com/helm/chart-releaser-action
+
 on:
   push:
     branches:
@@ -9,10 +11,14 @@ on:
       - '!charts/**/README.md'
   # For manual dispatch
   workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   release:
     permissions:
-      contents: write
+      contents: write # need to write a commit to the repo
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -26,14 +32,12 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.4.0
-          
+        uses: azure/setup-helm@v3
+
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.2.1
+        uses: helm/chart-releaser-action@v1.6.0
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ github.token }}"
         with:
           config: .github/cr.yaml
-
+          mark_as_latest: false # only headlamp is set to latest

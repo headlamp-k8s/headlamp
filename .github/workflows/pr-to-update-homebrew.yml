@@ -13,6 +13,11 @@ jobs:
   create_pr_to_upgrade_homebrew:
     name: Create PR to upgrade homebrew
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # needed to push a branch
+      pull-requests: write # needed to open a pull request
+      secrets: read
+
     steps:
       - name: Checkout headlamp repo
         uses: actions/checkout@v4
