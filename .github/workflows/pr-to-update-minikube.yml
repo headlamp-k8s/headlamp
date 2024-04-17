@@ -9,12 +9,18 @@ on:
       - completed
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   LATEST_HEADLAMP_TAG: latest
 jobs:
   create_pr_to_upgrade_minikube:
     name: Create PR to upgrade minikube
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # needed to push a branch
+      pull-requests: write # needed to open a pull request
     steps:
       - name: Checkout headlamp repo
         uses: actions/checkout@v4

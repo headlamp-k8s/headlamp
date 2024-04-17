@@ -8,9 +8,15 @@ on:
         required: true
         default: 'main'
 
+permissions:
+  contents: read
+
 jobs:
   build-linux:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write # needed to upload artifacts
+      contents: write
     steps:
     - uses: actions/checkout@v4
       with:

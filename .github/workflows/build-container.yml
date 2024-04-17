@@ -15,17 +15,22 @@ on:
     - Dockerfile.plugins
     - 'e2e-tests/**'
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: build discover and deploy
+    permissions:
+      actions: write # needed to upload artifacts
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v3
       with:
         node-version: 20.x
     - name: Start cluster
-      uses: medyagh/setup-minikube@master
+      uses: medyagh/setup-minikube@latest
       # now you can run kubectl to see the pods in the cluster
     - name: Try the cluster!
       run: kubectl get pods -A

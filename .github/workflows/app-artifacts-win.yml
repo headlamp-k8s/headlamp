@@ -12,11 +12,15 @@ on:
         default: true
         type: boolean
 
+permissions:
+  contents: read
+
 jobs:
   build-windows:
     permissions:
-      id-token: write
+      id-token: write # For fetching an OpenID Connect (OIDC) token
       contents: read
+      actions: write # needed to upload artifacts
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v4
