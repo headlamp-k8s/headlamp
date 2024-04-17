@@ -266,7 +266,7 @@ exports[`Storyshots SimpleTable Getter 1`] = `
 exports[`Storyshots SimpleTable Label Search 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -275,7 +275,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
         class="MuiBox-root css-70qvj9"
       >
         <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
         >
           Test
         </h1>
@@ -460,7 +460,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
 exports[`Storyshots SimpleTable Name Search 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -469,7 +469,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
         class="MuiBox-root css-70qvj9"
       >
         <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
         >
           Test
         </h1>
@@ -630,7 +630,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
 exports[`Storyshots SimpleTable Namespace Search 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -639,7 +639,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
         class="MuiBox-root css-70qvj9"
       >
         <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
         >
           Test
         </h1>
@@ -800,7 +800,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
 exports[`Storyshots SimpleTable Namespace Select 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -809,7 +809,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
         class="MuiBox-root css-70qvj9"
       >
         <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
         >
           Test
         </h1>
@@ -1026,7 +1026,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
 exports[`Storyshots SimpleTable Not Found Message 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -1035,7 +1035,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
         class="MuiBox-root css-70qvj9"
       >
         <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
         >
           Test
         </h1>
@@ -1190,7 +1190,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
 exports[`Storyshots SimpleTable Number Search 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -1199,7 +1199,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
         class="MuiBox-root css-70qvj9"
       >
         <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
         >
           Test
         </h1>
@@ -1651,7 +1651,7 @@ exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
 exports[`Storyshots SimpleTable UID Search 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -1660,7 +1660,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
         class="MuiBox-root css-70qvj9"
       >
         <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
         >
           Test
         </h1>

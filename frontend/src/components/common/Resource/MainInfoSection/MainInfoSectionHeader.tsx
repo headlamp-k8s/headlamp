@@ -9,7 +9,7 @@ import {
 } from '../../../../redux/actionButtonsSlice';
 import { useTypedSelector } from '../../../../redux/reducers/reducers';
 import ErrorBoundary from '../../ErrorBoundary';
-import SectionHeader, { HeaderStyleProps } from '../../SectionHeader';
+import SectionHeader, { HeaderStyle } from '../../SectionHeader';
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';
 import { RestartButton } from '../RestartButton';
@@ -24,7 +24,7 @@ export interface MainInfoHeaderProps {
     | React.ReactNode[]
     | null
     | HeaderAction[];
-  headerStyle?: HeaderStyleProps['headerStyle'];
+  headerStyle?: HeaderStyle;
   noDefaultActions?: boolean;
   /** The route or location to go to. If it's an empty string, then the "browser back" function is used. If null, no back button will be shown. */
   backLink?: string | ReturnType<typeof useLocation> | null;

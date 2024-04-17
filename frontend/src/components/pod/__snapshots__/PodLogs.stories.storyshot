@@ -42,7 +42,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -51,7 +51,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
               class="MuiBox-root css-70qvj9"
             >
               <h1
-                class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
               >
                 Pod
               </h1>
@@ -292,7 +292,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -301,7 +301,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Tolerations
                 </h2>
@@ -432,7 +432,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -441,7 +441,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Conditions
                 </h2>
@@ -682,7 +682,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -691,7 +691,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Containers
                 </h2>
@@ -888,7 +888,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -897,7 +897,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Events
                 </h2>

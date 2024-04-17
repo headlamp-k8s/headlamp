@@ -6,7 +6,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
     class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -15,7 +15,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
           class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
           >
             Plugins
           </h1>
@@ -808,7 +808,7 @@ exports[`Storyshots Settings/PluginSettings Empty 1`] = `
     class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -817,7 +817,7 @@ exports[`Storyshots Settings/PluginSettings Empty 1`] = `
           class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
           >
             Plugins
           </h1>
@@ -854,7 +854,7 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
     class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -863,7 +863,7 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
           class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
           >
             Plugins
           </h1>
@@ -1642,7 +1642,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
     class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -1651,7 +1651,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
           class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
           >
             Plugins
           </h1>
@@ -2430,7 +2430,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
     class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -2439,7 +2439,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
           class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
           >
             Plugins
           </h1>
@@ -3628,7 +3628,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
     class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -3637,7 +3637,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
           class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
           >
             Plugins
           </h1>
