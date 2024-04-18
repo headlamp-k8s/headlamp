@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: read
-  # We need to write a comment for the coverage change message.
-  issues: write
 
 env:
   HEADLAMP_RUN_INTEGRATION_TESTS: true
@@ -16,7 +14,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      issues: write # needed for commenting on PRs for coverage changes
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,15 +23,15 @@ jobs:
     
       - uses: actions/setup-go@v5
         with:
-          go-version: 1.22.0
-    
+          go-version: '1.22.*'
+
       - name: Install dependencies
         run: |
           cd backend
           go mod download
     
       - name: Start cluster
-        uses: medyagh/setup-minikube@master
+        uses: medyagh/setup-minikube@latest
 
       - name: Check cluster status and enable headlamp addon
         run: |
@@ -103,4 +102,4 @@ jobs:
             echo "Pull request raised from a fork. Skipping comment."
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
