@@ -506,7 +506,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                       <span
                         class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1ezega9-MuiTypography-root"
                       >
-                        Only warnings (1)
+                        Only warnings (3)
                       </span>
                     </label>
                   </div>
@@ -693,6 +693,144 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
+                        Pod
+                      </td>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                        scope="row"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/"
+                        >
+                          nginx-deployment-1234567890-abcde
+                        </a>
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/"
+                        >
+                          default
+                        </a>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <span
+                          aria-label="FailedGetResourceMetric"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-19rs0eg-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
+                          style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                        >
+                          FailedGetResourceMetric
+                        </span>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <div
+                          class="MuiBox-root css-k008qs"
+                        >
+                          <label
+                            class="makeStyles-fullText"
+                            id="b123456"
+                          >
+                            failed to get cpu utilization: missing request for cpu
+                          </label>
+                        </div>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                        style="text-align: right;"
+                      >
+                        <p
+                          aria-label="2024-02-13T14:42:17.000Z"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
+                        >
+                          3mo
+                          <span />
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        Pod
+                      </td>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                        scope="row"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/"
+                        >
+                          nginx-deployment-abcd-1234567890
+                        </a>
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/"
+                        >
+                          default
+                        </a>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <span
+                          aria-label="FailedGetResourceMetric"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-19rs0eg-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
+                          style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                        >
+                          FailedGetResourceMetric
+                        </span>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <div
+                          class="MuiBox-root css-k008qs"
+                        >
+                          <label
+                            class="makeStyles-fullText"
+                            id="abc123456"
+                          >
+                            failed to get cpu utilization: missing request for cpu
+                          </label>
+                        </div>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                        style="text-align: right;"
+                      >
+                        <p
+                          aria-label="2024-02-13T15:42:17.000Z"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
+                        >
+                          3mo
+                          <span />
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
                         HorizontalPodAutoscaler
                       </td>
                       <th
@@ -747,7 +885,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         style="text-align: right;"
                       >
                         <p
-                          aria-label="2023-07-12T20:07:10.000Z"
+                          aria-label="2023-07-13T14:42:17.000Z"
                           class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                         >

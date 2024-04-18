@@ -23,7 +23,7 @@ export default function ObjectEventList(props: ObjectEventListProps) {
 
   async function fetchEvents() {
     const events = await Event.objectEvents(props.object);
-    setEvents(events);
+    setEvents(events.map((e: KubeEvent) => new Event(e)));
   }
   const { t } = useTranslation(['translation', 'glossary']);
 
@@ -69,17 +69,17 @@ export default function ObjectEventList(props: ObjectEventListProps) {
             label: t('Age'),
             getter: item => {
               if (item.count > 1) {
-                return `${timeAgo(item.lastTimestamp)} (${item.count} times over ${timeAgo(
-                  item.firstTimestamp
+                return `${timeAgo(item.lastOccurrence)} (${item.count} times over ${timeAgo(
+                  item.firstOccurrence
                 )})`;
               }
-              const eventDate = timeAgo(item.lastTimestamp, { format: 'mini' });
+              const eventDate = timeAgo(item.lastOccurrence, { format: 'mini' });
               let label: string;
               if (item.count > 1) {
                 label = t('{{ eventDate }} ({{ count }} times since {{ firstEventDate }})', {
                   eventDate,
                   count: item.count,
-                  firstEventDate: timeAgo(item.firstTimestamp),
+                  firstEventDate: timeAgo(item.firstOccurrence),
                 });
               } else {
                 label = eventDate;
@@ -88,7 +88,7 @@ export default function ObjectEventList(props: ObjectEventListProps) {
               return (
                 <HoverInfoLabel
                   label={label}
-                  hoverInfo={localeDate(item.lastTimestamp)}
+                  hoverInfo={localeDate(item.lastOccurrence)}
                   icon="mdi:calendar"
                 />
               );
