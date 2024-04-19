@@ -7,6 +7,21 @@
  * Copyright © 2020 Kinvolk GmbH
  */
 
+/**
+ * @todo: A summary of things marked for fixing in this file marked with todo:
+ *
+ * - Return types are missing in places.
+ * - Some types are "any".
+ * - No docs on some functions and interfaces.
+ * - Async is missing on some functions that need to be marked as so.
+ * - Some of the users of the functions are not handling errors.
+ *
+ * Additionally, it needs to be refactored into an apiProxy/ folder, with the
+ * functionality broken up into smaller files by topic/feature. Keeping the
+ * apiProxy/index.ts file as the entry point for backwards compatibility
+ * exporting everything from there.
+ */
+
 import { OpPatch } from 'json-patch';
 import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
@@ -185,7 +200,7 @@ export interface QueryParameters {
  * @note Uses global `isTokenRefreshInProgress` to prevent multiple token
  * refreshes at the same time.
  */
-async function refreshToken(token: string | null) {
+async function refreshToken(token: string | null): Promise<void> {
   if (!token || isTokenRefreshInProgress) {
     return;
   }
@@ -291,7 +306,7 @@ export async function request(
   autoLogoutOnAuthError: boolean = true,
   useCluster: boolean = true,
   queryParams?: QueryParameters
-) {
+): Promise<any> {
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = (useCluster && getCluster()) || '';
 
@@ -325,7 +340,7 @@ export async function clusterRequest(
   path: string,
   params: ClusterRequestParams = {},
   queryParams?: QueryParameters
-) {
+): Promise<any> {
   interface RequestHeaders {
     Authorization?: string;
     cluster?: string;
@@ -1070,6 +1085,8 @@ export async function streamResult(
   }
 }
 
+// @todo: needs a return type.
+
 /**
  * Streams the results of a Kubernetes API request.
  *
@@ -1090,11 +1107,16 @@ export async function streamResults(
   return streamResultsForCluster(url, { cb, errCb, cluster }, queryParams);
 }
 
+// @todo: this interface needs documenting.
+
 export interface StreamResultsParams {
   cb: StreamResultsCb;
   errCb: StreamErrCb;
   cluster?: string;
 }
+
+// @todo: needs a return type.
+// @todo: needs documenting
 
 export async function streamResultsForCluster(
   url: string,
@@ -1319,6 +1341,8 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   }
 }
 
+// @todo: needs a return type.
+
 /**
  * Connects to a WebSocket stream at the specified path and returns an object
  * with a `close` function and a `socket` property. Sends messages to `cb` callback.
@@ -1346,6 +1370,8 @@ async function connectStream(
   });
 }
 
+// @todo: needs documenting.
+
 interface StreamParams {
   cluster?: string;
   isJson?: boolean;
@@ -1353,17 +1379,20 @@ interface StreamParams {
 }
 
 /**
- * @param path - The path of the WebSocket stream to connect to.
- * @param cb - The function to call with each message received from the stream.
- * @param onFail - The function to call if the stream is closed unexpectedly.
- * @param params - Stream parameters to configure the connection.
  * connectStreamWithParams is a wrapper around connectStream that allows for more
  * flexibility in the parameters that can be passed to the WebSocket connection.
+ *
  * This is an async function because it may need to fetch the kubeconfig for the
  * cluster if the cluster is specified in the params. If kubeconfig is found, it
  * sends the X-HEADLAMP-USER-ID header with the user ID from the localStorage.
  * It is sent as a base64url encoded string in protocal format:
  * `base64url.headlamp.authorization.k8s.io.${userID}`.
+ *
+ * @param path - The path of the WebSocket stream to connect to.
+ * @param cb - The function to call with each message received from the stream.
+ * @param onFail - The function to call if the stream is closed unexpectedly.
+ * @param params - Stream parameters to configure the connection.
+ *
  * @returns A promise that resolves to an object with a `close` function and a `socket` property.
  */
 async function connectStreamWithParams(
@@ -1371,7 +1400,10 @@ async function connectStreamWithParams(
   cb: StreamResultsCb,
   onFail: () => void,
   params?: StreamParams
-) {
+): Promise<{
+  close: () => void;
+  socket: WebSocket | null;
+}> {
   const { isJson = false, additionalProtocols = [], cluster = '' } = params || {};
   let isClosing = false;
 
@@ -1468,14 +1500,14 @@ async function connectStreamWithParams(
  *
  * @returns The combined path.
  */
-function combinePath(base: string, path: string) {
+function combinePath(base: string, path: string): string {
   if (base.endsWith('/')) base = base.slice(0, -1); // eslint-disable-line no-param-reassign
   if (path.startsWith('/')) path = path.slice(1); // eslint-disable-line no-param-reassign
   return `${base}/${path}`;
 }
 
 // @todo: apply() and other requests return Promise<any> Can we get it to return a better type?
-
+// @todo: Promise<JSON> doesn't make any sense as a type.
 /**
  * Applies the provided body to the Kubernetes API.
  *
@@ -1530,6 +1562,8 @@ export async function apply(body: KubeObjectInterface, clusterName?: string): Pr
   }
 }
 
+// @todo: apiEndpoint.put has a type of any, which needs improving.
+
 export interface ApiError extends Error {
   status: number;
 }
@@ -1580,6 +1614,9 @@ export async function metrics(
   return cancel;
 }
 
+//@todo: these need documenting.
+//@todo: these need return types.
+
 export async function testAuth(cluster = '') {
   const spec = { namespace: 'default' };
   const clusterName = cluster || getCluster();
@@ -1629,6 +1666,9 @@ export async function setCluster(clusterReq: ClusterRequest) {
     false
   );
 }
+
+// @todo return type is configSlice Promise<ConfigState['clusters']>
+// @todo: needs documenting.
 
 export async function deleteCluster(cluster: string) {
   if (cluster) {
@@ -1706,6 +1746,7 @@ export function startPortForward(
 }
 
 // @todo: stopOrDelete true is confusing, rename this param to justStop?
+// @todo: needs a return type.
 /**
  * Stops or deletes a portforward with the specified details.
  *
@@ -1733,6 +1774,8 @@ export function stopOrDeletePortForward(cluster: string, id: string, stopOrDelet
     })
   );
 }
+
+// @todo: needs a return type.
 
 /**
  * Lists the port forwards for the specified cluster.
@@ -1785,8 +1828,10 @@ export function drainNode(cluster: string, nodeName: string) {
   });
 }
 
+// @todo: needs documenting.
+
 interface DrainNodeStatus {
-  id: string;
+  id: string; //@todo: what is this and what is it for?
   cluster: string;
 }
 
@@ -1800,7 +1845,7 @@ interface DrainNodeStatus {
  * @param cluster - The cluster to get the status of the drain node process for.
  * @param nodeName - The node name to get the status of the drain node process for.
  *
- * @returns - The response from the API.
+ * @returns - The response from the API. @todo: what response?
  * @throws {Error} if the request fails
  * @throws {Error} if the response is not ok
  */
@@ -1821,7 +1866,9 @@ export function drainNodeStatus(cluster: string, nodeName: string): Promise<Drai
   });
 }
 
-/** Gets the default namespace for the given cluster.
+/**
+ * getClusterDefaultNamespace gives the default namespace for the given cluster.
+ *
  * If the checkSettings parameter is true (default), it will check the cluster settings first.
  * Otherwise it will just check the cluster config. This means that if one needs the default
  * namespace that may come from the kubeconfig, call this function with the checkSettings parameter as false.
@@ -1852,10 +1899,20 @@ function getClusterDefaultNamespace(cluster: string, checkSettings?: boolean): s
   return defaultNamespace;
 }
 
+// @todo: needs a return type.
+
+//@todo: what is DELETE /plugins/name response type? It's not used by headlamp in PLuginSettingsDetail.
 /**
- * Deletes the plugin with the specified name from the system. This function sends a DELETE request to the server's plugin management endpoint, targeting the plugin identified by its name.The function handles the request asynchronously and returns a promise that resolves with the server's response to the DELETE operation.
+ * Deletes the plugin with the specified name from the system.
  *
- * @param {string} name - The unique name of the plugin to delete. This identifier is used to construct the URL for the DELETE request.
+ * This function sends a DELETE request to the server's plugin management
+ * endpoint, targeting the plugin identified by its name.
+ * The function handles the request asynchronously and returns a promise that
+ * resolves with the server's response to the DELETE operation.
+ *
+ * @param {string} name - The unique name of the plugin to delete.
+ *  This identifier is used to construct the URL for the DELETE request.
+ *
  * @returns — A Promise that resolves to the JSON response from the API server.
  * @throws — An ApiError if the response status is not ok.
  *
@@ -1865,7 +1922,7 @@ function getClusterDefaultNamespace(cluster: string, checkSettings?: boolean): s
  *   .then(response => console.log('Plugin deleted successfully', response))
  *   .catch(error => console.error('Failed to delete plugin', error));
  */
-export function deletePlugin(name: string) {
+export async function deletePlugin(name: string) {
   return request(
     `/plugins/${name}`,
     { method: 'DELETE', headers: { ...getHeadlampAPIHeaders() } },
