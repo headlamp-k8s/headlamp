@@ -1,6 +1,6 @@
 import { InlineIcon } from '@iconify/react';
 import { Box, Button } from '@mui/material';
-import withStyles from '@mui/styles/withStyles';
+import { styled } from '@mui/system';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,18 +18,16 @@ import { DialogTitle } from '../common/Dialog';
 import Empty from '../common/EmptyContent';
 import OauthPopup from '../oidcauth/OauthPopup';
 
-const ColorButton = withStyles(theme => ({
-  root: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primaryColor,
-    width: '14rem',
-    padding: '0.5rem 2rem',
-    '&:hover': {
-      opacity: '0.8',
-      backgroundColor: theme.palette.text.primary,
-    },
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  backgroundColor: theme.palette.primaryColor,
+  width: '14rem',
+  padding: '0.5rem 2rem',
+  '&:hover': {
+    opacity: '0.8',
+    backgroundColor: theme.palette.text.primary,
   },
-}))(Button);
+}));
 
 interface ReactRouterLocationStateIface {
   from?: Location;
