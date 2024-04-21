@@ -108,15 +108,15 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -125,12 +125,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -140,12 +140,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -154,12 +154,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   State
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     aria-label=""
@@ -182,12 +182,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Node
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -197,12 +197,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Service Account
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -212,12 +212,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Host IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -226,12 +226,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Pod IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -240,20 +240,20 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   QoS Class
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Priority
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 />
               </dl>
             </div>
@@ -699,20 +699,20 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   terminated
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -730,22 +730,22 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Exit Code
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   1
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Started
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -754,12 +754,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Finished
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -768,22 +768,22 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -792,12 +792,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -806,12 +806,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -832,12 +832,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </p>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Command
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1120,15 +1120,15 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1137,12 +1137,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -1152,12 +1152,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1166,12 +1166,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   State
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     aria-label=""
@@ -1187,12 +1187,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Node
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -1202,12 +1202,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Service Account
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -1217,12 +1217,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Host IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1231,12 +1231,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Pod IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1245,20 +1245,20 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   QoS Class
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Priority
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 />
               </dl>
             </div>
@@ -1713,20 +1713,20 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   myapp-container
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -1744,30 +1744,30 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1776,12 +1776,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -1791,12 +1791,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Command
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1838,20 +1838,20 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   init-myservice
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -1869,12 +1869,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Started
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1883,22 +1883,22 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1907,12 +1907,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1921,12 +1921,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -1947,12 +1947,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </p>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Command
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -1966,20 +1966,20 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   init-mydb
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -1997,30 +1997,30 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -2029,12 +2029,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -2044,12 +2044,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Command
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -2339,15 +2339,15 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -2356,12 +2356,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -2371,12 +2371,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -2385,12 +2385,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   State
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     aria-label="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
@@ -2413,12 +2413,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Node
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -2428,12 +2428,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Service Account
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -2443,12 +2443,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Host IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -2457,12 +2457,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Pod IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -2471,20 +2471,20 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   QoS Class
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Priority
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 />
               </dl>
             </div>
@@ -2932,20 +2932,20 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   liveness
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -2973,22 +2973,22 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   337
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -2997,12 +2997,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -3011,12 +3011,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -3037,12 +3037,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </p>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Args
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-17wqeb1-MuiGrid-root"
@@ -3064,12 +3064,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Liveness Probes
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-j7qwjs"
@@ -3413,15 +3413,15 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -3430,12 +3430,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -3445,12 +3445,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -3459,12 +3459,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   State
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     aria-label="Back-off pulling image \\"doesnotexist:nover\\""
@@ -3480,12 +3480,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Node
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -3495,12 +3495,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Service Account
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -3510,12 +3510,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Host IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -3524,12 +3524,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Pod IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -3538,20 +3538,20 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   QoS Class
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Priority
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 />
               </dl>
             </div>
@@ -3999,20 +3999,20 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   imagepullbackoff
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -4040,30 +4040,30 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -4072,12 +4072,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -4368,15 +4368,15 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -4385,12 +4385,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -4400,12 +4400,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -4414,12 +4414,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   State
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     aria-label=""
@@ -4435,12 +4435,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Node
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -4450,12 +4450,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Service Account
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -4465,12 +4465,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Host IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -4479,12 +4479,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Pod IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -4493,20 +4493,20 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   QoS Class
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Priority
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 />
               </dl>
             </div>
@@ -4940,20 +4940,20 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   nginx
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -4971,12 +4971,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Started
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -4985,22 +4985,22 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -5009,12 +5009,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -5023,12 +5023,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -5049,12 +5049,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </p>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Ports
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <div
                     class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
@@ -5365,15 +5365,15 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -5382,12 +5382,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -5397,12 +5397,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -5411,12 +5411,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   State
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     aria-label=""
@@ -5432,12 +5432,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Node
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -5447,12 +5447,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Service Account
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -5462,12 +5462,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Host IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -5476,12 +5476,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Pod IP
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -5490,20 +5490,20 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   QoS Class
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 />
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Priority
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 />
               </dl>
             </div>
@@ -5955,20 +5955,20 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 makeStyles-metadataNameCell makeStyles-highlightRow css-49904w-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
                 >
                   successful
                 </dt>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Status
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiBox-root css-0"
@@ -5986,22 +5986,22 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Exit Code
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Started
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -6010,12 +6010,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Finished
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -6024,22 +6024,22 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Restart Count
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   0
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Container ID
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -6048,12 +6048,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image Pull Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -6062,12 +6062,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Image
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -6088,12 +6088,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </p>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Command
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"

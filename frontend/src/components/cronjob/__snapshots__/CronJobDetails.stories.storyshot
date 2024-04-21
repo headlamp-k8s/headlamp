@@ -158,15 +158,15 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -175,12 +175,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -190,12 +190,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -204,12 +204,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Schedule
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     aria-label=""
@@ -221,12 +221,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
                   </p>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Suspend
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -235,12 +235,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Last Schedule
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -605,15 +605,15 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -622,12 +622,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -637,12 +637,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -651,12 +651,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Schedule
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <p
                     aria-label="Every minute"
@@ -668,12 +668,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
                   </p>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Suspend
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -682,12 +682,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Last Schedule
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"

@@ -1,63 +1,6 @@
 import { Grid, GridProps } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
 import React from 'react';
 import { ValueLabel } from '../Label';
-
-const useStyles = makeStyles(theme => ({
-  metadataNameCell: {
-    fontSize: '1rem',
-    textAlign: 'left',
-    maxWidth: '100%',
-    minWidth: '10rem',
-    verticalAlign: 'top',
-    color: theme.palette.text.secondary,
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    padding: '7px 12px',
-    [theme.breakpoints.down('sm')]: {
-      color: theme.palette.text.primary,
-      fontSize: '1.5rem',
-      minWidth: '100%',
-      width: '100%',
-      maxWidth: '100%',
-      display: 'block',
-      borderTop: `1px solid ${theme.palette.divider}`,
-      borderBottom: `none`,
-    },
-  },
-  metadataCell: {
-    width: '100%',
-    verticalAlign: 'top',
-    fontSize: '1rem',
-    overflowWrap: 'anywhere',
-    padding: '7px 12px',
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    [theme.breakpoints.down('sm')]: {
-      color: theme.palette.text.secondary,
-      minWidth: '100%',
-      width: '100%',
-      maxWidth: '100%',
-      display: 'block',
-      marginBottom: '2rem',
-      borderBottom: `none`,
-    },
-  },
-  metadataRow: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  metadataLast: {
-    borderBottom: 'none',
-  },
-  table: {
-    border: '1px solid #e7e7e7',
-    borderRadius: theme.shape.borderRadius,
-  },
-  highlightRow: {
-    color: theme.palette.tables.head.color,
-    fontWeight: 'bold',
-    background: theme.palette.tables.head.background,
-  },
-}));
 
 export interface NameValueTableRow {
   /** The name (key) for this row */
@@ -101,7 +44,6 @@ function Value({
 }
 
 export default function NameValueTable(props: NameValueTableProps) {
-  const classes = useStyles();
   const { rows, valueCellProps: globalValueCellProps } = props;
 
   const visibleRows = React.useMemo(
@@ -123,7 +65,10 @@ export default function NameValueTable(props: NameValueTableProps) {
     <Grid
       container
       component="dl" // mount a Definition List
-      className={classes.table}
+      sx={theme => ({
+        border: '1px solid #e7e7e7',
+        borderRadius: theme.shape.borderRadius + 'px',
+      })}
     >
       {visibleRows.flatMap(
         ({ name, value, hide = false, withHighlightStyle = false, valueCellProps = {} }, i) => {
@@ -150,11 +95,37 @@ export default function NameValueTable(props: NameValueTableProps) {
               xs={12}
               sm={hideValueGridItem ? 12 : 4}
               component="dt"
-              className={clsx(
-                last ? classes.metadataLast : '',
-                classes.metadataNameCell,
-                withHighlightStyle ? classes.highlightRow : ''
-              )}
+              className={className}
+              sx={theme => {
+                const extra = withHighlightStyle
+                  ? {
+                      color: theme.palette.tables.head.color,
+                      fontWeight: 'bold',
+                      background: theme.palette.tables.head.background,
+                    }
+                  : {};
+                return {
+                  fontSize: '1rem',
+                  textAlign: 'left',
+                  maxWidth: '100%',
+                  minWidth: '10rem',
+                  verticalAlign: 'top',
+                  color: theme.palette.text.secondary,
+                  borderBottom: last ? 'none' : `1px solid ${theme.palette.divider}`,
+                  padding: '7px 12px',
+                  [theme.breakpoints.down('sm')]: {
+                    color: theme.palette.text.primary,
+                    fontSize: '1.5rem',
+                    minWidth: '100%',
+                    width: '100%',
+                    maxWidth: '100%',
+                    display: 'block',
+                    borderTop: `1px solid ${theme.palette.divider}`,
+                    borderBottom: `none`,
+                  },
+                  ...extra,
+                };
+              }}
             >
               {name}
             </Grid>,
@@ -167,12 +138,33 @@ export default function NameValueTable(props: NameValueTableProps) {
                 xs={12}
                 sm={8}
                 component="dd"
-                className={clsx(
-                  last ? classes.metadataLast : '',
-                  classes.metadataCell,
-                  className ? className : '',
-                  withHighlightStyle ? classes.highlightRow : ''
-                )}
+                sx={theme => {
+                  const extra = withHighlightStyle
+                    ? {
+                        color: theme.palette.tables.head.color,
+                        fontWeight: 'bold',
+                        background: theme.palette.tables.head.background,
+                      }
+                    : {};
+                  return {
+                    width: '100%',
+                    verticalAlign: 'top',
+                    fontSize: '1rem',
+                    overflowWrap: 'anywhere',
+                    padding: '7px 12px',
+                    borderBottom: last ? 'none' : `1px solid ${theme.palette.divider}`,
+                    [theme.breakpoints.down('sm')]: {
+                      color: theme.palette.text.secondary,
+                      minWidth: '100%',
+                      width: '100%',
+                      maxWidth: '100%',
+                      display: 'block',
+                      marginBottom: '2rem',
+                      borderBottom: `none`,
+                    },
+                    ...extra,
+                  };
+                }}
                 {...otherValueCellProps}
                 {...valueCellProps}
               >
