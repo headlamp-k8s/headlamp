@@ -20,7 +20,6 @@ jobs:
     runs-on: macos-latest
     permissions:
       contents: read
-      secrets: read
       actions: write # needed to upload artifacts
     steps:
     - uses: actions/checkout@v4
@@ -71,7 +70,6 @@ jobs:
     permissions:
       id-token: write # For fetching an OpenID Connect (OIDC) token
       contents: read
-      secrets: read
     runs-on: windows-latest
     needs: build-mac
     if: ${{ inputs.signBinaries }}
