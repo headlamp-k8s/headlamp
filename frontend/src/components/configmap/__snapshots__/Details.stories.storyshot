@@ -310,8 +310,8 @@ exports[`Storyshots ConfigMap/DetailsView Empty 1`] = `
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>
@@ -1351,8 +1351,8 @@ exports[`Storyshots ConfigMap/DetailsView With Base 1`] = `
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>

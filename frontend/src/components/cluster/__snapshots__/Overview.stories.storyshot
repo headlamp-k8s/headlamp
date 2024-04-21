@@ -1252,8 +1252,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                             class="MuiBox-root css-k008qs"
                           >
                             <label
-                              class="makeStyles-fullText"
                               id="abc123456"
+                              style="word-break: break-all; white-space: normal;"
                             >
                               failed to get cpu utilization: missing request for cpu
                             </label>
@@ -1326,8 +1326,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                             class="MuiBox-root css-k008qs"
                           >
                             <label
-                              class="makeStyles-fullText"
                               id="b123456"
+                              style="word-break: break-all; white-space: normal;"
                             >
                               failed to get cpu utilization: missing request for cpu
                             </label>
@@ -1400,8 +1400,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                             class="MuiBox-root css-k008qs"
                           >
                             <label
-                              class="makeStyles-fullText"
                               id="b12345"
+                              style="word-break: break-all; white-space: normal;"
                             >
                               failed to get cpu utilization: missing request for cpu
                             </label>

@@ -604,8 +604,8 @@ exports[`Storyshots WebhookConfiguration/ValidatingWebhookConfig/Details With Se
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>
@@ -1237,8 +1237,8 @@ exports[`Storyshots WebhookConfiguration/ValidatingWebhookConfig/Details With UR
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>

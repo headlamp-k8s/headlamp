@@ -428,8 +428,8 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>
@@ -913,8 +913,8 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>

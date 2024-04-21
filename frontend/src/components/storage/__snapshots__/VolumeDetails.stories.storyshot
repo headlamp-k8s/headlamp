@@ -343,8 +343,8 @@ exports[`Storyshots PersistentVolume/DetailsView Base 1`] = `
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>
