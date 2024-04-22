@@ -29,11 +29,34 @@ config:
   # -- base url path at which headlamp should run
   baseURL: ""
   oidc:
+    # Option 1:
+    # @param config.oidc.secret - OIDC secret configuration
+    # If you want to use an existing secret, set create to false and provide the name of the secret.
+    # If you want to create a new secret, set create to true and provide the name of the secret.
+    # Also provide the values for clientID, clientSecret, issuerURL, and scopes.
+    # Example:
+    # config:
+    #   oidc:
+    #     secret:
+    #       create: true
+    #       name: oidc
     secret:
       # -- Generate OIDC secret. If true, will generate a secret using .config.oidc.
       create: true
       # -- Name of the OIDC secret.
       name: oidc
+
+    # Option 2:
+    # @param config.oidc - OIDC env configuration
+    # If you want to set the OIDC configuration directly, set the following values.
+    # Example:
+    # config:
+    #   oidc:
+    #     clientID: "clientID"
+    #     clientSecret: "clientSecret"
+    #     issuerURL: "issuerURL"
+    #     scopes: "scopes"
+
     # -- OIDC client ID
     clientID: ""
     # -- OIDC client secret
@@ -42,6 +65,22 @@ config:
     issuerURL: ""
     # -- OIDC scopes to be used
     scopes: ""
+
+    # Option 3:
+    # @param config.oidc - External OIDC secret configuration
+    # If you want to use an external secret for OIDC configuration, enable this option.
+    # Provide the name of the secret to use.
+    # Example:
+    # config:
+    #   oidc:
+    #     secret:
+    #       create: false
+    #     externalSecret:
+    #       enabled: true
+    #       name: oidc
+    externalSecret:
+      enabled: false
+      name: ""
   # -- directory to look for plugins
   pluginsDir: "/headlamp/plugins"
   # Extra arguments that can be given to the container. See charts/headlamp/README.md for more information.

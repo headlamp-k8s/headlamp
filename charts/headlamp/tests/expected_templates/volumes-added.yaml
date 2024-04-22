@@ -62,6 +62,9 @@ spec:
     app.kubernetes.io/instance: headlamp
 ---
 # Source: headlamp/templates/deployment.yaml
+# This block of code is used to extract the values from the env.
+# This is done to check if the values are non-empty and if they are, they are used in the deployment.yaml.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -101,6 +104,7 @@ spec:
           args:
             - "-in-cluster"
             - "-plugins-dir=/headlamp/plugins"
+            # Check if externalSecret is disabled
           ports:
             - name: http
               containerPort: 4466
