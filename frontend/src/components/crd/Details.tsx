@@ -58,6 +58,14 @@ export default function CustomResourceDefinitionDetails() {
                 </Link>
               ),
             },
+            {
+              name: t('categories'),
+              value:
+                typeof item.jsonData.status.acceptedNames.categories !== 'undefined'
+                  ? item.jsonData.status.acceptedNames.categories.toString().split(',').join(', ')
+                  : '',
+              hide: typeof item.jsonData.status.acceptedNames.categories === 'undefined',
+            },
           ]
         }
       />

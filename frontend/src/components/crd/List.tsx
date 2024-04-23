@@ -62,7 +62,9 @@ export default function CustomResourceDefinitionList() {
           label: t('Categories'),
           getter: crd => {
             const categories = crd.jsonData!.status.acceptedNames.categories;
-            return typeof categories !== 'undefined' ? categories : 'un';
+            return typeof categories !== 'undefined'
+              ? categories.toString().split(',').join(', ')
+              : '';
           },
         },
         'age',
