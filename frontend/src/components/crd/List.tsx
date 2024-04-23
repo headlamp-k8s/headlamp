@@ -10,7 +10,7 @@ export default function CustomResourceDefinitionList() {
     <ResourceListView
       title={t('glossary|Custom Resources')}
       headerProps={{
-        noNamespaceFilter: true,
+        noNamespaceFilter: false,
       }}
       resourceClass={CRD}
       columns={[
@@ -57,6 +57,13 @@ export default function CustomResourceDefinitionList() {
           label: t('Scope'),
           getter: crd => crd.spec.scope,
           sort: true,
+        },
+        {
+          label: t('Categories'),
+          getter: crd => {
+            const categories = crd.jsonData!.status.acceptedNames.categories;
+            return typeof categories !== 'undefined' ? categories : 'un';
+          },
         },
         'age',
       ]}

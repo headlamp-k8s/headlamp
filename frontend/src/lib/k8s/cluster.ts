@@ -401,6 +401,9 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     getNamespace() {
       return this.metadata.namespace;
     }
+    getCategories() {
+      return this.jsonData!.status.acceptedNames.categories;
+    }
 
     getCreationTs() {
       return this.metadata.creationTimestamp;

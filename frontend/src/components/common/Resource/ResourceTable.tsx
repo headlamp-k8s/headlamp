@@ -25,7 +25,7 @@ export type ResourceTableColumn =
   | (ToggableColumn & SimpleTableDatumColumn)
   | (ToggableColumn & SimpleTableGetterColumn);
 
-type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
+type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind' | 'categories';
 
 export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
   /** The columns to be rendered, like used in SimpleTable, or by name. */
@@ -223,6 +223,13 @@ function Table(props: ResourceTableProps) {
                 }
                 return 0;
               },
+            };
+          case 'categories':
+            return {
+              id: 'categories',
+              label: t('translation|Categories'),
+              getter: (resource: KubeObject) => resource?.getCategories?.join(', '),
+              sort: false,
             };
           case 'type':
           case 'kind':
