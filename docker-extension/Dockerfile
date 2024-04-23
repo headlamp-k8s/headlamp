@@ -1,4 +1,4 @@
-FROM ghcr.io/headlamp-k8s/headlamp:v0.20.0 as headlamp
+FROM ghcr.io/headlamp-k8s/headlamp:v0.23.1 as headlamp
 
 FROM scratch
 
