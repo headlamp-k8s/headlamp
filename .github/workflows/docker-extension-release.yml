@@ -16,8 +16,6 @@ jobs:
   build_and_push_docker_extension:
     name: Build docker extension
     runs-on: ubuntu-latest
-    permissions:
-      secrets: read # needed to fetch docker hub creds
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v1

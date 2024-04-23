@@ -16,7 +16,6 @@ jobs:
     permissions:
       contents: write # needed to push a branch
       pull-requests: write # needed to open a pull request
-      secrets: read
 
     steps:
       - name: Checkout headlamp repo
