@@ -3,65 +3,171 @@ name: Build Frontend
 on:
   pull_request:
     paths:
-    - 'frontend/**'
-    - 'Makefile'
-    - '.github/**'
-    - 'app/**'
-    - 'plugins/**'
+      - "frontend/**"
+      - "Makefile"
+      - ".github/**"
+      - "app/**"
+      - "plugins/**"
   push:
     branches:
       - main
     paths:
-    - 'frontend/**'
-    - Makefile
-    - '.github/**'
-    - 'app/**'
-    - 'plugins/**'
+      - "frontend/**"
+      - Makefile
+      - ".github/**"
+      - "app/**"
+      - "plugins/**"
 
 permissions:
   contents: read
 
 jobs:
-  build:
-
-    runs-on: ubuntu-22.04
+  lint:
+    name: lint
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version: [20.x]
+        os: [ubuntu-22.04] # [windows-latest, ubuntu-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
 
-    - name: Install dependencies
-      run: |
-        make frontend-install-ci
+      - name: Install dependencies
+        run: |
+          make frontend-install
 
-    - name: Run linter
-      run: |
-        make frontend-lint
+      - name: Run linter
+        run: |
+          make frontend-lint
 
-    - name: Run tests
-      run: |
-        make frontend-test
+  test:
+    name: test
+    runs-on: ${{ matrix.os }}
 
-    - name: Build Frontend
-      run: |
-        make frontend-build
+    strategy:
+      matrix:
+        node-version: [20.x]
+        os: [ubuntu-22.04] # [windows-latest, ubuntu-latest, macos-latest]
 
-    - name: Test plugins
-      run: |
-        make plugins-test
+    steps:
+      - uses: actions/checkout@v4
 
-    - name: Build docs
-      run: |
-        make docs
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
 
-    - name: Build storybook
-      run: |
-        make frontend-build-storybook
+      - name: Install dependencies
+        run: |
+          make frontend-install
+
+      - name: Run tests
+        run: |
+          make frontend-test
+
+  build:
+    name: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [20.x]
+        os: [ubuntu-22.04] # [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          make frontend-install
+
+      - name: Build Frontend
+        run: |
+          make frontend-build
+
+  testplugins:
+    name: test plugins
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [20.x]
+        os: [ubuntu-22.04] # [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Test plugins
+        run: |
+          make plugins-test
+
+  builddocs:
+    name: build docs
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [20.x]
+        os: [ubuntu-22.04] # [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Build docs
+        run: |
+          make docs
+
+  buildstorybook:
+    name: build storybook
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [20.x]
+        os: [ubuntu-22.04] # [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          make frontend-install
+
+      - name: Build storybook
+        run: |
+          make frontend-build-storybook
