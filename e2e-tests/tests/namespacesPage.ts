@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class NamespacesPage {
   constructor(private page: Page) {}
@@ -21,7 +21,6 @@ export class NamespacesPage {
     const page = this.page;
 
     await page.waitForSelector('span:has-text("Namespaces")');
-
     await page.click('span:has-text("Namespaces")');
     await page.waitForLoadState('load');
 
@@ -32,14 +31,20 @@ export class NamespacesPage {
       return;
     }
 
-    await page.click('button[title="Create / Apply"]');
+    await expect(page.getByRole('button', { name: 'Create' })).toBeVisible();
+    await page.getByRole('button', { name: 'Create' }).click();
+
     await page.waitForLoadState('load');
 
-    await page.click('span:has-text("Use minimal editor")');
-    await page.waitForLoadState('load');
+    await expect(page.getByText('Use minimal editor')).toBeVisible();
+    await page.getByText('Use minimal editor').click();
 
+    await page.waitForLoadState('load');
     await page.fill('textarea[aria-label="yaml Code"]', yaml);
-    await page.click('button:has-text("Apply")');
+
+    await expect(page.getByRole('button', { name: 'Apply' })).toBeVisible();
+    await page.getByRole('button', { name: 'Apply' }).click();
+
     await page.waitForSelector(`text=Applied ${name}`);
   }
 
