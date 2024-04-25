@@ -98,6 +98,9 @@ export default function Layout({}: LayoutProps) {
       .then(config => {
         const clustersToConfig: ConfigState['clusters'] = {};
         config?.clusters.forEach((cluster: Cluster) => {
+          if (cluster.meta_data?.extensions?.headlamp_info?.customName) {
+            cluster.name = cluster.meta_data?.extensions?.headlamp_info?.customName;
+          }
           clustersToConfig[cluster.name] = cluster;
         });
 

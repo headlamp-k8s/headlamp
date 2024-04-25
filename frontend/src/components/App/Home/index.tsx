@@ -176,10 +176,14 @@ interface HomeComponentProps {
 
 function HomeComponent(props: HomeComponentProps) {
   const { clusters } = props;
+  const customNameClusters = Object.values(clusters).map(c => ({
+    ...c,
+    name: c.meta_data?.extensions?.headlamp_info?.customName || c.name,
+  }));
   const { t } = useTranslation(['translation', 'glossary']);
   const [versions, errors] = useClustersVersion(Object.values(clusters));
   const maxWarnings = 50;
-  const warningsMap = Event.useWarningList(Object.values(clusters).map(c => c.name));
+  const warningsMap = Event.useWarningList(Object.values(customNameClusters).map(c => c.name));
 
   function renderWarningsText(clusterName: string) {
     const numWarnings =
@@ -198,7 +202,7 @@ function HomeComponent(props: HomeComponentProps) {
   return (
     <PageGrid>
       <SectionBox headerProps={{ headerStyle: 'main' }} title={t('Home')}>
-        <RecentClusters clusters={Object.values(clusters)} onButtonClick={() => {}} />
+        <RecentClusters clusters={Object.values(customNameClusters)} onButtonClick={() => {}} />
       </SectionBox>
       <SectionBox
         title={
@@ -244,7 +248,7 @@ function HomeComponent(props: HomeComponentProps) {
               render: cluster => <ContextMenu cluster={cluster} />,
             },
           ]}
-          data={Object.values(clusters)}
+          data={Object.values(customNameClusters)}
           id="headlamp-home-clusters"
         />
       </SectionBox>
