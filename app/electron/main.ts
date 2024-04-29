@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime';
-import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
+import { ChildProcess, ChildProcessWithoutNullStreams, execSync, fork, spawn } from 'child_process';
 import { randomBytes } from 'crypto';
 import dotenv from 'dotenv';
 import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
@@ -706,6 +706,59 @@ function startElecron() {
     }
 
     ipcMain.on('run-command', handleRunCommand);
+
+    /**
+     * Represents the arguments for a plugin command.
+     */
+    interface PluginCommandArgs {
+      id: string;
+      command: string;
+      args: string[];
+    }
+
+    /**
+     * Handles a plugin commands from the renderer process.
+     *
+     * Forks the current electron process to run the plugin command and sends
+     * 'plugin-command-stdout', 'plugin-command-stderr', and 'plugin-command-exit'
+     * events back to the renderer process with the plugin command's output and exit code.
+     *
+     *
+     * @param {IpcMainEvent} event - The IPC event object representing the incoming command.
+     * @param {PluginCommandArgs} data - The data containing plugin command details.
+     * @returns {void}
+     */
+    function handlePluginCommand(event: IpcMainEvent, data: PluginCommandArgs) {
+      const { id, command, args } = data;
+
+      const includesJFlag = args.includes('-j');
+      const argsWithJFlag = includesJFlag ? args : [...args, '-j'];
+
+      const child: ChildProcess = fork('plugin-management.js', [command, ...argsWithJFlag], {
+        env: {
+          ELECTRON_RUN_AS_NODE: '1',
+        },
+        silent: true,
+      });
+
+      if (child.stdout !== null) {
+        child.stdout.on('data', (data: string | Buffer) => {
+          event.sender.send('plugin-command-stdout', id, data.toString());
+        });
+      }
+
+      if (child.stderr !== null) {
+        child.stderr.on('data', (data: string | Buffer) => {
+          event.sender.send('plugin-command-stderr', id, data.toString());
+        });
+      }
+
+      child.on('exit', (code: number | null) => {
+        event.sender.send('plugin-command-exit', id, code);
+      });
+    }
+
+    ipcMain.on('plugin-command', handlePluginCommand);
 
     if (!useExternalServer) {
       const runningHeadlamp = await getRunningHeadlampPIDs();

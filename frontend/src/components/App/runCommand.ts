@@ -85,3 +85,78 @@ export function runCommand(
       exit.addEventListener(event, (e: any) => listener(e.detail)),
   };
 }
+/**
+ * Executes a plugin command and returns an object mimicking the interface of a ChildProcess object returned by Node's fork function.
+ *
+ * This function is intended to be used only when Headlamp is in app mode.
+ *
+ * @param {'list' | 'install' | 'update' | 'delete'} command - The command to execute.
+ * @param {...string} args - Additional arguments for the command.
+ * @returns {{
+ *  on: (event: string, listener: (code: number | null) => void) => void;
+ *  stdout: { on: (event: string, listener: (chunk: any) => void) => void };
+ *  stderr: { on: (event: string, listener: (chunk: any) => void) => void };
+ * }} An object with event listeners for exit, stdout, and stderr.
+ * @throws {Error} Throws an error if runCommand is not available or running commands is disabled.
+ */
+
+export function runPluginCommand(
+  command: 'list' | 'install' | 'update' | 'delete',
+  ...args: string[]
+): {
+  on: (event: string, listener: (code: number | null) => void) => void;
+  stdout: { on: (event: string, listener: (chunk: any) => void) => void };
+  stderr: { on: (event: string, listener: (chunk: any) => void) => void };
+} {
+  if (!window.desktopApi) {
+    throw new Error('runCommand only works in Headlamp app mode.');
+  }
+
+  if (process.env.REACT_APP_ENABLE_RUN_CMD !== 'true') {
+    throw new Error('Running commands is disabled.');
+  }
+
+  // Generate a unique ID for the command, so that we can distinguish between
+  // multiple commands running at the same time.
+  const id = `${new Date().getTime()}-${Math.random().toString(36)}`;
+
+  const stdout = new EventTarget();
+  const stderr = new EventTarget();
+  const exit = new EventTarget();
+
+  window.desktopApi.send('plugin-command', { id, command, args });
+
+  window.desktopApi.receive('plugin-command-stdout', (cmdId: string, data: string) => {
+    if (cmdId === id) {
+      const event = new CustomEvent('data', { detail: data });
+      stdout.dispatchEvent(event);
+    }
+  });
+
+  window.desktopApi.receive('plugin-command-stderr', (cmdId: string, data: string) => {
+    if (cmdId === id) {
+      const event = new CustomEvent('data', { detail: data });
+      stderr.dispatchEvent(event);
+    }
+  });
+
+  window.desktopApi.receive('plugin-command-exit', (cmdId: string, code: number) => {
+    if (cmdId === id) {
+      const event = new CustomEvent('exit', { detail: code });
+      exit.dispatchEvent(event);
+    }
+  });
+
+  return {
+    on: (event: string, listener: (code: number | null) => void) =>
+      exit.addEventListener(event, (e: any) => listener(e.detail)),
+    stdout: {
+      on: (event: string, listener: (chunk: any) => void) =>
+        stdout.addEventListener(event, (e: any) => listener(e.detail)),
+    },
+    stderr: {
+      on: (event: string, listener: (chunk: any) => void) =>
+        stderr.addEventListener(event, (e: any) => listener(e.detail)),
+    },
+  };
+}
