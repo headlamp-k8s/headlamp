@@ -172,26 +172,17 @@ func flagset() *flag.FlagSet {
 
 // Gets the default plugins-dir depending on platform.
 func defaultPluginDir() string {
-	// These are the folders we use for the default plugin-dir.
-	//  - the passed in pluginDir if it's not empty.
-	//  - "./.plugins" if it exists.
+	// This is the folder we use for the default plugin-dir:
 	//  - ~/.config/Headlamp/plugins exists or it can be made
-	//  - "./.plugins" if the ~/.config/Headlamp/plugins can't be made.
 	// Windows: %APPDATA%\Headlamp\Config\plugins
 	//   (for example, C:\Users\USERNAME\AppData\Roaming\Headlamp\Config\plugins)
-	pluginDirDefault := "./.plugins"
-
-	if folderExists(pluginDirDefault) {
-		return pluginDirDefault
-	}
-
 	// https://www.npmjs.com/package/env-paths
 	// https://pkg.go.dev/os#UserConfigDir
 	userConfigDir, err := os.UserConfigDir()
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "getting user config dir")
 
-		return pluginDirDefault
+		return ""
 	}
 
 	pluginsConfigDir := filepath.Join(userConfigDir, "Headlamp", "plugins")
@@ -207,20 +198,10 @@ func defaultPluginDir() string {
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "creating plugins directory")
 
-		return pluginDirDefault
+		return ""
 	}
 
 	return pluginsConfigDir
-}
-
-// folderExists(path) returns true if the folder exists.
-func folderExists(path string) bool {
-	info, err := os.Stat(path)
-	if os.IsNotExist(err) {
-		return false
-	}
-
-	return info.IsDir()
 }
 
 func GetDefaultKubeConfigPath() string {
