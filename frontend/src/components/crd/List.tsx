@@ -10,7 +10,8 @@ export default function CustomResourceDefinitionList() {
     <ResourceListView
       title={t('glossary|Custom Resources')}
       headerProps={{
-        noNamespaceFilter: false,
+        noNamespaceFilter: true,
+        noCategoriesFilter: false,
       }}
       resourceClass={CRD}
       columns={[

@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import CRD from '../../lib/k8s/crd';
-import { removeCategoryFilter,setCategoryFilter } from '../../redux/filterSlice'; // Import the action to set the category filter
+import { removeCategoryFilter, setCategoryFilter } from '../../redux/filterSlice'; // Import the action to set the category filter
 import { useTypedSelector } from '../../redux/reducers/reducers'; // Import the hook to access the Redux store's state
 
 // Define CRDCategoriesList component
@@ -57,9 +57,6 @@ export function CRDCategoriesList() {
         options={categories}
         isOptionEqualToValue={(option, value) => value.includes(option)}
         getOptionLabel={option => option.toString()}
-        /*
-                isOptionEqualToValue={filter.categories.some(shit => filteredCategories.includes(shit))}
-*/
         renderOption={(props, option, { selected }) => (
           <li {...props}>
             <Checkbox checked={selected} />

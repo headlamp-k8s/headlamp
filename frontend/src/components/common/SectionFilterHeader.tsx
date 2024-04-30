@@ -18,6 +18,7 @@ import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
 export interface SectionFilterHeaderProps extends SectionHeaderProps {
   noNamespaceFilter?: boolean;
+  noCategoriesFilter?: boolean;
   noSearch?: boolean;
   preRenderFromFilterActions?: React.ReactNode[];
 }
@@ -25,6 +26,7 @@ export interface SectionFilterHeaderProps extends SectionHeaderProps {
 export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const {
     noNamespaceFilter = false,
+    noCategoriesFilter = true,
     noSearch = false,
     actions: propsActions = [],
     preRenderFromFilterActions,
@@ -35,6 +37,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const location = useLocation();
   const history = useHistory();
   const hasNamespaceFilters = !noNamespaceFilter && filter.namespaces.size > 0;
+  const hasCategoriesFilters = !noCategoriesFilter && filter.categories.length > 0;
   const hasSearch = !noSearch && !!filter.search;
   const { t } = useTranslation();
 
@@ -48,7 +51,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   // To solve this, we keep track of whether the filter has been shown by the user, in which case we
   // don't hide it even when the search is empty.
   const [showFilters, setShowFilters] = React.useState<{ show: boolean; userTriggered: boolean }>({
-    show: hasNamespaceFilters || hasSearch,
+    show: hasNamespaceFilters || hasSearch || hasCategoriesFilters,
     userTriggered: false,
   });
 
@@ -130,9 +133,12 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
               <NamespacesAutocomplete />
             </Grid>
           )}
-          <Grid item>
-            <CRDCategoriesList />
-          </Grid>
+          {!noCategoriesFilter && (
+            <Grid item>
+              <CRDCategoriesList />
+            </Grid>
+          )}
+
           <Grid item>
             <TextField
               id="standard-search"
