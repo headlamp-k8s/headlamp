@@ -144,20 +144,26 @@ function Table(props: ResourceTableProps) {
   const [tableSettings, setTableSettings] = useState<{ id: string; show: boolean }[]>(
     !!id ? helpers.loadTableSettings(id) : []
   );
+  const [processedColumns, setProcessedColumns] = useState(columns);
+
+  // Effect to handle changes in columns and reprocess if necessary
+  useEffect(() => {
+    async function processColumns() {
+      let newProcessedColumns = columns;
+      if (!noProcessing) {
+        for (const processorInfo of tableProcessors) {
+          newProcessedColumns =
+            (await processorInfo.processor({ id: id || '', columns: newProcessedColumns })) || [];
+        }
+      }
+      setProcessedColumns(newProcessedColumns);
+    }
+
+    processColumns();
+  }, [columns, noProcessing, id, tableProcessors]);
 
   const [resourceCols, cols, sortingColumn] = useMemo(() => {
     let sortingColumn = defaultSortingColumn;
-
-    let processedColumns = columns;
-
-    if (!noProcessing) {
-      tableProcessors.forEach(processorInfo => {
-        console.debug('Processing columns with processor: ', processorInfo.id, '...');
-        processedColumns =
-          processorInfo.processor({ id: id || '', columns: processedColumns }) || [];
-      });
-    }
-
     let shouldSortOnAge = false;
 
     const resourceCols: ResourceTableColumnWithDefaultShow[] = processedColumns
@@ -258,6 +264,7 @@ function Table(props: ResourceTableProps) {
 
     return [resourceCols, cols, sortingColumn];
   }, [
+    processedColumns,
     columns,
     hideColumns,
     id,
