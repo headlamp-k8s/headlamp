@@ -144,24 +144,31 @@ function Table(props: ResourceTableProps) {
   const [tableSettings, setTableSettings] = useState<{ id: string; show: boolean }[]>(
     !!id ? helpers.loadTableSettings(id) : []
   );
+  const [finalCols, setFinalCols] = useState(columns);
+
+  let processedColumns = columns;
 
   const [resourceCols, cols, sortingColumn] = useMemo(() => {
     let sortingColumn = defaultSortingColumn;
 
-    let processedColumns = columns;
-
     if (!noProcessing) {
-      tableProcessors.forEach(processorInfo => {
+      tableProcessors.forEach(async function (processorInfo) {
         console.debug('Processing columns with processor: ', processorInfo.id, '...');
         processedColumns =
-          processorInfo.processor({ id: id || '', columns: processedColumns }) || [];
+          (await processorInfo.processor({ id: id || '', columns: processedColumns })) || [];
+        //@ts-ignore
+        setFinalCols(processedColumns);
       });
     }
 
+    console.log('tableProcessors', tableProcessors);
+    console.log('processedColumns', processedColumns);
     let shouldSortOnAge = false;
 
-    const resourceCols: ResourceTableColumnWithDefaultShow[] = processedColumns
+    const resourceCols: ResourceTableColumnWithDefaultShow[] = finalCols
       .map(col => {
+        console.log('processing col', col);
+
         if (typeof col !== 'string') {
           return col;
         }

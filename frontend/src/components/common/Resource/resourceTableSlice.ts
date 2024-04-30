@@ -20,7 +20,8 @@ export type TableColumnsProcessor = {
   processor: (args: {
     id: string;
     columns: ResourceTableProps['columns'];
-  }) => ResourceTableProps['columns'];
+  }) => Promise<ResourceTableProps['columns']>;
+  // }) => ResourceTableProps['columns'];
 };
 
 const initialState: ResourceTableState = {
