@@ -3,7 +3,7 @@
 exports[`Storyshots Pod/PodDetailsView Error 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -819,7 +819,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                     alpine:3.4
                   </p>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-imageID css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-x1ts2p-MuiTypography-root"
                   >
                     <span
                       class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -1015,7 +1015,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
 exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -1934,7 +1934,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                     busybox
                   </p>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-imageID css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-x1ts2p-MuiTypography-root"
                   >
                     <span
                       class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -2234,7 +2234,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
 exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -3024,7 +3024,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                     registry.k8s.io/liveness
                   </p>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-imageID css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-x1ts2p-MuiTypography-root"
                   >
                     <span
                       class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -3308,7 +3308,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
 exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -4263,7 +4263,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
 exports[`Storyshots Pod/PodDetailsView Running 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -5036,7 +5036,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                     nginx:1.14.2
                   </p>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-imageID css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-x1ts2p-MuiTypography-root"
                   >
                     <span
                       class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -5260,7 +5260,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
 exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -6075,7 +6075,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                     alpine:3.4
                   </p>
                   <p
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-imageID css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-x1ts2p-MuiTypography-root"
                   >
                     <span
                       class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"

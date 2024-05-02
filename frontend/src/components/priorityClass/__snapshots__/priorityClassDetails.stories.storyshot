@@ -3,7 +3,7 @@
 exports[`Storyshots PriorityClass/PriorityClassDetailsView Default 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -300,7 +300,7 @@ exports[`Storyshots PriorityClass/PriorityClassDetailsView Default 1`] = `
 exports[`Storyshots PriorityClass/PriorityClassDetailsView Error 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -393,7 +393,7 @@ exports[`Storyshots PriorityClass/PriorityClassDetailsView Error 1`] = `
 exports[`Storyshots PriorityClass/PriorityClassDetailsView No Item Yet 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
