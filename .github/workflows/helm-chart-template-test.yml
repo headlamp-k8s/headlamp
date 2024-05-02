@@ -1,0 +1,34 @@
+name: Template test Helm charts
+
+on:
+  pull_request:
+    paths:
+      - charts/**
+      - '!charts/**/README.md'
+
+permissions:
+  contents: read
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.7.0
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Run template testing script
+        run: |
+          export SHELL=/bin/bash
+          make helm-template-test
+
