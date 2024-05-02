@@ -574,6 +574,7 @@ function startElecron() {
       if (url.startsWith(startUrl)) {
         return;
       }
+      event.preventDefault();
       shell.openExternal(url);
     });
 
