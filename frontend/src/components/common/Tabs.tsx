@@ -2,16 +2,9 @@ import { Theme } from '@mui/material';
 import MuiTab from '@mui/material/Tab';
 import MuiTabs from '@mui/material/Tabs';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import { SxProps } from '@mui/system';
 import React from 'react';
 import { useId } from '../../lib/util';
-
-const useStyle = makeStyles(() => ({
-  tab: {
-    minWidth: 150, // allows 8 tabs to show like on pods
-  },
-}));
 
 export interface Tab {
   label: string;
@@ -34,7 +27,6 @@ export default function Tabs(props: TabsProps) {
   const [tabIndex, setTabIndex] = React.useState<TabsProps['defaultIndex']>(
     defaultIndex && Math.min(defaultIndex as number, 0)
   );
-  const classes = useStyle();
 
   function handleTabChange(event: any, newValue: number) {
     setTabIndex(newValue);
@@ -76,7 +68,13 @@ export default function Tabs(props: TabsProps) {
           <MuiTab
             key={i}
             label={label}
-            className={tabs?.length > 7 ? classes.tab : ''}
+            sx={
+              tabs?.length > 7
+                ? {
+                    minWidth: 150, // allows 8 tabs to show like on pods
+                  }
+                : {}
+            }
             id={`full-width-tab-${i}-${ariaLabel.replace(' ', '')}-${uniqueIdSuffix}`}
             aria-controls={`full-width-tabpanel-${i}-${ariaLabel.replace(
               ' ',
