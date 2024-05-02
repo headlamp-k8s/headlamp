@@ -139,3 +139,7 @@ storybook:
 i18n:
 	cd app && npm run i18n
 	cd frontend && npm run i18n
+
+.PHONY: helm-template-test
+helm-template-test:
+	charts/headlamp/tests/test.sh
