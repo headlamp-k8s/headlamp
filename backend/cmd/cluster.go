@@ -28,3 +28,9 @@ type ClusterReq struct {
 type KubeconfigRequest struct {
 	Kubeconfigs []string `json:"kubeconfigs"`
 }
+
+// RenameClusterRequest is the request body structure for renaming a cluster.
+type RenameClusterRequest struct {
+	NewClusterName string `json:"newClusterName"`
+	Source         string `json:"source"`
+}
