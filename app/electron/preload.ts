@@ -5,7 +5,14 @@ import { contextBridge, ipcRenderer } from 'electron';
 contextBridge.exposeInMainWorld('desktopApi', {
   send: (channel, data) => {
     // allowed channels
-    const validChannels = ['setMenu', 'locale', 'appConfig', 'pluginsLoaded', 'run-command'];
+    const validChannels = [
+      'setMenu',
+      'locale',
+      'appConfig',
+      'pluginsLoaded',
+      'run-command',
+      'plugin-manager',
+    ];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
@@ -19,6 +26,7 @@ contextBridge.exposeInMainWorld('desktopApi', {
       'command-stdout',
       'command-stderr',
       'command-exit',
+      'plugin-manager',
     ];
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`

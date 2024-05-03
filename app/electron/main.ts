@@ -11,6 +11,7 @@ import open from 'open';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
+import PluginManager from '../../plugins/headlamp-plugin/plugin-management-utils';
 import i18n from './i18next.config';
 import windowSize from './windowSize';
 
@@ -47,6 +48,270 @@ const buildManifest = fs.existsSync(manifestFile) ? require(manifestFile) : {};
 
 // make it global so that it doesn't get garbage collected
 let mainWindow: BrowserWindow | null;
+
+interface Action {
+  identifier: string;
+  action: 'INSTALL' | 'UNINSTALL' | 'UPDATE' | 'LIST' | 'CANCEL' | 'GET';
+  URL?: string;
+  destinationFolder?: string;
+  headlampVersion?: string;
+  pluginName?: string;
+}
+
+interface ProgressResp {
+  type: string;
+  message: string;
+  data?: Record<string, any>;
+}
+
+/**
+ * `PluginManagerEventListeners` is a class that manages event listeners for plugins-manager.
+ *
+ * @class
+ */
+class PluginManagerEventListeners {
+  private cache: {
+    [key: string]: {
+      action: 'INSTALL' | 'UNINSTALL' | 'UPDATE' | 'LIST' | 'CANCEL';
+      progress: ProgressResp;
+      controller?: AbortController;
+      percentage?: number;
+    };
+  } = {};
+
+  constructor() {
+    this.cache = {};
+  }
+
+  /**
+   * Converts the progress response to a percentage.
+   *
+   * @param {ProgressResp} progress - The progress response object.
+   * @returns {number} The progress as a percentage.
+   */
+  private convertProgressToPercentage(progress: ProgressResp): number {
+    switch (progress.message) {
+      case 'Fetching Plugin Metadata':
+        return 20;
+      case 'Plugin Metadata Fetched':
+        return 30;
+      case 'Downloading Plugin':
+        return 50;
+      case 'Plugin Downloaded':
+        return 100;
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * Sets up event handlers for plugin-manager.
+   *
+   * @method
+   * @name setupEventHandlers
+   */
+  setupEventHandlers() {
+    ipcMain.on('plugin-manager', (event, data) => {
+      const eventData = JSON.parse(data) as Action;
+      const { identifier, action } = eventData;
+
+      const updateCache = (progress: ProgressResp) => {
+        const percentage = this.convertProgressToPercentage(progress);
+        this.cache[identifier].progress = progress;
+        this.cache[identifier].percentage = percentage;
+      };
+
+      switch (action) {
+        case 'INSTALL':
+          this.handleInstall(eventData, updateCache);
+          break;
+        case 'UPDATE':
+          this.handleUpdate(eventData, updateCache);
+          break;
+        case 'UNINSTALL':
+          this.handleUninstall(eventData, updateCache);
+          break;
+        case 'LIST':
+          this.handleList(event, eventData);
+          break;
+        case 'CANCEL':
+          this.handleCancel(event, identifier);
+          break;
+        case 'GET':
+          this.handleGet(event, identifier);
+          break;
+        default:
+          console.error(`Unknown action: ${action}`);
+      }
+    });
+  }
+
+  /**
+   * Handles the installation process.
+   *
+   * @method
+   * @name handleInstall
+   * @private
+   */
+  private handleInstall(eventData: Action, updateCache: (progress: ProgressResp) => void) {
+    const { identifier, URL, destinationFolder, headlampVersion } = eventData;
+    if (!URL) {
+      this.cache[identifier] = {
+        action: 'INSTALL',
+        progress: { type: 'error', message: 'URL is required' },
+      };
+      return;
+    }
+
+    const controller = new AbortController();
+    this.cache[identifier] = {
+      action: 'INSTALL',
+      progress: { type: 'info', message: 'installing plugin' },
+      percentage: 10,
+      controller,
+    };
+
+    PluginManager.install(
+      URL,
+      destinationFolder,
+      headlampVersion,
+      progress => {
+        updateCache(progress);
+      },
+      controller.signal
+    );
+  }
+
+  /**
+   * Handles the update process.
+   *
+   * @method
+   * @name handleUpdate
+   * @private
+   */
+  private handleUpdate(eventData: Action, updateCache: (progress: ProgressResp) => void) {
+    const { identifier, pluginName, destinationFolder, headlampVersion } = eventData;
+    if (!pluginName) {
+      this.cache[identifier] = {
+        action: 'UPDATE',
+        progress: { type: 'error', message: 'Plugin Name is required' },
+      };
+      return;
+    }
+
+    const controller = new AbortController();
+    this.cache[identifier] = {
+      action: 'UPDATE',
+      percentage: 10,
+      progress: { type: 'info', message: 'updating plugin' },
+      controller,
+    };
+
+    PluginManager.update(
+      pluginName,
+      destinationFolder,
+      headlampVersion,
+      progress => {
+        updateCache(progress);
+      },
+      controller.signal
+    );
+  }
+
+  /**
+   * Handles the uninstallation process.
+   *
+   * @method
+   * @name handleUninstall
+   * @private
+   */
+  private handleUninstall(eventData: Action, updateCache: (progress: ProgressResp) => void) {
+    const { identifier, pluginName, destinationFolder } = eventData;
+    if (!pluginName) {
+      this.cache[identifier] = {
+        action: 'UNINSTALL',
+        progress: { type: 'error', message: 'Plugin Name is required' },
+      };
+      return;
+    }
+
+    this.cache[identifier] = {
+      action: 'UNINSTALL',
+      progress: { type: 'info', message: 'uninstalling plugin' },
+    };
+
+    PluginManager.uninstall(pluginName, destinationFolder, progress => {
+      updateCache(progress);
+    });
+  }
+
+  /**
+   * Handles the list event.
+   *
+   * @method
+   * @name handleList
+   * @param {Electron.IpcMainEvent} event - The IPC Main Event.
+   * @param {Action} eventData - The event data.
+   * @private
+   */
+  private handleList(event: Electron.IpcMainEvent, eventData: Action) {
+    const { identifier, destinationFolder } = eventData;
+    PluginManager.list(destinationFolder, progress => {
+      event.sender.send('plugin-manager', JSON.stringify({ identifier: identifier, ...progress }));
+    });
+  }
+
+  /**
+   * Handles the cancel event.
+   *
+   * @method
+   * @name handleCancel
+   * @param {Electron.IpcMainEvent} event - The IPC Main Event.
+   * @param {string} identifier - The identifier of the event to cancel.
+   * @private
+   */
+  private handleCancel(event: Electron.IpcMainEvent, identifier: string) {
+    const cacheEntry = this.cache[identifier];
+    if (cacheEntry?.controller) {
+      cacheEntry.controller.abort();
+      event.sender.send(
+        'plugin-manager',
+        JSON.stringify({ type: 'success', message: 'cancelled' })
+      );
+    }
+  }
+
+  /**
+   * Handles the get event.
+   *
+   * @method
+   * @name handleGet
+   * @param {Electron.IpcMainEvent} event - The IPC Main Event.
+   * @param {string} identifier - The identifier of the event to get.
+   * @private
+   */
+  private handleGet(event: Electron.IpcMainEvent, identifier: string) {
+    const cacheEntry = this.cache[identifier];
+    if (cacheEntry) {
+      event.sender.send(
+        'plugin-manager',
+        JSON.stringify({
+          identifier: identifier,
+          ...cacheEntry.progress,
+          percentage: cacheEntry.percentage,
+        })
+      );
+    } else {
+      event.sender.send(
+        'plugin-manager',
+        JSON.stringify({
+          type: 'error',
+          message: 'No such operation in progress',
+        })
+      );
+    }
+  }
+}
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = isDev
@@ -707,6 +972,8 @@ function startElecron() {
     }
 
     ipcMain.on('run-command', handleRunCommand);
+
+    new PluginManagerEventListeners().setupEventHandlers();
 
     if (!useExternalServer) {
       const runningHeadlamp = await getRunningHeadlampPIDs();
