@@ -1,6 +1,7 @@
 import { has } from 'lodash';
 import React from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
+import { PluginManager } from '../components/App/pluginManager';
 import { runCommand } from '../components/App/runCommand';
 import { setBrandingAppLogoComponent } from '../components/App/themeSlice';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
@@ -680,4 +681,10 @@ export function registerPluginSettings(
   store.dispatch(setPluginSettingsComponent({ name, component, displaySaveButton }));
 }
 
-export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders, runCommand };
+export {
+  DefaultAppBarAction,
+  DefaultDetailsViewSection,
+  getHeadlampAPIHeaders,
+  runCommand,
+  PluginManager,
+};
