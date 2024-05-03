@@ -11,10 +11,9 @@ jobs:
   winget-update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout winget-automation
+      - name: Checkout Headlamp
         uses: actions/checkout@v4
         with:
-          ref: winget-automation
           token: ${{ secrets.KINVOLK_REPOS_TOKEN }}
           # we need the full history for the git tag command, so fetch all the branches
           fetch-depth: 0
