@@ -37,6 +37,7 @@ See [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAIN
 | imagePullSecrets | list | `[]` | An optional list of references to secrets in the same namespace to use for pulling any of the images used |
 | ingress.annotations | object | `{}` | Annotations for Ingress resource |
 | ingress.enabled | bool | `false` | Enable ingress controller resource |
+| ingress.ingressClassName | string | `""` | The ingress class name. Replacement for the deprecated "kubernetes.io/ingress.class" annotation |
 | ingress.hosts | list | `[]` | Hostname(s) for the Ingress resource |
 | ingress.tls | list | `[]` | Ingress TLS configuration |
 | initContainers | list | `[]` | An optional list of init containers to be run before the main containers. |

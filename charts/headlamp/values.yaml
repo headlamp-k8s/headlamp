@@ -120,8 +120,11 @@ ingress:
   # -- Annotations for Ingress resource
   annotations:
     {}
-    # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
+
+  # -- Ingress class name. replacement for the deprecated "kubernetes.io/ingress.class" annotation
+  ingressClassName: ""
+
   # -- Hostname(s) for the Ingress resource
   hosts:
     []
