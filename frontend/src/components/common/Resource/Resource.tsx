@@ -9,7 +9,7 @@ import Input, { InputProps } from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
 import { BaseTextFieldProps } from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/system';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
