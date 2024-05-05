@@ -1,7 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
 import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import MuiLink from '@mui/material/Link';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,21 +15,6 @@ import {
   PORT_FORWARDS_STORAGE_KEY,
 } from '../common/Resource/PortForward';
 
-const useStyles = makeStyles(theme => ({
-  link: {
-    // color: portforward.status === PORT_FORWARD_RUNNING_STATUS ? '#2774B3' : '',
-    cursor: 'pointer',
-    marginRight: theme.spacing(1),
-  },
-  disabledLink: {
-    pointerEvents: 'none',
-    color: theme.palette.text.disabled,
-  },
-  linkIcon: {
-    marginLeft: theme.spacing(0.5),
-  },
-}));
-
 const enum PortForwardAction {
   Start = 'Start',
   Stop = 'Stop',
@@ -38,10 +23,10 @@ const enum PortForwardAction {
 
 export default function PortForwardingList() {
   const [portforwards, setPortForwards] = React.useState<any[]>([]);
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [portForwardInAction, setPortForwardInAction] = React.useState<any>(null);
   const { enqueueSnackbar } = useSnackbar();
-  const classes = useStyles();
   const cluster = getCluster();
   const { t, i18n } = useTranslation(['translation', 'glossary']);
   const optionsTranslated = React.useMemo(
@@ -233,14 +218,23 @@ export default function PortForwardingList() {
                     onClick={() => {
                       window.open(`http://localhost:${portforward.port}`, '_blank');
                     }}
-                    className={
+                    sx={theme =>
                       portforward.status === PORT_FORWARD_RUNNING_STATUS
-                        ? classes.link
-                        : classes.disabledLink
+                        ? {
+                            cursor: 'pointer',
+                            marginRight: theme.spacing(1),
+                          }
+                        : {
+                            pointerEvents: 'none',
+                            color: theme.palette.text.disabled,
+                          }
                     }
                   >
                     {portforward.port}
-                    <InlineIcon icon={'mdi:open-in-new'} className={classes.linkIcon} />
+                    <InlineIcon
+                      icon={'mdi:open-in-new'}
+                      style={{ marginLeft: theme.spacing(0.5) }}
+                    />
                   </MuiLink>
                 </Box>
               );
