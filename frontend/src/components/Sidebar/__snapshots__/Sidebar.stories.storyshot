@@ -7,16 +7,16 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
     class="MuiBox-root css-0"
   >
     <div
-      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerClose css-7ik032-MuiDrawer-docked"
+      class="MuiDrawer-root MuiDrawer-docked css-1p9jtjb-MuiDrawer-docked"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper makeStyles-drawerClose MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
       >
         <div
-          class="makeStyles-toolbar MuiBox-root css-0"
+          class="MuiBox-root css-6r4z7i"
         />
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap makeStyles-sidebarGrid css-1faa83w-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap css-tf9pd2-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -137,7 +137,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
             <div
-              class="makeStyles-linkArea MuiBox-root css-1k1a8ni"
+              class="MuiBox-root css-uskbpj"
             >
               <div
                 class="MuiBox-root css-1h413jj"
@@ -182,16 +182,16 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
     class="MuiBox-root css-0"
   >
     <div
-      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerOpen css-7ik032-MuiDrawer-docked"
+      class="MuiDrawer-root MuiDrawer-docked css-1hap3a5-MuiDrawer-docked"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
       >
         <div
-          class="makeStyles-toolbar MuiBox-root css-0"
+          class="MuiBox-root css-6r4z7i"
         />
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap makeStyles-sidebarGrid css-1faa83w-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap css-tf9pd2-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -333,7 +333,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
             <div
-              class="makeStyles-linkArea MuiBox-root css-1k1a8ni"
+              class="MuiBox-root css-uskbpj"
             >
               <div
                 class="MuiBox-root css-phsv6y"
@@ -378,16 +378,16 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
     class="MuiBox-root css-0"
   >
     <div
-      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerClose css-7ik032-MuiDrawer-docked"
+      class="MuiDrawer-root MuiDrawer-docked css-1p9jtjb-MuiDrawer-docked"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper makeStyles-drawerClose MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
       >
         <div
-          class="makeStyles-toolbar MuiBox-root css-0"
+          class="MuiBox-root css-6r4z7i"
         />
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap makeStyles-sidebarGrid css-1faa83w-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap css-tf9pd2-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -1433,7 +1433,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
             <div
-              class="makeStyles-linkArea MuiBox-root css-1k1a8ni"
+              class="MuiBox-root css-uskbpj"
             >
               <div
                 class="MuiBox-root css-xi606m"
@@ -1494,16 +1494,16 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
     class="MuiBox-root css-0"
   >
     <div
-      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerOpen css-7ik032-MuiDrawer-docked"
+      class="MuiDrawer-root MuiDrawer-docked css-1hap3a5-MuiDrawer-docked"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
       >
         <div
-          class="makeStyles-toolbar MuiBox-root css-0"
+          class="MuiBox-root css-6r4z7i"
         />
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap makeStyles-sidebarGrid css-1faa83w-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap css-tf9pd2-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -2598,7 +2598,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
             <div
-              class="makeStyles-linkArea MuiBox-root css-1k1a8ni"
+              class="MuiBox-root css-uskbpj"
             >
               <div
                 class="MuiBox-root css-xi606m"
@@ -2666,16 +2666,16 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
     class="MuiBox-root css-0"
   >
     <div
-      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerOpen css-7ik032-MuiDrawer-docked"
+      class="MuiDrawer-root MuiDrawer-docked css-1hap3a5-MuiDrawer-docked"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12i7wg6-MuiPaper-root-MuiDrawer-paper"
       >
         <div
-          class="makeStyles-toolbar MuiBox-root css-0"
+          class="MuiBox-root css-6r4z7i"
         />
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap makeStyles-sidebarGrid css-1faa83w-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap css-tf9pd2-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -3770,7 +3770,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
             <div
-              class="makeStyles-linkArea MuiBox-root css-1k1a8ni"
+              class="MuiBox-root css-uskbpj"
             >
               <div
                 class="MuiBox-root css-xi606m"
