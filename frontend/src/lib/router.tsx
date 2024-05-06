@@ -1,7 +1,7 @@
+import { lazy } from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
-import Home from '../components/App/Home';
 import NotificationList from '../components/App/Notifications/List';
 import PluginSettings from '../components/App/PluginSettings';
 import PluginSettingsDetails from '../components/App/PluginSettings/PluginSettingsDetails';
@@ -36,12 +36,8 @@ import { LeaseDetails } from '../components/lease/Details';
 import { LeaseList } from '../components/lease/List';
 import { LimitRangeDetails } from '../components/limitRange/Details';
 import { LimitRangeList } from '../components/limitRange/List';
-import NamespaceDetails from '../components/namespace/Details';
-import NamespacesList from '../components/namespace/List';
 import { NetworkPolicyDetails } from '../components/networkpolicy/Details';
 import { NetworkPolicyList } from '../components/networkpolicy/List';
-import NodeDetails from '../components/node/Details';
-import NodeList from '../components/node/List';
 import OIDCAuth from '../components/oidcauth';
 import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
@@ -68,12 +64,6 @@ import ServiceAccountList from '../components/serviceaccount/List';
 import { DefaultSidebars } from '../components/Sidebar';
 import StatefulSetDetails from '../components/statefulset/Details';
 import StatefulSetList from '../components/statefulset/List';
-import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
-import PersistentVolumeClaimList from '../components/storage/ClaimList';
-import StorageClassDetails from '../components/storage/ClassDetails';
-import StorageClassList from '../components/storage/ClassList';
-import PersistentVolumeDetails from '../components/storage/VolumeDetails';
-import PersistentVolumeList from '../components/storage/VolumeList';
 import VpaDetails from '../components/verticalPodAutoscaler/Details';
 import VpaList from '../components/verticalPodAutoscaler/List';
 import MutatingWebhookConfigurationDetails from '../components/webhookconfiguration/MutatingWebhookConfigDetails';
@@ -81,7 +71,6 @@ import MutatingWebhookConfigList from '../components/webhookconfiguration/Mutati
 import ValidatingWebhookConfigurationDetails from '../components/webhookconfiguration/ValidatingWebhookConfigDetails';
 import ValidatingWebhookConfigurationList from '../components/webhookconfiguration/ValidatingWebhookConfigList';
 import WorkloadDetails from '../components/workload/Details';
-import WorkloadOverview from '../components/workload/Overview';
 import helpers from '../helpers';
 import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import store from '../redux/stores/store';
@@ -89,6 +78,19 @@ import Deployment from './k8s/deployment';
 import Job from './k8s/job';
 import ReplicaSet from './k8s/replicaSet';
 import { getCluster, getClusterPrefixedPath } from './util';
+
+const Home = lazy(() => import('../components/App/Home'));
+const NamespaceDetails = lazy(() => import('../components/namespace/Details'));
+const NamespacesList = lazy(() => import('../components/namespace/List'));
+const NodeDetails = lazy(() => import('../components/node/Details'));
+const NodeList = lazy(() => import('../components/node/List'));
+const StorageClassDetails = lazy(() => import('../components/storage/ClassDetails'));
+const StorageClassList = lazy(() => import('../components/storage/ClassList'));
+const PersistentVolumeDetails = lazy(() => import('../components/storage/VolumeDetails'));
+const PersistentVolumeList = lazy(() => import('../components/storage/VolumeList'));
+const PersistentVolumeClaimDetails = lazy(() => import('../components/storage/ClaimDetails'));
+const PersistentVolumeClaimList = lazy(() => import('../components/storage/ClaimList'));
+const WorkloadOverview = lazy(() => import('../components/workload/Overview'));
 
 export interface Route {
   /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */
