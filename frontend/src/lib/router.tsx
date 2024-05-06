@@ -1,40 +1,28 @@
 import { lazy } from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
-import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
 import PluginSettings from '../components/App/PluginSettings';
 import PluginSettingsDetails from '../components/App/PluginSettings/PluginSettingsDetails';
 import Settings from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
-import AuthChooser from '../components/authchooser';
 import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
 import Overview from '../components/cluster/Overview';
 import { PageGrid } from '../components/common/Resource/Resource';
 import CustomResourceDetails from '../components/crd/CustomResourceDetails';
 import CustomResourceList from '../components/crd/CustomResourceList';
-import CustomResourceDefinitionDetails from '../components/crd/Details';
-import CustomResourceDefinitionList from '../components/crd/List';
 import { LeaseDetails } from '../components/lease/Details';
 import { LeaseList } from '../components/lease/List';
 import { LimitRangeDetails } from '../components/limitRange/Details';
 import { LimitRangeList } from '../components/limitRange/List';
 import { NetworkPolicyDetails } from '../components/networkpolicy/Details';
 import { NetworkPolicyList } from '../components/networkpolicy/List';
-import OIDCAuth from '../components/oidcauth';
 import PortForwardingList from '../components/portforward';
 import { RuntimeClassDetails } from '../components/runtimeClass/Details';
 import { RuntimeClassList } from '../components/runtimeClass/List';
 import { DefaultSidebars } from '../components/Sidebar';
-import VpaDetails from '../components/verticalPodAutoscaler/Details';
-import VpaList from '../components/verticalPodAutoscaler/List';
-import MutatingWebhookConfigurationDetails from '../components/webhookconfiguration/MutatingWebhookConfigDetails';
-import MutatingWebhookConfigList from '../components/webhookconfiguration/MutatingWebhookConfigList';
-import ValidatingWebhookConfigurationDetails from '../components/webhookconfiguration/ValidatingWebhookConfigDetails';
-import ValidatingWebhookConfigurationList from '../components/webhookconfiguration/ValidatingWebhookConfigList';
 import helpers from '../helpers';
-import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import store from '../redux/stores/store';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
@@ -94,6 +82,27 @@ const PriorityClassDetails = lazy(() => import('../components/priorityClass/Deta
 const PriorityClassList = lazy(() => import('../components/priorityClass/List'));
 const ResourceQuotaDetails = lazy(() => import('../components/resourceQuota/Details'));
 const ResourceQuotaList = lazy(() => import('../components/resourceQuota/List'));
+
+const MutatingWebhookConfigurationDetails = lazy(
+  () => import('../components/webhookconfiguration/MutatingWebhookConfigDetails')
+);
+const MutatingWebhookConfigList = lazy(
+  () => import('../components/webhookconfiguration/MutatingWebhookConfigList')
+);
+const ValidatingWebhookConfigurationDetails = lazy(
+  () => import('../components/webhookconfiguration/ValidatingWebhookConfigDetails')
+);
+const ValidatingWebhookConfigurationList = lazy(
+  () => import('../components/webhookconfiguration/ValidatingWebhookConfigList')
+);
+const VpaDetails = lazy(() => import('../components/verticalPodAutoscaler/Details'));
+const VpaList = lazy(() => import('../components/verticalPodAutoscaler/List'));
+const AuthToken = lazy(() => import('../components/account/Auth'));
+const OIDCAuth = lazy(() => import('../components/oidcauth'));
+const AuthChooser = lazy(() => import('../components/authchooser'));
+const LocaleSelect = lazy(() => import('../i18n/LocaleSelect/LocaleSelect'));
+const CustomResourceDefinitionDetails = lazy(() => import('../components/crd/Details'));
+const CustomResourceDefinitionList = lazy(() => import('../components/crd/List'));
 
 export interface Route {
   /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */
