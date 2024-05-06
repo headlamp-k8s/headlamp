@@ -11,6 +11,8 @@ const avoidCheck = [
   'ActionsNotifier',
   'AlertNotification',
   'ErrorBoundary',
+  'LogViewer',
+  'Terminal',
 ];
 
 const checkExports = [
@@ -27,7 +29,6 @@ const checkExports = [
   'LabelListItem',
   'Link',
   'Loader',
-  'LogViewer',
   'NamespacesAutocomplete',
   'NameValueTable',
   'Resource',
@@ -37,7 +38,6 @@ const checkExports = [
   'ShowHideLabel',
   'SimpleTable',
   'Tabs',
-  'Terminal',
   'TileChart',
   'TimezoneSelect',
   'Tooltip',
