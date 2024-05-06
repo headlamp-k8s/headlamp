@@ -1,24 +1,14 @@
 import { lazy } from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
-import NotificationList from '../components/App/Notifications/List';
-import PluginSettings from '../components/App/PluginSettings';
-import PluginSettingsDetails from '../components/App/PluginSettings/PluginSettingsDetails';
-import Settings from '../components/App/Settings';
-import SettingsCluster from '../components/App/Settings/SettingsCluster';
-import SettingsClusters from '../components/App/Settings/SettingsClusters';
-import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
 import Overview from '../components/cluster/Overview';
 import { PageGrid } from '../components/common/Resource/Resource';
-import CustomResourceDetails from '../components/crd/CustomResourceDetails';
-import CustomResourceList from '../components/crd/CustomResourceList';
 import { LeaseDetails } from '../components/lease/Details';
 import { LeaseList } from '../components/lease/List';
 import { LimitRangeDetails } from '../components/limitRange/Details';
 import { LimitRangeList } from '../components/limitRange/List';
 import { NetworkPolicyDetails } from '../components/networkpolicy/Details';
 import { NetworkPolicyList } from '../components/networkpolicy/List';
-import PortForwardingList from '../components/portforward';
 import { RuntimeClassDetails } from '../components/runtimeClass/Details';
 import { RuntimeClassList } from '../components/runtimeClass/List';
 import { DefaultSidebars } from '../components/Sidebar';
@@ -103,6 +93,19 @@ const AuthChooser = lazy(() => import('../components/authchooser'));
 const LocaleSelect = lazy(() => import('../i18n/LocaleSelect/LocaleSelect'));
 const CustomResourceDefinitionDetails = lazy(() => import('../components/crd/Details'));
 const CustomResourceDefinitionList = lazy(() => import('../components/crd/List'));
+
+const CustomResourceDetails = lazy(() => import('../components/crd/CustomResourceDetails'));
+const CustomResourceList = lazy(() => import('../components/crd/CustomResourceList'));
+const NotificationList = lazy(() => import('../components/App/Notifications/List'));
+const Settings = lazy(() => import('../components/App/Settings'));
+const SettingsClusters = lazy(() => import('../components/App/Settings/SettingsClusters'));
+const SettingsCluster = lazy(() => import('../components/App/Settings/SettingsCluster'));
+const PluginSettings = lazy(() => import('../components/App/PluginSettings'));
+const PluginSettingsDetails = lazy(
+  () => import('../components/App/PluginSettings/PluginSettingsDetails')
+);
+const PortForwardingList = lazy(() => import('../components/portforward'));
+const KubeConfigLoader = lazy(() => import('../components/cluster/KubeConfigLoader'));
 
 export interface Route {
   /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */
