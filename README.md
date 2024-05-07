@@ -11,15 +11,15 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 
 ## Features
 
-  * Vendor independent / generic Kubernetes UI
-  * Works in-cluster, or locally as a desktop app
-  * Multi-cluster
-  * Extensible through plugins
-  * UI controls reflecting user roles (no deletion/update if not allowed)
-  * Clean & modern UI
-  * Cancellable creation/update/deletion operations
-  * Logs, exec, and resource editor with documentation
-  * Read-write / interactive (actions based on permissions)
+- Vendor independent / generic Kubernetes UI
+- Works in-cluster, or locally as a desktop app
+- Multi-cluster
+- Extensible through plugins
+- UI controls reflecting user roles (no deletion/update if not allowed)
+- Clean & modern UI
+- Cancellable creation/update/deletion operations
+- Logs, exec, and resource editor with documentation
+- Read-write / interactive (actions based on permissions)
 
 ## Screenshots
 
@@ -86,3 +86,7 @@ biggest changes planned so far.
 ## License
 
 Headlamp is released under the terms of the [Apache 2.0](./LICENSE) license.
+
+## Frequently Asked Questions
+
+For more information about Headlamp, see the [Headlamp FAQ](./faq).
