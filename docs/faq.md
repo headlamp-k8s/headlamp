@@ -30,7 +30,7 @@ A: Headlamp is designed to be vendor-agnostic, supporting a variety of Kubernete
 
 ### Q: Who maintains Headlamp?
 
-**A:** Headlamp's core team is composed of developers that are employed by Microsoft. As a 100% open source project and a CNCF Sandbox project, Headlamp encourages any users/developers to participate in it.
+**A:** You can find the list of Headlamp's maintainers in its [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAINERS.md) file in the repository. As a 100% open source project and a CNCF Sandbox project, Headlamp encourages any users/developers to participate in it.
 
 ### Q: What capabilities / credentials does Headlamp require to access my Kubernetes cluster?
 
