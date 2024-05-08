@@ -10,8 +10,8 @@ import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster } from '../../../lib/k8s/apiProxy';
 import { setConfig } from '../../../redux/configSlice';
-import { Link } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
+import Link from '../../common/Link';
 import NameValueTable from '../../common/NameValueTable/NameValueTable';
 import SectionBox from '../../common/SectionBox';
 

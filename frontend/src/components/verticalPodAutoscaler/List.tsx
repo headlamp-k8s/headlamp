@@ -2,9 +2,9 @@ import { Link, Paper, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import VPA from '../../lib/k8s/vpa';
-import { SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
 import ResourceListView from '../common/Resource/ResourceListView';
+import SectionBox from '../common/SectionBox';
 
 export default function VpaList() {
   const { t } = useTranslation(['glossary', 'translation']);

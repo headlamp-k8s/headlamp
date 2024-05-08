@@ -13,9 +13,6 @@ const avoidCheck = [
   'ErrorBoundary',
   'LogViewer',
   'Terminal',
-];
-
-const checkExports = [
   'ActionButton',
   'BackLink',
   'Chart',
@@ -43,6 +40,8 @@ const checkExports = [
   'Tooltip',
   'ObjectEventList',
 ];
+
+const checkExports: string[] = [];
 
 function getFilesToVerify() {
   const filesToVerify: string[] = [];

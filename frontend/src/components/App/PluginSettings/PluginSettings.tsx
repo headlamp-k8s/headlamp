@@ -9,8 +9,10 @@ import helpers from '../../../helpers';
 import { useFilterFunc } from '../../../lib/util';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { Link as HeadlampLink, SectionBox, SimpleTable } from '../../common';
+import HeadlampLink from '../../common/Link';
+import SectionBox from '../../common/SectionBox';
 import SectionFilterHeader from '../../common/SectionFilterHeader';
+import SimpleTable from '../../common/SimpleTable';
 
 /**
  * Interface of the component's props structure.

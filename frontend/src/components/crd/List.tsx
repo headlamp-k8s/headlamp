@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import CRD from '../../lib/k8s/crd';
-import { Link } from '../common';
+import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function CustomResourceDefinitionList() {

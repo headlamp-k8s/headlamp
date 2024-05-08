@@ -2,7 +2,7 @@ import { Chip } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import HPA from '../../lib/k8s/hpa';
-import { Link } from '../common';
+import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 const RootDiv = styled('div')(({ theme }) => ({

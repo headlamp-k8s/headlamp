@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding, { KubeRoleBinding } from '../../lib/k8s/roleBinding';
 import { useErrorState, useFilterFunc } from '../../lib/util';
-import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
+import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 interface RoleBindingDict {
