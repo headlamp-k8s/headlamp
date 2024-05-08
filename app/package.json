@@ -156,7 +156,7 @@
     "mime-types": "^2.1.35",
     "octokit": "^2.0.14",
     "tar": "^6.1.13",
-    "typescript": "^4.4.3"
+    "typescript": "4.5.5"
   },
   "dependencies": {
     "@types/semver": "^7.3.8",

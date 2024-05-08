@@ -143,7 +143,7 @@
     "stream-http": "^3.2.0",
     "style-loader": "^3.3.1",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
-    "typescript": "4.4.3",
+    "typescript": "4.5.5",
     "url": "^0.11.0",
     "url-loader": "^4.1.1",
     "util": "^0.12.4",
