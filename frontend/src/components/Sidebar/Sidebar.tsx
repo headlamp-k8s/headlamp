@@ -15,7 +15,7 @@ import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { ActionButton } from '../common';
+import ActionButton from '../common/ActionButton/ActionButton';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';

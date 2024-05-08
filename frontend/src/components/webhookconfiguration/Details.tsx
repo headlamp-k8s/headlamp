@@ -1,9 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import MutatingWebhookConfiguration from '../../lib/k8s/mutatingWebhookConfiguration';
 import ValidatingWebhookConfiguration from '../../lib/k8s/validatingWebhookConfiguration';
-import { Link, NameValueTable, SectionBox, SimpleTable } from '../common';
+import Link from '../common/Link';
+import NameValueTable from '../common/NameValueTable/NameValueTable';
 import { DetailsGrid, SecretField } from '../common/Resource';
 import { MatchExpressions } from '../common/Resource/MatchExpressions';
+import SectionBox from '../common/SectionBox';
+import SimpleTable from '../common/SimpleTable';
 
 export interface WebhookConfigurationDetailsProps {
   resourceClass: typeof ValidatingWebhookConfiguration | typeof MutatingWebhookConfiguration;

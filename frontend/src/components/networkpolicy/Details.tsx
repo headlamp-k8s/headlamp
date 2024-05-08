@@ -8,7 +8,10 @@ import NetworkPolicy, {
   NetworkPolicyIngressRule,
   NetworkPolicyPort,
 } from '../../lib/k8s/networkpolicy';
-import { DetailsGrid, NameValueTable, SectionBox, useMetadataDisplayStyles } from '../common';
+import NameValueTable from '../common/NameValueTable/NameValueTable';
+import { DetailsGrid } from '../common/Resource';
+import { useMetadataDisplayStyles } from '../common/Resource/MetadataDisplay';
+import SectionBox from '../common/SectionBox';
 
 export function NetworkPolicyDetails() {
   const { t } = useTranslation(['glossary', 'translation']);

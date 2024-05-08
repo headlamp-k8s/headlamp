@@ -30,7 +30,7 @@ import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { AppLogo } from '../App/AppLogo';
-import ActionButton from '../common/ActionButton';
+import ActionButton from '../common/ActionButton/ActionButton';
 import { DialogTitle } from '../common/Dialog';
 import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';

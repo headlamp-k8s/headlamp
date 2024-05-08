@@ -19,7 +19,7 @@ import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
 import { clusterAction } from '../../redux/clusterActionSlice';
-import { ActionButton } from '../common';
+import ActionButton from '../common/ActionButton/ActionButton';
 import { DetailsGrid } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import { JobsListRenderer } from '../job/List';
