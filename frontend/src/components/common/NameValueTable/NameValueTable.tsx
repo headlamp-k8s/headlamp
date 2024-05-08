@@ -1,4 +1,5 @@
-import { Grid, GridProps } from '@mui/material';
+import { GridProps } from '@mui/material/Grid';
+import Grid from '@mui/material/Grid';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';

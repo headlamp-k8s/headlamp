@@ -1,18 +1,16 @@
 import bellIcon from '@iconify/icons-mdi/bell';
 import { Icon } from '@iconify/react';
-import {
-  Badge,
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  ListItem,
-  Popover,
-  Theme,
-  Tooltip,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { useTheme } from '@mui/material';
+import { Theme } from '@mui/material';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import ListItem from '@mui/material/ListItem';
+import Popover from '@mui/material/Popover';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';

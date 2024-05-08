@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import Typography from '@mui/material/Typography';

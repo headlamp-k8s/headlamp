@@ -1,4 +1,4 @@
-import { Chip } from '@mui/material';
+import Chip from '@mui/material/Chip';
 import { styled } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import HPA from '../../lib/k8s/hpa';

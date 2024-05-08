@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react';
-import { Button, ButtonGroup } from '@mui/material';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/system';
 import React from 'react';

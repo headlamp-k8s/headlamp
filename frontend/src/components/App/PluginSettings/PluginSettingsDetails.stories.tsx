@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { PluginInfo, PluginSettingsDetailsProps } from '../../../plugin/pluginsSlice';

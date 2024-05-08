@@ -1,4 +1,9 @@
-import { Box, Button, DialogContent, Grid, InputBase, Paper } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import DialogContent from '@mui/material/DialogContent';
+import Grid from '@mui/material/Grid';
+import InputBase from '@mui/material/InputBase';
+import Paper from '@mui/material/Paper';
 import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React, { useEffect } from 'react';

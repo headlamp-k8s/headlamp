@@ -1,4 +1,6 @@
-import { Box, Link as MuiLink, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import MuiLink from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Ingress, { IngressBackend, IngressRule } from '../../lib/k8s/ingress';

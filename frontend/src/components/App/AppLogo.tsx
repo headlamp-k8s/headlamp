@@ -1,4 +1,5 @@
-import { SvgIcon, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
+import SvgIcon from '@mui/material/SvgIcon';
 import { SxProps } from '@mui/system';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
