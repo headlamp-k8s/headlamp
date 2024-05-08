@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { Lease } from '../../lib/k8s/lease';
-import { DateLabel, DetailsGrid } from '../common';
+import { DateLabel } from '../common/Label';
+import { DetailsGrid } from '../common/Resource';
 
 export function LeaseDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
