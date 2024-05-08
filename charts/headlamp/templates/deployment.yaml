@@ -91,6 +91,9 @@ spec:
             {{- with .Values.config.baseURL }}
             - "-base-url={{ . }}"
             {{- end }}
+            {{- with .Values.config.extraArgs }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 4466

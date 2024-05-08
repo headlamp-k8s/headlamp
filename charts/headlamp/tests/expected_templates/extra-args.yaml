@@ -101,6 +101,7 @@ spec:
           args:
             - "-in-cluster"
             - "-plugins-dir=/headlamp/plugins"
+            - -insecure-ssl
           ports:
             - name: http
               containerPort: 4466
@@ -115,6 +116,3 @@ spec:
               port: http
           resources:
             {}
-      volumes:
-        - emptyDir: {}
-          name: plugins
