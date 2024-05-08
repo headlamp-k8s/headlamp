@@ -39,13 +39,15 @@ import {
   DetailsViewSection,
 } from '../../DetailsViewSection/detailsViewSectionSlice';
 import { PodListProps, PodListRenderer } from '../../pod/List';
-import { LightTooltip, Loader, ObjectEventList } from '..';
 import BackLink from '../BackLink';
 import Empty from '../EmptyContent';
 import ErrorBoundary from '../ErrorBoundary';
 import InnerTable from '../InnerTable';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
+import Loader from '../Loader';
+import ObjectEventList from '../ObjectEventList';
+import { LightTooltip } from '../Tooltip';
 import { useMetadataDisplayStyles } from '.';
 import { MainInfoSection, MainInfoSectionProps } from './MainInfoSection/MainInfoSection';
 import { MainInfoHeader } from './MainInfoSection/MainInfoSectionHeader';

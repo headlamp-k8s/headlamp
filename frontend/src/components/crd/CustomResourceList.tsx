@@ -6,11 +6,15 @@ import { useParams } from 'react-router-dom';
 import { KubeObject } from '../../lib/k8s/cluster';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { localeDate } from '../../lib/util';
-import { Link, Loader, PageGrid, SectionHeader, SimpleTableGetterColumn } from '../common';
 import BackLink from '../common/BackLink';
 import Empty from '../common/EmptyContent';
+import Link from '../common/Link';
+import Loader from '../common/Loader';
+import { PageGrid } from '../common/Resource/Resource';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { ResourceTableProps } from '../common/Resource/ResourceTable';
+import SectionHeader from '../common/SectionHeader';
+import { SimpleTableGetterColumn } from '../common/SimpleTable';
 
 export default function CustomResourceList() {
   const { t } = useTranslation(['glossary', 'translation']);

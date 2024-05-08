@@ -13,9 +13,10 @@ import { createRouteURL, getRoute, getRoutePath } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setConfig } from '../../redux/configSlice';
 import { ClusterDialog } from '../cluster/Chooser';
-import { Link, Loader } from '../common';
 import { DialogTitle } from '../common/Dialog';
 import Empty from '../common/EmptyContent';
+import Link from '../common/Link';
+import Loader from '../common/Loader';
 import OauthPopup from '../oidcauth/OauthPopup';
 
 const ColorButton = withStyles(theme => ({

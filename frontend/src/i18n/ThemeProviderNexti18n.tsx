@@ -2,7 +2,7 @@ import { deDE, enUS, esES, frFR, hiIN, ptPT } from '@mui/material/locale';
 import { createTheme, StyledEngineProvider, Theme, ThemeProvider } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader } from '../components/common';
+import Loader from '../components/common/Loader';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
