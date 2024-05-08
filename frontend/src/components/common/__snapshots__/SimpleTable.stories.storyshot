@@ -312,8 +312,8 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
-                      for="namespaces-filter"
-                      id="namespaces-filter-label"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
                     >
                       Namespaces
                     </label>
@@ -327,7 +327,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
                         autocapitalize="none"
                         autocomplete="off"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                        id="namespaces-filter"
+                        id="mui-test-id"
                         placeholder="Filter"
                         role="combobox"
                         spellcheck="false"
@@ -374,8 +374,8 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="true"
-                  for="standard-search"
-                  id="standard-search-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Search
                 </label>
@@ -386,7 +386,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputTypeSearch css-c63i49-MuiInputBase-input-MuiInput-input"
-                    id="standard-search"
+                    id="mui-test-id"
                     placeholder="Filter"
                     type="search"
                     value="mylabel"
@@ -563,8 +563,8 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
-                      for="namespaces-filter"
-                      id="namespaces-filter-label"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
                     >
                       Namespaces
                     </label>
@@ -578,7 +578,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
                         autocapitalize="none"
                         autocomplete="off"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                        id="namespaces-filter"
+                        id="mui-test-id"
                         placeholder="Filter"
                         role="combobox"
                         spellcheck="false"
@@ -625,8 +625,8 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="true"
-                  for="standard-search"
-                  id="standard-search-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Search
                 </label>
@@ -637,7 +637,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputTypeSearch css-c63i49-MuiInputBase-input-MuiInput-input"
-                    id="standard-search"
+                    id="mui-test-id"
                     placeholder="Filter"
                     type="search"
                     value="phonyresources2"
@@ -790,8 +790,8 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
-                      for="namespaces-filter"
-                      id="namespaces-filter-label"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
                     >
                       Namespaces
                     </label>
@@ -805,7 +805,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
                         autocapitalize="none"
                         autocomplete="off"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                        id="namespaces-filter"
+                        id="mui-test-id"
                         placeholder="Filter"
                         role="combobox"
                         spellcheck="false"
@@ -852,8 +852,8 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="true"
-                  for="standard-search"
-                  id="standard-search-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Search
                 </label>
@@ -864,7 +864,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputTypeSearch css-c63i49-MuiInputBase-input-MuiInput-input"
-                    id="standard-search"
+                    id="mui-test-id"
                     placeholder="Filter"
                     type="search"
                     value="MyNamespace3"
@@ -1017,8 +1017,8 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
-                      for="namespaces-filter"
-                      id="namespaces-filter-label"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
                     >
                       Namespaces
                     </label>
@@ -1044,7 +1044,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
                         autocapitalize="none"
                         autocomplete="off"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                        id="namespaces-filter"
+                        id="mui-test-id"
                         placeholder=""
                         role="combobox"
                         spellcheck="false"
@@ -1113,8 +1113,8 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="true"
-                  for="standard-search"
-                  id="standard-search-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Search
                 </label>
@@ -1125,7 +1125,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputTypeSearch css-c63i49-MuiInputBase-input-MuiInput-input"
-                    id="standard-search"
+                    id="mui-test-id"
                     placeholder="Filter"
                     type="search"
                     value=""
@@ -1300,8 +1300,8 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
-                      for="namespaces-filter"
-                      id="namespaces-filter-label"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
                     >
                       Namespaces
                     </label>
@@ -1315,7 +1315,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
                         autocapitalize="none"
                         autocomplete="off"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                        id="namespaces-filter"
+                        id="mui-test-id"
                         placeholder="Filter"
                         role="combobox"
                         spellcheck="false"
@@ -1362,8 +1362,8 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="true"
-                  for="standard-search"
-                  id="standard-search-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Search
                 </label>
@@ -1374,7 +1374,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputTypeSearch css-c63i49-MuiInputBase-input-MuiInput-input"
-                    id="standard-search"
+                    id="mui-test-id"
                     placeholder="Filter"
                     type="search"
                     value="somethingthatsnotapossiblematch123"
@@ -1521,8 +1521,8 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
-                      for="namespaces-filter"
-                      id="namespaces-filter-label"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
                     >
                       Namespaces
                     </label>
@@ -1536,7 +1536,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
                         autocapitalize="none"
                         autocomplete="off"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                        id="namespaces-filter"
+                        id="mui-test-id"
                         placeholder="Filter"
                         role="combobox"
                         spellcheck="false"
@@ -1583,8 +1583,8 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="true"
-                  for="standard-search"
-                  id="standard-search-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Search
                 </label>
@@ -1595,7 +1595,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputTypeSearch css-c63i49-MuiInputBase-input-MuiInput-input"
-                    id="standard-search"
+                    id="mui-test-id"
                     placeholder="Filter"
                     type="search"
                     value="30"
@@ -2039,8 +2039,8 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
                     <label
                       class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                       data-shrink="true"
-                      for="namespaces-filter"
-                      id="namespaces-filter-label"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
                     >
                       Namespaces
                     </label>
@@ -2054,7 +2054,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
                         autocapitalize="none"
                         autocomplete="off"
                         class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                        id="namespaces-filter"
+                        id="mui-test-id"
                         placeholder="Filter"
                         role="combobox"
                         spellcheck="false"
@@ -2101,8 +2101,8 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="true"
-                  for="standard-search"
-                  id="standard-search-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Search
                 </label>
@@ -2113,7 +2113,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputTypeSearch css-c63i49-MuiInputBase-input-MuiInput-input"
-                    id="standard-search"
+                    id="mui-test-id"
                     placeholder="Filter"
                     type="search"
                     value="phony0"

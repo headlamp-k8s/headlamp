@@ -174,7 +174,7 @@ exports[`Storyshots Settings General 1`] = `
               style="width: 100px;"
             >
               <div
-                aria-controls="mui-50"
+                aria-controls="mui-test-id"
                 aria-expanded="false"
                 aria-haspopup="listbox"
                 class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
@@ -224,8 +224,8 @@ exports[`Storyshots Settings General 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-standard css-zh08sj-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for="cluster-selector-autocomplete"
-                  id="cluster-selector-autocomplete-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Timezone
                 </label>
@@ -239,7 +239,7 @@ exports[`Storyshots Settings General 1`] = `
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                    id="cluster-selector-autocomplete"
+                    id="mui-test-id"
                     role="combobox"
                     spellcheck="false"
                     type="text"

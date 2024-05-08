@@ -15,8 +15,8 @@ exports[`Storyshots NamespacesAutocomplete Some 1`] = `
         <label
           class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
           data-shrink="true"
-          for="namespaces-filter"
-          id="namespaces-filter-label"
+          for="mui-test-id"
+          id="mui-test-id-label"
         >
           Namespaces
         </label>
@@ -30,7 +30,7 @@ exports[`Storyshots NamespacesAutocomplete Some 1`] = `
             autocapitalize="none"
             autocomplete="off"
             class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-            id="namespaces-filter"
+            id="mui-test-id"
             placeholder="Filter"
             role="combobox"
             spellcheck="false"

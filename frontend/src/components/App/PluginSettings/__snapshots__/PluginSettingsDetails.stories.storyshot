@@ -61,8 +61,8 @@ exports[`Storyshots Settings/PluginSettingsDetail With Auto Save 1`] = `
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1a2ml2f-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="false"
-            for="mui-46"
-            id="mui-46-label"
+            for="mui-test-id"
+            id="mui-test-id-label"
           >
             Normal Input
           </label>
@@ -72,7 +72,7 @@ exports[`Storyshots Settings/PluginSettingsDetail With Auto Save 1`] = `
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id="mui-46"
+              id="mui-test-id"
               type="text"
               value=""
             />
@@ -168,8 +168,8 @@ exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1a2ml2f-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="false"
-            for="mui-47"
-            id="mui-47-label"
+            for="mui-test-id"
+            id="mui-test-id-label"
           >
             Normal Input
           </label>
@@ -179,7 +179,7 @@ exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id="mui-47"
+              id="mui-test-id"
               type="text"
               value=""
             />
