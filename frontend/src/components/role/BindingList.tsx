@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
-import { useErrorState, useFilterFunc } from '../../lib/util';
+import { useErrorState } from '../../lib/util';
 import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -35,7 +35,6 @@ export default function RoleBindingList() {
   const [clusterRoleBindingError, onClusterRoleBindingError] =
     useErrorState(setupClusterRoleBindings);
   const { t } = useTranslation(['glossary', 'translation']);
-  const filterFunc = useFilterFunc<RoleBinding>(['.jsonData.kind']);
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
     setBindings(currentBindings => ({ ...currentBindings, [kind]: newBindings }));
@@ -100,7 +99,6 @@ export default function RoleBindingList() {
   return (
     <ResourceListView
       title={t('glossary|Role Bindings')}
-      filterFunction={filterFunc}
       errorMessage={getErrorMessage()}
       columns={[
         'type',

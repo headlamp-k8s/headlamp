@@ -24,16 +24,19 @@ export default function ReplicaSetList() {
           id: 'currentReplicas',
           label: t('translation|Current', { context: 'replicas' }),
           getValue: replicaSet => replicaSet?.status?.replicas || 0,
+          gridTemplate: 0.6,
         },
         {
           id: 'desiredReplicas',
           label: t('translation|Desired', { context: 'replicas' }),
           getValue: replicaSet => replicaSet?.spec?.replicas || 0,
+          gridTemplate: 0.6,
         },
         {
           id: 'readyReplicas',
           label: t('translation|Ready'),
           getValue: replicaSet => replicaSet?.status?.readyReplicas || 0,
+          gridTemplate: 0.6,
         },
         {
           id: 'containers',

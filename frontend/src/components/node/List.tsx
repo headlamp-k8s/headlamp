@@ -25,9 +25,6 @@ export default function NodeList() {
         {
           id: 'cpu',
           label: t('CPU'),
-          cellProps: {
-            sx: { width: '20%' },
-          },
           getValue: node => {
             const [used] = getResourceMetrics(node, nodeMetrics || [], 'cpu');
             return used;
@@ -44,9 +41,6 @@ export default function NodeList() {
         {
           id: 'memory',
           label: t('Memory'),
-          cellProps: {
-            sx: { width: '20%' },
-          },
           getValue: node => {
             const [used] = getResourceMetrics(node, nodeMetrics || [], 'memory');
             return used;
@@ -63,6 +57,7 @@ export default function NodeList() {
         {
           id: 'ready',
           label: t('translation|Ready'),
+          gridTemplate: 'minmax(150px, .3fr)',
           getValue: node => {
             const isReady = !!node.status.conditions.find(
               condition => condition.type === 'Ready' && condition.status === 'True'
@@ -81,6 +76,7 @@ export default function NodeList() {
         {
           id: 'roles',
           label: t('Roles'),
+          gridTemplate: 'minmax(150px, .5fr)',
           getValue: node => {
             return Object.keys(node.metadata.labels)
               .filter((t: String) => t.startsWith('node-role.kubernetes.io/'))
@@ -101,11 +97,13 @@ export default function NodeList() {
         {
           id: 'version',
           label: t('translation|Version'),
+          gridTemplate: 'minmax(150px, .5fr)',
           getValue: node => node.status.nodeInfo.kubeletVersion,
         },
         {
           id: 'software',
           label: t('translation|Software'),
+          gridTemplate: 'minmax(200px, 1.5fr)',
           getValue: node => node.status.nodeInfo.operatingSystem,
           render: node => {
             let osIcon = 'mdi:desktop-classic';

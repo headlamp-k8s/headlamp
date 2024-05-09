@@ -24,29 +24,6 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
           />
         </div>
       </div>
-      <div
-        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-      >
-        <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
-        >
-          <div
-            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-          >
-            <button
-              aria-label="Show filter"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-              tabindex="0"
-              type="button"
-            >
-              <span />
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
     <div
       class="MuiBox-root css-1txv3mw"
@@ -68,7 +45,7 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                 class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
               >
                 <div
-                  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
+                  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
                   role="alert"
                 >
                   <div
@@ -182,17 +159,17 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
           class="MuiTableContainer-root css-nhjqqh-MuiTableContainer-root"
         >
           <table
-            class="MuiTable-root css-1x84si1-MuiTable-root"
-            style="--header-default-size: 80; --col-default-size: 80; --header-name-size: 80; --col-name-size: 80; --header-controller-size: 80; --col-controller-size: 80; --header-age-size: 80; --col-age-size: 80;"
+            class="MuiTable-root css-bb6075-MuiTable-root"
+            style="--header-default-size: 180; --col-default-size: 180; --header-name-size: 180; --col-name-size: 180; --header-controller-size: 180; --col-controller-size: 180; --header-age-size: 180; --col-age-size: 180;"
           >
             <thead
-              class="MuiTableHead-root css-118e0ip-MuiTableHead-root"
+              class="MuiTableHead-root css-114s3s2-MuiTableHead-root"
             >
               <tr
-                class="MuiTableRow-root MuiTableRow-head css-4cnyqt-MuiTableRow-root"
+                class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-fwd8xq-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14ys4f5-MuiTableCell-root"
                   colspan="1"
                   data-index="0"
                   scope="col"
@@ -204,10 +181,8 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                       class="Mui-TableHeadCell-Content-Labels MuiBox-root css-1byo2ey"
                     >
                       <div
-                        class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-a3udzh"
-                      >
-                         
-                      </div>
+                        class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-1sbs8jn"
+                      />
                     </div>
                     <div
                       class="Mui-TableHeadCell-Content-Actions MuiBox-root css-epvm6"
@@ -239,7 +214,7 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1gtl1gi-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                   colspan="1"
                   data-index="1"
                   scope="col"
@@ -316,7 +291,7 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10kw3pq-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1i14xun-MuiTableCell-root"
                   colspan="1"
                   data-index="2"
                   scope="col"
@@ -393,16 +368,16 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-19ygcpy-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
                   colspan="1"
                   data-index="3"
                   scope="col"
                 >
                   <div
-                    class="Mui-TableHeadCell-Content MuiBox-root css-15mqaut"
+                    class="Mui-TableHeadCell-Content MuiBox-root css-1w86f15"
                   >
                     <div
-                      class="Mui-TableHeadCell-Content-Labels MuiBox-root css-1bh2skb"
+                      class="Mui-TableHeadCell-Content-Labels MuiBox-root css-68rqdf"
                     >
                       <div
                         class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-chb057"
@@ -471,18 +446,18 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
               </tr>
             </thead>
             <tbody
-              class="MuiTableBody-root css-29nbga-MuiTableBody-root"
+              class="MuiTableBody-root css-51306a-MuiTableBody-root"
             >
               <tr
-                class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                 data-index="0"
               >
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-291fz0-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-elz685-MuiTableCell-root"
                   data-index="0"
                 />
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                   data-index="1"
                 >
                   <a
@@ -493,13 +468,13 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-sjh9j3-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-o559dc-MuiTableCell-root"
                   data-index="2"
                 >
                   test
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="3"
                 >
                   <p
@@ -513,11 +488,11 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                 data-index="1"
               >
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-291fz0-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-elz685-MuiTableCell-root"
                   data-index="0"
                 >
                   <p
@@ -530,7 +505,7 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                   </p>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                   data-index="1"
                 >
                   <a
@@ -541,13 +516,13 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-sjh9j3-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-o559dc-MuiTableCell-root"
                   data-index="2"
                 >
                   test
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="3"
                 >
                   <p
@@ -562,7 +537,7 @@ exports[`Storyshots IngressClass/ListView Items 1`] = `
               </tr>
             </tbody>
             <tfoot
-              class="MuiTableFooter-root css-131pszo-MuiTableFooter-root"
+              class="MuiTableFooter-root css-4ar9ic-MuiTableFooter-root"
             />
           </table>
         </div>

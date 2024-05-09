@@ -18,7 +18,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 export interface PureNamespacesAutocompleteProps {
   namespaceNames: string[];
   onChange: (event: React.ChangeEvent<{}>, newValue: string[]) => void;
-  filter: { namespaces: Set<string>; search: string };
+  filter: { namespaces: Set<string> };
 }
 
 export function PureNamespacesAutocomplete({
@@ -50,6 +50,7 @@ export function PureNamespacesAutocomplete({
       multiple
       id="namespaces-filter"
       autoComplete
+      openOnFocus
       options={namespaceNames}
       onChange={onChange}
       onInputChange={onInputChange}

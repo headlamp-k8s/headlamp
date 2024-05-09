@@ -35,6 +35,7 @@ export default function VolumeClaimList() {
           id: 'capacity',
           label: t('Capacity'),
           getValue: volumeClaim => volumeClaim.status.capacity?.storage,
+          gridTemplate: 0.8,
         },
         {
           id: 'accessModes',
@@ -68,6 +69,7 @@ export default function VolumeClaimList() {
           label: t('translation|Status'),
           getValue: volume => volume.status.phase,
           render: volume => makePVCStatusLabel(volume),
+          gridTemplate: 0.3,
         },
         'age',
       ]}

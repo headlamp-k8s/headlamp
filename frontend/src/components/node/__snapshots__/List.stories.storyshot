@@ -27,29 +27,6 @@ exports[`Storyshots node/List Nodes 1`] = `
             />
           </div>
         </div>
-        <div
-          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-        >
-          <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-            >
-              <button
-                aria-label="Show filter"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-                tabindex="0"
-                type="button"
-              >
-                <span />
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
       <div
         class="MuiBox-root css-1txv3mw"
@@ -71,7 +48,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                   class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
                     role="alert"
                   >
                     <div
@@ -185,17 +162,17 @@ exports[`Storyshots node/List Nodes 1`] = `
             class="MuiTableContainer-root css-nhjqqh-MuiTableContainer-root"
           >
             <table
-              class="MuiTable-root css-1x84si1-MuiTable-root"
-              style="--header-name-size: 80; --col-name-size: 80; --header-cpu-size: 80; --col-cpu-size: 80; --header-memory-size: 80; --col-memory-size: 80; --header-ready-size: 80; --col-ready-size: 80; --header-taints-size: 80; --col-taints-size: 80; --header-roles-size: 80; --col-roles-size: 80; --header-internalIP-size: 80; --col-internalIP-size: 80; --header-externalIP-size: 80; --col-externalIP-size: 80; --header-version-size: 80; --col-version-size: 80; --header-age-size: 80; --col-age-size: 80;"
+              class="MuiTable-root css-19lo6k6-MuiTable-root"
+              style="--header-name-size: 180; --col-name-size: 180; --header-cpu-size: 180; --col-cpu-size: 180; --header-memory-size: 180; --col-memory-size: 180; --header-ready-size: 180; --col-ready-size: 180; --header-taints-size: 180; --col-taints-size: 180; --header-roles-size: 180; --col-roles-size: 180; --header-internalIP-size: 180; --col-internalIP-size: 180; --header-externalIP-size: 180; --col-externalIP-size: 180; --header-version-size: 180; --col-version-size: 180; --header-age-size: 180; --col-age-size: 180;"
             >
               <thead
-                class="MuiTableHead-root css-118e0ip-MuiTableHead-root"
+                class="MuiTableHead-root css-114s3s2-MuiTableHead-root"
               >
                 <tr
-                  class="MuiTableRow-root MuiTableRow-head css-4cnyqt-MuiTableRow-root"
+                  class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1gtl1gi-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                     colspan="1"
                     data-index="0"
                     scope="col"
@@ -272,7 +249,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sk0khz-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-dbz2w6-MuiTableCell-root"
                     colspan="1"
                     data-index="1"
                     scope="col"
@@ -349,7 +326,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-gnf6ex-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-tochlp-MuiTableCell-root"
                     colspan="1"
                     data-index="2"
                     scope="col"
@@ -426,7 +403,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7kucqp-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-xmrx72-MuiTableCell-root"
                     colspan="1"
                     data-index="3"
                     scope="col"
@@ -503,7 +480,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-61f32m-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-mnz223-MuiTableCell-root"
                     colspan="1"
                     data-index="4"
                     scope="col"
@@ -580,7 +557,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-to2id3-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-t1mp32-MuiTableCell-root"
                     colspan="1"
                     data-index="5"
                     scope="col"
@@ -657,7 +634,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-o250xz-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1hmo6pq-MuiTableCell-root"
                     colspan="1"
                     data-index="6"
                     scope="col"
@@ -734,7 +711,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1dzllag-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-17eql8-MuiTableCell-root"
                     colspan="1"
                     data-index="7"
                     scope="col"
@@ -811,7 +788,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-qhpfmc-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-or5cb9-MuiTableCell-root"
                     colspan="1"
                     data-index="8"
                     scope="col"
@@ -888,16 +865,16 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-19ygcpy-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
                     colspan="1"
                     data-index="9"
                     scope="col"
                   >
                     <div
-                      class="Mui-TableHeadCell-Content MuiBox-root css-15mqaut"
+                      class="Mui-TableHeadCell-Content MuiBox-root css-1w86f15"
                     >
                       <div
-                        class="Mui-TableHeadCell-Content-Labels MuiBox-root css-1bh2skb"
+                        class="Mui-TableHeadCell-Content-Labels MuiBox-root css-68rqdf"
                       >
                         <div
                           class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-chb057"
@@ -966,14 +943,14 @@ exports[`Storyshots node/List Nodes 1`] = `
                 </tr>
               </thead>
               <tbody
-                class="MuiTableBody-root css-29nbga-MuiTableBody-root"
+                class="MuiTableBody-root css-51306a-MuiTableBody-root"
               >
                 <tr
-                  class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                  class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                   data-index="0"
                 >
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                     data-index="0"
                   >
                     <a
@@ -984,7 +961,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </a>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-orndu8-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1omirxm-MuiTableCell-root"
                     data-index="1"
                   >
                     <div
@@ -993,7 +970,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     />
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-2va0j7-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-157islm-MuiTableCell-root"
                     data-index="2"
                   >
                     <div
@@ -1002,7 +979,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     />
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-g7m1wm-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-l8pc90-MuiTableCell-root"
                     data-index="3"
                   >
                     <span
@@ -1013,7 +990,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </span>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-epg2om-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-3v4n1h-MuiTableCell-root"
                     data-index="4"
                   >
                     <div
@@ -1021,31 +998,31 @@ exports[`Storyshots node/List Nodes 1`] = `
                     />
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1p8pxei-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-165tvm3-MuiTableCell-root"
                     data-index="5"
                   >
                     agent
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-138fcmj-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-4hrpnu-MuiTableCell-root"
                     data-index="6"
                   >
                     1.2.3.4
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-15sdxgd-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-g49sdf-MuiTableCell-root"
                     data-index="7"
                   >
                     
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vj0gkx-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-nzc431-MuiTableCell-root"
                     data-index="8"
                   >
                     v1.26.3
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                     data-index="9"
                   >
                     <p
@@ -1059,11 +1036,11 @@ exports[`Storyshots node/List Nodes 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                  class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                   data-index="1"
                 >
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                     data-index="0"
                   >
                     <a
@@ -1074,7 +1051,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </a>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-orndu8-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1omirxm-MuiTableCell-root"
                     data-index="1"
                   >
                     <div
@@ -1083,7 +1060,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     />
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-2va0j7-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-157islm-MuiTableCell-root"
                     data-index="2"
                   >
                     <div
@@ -1092,7 +1069,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     />
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-g7m1wm-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-l8pc90-MuiTableCell-root"
                     data-index="3"
                   >
                     <span
@@ -1103,7 +1080,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                     </span>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-epg2om-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-3v4n1h-MuiTableCell-root"
                     data-index="4"
                   >
                     <div
@@ -1111,31 +1088,31 @@ exports[`Storyshots node/List Nodes 1`] = `
                     />
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1p8pxei-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-165tvm3-MuiTableCell-root"
                     data-index="5"
                   >
                     
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-138fcmj-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-4hrpnu-MuiTableCell-root"
                     data-index="6"
                   >
                     10.2.3.4
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-15sdxgd-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-g49sdf-MuiTableCell-root"
                     data-index="7"
                   >
                     
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vj0gkx-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-nzc431-MuiTableCell-root"
                     data-index="8"
                   >
                     v1.23.12
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                     data-index="9"
                   >
                     <p
@@ -1150,7 +1127,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                 </tr>
               </tbody>
               <tfoot
-                class="MuiTableFooter-root css-131pszo-MuiTableFooter-root"
+                class="MuiTableFooter-root css-4ar9ic-MuiTableFooter-root"
               />
             </table>
           </div>

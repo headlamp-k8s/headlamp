@@ -45,7 +45,7 @@ export default function DeploymentsList() {
       .map((condition: any) => {
         const { type, message } = condition;
         return (
-          <Box pr={0.5} display="inline-block">
+          <Box display="inline-block">
             <StatusLabel status="">
               <span title={message} key={type}>
                 {type}
@@ -69,17 +69,25 @@ export default function DeploymentsList() {
           getValue: deployment => deployment.status.availableReplicas,
           render: deployment => renderPods(deployment),
           sort: sortByPods,
+          gridTemplate: 0.5,
         },
         {
           id: 'replicas',
           label: t('Replicas'),
           getValue: deployment => deployment.spec.replicas || 0,
+          gridTemplate: 0.6,
         },
         {
           id: 'conditions',
           label: t('translation|Conditions'),
           getValue: deployment => deployment.status?.conditions?.map((c: any) => c.type)?.join(''),
           render: deployment => renderConditions(deployment),
+          cellProps: {
+            sx: {
+              flexWrap: 'wrap',
+              gap: '4px',
+            },
+          },
         },
         {
           id: 'containers',

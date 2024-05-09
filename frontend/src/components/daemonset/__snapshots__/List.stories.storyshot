@@ -36,17 +36,71 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
-              <button
-                aria-label="Show filter"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-                tabindex="0"
-                type="button"
+              <div
+                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
-                <span />
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
-              </button>
+                <div
+                  class="MuiBox-root css-1dipl1t"
+                >
+                  <div
+                    class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                    style="margin-top: 0px;"
+                  >
+                    <label
+                      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
+                      data-shrink="true"
+                      for="mui-test-id"
+                      id="mui-test-id-label"
+                    >
+                      Namespaces
+                    </label>
+                    <div
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
+                    >
+                      <input
+                        aria-autocomplete="both"
+                        aria-expanded="false"
+                        aria-invalid="false"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
+                        id="mui-test-id"
+                        placeholder="Filter"
+                        role="combobox"
+                        spellcheck="false"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
+                      >
+                        <button
+                          aria-label="Open"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-1aav1nn-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+                          tabindex="-1"
+                          title="Open"
+                          type="button"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                            data-testid="ArrowDropDownIcon"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M7 10l5 5 5-5z"
+                            />
+                          </svg>
+                          <span
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -71,7 +125,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                   class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
                     role="alert"
                   >
                     <div
@@ -185,17 +239,17 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
             class="MuiTableContainer-root css-nhjqqh-MuiTableContainer-root"
           >
             <table
-              class="MuiTable-root css-1x84si1-MuiTable-root"
-              style="--header-name-size: 80; --col-name-size: 80; --header-namespace-size: 80; --col-namespace-size: 80; --header-pods-size: 80; --col-pods-size: 80; --header-currentPods-size: 80; --col-currentPods-size: 80; --header-desiredPods-size: 80; --col-desiredPods-size: 80; --header-readyPods-size: 80; --col-readyPods-size: 80; --header-nodeSelector-size: 80; --col-nodeSelector-size: 80; --header-containers-size: 80; --col-containers-size: 80; --header-images-size: 80; --col-images-size: 80; --header-age-size: 80; --col-age-size: 80;"
+              class="MuiTable-root css-1e9qppa-MuiTable-root"
+              style="--header-name-size: 180; --col-name-size: 180; --header-namespace-size: 180; --col-namespace-size: 180; --header-pods-size: 180; --col-pods-size: 180; --header-currentPods-size: 180; --col-currentPods-size: 180; --header-desiredPods-size: 180; --col-desiredPods-size: 180; --header-readyPods-size: 180; --col-readyPods-size: 180; --header-nodeSelector-size: 180; --col-nodeSelector-size: 180; --header-containers-size: 180; --col-containers-size: 180; --header-images-size: 180; --col-images-size: 180; --header-age-size: 180; --col-age-size: 180;"
             >
               <thead
-                class="MuiTableHead-root css-118e0ip-MuiTableHead-root"
+                class="MuiTableHead-root css-114s3s2-MuiTableHead-root"
               >
                 <tr
-                  class="MuiTableRow-root MuiTableRow-head css-4cnyqt-MuiTableRow-root"
+                  class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
                 >
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1gtl1gi-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                     colspan="1"
                     data-index="0"
                     scope="col"
@@ -272,7 +326,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1hvk10m-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-y0j8gz-MuiTableCell-root"
                     colspan="1"
                     data-index="1"
                     scope="col"
@@ -349,7 +403,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-wac4hi-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-s3gggc-MuiTableCell-root"
                     colspan="1"
                     data-index="2"
                     scope="col"
@@ -426,7 +480,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ytzglj-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1utncyt-MuiTableCell-root"
                     colspan="1"
                     data-index="3"
                     scope="col"
@@ -503,7 +557,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-emqvbl-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-15443sz-MuiTableCell-root"
                     colspan="1"
                     data-index="4"
                     scope="col"
@@ -580,7 +634,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1fx8tw8-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-18g8d4j-MuiTableCell-root"
                     colspan="1"
                     data-index="5"
                     scope="col"
@@ -657,7 +711,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-13p98b4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-yv5b2a-MuiTableCell-root"
                     colspan="1"
                     data-index="6"
                     scope="col"
@@ -734,7 +788,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-13v29mv-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-16fxf6s-MuiTableCell-root"
                     colspan="1"
                     data-index="7"
                     scope="col"
@@ -811,7 +865,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-pktq97-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-mha81v-MuiTableCell-root"
                     colspan="1"
                     data-index="8"
                     scope="col"
@@ -888,16 +942,16 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </div>
                   </th>
                   <th
-                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-19ygcpy-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
                     colspan="1"
                     data-index="9"
                     scope="col"
                   >
                     <div
-                      class="Mui-TableHeadCell-Content MuiBox-root css-15mqaut"
+                      class="Mui-TableHeadCell-Content MuiBox-root css-1w86f15"
                     >
                       <div
-                        class="Mui-TableHeadCell-Content-Labels MuiBox-root css-1bh2skb"
+                        class="Mui-TableHeadCell-Content-Labels MuiBox-root css-68rqdf"
                       >
                         <div
                           class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-chb057"
@@ -966,14 +1020,14 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                 </tr>
               </thead>
               <tbody
-                class="MuiTableBody-root css-29nbga-MuiTableBody-root"
+                class="MuiTableBody-root css-51306a-MuiTableBody-root"
               >
                 <tr
-                  class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                  class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                   data-index="0"
                 >
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                     data-index="0"
                   >
                     <a
@@ -984,7 +1038,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </a>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vf4ba6-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-adap2x-MuiTableCell-root"
                     data-index="1"
                   >
                     <a
@@ -995,31 +1049,31 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </a>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1z2khh-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10dyccb-MuiTableCell-root"
                     data-index="2"
                   >
                     2
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-tmib8t-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1z0nlwt-MuiTableCell-root"
                     data-index="3"
                   >
                     2
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-odlfo3-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-cvi8k5-MuiTableCell-root"
                     data-index="4"
                   >
                     2
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-xn375n-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vd59e1-MuiTableCell-root"
                     data-index="5"
                   >
                     2
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1rzsx7v-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e8p8zj-MuiTableCell-root"
                     data-index="6"
                   >
                     <span
@@ -1031,7 +1085,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </span>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ceay95-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-2z5r30-MuiTableCell-root"
                     data-index="7"
                   >
                     <span
@@ -1043,7 +1097,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </span>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-15koqbe-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1v1f1s4-MuiTableCell-root"
                     data-index="8"
                   >
                     <span
@@ -1055,7 +1109,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                     </span>
                   </td>
                   <td
-                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                     data-index="9"
                   >
                     <p
@@ -1070,7 +1124,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                 </tr>
               </tbody>
               <tfoot
-                class="MuiTableFooter-root css-131pszo-MuiTableFooter-root"
+                class="MuiTableFooter-root css-4ar9ic-MuiTableFooter-root"
               />
             </table>
           </div>

@@ -16,7 +16,7 @@ import { ApiError, deleteCluster } from '../../../lib/k8s/apiProxy';
 import { Cluster } from '../../../lib/k8s/cluster';
 import Event from '../../../lib/k8s/event';
 import { createRouteURL } from '../../../lib/router';
-import { useFilterFunc, useId } from '../../../lib/util';
+import { useId } from '../../../lib/util';
 import { setConfig } from '../../../redux/configSlice';
 import { Link, PageGrid, SectionBox, SectionFilterHeader } from '../../common';
 import { ConfirmDialog } from '../../common';
@@ -178,7 +178,6 @@ function HomeComponent(props: HomeComponentProps) {
   const { clusters } = props;
   const { t } = useTranslation(['translation', 'glossary']);
   const [versions, errors] = useClustersVersion(Object.values(clusters));
-  const filterFunc = useFilterFunc<Cluster>(['.name']);
   const maxWarnings = 50;
   const warningsMap = Event.useWarningList(Object.values(clusters).map(c => c.name));
 
@@ -211,7 +210,6 @@ function HomeComponent(props: HomeComponentProps) {
         }
       >
         <ResourceTable
-          filterFunction={filterFunc}
           defaultSortingColumn={{ id: 'name', desc: false }}
           columns={[
             {

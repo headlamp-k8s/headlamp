@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
-import { useErrorState, useFilterFunc } from '../../lib/util';
+import { useErrorState } from '../../lib/util';
 import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 
@@ -15,7 +15,6 @@ export default function RoleList() {
   const [roleError, setRolesError] = useErrorState(setupRoles);
   const [clusterRoleError, setClusterRolesError] = useErrorState(setupClusterRoles);
   const { t } = useTranslation('glossary');
-  const filterFunc = useFilterFunc<Role>(['.jsonData.kind']);
 
   function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
     setRoles(oldRoles => ({ ...(oldRoles || {}), [kind]: newRoles }));
@@ -61,7 +60,6 @@ export default function RoleList() {
   return (
     <ResourceListView
       title={t('Roles')}
-      filterFunction={filterFunc}
       errorMessage={getErrorMessage()}
       columns={[
         'type',

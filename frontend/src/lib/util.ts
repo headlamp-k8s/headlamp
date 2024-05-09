@@ -146,8 +146,9 @@ export function getResourceMetrics(
 }
 
 /**
- * @returns A filter function that can be used to filter a list of items.
+ * Get a function to filter kube resources based on the current global filter state.
  *
+ * @returns A filter function that can be used to filter a list of items.
  * @param matchCriteria - The JSONPath criteria to match.
  */
 export function useFilterFunc<
@@ -157,11 +158,11 @@ export function useFilterFunc<
 >(matchCriteria?: string[]) {
   const filter = useTypedSelector(state => state.filter);
 
-  return (item: T) => {
+  return (item: T, search?: string) => {
     if (!!item.metadata) {
-      return filterResource(item as KubeObjectInterface | KubeEvent, filter, matchCriteria);
+      return filterResource(item as KubeObjectInterface | KubeEvent, filter, search, matchCriteria);
     }
-    return filterGeneric<T>(item, filter, matchCriteria);
+    return filterGeneric<T>(item, search, matchCriteria);
   };
 }
 

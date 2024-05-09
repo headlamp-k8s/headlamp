@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   sectionHeader: ({ noPadding }: HeaderStyleProps) => ({
     padding: theme.spacing(noPadding ? 0 : 2),
     paddingTop: theme.spacing(noPadding ? 0 : 3),
-    paddingRight: '0',
+    paddingRight: theme.spacing(noPadding ? 0 : 2),
   }),
   sectionTitle: ({ headerStyle }: HeaderStyleProps) => ({
     ...theme.palette.headerStyle[headerStyle || 'normal'],

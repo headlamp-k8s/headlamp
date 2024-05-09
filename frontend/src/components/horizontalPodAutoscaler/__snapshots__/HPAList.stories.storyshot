@@ -33,17 +33,71 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
-            <button
-              aria-label="Show filter"
-              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-              tabindex="0"
-              type="button"
+            <div
+              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
             >
-              <span />
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
-            </button>
+              <div
+                class="MuiBox-root css-1dipl1t"
+              >
+                <div
+                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                  style="margin-top: 0px;"
+                >
+                  <label
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
+                    data-shrink="true"
+                    for="mui-test-id"
+                    id="mui-test-id-label"
+                  >
+                    Namespaces
+                  </label>
+                  <div
+                    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
+                  >
+                    <input
+                      aria-autocomplete="both"
+                      aria-expanded="false"
+                      aria-invalid="false"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
+                      id="mui-test-id"
+                      placeholder="Filter"
+                      role="combobox"
+                      spellcheck="false"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
+                    >
+                      <button
+                        aria-label="Open"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-1aav1nn-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+                        tabindex="-1"
+                        title="Open"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                          data-testid="ArrowDropDownIcon"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M7 10l5 5 5-5z"
+                          />
+                        </svg>
+                        <span
+                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -68,7 +122,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
               >
                 <div
-                  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
+                  class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
                   role="alert"
                 >
                   <div
@@ -182,17 +236,17 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
           class="MuiTableContainer-root css-nhjqqh-MuiTableContainer-root"
         >
           <table
-            class="MuiTable-root css-1x84si1-MuiTable-root"
-            style="--header-name-size: 80; --col-name-size: 80; --header-namespace-size: 80; --col-namespace-size: 80; --header-reference-size: 80; --col-reference-size: 80; --header-targets-size: 80; --col-targets-size: 80; --header-minReplicas-size: 80; --col-minReplicas-size: 80; --header-maxReplicas-size: 80; --col-maxReplicas-size: 80; --header-currentReplicas-size: 80; --col-currentReplicas-size: 80; --header-age-size: 80; --col-age-size: 80;"
+            class="MuiTable-root css-1mxksyu-MuiTable-root"
+            style="--header-name-size: 180; --col-name-size: 180; --header-namespace-size: 180; --col-namespace-size: 180; --header-reference-size: 180; --col-reference-size: 180; --header-targets-size: 180; --col-targets-size: 180; --header-minReplicas-size: 180; --col-minReplicas-size: 180; --header-maxReplicas-size: 180; --col-maxReplicas-size: 180; --header-currentReplicas-size: 180; --col-currentReplicas-size: 180; --header-age-size: 180; --col-age-size: 180;"
           >
             <thead
-              class="MuiTableHead-root css-118e0ip-MuiTableHead-root"
+              class="MuiTableHead-root css-114s3s2-MuiTableHead-root"
             >
               <tr
-                class="MuiTableRow-root MuiTableRow-head css-4cnyqt-MuiTableRow-root"
+                class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
               >
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1gtl1gi-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                   colspan="1"
                   data-index="0"
                   scope="col"
@@ -269,7 +323,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1hvk10m-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-y0j8gz-MuiTableCell-root"
                   colspan="1"
                   data-index="1"
                   scope="col"
@@ -346,7 +400,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1o0qd1p-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10umkxl-MuiTableCell-root"
                   colspan="1"
                   data-index="2"
                   scope="col"
@@ -423,7 +477,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1hbuf7q-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-116wkip-MuiTableCell-root"
                   colspan="1"
                   data-index="3"
                   scope="col"
@@ -500,7 +554,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ly316k-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-xov0qj-MuiTableCell-root"
                   colspan="1"
                   data-index="4"
                   scope="col"
@@ -577,7 +631,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-aroell-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1okj1jh-MuiTableCell-root"
                   colspan="1"
                   data-index="5"
                   scope="col"
@@ -654,7 +708,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ghubsy-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-bok8gx-MuiTableCell-root"
                   colspan="1"
                   data-index="6"
                   scope="col"
@@ -731,16 +785,16 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-19ygcpy-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
                   colspan="1"
                   data-index="7"
                   scope="col"
                 >
                   <div
-                    class="Mui-TableHeadCell-Content MuiBox-root css-15mqaut"
+                    class="Mui-TableHeadCell-Content MuiBox-root css-1w86f15"
                   >
                     <div
-                      class="Mui-TableHeadCell-Content-Labels MuiBox-root css-1bh2skb"
+                      class="Mui-TableHeadCell-Content-Labels MuiBox-root css-68rqdf"
                     >
                       <div
                         class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-chb057"
@@ -809,14 +863,14 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </tr>
             </thead>
             <tbody
-              class="MuiTableBody-root css-29nbga-MuiTableBody-root"
+              class="MuiTableBody-root css-51306a-MuiTableBody-root"
             >
               <tr
-                class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                 data-index="0"
               >
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                   data-index="0"
                 >
                   <a
@@ -827,7 +881,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vf4ba6-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-adap2x-MuiTableCell-root"
                   data-index="1"
                 >
                   <a
@@ -838,7 +892,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1qsm2vf-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6oh1xu-MuiTableCell-root"
                   data-index="2"
                 >
                   <a
@@ -851,7 +905,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1nis9ey-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10xe59h-MuiTableCell-root"
                   data-index="3"
                 >
                   <div
@@ -878,25 +932,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-its7qm-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-n2il5f-MuiTableCell-root"
                   data-index="4"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1g22oqc-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-8p35a3-MuiTableCell-root"
                   data-index="5"
                 >
                   10
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-gxeivx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1f8dvth-MuiTableCell-root"
                   data-index="6"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="7"
                 >
                   <p
@@ -910,11 +964,11 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                 data-index="1"
               >
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                   data-index="0"
                 >
                   <a
@@ -925,7 +979,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vf4ba6-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-adap2x-MuiTableCell-root"
                   data-index="1"
                 >
                   <a
@@ -936,7 +990,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1qsm2vf-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6oh1xu-MuiTableCell-root"
                   data-index="2"
                 >
                   <a
@@ -949,7 +1003,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1nis9ey-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10xe59h-MuiTableCell-root"
                   data-index="3"
                 >
                   <div
@@ -976,25 +1030,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-its7qm-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-n2il5f-MuiTableCell-root"
                   data-index="4"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1g22oqc-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-8p35a3-MuiTableCell-root"
                   data-index="5"
                 >
                   10
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-gxeivx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1f8dvth-MuiTableCell-root"
                   data-index="6"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="7"
                 >
                   <p
@@ -1008,11 +1062,11 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                 data-index="2"
               >
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                   data-index="0"
                 >
                   <a
@@ -1023,7 +1077,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vf4ba6-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-adap2x-MuiTableCell-root"
                   data-index="1"
                 >
                   <a
@@ -1034,7 +1088,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1qsm2vf-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6oh1xu-MuiTableCell-root"
                   data-index="2"
                 >
                   <a
@@ -1047,7 +1101,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1nis9ey-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10xe59h-MuiTableCell-root"
                   data-index="3"
                 >
                   <div
@@ -1074,25 +1128,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-its7qm-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-n2il5f-MuiTableCell-root"
                   data-index="4"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1g22oqc-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-8p35a3-MuiTableCell-root"
                   data-index="5"
                 >
                   10
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-gxeivx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1f8dvth-MuiTableCell-root"
                   data-index="6"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="7"
                 >
                   <p
@@ -1106,11 +1160,11 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                 data-index="3"
               >
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                   data-index="0"
                 >
                   <a
@@ -1121,7 +1175,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vf4ba6-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-adap2x-MuiTableCell-root"
                   data-index="1"
                 >
                   <a
@@ -1132,7 +1186,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1qsm2vf-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6oh1xu-MuiTableCell-root"
                   data-index="2"
                 >
                   <a
@@ -1145,7 +1199,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1nis9ey-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10xe59h-MuiTableCell-root"
                   data-index="3"
                 >
                   <div
@@ -1172,25 +1226,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-its7qm-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-n2il5f-MuiTableCell-root"
                   data-index="4"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1g22oqc-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-8p35a3-MuiTableCell-root"
                   data-index="5"
                 >
                   10
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-gxeivx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1f8dvth-MuiTableCell-root"
                   data-index="6"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="7"
                 >
                   <p
@@ -1204,11 +1258,11 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                 </td>
               </tr>
               <tr
-                class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                 data-index="4"
               >
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
                   data-index="0"
                 >
                   <a
@@ -1219,7 +1273,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vf4ba6-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-adap2x-MuiTableCell-root"
                   data-index="1"
                 >
                   <a
@@ -1230,7 +1284,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1qsm2vf-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6oh1xu-MuiTableCell-root"
                   data-index="2"
                 >
                   <a
@@ -1243,7 +1297,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1nis9ey-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-10xe59h-MuiTableCell-root"
                   data-index="3"
                 >
                   <div
@@ -1270,25 +1324,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
                   </div>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-its7qm-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-n2il5f-MuiTableCell-root"
                   data-index="4"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1g22oqc-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-8p35a3-MuiTableCell-root"
                   data-index="5"
                 >
                   10
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-gxeivx-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1f8dvth-MuiTableCell-root"
                   data-index="6"
                 >
                   1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-yh37k4-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="7"
                 >
                   <p
@@ -1303,7 +1357,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </tr>
             </tbody>
             <tfoot
-              class="MuiTableFooter-root css-131pszo-MuiTableFooter-root"
+              class="MuiTableFooter-root css-4ar9ic-MuiTableFooter-root"
             />
           </table>
         </div>

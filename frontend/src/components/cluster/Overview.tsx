@@ -2,13 +2,11 @@ import { FormControlLabel, Switch } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
-import { setSearchFilter } from '../../redux/filterSlice';
 import { DateLabel, Link, PageGrid, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -67,7 +65,6 @@ function EventsSection() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const eventsFilter = queryParams.get('eventsFilter');
-  const dispatch = useDispatch();
   const filterFunc = useFilterFunc<Event>(['.jsonData.involvedObject.kind']);
   const [isWarningEventSwitchChecked, setIsWarningEventSwitchChecked] = React.useState(
     Boolean(
@@ -79,8 +76,8 @@ function EventsSection() {
   );
   const [events, eventsError] = Event.useList({ limit: Event.maxLimit });
 
-  const warningActionFilterFunc = (event: Event) => {
-    if (!filterFunc(event)) {
+  const warningActionFilterFunc = (event: Event, search?: string) => {
+    if (!filterFunc(event, search)) {
       return false;
     }
 
@@ -92,14 +89,6 @@ function EventsSection() {
     // the default filterFunc (and its result was 'true').
     return true;
   };
-
-  React.useEffect(() => {
-    if (!eventsFilter) {
-      return;
-    }
-    // we want to consider search by id
-    dispatch(setSearchFilter(eventsFilter));
-  }, [eventsFilter]);
 
   const numWarnings = React.useMemo(
     () => events?.filter(e => e.type === 'Warning').length ?? '?',
@@ -134,6 +123,7 @@ function EventsSection() {
     <ResourceListView
       title={t('glossary|Events')}
       headerProps={{
+        noNamespaceFilter: false,
         titleSideActions: [
           <FormControlLabel
             checked={isWarningEventSwitchChecked}
@@ -146,6 +136,7 @@ function EventsSection() {
           />,
         ],
       }}
+      defaultGlobalFilter={eventsFilter ?? undefined}
       data={events}
       errorMessage={Event.getErrorMessage(eventsError)}
       columns={[
@@ -157,6 +148,7 @@ function EventsSection() {
           label: t('Name'),
           getValue: event => event.involvedObjectInstance?.getName() ?? event.involvedObject.name,
           render: event => makeObjectLink(event),
+          gridTemplate: 1.5,
         },
         'namespace',
         {
@@ -174,13 +166,15 @@ function EventsSection() {
           render: event => (
             <ShowHideLabel labelId={event.metadata?.uid || ''}>{event.message || ''}</ShowHideLabel>
           ),
+          gridTemplate: 1.5,
         },
         {
           id: 'last-seen',
           label: t('Last Seen'),
+          gridTemplate: 'min-content',
+          cellProps: { align: 'right' },
           getValue: event => -new Date(event.lastOccurrence).getTime(),
           render: event => <DateLabel date={event.lastOccurrence} format="mini" />,
-          cellProps: { align: 'right' },
         },
       ]}
       filterFunction={warningActionFilterFunc}

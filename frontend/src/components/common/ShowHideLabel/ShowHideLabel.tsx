@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles({
   fullText: {
     wordBreak: 'break-all',
+    whiteSpace: 'normal',
   },
 });
 

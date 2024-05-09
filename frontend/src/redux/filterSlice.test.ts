@@ -3,7 +3,6 @@ import filterReducer, {
   initialState,
   resetFilter,
   setNamespaceFilter,
-  setSearchFilter,
 } from './filterSlice';
 
 describe('filterSlice', () => {
@@ -19,17 +18,10 @@ describe('filterSlice', () => {
     expect(state.namespaces).toEqual(new Set(namespaces));
   });
 
-  it('should handle setSearchFilter', () => {
-    const search = 'pod';
-    state = filterReducer(state, setSearchFilter(search));
-    expect(state.search).toEqual(search);
-  });
-
   it('should handle resetFilter', () => {
     state = {
       ...state,
       namespaces: new Set(['default']),
-      search: 'pod',
     };
 
     state = filterReducer(state, resetFilter());

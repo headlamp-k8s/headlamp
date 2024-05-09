@@ -158,29 +158,6 @@ exports[`Storyshots Home/Home Base 1`] = `
                 />
               </div>
             </div>
-            <div
-              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-                >
-                  <button
-                    aria-label="Show filter"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-                    tabindex="0"
-                    type="button"
-                  >
-                    <span />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
           <div
             class="MuiBox-root css-1txv3mw"
@@ -202,7 +179,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                       class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
                     >
                       <div
-                        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
+                        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
                         role="alert"
                       >
                         <div
@@ -316,17 +293,17 @@ exports[`Storyshots Home/Home Base 1`] = `
                 class="MuiTableContainer-root css-nhjqqh-MuiTableContainer-root"
               >
                 <table
-                  class="MuiTable-root css-1x84si1-MuiTable-root"
-                  style="--header-name-size: 80; --col-name-size: 80; --header-1-size: 80; --col-1-size: 80; --header-2-size: 80; --col-2-size: 80; --header-3-size: 80; --col-3-size: 80; --header-4-size: 80; --col-4-size: 80;"
+                  class="MuiTable-root css-168xlf9-MuiTable-root"
+                  style="--header-name-size: 180; --col-name-size: 180; --header-1-size: 180; --col-1-size: 180; --header-2-size: 180; --col-2-size: 180; --header-3-size: 180; --col-3-size: 180; --header-4-size: 180; --col-4-size: 180;"
                 >
                   <thead
-                    class="MuiTableHead-root css-118e0ip-MuiTableHead-root"
+                    class="MuiTableHead-root css-114s3s2-MuiTableHead-root"
                   >
                     <tr
-                      class="MuiTableRow-root MuiTableRow-head css-4cnyqt-MuiTableRow-root"
+                      class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
                     >
                       <th
-                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1gtl1gi-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                         colspan="1"
                         data-index="0"
                         scope="col"
@@ -402,7 +379,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </div>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1lq7huv-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1lywgbe-MuiTableCell-root"
                         colspan="1"
                         data-index="1"
                         scope="col"
@@ -479,7 +456,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </div>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ughqxg-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1q4zsyf-MuiTableCell-root"
                         colspan="1"
                         data-index="2"
                         scope="col"
@@ -556,7 +533,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </div>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1nssqnd-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-2rio64-MuiTableCell-root"
                         colspan="1"
                         data-index="3"
                         scope="col"
@@ -633,29 +610,27 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </div>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-i8z0lu-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hzrbgy-MuiTableCell-root"
                         colspan="1"
                         data-index="4"
                         scope="col"
                       >
                         <div
-                          class="Mui-TableHeadCell-Content MuiBox-root css-15mqaut"
+                          class="Mui-TableHeadCell-Content MuiBox-root css-1w86f15"
                         >
                           <div
-                            class="Mui-TableHeadCell-Content-Labels MuiBox-root css-1bh2skb"
+                            class="Mui-TableHeadCell-Content-Labels MuiBox-root css-68rqdf"
                           >
                             <div
-                              class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-a3udzh"
-                            >
-                               
-                            </div>
+                              class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-1sbs8jn"
+                            />
                             <span
-                              aria-label="Sort by   ascending"
+                              aria-label="Sort by  ascending"
                               class="MuiBadge-root css-1c32n2y-MuiBadge-root"
                               data-mui-internal-clone-element="true"
                             >
                               <span
-                                aria-label="Sort by   ascending"
+                                aria-label="Sort by  ascending"
                                 class="MuiButtonBase-root MuiTableSortLabel-root Mui-active css-118d58w-MuiButtonBase-root-MuiTableSortLabel-root"
                                 role="button"
                                 tabindex="0"
@@ -712,14 +687,14 @@ exports[`Storyshots Home/Home Base 1`] = `
                     </tr>
                   </thead>
                   <tbody
-                    class="MuiTableBody-root css-29nbga-MuiTableBody-root"
+                    class="MuiTableBody-root css-51306a-MuiTableBody-root"
                   >
                     <tr
-                      class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                      class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                       data-index="0"
                     >
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-seoidr-MuiTableCell-root"
                         data-index="0"
                       >
                         <a
@@ -730,7 +705,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </a>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1phqppa-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-18f8p9t-MuiTableCell-root"
                         data-index="1"
                       >
                         <div
@@ -750,19 +725,19 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </div>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-w6o6bl-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ia5azj-MuiTableCell-root"
                         data-index="2"
                       >
                         ⋯
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vjwruf-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-xszpt6-MuiTableCell-root"
                         data-index="3"
                       >
                         ⋯
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-c9e1mn-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-qb47jv-MuiTableCell-root"
                         data-index="4"
                       >
                         <button
@@ -782,11 +757,11 @@ exports[`Storyshots Home/Home Base 1`] = `
                       </td>
                     </tr>
                     <tr
-                      class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                      class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                       data-index="1"
                     >
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-seoidr-MuiTableCell-root"
                         data-index="0"
                       >
                         <a
@@ -797,7 +772,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </a>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1phqppa-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-18f8p9t-MuiTableCell-root"
                         data-index="1"
                       >
                         <div
@@ -817,19 +792,19 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </div>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-w6o6bl-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ia5azj-MuiTableCell-root"
                         data-index="2"
                       >
                         ⋯
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vjwruf-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-xszpt6-MuiTableCell-root"
                         data-index="3"
                       >
                         ⋯
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-c9e1mn-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-qb47jv-MuiTableCell-root"
                         data-index="4"
                       >
                         <button
@@ -849,11 +824,11 @@ exports[`Storyshots Home/Home Base 1`] = `
                       </td>
                     </tr>
                     <tr
-                      class="MuiTableRow-root css-19dmwlb-MuiTableRow-root"
+                      class="MuiTableRow-root css-n8542r-MuiTableRow-root"
                       data-index="2"
                     >
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ulegx-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-seoidr-MuiTableCell-root"
                         data-index="0"
                       >
                         <a
@@ -864,7 +839,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </a>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1phqppa-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-18f8p9t-MuiTableCell-root"
                         data-index="1"
                       >
                         <div
@@ -884,19 +859,19 @@ exports[`Storyshots Home/Home Base 1`] = `
                         </div>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-w6o6bl-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ia5azj-MuiTableCell-root"
                         data-index="2"
                       >
                         ⋯
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vjwruf-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-xszpt6-MuiTableCell-root"
                         data-index="3"
                       >
                         ⋯
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-c9e1mn-MuiTableCell-root"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-qb47jv-MuiTableCell-root"
                         data-index="4"
                       >
                         <button
@@ -917,7 +892,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                     </tr>
                   </tbody>
                   <tfoot
-                    class="MuiTableFooter-root css-131pszo-MuiTableFooter-root"
+                    class="MuiTableFooter-root css-4ar9ic-MuiTableFooter-root"
                   />
                 </table>
               </div>

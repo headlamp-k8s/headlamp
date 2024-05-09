@@ -24,11 +24,13 @@ export default function StatefulSetList() {
           id: 'pods',
           label: t('Pods'),
           getValue: statefulSet => renderPods(statefulSet),
+          gridTemplate: 0.6,
         },
         {
           id: 'replicas',
           label: t('Replicas'),
           getValue: statefulSet => statefulSet.spec.replicas,
+          gridTemplate: 0.6,
         },
         {
           id: 'containers',

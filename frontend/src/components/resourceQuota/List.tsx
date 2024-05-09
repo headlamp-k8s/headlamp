@@ -25,7 +25,7 @@ export interface ResourceQuotaProps {
   error: ApiError | null;
   hideColumns?: string[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
-  noSearch?: boolean;
+  noNamespaceFilter?: boolean;
 }
 
 export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
@@ -34,7 +34,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
     error,
     hideColumns = [],
     reflectTableInURL = 'resourcequotas',
-    noSearch,
+    noNamespaceFilter,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
@@ -56,17 +56,11 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
             });
             return <WrappingBox>{requests}</WrappingBox>;
           },
-          cellProps: {
-            style: {
-              width: 'fit-content',
-              minWidth: '100%',
-            },
-          },
         },
         {
           id: 'limits',
           label: t('translation|Limit'),
-          getValue: item => item.limits.join(', '),
+          getValue: item => item?.limits?.join(', '),
           render: item => {
             const limits: JSX.Element[] = [];
             item.limits.forEach((limit: string) => {
@@ -78,7 +72,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
         'age',
       ]}
       headerProps={{
-        noSearch,
+        noNamespaceFilter,
       }}
       errorMessage={ResourceQuota.getErrorMessage(error)}
       data={resourceQuotas}

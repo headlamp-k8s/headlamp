@@ -223,31 +223,30 @@ ReflectInURLWithPrefix.args = {
 
 // filter Function
 
-type SimpleTableWithFilterProps = SimpleTableProps & { matchCriteria?: string[] };
+type SimpleTableWithFilterProps = SimpleTableProps & { matchCriteria?: string[]; search?: string };
 function SimpleTableWithFilter(props: SimpleTableWithFilterProps) {
-  const { matchCriteria, ...otherProps } = props;
+  const { matchCriteria, search, ...otherProps } = props;
   const filterFunc = useFilterFunc(matchCriteria);
-  return <SimpleTable filterFunction={filterFunc} {...otherProps} />;
+  return <SimpleTable filterFunction={item => filterFunc(item, search)} {...otherProps} />;
 }
 
 const TemplateWithFilter: StoryFn<{
   simpleTableArgs: SimpleTableWithFilterProps;
   namespaces: string[];
-  search: string;
+  search?: string;
 }> = args => {
-  const { simpleTableArgs, search, namespaces = [] } = args;
+  const { simpleTableArgs, namespaces = [], search } = args;
 
   const storeWithFilterAndSettings = configureStore({
     reducer: (
       state = {
-        filter: { namespaces: new Set<string>(), search: '' },
+        filter: { namespaces: new Set<string>() },
         config: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
       }
     ) => state,
     preloadedState: {
       filter: {
         namespaces: new Set(namespaces),
-        search,
       },
       config: {
         settings: {
@@ -260,7 +259,7 @@ const TemplateWithFilter: StoryFn<{
   return (
     <TestContext store={storeWithFilterAndSettings}>
       <SectionFilterHeader title="Test" />
-      <SimpleTableWithFilter {...simpleTableArgs} />
+      <SimpleTableWithFilter {...simpleTableArgs} search={search} />
     </TestContext>
   );
 };

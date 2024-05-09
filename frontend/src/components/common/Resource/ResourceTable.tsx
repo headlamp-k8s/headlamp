@@ -1,6 +1,6 @@
 import { TableCellProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { MRT_Row, MRT_SortingFn } from 'material-react-table';
+import { MRT_FilterFns, MRT_Row, MRT_SortingFn } from 'material-react-table';
 import { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
@@ -33,6 +33,15 @@ export type ResourceTableColumn<RowItem> = {
   /** Change how filtering behaves, by default it will just search the text value */
   filterVariant?: TableColumn<any>['filterVariant'];
   disableFiltering?: boolean;
+  /**
+   * Column width in the grid template format
+   * Number values will be converted to "fr"
+   * @example
+   * 1
+   * "1.5fr"
+   * "min-content"
+   */
+  gridTemplate?: string | number;
 } & (
   | {
       /** To render a simple value provide property name of the item */
@@ -58,7 +67,7 @@ export type ResourceTableColumn<RowItem> = {
 type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
 
 export interface ResourceTableProps<RowItem> {
-  /** The columns to be rendered, like used in SimpleTable, or by name. */
+  /** The columns to be rendered, like used in Table, or by name. */
   columns: (ResourceTableColumn<RowItem> | ColumnType)[];
   /** Provide a list of columns that won't be shown and cannot be turned on */
   hideColumns?: string[] | null;
@@ -71,11 +80,17 @@ export interface ResourceTableProps<RowItem> {
   noProcessing?: boolean;
   /** The callback for when the columns chooser is closed. */
   onColumnChooserClose?: () => void;
-  /** Column to be sorted */
+  /** Specify initial sorting of the table, provide id of the column you want the table to be sorted by and direction */
   defaultSortingColumn?: { id: string; desc: boolean };
+  /** Apply a global search filter by default. Table will use all columns to search */
+  defaultGlobalFilter?: string;
+  /** Rows data */
   data: Array<RowItem> | null;
+  /** Filter out rows from the table */
   filterFunction?: (item: RowItem) => boolean;
+  /** Display an error message. Table will be hidden even if data is present */
   errorMessage?: string | null;
+  /** State of the Table (page, rows per page) is reflected in the url */
   reflectInURL?: string | boolean;
 }
 
@@ -203,12 +218,12 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
     errorMessage,
     reflectInURL,
     data,
+    defaultGlobalFilter,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
   const tableProcessors = useTypedSelector(state => state.resourceTable.tableColumnsProcessors);
-  const filter = useTypedSelector(state => state.filter);
   const defaultFilterFunc = useFilterFunc();
   const [columnVisibility, setColumnVisibility] = useState(() =>
     initColumnVisibilityState(columns, id)
@@ -244,9 +259,13 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
             enableMultiSort: !!sort,
             enableSorting: !!sort,
             enableColumnFilter: !column.disableFiltering,
-            muiTableHeadCellProps: column.cellProps,
-            muiTableBodyCellProps: column.cellProps,
-            grow: false,
+            muiTableBodyCellProps: {
+              ...column.cellProps,
+              // Make sure column don't override width, it'll mess up the layout
+              // the layout is controlled only through the gridTemplate property
+              sx: { ...(column.cellProps?.sx ?? {}), width: 'unset', minWidth: 'unset' },
+            },
+            gridTemplate: column.gridTemplate ?? 1,
           };
 
           if ('getValue' in column) {
@@ -272,6 +291,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
             return {
               id: 'name',
               header: t('translation|Name'),
+              gridTemplate: 1.5,
               accessorFn: (item: KubeObject) => item.metadata.name,
               Cell: ({ row }: { row: MRT_Row<any> }) =>
                 row.original && <Link kubeObject={row.original} />,
@@ -280,11 +300,13 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
             return {
               id: 'age',
               header: t('translation|Age'),
+              gridTemplate: 'min-content',
               accessorFn: (item: KubeObject) =>
                 -new Date(item.metadata.creationTimestamp).getTime(),
-              muiTableHeadCellProps: { align: 'right' },
-              muiTableBodyCellProps: { align: 'right' },
               enableColumnFilter: false,
+              muiTableBodyCellProps: {
+                align: 'right',
+              },
               Cell: ({ row }: { row: MRT_Row<KubeObject> }) =>
                 row.original && (
                   <DateLabel
@@ -314,15 +336,16 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
             return {
               id: 'kind',
               header: t('translation|Type'),
-              Cell: ({ row }: { row: MRT_Row<KubeObject> }) => row.original.kind,
-              accessorFn: (resource: KubeObject) => resource?.kind,
+              accessorFn: (resource: KubeObject) => String(resource?.kind),
               filterVariant: 'multi-select',
             };
           default:
             throw new Error(`Unknown column: ${col}`);
         }
       })
-      .filter(col => !hideColumns?.includes(col.id ?? '')) as TableColumn<KubeObject>[];
+      .filter(col => !hideColumns?.includes(col.id ?? '')) as Array<
+      TableColumn<KubeObject> & { gridTemplate?: string | number }
+    >;
 
     let sort = undefined;
     const sortingColumn = defaultSortingColumn ?? allColumns.find(it => it.id === 'age');
@@ -364,10 +387,12 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
     sorting: sort ? [sort] : undefined,
   };
 
-  if (filter.search) {
-    initialState.globalFilter = filter.search;
+  if (defaultGlobalFilter) {
+    initialState.globalFilter = defaultGlobalFilter;
     initialState.showGlobalFilter = true;
   }
+
+  const filterFunc = filterFunction ?? defaultFilterFunc;
 
   return (
     <>
@@ -386,9 +411,15 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
         }}
         reflectInURL={reflectInURL}
         onColumnVisibilityChange={onColumnsVisibilityChange as any}
-        filterFunction={
-          (filterFunction ?? defaultFilterFunc) as (item: Record<string, any>) => boolean
-        }
+        filterFns={{
+          kubeObjectSearch: (row, id, filterValue) => {
+            const customFilterResult = filterFunc(row.original, filterValue);
+            const fuzzyColumnsResult = MRT_FilterFns.contains(row, id, filterValue);
+            return customFilterResult || fuzzyColumnsResult;
+          },
+        }}
+        globalFilterFn="kubeObjectSearch"
+        filterFunction={filterFunc as any}
       />
     </>
   );

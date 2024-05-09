@@ -81,7 +81,8 @@ export class HeadlampPage {
     const headers = await this.page.$$eval(`${tableSelector} th`, ths =>
       ths.map(th => {
         if (th && th.textContent) {
-          return th.textContent.trim();
+          // Table header also contains a number, displayed during multi-sorting, so we remove it
+          return th.textContent.trim().replace('0', '');
         }
       })
     );
