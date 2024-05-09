@@ -25,7 +25,7 @@ interface WorkloadDict {
 export default function Overview() {
   const [workloadsData, setWorkloadsData] = React.useState<WorkloadDict>({});
   const location = useLocation();
-  const filterFunc = useFilterFunc(['.jsonData.kind']);
+  const filterFunc = useFilterFunc<Workload>(['.jsonData.kind']);
   const { t } = useTranslation('glossary');
   const cluster = useCluster();
 
@@ -119,21 +119,16 @@ export default function Overview() {
           {
             id: 'name',
             label: t('translation|Name'),
-            getter: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
-            sort: (w1: Workload, w2: Workload) => {
-              if (w1.metadata.name < w2.metadata.name) {
-                return -1;
-              } else if (w1.metadata.name > w2.metadata.name) {
-                return 1;
-              }
-              return 0;
-            },
+            getValue: item => item.metadata.name,
+            render: item => (
+              <ResourceLink resource={item as KubeObject} state={{ backLink: { ...location } }} />
+            ),
           },
           'namespace',
           {
             id: 'pods',
             label: t('Pods'),
-            getter: item => item && getPods(item),
+            getValue: item => item && getPods(item),
             sort: sortByReplicas,
           },
           'age',

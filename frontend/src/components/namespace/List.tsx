@@ -37,53 +37,55 @@ export default function NamespacesList() {
     return <StatusLabel status={status === 'Active' ? 'success' : 'error'}>{status}</StatusLabel>;
   }
 
-  const resourceTableProps: ResourceTableFromResourceClassProps | ResourceTableProps =
-    React.useMemo(() => {
-      if (allowedNamespaces.length > 0) {
-        return {
-          columns: [
-            {
-              id: 'name',
-              label: t('translation|Name'),
-              getter: ({ metadata }) => (
-                <Link
-                  routeName={'namespace'}
-                  params={{
-                    name: metadata.name,
-                  }}
-                >
-                  {metadata.name}
-                </Link>
-              ),
-            },
-            {
-              id: 'status',
-              label: t('translation|Status'),
-              getter: () => 'Unknown',
-            },
-            {
-              id: 'age',
-              label: t('translation|Age'),
-              getter: () => 'Unknown',
-            },
-          ],
-          data: allowedNamespaces,
-        };
-      }
+  const resourceTableProps:
+    | ResourceTableFromResourceClassProps<Namespace>
+    | ResourceTableProps<Namespace> = React.useMemo(() => {
+    if (allowedNamespaces.length > 0) {
       return {
-        resourceClass: Namespace,
         columns: [
-          'name',
+          {
+            id: 'name',
+            label: t('translation|Name'),
+            getValue: ns => ns.metadata.name,
+            render: ({ metadata }) => (
+              <Link
+                routeName={'namespace'}
+                params={{
+                  name: metadata.name,
+                }}
+              >
+                {metadata.name}
+              </Link>
+            ),
+          },
           {
             id: 'status',
             label: t('translation|Status'),
-            getter: makeStatusLabel,
-            sort: (namespace: Namespace) => namespace.status.phase,
+            getValue: () => 'Unknown',
           },
-          'age',
+          {
+            id: 'age',
+            label: t('translation|Age'),
+            getValue: () => 'Unknown',
+          },
         ],
+        data: allowedNamespaces as unknown as Namespace[],
       };
-    }, [allowedNamespaces]);
+    }
+    return {
+      resourceClass: Namespace,
+      columns: [
+        'name',
+        {
+          id: 'status',
+          label: t('translation|Status'),
+          getValue: ns => ns.status.phase,
+          render: makeStatusLabel,
+        },
+        'age',
+      ],
+    };
+  }, [allowedNamespaces]);
 
   return (
     <ResourceListView

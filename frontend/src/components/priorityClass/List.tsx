@@ -14,14 +14,12 @@ export default function PriorityClassList() {
         {
           id: 'value',
           label: t('translation|Value'),
-          getter: item => item.value,
-          sort: true,
+          getValue: item => item.value,
         },
         {
           id: 'globalDefault',
           label: t('translation|Global Default'),
-          getter: item => item.globalDefault || 'False',
-          sort: true,
+          getValue: item => String(item.globalDefault || 'False'),
         },
         'age',
       ]}

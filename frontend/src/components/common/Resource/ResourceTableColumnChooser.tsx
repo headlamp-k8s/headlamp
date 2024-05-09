@@ -7,14 +7,14 @@ import Popover from '@mui/material/Popover';
 import React from 'react';
 import { ResourceTableColumn } from './ResourceTable';
 
-interface ColumnsPopupProps {
-  columns: ResourceTableColumn[];
-  onToggleColumn: (cols: ResourceTableColumn[]) => void;
+interface ColumnsPopupProps<T> {
+  columns: ResourceTableColumn<T>[];
+  onToggleColumn: (cols: ResourceTableColumn<T>[]) => void;
   onClose: () => void;
   anchorEl: HTMLElement | null;
 }
 
-export default function ColumnsPopup(props: ColumnsPopupProps) {
+export default function ColumnsPopup<T>(props: ColumnsPopupProps<T>) {
   const { columns, onToggleColumn, onClose, anchorEl } = props;
   const [currentColumns, setColumnsChanged] = React.useState(columns);
 

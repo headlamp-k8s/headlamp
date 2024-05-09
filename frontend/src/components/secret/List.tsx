@@ -4,7 +4,7 @@ import { useFilterFunc } from '../../lib/util';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function SecretList() {
-  const filterFunc = useFilterFunc(['.jsonData.type']);
+  const filterFunc = useFilterFunc<Secret>(['.jsonData.type']);
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (
@@ -18,14 +18,12 @@ export default function SecretList() {
         {
           id: 'type',
           label: t('translation|Type'),
-          getter: secret => secret.type,
-          sort: true,
+          getValue: secret => secret.type,
         },
         {
           id: 'data',
           label: t('translation|Data'),
-          getter: (secret: Secret) => Object.keys(secret.data || {}).length || 0,
-          sort: true,
+          getValue: (secret: Secret) => Object.keys(secret.data || {}).length || 0,
         },
         'age',
       ]}

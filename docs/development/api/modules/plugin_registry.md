@@ -639,7 +639,7 @@ registerResourceTableColumnsProcessor(function ageRemover({ id, columns }) {
   if (id === 'headlamp-pods') {
     columns.push({
       label: 'Init Containers',
-      getter: (pod: Pod) => {
+      getValue: (pod: Pod) => {
         return pod.spec.initContainers.length;
       },
     });

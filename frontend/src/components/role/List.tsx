@@ -15,7 +15,7 @@ export default function RoleList() {
   const [roleError, setRolesError] = useErrorState(setupRoles);
   const [clusterRoleError, setClusterRolesError] = useErrorState(setupClusterRoles);
   const { t } = useTranslation('glossary');
-  const filterFunc = useFilterFunc(['.jsonData.kind']);
+  const filterFunc = useFilterFunc<Role>(['.jsonData.kind']);
 
   function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
     setRoles(oldRoles => ({ ...(oldRoles || {}), [kind]: newRoles }));
@@ -67,7 +67,8 @@ export default function RoleList() {
         'type',
         {
           label: t('translation|Name'),
-          getter: item => (
+          getValue: item => item.metadata.namespace,
+          render: item => (
             <Link
               routeName={item.metadata.namespace ? 'role' : 'clusterrole'}
               params={{
@@ -78,14 +79,6 @@ export default function RoleList() {
               {item.metadata.name}
             </Link>
           ),
-          sort: (r1: Role, r2: Role) => {
-            if (r1.metadata.name < r2.metadata.name) {
-              return -1;
-            } else if (r1.metadata.name > r2.metadata.name) {
-              return 1;
-            }
-            return 0;
-          },
         },
         'namespace',
         'age',

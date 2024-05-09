@@ -15,18 +15,17 @@ export default function PDBList() {
         {
           id: 'minAvailable',
           label: t('translation|Min Available'),
-          getter: (item: PDB) => item.spec.minAvailable || t('translation|N/A'),
-          sort: true,
+          getValue: (item: PDB) => item.spec.minAvailable || t('translation|N/A'),
         },
         {
           id: 'maxUnavailable',
           label: t('translation|Max Unavailable'),
-          getter: (item: PDB) => item.spec.maxUnavailable || t('translation|N/A'),
+          getValue: (item: PDB) => item.spec.maxUnavailable || t('translation|N/A'),
         },
         {
           id: 'allowedDisruptions',
           label: t('translation|Allowed Disruptions'),
-          getter: (item: PDB) => item.status.disruptionsAllowed || t('translation|N/A'),
+          getValue: (item: PDB) => item.status.disruptionsAllowed || t('translation|N/A'),
         },
         'age',
       ]}

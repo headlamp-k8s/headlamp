@@ -32,7 +32,7 @@ const Template: Story = () => {
         'namespace',
         {
           label: 'Num Containers',
-          getter: item => item?.spec.containers.length,
+          getValue: item => item?.spec.containers.length,
           show: false,
         },
         'age',

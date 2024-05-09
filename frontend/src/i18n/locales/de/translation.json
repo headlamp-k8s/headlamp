@@ -215,7 +215,6 @@
   "Init Containers": "Init-Container",
   "Conditions": "Bedingungen",
   "Volumes": "Speicher-Volumes",
-  "Change columns displayed": "Angezeigte Spalten ändern",
   "Restarting {{ itemName }}…": "Starte {{ itemName }} neu…",
   "Cancelled restarting {{ itemName }}.": "Der Neustart von {{ itemName }} wurde abgebrochen.",
   "Restarted {{ itemName }}.": "{{ itemName }} neu gestartet.",

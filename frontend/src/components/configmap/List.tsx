@@ -15,9 +15,7 @@ export default function ConfigMapList() {
         {
           id: 'data',
           label: t('translation|Data'),
-          getter: (configmap: ConfigMap) => Object.keys(configmap.data || {}).length || 0,
-          sort: true,
-          gridTemplate: 0.5,
+          getValue: (configmap: ConfigMap) => Object.keys(configmap.data || {}).length || 0,
         },
         'age',
       ]}

@@ -212,38 +212,38 @@ function HomeComponent(props: HomeComponentProps) {
       >
         <ResourceTable
           filterFunction={filterFunc}
-          defaultSortingColumn={1}
+          defaultSortingColumn={{ id: 'name', desc: false }}
           columns={[
             {
+              id: 'name',
               label: t('Name'),
-              getter: ({ name }: Cluster) => (
+              getValue: cluster => cluster.name,
+              render: ({ name }) => (
                 <Link routeName="cluster" params={{ cluster: name }}>
                   {name}
                 </Link>
               ),
-              sort: (c1: Cluster, c2: Cluster) => c1.name.localeCompare(c2.name),
             },
             {
               label: t('Status'),
-              getter: ({ name }: Cluster) => <ClusterStatus error={errors[name]} />,
+              getValue: cluster => cluster.name,
+              render: ({ name }) => <ClusterStatus error={errors[name]} />,
             },
             {
               label: t('Warnings'),
-              getter: ({ name }: Cluster) => renderWarningsText(name),
-              sort: true,
+              getValue: ({ name }) => renderWarningsText(name),
             },
             {
               label: t('glossary|Kubernetes Version'),
-              getter: ({ name }: Cluster) => versions[name]?.gitVersion || '⋯',
-              sort: true,
+              getValue: ({ name }) => versions[name]?.gitVersion || '⋯',
             },
             {
               label: '',
-              getter: (cluster: Cluster) => (
-                <Box textAlign="right">
-                  <ContextMenu cluster={cluster} />
-                </Box>
-              ),
+              getValue: () => '',
+              cellProps: {
+                align: 'right',
+              },
+              render: cluster => <ContextMenu cluster={cluster} />,
             },
           ]}
           data={Object.values(clusters)}

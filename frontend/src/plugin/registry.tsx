@@ -391,9 +391,12 @@ export function registerDetailsViewHeaderActionsProcessor(
  *   if (id === 'headlamp-pods') {
  *     columns.push({
  *       label: 'Init Containers',
- *       getter: (pod: Pod) => {
+ *       // return plain value to allow filtering and sorting
+ *       getValue: (pod: Pod) => {
  *         return pod.spec.initContainers.length;
- *       },
+ *       }
+ *       // (optional) customise how the cell value is rendered
+ *       render: (pod: Pod) => <div style={{ color: "red" }}>{pod.spec.initContainers.length}</div>
  *     });
  *   }
  *

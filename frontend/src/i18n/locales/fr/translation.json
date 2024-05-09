@@ -215,7 +215,6 @@
   "Init Containers": "Conteneurs d'initialisation",
   "Conditions": "Conditions",
   "Volumes": "Volumes",
-  "Change columns displayed": "Modifier les colonnes affichées",
   "Restarting {{ itemName }}…": "Redémarrage de {{ itemName }}…",
   "Cancelled restarting {{ itemName }}.": "Redémarrage de {{ itemName }} annulé.",
   "Restarted {{ itemName }}.": "{{ itemName }} redémarré.",

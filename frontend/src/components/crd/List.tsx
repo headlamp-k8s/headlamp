@@ -16,7 +16,8 @@ export default function CustomResourceDefinitionList() {
       columns={[
         {
           label: t('glossary|Resource'),
-          getter: crd => (
+          getValue: crd => crd.spec.names.kind,
+          render: crd => (
             <Link
               routeName="customresources"
               params={{
@@ -29,7 +30,8 @@ export default function CustomResourceDefinitionList() {
         },
         {
           label: t('glossary|Definition'),
-          getter: crd => (
+          getValue: crd => crd.metadata.name,
+          render: crd => (
             <Link
               routeName="crd"
               params={{
@@ -39,24 +41,14 @@ export default function CustomResourceDefinitionList() {
               {crd.metadata.name}
             </Link>
           ),
-          sort: (c1: CRD, c2: CRD) => {
-            if (c1.metadata.name < c2.metadata.name) {
-              return -1;
-            } else if (c1.metadata.name > c2.metadata.name) {
-              return 1;
-            }
-            return 0;
-          },
         },
         {
           label: t('translation|Group'),
-          getter: crd => crd.spec.group,
-          sort: true,
+          getValue: crd => crd.spec.group,
         },
         {
           label: t('Scope'),
-          getter: crd => crd.spec.scope,
-          sort: true,
+          getValue: crd => crd.spec.scope,
         },
         'age',
       ]}
