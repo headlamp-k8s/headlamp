@@ -90,3 +90,97 @@ npx playwright test -g "404 page is present" --headed
 
 - You can modify the playwright.config.ts file to slow down the tests. You must be sure not to add this change to the repository when you push.
   - within the playwright.config.ts file locate the `const config: PlaywrightTestConfig` object. within the object, modify the use object to contain a field for `launchOptions: { slowMo: }` set to a number of milliseconds ex. `use: { ..., launchOptions: { slowMo: 1000 }` property to slow down the tests to take 1 second between each step.
+
+## Running Playwright through a Virtual Machine (VM)
+
+### Log into Azure CLI
+
+1. **Open a new Ubuntu terminal window.**
+   - Verify the installation of Azure CLI on your machine by typing:
+     ```
+     az version
+     ```
+   - Log into your Azure account with the following command:
+     ```
+     az login
+     ```
+
+### Prepare the VM Creation Script
+
+1. **Open another terminal window.**
+
+   - Before running the script, replace `VM_NAME` and `RESOURCE_GROUP` with your specific values. You can find the default script template or use a GitHub gist link.
+
+2. **Modify and run the script:**
+   - Replace the placeholders in the script with actual values for `VM_NAME` and `RESOURCE_GROUP`.
+   - Execute the script using the following command:
+     ```
+     curl -sSfL https://headlamp.dev/blog/2024/04/user-added-cluster-support-in-shared-headlamp-deployments/create-azurevm.sh | bash
+     ```
+
+### Verify VM Creation
+
+1. **Use a web browser to access the Azure portal.**
+   - Navigate to the resource page and search for the `VM_NAME` you used in the script to check if the VM was successfully created.
+
+### Connect and Setup the VM
+
+1. **SSH into the newly created VM.**
+
+   - Use this command to connect:
+     ```
+     ssh your-username@your-vm-ip
+     ```
+
+2. **Install essential tools on the VM:**
+   - Install Docker:
+     ```
+     sudo apt install docker.io
+     ```
+     You can find more details on the [official Docker installation guide](https://docs.docker.com/engine/install/ubuntu).
+   - Install Git:
+     ```
+     sudo apt install git
+     ```
+   - Clone the Headlamp repository:
+     ```
+     git clone https://github.com/headlamp-k8s/headlamp
+     ```
+
+### Build and Push Docker Image
+
+1. **Navigate to the workflow file and build the Headlamp image:**
+
+   - Inside `.github/workflows/build-container.yml` is the source line we need, locate the step for building the image and run in your terminal:
+     ```
+     DOCKER_IMAGE_VERSION=latest make image
+     ```
+
+2. **Tag and push the Docker image to a registry (e.g., ttl.sh):**
+
+   - Tag your Docker image and push it using ttl.sh:
+     ```
+     docker tag headlamp-k8s/headlamp ttl.sh/headlamp-k8s/headlamp
+     docker push ttl.sh/headlamp-k8s/headlamp
+     ```
+
+3. **Pull the Docker image to your local machine:**
+   - After pushing, exit back to your local machine and pull the image:
+     ```
+     docker pull ttl.sh/headlamp-k8s/headlamp
+     ```
+
+### Setup Minikube and Run Tests
+
+1. **Ensure Minikube is running on your local machine.**
+
+2. **Update the Kubernetes Headlamp CI configuration:**
+
+   - Navigate to `e2e-tests/kubernetes-headlamp-ci.yml`.
+   - Change the `image` field under `spec.containers` to match the Docker image you pulled:
+     ```
+     image: ttl.sh/headlamp-k8s/headlamp
+     ```
+
+3. **Deploy to the cluster and run end-to-end tests:**
+   - Follow the steps outlined in `Deploy to cluster` and `Run e2e tests` sections to execute these actions on your local machine.
