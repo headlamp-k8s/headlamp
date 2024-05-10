@@ -5852,7 +5852,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                     class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
-                    Error
+                    Completed
                   </span>
                 </dd>
                 <dt
