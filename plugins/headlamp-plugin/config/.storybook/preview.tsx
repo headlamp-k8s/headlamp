@@ -1,7 +1,6 @@
 import React from 'react';
 import themesConf from '@kinvolk/headlamp-plugin/lib/lib/themes';
 import { ThemeProvider } from '@mui/material/styles';
-import StylesProvider from '@mui/styles/StylesProvider';
 
 const darkTheme = themesConf['dark'];
 const lightTheme = themesConf['light'];
@@ -15,16 +14,7 @@ const withThemeProvider = (Story, context) => {
       <Story {...context} />
     </ThemeProvider>
   );
-  if (process.env.NODE_ENV !== 'test') {
-    return ourThemeProvider;
-  } else {
-    const generateClassName = (rule, styleSheet) =>
-      `${styleSheet?.options.classNamePrefix}-${rule.key}`;
-
-    return (
-      <StylesProvider generateClassName={generateClassName}>{ourThemeProvider}</StylesProvider>
-    );
-  }
+  return ourThemeProvider;
 };
 // export const decorators = [withThemeProvider, mswDecorator];
 // export const decorators = [mswDecorator];
