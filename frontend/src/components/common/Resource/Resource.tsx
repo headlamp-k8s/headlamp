@@ -734,6 +734,11 @@ export function ContainerInfo(props: ContainerInfoProps) {
         hide: !status,
       },
       {
+        name: t('translation|Exit Code'),
+        value: status?.state?.terminated?.exitCode,
+        hide: !status?.state?.terminated,
+      },
+      {
         name: t('translation|Restart Count'),
         value: status?.restartCount,
         hide: !status,

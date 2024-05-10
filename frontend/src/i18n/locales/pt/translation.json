@@ -210,6 +210,7 @@
   "Waiting": "À espera",
   "Running": "em execução",
   "Error": "Erro",
+  "Exit Code": "",
   "Restart Count": "Núm. Reinícios",
   "No data to be shown.": "Sem dados para mostrar.",
   "Init Containers": "Containers de Inicialização",

@@ -210,6 +210,7 @@
   "Waiting": "Waiting",
   "Running": "Running",
   "Error": "Error",
+  "Exit Code": "Exit Code",
   "Restart Count": "Restart Count",
   "No data to be shown.": "No data to be shown.",
   "Init Containers": "Init Containers",
