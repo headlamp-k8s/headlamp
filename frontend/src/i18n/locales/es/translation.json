@@ -211,6 +211,8 @@
   "Running": "en ejecución",
   "Error": "Error",
   "Exit Code": "",
+  "Started": "",
+  "Finished": "",
   "Restart Count": "Núm. de reinicios",
   "No data to be shown.": "Sin datos para enseñar.",
   "Init Containers": "Contenedores de Inicialización",
