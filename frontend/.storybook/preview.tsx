@@ -1,14 +1,8 @@
 import React from 'react';
 import themesConf from '../src/lib/themes';
-import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
-import StylesProvider from '@mui/styles/StylesProvider';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { rest } from 'msw'
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
 
 // https://github.com/mswjs/msw-storybook-addon
 initialize();
@@ -29,18 +23,7 @@ const withThemeProvider = (Story, context) => {
       </ThemeProvider>
     </StyledEngineProvider>
   );
-  if (process.env.NODE_ENV !== 'test') {
-    return ourThemeProvider;
-  } else {
-    const generateClassName = (rule, styleSheet) =>
-      `${styleSheet?.options.classNamePrefix}-${rule.key}`;
-
-    return (
-      <StylesProvider generateClassName={generateClassName}>
-        {ourThemeProvider}
-      </StylesProvider>
-    )
-  }
+  return ourThemeProvider;
 };
 export const decorators = [withThemeProvider, mswDecorator];
 
