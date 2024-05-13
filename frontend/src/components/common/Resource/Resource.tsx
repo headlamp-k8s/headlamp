@@ -29,6 +29,7 @@ import {
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
+import { localeDate } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
@@ -658,6 +659,21 @@ export function ContainerInfo(props: ContainerInfoProps) {
   const classes = useContainerInfoStyles(theme);
   const { t } = useTranslation(['glossary', 'translation']);
 
+  const [startedDate, finishDate] = React.useMemo(() => {
+    let startedDate =
+      status?.state?.running?.startedAt || status?.state?.terminated?.startedAt || '';
+    if (!!startedDate) {
+      startedDate = localeDate(startedDate);
+    }
+
+    let finishDate = status?.state?.terminated?.finishedAt ?? '';
+    if (!!finishDate) {
+      finishDate = localeDate(finishDate);
+    }
+
+    return [startedDate, finishDate];
+  }, [status]);
+
   function getContainerStatusLabel() {
     if (!status || !container) {
       return undefined;
@@ -675,28 +691,35 @@ export function ContainerInfo(props: ContainerInfoProps) {
       statusType = 'success';
       label = t('translation|Running');
     } else if (!!status.state.terminated) {
-      statusType = status.state.terminated.exitCode === 0 ? '' : 'error';
-      label = t('translation|Error');
+      if (status.state.terminated.exitCode === 0) {
+        statusType = '';
+        label = status.state.terminated.reason;
+      } else {
+        statusType = 'error';
+        label = t('translation|Error');
+      }
     }
 
     const tooltipID = 'container-state-message-' + container.name;
 
     return (
-      <>
-        <StatusLabel
-          status={statusType}
-          aria-describedby={!!state?.message ? tooltipID : undefined}
-        >
-          {label + (state?.reason ? ` (${state.reason})` : '')}
-        </StatusLabel>
-        {!!state && state.message && (
-          <LightTooltip role="tooltip" title={state.message} interactive id={tooltipID}>
-            <Box aria-label="hidden" display="inline" px={1} style={{ verticalAlign: 'bottom' }}>
-              <Icon icon="mdi:alert-outline" width="1.3rem" height="1.3rem" aria-label="hidden" />
-            </Box>
-          </LightTooltip>
-        )}
-      </>
+      <Box>
+        <Box>
+          <StatusLabel
+            status={statusType}
+            aria-describedby={!!state?.message ? tooltipID : undefined}
+          >
+            {label + (state?.reason ? ` (${state.reason})` : '')}
+          </StatusLabel>
+          {!!state && state.message && (
+            <LightTooltip role="tooltip" title={state.message} interactive id={tooltipID}>
+              <Box aria-label="hidden" display="inline" px={1} style={{ verticalAlign: 'bottom' }}>
+                <Icon icon="mdi:alert-outline" width="1.3rem" height="1.3rem" aria-label="hidden" />
+              </Box>
+            </LightTooltip>
+          )}
+        </Box>
+      </Box>
     );
   }
 
@@ -727,6 +750,21 @@ export function ContainerInfo(props: ContainerInfoProps) {
         name: t('translation|Status'),
         value: getContainerStatusLabel(),
         hide: !status,
+      },
+      {
+        name: t('translation|Exit Code'),
+        value: status?.state?.terminated?.exitCode,
+        hide: !status?.state?.terminated,
+      },
+      {
+        name: t('translation|Started'),
+        value: startedDate,
+        hide: !startedDate,
+      },
+      {
+        name: t('translation|Finished'),
+        value: finishDate,
+        hide: !finishDate,
       },
       {
         name: t('translation|Restart Count'),

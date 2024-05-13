@@ -714,11 +714,57 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                  <div
+                    class="MuiBox-root css-0"
                   >
-                    Error
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                      >
+                        Error
+                      </span>
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Exit Code
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  1
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Started
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    2022-01-01T00:05:00.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Finished
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    2022-01-01T00:05:00.000Z
                   </span>
                 </dd>
                 <dt
@@ -1682,12 +1728,20 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                  <div
+                    class="MuiBox-root css-0"
                   >
-                    Waiting (PodInitializing)
-                  </span>
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                      >
+                        Waiting (PodInitializing)
+                      </span>
+                    </div>
+                  </div>
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
@@ -1799,11 +1853,33 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                  <div
+                    class="MuiBox-root css-0"
                   >
-                    Running
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                      >
+                        Running
+                      </span>
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Started
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    2022-01-01T00:05:00.000Z
                   </span>
                 </dd>
                 <dt
@@ -1905,12 +1981,20 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                  <div
+                    class="MuiBox-root css-0"
                   >
-                    Waiting (PodInitializing)
-                  </span>
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                      >
+                        Waiting (PodInitializing)
+                      </span>
+                    </div>
+                  </div>
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
@@ -2863,21 +2947,29 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    aria-describedby="container-state-message-liveness"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
-                  >
-                    Waiting (CrashLoopBackOff)
-                  </span>
                   <div
-                    aria-label="hidden"
-                    class="MuiBox-root css-a56neh"
-                    data-mui-internal-clone-element="true"
-                    role="tooltip"
-                    style="vertical-align: bottom;"
+                    class="MuiBox-root css-0"
                   >
-                    <span />
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        aria-describedby="container-state-message-liveness"
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                      >
+                        Waiting (CrashLoopBackOff)
+                      </span>
+                      <div
+                        aria-label="hidden"
+                        class="MuiBox-root css-a56neh"
+                        data-mui-internal-clone-element="true"
+                        role="tooltip"
+                        style="vertical-align: bottom;"
+                      >
+                        <span />
+                      </div>
+                    </div>
                   </div>
                 </dd>
                 <dt
@@ -3922,21 +4014,29 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    aria-describedby="container-state-message-imagepullbackoff"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
-                  >
-                    Waiting (ImagePullBackOff)
-                  </span>
                   <div
-                    aria-label="hidden"
-                    class="MuiBox-root css-a56neh"
-                    data-mui-internal-clone-element="true"
-                    role="tooltip"
-                    style="vertical-align: bottom;"
+                    class="MuiBox-root css-0"
                   >
-                    <span />
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        aria-describedby="container-state-message-imagepullbackoff"
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                      >
+                        Waiting (ImagePullBackOff)
+                      </span>
+                      <div
+                        aria-label="hidden"
+                        class="MuiBox-root css-a56neh"
+                        data-mui-internal-clone-element="true"
+                        role="tooltip"
+                        style="vertical-align: bottom;"
+                      >
+                        <span />
+                      </div>
+                    </div>
                   </div>
                 </dd>
                 <dt
@@ -4855,11 +4955,33 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                  <div
+                    class="MuiBox-root css-0"
                   >
-                    Running
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                      >
+                        Running
+                      </span>
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Started
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    2022-01-01T00:05:00.000Z
                   </span>
                 </dd>
                 <dt
@@ -5848,11 +5970,57 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  <div
+                    class="MuiBox-root css-0"
                   >
-                    Error
+                    <div
+                      class="MuiBox-root css-0"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Completed
+                      </span>
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Exit Code
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  0
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Started
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    2022-01-01T00:05:00.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                >
+                  Finished
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    2022-01-01T00:05:00.000Z
                   </span>
                 </dd>
                 <dt
