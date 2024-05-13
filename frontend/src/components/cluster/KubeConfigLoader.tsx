@@ -104,7 +104,7 @@ const WideButton = styled(Button)({
 
 const BlackButton = styled(WideButton)(({ theme }) => ({
   backgroundColor: theme.palette.sidebarBg,
-  color: theme.palette.primary.contrastText,
+  color: theme.palette.primaryColor,
   '&:hover': {
     opacity: '0.8',
     backgroundColor: theme.palette.sidebarBg,
