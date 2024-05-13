@@ -93,7 +93,11 @@ else
 endif
 
 run-frontend:
+ifeq ($(UNIXSHELL),true)
+	cd frontend && nice -16 npm start
+else
 	cd frontend && npm start
+endif
 
 frontend-lint:
 	cd frontend && npm run lint -- --max-warnings 0 && npm run format-check
