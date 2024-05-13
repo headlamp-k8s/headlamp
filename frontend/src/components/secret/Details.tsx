@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Secret from '../../lib/k8s/secret';
-import { EmptyContent } from '../common';
+import EmptyContent from '../common/EmptyContent';
 import { DetailsGrid, SecretField } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable, NameValueTableRow } from '../common/SimpleTable';

@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ResourceQuota from '../../lib/k8s/resourceQuota';
 import { compareUnits, normalizeUnit } from '../../lib/util';
-import { DetailsGrid, SimpleTable } from '../common';
+import { DetailsGrid } from '../common/Resource';
+import SimpleTable from '../common/SimpleTable';
 
 export default function ResourceQuotaDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();

@@ -1,6 +1,9 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 import MuiLink from '@mui/material/Link';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import makeStyles from '@mui/styles/makeStyles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
@@ -8,12 +11,16 @@ import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
 import { listPortForward, startPortForward, stopOrDeletePortForward } from '../../lib/k8s/apiProxy';
 import { getCluster } from '../../lib/util';
-import { Link, Loader, SectionBox, SimpleTable, StatusLabel } from '../common';
+import { StatusLabel } from '../common/Label';
+import Link from '../common/Link';
+import Loader from '../common/Loader';
 import {
   PORT_FORWARD_RUNNING_STATUS,
   PORT_FORWARD_STOP_STATUS,
   PORT_FORWARDS_STORAGE_KEY,
 } from '../common/Resource/PortForward';
+import SectionBox from '../common/SectionBox';
+import SimpleTable from '../common/SimpleTable';
 
 const useStyles = makeStyles(theme => ({
   link: {

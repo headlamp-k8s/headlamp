@@ -1,5 +1,6 @@
-import { Grid, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 import { styled } from '@mui/system';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';

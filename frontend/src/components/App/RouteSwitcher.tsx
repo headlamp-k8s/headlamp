@@ -1,4 +1,5 @@
 import React from 'react';
+import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
@@ -15,6 +16,7 @@ import {
 import { getCluster } from '../../lib/util';
 import { setHideAppBar } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import Loader from '../common/Loader';
 import { useSidebarItem } from '../Sidebar';
 
 export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
@@ -73,7 +75,9 @@ function RouteComponent({ route }: { route: RouteType }) {
           : route.sidebar?.item || ''
       )}
     >
-      <route.component />
+      <Suspense fallback={<Loader title={'...'} />}>
+        <route.component />
+      </Suspense>
     </PageTitle>
   );
 }

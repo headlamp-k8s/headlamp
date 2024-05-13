@@ -1,6 +1,6 @@
 import { InlineIcon } from '@iconify/react';
-import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
@@ -15,7 +15,7 @@ import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { ActionButton } from '../common';
+import ActionButton from '../common/ActionButton/ActionButton';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';

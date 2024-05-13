@@ -1,4 +1,5 @@
-import { DialogContent, Typography } from '@mui/material';
+import DialogContent from '@mui/material/DialogContent';
+import Typography from '@mui/material/Typography';
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { Dialog as DialogComponent, DialogProps } from './Dialog';

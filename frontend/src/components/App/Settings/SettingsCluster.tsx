@@ -1,6 +1,9 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Box, Chip, IconButton, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
+import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,8 +13,10 @@ import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster } from '../../../lib/k8s/apiProxy';
 import { setConfig } from '../../../redux/configSlice';
-import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
+import Link from '../../common/Link';
+import NameValueTable from '../../common/NameValueTable/NameValueTable';
+import SectionBox from '../../common/SectionBox';
 
 const useStyles = makeStyles(() => ({
   input: {

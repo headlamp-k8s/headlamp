@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { createRouteURL } from '../../../lib/router';
 import { getCluster } from '../../../lib/util';
-import { ActionButton } from '../../common';
+import ActionButton from '../../common/ActionButton/ActionButton';
 
 export default function SettingsButton(props: { onClickExtra?: () => void }) {
   const { onClickExtra } = props;

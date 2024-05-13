@@ -1,11 +1,14 @@
 import { Icon } from '@iconify/react';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import Job from '../../lib/k8s/job';
 import { formatDuration } from '../../lib/util';
-import { LightTooltip, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
+import { StatusLabel } from '../common/Label';
+import { StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { SimpleTableProps } from '../common/SimpleTable';
+import { LightTooltip } from '../common/Tooltip';
 
 export function makePodStatusLabel(job: Job) {
   if (!job?.status?.conditions) {

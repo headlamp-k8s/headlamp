@@ -1,7 +1,12 @@
 import 'github-markdown-css';
 import { Icon } from '@iconify/react';
-import { Box, Button, Link, Modal, Paper, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import Modal from '@mui/material/Modal';
+import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';

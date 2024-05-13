@@ -152,3 +152,5 @@ export function Dialog(props: DialogProps) {
     </MuiDialog>
   );
 }
+
+export default Dialog;

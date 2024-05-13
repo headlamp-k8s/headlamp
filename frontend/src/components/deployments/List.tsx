@@ -1,9 +1,10 @@
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import Deployment from '../../lib/k8s/deployment';
-import { LightTooltip, StatusLabel } from '../common';
+import { StatusLabel } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { LightTooltip } from '../common/Tooltip';
 
 export default function DeploymentsList() {
   const { t } = useTranslation(['glossary', 'translation']);

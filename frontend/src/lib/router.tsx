@@ -1,94 +1,111 @@
+import { lazy } from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
-import AuthToken from '../components/account/Auth';
-import Home from '../components/App/Home';
-import NotificationList from '../components/App/Notifications/List';
-import PluginSettings from '../components/App/PluginSettings';
-import PluginSettingsDetails from '../components/App/PluginSettings/PluginSettingsDetails';
-import Settings from '../components/App/Settings';
-import SettingsCluster from '../components/App/Settings/SettingsCluster';
-import SettingsClusters from '../components/App/Settings/SettingsClusters';
-import AuthChooser from '../components/authchooser';
-import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
 import Overview from '../components/cluster/Overview';
 import { PageGrid } from '../components/common/Resource/Resource';
-import ConfigDetails from '../components/configmap/Details';
-import ConfigMapList from '../components/configmap/List';
-import CustomResourceDetails from '../components/crd/CustomResourceDetails';
-import CustomResourceList from '../components/crd/CustomResourceList';
-import CustomResourceDefinitionDetails from '../components/crd/Details';
-import CustomResourceDefinitionList from '../components/crd/List';
-import CronJobDetails from '../components/cronjob/Details';
-import CronJobList from '../components/cronjob/List';
-import DaemonSetDetails from '../components/daemonset/Details';
-import DaemonSetList from '../components/daemonset/List';
-import DeploymentsList from '../components/deployments/List';
-import EndpointDetails from '../components/endpoints/Details';
-import EndpointList from '../components/endpoints/List';
-import HpaDetails from '../components/horizontalPodAutoscaler/Details';
-import HpaList from '../components/horizontalPodAutoscaler/List';
-import IngressClassDetails from '../components/ingress/ClassDetails';
-import IngressClassList from '../components/ingress/ClassList';
-import IngressDetails from '../components/ingress/Details';
-import IngressList from '../components/ingress/List';
-import JobsList from '../components/job/List';
 import { LeaseDetails } from '../components/lease/Details';
 import { LeaseList } from '../components/lease/List';
 import { LimitRangeDetails } from '../components/limitRange/Details';
 import { LimitRangeList } from '../components/limitRange/List';
-import NamespaceDetails from '../components/namespace/Details';
-import NamespacesList from '../components/namespace/List';
 import { NetworkPolicyDetails } from '../components/networkpolicy/Details';
 import { NetworkPolicyList } from '../components/networkpolicy/List';
-import NodeDetails from '../components/node/Details';
-import NodeList from '../components/node/List';
-import OIDCAuth from '../components/oidcauth';
-import PodDetails from '../components/pod/Details';
-import PodList from '../components/pod/List';
-import PDBDetails from '../components/podDisruptionBudget/Details';
-import PDBList from '../components/podDisruptionBudget/List';
-import PortForwardingList from '../components/portforward';
-import PriorityClassDetails from '../components/priorityClass/Details';
-import PriorityClassList from '../components/priorityClass/List';
-import ReplicaSetList from '../components/replicaset/List';
-import ResourceQuotaDetails from '../components/resourceQuota/Details';
-import ResourceQuotaList from '../components/resourceQuota/List';
-import RoleBindingDetails from '../components/role/BindingDetails';
-import RoleBindingList from '../components/role/BindingList';
-import RoleDetails from '../components/role/Details';
-import RoleList from '../components/role/List';
 import { RuntimeClassDetails } from '../components/runtimeClass/Details';
 import { RuntimeClassList } from '../components/runtimeClass/List';
-import SecretDetails from '../components/secret/Details';
-import SecretList from '../components/secret/List';
-import ServiceDetails from '../components/service/Details';
-import ServiceList from '../components/service/List';
-import ServiceAccountDetails from '../components/serviceaccount/Details';
-import ServiceAccountList from '../components/serviceaccount/List';
 import { DefaultSidebars } from '../components/Sidebar';
-import StatefulSetDetails from '../components/statefulset/Details';
-import StatefulSetList from '../components/statefulset/List';
-import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
-import PersistentVolumeClaimList from '../components/storage/ClaimList';
-import StorageClassDetails from '../components/storage/ClassDetails';
-import StorageClassList from '../components/storage/ClassList';
-import PersistentVolumeDetails from '../components/storage/VolumeDetails';
-import PersistentVolumeList from '../components/storage/VolumeList';
-import VpaDetails from '../components/verticalPodAutoscaler/Details';
-import VpaList from '../components/verticalPodAutoscaler/List';
-import MutatingWebhookConfigurationDetails from '../components/webhookconfiguration/MutatingWebhookConfigDetails';
-import MutatingWebhookConfigList from '../components/webhookconfiguration/MutatingWebhookConfigList';
-import ValidatingWebhookConfigurationDetails from '../components/webhookconfiguration/ValidatingWebhookConfigDetails';
-import ValidatingWebhookConfigurationList from '../components/webhookconfiguration/ValidatingWebhookConfigList';
-import WorkloadDetails from '../components/workload/Details';
-import WorkloadOverview from '../components/workload/Overview';
 import helpers from '../helpers';
-import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import store from '../redux/stores/store';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
 import ReplicaSet from './k8s/replicaSet';
 import { getCluster, getClusterPrefixedPath } from './util';
+
+const Home = lazy(() => import('../components/App/Home'));
+const NamespaceDetails = lazy(() => import('../components/namespace/Details'));
+const NamespacesList = lazy(() => import('../components/namespace/List'));
+const NodeDetails = lazy(() => import('../components/node/Details'));
+const NodeList = lazy(() => import('../components/node/List'));
+const StorageClassDetails = lazy(() => import('../components/storage/ClassDetails'));
+const StorageClassList = lazy(() => import('../components/storage/ClassList'));
+const PersistentVolumeDetails = lazy(() => import('../components/storage/VolumeDetails'));
+const PersistentVolumeList = lazy(() => import('../components/storage/VolumeList'));
+const PersistentVolumeClaimDetails = lazy(() => import('../components/storage/ClaimDetails'));
+const PersistentVolumeClaimList = lazy(() => import('../components/storage/ClaimList'));
+const WorkloadOverview = lazy(() => import('../components/workload/Overview'));
+
+const DaemonSetDetails = lazy(() => import('../components/daemonset/Details'));
+const StatefulSetDetails = lazy(() => import('../components/statefulset/Details'));
+const WorkloadDetails = lazy(() => import('../components/workload/Details'));
+const PodDetails = lazy(() => import('../components/pod/Details'));
+const PodList = lazy(() => import('../components/pod/List'));
+const ServiceDetails = lazy(() => import('../components/service/Details'));
+const ServiceList = lazy(() => import('../components/service/List'));
+const EndpointDetails = lazy(() => import('../components/endpoints/Details'));
+const EndpointList = lazy(() => import('../components/endpoints/List'));
+const IngressDetails = lazy(() => import('../components/ingress/Details'));
+const IngressList = lazy(() => import('../components/ingress/List'));
+const IngressClassDetails = lazy(() => import('../components/ingress/ClassDetails'));
+const IngressClassList = lazy(() => import('../components/ingress/ClassList'));
+const DaemonSetList = lazy(() => import('../components/daemonset/List'));
+const JobsList = lazy(() => import('../components/job/List'));
+
+const CronJobDetails = lazy(() => import('../components/cronjob/Details'));
+const CronJobList = lazy(() => import('../components/cronjob/List'));
+const DeploymentsList = lazy(() => import('../components/deployments/List'));
+const StatefulSetList = lazy(() => import('../components/statefulset/List'));
+const ReplicaSetList = lazy(() => import('../components/replicaset/List'));
+const ConfigDetails = lazy(() => import('../components/configmap/Details'));
+const ConfigMapList = lazy(() => import('../components/configmap/List'));
+const ServiceAccountDetails = lazy(() => import('../components/serviceaccount/Details'));
+const ServiceAccountList = lazy(() => import('../components/serviceaccount/List'));
+const RoleDetails = lazy(() => import('../components/role/Details'));
+const RoleList = lazy(() => import('../components/role/List'));
+
+const RoleBindingDetails = lazy(() => import('../components/role/BindingDetails'));
+const RoleBindingList = lazy(() => import('../components/role/BindingList'));
+const SecretDetails = lazy(() => import('../components/secret/Details'));
+const SecretList = lazy(() => import('../components/secret/List'));
+const HpaDetails = lazy(() => import('../components/horizontalPodAutoscaler/Details'));
+const HpaList = lazy(() => import('../components/horizontalPodAutoscaler/List'));
+const PDBDetails = lazy(() => import('../components/podDisruptionBudget/Details'));
+const PDBList = lazy(() => import('../components/podDisruptionBudget/List'));
+const PriorityClassDetails = lazy(() => import('../components/priorityClass/Details'));
+const PriorityClassList = lazy(() => import('../components/priorityClass/List'));
+const ResourceQuotaDetails = lazy(() => import('../components/resourceQuota/Details'));
+const ResourceQuotaList = lazy(() => import('../components/resourceQuota/List'));
+
+const MutatingWebhookConfigurationDetails = lazy(
+  () => import('../components/webhookconfiguration/MutatingWebhookConfigDetails')
+);
+const MutatingWebhookConfigList = lazy(
+  () => import('../components/webhookconfiguration/MutatingWebhookConfigList')
+);
+const ValidatingWebhookConfigurationDetails = lazy(
+  () => import('../components/webhookconfiguration/ValidatingWebhookConfigDetails')
+);
+const ValidatingWebhookConfigurationList = lazy(
+  () => import('../components/webhookconfiguration/ValidatingWebhookConfigList')
+);
+const VpaDetails = lazy(() => import('../components/verticalPodAutoscaler/Details'));
+const VpaList = lazy(() => import('../components/verticalPodAutoscaler/List'));
+const AuthToken = lazy(() => import('../components/account/Auth'));
+const OIDCAuth = lazy(() => import('../components/oidcauth'));
+const AuthChooser = lazy(() => import('../components/authchooser'));
+const LocaleSelect = lazy(() => import('../i18n/LocaleSelect/LocaleSelect'));
+const CustomResourceDefinitionDetails = lazy(() => import('../components/crd/Details'));
+const CustomResourceDefinitionList = lazy(() => import('../components/crd/List'));
+
+const CustomResourceDetails = lazy(() => import('../components/crd/CustomResourceDetails'));
+const CustomResourceList = lazy(() => import('../components/crd/CustomResourceList'));
+const NotificationList = lazy(() => import('../components/App/Notifications/List'));
+const Settings = lazy(() => import('../components/App/Settings'));
+const SettingsClusters = lazy(() => import('../components/App/Settings/SettingsClusters'));
+const SettingsCluster = lazy(() => import('../components/App/Settings/SettingsCluster'));
+const PluginSettings = lazy(() => import('../components/App/PluginSettings'));
+const PluginSettingsDetails = lazy(
+  () => import('../components/App/PluginSettings/PluginSettingsDetails')
+);
+const PortForwardingList = lazy(() => import('../components/portforward'));
+const KubeConfigLoader = lazy(() => import('../components/cluster/KubeConfigLoader'));
 
 export interface Route {
   /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */

@@ -1,4 +1,6 @@
-import { Box, Chip, Tooltip } from '@mui/material';
+import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
+import Tooltip from '@mui/material/Tooltip';
 import { styled } from '@mui/system';
 import Node from '../../lib/k8s/node';
 

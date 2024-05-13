@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import makeStyles from '@mui/styles/makeStyles';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,9 @@ import LocaleSelect from '../../../i18n/LocaleSelect/LocaleSelect';
 import { setVersionDialogOpen } from '../../../redux/actions/actions';
 import { setAppSettings } from '../../../redux/configSlice';
 import { defaultTableRowsPerPageOptions } from '../../../redux/configSlice';
-import { ActionButton, NameValueTable, SectionBox } from '../../common';
+import ActionButton from '../../common/ActionButton/ActionButton';
+import NameValueTable from '../../common/NameValueTable/NameValueTable';
+import SectionBox from '../../common/SectionBox';
 import TimezoneSelect from '../../common/TimezoneSelect';
 import { useSettings } from './hook';
 import NumRowsInput from './NumRowsInput';

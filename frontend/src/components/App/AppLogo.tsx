@@ -1,4 +1,5 @@
-import { SvgIcon, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
+import SvgIcon from '@mui/material/SvgIcon';
 import { SxProps } from '@mui/system';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
@@ -7,7 +8,7 @@ import { ReactComponent as LogoDark } from '../../resources/icon-dark.svg';
 import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
 import { ReactComponent as LogoWithTextDark } from '../../resources/logo-dark.svg';
 import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
-import { EmptyContent } from '../common';
+import EmptyContent from '../common/EmptyContent';
 import ErrorBoundary from '../common/ErrorBoundary';
 
 export interface AppLogoProps {

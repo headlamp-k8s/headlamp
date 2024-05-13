@@ -1,7 +1,10 @@
-import { Switch, SwitchProps, Typography, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import { SwitchProps } from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -9,8 +12,10 @@ import helpers from '../../../helpers';
 import { useFilterFunc } from '../../../lib/util';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { Link as HeadlampLink, SectionBox, SimpleTable } from '../../common';
+import HeadlampLink from '../../common/Link';
+import SectionBox from '../../common/SectionBox';
 import SectionFilterHeader from '../../common/SectionFilterHeader';
+import SimpleTable from '../../common/SimpleTable';
 
 /**
  * Interface of the component's props structure.

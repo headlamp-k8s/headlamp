@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import StatefulSet from '../../lib/k8s/statefulSet';
-import { LightTooltip } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { LightTooltip } from '../common/Tooltip';
 
 export default function StatefulSetList() {
   const { t } = useTranslation('glossary');

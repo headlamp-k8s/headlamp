@@ -11,9 +11,8 @@ const avoidCheck = [
   'ActionsNotifier',
   'AlertNotification',
   'ErrorBoundary',
-];
-
-const checkExports = [
+  'LogViewer',
+  'Terminal',
   'ActionButton',
   'BackLink',
   'Chart',
@@ -27,7 +26,6 @@ const checkExports = [
   'LabelListItem',
   'Link',
   'Loader',
-  'LogViewer',
   'NamespacesAutocomplete',
   'NameValueTable',
   'Resource',
@@ -37,12 +35,13 @@ const checkExports = [
   'ShowHideLabel',
   'SimpleTable',
   'Tabs',
-  'Terminal',
   'TileChart',
   'TimezoneSelect',
   'Tooltip',
   'ObjectEventList',
 ];
+
+const checkExports: string[] = [];
 
 function getFilesToVerify() {
   const filesToVerify: string[] = [];

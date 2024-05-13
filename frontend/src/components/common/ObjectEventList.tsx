@@ -4,7 +4,9 @@ import { KubeObject } from '../../lib/k8s/cluster';
 import Event, { KubeEvent } from '../../lib/k8s/event';
 import { localeDate, timeAgo } from '../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
-import { HoverInfoLabel, SectionBox, SimpleTable } from '../common';
+import { HoverInfoLabel } from '../common/Label';
+import { SectionBox } from '../common/SectionBox';
+import SimpleTable from '../common/SimpleTable';
 import ShowHideLabel from './ShowHideLabel';
 
 export interface ObjectEventListProps {

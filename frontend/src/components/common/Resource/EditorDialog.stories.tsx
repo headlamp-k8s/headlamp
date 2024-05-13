@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { EditorDialog, EditorDialogProps } from '..';
+import EditorDialog, { EditorDialogProps } from './EditorDialog';
 
 export default {
   title: 'Resource/EditorDialog',

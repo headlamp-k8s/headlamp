@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import { Meta, Story } from '@storybook/react';
 import ShowHideLabel, { ShowHideLabelProps } from './ShowHideLabel';
 

@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { TestContext } from '../../test';
-import { VolumeSection, VolumeSectionProps } from '../common';
+import { VolumeSection, VolumeSectionProps } from '../common/Resource';
 
 const dummyResource: KubeObjectInterface = {
   kind: 'Pod',

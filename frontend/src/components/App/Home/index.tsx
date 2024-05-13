@@ -18,9 +18,12 @@ import Event from '../../../lib/k8s/event';
 import { createRouteURL } from '../../../lib/router';
 import { useFilterFunc, useId } from '../../../lib/util';
 import { setConfig } from '../../../redux/configSlice';
-import { Link, PageGrid, SectionBox, SectionFilterHeader } from '../../common';
-import { ConfirmDialog } from '../../common';
+import ConfirmDialog from '../../common/ConfirmDialog';
+import Link from '../../common/Link';
+import { PageGrid } from '../../common/Resource/Resource';
 import ResourceTable from '../../common/Resource/ResourceTable';
+import SectionBox from '../../common/SectionBox';
+import SectionFilterHeader from '../../common/SectionFilterHeader';
 import RecentClusters from './RecentClusters';
 
 function ContextMenu({ cluster }: { cluster: Cluster }) {

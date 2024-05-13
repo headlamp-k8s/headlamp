@@ -13,9 +13,9 @@ import { ConfigStore } from '../../../plugin/configStore';
 import { PluginInfo, reloadPage } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import NotFoundComponent from '../../404';
-import { SectionBox } from '../../common';
 import { ConfirmDialog } from '../../common/Dialog';
 import ErrorBoundary from '../../common/ErrorBoundary';
+import SectionBox from '../../common/SectionBox';
 
 const PluginSettingsDetailsInitializer = (props: { plugin: PluginInfo }) => {
   const { plugin } = props;

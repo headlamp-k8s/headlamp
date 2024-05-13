@@ -1,10 +1,11 @@
-import { DialogContent } from '@mui/material';
+import DialogContent from '@mui/material/DialogContent';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../helpers';
 import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { Dialog, NameValueTable } from '../common';
+import Dialog from '../common/Dialog';
+import NameValueTable from '../common/NameValueTable/NameValueTable';
 
 export default function VersionDialog() {
   const open = useTypedSelector(state => state.ui.isVersionDialogOpen);

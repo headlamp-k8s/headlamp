@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import PriorityClass from '../../lib/k8s/priorityClass';
-import { DetailsGrid } from '../common';
+import { DetailsGrid } from '../common/Resource';
 
 export default function PriorityClassDetails() {
   const { t } = useTranslation(['translation']);

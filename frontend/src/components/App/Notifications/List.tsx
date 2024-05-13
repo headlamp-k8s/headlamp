@@ -1,12 +1,22 @@
 import { Icon } from '@iconify/react';
-import { Box, IconButton, Menu, MenuItem, Tooltip, Typography, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { DateLabel, Link, SectionBox, SectionFilterHeader, SimpleTable } from '../../common';
 import Empty from '../../common/EmptyContent';
+import { DateLabel } from '../../common/Label';
+import Link from '../../common/Link';
+import SectionBox from '../../common/SectionBox';
+import SectionFilterHeader from '../../common/SectionFilterHeader';
+import SimpleTable from '../../common/SimpleTable';
 import { Notification, setNotifications, updateNotifications } from './notificationsSlice';
 
 export default function NotificationList() {

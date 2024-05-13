@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActionButton } from '..';
+import ActionButton from '../ActionButton';
 import SectionBox from '../SectionBox';
 import SectionFilterHeader, { SectionFilterHeaderProps } from '../SectionFilterHeader';
 import ResourceTable, {
