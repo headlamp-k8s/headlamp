@@ -4,6 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { KubeObject } from '../../lib/k8s/cluster';
 import { SectionBox } from '../common';
 import DetailsViewSection, { DetailsViewSectionProps } from './DetailsViewSection';
 import { setDetailsView } from './detailsViewSectionSlice';
@@ -63,10 +64,10 @@ const Template: Story<DetailsViewSectionProps> = args => {
 
 export const MatchRenderIt = Template.bind({});
 MatchRenderIt.args = {
-  resource: { kind: 'Node' },
+  resource: { kind: 'Node' } as KubeObject,
 };
 
 export const NoMatchNoRender = Template.bind({});
 NoMatchNoRender.args = {
-  resource: { kind: 'DoesNotExist' },
+  resource: { kind: 'DoesNotExist' } as KubeObject,
 };

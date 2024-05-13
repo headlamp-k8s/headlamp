@@ -13,7 +13,7 @@ import { makeStyles, useTheme } from '@mui/styles';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import YAML from 'yaml';
@@ -24,8 +24,10 @@ import {
   KubeContainer,
   KubeContainerStatus,
   KubeObject,
+  KubeObjectClass,
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
+import { KubeEvent } from '../../../lib/k8s/event';
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
@@ -60,7 +62,7 @@ export interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params
   name?: string;
   routeName?: string;
   routeParams?: RouteURLProps;
-  resource: KubeObjectInterface;
+  resource: KubeObject;
 }
 
 export function ResourceLink(props: ResourceLinkProps) {
@@ -84,17 +86,17 @@ const useDetailsGridStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export interface DetailsGridProps
-  extends PropsWithChildren<Omit<MainInfoSectionProps, 'resource'>> {
+export interface DetailsGridProps<T extends KubeObjectClass>
+  extends PropsWithChildren<Omit<MainInfoSectionProps<T>, 'resource'>> {
   /** Resource type to fetch (from the ResourceClasses). */
-  resourceType: KubeObject;
+  resourceType: T;
   /** Name of the resource. */
   name: string;
   /** Namespace of the resource. If not provided, it's assumed the resource is not namespaced. */
   namespace?: string;
   /** Sections to show in the details grid (besides the default ones). */
   extraSections?:
-    | ((item: KubeObject) => boolean | DetailsViewSection[])
+    | ((item: InstanceType<T>) => boolean | DetailsViewSection[] | ReactNode[])
     | boolean
     | DetailsViewSection[];
   /** @deprecated Use extraSections instead. */
@@ -102,13 +104,13 @@ export interface DetailsGridProps
   /** If true, will show the events section. */
   withEvents?: boolean;
   /** Called when the resource instance is created/updated, or there is an error. */
-  onResourceUpdate?: (resource: KubeObject, error: ApiError) => void;
+  onResourceUpdate?: (resource: InstanceType<T>, error: ApiError) => void;
 }
 
 /** Renders the different parts that constibute an actual resource's details view.
  * Those are: the back link, the header, the main info section, the extra sections, and the events section.
  */
-export function DetailsGrid(props: DetailsGridProps) {
+export function DetailsGrid<T extends KubeObjectClass>(props: DetailsGridProps<T>) {
   const {
     sectionsFunc,
     resourceType,
@@ -136,7 +138,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     otherMainInfoSectionProps;
 
   const [item, error] = resourceType.useGet(name, namespace);
-  const prevItemRef = React.useRef<{ uid?: string; version?: string; error?: ApiError }>({});
+  const prevItemRef = React.useRef<{ uid?: string; version?: string; error?: ApiError | null }>({});
 
   React.useEffect(() => {
     if (item) {
@@ -156,7 +158,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     // infinite loops.
     const prevItem = prevItemRef.current;
     if (
-      prevItem?.uid === item?.metatada?.uid &&
+      prevItem?.uid === item?.metadata?.uid &&
       prevItem?.version === item?.metadata?.resourceVersion &&
       error === prevItem.error
     ) {
@@ -164,11 +166,11 @@ export function DetailsGrid(props: DetailsGridProps) {
     }
 
     prevItemRef.current = {
-      uid: item?.metatada?.uid,
+      uid: item?.metadata?.uid,
       version: item?.metadata?.resourceVersion,
       error,
     };
-    onResourceUpdate?.(item, error);
+    onResourceUpdate?.(item!, error!);
   }, [item, error]);
 
   const actualBackLink: string | Location | undefined = React.useMemo(() => {
@@ -192,7 +194,7 @@ export function DetailsGrid(props: DetailsGridProps) {
       route = item.listRoute;
     } else {
       try {
-        route = new resourceType().listRoute;
+        route = new resourceType({} as any).listRoute;
       } catch (err) {
         console.error(
           `Error creating route for details grid (resource type=${resourceType}): ${err}`
@@ -270,7 +272,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     );
     sections.push({
       id: 'LEGACY_SECTIONS_FUNC',
-      section: sectionsFunc(item),
+      section: sectionsFunc(item!),
     });
   }
 
@@ -279,9 +281,9 @@ export function DetailsGrid(props: DetailsGridProps) {
     if (Array.isArray(extraSections)) {
       actualExtraSections = extraSections;
     } else if (typeof extraSections === 'function') {
-      const extraSectionsResult = extraSections(item) || [];
+      const extraSectionsResult = extraSections(item!) || [];
       if (Array.isArray(extraSectionsResult)) {
-        actualExtraSections = extraSectionsResult;
+        actualExtraSections = extraSectionsResult as any[];
       }
     }
 
@@ -496,7 +498,7 @@ export function SecretField(props: InputProps) {
 }
 
 export interface ConditionsTableProps {
-  resource: KubeObjectInterface | null;
+  resource: KubeObjectInterface | KubeEvent | null;
   showLastUpdate?: boolean;
 }
 
@@ -649,7 +651,7 @@ const useContainerInfoStyles = makeStyles((theme: Theme) => ({
 
 export interface ContainerInfoProps {
   container: KubeContainer;
-  resource?: KubeObjectInterface | null;
+  resource: KubeObjectInterface | null;
   status?: Omit<KubePod['status']['KubeContainerStatus'], 'name'>;
 }
 
@@ -1057,7 +1059,7 @@ export function VolumeSection(props: VolumeSectionProps) {
   function PrintVolumeLink(props: PrintVolumeLinkProps) {
     const { volumeName, volumeKind, volume } = props;
     const resourceClasses = ResourceClasses;
-    const classList = Object.keys(resourceClasses);
+    const classList = Object.keys(resourceClasses) as Array<keyof typeof resourceClasses>;
 
     for (const kind of classList) {
       if (kind.toLowerCase() === volumeKind.toLowerCase()) {

@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material/styles';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeObject, KubeObjectClass } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
@@ -46,7 +46,7 @@ export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
 }
 
 export interface ResourceTableFromResourceClassProps extends Omit<ResourceTableProps, 'data'> {
-  resourceClass: KubeObject;
+  resourceClass: KubeObjectClass;
 }
 
 export default function ResourceTable(
@@ -108,7 +108,7 @@ function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
 
   useEffect(() => {
     dispatchHeadlampEvent({
-      resources: items,
+      resources: items!,
       resourceKind: resourceClass.className,
       error: error || undefined,
     });

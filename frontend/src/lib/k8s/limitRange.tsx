@@ -31,6 +31,6 @@ export class LimitRange extends makeKubeObject<KubeLimitRange>('LimitRange') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'limitranges');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 }

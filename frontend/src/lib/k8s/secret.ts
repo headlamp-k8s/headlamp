@@ -10,11 +10,11 @@ class Secret extends makeKubeObject<KubeSecret>('secret') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'secrets');
 
   get data() {
-    return this.jsonData!.data;
+    return this.jsonData.data;
   }
 
   get type() {
-    return this.jsonData!.type;
+    return this.jsonData.type;
   }
 }
 

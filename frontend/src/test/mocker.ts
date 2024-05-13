@@ -1,14 +1,14 @@
 import _ from 'lodash';
-import { KubeObjectIface, KubeObjectInterface } from '../lib/k8s/cluster';
+import { KubeMetadata, KubeObjectClass, KubeObjectInterface } from '../lib/k8s/cluster';
 
-interface K8sResourceListGeneratorOptions<T extends KubeObjectInterface> {
+interface K8sResourceListGeneratorOptions<T extends KubeObjectClass> {
   numResults?: number;
-  instantiateAs?: KubeObjectIface<T>;
+  instantiateAs?: T;
 }
 
-export function generateK8sResourceList<T extends KubeObjectInterface = KubeObjectInterface>(
-  baseJson: Omit<T, 'metadata'>,
-  options: K8sResourceListGeneratorOptions<T> = {}
+export function generateK8sResourceList<T extends KubeObjectInterface, C extends KubeObjectClass>(
+  baseJson: Partial<T>,
+  options: K8sResourceListGeneratorOptions<C> = {}
 ) {
   const { numResults = 5, instantiateAs } = options;
   const list = [];
@@ -16,7 +16,7 @@ export function generateK8sResourceList<T extends KubeObjectInterface = KubeObje
     const json = {
       metadata: {
         name: '',
-      },
+      } as KubeMetadata,
       ..._.cloneDeep(baseJson),
     } as T;
 

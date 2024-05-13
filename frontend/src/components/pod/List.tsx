@@ -224,7 +224,7 @@ export default function PodList() {
 
   React.useEffect(() => {
     dispatchHeadlampEvent({
-      resources: pods,
+      resources: pods!,
       resourceKind: 'Pod',
       error: error || undefined,
     });

@@ -13,7 +13,7 @@ import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/D
 import {
   addDetailsViewSectionsProcessor,
   DefaultDetailsViewSection,
-  DetailsViewSectionsProcessor,
+  DetailsViewsSectionProcessor,
   setDetailsViewSection,
 } from '../components/DetailsViewSection/detailsViewSectionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
@@ -184,7 +184,7 @@ export default class Registry {
    */
   registerDetailsViewSection(
     sectionName: string,
-    sectionFunc: (props: { resource: any }) => SectionFuncProps | null
+    sectionFunc: (resource: KubeObject) => SectionFuncProps | null
   ) {
     console.warn(
       'Registry.registerDetailsViewSection is deprecated. Please use registerDetailsViewSection.'
@@ -516,7 +516,7 @@ export function registerDetailsViewSection(viewSection: DetailsViewSectionType) 
  * ```
  */
 export function registerDetailsViewSectionsProcessor(
-  processor: DetailsViewSectionsProcessor | DetailsViewSectionsProcessor['processor']
+  processor: DetailsViewsSectionProcessor | DetailsViewsSectionProcessor['processor']
 ) {
   store.dispatch(addDetailsViewSectionsProcessor(processor));
 }

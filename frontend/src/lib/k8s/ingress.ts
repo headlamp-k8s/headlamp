@@ -77,7 +77,7 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
   private cachedRules: IngressRule[] = [];
 
   get spec(): KubeIngress['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   getHosts() {

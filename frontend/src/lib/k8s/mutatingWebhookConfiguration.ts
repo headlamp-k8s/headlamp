@@ -52,7 +52,7 @@ class MutatingWebhookConfiguration extends makeKubeObject<KubeMutatingWebhookCon
   );
 
   get webhooks(): KubeMutatingWebhookConfiguration['webhooks'] {
-    return this.jsonData!.webhooks;
+    return this.jsonData.webhooks;
   }
 }
 

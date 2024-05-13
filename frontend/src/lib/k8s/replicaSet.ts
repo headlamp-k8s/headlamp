@@ -34,11 +34,11 @@ class ReplicaSet extends makeKubeObject<KubeReplicaSet>('ReplicaSet') {
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'replicasets', true);
 
   get spec(): KubeReplicaSet['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): KubeReplicaSet['status'] {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getContainers(): KubeContainer[] {

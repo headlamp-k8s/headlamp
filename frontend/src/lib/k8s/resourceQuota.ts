@@ -34,11 +34,11 @@ class ResourceQuota extends makeKubeObject<KubeResourceQuota>('resourceQuota') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'resourcequotas');
 
   get spec(): spec {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): status {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get requests(): string[] {

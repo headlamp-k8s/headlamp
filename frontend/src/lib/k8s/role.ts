@@ -8,14 +8,14 @@ export interface KubeRole extends KubeObjectInterface {
     resourceNames: string[];
     resources: string[];
     verbs: string[];
-  };
+  }[];
 }
 
 class Role extends makeKubeObject<KubeRole>('role') {
   static apiEndpoint = apiFactoryWithNamespace('rbac.authorization.k8s.io', 'v1', 'roles');
 
   get rules() {
-    return this.jsonData!.rules;
+    return this.jsonData.rules;
   }
 }
 

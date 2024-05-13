@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/react';
-import VPA, { KubeVPA } from '../../lib/k8s/vpa';
+import VPA from '../../lib/k8s/vpa';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import VpaList from './List';
 
 VPA.isEnabled = () => Promise.resolve(true);
 VPA.useList = () => {
-  const objList = generateK8sResourceList<KubeVPA>(
+  const objList = generateK8sResourceList(
     {
       apiVersion: 'autoscaling.k8s.io/v1',
       kind: 'VerticalPodAutoscaler',

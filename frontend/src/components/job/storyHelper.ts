@@ -1,8 +1,11 @@
-export const jobs = [
+import { KubeObjectInterface } from '../../lib/k8s/cluster';
+
+export const jobs: KubeObjectInterface[] = [
   {
     apiVersion: 'batch/v1',
     kind: 'Job',
     metadata: {
+      name: '',
       creationTimestamp: '2023-07-28T08:00:00Z',
       generation: 1,
       labels: {

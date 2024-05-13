@@ -32,15 +32,15 @@ class Endpoints extends makeKubeObject<KubeEndpoint>('endpoint') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'endpoints');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get subsets() {
-    return this.jsonData!.subsets;
+    return this.jsonData.subsets;
   }
 
   getAddressesText() {

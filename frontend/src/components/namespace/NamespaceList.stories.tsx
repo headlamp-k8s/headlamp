@@ -1,15 +1,16 @@
 import { Meta, Story } from '@storybook/react';
-import Namespace, { KubeNamespace } from '../../lib/k8s/namespace';
+import { KubeMetadata } from '../../lib/k8s/cluster';
+import Namespace from '../../lib/k8s/namespace';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import NamespacesList from './List';
 
 Namespace.useList = () => {
-  const objList = generateK8sResourceList<KubeNamespace>(
+  const objList = generateK8sResourceList(
     {
       kind: 'Namespace',
       apiVersion: 'v1',
-      metadata: {},
+      metadata: {} as KubeMetadata,
       spec: {
         finalizers: ['kubernetes'],
       },

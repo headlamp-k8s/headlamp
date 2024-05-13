@@ -1,12 +1,10 @@
 import { Meta, Story } from '@storybook/react';
-import VWC, {
-  KubeValidatingWebhookConfiguration,
-} from '../../lib/k8s/validatingWebhookConfiguration';
+import VWC from '../../lib/k8s/validatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import { createVWC } from './storyHelper';
 import ValidatingWebhookConfigDetails from './ValidatingWebhookConfigDetails';
 
-const usePhonyGet: KubeValidatingWebhookConfiguration['useGet'] = (withService: boolean) => {
+const usePhonyGet = (withService: boolean) => {
   return [new VWC(createVWC(withService)), null, () => {}, () => {}] as any;
 };
 

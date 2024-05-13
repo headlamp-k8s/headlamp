@@ -43,11 +43,11 @@ class Service extends makeKubeObject<KubeService>('service') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'services');
 
   get spec(): KubeService['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getExternalAddresses() {

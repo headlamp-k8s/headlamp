@@ -1,6 +1,12 @@
 import { ResourceClasses } from '.';
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObject, KubeObjectInterface, makeKubeObject } from './cluster';
+import {
+  KubeMetadata,
+  KubeObject,
+  KubeObjectClass,
+  KubeObjectInterface,
+  makeKubeObject,
+} from './cluster';
 export interface CrossVersionObjectReference {
   apiVersion: string;
   kind: string;
@@ -170,11 +176,11 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
   static apiEndpoint = apiFactoryWithNamespace('autoscaling', 'v2', 'horizontalpodautoscalers');
 
   get spec(): HpaSpec {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): HpaStatus {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   metrics(t: Function): HPAMetrics[] {
@@ -339,7 +345,7 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
       return null;
     }
 
-    const TargetObjectClass = ResourceClasses[target.kind];
+    const TargetObjectClass = (ResourceClasses as Record<string, KubeObjectClass>)[target.kind];
     let objInstance: KubeObject | null = null;
     if (!!TargetObjectClass) {
       objInstance = new TargetObjectClass({
@@ -347,7 +353,7 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
         metadata: {
           name: target.name,
           namespace: this.getNamespace(),
-        },
+        } as KubeMetadata,
       });
     }
 

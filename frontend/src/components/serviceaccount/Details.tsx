@@ -15,7 +15,7 @@ export default function ServiceAccountDetails() {
       name={name}
       namespace={namespace}
       withEvents
-      extraInfo={(item: ServiceAccount) =>
+      extraInfo={item =>
         item && [
           {
             name: t('Secrets'),

@@ -40,11 +40,11 @@ class PDB extends makeKubeObject<KubePDB>('podDisruptionBudget') {
   static apiEndpoint = apiFactoryWithNamespace(['policy', 'v1', 'poddisruptionbudgets']);
 
   get spec(): KubePDB['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): KubePDB['status'] {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get selectors(): string[] {

@@ -1,12 +1,12 @@
 import { Meta, Story } from '@storybook/react';
-import Job from '../../lib/k8s/job';
+import Job, { KubeJob } from '../../lib/k8s/job';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import List from './List';
 import { jobs } from './storyHelper';
 
 Job.useList = () => {
-  const jobList = generateK8sResourceList(jobs[0], { numResults: 3 });
+  const jobList = generateK8sResourceList<KubeJob, any>(jobs[0], { numResults: 3 }) as KubeJob[];
 
   const failedJob = jobList[1];
   failedJob.status = {

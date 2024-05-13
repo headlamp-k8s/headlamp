@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { ResourceClasses } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
+import { KubeObject } from '../../lib/k8s/cluster';
 import CustomResourceDefinition, { KubeCRD } from '../../lib/k8s/crd';
 import { localeDate } from '../../lib/util';
 import { HoverInfoLabel, Link, NameValueTableRow, ObjectEventList, SectionBox } from '../common';
@@ -32,7 +33,7 @@ export function CustomResourceDetails(props: CustomResourceDetailsProps) {
   const { t } = useTranslation('glossary');
 
   const namespace = ns === '-' ? undefined : ns;
-  const CRD = ResourceClasses.CustomResourceDefinition as CustomResourceDefinition;
+  const CRD = ResourceClasses.CustomResourceDefinition;
 
   CRD.useApiGet(setCRD, crdName, undefined, setError);
 
@@ -109,7 +110,7 @@ export interface CustomResourceDetailsRendererProps {
 
 function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps) {
   const { crd, crName, namespace } = props;
-  const [item, setItem] = React.useState<KubeCRD | null>(null);
+  const [item, setItem] = React.useState<KubeObject | null>(null);
   const [error, setError] = React.useState<ApiError | null>(null);
 
   const { t } = useTranslation('glossary');
@@ -152,7 +153,7 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
               </Link>
             ),
           },
-          ...getExtraInfo(extraColumns, item!.jsonData),
+          ...getExtraInfo(extraColumns, item!.jsonData as KubeCRD),
         ]}
         backLink=""
       />

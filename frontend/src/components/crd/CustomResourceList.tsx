@@ -35,7 +35,7 @@ export default function CustomResourceList() {
     );
   }
 
-  return <CustomResourceListRenderer crd={crd} />;
+  return <CustomResourceListRenderer crd={crd!} />;
 }
 
 function CustomResourceLink(props: { resource: KubeCRD; crd: CRD; [otherProps: string]: any }) {
@@ -83,7 +83,7 @@ function CustomResourceListRenderer(props: CustomResourceListProps) {
   );
 }
 
-function getValueWithJSONPath(item: KubeCRD, jsonPath: string): string {
+function getValueWithJSONPath(item: CRD, jsonPath: string): string {
   let value: string | undefined;
   try {
     // Extract the value from the json item
@@ -153,7 +153,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
     const colsToDisplay: ResourceTableProps['columns'] = [
       {
         label: t('translation|Name'),
-        getter: (resource: KubeObject) => <CustomResourceLink resource={resource} crd={crd} />,
+        getter: (resource: KubeCRD) => <CustomResourceLink resource={resource} crd={crd} />,
         sort: (c1: KubeObject, c2: KubeObject) => {
           return c1.metadata.name.localeCompare(c2.metadata.name);
         },

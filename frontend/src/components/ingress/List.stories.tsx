@@ -1,12 +1,11 @@
 import { Meta, Story } from '@storybook/react';
-import { KubeObject } from '../../lib/k8s/cluster';
 import Ingress from '../../lib/k8s/ingress';
 import { TestContext } from '../../test';
 import ListView from './List';
 import { PORT_INGRESS, RESOURCE_INGRESS } from './storyHelper';
 
 Ingress.useList = () => {
-  const objList = [PORT_INGRESS, RESOURCE_INGRESS].map((data: KubeObject) => new Ingress(data));
+  const objList = [PORT_INGRESS, RESOURCE_INGRESS].map(data => new Ingress(data));
 
   return [objList, null, () => {}, () => {}] as any;
 };

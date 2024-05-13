@@ -11,6 +11,7 @@ import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import { KubeEvent } from './event';
 import Job from './job';
+import Pod from './pod';
 import ReplicaSet from './replicaSet';
 import StatefulSet from './statefulSet';
 
@@ -54,7 +55,13 @@ export interface KubeObjectInterface {
   kind: string;
   apiVersion?: string;
   metadata: KubeMetadata;
-  [otherProps: string]: any;
+  spec?: any;
+  status?: any;
+  items?: any[];
+  actionType?: any;
+  lastTimestamp?: string;
+  key?: any;
+  // [otherProps: string]: any;
 }
 
 export interface StringDict {
@@ -191,6 +198,7 @@ export interface KubeMetadata {
    * @see {@link https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids | UIDs docs} for more details.
    */
   uid: string;
+  apiVersion?: any;
 }
 
 export interface KubeOwnerReference {
@@ -337,16 +345,14 @@ export interface AuthRequestResourceAttrs {
  *
  * @param objectName The name of the object to create a KubeObject implementation for.
  */
-export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
-  objectName: string
-): KubeObjectIface<T> {
+export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(objectName: string) {
   class KubeObject {
     static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
-    jsonData: T | null = null;
+    jsonData: T;
     private readonly _clusterName: string;
 
-    constructor(json: T) {
-      this.jsonData = json;
+    constructor(json: T | null = null) {
+      this.jsonData = json!;
       this._clusterName = getCluster() || '';
     }
 
@@ -411,15 +417,15 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     getValue(prop: string) {
-      return this.jsonData![prop];
+      return (this.jsonData as Record<string, any>)![prop];
     }
 
     get metadata() {
-      return this.jsonData!.metadata;
+      return this.jsonData.metadata;
     }
 
     get kind() {
-      return this.jsonData!.kind;
+      return this.jsonData.kind;
     }
 
     get isNamespaced() {
@@ -540,10 +546,16 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       useConnectApi(...listCalls);
     }
 
-    static useList<U extends KubeObject>(
+    static useList<U extends typeof KubeObject>(
+      this: U,
       opts?: ApiListOptions
-    ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
-      const [objList, setObjList] = React.useState<U[] | null>(null);
+    ): [
+      InstanceType<U>[] | null,
+      ApiError | null,
+      (items: InstanceType<U>[]) => void,
+      (err: ApiError | null) => void
+    ] {
+      const [objList, setObjList] = React.useState<InstanceType<U>[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
       const currentCluster = useCluster();
       const cluster = opts?.cluster || currentCluster;
@@ -554,7 +566,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         setError(null);
       }, [cluster]);
 
-      function setList(items: U[] | null) {
+      function setList(items: InstanceType<U>[] | null) {
         setObjList(items);
         if (items !== null) {
           setError(null);
@@ -596,8 +608,9 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       return this.apiEndpoint.get.bind(null, ...args);
     }
 
-    static useApiGet<U extends KubeObject>(
-      onGet: (...args: any) => any,
+    static useApiGet<U extends typeof KubeObject>(
+      this: U,
+      onGet: (item: InstanceType<U> | null) => any,
       name: string,
       namespace?: string,
       onError?: (err: ApiError | null) => void,
@@ -612,18 +625,24 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       useConnectApi(this.apiGet(getCallback, name, namespace, onError, opts));
     }
 
-    static useGet<U extends KubeObject>(
+    static useGet<U extends typeof KubeObject>(
+      this: U,
       name: string,
       namespace?: string,
       opts?: {
         queryParams?: QueryParameters;
         cluster?: string;
       }
-    ): [U | null, ApiError | null, (items: U) => void, (err: ApiError | null) => void] {
-      const [obj, setObj] = React.useState<U | null>(null);
+    ): [
+      InstanceType<U> | null,
+      ApiError | null,
+      (items: InstanceType<U>) => void,
+      (err: ApiError | null) => void
+    ] {
+      const [obj, setObj] = React.useState<InstanceType<U> | null>(null);
       const [error, setError] = useErrorState(setObj);
 
-      function onGet(item: U | null) {
+      function onGet(item: InstanceType<U> | null) {
         // Only set the object if we have we have a different one.
         if (!!obj && !!item && obj.metadata.resourceVersion === item.metadata.resourceVersion) {
           return;
@@ -845,10 +864,21 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
   }
 
-  return KubeObject as KubeObjectIface<T>;
+  return KubeObject;
 }
 
+/**
+ * This type refers to the *class* of a KubeObject.
+ */
 export type KubeObjectClass = ReturnType<typeof makeKubeObject>;
+
+/**
+ * This type refers to an *instance* of a KubeObject.
+ *
+ * @example
+ * const pod = new Pod({ metadata: { name: 'my-pod' } });
+ * // pod is of type KubeObject
+ */
 export type KubeObject = InstanceType<KubeObjectClass>;
 
 export type Time = number | string | null;
@@ -1254,4 +1284,13 @@ export interface KubeContainerStatus {
   started?: boolean;
 }
 
-export type Workload = DaemonSet | ReplicaSet | StatefulSet | Job | CronJob | Deployment;
+export type Workload = Pod | DaemonSet | ReplicaSet | StatefulSet | Job | CronJob | Deployment;
+
+export type WorkloadClass =
+  | typeof Pod
+  | typeof DaemonSet
+  | typeof ReplicaSet
+  | typeof StatefulSet
+  | typeof Job
+  | typeof CronJob
+  | typeof Deployment;

@@ -7,7 +7,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResourceClasses } from '../../../lib/k8s';
-import { KubeObject, KubeObjectInterface, KubeOwnerReference } from '../../../lib/k8s/cluster';
+import { KubeObject, KubeOwnerReference } from '../../../lib/k8s/cluster';
 import { localeDate } from '../../../lib/util';
 import { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
 import Link from '../Link';
@@ -29,17 +29,17 @@ export const useMetadataDisplayStyles = makeStyles(theme => ({
   },
 }));
 
-type ExtraRowsFunc = (resource: KubeObjectInterface) => NameValueTableRow[] | null;
+type ExtraRowsFunc<T> = (resource: T | null) => NameValueTableRow[] | null;
 
-export interface MetadataDisplayProps {
-  resource: KubeObject;
-  extraRows?: ExtraRowsFunc | NameValueTableRow[] | null;
+export interface MetadataDisplayProps<T extends KubeObject> {
+  resource: T;
+  extraRows?: ExtraRowsFunc<T> | NameValueTableRow[] | null;
 }
 
-export function MetadataDisplay(props: MetadataDisplayProps) {
+export function MetadataDisplay<T extends KubeObject>(props: MetadataDisplayProps<T>) {
   const { resource, extraRows } = props;
   const { t } = useTranslation();
-  let makeExtraRows: ExtraRowsFunc;
+  let makeExtraRows: ExtraRowsFunc<T>;
 
   function makeOwnerReferences(ownerReferences: KubeOwnerReference[]) {
     if (!resource || ownerReferences === undefined) {
@@ -56,7 +56,8 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
         if (ownerRef.kind in ResourceClasses) {
           let routeName;
           try {
-            routeName = new ResourceClasses[ownerRef.kind]().detailsRoute;
+            routeName = new ResourceClasses[ownerRef.kind as keyof typeof ResourceClasses]()
+              .detailsRoute;
           } catch (e) {
             console.error(`Error getting routeName for {ownerRef.kind}`, e);
             return null;

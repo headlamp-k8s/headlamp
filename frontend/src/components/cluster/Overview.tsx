@@ -185,12 +185,12 @@ function EventsSection() {
         },
         {
           label: t('Last Seen'),
-          getter: event => <DateLabel date={event.lastOccurrence} format="mini" />,
+          getter: (event: Event) => <DateLabel date={event.lastOccurrence} format="mini" />,
           cellProps: { style: { textAlign: 'right' } },
           gridTemplate: 'minmax(150px, 0.5fr)',
           sort: (e1: Event, e2: Event) => {
-            const date1 = e1.lastTimestamp || e1.metadata.creationTimestamp;
-            const date2 = e2.lastTimestamp || e2.metadata.creationTimestamp;
+            const date1 = e1.getValue('lastTimestamp') || e1.metadata.creationTimestamp;
+            const date2 = e2.getValue('lastTimestamp') || e2.metadata.creationTimestamp;
             return new Date(date2).getTime() - new Date(date1).getTime();
           },
         },

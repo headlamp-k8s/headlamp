@@ -5,7 +5,7 @@ import PriorityClass, { KubePriorityClass } from '../../lib/k8s/priorityClass';
 import { TestContext } from '../../test';
 import HPADetails from './Details';
 
-const usePhonyGet: KubeObjectClass['useGet'] = () => {
+const usePhonyGet = () => {
   return [
     new PriorityClass({
       description: 'Mission Critical apps.',

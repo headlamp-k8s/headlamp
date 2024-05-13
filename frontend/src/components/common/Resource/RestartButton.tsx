@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/cluster';
+import Deployment from '../../../lib/k8s/deployment';
 import { clusterAction } from '../../../redux/clusterActionSlice';
 import {
   EventStatus,
@@ -35,7 +36,7 @@ export function RestartButton(props: RestartButtonProps) {
 
   function applyFunc() {
     try {
-      const clonedItem = _.cloneDeep(item);
+      const clonedItem = _.cloneDeep(item) as Deployment;
       clonedItem.spec.template.metadata.annotations = {
         ...clonedItem.spec.template.metadata.annotations,
         'kubectl.kubernetes.io/restartedAt': new Date().toISOString(),

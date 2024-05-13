@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApiError, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
-import { KubeObject, makeKubeObject } from '../../lib/k8s/cluster';
+import { KubeObjectInterface, makeKubeObject } from '../../lib/k8s/cluster';
 import CustomResourceDefinition, { KubeCRD } from '../../lib/k8s/crd';
 
 const mockCRDMap: { [crdName: string]: KubeCRD | null } = {
@@ -44,7 +44,7 @@ const mockCRDMap: { [crdName: string]: KubeCRD | null } = {
   loadingcrd: null,
 };
 
-const mockCRMap: { [name: string]: KubeObject | null } = {
+const mockCRMap: { [name: string]: KubeObjectInterface | null } = {
   mycustomresource_mynamespace: {
     kind: 'MyCustomResource',
     apiVersion: 'my.phonyresources.io/v1',
@@ -99,14 +99,14 @@ const CRDMockMethods = {
   },
 };
 
-class CRMockClass extends makeKubeObject<KubeObject>('customresource') {
+class CRMockClass extends makeKubeObject<KubeObjectInterface>('customresource') {
   static apiEndpoint = apiFactoryWithNamespace(['', '', '']);
 
   static useApiGet(
-    setItem: (item: CRMockClass | null) => void,
+    setItem: (item: any | null) => void, // Update the type of the 'setItem' parameter
     name: string,
     namespace?: string,
-    setError?: (err: ApiError) => void
+    setError?: (err: ApiError | null) => void
   ) {
     React.useEffect(() => {
       const jsonData = mockCRMap[name + '_' + namespace];
@@ -122,7 +122,7 @@ class CRMockClass extends makeKubeObject<KubeObject>('customresource') {
 
   static useApiList(onList: (...arg: any[]) => any) {
     React.useEffect(() => {
-      onList(Object.values(mockCRMap).map(cr => new CRMockClass(cr)));
+      onList(Object.values(mockCRMap).map(cr => new CRMockClass(cr!)));
     }, []);
   }
 

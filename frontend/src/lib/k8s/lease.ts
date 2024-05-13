@@ -16,6 +16,6 @@ export class Lease extends makeKubeObject<KubeLease>('Lease') {
   static apiEndpoint = apiFactoryWithNamespace('coordination.k8s.io', 'v1', 'leases');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 }

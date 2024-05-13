@@ -19,11 +19,11 @@ class RoleBinding extends makeKubeObject<KubeRoleBinding>('roleBinding') {
   static apiEndpoint = apiFactoryWithNamespace('rbac.authorization.k8s.io', 'v1', 'rolebindings');
 
   get roleRef() {
-    return this.jsonData!.roleRef;
+    return this.jsonData.roleRef;
   }
 
   get subjects(): KubeRoleBinding['subjects'] {
-    return this.jsonData!.subjects;
+    return this.jsonData.subjects;
   }
 }
 

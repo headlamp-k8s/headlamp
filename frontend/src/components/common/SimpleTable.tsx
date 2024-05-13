@@ -97,7 +97,8 @@ export interface SimpleTableProps {
         [dataProp: string]: any;
         [dataProp: number]: any;
       }[]
-    | null;
+    | null
+    | undefined;
   filterFunction?: ((...args: any[]) => boolean) | null;
   rowsPerPage?: number[];
   emptyMessage?: string;
@@ -338,7 +339,7 @@ export default function SimpleTable(props: SimpleTableProps) {
 
   function getPagedRows() {
     const startIndex = page * rowsPerPage;
-    return filteredData.slice(startIndex, startIndex + rowsPerPage);
+    return filteredData!.slice(startIndex, startIndex + rowsPerPage);
   }
 
   if (displayData === null) {
@@ -351,10 +352,10 @@ export default function SimpleTable(props: SimpleTableProps) {
 
   let filteredData = displayData;
   if (filterFunction) {
-    filteredData = displayData.filter(filterFunction);
+    filteredData = displayData!.filter(filterFunction);
   }
 
-  if ((filteredData.length === 0 || filteredData.length < page * rowsPerPage) && page !== 0) {
+  if ((filteredData!.length === 0 || filteredData!.length < page * rowsPerPage) && page !== 0) {
     setPage(0);
   }
 
@@ -421,7 +422,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           </TableHead>
         )}
         <TableBody>
-          {filteredData.length > 0 ? (
+          {filteredData!.length > 0 ? (
             getPagedRows().map((row: any, i: number) => (
               <TableRow key={i}>
                 {columns.map((col, i) => {
@@ -449,11 +450,11 @@ export default function SimpleTable(props: SimpleTableProps) {
           )}
         </TableBody>
       </Table>
-      {filteredData.length > rowsPerPageOptions[0] && showPagination && (
+      {filteredData!.length > rowsPerPageOptions[0] && showPagination && (
         <TablePagination
           rowsPerPageOptions={rowsPerPageOptions}
           component="div"
-          count={filteredData.length}
+          count={filteredData!.length}
           rowsPerPage={rowsPerPage}
           showFirstButton
           showLastButton

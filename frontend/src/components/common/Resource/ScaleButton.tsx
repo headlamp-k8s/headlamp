@@ -98,7 +98,7 @@ export default function ScaleButton(props: ScaleButtonProps) {
   );
 }
 
-interface ScaleDialogProps extends DialogProps {
+interface ScaleDialogProps extends Omit<DialogProps, 'resource'> {
   resource: KubeObject;
   onSave: (numReplicas: number) => void;
   onClose: () => void;
@@ -126,11 +126,11 @@ function ScaleDialog(props: ScaleDialogProps) {
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.SCALE_RESOURCE);
 
   function getNumReplicas() {
-    if (!resource?.spec) {
+    if (!('spec' in resource)) {
       return -1;
     }
 
-    return parseInt(resource.spec.replicas);
+    return parseInt((resource as any).spec.replicas);
   }
 
   const currentNumReplicas = getNumReplicas();

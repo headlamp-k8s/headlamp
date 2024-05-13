@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useCluster } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
-import { KubeObject, Workload } from '../../lib/k8s/cluster';
+import { KubeObjectClass, Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import Deployment from '../../lib/k8s/deployment';
@@ -72,7 +72,8 @@ export default function Overview() {
     return joint;
   }
 
-  const workloads: KubeObject[] = [
+  type ClassType<T> = new (...args: any[]) => T;
+  const workloads: Array<ClassType<Workload> & KubeObjectClass> = [
     Pod,
     Deployment,
     StatefulSet,
@@ -82,7 +83,7 @@ export default function Overview() {
     CronJob,
   ];
 
-  workloads.forEach((workloadClass: KubeObject) => {
+  workloads.forEach(workloadClass => {
     workloadClass.useApiList(
       (items: InstanceType<typeof workloadClass>[]) => {
         setWorkloads({ [workloadClass.className]: items });

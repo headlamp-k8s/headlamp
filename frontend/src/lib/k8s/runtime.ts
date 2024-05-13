@@ -3,13 +3,15 @@ import { KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeRuntimeClass extends KubeObjectInterface {
   handler: string;
+  overhead?: any;
+  scheduling?: any;
 }
 
 export class RuntimeClass extends makeKubeObject<KubeRuntimeClass>('RuntimeClass') {
   static apiEndpoint = apiFactory('node.k8s.io', 'v1', 'runtimeclasses');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   static get pluralName() {

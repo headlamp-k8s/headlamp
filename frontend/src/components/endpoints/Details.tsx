@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useLocation, useParams } from 'react-router-dom';
 import { ResourceClasses } from '../../lib/k8s';
-import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
+import Endpoint, { KubeEndpoint } from '../../lib/k8s/endpoints';
 import { Link, SectionHeader } from '../common';
 import Empty from '../common/EmptyContent';
 import { DetailsGrid } from '../common/Resource';
@@ -15,7 +15,7 @@ export default function EndpointDetails() {
 
   return (
     <DetailsGrid
-      resourceType={Endpoints}
+      resourceType={Endpoint}
       name={name}
       namespace={namespace}
       title={t('Endpoint')}
@@ -55,7 +55,9 @@ export default function EndpointDetails() {
                               label: t('Target'),
                               getter: address => {
                                 const targetRefClass = !!address.targetRef?.kind
-                                  ? ResourceClasses[address.targetRef?.kind]
+                                  ? ResourceClasses[
+                                      address.targetRef?.kind as keyof typeof ResourceClasses
+                                    ]
                                   : null;
                                 if (!!targetRefClass) {
                                   return (

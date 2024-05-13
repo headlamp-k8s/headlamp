@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
-import PriorityClass, { KubePriorityClass } from '../../lib/k8s/priorityClass';
+import PriorityClass from '../../lib/k8s/priorityClass';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import PriorityClassList from './List';
 
 PriorityClass.useList = () => {
-  const objList = generateK8sResourceList<KubePriorityClass>(
+  const objList = generateK8sResourceList(
     {
       description: 'Mission Critical apps.',
       kind: 'PriorityClass',

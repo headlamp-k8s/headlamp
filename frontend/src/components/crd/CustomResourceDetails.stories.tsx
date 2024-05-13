@@ -6,6 +6,7 @@ import { CustomResourceDetails, CustomResourceDetailsProps } from './CustomResou
 import { CRDMockMethods, CRMockClass } from './storyHelper';
 
 // So we can test with a mocked CR.
+// @ts-ignore
 ResourceClasses['mycustomresources'] = CRMockClass;
 
 export default {

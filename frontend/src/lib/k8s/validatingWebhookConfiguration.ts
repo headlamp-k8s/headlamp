@@ -33,7 +33,7 @@ class ValidatingWebhookConfiguration extends makeKubeObject<KubeValidatingWebhoo
   );
 
   get webhooks(): KubeValidatingWebhookConfiguration['webhooks'] {
-    return this.jsonData!.webhooks;
+    return this.jsonData.webhooks;
   }
 }
 

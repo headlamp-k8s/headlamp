@@ -24,7 +24,7 @@ export interface LinkProps extends LinkBaseProps {
 }
 
 export interface LinkObjectProps extends LinkBaseProps {
-  kubeObject: InstanceType<ReturnType<typeof makeKubeObject>>;
+  kubeObject: InstanceType<ReturnType<typeof makeKubeObject>> | null;
   [prop: string]: any;
 }
 
@@ -32,8 +32,8 @@ function PureLink(props: React.PropsWithChildren<LinkProps | LinkObjectProps>) {
   if ((props as LinkObjectProps).kubeObject) {
     const { kubeObject, ...otherProps } = props as LinkObjectProps;
     return (
-      <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()} {...otherProps}>
-        {props.children || kubeObject.getName()}
+      <MuiLink component={RouterLink} to={kubeObject!.getDetailsLink()} {...otherProps}>
+        {props.children || kubeObject!.getName()}
       </MuiLink>
     );
   }

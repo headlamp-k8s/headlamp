@@ -5,6 +5,7 @@ export interface KubeStorageClass extends KubeObjectInterface {
   provisioner: string;
   reclaimPolicy: string;
   volumeBindingMode: string;
+  allowVolumeExpansion?: boolean;
 }
 
 class StorageClass extends makeKubeObject<KubeStorageClass>('storageClass') {

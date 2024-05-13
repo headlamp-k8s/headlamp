@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react';
-import { KubeObject } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
 import { TestContext } from '../../../test';
@@ -121,7 +120,7 @@ class MyPod extends Pod {
 
 const podData: ResourceTableFromResourceClassProps = {
   columns: ['name', 'namespace', 'age'],
-  resourceClass: MyPod as KubeObject,
+  resourceClass: MyPod,
 };
 
 const withHiddenCols: ResourceTableFromResourceClassProps = {
@@ -135,7 +134,7 @@ const withHiddenCols: ResourceTableFromResourceClassProps = {
     },
     'age',
   ],
-  resourceClass: MyPod as KubeObject,
+  resourceClass: MyPod,
   hideColumns: ['namespace'],
 };
 

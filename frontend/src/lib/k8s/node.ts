@@ -56,11 +56,11 @@ class Node extends makeKubeObject<KubeNode>('node') {
   static apiEndpoint = apiFactory('', 'v1', 'nodes');
 
   get status(): KubeNode['status'] {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get spec(): KubeNode['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   static useMetrics(): [KubeMetrics[] | null, ApiError | null] {

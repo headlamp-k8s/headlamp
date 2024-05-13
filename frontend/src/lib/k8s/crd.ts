@@ -45,7 +45,7 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
   }
 
   get spec(): KubeCRD['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get plural(): string {
@@ -104,12 +104,12 @@ export interface CRClassArgs {
 export function makeCustomResourceClass(
   args: [group: string, version: string, pluralName: string][],
   isNamespaced: boolean
-): ReturnType<typeof makeKubeObject>;
-export function makeCustomResourceClass(args: CRClassArgs): ReturnType<typeof makeKubeObject>;
+): KubeObjectClass;
+export function makeCustomResourceClass(args: CRClassArgs): KubeObjectClass;
 export function makeCustomResourceClass(
   args: [group: string, version: string, pluralName: string][] | CRClassArgs,
   isNamespaced?: boolean
-): ReturnType<typeof makeKubeObject> {
+): KubeObjectClass {
   let apiInfoArgs: [group: string, version: string, pluralName: string][] = [];
 
   if (Array.isArray(args)) {
@@ -120,7 +120,7 @@ export function makeCustomResourceClass(
 
   // Used for tests
   if (process.env.UNDER_TEST === 'true') {
-    const knownClass = ResourceClasses[apiInfoArgs[0][2]];
+    const knownClass = (ResourceClasses as Record<string, KubeObjectClass>)[apiInfoArgs[0][2]];
     if (!!knownClass) {
       return knownClass;
     }

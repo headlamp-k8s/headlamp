@@ -26,6 +26,10 @@ export interface KubePodSpec {
     conditionType: string;
   }[];
   volumes?: KubeVolume[];
+  serviceAccountName?: string;
+  serviceAccount?: string;
+  priority?: string;
+  tolerations?: any[];
 }
 
 export interface KubePod extends KubeObjectInterface {
@@ -90,17 +94,17 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
   protected detailedStatusCache: Partial<{ resourceVersion: string; details: PodDetailedStatus }>;
 
-  constructor(jsonData: KubePod) {
+  constructor(jsonData?: KubePod) {
     super(jsonData);
     this.detailedStatusCache = {};
   }
 
   get spec(): KubePod['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): KubePod['status'] {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getLogs(...args: Parameters<oldGetLogs | newGetLogs>): () => void {
