@@ -108,6 +108,7 @@
     "jsonpath-plus": "^6.0.1",
     "lint-staged": "^10.5.4",
     "lodash": "^4.17.21",
+    "material-react-table": "^2.13.0",
     "monaco-editor": "^0.25.2",
     "monaco-editor-webpack-plugin": "^4.2.0",
     "msw": "^0.47.4",

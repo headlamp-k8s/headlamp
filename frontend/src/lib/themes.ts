@@ -135,6 +135,7 @@ const commonRules = {
       head: {
         background: '#faf9f8',
         color: '#242424',
+        borderColor: 'rgba(0,0,0,0.12)',
       },
       body: {
         background: '#fff',
@@ -234,6 +235,7 @@ const darkTheme = createTheme({
       head: {
         background: '#000',
         color: '#aeaeae',
+        borderColor: 'rgba(255,255,255,0.12)',
       },
       body: {
         background: '#1B1A19',

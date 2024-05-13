@@ -49,7 +49,7 @@ exports[`Storyshots common/GenericError Component Title 1`] = `
         class="MuiTypography-root MuiTypography-h1 css-5ewpze-MuiTypography-root"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >

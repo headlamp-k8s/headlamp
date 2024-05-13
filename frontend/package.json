@@ -61,6 +61,7 @@
     "js-yaml": "^4.1.0",
     "jsonpath-plus": "^6.0.1",
     "lodash": "^4.17.21",
+    "material-react-table": "^2.13.0",
     "monaco-editor": "^0.25.2",
     "monaco-editor-webpack-plugin": "^4.2.0",
     "notistack": "^2.0.8",

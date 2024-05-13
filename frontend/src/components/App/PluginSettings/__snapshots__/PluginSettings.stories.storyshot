@@ -325,7 +325,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
     class="MuiBox-root css-ova7y8"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-wlshgd-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-wlshgd-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >

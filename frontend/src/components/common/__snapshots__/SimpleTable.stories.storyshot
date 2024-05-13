@@ -300,7 +300,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
                 <div
                   class="MuiBox-root css-1dipl1t"
@@ -318,7 +318,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
                       Namespaces
                     </label>
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         aria-autocomplete="both"
@@ -335,7 +335,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
                         value=""
                       />
                       <div
-                        class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                       >
                         <button
                           aria-label="Open"
@@ -380,7 +380,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
                   Search
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-at4obv-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-1d1jo89-MuiInputBase-root-MuiInput-root"
                   role="search"
                 >
                   <input
@@ -399,13 +399,13 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
             >
               <button
                 aria-controls="standard-search"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
                 tabindex="0"
                 type="button"
               >
                 Clear
                 <span
-                  class="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+                  class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
                 >
                   <span />
                 </span>
@@ -551,7 +551,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
                 <div
                   class="MuiBox-root css-1dipl1t"
@@ -569,7 +569,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
                       Namespaces
                     </label>
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         aria-autocomplete="both"
@@ -586,7 +586,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
                         value=""
                       />
                       <div
-                        class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                       >
                         <button
                           aria-label="Open"
@@ -631,7 +631,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
                   Search
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-at4obv-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-1d1jo89-MuiInputBase-root-MuiInput-root"
                   role="search"
                 >
                   <input
@@ -650,13 +650,13 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
             >
               <button
                 aria-controls="standard-search"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
                 tabindex="0"
                 type="button"
               >
                 Clear
                 <span
-                  class="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+                  class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
                 >
                   <span />
                 </span>
@@ -778,7 +778,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
                 <div
                   class="MuiBox-root css-1dipl1t"
@@ -796,7 +796,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
                       Namespaces
                     </label>
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         aria-autocomplete="both"
@@ -813,7 +813,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
                         value=""
                       />
                       <div
-                        class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                       >
                         <button
                           aria-label="Open"
@@ -858,7 +858,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
                   Search
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-at4obv-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-1d1jo89-MuiInputBase-root-MuiInput-root"
                   role="search"
                 >
                   <input
@@ -877,13 +877,13 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
             >
               <button
                 aria-controls="standard-search"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
                 tabindex="0"
                 type="button"
               >
                 Clear
                 <span
-                  class="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+                  class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
                 >
                   <span />
                 </span>
@@ -1005,7 +1005,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+                class="MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
                 <div
                   class="MuiBox-root css-1dipl1t"
@@ -1023,7 +1023,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
                       Namespaces
                     </label>
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                     >
                       <p
                         class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
@@ -1052,7 +1052,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
                         value=""
                       />
                       <div
-                        class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                       >
                         <button
                           aria-label="Clear"
@@ -1119,7 +1119,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
                   Search
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-at4obv-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-1d1jo89-MuiInputBase-root-MuiInput-root"
                   role="search"
                 >
                   <input
@@ -1138,13 +1138,13 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
             >
               <button
                 aria-controls="standard-search"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
                 tabindex="0"
                 type="button"
               >
                 Clear
                 <span
-                  class="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+                  class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
                 >
                   <span />
                 </span>
@@ -1288,7 +1288,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
                 <div
                   class="MuiBox-root css-1dipl1t"
@@ -1306,7 +1306,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
                       Namespaces
                     </label>
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         aria-autocomplete="both"
@@ -1323,7 +1323,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
                         value=""
                       />
                       <div
-                        class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                       >
                         <button
                           aria-label="Open"
@@ -1368,7 +1368,7 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
                   Search
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-at4obv-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-1d1jo89-MuiInputBase-root-MuiInput-root"
                   role="search"
                 >
                   <input
@@ -1387,13 +1387,13 @@ exports[`Storyshots SimpleTable Not Found Message 1`] = `
             >
               <button
                 aria-controls="standard-search"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
                 tabindex="0"
                 type="button"
               >
                 Clear
                 <span
-                  class="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+                  class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
                 >
                   <span />
                 </span>
@@ -1509,7 +1509,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
                 <div
                   class="MuiBox-root css-1dipl1t"
@@ -1527,7 +1527,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
                       Namespaces
                     </label>
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         aria-autocomplete="both"
@@ -1544,7 +1544,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
                         value=""
                       />
                       <div
-                        class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                       >
                         <button
                           aria-label="Open"
@@ -1589,7 +1589,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
                   Search
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-at4obv-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-1d1jo89-MuiInputBase-root-MuiInput-root"
                   role="search"
                 >
                   <input
@@ -1608,13 +1608,13 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
             >
               <button
                 aria-controls="standard-search"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
                 tabindex="0"
                 type="button"
               >
                 Clear
                 <span
-                  class="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+                  class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
                 >
                   <span />
                 </span>
@@ -2027,7 +2027,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
               >
                 <div
                   class="MuiBox-root css-1dipl1t"
@@ -2045,7 +2045,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
                       Namespaces
                     </label>
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         aria-autocomplete="both"
@@ -2062,7 +2062,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
                         value=""
                       />
                       <div
-                        class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                        class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                       >
                         <button
                           aria-label="Open"
@@ -2107,7 +2107,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
                   Search
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-at4obv-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-1d1jo89-MuiInputBase-root-MuiInput-root"
                   role="search"
                 >
                   <input
@@ -2126,13 +2126,13 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
             >
               <button
                 aria-controls="standard-search"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
                 tabindex="0"
                 type="button"
               >
                 Clear
                 <span
-                  class="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+                  class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
                 >
                   <span />
                 </span>

@@ -485,7 +485,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
                       >
                         <span
-                          class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
+                          class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-1nsozxe-MuiButtonBase-root-MuiSwitch-switchBase"
                         >
                           <input
                             checked=""

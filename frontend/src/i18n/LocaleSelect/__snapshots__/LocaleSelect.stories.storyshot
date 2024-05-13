@@ -6,7 +6,7 @@ exports[`Storyshots LocaleSelect Initial 1`] = `
     class="MuiFormControl-root css-k2e4wk-MuiFormControl-root"
   >
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-zghmfh-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
     >
       <div
         aria-controls="under-test"
