@@ -20,7 +20,7 @@ slug: "lib_k8s_cluster.ContainerState"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1190](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1190)
+[lib/k8s/cluster.ts:1227](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1227)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1193](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1193)
+[lib/k8s/cluster.ts:1230](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1230)
 
 ___
 
@@ -59,4 +59,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1202](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1202)
+[lib/k8s/cluster.ts:1239](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1239)

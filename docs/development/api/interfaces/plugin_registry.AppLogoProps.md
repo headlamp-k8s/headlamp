@@ -20,7 +20,7 @@ A class to use on your SVG.
 
 #### Defined in
 
-[components/App/AppLogo.tsx:19](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/App/AppLogo.tsx#L19)
+[components/App/AppLogo.tsx:19](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/components/App/AppLogo.tsx#L19)
 
 ___
 
@@ -32,7 +32,19 @@ The size of the logo. 'small' for in mobile view, and 'large' for tablet and des
 
 #### Defined in
 
-[components/App/AppLogo.tsx:15](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/App/AppLogo.tsx#L15)
+[components/App/AppLogo.tsx:15](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/components/App/AppLogo.tsx#L15)
+
+___
+
+### sx
+
+• `Optional` **sx**: `SxProps`<`Theme`\>
+
+SxProps to use on your SVG.
+
+#### Defined in
+
+[components/App/AppLogo.tsx:21](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/components/App/AppLogo.tsx#L21)
 
 ___
 
@@ -44,4 +56,4 @@ User selected theme. By default it checks which is is active.
 
 #### Defined in
 
-[components/App/AppLogo.tsx:17](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/App/AppLogo.tsx#L17)
+[components/App/AppLogo.tsx:17](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/components/App/AppLogo.tsx#L17)

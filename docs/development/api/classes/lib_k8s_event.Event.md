@@ -30,7 +30,7 @@ makeKubeObject<KubeEvent\>('Event').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:301](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L301)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L317)
 
 ## Properties
 
@@ -46,13 +46,13 @@ makeKubeObject<KubeEvent\>('Event').constructor
 
 | Name | Type |
 | :------ | :------ |
-| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\>  } |
-| `scale.get` | (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> |
-| `scale.put` | (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\> |
+| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\>  } |
+| `scale.get` | (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> |
+| `scale.put` | (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/event.ts:24](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L24)
+[lib/k8s/event.ts:25](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L25)
 
 ___
 
@@ -66,9 +66,37 @@ makeKubeObject<KubeEvent\>('Event').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:302](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L302)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Accessors
+
+### count
+
+• `get` **count**(): `any`
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[lib/k8s/event.ts:68](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L68)
+
+___
+
+### firstOccurrence
+
+• `get` **firstOccurrence**(): `any`
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[lib/k8s/event.ts:102](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L102)
+
+___
 
 ### involvedObject
 
@@ -80,7 +108,7 @@ makeKubeObject<KubeEvent\>('Event').className
 
 #### Defined in
 
-[lib/k8s/event.ts:47](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L47)
+[lib/k8s/event.ts:48](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L48)
 
 ___
 
@@ -94,7 +122,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:93](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L93)
+[lib/k8s/event.ts:147](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L147)
+
+___
+
+### lastOccurrence
+
+• `get` **lastOccurrence**(): `any`
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[lib/k8s/event.ts:77](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L77)
 
 ___
 
@@ -108,7 +150,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:59](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L59)
+[lib/k8s/event.ts:60](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L60)
 
 ___
 
@@ -122,7 +164,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:55](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L55)
+[lib/k8s/event.ts:56](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L56)
+
+___
+
+### source
+
+• `get` **source**(): `any`
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[lib/k8s/event.ts:64](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L64)
 
 ___
 
@@ -136,7 +192,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:39](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L39)
+[lib/k8s/event.ts:40](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L40)
 
 ___
 
@@ -150,7 +206,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:43](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L43)
+[lib/k8s/event.ts:44](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L44)
 
 ___
 
@@ -164,7 +220,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:51](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L51)
+[lib/k8s/event.ts:52](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L52)
 
 ___
 
@@ -178,7 +234,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:30](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L30)
+[lib/k8s/event.ts:31](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L31)
 
 • `Static` `set` **maxLimit**(`limit`): `void`
 
@@ -194,19 +250,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:35](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L35)
+[lib/k8s/event.ts:36](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L36)
 
 ## Methods
 
 ### apiList
 
-▸ `Static` **apiList**(`onList`): `any`
+▸ `Static` **apiList**(`onList`, `onError?`, `opts?`): `any`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `onList` | (`arg`: `any`[]) => `void` |
+| `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| `opts?` | [`ApiListSingleNamespaceOptions`](../interfaces/lib_k8s_cluster.ApiListSingleNamespaceOptions.md) |
 
 #### Returns
 
@@ -218,7 +276,7 @@ makeKubeObject<KubeEvent\>('Event').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:281](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L281)
+[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L293)
 
 ___
 
@@ -243,7 +301,7 @@ makeKubeObject<KubeEvent\>('Event').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:304](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L304)
+[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L320)
 
 ___
 
@@ -267,7 +325,7 @@ makeKubeObject<KubeEvent\>('Event').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:300](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L300)
+[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L316)
 
 ___
 
@@ -287,7 +345,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:63](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L63)
+[lib/k8s/event.ts:117](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L117)
 
 ___
 
@@ -314,7 +372,7 @@ makeKubeObject<KubeEvent\>('Event').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:287](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L287)
+[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L303)
 
 ___
 
@@ -340,7 +398,7 @@ makeKubeObject<KubeEvent\>('Event').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:282](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L282)
+[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L298)
 
 ___
 
@@ -365,7 +423,7 @@ makeKubeObject<KubeEvent\>('Event').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:296](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L296)
+[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L312)
 
 ___
 
@@ -389,4 +447,48 @@ makeKubeObject<KubeEvent\>('Event').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L309)
+
+___
+
+### useListForClusters
+
+▸ `Static` **useListForClusters**(`clusterNames`, `options?`): `EventErrorObj`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `clusterNames` | `string`[] |
+| `options?` | `Object` |
+| `options.queryParams?` | [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md) |
+
+#### Returns
+
+`EventErrorObj`
+
+#### Defined in
+
+[lib/k8s/event.ts:167](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L167)
+
+___
+
+### useWarningList
+
+▸ `Static` **useWarningList**(`clusters`, `options?`): `EventErrorObj`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `clusters` | `string`[] |
+| `options?` | `Object` |
+| `options.queryParams?` | [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md) |
+
+#### Returns
+
+`EventErrorObj`
+
+#### Defined in
+
+[lib/k8s/event.ts:238](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/event.ts#L238)

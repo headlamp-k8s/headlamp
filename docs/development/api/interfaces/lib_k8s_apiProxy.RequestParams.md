@@ -26,7 +26,7 @@ Whether to automatically log out the user if there is an authentication error.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:45](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L45)
+[lib/k8s/apiProxy.ts:66](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/apiProxy.ts#L66)
 
 ___
 
@@ -38,7 +38,7 @@ Cluster context name.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:43](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L43)
+[lib/k8s/apiProxy.ts:64](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/apiProxy.ts#L64)
 
 ___
 
@@ -50,7 +50,7 @@ Is the request expected to receive JSON data?
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:41](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L41)
+[lib/k8s/apiProxy.ts:62](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/apiProxy.ts#L62)
 
 ___
 
@@ -62,4 +62,4 @@ Number of milliseconds to wait for a response.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:39](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L39)
+[lib/k8s/apiProxy.ts:60](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/apiProxy.ts#L60)

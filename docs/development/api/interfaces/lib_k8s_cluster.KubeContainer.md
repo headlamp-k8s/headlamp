@@ -26,7 +26,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:854](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L854)
+[lib/k8s/cluster.ts:891](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L891)
 
 ___
 
@@ -46,7 +46,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:866](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L866)
+[lib/k8s/cluster.ts:903](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L903)
 
 ___
 
@@ -58,7 +58,7 @@ List of environment variables to set in the container. Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:869](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L869)
+[lib/k8s/cluster.ts:906](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L906)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:931](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L931)
+[lib/k8s/cluster.ts:968](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L968)
 
 ___
 
@@ -83,7 +83,7 @@ default or override container images in workload controllers like Deployments an
 
 #### Defined in
 
-[lib/k8s/cluster.ts:955](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L955)
+[lib/k8s/cluster.ts:992](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L992)
 
 ___
 
@@ -98,7 +98,7 @@ specified, or IfNotPresent otherwise. Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:963](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L963)
+[lib/k8s/cluster.ts:1000](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1000)
 
 ___
 
@@ -113,7 +113,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:973](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L973)
+[lib/k8s/cluster.ts:1010](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1010)
 
 ___
 
@@ -128,7 +128,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:981](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L981)
+[lib/k8s/cluster.ts:1018](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1018)
 
 ___
 
@@ -147,7 +147,7 @@ https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#containerpo
 
 #### Defined in
 
-[lib/k8s/cluster.ts:993](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L993)
+[lib/k8s/cluster.ts:1030](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1030)
 
 ___
 
@@ -164,7 +164,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1016](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1016)
+[lib/k8s/cluster.ts:1053](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1053)
 
 ___
 
@@ -176,7 +176,7 @@ Resources resize policy for the container.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1018](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1018)
+[lib/k8s/cluster.ts:1055](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1055)
 
 ___
 
@@ -205,7 +205,7 @@ https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#resourcereq
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1037](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1037)
+[lib/k8s/cluster.ts:1074](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1074)
 
 ___
 
@@ -220,7 +220,7 @@ Default is false.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1104](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1104)
+[lib/k8s/cluster.ts:1141](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1141)
 
 ___
 
@@ -240,7 +240,7 @@ Default is false
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1116](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1116)
+[lib/k8s/cluster.ts:1153](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1153)
 
 ___
 
@@ -258,7 +258,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1079](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1079)
+[lib/k8s/cluster.ts:1116](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1116)
 
 ___
 
@@ -276,7 +276,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1090](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1090)
+[lib/k8s/cluster.ts:1127](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1127)
 
 ___
 
@@ -291,7 +291,7 @@ Default is false.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1123](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1123)
+[lib/k8s/cluster.ts:1160](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1160)
 
 ___
 
@@ -306,7 +306,7 @@ patch merge key: devicePath
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1130](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1130)
+[lib/k8s/cluster.ts:1167](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1167)
 
 ___
 
@@ -316,7 +316,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1092](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1092)
+[lib/k8s/cluster.ts:1129](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1129)
 
 ___
 
@@ -330,4 +330,4 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1141](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1141)
+[lib/k8s/cluster.ts:1178](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1178)

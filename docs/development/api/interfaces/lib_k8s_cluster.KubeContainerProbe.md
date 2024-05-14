@@ -20,7 +20,7 @@ slug: "lib_k8s_cluster.KubeContainerProbe"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1151](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1151)
+[lib/k8s/cluster.ts:1188](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1188)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1161](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1161)
+[lib/k8s/cluster.ts:1198](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1198)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1145](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1145)
+[lib/k8s/cluster.ts:1182](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1182)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1157](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1157)
+[lib/k8s/cluster.ts:1194](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1194)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1159](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1159)
+[lib/k8s/cluster.ts:1196](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1196)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1160](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1160)
+[lib/k8s/cluster.ts:1197](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1197)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1154](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1154)
+[lib/k8s/cluster.ts:1191](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1191)
 
 ___
 
@@ -105,4 +105,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1158](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L1158)
+[lib/k8s/cluster.ts:1195](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/lib/k8s/cluster.ts#L1195)

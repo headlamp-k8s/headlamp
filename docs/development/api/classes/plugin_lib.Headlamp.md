@@ -17,6 +17,49 @@ order to register themselves.
 
 ## Methods
 
+### getProductName
+
+▸ **getProductName**(): `string`
+
+Returns the name of the product.
+
+#### Returns
+
+`string`
+
+the name of the product.
+
+#### Defined in
+
+[plugin/lib.ts:172](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/plugin/lib.ts#L172)
+
+___
+
+### getVersion
+
+▸ **getVersion**(): `Object`
+
+Returns the version of Headlamp as an object with a VERSION (application version) and
+GIT_VERSION (commit) fields. Like:
+{ VERSION: 'v0.0.0', GIT_VERSION: '0000000000000}
+
+#### Returns
+
+`Object`
+
+the version of Headlamp.
+
+| Name | Type |
+| :------ | :------ |
+| `GIT_VERSION` | `string` |
+| `VERSION` | `string` |
+
+#### Defined in
+
+[plugin/lib.ts:162](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/plugin/lib.ts#L162)
+
+___
+
 ### isRunningAsApp
 
 ▸ `Static` **isRunningAsApp**(): `boolean`
@@ -31,7 +74,7 @@ true if Headlamp is running as a desktop app.
 
 #### Defined in
 
-[plugin/lib.ts:151](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/lib.ts#L151)
+[plugin/lib.ts:151](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/plugin/lib.ts#L151)
 
 ___
 
@@ -68,7 +111,7 @@ Headlamp.registerPlugin("aPluginIdString", myPlugin)
 
 #### Defined in
 
-[plugin/lib.ts:106](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/lib.ts#L106)
+[plugin/lib.ts:106](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/plugin/lib.ts#L106)
 
 ___
 
@@ -91,7 +134,7 @@ If Headlamp is not running as a desktop app, then this method prints an error an
 
 #### Defined in
 
-[plugin/lib.ts:135](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/lib.ts#L135)
+[plugin/lib.ts:135](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/plugin/lib.ts#L135)
 
 ___
 
@@ -120,4 +163,4 @@ a promise which completes to Headlamp's configuration (showing the list of confi
 
 #### Defined in
 
-[plugin/lib.ts:123](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/lib.ts#L123)
+[plugin/lib.ts:123](https://github.com/headlamp-k8s/headlamp/blob/e3b4c5c7/frontend/src/plugin/lib.ts#L123)
