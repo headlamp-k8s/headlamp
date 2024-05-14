@@ -25,7 +25,7 @@ export interface ResourceQuotaProps {
   error: ApiError | null;
   hideColumns?: string[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
-  noSearch?: boolean;
+  noNamespaceFilter?: boolean;
 }
 
 export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
@@ -34,7 +34,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
     error,
     hideColumns = [],
     reflectTableInURL = 'resourcequotas',
-    noSearch,
+    noNamespaceFilter,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
@@ -48,24 +48,20 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
         {
           id: 'requests',
           label: t('translation|Request'),
-          getter: (item: ResourceQuota) => {
+          getValue: item => item.requests.join(', '),
+          render: item => {
             const requests: JSX.Element[] = [];
             item.requests.forEach((request: string) => {
               requests.push(<PaddedChip label={request} variant="outlined" size="small" />);
             });
             return <WrappingBox>{requests}</WrappingBox>;
           },
-          cellProps: {
-            style: {
-              width: 'fit-content',
-              minWidth: '100%',
-            },
-          },
         },
         {
           id: 'limits',
           label: t('translation|Limit'),
-          getter: (item: ResourceQuota) => {
+          getValue: item => item?.limits?.join(', '),
+          render: item => {
             const limits: JSX.Element[] = [];
             item.limits.forEach((limit: string) => {
               limits.push(<PaddedChip label={limit} variant="outlined" size="small" />);
@@ -76,7 +72,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
         'age',
       ]}
       headerProps={{
-        noSearch,
+        noNamespaceFilter,
       }}
       errorMessage={ResourceQuota.getErrorMessage(error)}
       data={resourceQuotas}

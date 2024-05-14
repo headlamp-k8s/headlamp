@@ -12,7 +12,7 @@ import Job from '../../lib/k8s/job';
 import Pod from '../../lib/k8s/pod';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import StatefulSet from '../../lib/k8s/statefulSet';
-import { getReadyReplicas, getTotalReplicas, useFilterFunc } from '../../lib/util';
+import { getReadyReplicas, getTotalReplicas } from '../../lib/util';
 import { PageGrid, ResourceLink } from '../common/Resource';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
@@ -25,7 +25,6 @@ interface WorkloadDict {
 export default function Overview() {
   const [workloadsData, setWorkloadsData] = React.useState<WorkloadDict>({});
   const location = useLocation();
-  const filterFunc = useFilterFunc(['.jsonData.kind']);
   const { t } = useTranslation('glossary');
   const cluster = useCluster();
 
@@ -113,27 +112,21 @@ export default function Overview() {
       </SectionBox>
       <ResourceListView
         title={t('Workloads')}
-        filterFunction={filterFunc}
         columns={[
           'kind',
           {
             id: 'name',
             label: t('translation|Name'),
-            getter: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
-            sort: (w1: Workload, w2: Workload) => {
-              if (w1.metadata.name < w2.metadata.name) {
-                return -1;
-              } else if (w1.metadata.name > w2.metadata.name) {
-                return 1;
-              }
-              return 0;
-            },
+            getValue: item => item.metadata.name,
+            render: item => (
+              <ResourceLink resource={item as KubeObject} state={{ backLink: { ...location } }} />
+            ),
           },
           'namespace',
           {
             id: 'pods',
             label: t('Pods'),
-            getter: item => item && getPods(item),
+            getValue: item => item && getPods(item),
             sort: sortByReplicas,
           },
           'age',

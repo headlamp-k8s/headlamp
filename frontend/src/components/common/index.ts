@@ -48,3 +48,5 @@ export * from './ErrorPage';
 export * from './ConfirmButton';
 export { default as ConfirmButton } from './ConfirmButton';
 export * from './NamespacesAutocomplete';
+export * from './Table/Table';
+export { default as Table } from './Table';

@@ -6,13 +6,10 @@ import { KubeEvent } from '../lib/k8s/event';
 export interface FilterState {
   /** The namespaces to filter on. */
   namespaces: Set<string>;
-  /** The search string to filter on. */
-  search: string;
 }
 
 export const initialState: FilterState = {
   namespaces: new Set(),
-  search: '',
 };
 
 /**
@@ -27,6 +24,7 @@ export const initialState: FilterState = {
 export function filterResource(
   item: KubeObjectInterface | KubeEvent,
   filter: FilterState,
+  search?: string,
   matchCriteria?: string[]
 ) {
   let matches: boolean = true;
@@ -39,8 +37,8 @@ export function filterResource(
     return false;
   }
 
-  if (filter.search) {
-    const filterString = filter.search.toLowerCase();
+  if (search) {
+    const filterString = search.toLowerCase();
     const usedMatchCriteria = [
       item.metadata.uid.toLowerCase(),
       item.metadata.namespace ? item.metadata.namespace.toLowerCase() : '',
@@ -54,7 +52,7 @@ export function filterResource(
       return true;
     }
 
-    matches = filterGeneric(item, filter, matchCriteria);
+    matches = filterGeneric(item, search, matchCriteria);
   }
 
   return matches;
@@ -72,14 +70,14 @@ export function filterResource(
  */
 export function filterGeneric<T extends { [key: string]: any } = { [key: string]: any }>(
   item: T,
-  filter: FilterState,
+  search?: string,
   matchCriteria?: string[]
 ) {
-  if (!filter.search) {
+  if (!search) {
     return true;
   }
 
-  const filterString = filter.search.toLowerCase();
+  const filterString = search.toLowerCase();
   const usedMatchCriteria: string[] = [];
 
   // Use the custom matchCriteria if any
@@ -125,21 +123,14 @@ const filterSlice = createSlice({
       state.namespaces = new Set(action.payload);
     },
     /**
-     * Sets the search filter with a string.
-     */
-    setSearchFilter(state, action: PayloadAction<string>) {
-      state.search = action.payload;
-    },
-    /**
      * Resets the filter state.
      */
     resetFilter(state) {
       state.namespaces = new Set();
-      state.search = '';
     },
   },
 });
 
-export const { setNamespaceFilter, setSearchFilter, resetFilter } = filterSlice.actions;
+export const { setNamespaceFilter, resetFilter } = filterSlice.actions;
 
 export default filterSlice.reducer;

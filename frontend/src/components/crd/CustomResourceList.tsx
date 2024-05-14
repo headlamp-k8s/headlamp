@@ -6,11 +6,11 @@ import { useParams } from 'react-router-dom';
 import { KubeObject } from '../../lib/k8s/cluster';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { localeDate } from '../../lib/util';
-import { Link, Loader, PageGrid, SectionHeader, SimpleTableGetterColumn } from '../common';
+import { Link, Loader, PageGrid, SectionHeader } from '../common';
 import BackLink from '../common/BackLink';
 import Empty from '../common/EmptyContent';
 import ResourceListView from '../common/Resource/ResourceListView';
-import { ResourceTableProps } from '../common/Resource/ResourceTable';
+import { ResourceTableColumn, ResourceTableProps } from '../common/Resource/ResourceTable';
 
 export default function CustomResourceList() {
   const { t } = useTranslation(['glossary', 'translation']);
@@ -124,7 +124,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
       crd.jsonData.spec.versions.find(
         (version: KubeCRD['spec']['versions'][number]) => version.name === currentVersion
       )?.additionalPrinterColumns || [];
-    const cols: SimpleTableGetterColumn[] = [];
+    const cols: ResourceTableColumn<KubeCRD>[] = [];
     for (let i = 0; i < colsFromSpec.length; i++) {
       const idx = i;
       const colSpec = colsFromSpec[idx];
@@ -135,7 +135,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
 
       cols.push({
         label: colSpec.name,
-        getter: resource => {
+        getValue: resource => {
           let value = getValueWithJSONPath(resource, colSpec.jsonPath);
           if (colSpec.type === 'date') {
             value = localeDate(new Date(value));
@@ -150,13 +150,11 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
   }, [crd, apiGroup]);
 
   const cols = React.useMemo(() => {
-    const colsToDisplay: ResourceTableProps['columns'] = [
+    const colsToDisplay: ResourceTableProps<KubeCRD>['columns'] = [
       {
         label: t('translation|Name'),
-        getter: (resource: KubeObject) => <CustomResourceLink resource={resource} crd={crd} />,
-        sort: (c1: KubeObject, c2: KubeObject) => {
-          return c1.metadata.name.localeCompare(c2.metadata.name);
-        },
+        getValue: resource => resource.metadata.name,
+        render: (resource: KubeObject) => <CustomResourceLink resource={resource} crd={crd} />,
       },
       ...additionalPrinterCols,
       'age',

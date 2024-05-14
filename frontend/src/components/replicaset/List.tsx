@@ -17,35 +17,36 @@ export default function ReplicaSetList() {
         {
           id: 'generation',
           label: t('Generation'),
-          getter: replicaSet => replicaSet?.status?.observedGeneration,
-          sort: true,
+          getValue: replicaSet => replicaSet?.status?.observedGeneration,
           show: false,
         },
         {
           id: 'currentReplicas',
           label: t('translation|Current', { context: 'replicas' }),
-          getter: replicaSet => replicaSet?.status?.replicas || 0,
+          getValue: replicaSet => replicaSet?.status?.replicas || 0,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'desiredReplicas',
           label: t('translation|Desired', { context: 'replicas' }),
-          getter: replicaSet => replicaSet?.spec?.replicas || 0,
+          getValue: replicaSet => replicaSet?.spec?.replicas || 0,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'readyReplicas',
           label: t('translation|Ready'),
-          getter: replicaSet => replicaSet?.status?.readyReplicas || 0,
+          getValue: replicaSet => replicaSet?.status?.readyReplicas || 0,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'containers',
           label: t('Containers'),
-          getter: replicaSet => {
+          getValue: replicaSet =>
+            replicaSet
+              .getContainers()
+              .map(c => c.name)
+              .join(''),
+          render: replicaSet => {
             const containerText = replicaSet
               .getContainers()
               .map((c: KubeContainer) => c.name)
@@ -56,22 +57,16 @@ export default function ReplicaSetList() {
               </LightTooltip>
             );
           },
-          sort: (rs1, rs2) => {
-            const containers1 = rs1
-              .getContainers()
-              .map((c: KubeContainer) => c.name)
-              .join('');
-            const containers2 = rs2
-              .getContainers()
-              .map((c: KubeContainer) => c.name)
-              .join('');
-            return containers1.localeCompare(containers2);
-          },
         },
         {
           id: 'images',
           label: t('Images'),
-          getter: replicaSet => {
+          getValue: replicaSet =>
+            replicaSet
+              .getContainers()
+              .map((c: KubeContainer) => c.image)
+              .join(''),
+          render: replicaSet => {
             const imageText = replicaSet
               .getContainers()
               .map((c: KubeContainer) => c.image)
@@ -82,22 +77,12 @@ export default function ReplicaSetList() {
               </LightTooltip>
             );
           },
-          sort: (rs1, rs2) => {
-            const images1 = rs1
-              .getContainers()
-              .map((c: KubeContainer) => c.image)
-              .join('');
-            const images2 = rs2
-              .getContainers()
-              .map((c: KubeContainer) => c.image)
-              .join('');
-            return images1.localeCompare(images2);
-          },
         },
         {
           id: 'selector',
           label: t('Selector'),
-          getter: replicaSet => {
+          getValue: replicaSet => replicaSet.getMatchLabelsList().join(''),
+          render: replicaSet => {
             const selectorText = replicaSet.getMatchLabelsList().join('\n');
             return (
               selectorText && (
@@ -107,7 +92,6 @@ export default function ReplicaSetList() {
               )
             );
           },
-          sort: true,
         },
         'age',
       ]}

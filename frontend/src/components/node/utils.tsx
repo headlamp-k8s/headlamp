@@ -24,7 +24,7 @@ export function NodeTaintsLabel(props: { node: Node }) {
   const limits: JSX.Element[] = [];
   node.spec.taints.forEach(taint => {
     limits.push(
-      <Tooltip title={`${taint.key}:${taint.effect}`}>
+      <Tooltip title={`${taint.key}:${taint.effect}`} key={taint.key}>
         <PaddedChip label={`${taint.key}:${taint.effect}`} variant="outlined" size="small" />
       </Tooltip>
     );

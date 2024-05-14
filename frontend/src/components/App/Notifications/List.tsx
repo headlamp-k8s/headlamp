@@ -5,9 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { DateLabel, Link, SectionBox, SectionFilterHeader, SimpleTable } from '../../common';
+import { DateLabel, Link, SectionBox, SectionFilterHeader, Table } from '../../common';
 import Empty from '../../common/EmptyContent';
-import { Notification, setNotifications, updateNotifications } from './notificationsSlice';
+import {
+  Notification,
+  NotificationIface,
+  setNotifications,
+  updateNotifications,
+} from './notificationsSlice';
 
 export default function NotificationList() {
   const notifications = useTypedSelector(state => state.notifications.notifications);
@@ -15,7 +20,6 @@ export default function NotificationList() {
   const { t } = useTranslation(['glossary', 'translation']);
   const dispatch = useDispatch();
   const theme = useTheme();
-  const search = useTypedSelector(state => state.filter.search);
   const history = useHistory();
 
   const allNotificationsAreDeleted = useMemo(() => {
@@ -26,7 +30,7 @@ export default function NotificationList() {
     return !!notifications.find(notification => !notification.deleted && !notification.seen);
   }, [notifications]);
 
-  function notificationSeenUnseenHandler(event: any, notification?: Notification) {
+  function notificationSeenUnseenHandler(event: any, notification?: NotificationIface) {
     if (!notification) {
       return;
     }
@@ -51,7 +55,7 @@ export default function NotificationList() {
     dispatch(setNotifications(massagedNotifications));
   }
 
-  function notificationItemClickHandler(notification: Notification) {
+  function notificationItemClickHandler(notification: NotificationIface) {
     notification.url && history.push(notification.url);
     notification.seen = true;
     dispatch(updateNotifications(notification));
@@ -104,15 +108,13 @@ export default function NotificationList() {
             maxWidth: '100%',
           }}
         >
-          <SimpleTable
-            filterFunction={(notification: Notification) =>
-              (notification?.message?.toLowerCase() || '').includes(search.toLowerCase())
-            }
+          <Table
             columns={[
               {
-                label: t('translation|Message'),
+                header: t('translation|Message'),
                 gridTemplate: 'auto',
-                getter: (notification: Notification) => (
+                accessorKey: 'message',
+                Cell: ({ row: { original: notification } }) => (
                   <Box>
                     <Tooltip
                       title={notification.message || t('translation|No message')}
@@ -133,9 +135,10 @@ export default function NotificationList() {
                 ),
               },
               {
-                label: t('glossary|Cluster'),
+                header: t('glossary|Cluster'),
                 gridTemplate: 'min-content',
-                getter: (notification: Notification) => (
+                accessorKey: 'cluster',
+                Cell: ({ row: { original: notification } }) => (
                   <Box display={'flex'} alignItems="center">
                     {Object.entries(clusters || {}).length > 1 && notification.cluster && (
                       <Box
@@ -155,14 +158,18 @@ export default function NotificationList() {
                 ),
               },
               {
-                label: t('translation|Date'),
+                header: t('translation|Date'),
                 gridTemplate: 'min-content',
-                getter: (notification: Notification) => <DateLabel date={notification.date} />,
+                accessorKey: 'date',
+                Cell: ({ row: { original: notification } }) => (
+                  <DateLabel date={notification.date} />
+                ),
               },
               {
-                label: t('translation|Visible'),
+                header: t('translation|Visible'),
                 gridTemplate: 'min-content',
-                getter: (notification: Notification) =>
+                accessorKey: 'seen',
+                Cell: ({ row: { original: notification } }) =>
                   !notification.seen && (
                     <Tooltip title={t(`translation|Mark as read`)}>
                       <IconButton
@@ -182,7 +189,6 @@ export default function NotificationList() {
               },
             ]}
             data={notifications}
-            noTableHeader
           />
         </Box>
       )}

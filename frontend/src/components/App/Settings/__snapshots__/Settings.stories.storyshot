@@ -3,12 +3,12 @@
 exports[`Storyshots Settings General 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary css-w7fpvq-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
     <span
-      class="MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
+      class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
     >
       <span />
     </span>
@@ -87,7 +87,7 @@ exports[`Storyshots Settings General 1`] = `
             class="MuiFormControl-root css-k2e4wk-MuiFormControl-root"
           >
             <div
-              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-zghmfh-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
             >
               <div
                 aria-controls="under-test"
@@ -136,7 +136,7 @@ exports[`Storyshots Settings General 1`] = `
           >
             <button
               aria-label="light theme"
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButtonGroup-firstButton css-put5n8-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButtonGroup-firstButton css-put5n8-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -147,7 +147,7 @@ exports[`Storyshots Settings General 1`] = `
             </button>
             <button
               aria-label="dark theme"
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButtonGroup-lastButton css-j5ggku-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlinedPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeLarge MuiButton-outlinedSizeLarge MuiButton-colorPrimary MuiButtonGroup-lastButton css-j5ggku-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -170,11 +170,11 @@ exports[`Storyshots Settings General 1`] = `
             class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
           >
             <div
-              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-zghmfh-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
               style="width: 100px;"
             >
               <div
-                aria-controls="mui-50"
+                aria-controls="mui-test-id"
                 aria-expanded="false"
                 aria-haspopup="listbox"
                 class="MuiSelect-select MuiSelect-standard MuiInputBase-input MuiInput-input css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input"
@@ -216,7 +216,7 @@ exports[`Storyshots Settings General 1`] = `
             class="MuiBox-root css-10rqxfs"
           >
             <div
-              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
             >
               <div
                 class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
@@ -224,13 +224,13 @@ exports[`Storyshots Settings General 1`] = `
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-standard css-zh08sj-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for="cluster-selector-autocomplete"
-                  id="cluster-selector-autocomplete-label"
+                  for="mui-test-id"
+                  id="mui-test-id-label"
                 >
                   Timezone
                 </label>
                 <div
-                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-15ywaty-MuiInputBase-root-MuiInput-root"
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                 >
                   <input
                     aria-autocomplete="both"
@@ -239,14 +239,14 @@ exports[`Storyshots Settings General 1`] = `
                     autocapitalize="none"
                     autocomplete="off"
                     class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
-                    id="cluster-selector-autocomplete"
+                    id="mui-test-id"
                     role="combobox"
                     spellcheck="false"
                     type="text"
                     value=""
                   />
                   <div
-                    class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+                    class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
                   >
                     <button
                       aria-label="Open"

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
-import RoleBinding, { KubeRoleBinding } from '../../lib/k8s/roleBinding';
-import { useErrorState, useFilterFunc } from '../../lib/util';
+import RoleBinding from '../../lib/k8s/roleBinding';
+import { useErrorState } from '../../lib/util';
 import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -35,7 +35,6 @@ export default function RoleBindingList() {
   const [clusterRoleBindingError, onClusterRoleBindingError] =
     useErrorState(setupClusterRoleBindings);
   const { t } = useTranslation(['glossary', 'translation']);
-  const filterFunc = useFilterFunc(['.jsonData.kind']);
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
     setBindings(currentBindings => ({ ...currentBindings, [kind]: newBindings }));
@@ -74,22 +73,24 @@ export default function RoleBindingList() {
     return null;
   }
 
-  function sortBindings(kind: string, r1: RoleBinding, r2: RoleBinding) {
-    const groups1 = r1?.subjects
-      ?.filter(subject => subject.kind === kind)
-      .map(subject => subject.name);
-    const groups2 = r2?.subjects
-      ?.filter(subject => subject.kind === kind)
-      .map(subject => subject.name);
-    if (groups1 && groups2) {
-      return groups1.join('').localeCompare(groups2.join(''));
-    } else if (groups1) {
-      return 1;
-    } else if (groups2) {
-      return -1;
-    } else {
-      return 0;
-    }
+  function sortBindings(kind: string) {
+    return function (r1: RoleBinding, r2: RoleBinding) {
+      const groups1 = r1?.subjects
+        ?.filter(subject => subject.kind === kind)
+        .map(subject => subject.name);
+      const groups2 = r2?.subjects
+        ?.filter(subject => subject.kind === kind)
+        .map(subject => subject.name);
+      if (groups1 && groups2) {
+        return groups1.join('').localeCompare(groups2.join(''));
+      } else if (groups1) {
+        return 1;
+      } else if (groups2) {
+        return -1;
+      } else {
+        return 0;
+      }
+    };
   }
 
   RoleBinding.useApiList(setupRoleBindings, onRoleBindingError);
@@ -98,7 +99,6 @@ export default function RoleBindingList() {
   return (
     <ResourceListView
       title={t('glossary|Role Bindings')}
-      filterFunction={filterFunc}
       errorMessage={getErrorMessage()}
       columns={[
         'type',
@@ -106,7 +106,8 @@ export default function RoleBindingList() {
         {
           id: 'namespace',
           label: t('glossary|Namespace'),
-          getter: item =>
+          getValue: item => item.getNamespace() ?? t('translation|All namespaces'),
+          render: item =>
             item.getNamespace() ? (
               <Link routeName="namespace" params={{ name: item.getNamespace() }}>
                 {item.getNamespace()}
@@ -114,18 +115,22 @@ export default function RoleBindingList() {
             ) : (
               t('translation|All namespaces')
             ),
-          sort: true,
         },
         {
           id: 'role',
           label: t('glossary|Role'),
-          getter: item => <RoleLink role={item.roleRef.name} namespace={item.getNamespace()} />,
-          sort: true,
+          getValue: item => item.roleRef.name,
+          render: item => <RoleLink role={item.roleRef.name} namespace={item.getNamespace()} />,
         },
         {
           id: 'users',
           label: t('translation|Users'),
-          getter: (item: KubeRoleBinding) => (
+          getValue: item =>
+            item?.subjects
+              ?.filter(s => s.kind === 'User')
+              ?.map(s => s.name)
+              ?.join(' '),
+          render: item => (
             <LabelListItem
               labels={
                 item?.subjects
@@ -134,12 +139,17 @@ export default function RoleBindingList() {
               }
             />
           ),
-          sort: (r1, r2) => sortBindings('User', r1, r2),
+          sort: sortBindings('User'),
         },
         {
           id: 'groups',
           label: t('glossary|Groups'),
-          getter: (item: KubeRoleBinding) => (
+          getValue: item =>
+            item?.subjects
+              ?.filter(subject => subject.kind === 'Group')
+              ?.map(subject => subject.name)
+              ?.join(' '),
+          render: item => (
             <LabelListItem
               labels={
                 item?.subjects
@@ -148,12 +158,17 @@ export default function RoleBindingList() {
               }
             />
           ),
-          sort: (r1, r2) => sortBindings('Group', r1, r2),
+          sort: sortBindings('Group'),
         },
         {
           id: 'serviceaccounts',
           label: t('glossary|Service Accounts'),
-          getter: (item: KubeRoleBinding) => (
+          getValue: item =>
+            item?.subjects
+              ?.filter(subject => subject.kind === 'ServiceAccount')
+              ?.map(subject => subject.name)
+              ?.join(' '),
+          render: item => (
             <LabelListItem
               labels={
                 item?.subjects
@@ -162,7 +177,7 @@ export default function RoleBindingList() {
               }
             />
           ),
-          sort: (r1, r2) => sortBindings('ServiceAccount', r1, r2),
+          sort: sortBindings('Service Accounts'),
         },
         'age',
       ]}

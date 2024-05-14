@@ -14,7 +14,7 @@ export default function MutatingWebhookConfigurationList() {
         {
           id: 'webhooks',
           label: t('Webhooks'),
-          getter: mutatingWebhookConfig => mutatingWebhookConfig.webhooks?.length || 0,
+          getValue: mutatingWebhookConfig => mutatingWebhookConfig.webhooks?.length || 0,
         },
         'age',
       ]}

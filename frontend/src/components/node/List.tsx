@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Node from '../../lib/k8s/node';
+import { getResourceMetrics } from '../../lib/util';
 import { HoverInfoLabel } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { UsageBarChart } from './Charts';
@@ -24,10 +25,11 @@ export default function NodeList() {
         {
           id: 'cpu',
           label: t('CPU'),
-          cellProps: {
-            sx: { width: '20%' },
+          getValue: node => {
+            const [used] = getResourceMetrics(node, nodeMetrics || [], 'cpu');
+            return used;
           },
-          getter: node => (
+          render: node => (
             <UsageBarChart
               node={node}
               nodeMetrics={nodeMetrics}
@@ -39,10 +41,11 @@ export default function NodeList() {
         {
           id: 'memory',
           label: t('Memory'),
-          cellProps: {
-            sx: { width: '20%' },
+          getValue: node => {
+            const [used] = getResourceMetrics(node, nodeMetrics || [], 'memory');
+            return used;
           },
-          getter: node => (
+          render: node => (
             <UsageBarChart
               node={node}
               nodeMetrics={nodeMetrics}
@@ -54,19 +57,27 @@ export default function NodeList() {
         {
           id: 'ready',
           label: t('translation|Ready'),
-          gridTemplate: 'minmax(100px, .3fr)',
-          getter: node => <NodeReadyLabel node={node} />,
+          gridTemplate: 'minmax(150px, .3fr)',
+          getValue: node => {
+            const isReady = !!node.status.conditions.find(
+              condition => condition.type === 'Ready' && condition.status === 'True'
+            );
+            return isReady ? t('translation|Yes') : t('translation|No');
+          },
+          render: node => <NodeReadyLabel node={node} />,
         },
         {
           id: 'taints',
           label: t('translation|Taints'),
-          getter: (item: Node) => <NodeTaintsLabel node={item} />,
+          getValue: node =>
+            node.spec?.taints?.map(taint => `${taint.key}:${taint.effect}`)?.join(', '),
+          render: (item: Node) => <NodeTaintsLabel node={item} />,
         },
         {
           id: 'roles',
           label: t('Roles'),
-          gridTemplate: 'minmax(100px, .5fr)',
-          getter: node => {
+          gridTemplate: 'minmax(150px, .5fr)',
+          getValue: node => {
             return Object.keys(node.metadata.labels)
               .filter((t: String) => t.startsWith('node-role.kubernetes.io/'))
               .map(t => t.replace('node-role.kubernetes.io/', ''))
@@ -76,24 +87,25 @@ export default function NodeList() {
         {
           id: 'internalIP',
           label: t('translation|Internal IP'),
-          getter: node => node.getInternalIP(),
+          getValue: node => node.getInternalIP(),
         },
         {
           id: 'externalIP',
           label: t('External IP'),
-          getter: node => node.getExternalIP(),
+          getValue: node => node.getExternalIP(),
         },
         {
           id: 'version',
           label: t('translation|Version'),
-          gridTemplate: 'minmax(100px, .5fr)',
-          getter: node => node.status.nodeInfo.kubeletVersion,
+          gridTemplate: 'minmax(150px, .5fr)',
+          getValue: node => node.status.nodeInfo.kubeletVersion,
         },
         {
           id: 'software',
           label: t('translation|Software'),
           gridTemplate: 'minmax(200px, 1.5fr)',
-          getter: node => {
+          getValue: node => node.status.nodeInfo.operatingSystem,
+          render: node => {
             let osIcon = 'mdi:desktop-classic';
             if (node.status.nodeInfo.operatingSystem === 'linux') {
               osIcon = 'mdi:linux';

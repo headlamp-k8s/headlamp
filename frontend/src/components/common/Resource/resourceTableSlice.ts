@@ -17,10 +17,10 @@ export type TableColumnsProcessor = {
    *
    * @returns The new table columns.
    */
-  processor: (args: {
+  processor: <T>(args: {
     id: string;
-    columns: ResourceTableProps['columns'];
-  }) => ResourceTableProps['columns'];
+    columns: ResourceTableProps<T>['columns'];
+  }) => ResourceTableProps<T>['columns'];
 };
 
 const initialState: ResourceTableState = {

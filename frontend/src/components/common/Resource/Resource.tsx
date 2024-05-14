@@ -867,6 +867,9 @@ export function ContainerInfo(props: ContainerInfoProps) {
 export interface OwnedPodsSectionProps {
   resource: KubeObjectInterface;
   hideColumns?: PodListProps['hideColumns'];
+  /**
+   * Hides the namespace selector
+   */
   noSearch?: boolean;
 }
 
@@ -887,14 +890,14 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
 
   const [pods, error] = Pod.useList(queryData);
   const onlyOneNamespace = !!resource.metadata.namespace || resource.kind === 'Namespace';
+  const hideNamespaceFilter = onlyOneNamespace || noSearch;
 
   return (
     <PodListRenderer
       hideColumns={hideColumns || onlyOneNamespace ? ['namespace'] : undefined}
       pods={pods}
       error={error}
-      noNamespaceFilter={onlyOneNamespace}
-      noSearch={noSearch}
+      noNamespaceFilter={hideNamespaceFilter}
     />
   );
 }

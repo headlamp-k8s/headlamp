@@ -9,7 +9,7 @@ export interface LimitRangeProps {
   error: ApiError | null;
   hideColumns?: string[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
-  noSearch?: boolean;
+  noNamespaceFilter?: boolean;
 }
 
 export function LimitRangeRenderer(props: LimitRangeProps) {
@@ -18,7 +18,7 @@ export function LimitRangeRenderer(props: LimitRangeProps) {
     error,
     hideColumns = [],
     reflectTableInURL = 'limitranges',
-    noSearch,
+    noNamespaceFilter,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
@@ -28,7 +28,7 @@ export function LimitRangeRenderer(props: LimitRangeProps) {
       columns={['name', 'namespace', 'age']}
       hideColumns={hideColumns}
       headerProps={{
-        noSearch,
+        noNamespaceFilter,
       }}
       errorMessage={LimitRange.getErrorMessage(error)}
       data={limitRanges}

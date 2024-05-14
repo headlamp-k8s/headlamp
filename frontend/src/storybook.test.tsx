@@ -16,6 +16,8 @@ class OurConverter extends Stories2SnapsConverter {
   }
 }
 
+jest.mock('@mui/utils/useId', () => jest.fn().mockReturnValue('mui-test-id'));
+
 initStoryshots({
   stories2snapsConverter: new OurConverter(),
   asyncJest: true,

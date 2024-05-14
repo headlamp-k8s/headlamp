@@ -17,26 +17,22 @@ export default function ClassList() {
         {
           id: 'provisioner',
           label: t('Provisioner'),
-          getter: storageClass => storageClass.provisioner,
-          sort: true,
+          getValue: storageClass => storageClass.provisioner,
         },
         {
           id: 'reclaimPolicy',
           label: t('Reclaim Policy'),
-          getter: storageClass => storageClass.reclaimPolicy,
-          sort: true,
+          getValue: storageClass => storageClass.reclaimPolicy,
         },
         {
           id: 'volumeBindingMode',
           label: t('Volume Binding Mode'),
-          getter: storageClass => storageClass.volumeBindingMode,
-          sort: true,
+          getValue: storageClass => storageClass.volumeBindingMode,
         },
         {
           id: 'allowVolumeExpansion',
           label: t('Allow Volume Expansion'),
-          getter: storageClass => storageClass.allowVolumeExpansion,
-          sort: true,
+          getValue: storageClass => storageClass.allowVolumeExpansion,
         },
         'age',
       ]}

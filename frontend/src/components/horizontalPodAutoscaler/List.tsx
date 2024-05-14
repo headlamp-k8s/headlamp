@@ -32,7 +32,8 @@ export default function HpaList() {
         {
           id: 'reference',
           label: t('translation|Reference'),
-          getter: item => (
+          getValue: item => item.referenceObject?.metadata.name,
+          render: item => (
             <Link kubeObject={item.referenceObject}>
               {item.referenceObject?.kind}/{item.referenceObject?.metadata.name}
             </Link>
@@ -41,7 +42,12 @@ export default function HpaList() {
         {
           id: 'targets',
           label: t('translation|Targets'),
-          getter: (hpa: HPA) => {
+          getValue: item =>
+            item
+              .metrics(t)
+              .map(it => it.shortValue)
+              .join(', '),
+          render: (hpa: HPA) => {
             const value: JSX.Element[] = [];
             const metrics = hpa.metrics(t);
             if (metrics.length) {
@@ -61,30 +67,21 @@ export default function HpaList() {
             }
             return <RootDiv>{value}</RootDiv>;
           },
-          cellProps: {
-            style: {
-              width: 'fit-content',
-              minWidth: '100%',
-            },
-          },
         },
         {
           id: 'minReplicas',
           label: t('translation|MinReplicas'),
-          getter: item => item.spec.minReplicas,
-          sort: true,
+          getValue: item => item.spec.minReplicas,
         },
         {
           id: 'maxReplicas',
           label: t('translation|MaxReplicas'),
-          getter: item => item.spec.maxReplicas,
-          sort: true,
+          getValue: item => item.spec.maxReplicas,
         },
         {
           id: 'currentReplicas',
           label: t('glossary|Replicas'),
-          getter: item => item.status.currentReplicas,
-          sort: true,
+          getValue: item => item.status.currentReplicas,
         },
         'age',
       ]}

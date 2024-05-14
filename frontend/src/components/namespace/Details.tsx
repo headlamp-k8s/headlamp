@@ -48,7 +48,7 @@ export default function NamespaceDetails() {
           {
             id: 'headlamp.namespace-owned-pods',
             section: (
-              <OwnedPodsSection noSearch hideColumns={['namespace']} resource={item?.jsonData} />
+              <OwnedPodsSection hideColumns={['namespace']} resource={item?.jsonData} noSearch />
             ),
           },
           {
@@ -77,7 +77,7 @@ export function NamespacedLimitRangesSection(props: NamespacedLimitRangesSection
       hideColumns={['namespace']}
       limitRanges={limitRanges}
       error={error}
-      noSearch
+      noNamespaceFilter
     />
   );
 }
@@ -98,7 +98,7 @@ export function NamespacedResourceQuotasSection(props: NamespacedResourceQuotasS
       hideColumns={['namespace']}
       resourceQuotas={resourceQuotas}
       error={error}
-      noSearch
+      noNamespaceFilter
     />
   );
 }

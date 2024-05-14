@@ -2,6 +2,7 @@ import { Switch, SwitchProps, Typography, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import { MRT_Row } from 'material-react-table';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -9,7 +10,7 @@ import helpers from '../../../helpers';
 import { useFilterFunc } from '../../../lib/util';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { Link as HeadlampLink, SectionBox, SimpleTable } from '../../common';
+import { Link as HeadlampLink, SectionBox, Table } from '../../common';
 import SectionFilterHeader from '../../common/SectionFilterHeader';
 
 /**
@@ -164,11 +165,19 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
       <SectionBox
         title={<SectionFilterHeader title={t('translation|Plugins')} noNamespaceFilter />}
       >
-        <SimpleTable
+        <Table
           columns={[
             {
-              label: t('translation|Name'),
-              getter: (plugin: PluginInfo) => {
+              header: t('translation|Name'),
+              accessorKey: 'name',
+              muiTableBodyCellProps: {
+                sx: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  width: 'unset',
+                },
+              },
+              Cell: ({ row: { original: plugin } }: { row: MRT_Row<PluginInfo> }) => {
                 return (
                   <>
                     <Typography variant="subtitle1">
@@ -184,16 +193,14 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                   </>
                 );
               },
-              sort: (a: PluginInfo, b: PluginInfo) => a.name.localeCompare(b.name),
             },
             {
-              label: t('translation|Description'),
-              datum: 'description',
-              sort: true,
+              header: t('translation|Description'),
+              accessorKey: 'description',
             },
             {
-              label: t('translation|Origin'),
-              getter: (plugin: PluginInfo) => {
+              header: t('translation|Origin'),
+              Cell: ({ row: { original: plugin } }: { row: MRT_Row<PluginInfo> }) => {
                 const url = plugin?.homepage || plugin?.repository?.url;
                 return plugin?.origin ? (
                   url ? (
@@ -205,22 +212,20 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                   t('translation|Unknown')
                 );
               },
-              sort: true,
             },
             // TODO: Fetch the plugin status from the plugin settings store
             {
-              label: t('translation|Status'),
-              getter: (plugin: PluginInfo) => {
+              header: t('translation|Status'),
+              accessorFn: (plugin: PluginInfo) => {
                 if (plugin.isCompatible === false) {
                   return t('translation|Incompatible');
                 }
                 return plugin.isEnabled ? t('translation|Enabled') : t('translation|Disabled');
               },
-              sort: true,
             },
             {
-              label: t('translation|Enable'),
-              getter: (plugin: PluginInfo) => {
+              header: t('translation|Enable'),
+              Cell: ({ row: { original: plugin } }: { row: MRT_Row<PluginInfo> }) => {
                 if (!plugin.isCompatible || !helpers.isElectron()) {
                   return null;
                 }
@@ -239,7 +244,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             },
           ]
             // remove the enable column if we're not in app mode
-            .filter(el => !(el.label === t('translation|Enable') && !helpers.isElectron()))}
+            .filter(el => !(el.header === t('translation|Enable') && !helpers.isElectron()))}
           data={pluginChanges}
           filterFunction={useFilterFunc<PluginInfo>(['.name'])}
         />

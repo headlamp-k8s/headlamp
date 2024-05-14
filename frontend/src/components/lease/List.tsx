@@ -14,7 +14,7 @@ export function LeaseList() {
         {
           id: 'holder',
           label: t('translation|Holder'),
-          getter: item => item?.spec.holderIdentity,
+          getValue: item => item?.spec.holderIdentity,
         },
         'age',
       ]}

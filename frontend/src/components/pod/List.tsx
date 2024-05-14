@@ -71,18 +71,10 @@ export interface PodListProps {
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
-  noSearch?: boolean;
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const {
-    pods,
-    error,
-    hideColumns = [],
-    reflectTableInURL = 'pods',
-    noNamespaceFilter,
-    noSearch,
-  } = props;
+  const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (
@@ -90,7 +82,6 @@ export function PodListRenderer(props: PodListProps) {
       title={t('Pods')}
       headerProps={{
         noNamespaceFilter,
-        noSearch,
       }}
       hideColumns={hideColumns}
       errorMessage={Pod.getErrorMessage(error)}
@@ -99,7 +90,7 @@ export function PodListRenderer(props: PodListProps) {
         'namespace',
         {
           label: t('Restarts'),
-          getter: (pod: Pod) => {
+          getValue: (pod: Pod) => {
             const { restarts, lastRestartDate } = pod.getDetailedStatus();
             return lastRestartDate.getTime() !== 0
               ? t('{{ restarts }} ({{ abbrevTime }} ago)', {
@@ -108,12 +99,11 @@ export function PodListRenderer(props: PodListProps) {
                 })
               : restarts;
           },
-          sort: true,
         },
         {
           id: 'ready',
           label: t('translation|Ready'),
-          getter: (pod: Pod) => {
+          getValue: (pod: Pod) => {
             const podRow = pod.getDetailedStatus();
             return `${podRow.readyContainers}/${podRow.totalContainers}`;
           },
@@ -121,51 +111,55 @@ export function PodListRenderer(props: PodListProps) {
         {
           id: 'status',
           label: t('translation|Status'),
-          getter: makePodStatusLabel,
-          sort: (pod: Pod) => {
-            const podRow = pod.getDetailedStatus();
-            return podRow.reason;
-          },
+          getValue: pod => pod.getDetailedStatus().reason,
+          render: makePodStatusLabel,
         },
         {
           id: 'ip',
           label: t('glossary|IP'),
-          getter: (pod: Pod) => pod.status.podIP,
-          sort: true,
+          getValue: (pod: Pod) => String(pod.status.podIP),
         },
         {
           id: 'node',
           label: t('glossary|Node'),
-          getter: (pod: Pod) =>
+          getValue: pod => pod?.spec?.nodeName,
+          render: pod =>
             pod?.spec?.nodeName && (
               <Link routeName="node" params={{ name: pod.spec.nodeName }} tooltip>
                 {pod.spec.nodeName}
               </Link>
             ),
-          sort: (p1: Pod, p2: Pod) => {
-            return p1?.spec?.nodeName?.localeCompare(p2?.spec?.nodeName || '') || 0;
-          },
         },
         {
           id: 'nominatedNode',
           label: t('glossary|Nominated Node'),
-          getter: (pod: Pod) =>
+          getValue: pod => pod?.status?.nominatedNodeName,
+          render: pod =>
             !!pod?.status?.nominatedNodeName && (
               <Link routeName="node" params={{ name: pod?.status?.nominatedNodeName }} tooltip>
                 {pod?.status?.nominatedNodeName}
               </Link>
             ),
-          sort: (p1: Pod, p2: Pod) => {
-            return (
-              p1?.status?.nominatedNodeName?.localeCompare(p2?.status?.nominatedNodeName || '') || 0
-            );
-          },
           show: false,
         },
         {
           id: 'readinessGates',
           label: t('glossary|Readiness Gates'),
-          getter: (pod: Pod) => {
+          getValue: pod => {
+            const readinessGatesStatus = getReadinessGatesStatus(pod);
+            const total = Object.keys(readinessGatesStatus).length;
+
+            if (total === 0) {
+              return '';
+            }
+
+            const statusTrueCount = Object.values(readinessGatesStatus).filter(
+              status => status === 'True'
+            ).length;
+
+            return statusTrueCount;
+          },
+          render: (pod: Pod) => {
             const readinessGatesStatus = getReadinessGatesStatus(pod);
             const total = Object.keys(readinessGatesStatus).length;
 

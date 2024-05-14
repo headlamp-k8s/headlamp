@@ -46,25 +46,31 @@ export default function IngressList() {
         {
           id: 'class',
           label: t('Class Name'),
-          getter: (ingress: Ingress) =>
+          getValue: ingress => ingress.spec?.ingressClassName,
+          render: ingress =>
             ingress.spec?.ingressClassName ? (
               <Link routeName="ingressclass" params={{ name: ingress.spec?.ingressClassName }}>
                 {ingress.spec?.ingressClassName}
               </Link>
             ) : null,
-          sort: true,
         },
         {
           id: 'hosts',
           label: t('Hosts'),
-          getter: (ingress: Ingress) => (
+          getValue: ingress =>
+            ingress
+              .getRules()
+              .map(r => r.host ?? '*')
+              .join(''),
+          render: ingress => (
             <LabelListItem labels={ingress.getRules().map(({ host }) => host || '*')} />
           ),
         },
         {
           id: 'ports',
           label: t('translation|Path'),
-          getter: (ingress: Ingress) => <RulesDisplay ingress={ingress} />,
+          getValue: () => '',
+          render: (ingress: Ingress) => <RulesDisplay ingress={ingress} />,
         },
         'age',
       ]}

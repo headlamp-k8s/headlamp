@@ -6,7 +6,7 @@ import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function EndpointList() {
   const { t } = useTranslation(['glossary', 'translation']);
-  const filterFunc = useFilterFunc([
+  const filterFunc = useFilterFunc<Endpoints>([
     '.jsonData.subsets[*].addresses[*].ip',
     '.jsonData.subsets[*].ports[*].port',
     '.jsonData.subsets[*].ports[*].name',
@@ -23,7 +23,8 @@ export default function EndpointList() {
         {
           id: 'addresses',
           label: t('translation|Addresses'),
-          getter: endpoint => <LabelListItem labels={endpoint.getAddresses()} />,
+          getValue: endpoint => endpoint.getAddresses().join(', '),
+          render: endpoint => <LabelListItem labels={endpoint.getAddresses()} />,
           gridTemplate: 1.5,
         },
         'age',

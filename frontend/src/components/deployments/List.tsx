@@ -45,7 +45,7 @@ export default function DeploymentsList() {
       .map((condition: any) => {
         const { type, message } = condition;
         return (
-          <Box pr={0.5} display="inline-block">
+          <Box display="inline-block">
             <StatusLabel status="">
               <span title={message} key={type}>
                 {type}
@@ -66,26 +66,38 @@ export default function DeploymentsList() {
         {
           id: 'pods',
           label: t('Pods'),
-          getter: deployment => renderPods(deployment),
+          getValue: deployment => deployment.status.availableReplicas,
+          render: deployment => renderPods(deployment),
           sort: sortByPods,
           gridTemplate: 0.5,
         },
         {
           id: 'replicas',
           label: t('Replicas'),
-          getter: deployment => deployment.spec.replicas || 0,
-          sort: true,
+          getValue: deployment => deployment.spec.replicas || 0,
           gridTemplate: 0.6,
         },
         {
           id: 'conditions',
           label: t('translation|Conditions'),
-          getter: deployment => renderConditions(deployment),
+          getValue: deployment => deployment.status?.conditions?.map((c: any) => c.type)?.join(''),
+          render: deployment => renderConditions(deployment),
+          cellProps: {
+            sx: {
+              flexWrap: 'wrap',
+              gap: '4px',
+            },
+          },
         },
         {
           id: 'containers',
           label: t('Containers'),
-          getter: deployment => {
+          getValue: deployment =>
+            deployment
+              .getContainers()
+              .map(c => c.name)
+              .join(', '),
+          render: deployment => {
             const containers = deployment.getContainers().map((c: KubeContainer) => c.name);
             const containerText = containers.join(', ');
             const containerTooltip = containers.join('\n');
@@ -99,7 +111,12 @@ export default function DeploymentsList() {
         {
           id: 'images',
           label: t('Images'),
-          getter: deployment => {
+          getValue: deployment =>
+            deployment
+              .getContainers()
+              .map(c => c.image)
+              .join(', '),
+          render: deployment => {
             const images = deployment.getContainers().map((c: KubeContainer) => c.image);
             const imageText = images.join(', ');
             const imageTooltip = images.join('\n');
@@ -113,7 +130,8 @@ export default function DeploymentsList() {
         {
           id: 'selector',
           label: t('Selector'),
-          getter: deployment => {
+          getValue: deployment => deployment.getMatchLabelsList().join(', '),
+          render: deployment => {
             const matchLabels = deployment.getMatchLabelsList();
             const text = matchLabels.join(', ');
             const tooltip = matchLabels.join('\n');

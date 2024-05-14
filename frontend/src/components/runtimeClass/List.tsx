@@ -14,7 +14,7 @@ export function RuntimeClassList() {
         {
           id: 'handler',
           label: t('translation|Handler'),
-          getter: item => item?.jsonData?.handler,
+          getValue: item => item?.jsonData?.handler,
         },
         'age',
       ]}

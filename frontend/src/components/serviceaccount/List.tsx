@@ -15,8 +15,7 @@ export default function ServiceAccountList() {
         {
           id: 'secrets',
           label: t('Secrets'),
-          getter: (serviceaccount: ServiceAccount) => serviceaccount?.secrets?.length || 0,
-          sort: true,
+          getValue: (serviceaccount: ServiceAccount) => serviceaccount?.secrets?.length || 0,
           gridTemplate: 0.5,
         },
         'age',

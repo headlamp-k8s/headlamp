@@ -15,7 +15,7 @@ export function NetworkPolicyList() {
         {
           id: 'type',
           label: t('translation|Type'),
-          getter: networkpolicy => {
+          getValue: networkpolicy => {
             console.log(networkpolicy);
             const isIngressAvailable =
               networkpolicy.jsonData.spec.ingress && networkpolicy.jsonData.spec.ingress.length > 0;
@@ -33,7 +33,15 @@ export function NetworkPolicyList() {
         {
           id: 'podSelector',
           label: t('Pod Selector'),
-          getter: networkpolicy => {
+          getValue: networkpolicy => {
+            const podSelector = networkpolicy.jsonData.spec.podSelector;
+            return podSelector.matchLabels
+              ? Object.keys(podSelector.matchLabels)
+                  .map(key => `${key}=${podSelector.matchLabels[key]}`)
+                  .join(', ')
+              : null;
+          },
+          render: networkpolicy => {
             const podSelector = networkpolicy.jsonData.spec.podSelector;
             return podSelector.matchLabels ? (
               <LabelListItem

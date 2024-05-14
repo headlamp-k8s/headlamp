@@ -2,19 +2,24 @@ import { Box, Typography } from '@mui/material';
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, StoryFn } from '@storybook/react';
 import { useLocation } from 'react-router-dom';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
-import { useFilterFunc } from '../../lib/util';
-import { TestContext, TestContextProps } from '../../test';
-import SectionFilterHeader from './SectionFilterHeader';
-import SimpleTable, { SimpleTableProps } from './SimpleTable';
+import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { useFilterFunc } from '../../../lib/util';
+import { TestContext, TestContextProps } from '../../../test';
+import SectionFilterHeader from '../SectionFilterHeader';
+import Table, { TableProps } from './Table';
 
 export default {
-  title: 'SimpleTable',
-  component: SimpleTable,
+  title: 'Table',
+  component: Table,
   argTypes: {},
+  parameters: {
+    actions: {
+      disable: true,
+    },
+  },
 } as Meta;
 
-function TestSimpleTable(props: SimpleTableProps) {
+function TestSimpleTable(props: TableProps<any>) {
   const location = useLocation();
   if (!!props.reflectInURL) {
     return (
@@ -23,15 +28,15 @@ function TestSimpleTable(props: SimpleTableProps) {
         <Typography>
           <b>Current URL search:</b> {`${location.search || ''}`}
         </Typography>
-        <SimpleTable {...props} />
+        <Table {...props} />
       </Box>
     );
   }
 
-  return <SimpleTable {...props} />;
+  return <Table {...props} />;
 }
 
-const Template: StoryFn<SimpleTableProps> = args => (
+const Template: StoryFn<TableProps<any>> = args => (
   <TestContext>
     <TestSimpleTable {...args} />
   </TestContext>
@@ -42,24 +47,24 @@ const fixtureData = {
   errorMessage: null,
   columns: [
     {
-      label: 'Name',
-      datum: 'name',
+      header: 'Name',
+      accessorKey: 'name',
     },
     {
-      label: 'Status',
-      datum: 'status',
+      header: 'Status',
+      accessorKey: 'status',
     },
     {
-      label: 'Age',
-      datum: 'age',
+      header: 'Age',
+      accessorKey: 'age',
     },
     {
-      label: 'Long Field Name',
-      datum: 'longField',
+      header: 'Long Field Name',
+      accessorKey: 'longField',
     },
     {
-      label: 'Number',
-      datum: 'number',
+      header: 'Number',
+      accessorKey: 'number',
     },
   ],
   data: [
@@ -96,29 +101,29 @@ Getter.args = {
   ...fixtureData,
   columns: [
     {
-      label: 'Name',
-      // datum: "",
-      getter: (row: any) => row.name,
+      header: 'Name',
+      // accessorKey: "",
+      accessorFn: (row: any) => row.name,
     },
     {
-      label: 'Status',
-      // datum: "",
-      getter: (row: any) => row.status,
+      header: 'Status',
+      // accessorKey: "",
+      accessorFn: (row: any) => row.status,
     },
     {
-      label: 'Age',
-      // datum: "",
-      getter: (row: any) => row.age,
+      header: 'Age',
+      // accessorKey: "",
+      accessorFn: (row: any) => row.age,
     },
     {
-      label: 'Long Field Name',
-      // datum: "",
-      getter: (row: any) => row.longField,
+      header: 'Long Field Name',
+      // accessorKey: "",
+      accessorFn: (row: any) => row.longField,
     },
     {
-      label: 'Number',
-      // datum: "",
-      getter: (row: any) => row.number,
+      header: 'Number',
+      // accessorKey: "",
+      accessorFn: (row: any) => row.number,
     },
   ],
 };
@@ -128,32 +133,32 @@ Datum.args = {
   ...fixtureData,
   columns: [
     {
-      label: 'Name',
-      datum: 'name',
+      header: 'Name',
+      accessorKey: 'name',
     },
     {
-      label: 'Status',
-      datum: 'status',
+      header: 'Status',
+      accessorKey: 'status',
     },
     {
-      label: 'Age',
-      datum: 'age',
+      header: 'Age',
+      accessorKey: 'age',
     },
     {
-      label: 'Long Field Name',
-      datum: 'longField',
+      header: 'Long Field Name',
+      accessorKey: 'longField',
     },
   ],
 };
 
 const TemplateWithURLReflection: StoryFn<{
-  simpleTableProps: SimpleTableProps;
+  tableProps: TableProps<any>;
   testContextProps: TestContextProps;
 }> = args => {
-  const { testContextProps, simpleTableProps } = args;
+  const { testContextProps, tableProps } = args;
   return (
     <TestContext {...testContextProps}>
-      <TestSimpleTable {...simpleTableProps} />
+      <TestSimpleTable {...tableProps} />
     </TestContext>
   );
 };
@@ -171,20 +176,20 @@ const lotsOfData = (() => {
   return data;
 })();
 ReflectInURL.args = {
-  simpleTableProps: {
+  tableProps: {
     data: lotsOfData,
     columns: [
       {
-        label: 'Name',
-        datum: 'name',
+        header: 'Name',
+        accessorKey: 'name',
       },
       {
-        label: 'Namespace',
-        datum: 'namespace',
+        header: 'Namespace',
+        accessorKey: 'namespace',
       },
       {
-        label: 'Number',
-        datum: 'number',
+        header: 'Number',
+        accessorKey: 'number',
       },
     ],
     rowsPerPage: [5, 10, 15],
@@ -197,20 +202,20 @@ ReflectInURL.args = {
 
 export const ReflectInURLWithPrefix = TemplateWithURLReflection.bind({});
 ReflectInURLWithPrefix.args = {
-  simpleTableProps: {
+  tableProps: {
     data: lotsOfData,
     columns: [
       {
-        label: 'Name',
-        datum: 'name',
+        header: 'Name',
+        accessorKey: 'name',
       },
       {
-        label: 'Namespace',
-        datum: 'namespace',
+        header: 'Namespace',
+        accessorKey: 'namespace',
       },
       {
-        label: 'Number',
-        datum: 'creationDate',
+        header: 'Number',
+        accessorKey: 'creationDate',
       },
     ],
     rowsPerPage: [5, 10, 15],
@@ -223,30 +228,31 @@ ReflectInURLWithPrefix.args = {
 
 // filter Function
 
-type SimpleTableWithFilterProps = SimpleTableProps & { matchCriteria?: string[]; search?: string };
-function SimpleTableWithFilter(props: SimpleTableWithFilterProps) {
-  const { matchCriteria, search, ...otherProps } = props;
+type TableWithFilterProps = TableProps<any> & { matchCriteria?: string[] };
+function TableWithFilter(props: TableWithFilterProps) {
+  const { matchCriteria, ...otherProps } = props;
   const filterFunc = useFilterFunc(matchCriteria);
-  return <SimpleTable filterFunction={item => filterFunc(item, search)} {...otherProps} />;
+  return <Table filterFunction={filterFunc} {...otherProps} />;
 }
 
 const TemplateWithFilter: StoryFn<{
-  simpleTableArgs: SimpleTableWithFilterProps;
+  tableArgs: TableWithFilterProps;
   namespaces: string[];
-  search?: string;
+  search: string;
 }> = args => {
-  const { simpleTableArgs, namespaces = [], search } = args;
+  const { tableArgs: simpleTableArgs, search, namespaces = [] } = args;
 
   const storeWithFilterAndSettings = configureStore({
     reducer: (
       state = {
-        filter: { namespaces: new Set<string>() },
+        filter: { namespaces: new Set<string>(), search: '' },
         config: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
       }
     ) => state,
     preloadedState: {
       filter: {
         namespaces: new Set(namespaces),
+        search,
       },
       config: {
         settings: {
@@ -259,30 +265,30 @@ const TemplateWithFilter: StoryFn<{
   return (
     <TestContext store={storeWithFilterAndSettings}>
       <SectionFilterHeader title="Test" />
-      <SimpleTableWithFilter {...simpleTableArgs} search={search} />
+      <TableWithFilter {...simpleTableArgs} />
     </TestContext>
   );
 };
 
-const podData = {
+const podData: TableProps<any> = {
   rowsPerPage: [15, 25, 50],
   errorMessage: null,
   columns: [
     {
-      label: 'Name',
-      getter: (item: KubeObjectInterface) => item.metadata.name,
+      header: 'Name',
+      accessorFn: (item: KubeObjectInterface) => item.metadata.name,
     },
     {
-      label: 'Namespace',
-      getter: (item: KubeObjectInterface) => item.metadata.namespace,
+      header: 'Namespace',
+      accessorFn: (item: KubeObjectInterface) => item.metadata.namespace,
     },
     {
-      label: 'UID',
-      getter: (item: KubeObjectInterface) => item.metadata.uid,
+      header: 'UID',
+      accessorFn: (item: KubeObjectInterface) => item.metadata.uid,
     },
     {
-      label: 'Labels',
-      getter: (item: KubeObjectInterface) => JSON.stringify(item.metadata.labels),
+      header: 'Labels',
+      accessorFn: (item: KubeObjectInterface) => JSON.stringify(item.metadata.labels),
     },
   ],
   data: [
@@ -348,56 +354,56 @@ const podData = {
       someNumber: 30,
     },
   ],
-  defaultSortingColumn: 1,
+  // defaultSortingColumn: 1,
 };
 
 export const NameSearch = TemplateWithFilter.bind({});
 NameSearch.args = {
-  simpleTableArgs: podData,
+  tableArgs: podData,
   search: 'phonyresources2',
 };
 
 export const NamespaceSearch = TemplateWithFilter.bind({});
 NamespaceSearch.args = {
-  simpleTableArgs: podData,
+  tableArgs: podData,
   search: 'MyNamespace3',
 };
 
 export const UIDSearch = TemplateWithFilter.bind({});
 UIDSearch.args = {
-  simpleTableArgs: podData,
+  tableArgs: podData,
   search: 'phony0',
 };
 
 export const LabelSearch = TemplateWithFilter.bind({});
 LabelSearch.args = {
-  simpleTableArgs: podData,
+  tableArgs: podData,
   search: 'mylabel',
 };
 
 export const NamespaceSelect = TemplateWithFilter.bind({});
 NamespaceSelect.args = {
-  simpleTableArgs: podData,
+  tableArgs: podData,
   namespaces: ['MyNamespace0', 'MyNamespace1'],
 };
 
 export const NumberSearch = TemplateWithFilter.bind({});
 NumberSearch.args = {
-  simpleTableArgs: {
+  tableArgs: {
     ...podData,
     matchCriteria: ['.someNumber'],
     columns: [
       {
-        label: 'Name',
-        getter: (item: KubeObjectInterface) => item.metadata.name,
+        header: 'Name',
+        accessorFn: (item: KubeObjectInterface) => item.metadata.name,
       },
       {
-        label: 'Namespace',
-        getter: (item: KubeObjectInterface) => item.metadata.namespace,
+        header: 'Namespace',
+        accessorFn: (item: KubeObjectInterface) => item.metadata.namespace,
       },
       {
-        label: 'Number',
-        datum: 'someNumber',
+        header: 'Number',
+        accessorKey: 'someNumber',
       },
     ],
   },
@@ -406,11 +412,42 @@ NumberSearch.args = {
 
 export const NotFoundMessage = TemplateWithFilter.bind({});
 NotFoundMessage.args = {
-  simpleTableArgs: podData,
+  tableArgs: podData,
   search: 'somethingthatsnotapossiblematch123',
 };
 
-// emptyMessage
-// defaultSortingColumn
-// rowsPerPage
-// errorMessage
+export const WithGlobalFilter = Template.bind({});
+WithGlobalFilter.args = {
+  ...podData,
+  initialState: {
+    globalFilter: 'value1',
+    showGlobalFilter: true,
+  },
+};
+
+export const WithSorting = Template.bind({});
+WithSorting.args = {
+  ...podData,
+  initialState: {
+    sorting: [{ id: '0', desc: true }],
+  },
+};
+
+export const WithFilterMultiSelect = Template.bind({});
+WithFilterMultiSelect.args = {
+  ...podData,
+  enableFacetedValues: true,
+  columns: [
+    {
+      id: '0',
+      header: 'Name',
+      accessorFn: (item: KubeObjectInterface) => item.metadata.name,
+    },
+    {
+      id: '1',
+      header: 'Namespace',
+      accessorFn: (item: KubeObjectInterface) => item.metadata.namespace,
+      filterVariant: 'multi-select',
+    },
+  ],
+};

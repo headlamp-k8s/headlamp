@@ -17,35 +17,32 @@ export default function DaemonSetList() {
         {
           id: 'pods',
           label: t('Pods'),
-          getter: daemonSet => daemonSet.status?.currentNumberScheduled || 0,
+          getValue: daemonSet => daemonSet.status?.currentNumberScheduled || 0,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'currentPods',
           label: t('translation|Current'),
-          getter: daemonSet => daemonSet.status?.currentNumberScheduled || 0,
+          getValue: daemonSet => daemonSet.status?.currentNumberScheduled || 0,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'desiredPods',
           label: t('translation|Desired', { context: 'pods' }),
-          getter: daemonSet => daemonSet.status?.desiredNumberScheduled || 0,
+          getValue: daemonSet => daemonSet.status?.desiredNumberScheduled || 0,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'readyPods',
           label: t('translation|Ready'),
-          getter: daemonSet => daemonSet.status?.numberReady || 0,
+          getValue: daemonSet => daemonSet.status?.numberReady || 0,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'nodeSelector',
           label: t('Node Selector'),
-          getter: daemonSet => {
+          getValue: daemonSet => daemonSet.getNodeSelectors().join(', '),
+          render: daemonSet => {
             const selectors = daemonSet.getNodeSelectors();
             const nodeSelectorTooltip = selectors.join('\n');
             const nodeSelectorText = selectors.join(', ');
@@ -59,7 +56,12 @@ export default function DaemonSetList() {
         {
           id: 'containers',
           label: t('Containers'),
-          getter: daemonSet => {
+          getValue: daemonSet =>
+            daemonSet
+              .getContainers()
+              .map((c: KubeContainer) => c.name)
+              .join(', '),
+          render: daemonSet => {
             const containerNames = daemonSet.getContainers().map((c: KubeContainer) => c.name);
             const containerText = containerNames.join(', ');
             const containerTooltip = containerNames.join('\n');
@@ -73,7 +75,12 @@ export default function DaemonSetList() {
         {
           id: 'images',
           label: t('Images'),
-          getter: daemonSet => {
+          getValue: daemonSet =>
+            daemonSet
+              .getContainers()
+              .map((c: KubeContainer) => c.image)
+              .join(', '),
+          render: daemonSet => {
             const images = daemonSet.getContainers().map((c: KubeContainer) => c.image);
             const imageTooltip = images.join('\n');
             const imageText = images.join(', ');

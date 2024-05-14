@@ -28,7 +28,7 @@ exports[`Storyshots common/ReleaseNotes/UpdatePopup Closed 1`] = `
             class="MuiBox-root css-1aisqbv"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
               style="text-transform: none;"
               tabindex="0"
               type="button"
@@ -43,7 +43,7 @@ exports[`Storyshots common/ReleaseNotes/UpdatePopup Closed 1`] = `
             class="MuiBox-root css-1itv5e3"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
               style="color: rgb(255, 242, 0);"
               tabindex="0"
               type="button"
@@ -58,7 +58,7 @@ exports[`Storyshots common/ReleaseNotes/UpdatePopup Closed 1`] = `
             class="MuiBox-root css-0"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
               style="color: rgb(255, 242, 0);"
               tabindex="0"
               type="button"
@@ -104,7 +104,7 @@ exports[`Storyshots common/ReleaseNotes/UpdatePopup Show 1`] = `
             class="MuiBox-root css-1aisqbv"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
               style="text-transform: none;"
               tabindex="0"
               type="button"
@@ -119,7 +119,7 @@ exports[`Storyshots common/ReleaseNotes/UpdatePopup Show 1`] = `
             class="MuiBox-root css-1itv5e3"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
               style="color: rgb(255, 242, 0);"
               tabindex="0"
               type="button"
@@ -134,7 +134,7 @@ exports[`Storyshots common/ReleaseNotes/UpdatePopup Show 1`] = `
             class="MuiBox-root css-0"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
               style="color: rgb(255, 242, 0);"
               tabindex="0"
               type="button"

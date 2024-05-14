@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { expect, Page } from '@playwright/test';
 
 export class HeadlampPage {
@@ -5,7 +6,6 @@ export class HeadlampPage {
 
   async authenticate() {
     await this.page.goto('/');
-
     await this.page.waitForSelector('h1:has-text("Authentication")');
 
     // Expects the URL to contain c/main/token
@@ -81,7 +81,8 @@ export class HeadlampPage {
     const headers = await this.page.$$eval(`${tableSelector} th`, ths =>
       ths.map(th => {
         if (th && th.textContent) {
-          return th.textContent.trim();
+          // Table header also contains a number, displayed during multi-sorting, so we remove it
+          return th.textContent.trim().replace('0', '');
         }
       })
     );
@@ -104,7 +105,9 @@ export class HeadlampPage {
     const rowsDisplayed1 = await this.getRowsDisplayed();
 
     // Click on the next page button
-    const nextPageButton = this.page.getByTitle('Next page');
+    const nextPageButton = this.page.getByRole('button', {
+      name: 'Go to next page',
+    });
     await nextPageButton.click();
 
     // Get value of rows per page after clicking next page button
@@ -115,7 +118,7 @@ export class HeadlampPage {
   }
 
   async getRowsDisplayed() {
-    const paginationCaption = this.page.locator("p:has-text(' of ')");
+    const paginationCaption = this.page.locator("span:has-text(' of ')");
     const captionText = await paginationCaption.textContent();
     return captionText;
   }

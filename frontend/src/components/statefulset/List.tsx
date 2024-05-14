@@ -23,21 +23,20 @@ export default function StatefulSetList() {
         {
           id: 'pods',
           label: t('Pods'),
-          getter: statefulSet => renderPods(statefulSet),
+          getValue: statefulSet => renderPods(statefulSet),
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'replicas',
           label: t('Replicas'),
-          getter: statefulSet => statefulSet.spec.replicas,
+          getValue: statefulSet => statefulSet.spec.replicas,
           gridTemplate: 0.6,
-          sort: true,
         },
         {
           id: 'containers',
           label: t('Containers'),
-          getter: statefulSet => {
+          getValue: statefulSet => statefulSet.containerNames.join(', '),
+          render: statefulSet => {
             const containerNames = statefulSet.getContainers().map((c: KubeContainer) => c.name);
             const containerTooltip = containerNames.join('\n');
             const containerText = containerNames.join(', ');
@@ -52,7 +51,12 @@ export default function StatefulSetList() {
         {
           id: 'images',
           label: t('Images'),
-          getter: statefulSet => {
+          getValue: statefulSet =>
+            statefulSet
+              .getContainers()
+              .map(it => it.image)
+              .join(', '),
+          render: statefulSet => {
             const containerImages = statefulSet.getContainers().map((c: KubeContainer) => c.image);
             const containerTooltip = containerImages.join('\n');
             const containerText = containerImages.join(', ');

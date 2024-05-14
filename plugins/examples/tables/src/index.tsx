@@ -71,7 +71,8 @@ registerResourceTableColumnsProcessor(function setupContextMenuForPodsList({ id,
   if (id === 'headlamp-pods') {
     columns.push({
       label: '',
-      getter: (pod: Pod) => {
+      getValue: (pod: Pod) => pod.getDetailsLink(),
+      render: (pod: Pod) => {
         return <ContextMenu detailsLink={pod.getDetailsLink()} />;
       },
     });

@@ -36,7 +36,7 @@ exports[`Storyshots ActionsNotifier Some 1`] = `
                 class="SnackbarItem-action"
               >
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall css-u3zvl7-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorSecondary MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorSecondary css-u3zvl7-MuiButtonBase-root-MuiButton-root"
                   tabindex="0"
                   type="button"
                 >

@@ -3,12 +3,12 @@
 exports[`Storyshots Settings/PluginSettingsDetail With Auto Save 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary css-w7fpvq-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
     <span
-      class="MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
+      class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
     >
       <span />
     </span>
@@ -61,8 +61,8 @@ exports[`Storyshots Settings/PluginSettingsDetail With Auto Save 1`] = `
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1a2ml2f-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="false"
-            for="mui-46"
-            id="mui-46-label"
+            for="mui-test-id"
+            id="mui-test-id-label"
           >
             Normal Input
           </label>
@@ -72,7 +72,7 @@ exports[`Storyshots Settings/PluginSettingsDetail With Auto Save 1`] = `
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id="mui-46"
+              id="mui-test-id"
               type="text"
               value=""
             />
@@ -110,12 +110,12 @@ exports[`Storyshots Settings/PluginSettingsDetail With Auto Save 1`] = `
 exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-w7fpvq-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary css-w7fpvq-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
     <span
-      class="MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
+      class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
     >
       <span />
     </span>
@@ -168,8 +168,8 @@ exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1a2ml2f-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="false"
-            for="mui-47"
-            id="mui-47-label"
+            for="mui-test-id"
+            id="mui-test-id-label"
           >
             Normal Input
           </label>
@@ -179,7 +179,7 @@ exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id="mui-47"
+              id="mui-test-id"
               type="text"
               value=""
             />
@@ -210,7 +210,7 @@ exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
         class="MuiStack-root css-niqf4j-MuiStack-root"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-19g3xkx-MuiButtonBase-root-MuiButton-root"
           disabled=""
           style="background-color: silver; color: black;"
           tabindex="-1"
@@ -219,7 +219,7 @@ exports[`Storyshots Settings/PluginSettingsDetail Without Auto Save 1`] = `
           Save
         </button>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
           style="color: silver;"
           tabindex="0"
           type="button"

@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react';
-import { KubeObject } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
 import { TestContext } from '../../../test';
@@ -13,7 +12,7 @@ export default {
 } as Meta;
 
 const TemplateWithFilter: Story<{
-  resourceTableArgs: ResourceTableFromResourceClassProps;
+  resourceTableArgs: ResourceTableFromResourceClassProps<MyPod>;
   namespaces: string[];
   search: string;
 }> = args => {
@@ -119,23 +118,23 @@ class MyPod extends Pod {
     ] as any;
 }
 
-const podData: ResourceTableFromResourceClassProps = {
+const podData: ResourceTableFromResourceClassProps<MyPod> = {
   columns: ['name', 'namespace', 'age'],
-  resourceClass: MyPod as KubeObject,
+  resourceClass: MyPod,
 };
 
-const withHiddenCols: ResourceTableFromResourceClassProps = {
+const withHiddenCols: ResourceTableFromResourceClassProps<MyPod> = {
   columns: [
     'name',
     'namespace',
     {
       label: 'UID',
-      getter: (pod: Pod) => pod.metadata.uid,
+      getValue: pod => pod.metadata.uid,
       show: false,
     },
     'age',
   ],
-  resourceClass: MyPod as KubeObject,
+  resourceClass: MyPod,
   hideColumns: ['namespace'],
 };
 
