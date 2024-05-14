@@ -13,6 +13,19 @@ DOCKER_PLATFORM ?= local
 ifeq ($(OS), Windows_NT)
 	SERVER_EXE_EXT = .exe
 endif
+
+ifeq ($(OS), Windows_NT)
+	UNIXSHELL = false
+	ifdef BASH_VERSION
+		UNIXSHELL = true
+	endif
+	ifdef BASH_VERSION
+		UNIXSHELL = true
+	endif
+else
+	UNIXSHELL = true
+endif
+
 all: backend frontend
 
 tools/golangci-lint: backend/go.mod backend/go.sum
@@ -68,13 +81,23 @@ frontend-build:
 frontend-build-storybook:
 	cd frontend && npm run build-storybook
 
+
 run-backend:
 	@echo "**** Warning: Running with Helm and dynamic-clusters endpoints enabled. ****"
-	@echo
-	HEADLAMP_BACKEND_TOKEN=headlamp HEADLAMP_CONFIG_ENABLE_HELM=true HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS=true ./backend/headlamp-server -dev
+
+ifeq ($(UNIXSHELL),true)
+	HEADLAMP_BACKEND_TOKEN=headlamp HEADLAMP_CONFIG_ENABLE_HELM=true HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS=true ./backend/headlamp-server -dev 
+else
+	@echo "**** Running on Windows without bash or zsh. ****"
+	@cmd /c "set HEADLAMP_BACKEND_TOKEN=headlamp&& set HEADLAMP_CONFIG_ENABLE_HELM=true&& set HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS=true&& backend\headlamp-server -dev"
+endif
 
 run-frontend:
-	cd frontend && REACT_APP_HEADLAMP_BACKEND_TOKEN=headlamp npm start
+ifeq ($(UNIXSHELL),true)
+	cd frontend && nice -16 npm start
+else
+	cd frontend && npm start
+endif
 
 frontend-lint:
 	cd frontend && npm run lint -- --max-warnings 0 && npm run format-check
