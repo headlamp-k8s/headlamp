@@ -57,7 +57,6 @@ export default function CustomResourceDefinitionList() {
         {
           label: t('Scope'),
           getter: crd => {
-            console.log(crd);
             return crd.spec.scope;
           },
           sort: true,

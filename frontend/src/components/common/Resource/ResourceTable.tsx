@@ -224,13 +224,6 @@ function Table(props: ResourceTableProps) {
                 return 0;
               },
             };
-          case 'categories':
-            return {
-              id: 'categories',
-              label: t('translation|Categories'),
-              getter: (resource: KubeObject) => resource?.getCategories?.join(', '),
-              sort: false,
-            };
           case 'type':
           case 'kind':
             return {

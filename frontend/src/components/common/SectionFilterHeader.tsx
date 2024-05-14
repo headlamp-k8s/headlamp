@@ -12,7 +12,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
 import { resetFilter, setNamespaceFilter, setSearchFilter } from '../../redux/filterSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { CRDCategoriesList } from './CRDCategoriesList';
 import { NamespacesAutocomplete } from './NamespacesAutocomplete';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
@@ -131,11 +130,6 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
           {!noNamespaceFilter && (
             <Grid item>
               <NamespacesAutocomplete />
-            </Grid>
-          )}
-          {!noCategoriesFilter && (
-            <Grid item>
-              <CRDCategoriesList />
             </Grid>
           )}
 

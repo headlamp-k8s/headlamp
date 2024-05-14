@@ -61,10 +61,10 @@ export default function CustomResourceDefinitionDetails() {
             {
               name: t('categories'),
               value:
-                typeof item.jsonData.status.acceptedNames.categories !== 'undefined'
+                item.jsonData.status.acceptedNames.categories !== undefined
                   ? item.jsonData.status.acceptedNames.categories.toString().split(',').join(', ')
                   : '',
-              hide: typeof item.jsonData.status.acceptedNames.categories === 'undefined',
+              hide: item.jsonData.status.acceptedNames.categories === undefined,
             },
           ]
         }
