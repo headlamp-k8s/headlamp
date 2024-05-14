@@ -30,7 +30,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
 
 ## Properties
 
@@ -53,7 +53,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').constructor
 
 #### Defined in
 
-[lib/k8s/runtime.ts:9](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/runtime.ts#L9)
+[lib/k8s/runtime.ts:9](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/runtime.ts#L9)
 
 ___
 
@@ -67,7 +67,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L318)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Accessors
 
@@ -81,7 +81,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').className
 
 #### Defined in
 
-[lib/k8s/runtime.ts:11](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/runtime.ts#L11)
+[lib/k8s/runtime.ts:11](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/runtime.ts#L11)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/runtime.ts:19](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/runtime.ts#L19)
+[lib/k8s/runtime.ts:19](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/runtime.ts#L19)
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/runtime.ts:15](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/runtime.ts#L15)
+[lib/k8s/runtime.ts:15](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/runtime.ts#L15)
 
 ## Methods
 
@@ -135,7 +135,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
 
 ___
 
@@ -160,7 +160,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
 
 ___
 
@@ -184,7 +184,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
 
 ___
 
@@ -211,7 +211,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
 
 ___
 
@@ -237,7 +237,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
 
 ___
 
@@ -262,7 +262,7 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
 
 ___
 
@@ -286,4 +286,4 @@ makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)

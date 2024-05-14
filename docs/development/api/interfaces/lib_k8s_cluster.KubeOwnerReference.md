@@ -16,7 +16,7 @@ API version of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:198](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L198)
+[lib/k8s/cluster.ts:198](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L198)
 
 ___
 
@@ -35,7 +35,7 @@ otherwise 422 (Unprocessable Entity) will be returned.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:210](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L210)
+[lib/k8s/cluster.ts:210](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L210)
 
 ___
 
@@ -47,7 +47,7 @@ If true, this reference points to the managing controller.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:212](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L212)
+[lib/k8s/cluster.ts:212](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L212)
 
 ___
 
@@ -59,7 +59,7 @@ Kind of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:214](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L214)
+[lib/k8s/cluster.ts:214](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L214)
 
 ___
 
@@ -71,7 +71,7 @@ Name of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:216](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L216)
+[lib/k8s/cluster.ts:216](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L216)
 
 ___
 
@@ -83,4 +83,4 @@ UID of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:218](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L218)
+[lib/k8s/cluster.ts:218](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L218)

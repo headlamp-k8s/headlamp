@@ -23,7 +23,7 @@ retrieve arbitrary metadata about this object
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -35,7 +35,7 @@ An RFC 3339 date of the date and time an object was created
 
 #### Defined in
 
-[lib/k8s/cluster.ts:79](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L79)
+[lib/k8s/cluster.ts:79](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L79)
 
 ___
 
@@ -50,7 +50,7 @@ Read-only.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L86)
+[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L86)
 
 ___
 
@@ -70,7 +70,7 @@ the resource may be deleted prior to this time.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L98)
+[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L98)
 
 ___
 
@@ -95,7 +95,7 @@ patch strategy: merge
 
 #### Defined in
 
-[lib/k8s/cluster.ts:115](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L115)
+[lib/k8s/cluster.ts:115](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L115)
 
 ___
 
@@ -116,7 +116,7 @@ return a 409. Applied only if Name is not specified.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:128](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L128)
+[lib/k8s/cluster.ts:128](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L128)
 
 ___
 
@@ -130,7 +130,7 @@ Read-only.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:134](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L134)
+[lib/k8s/cluster.ts:134](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L134)
 
 ___
 
@@ -144,7 +144,7 @@ A map of string keys and values that can be used to organize and categorize obje
 
 #### Defined in
 
-[lib/k8s/cluster.ts:140](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L140)
+[lib/k8s/cluster.ts:140](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L140)
 
 ___
 
@@ -160,7 +160,7 @@ version that the workflow used when modifying the object.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:148](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L148)
+[lib/k8s/cluster.ts:148](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L148)
 
 ___
 
@@ -175,7 +175,7 @@ This value is used in the path when retrieving an individual object.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:155](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L155)
+[lib/k8s/cluster.ts:155](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L155)
 
 ___
 
@@ -192,7 +192,7 @@ those objects will be empty. Must be a DNS_LABEL. Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:164](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L164)
+[lib/k8s/cluster.ts:164](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L164)
 
 ___
 
@@ -207,7 +207,7 @@ set to true. There cannot be more than one managing controller.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:171](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L171)
+[lib/k8s/cluster.ts:171](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L171)
 
 ___
 
@@ -225,7 +225,7 @@ resources, or different servers.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:181](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L181)
+[lib/k8s/cluster.ts:181](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L181)
 
 ___
 
@@ -237,7 +237,7 @@ Deprecated: selfLink is a legacy read-only field that is no longer populated by 
 
 #### Defined in
 
-[lib/k8s/cluster.ts:185](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L185)
+[lib/k8s/cluster.ts:185](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L185)
 
 ___
 
@@ -253,4 +253,4 @@ operations. Populated by the system. Read-only.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:193](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L193)
+[lib/k8s/cluster.ts:193](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L193)

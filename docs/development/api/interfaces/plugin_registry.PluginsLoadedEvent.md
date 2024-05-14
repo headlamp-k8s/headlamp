@@ -22,7 +22,7 @@ Event fired when all plugins are loaded.
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:224](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/headlampEventSlice.ts#L224)
+[redux/headlampEventSlice.ts:224](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L224)
 
 ___
 
@@ -32,4 +32,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:223](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/headlampEventSlice.ts#L223)
+[redux/headlampEventSlice.ts:223](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L223)

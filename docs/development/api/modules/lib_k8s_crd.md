@@ -34,7 +34,7 @@ slug: "lib_k8s_crd"
 
 #### Defined in
 
-[lib/k8s/crd.ts:104](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/crd.ts#L104)
+[lib/k8s/crd.ts:104](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L104)
 
 ▸ **makeCustomResourceClass**(`args`): `ReturnType`<typeof [`makeKubeObject`](lib_k8s_cluster.md#makekubeobject)\>
 
@@ -50,4 +50,4 @@ slug: "lib_k8s_crd"
 
 #### Defined in
 
-[lib/k8s/crd.ts:108](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/crd.ts#L108)
+[lib/k8s/crd.ts:108](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L108)

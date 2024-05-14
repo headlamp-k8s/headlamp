@@ -14,7 +14,7 @@ slug: "lib_k8s_cluster.KubeMetrics"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1213](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L1213)
+[lib/k8s/cluster.ts:1213](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1213)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1218](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L1218)
+[lib/k8s/cluster.ts:1218](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1218)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1214](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L1214)
+[lib/k8s/cluster.ts:1214](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1214)

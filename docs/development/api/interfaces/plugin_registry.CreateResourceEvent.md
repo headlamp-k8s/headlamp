@@ -22,7 +22,7 @@ Event fired when creating a resource.
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:193](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/headlampEventSlice.ts#L193)
+[redux/headlampEventSlice.ts:193](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L193)
 
 ___
 
@@ -32,4 +32,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:192](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/headlampEventSlice.ts#L192)
+[redux/headlampEventSlice.ts:192](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L192)

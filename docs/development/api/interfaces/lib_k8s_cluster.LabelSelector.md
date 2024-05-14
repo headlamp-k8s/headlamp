@@ -14,7 +14,7 @@ slug: "lib_k8s_cluster.LabelSelector"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1202](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L1202)
+[lib/k8s/cluster.ts:1202](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1202)
 
 ___
 
@@ -28,4 +28,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1207](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L1207)
+[lib/k8s/cluster.ts:1207](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1207)

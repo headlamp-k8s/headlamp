@@ -28,7 +28,7 @@ Represents a Headlamp event. It can be one of the default events or a custom eve
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:69](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/headlampEventSlice.ts#L69)
+[redux/headlampEventSlice.ts:69](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L69)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:68](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/redux/headlampEventSlice.ts#L68)
+[redux/headlampEventSlice.ts:68](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L68)

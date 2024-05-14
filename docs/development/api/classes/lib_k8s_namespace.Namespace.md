@@ -30,7 +30,7 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
 
 ## Properties
 
@@ -53,7 +53,7 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 
 #### Defined in
 
-[lib/k8s/namespace.ts:11](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/namespace.ts#L11)
+[lib/k8s/namespace.ts:11](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/namespace.ts#L11)
 
 ___
 
@@ -67,7 +67,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L318)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Accessors
 
@@ -81,7 +81,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/namespace.ts:13](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/namespace.ts#L13)
+[lib/k8s/namespace.ts:13](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/namespace.ts#L13)
 
 ## Methods
 
@@ -107,7 +107,7 @@ makeKubeObject<KubeNamespace\>('namespace').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
 
 ___
 
@@ -132,7 +132,7 @@ makeKubeObject<KubeNamespace\>('namespace').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
 
 ___
 
@@ -156,7 +156,7 @@ makeKubeObject<KubeNamespace\>('namespace').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
 
 ___
 
@@ -183,7 +183,7 @@ makeKubeObject<KubeNamespace\>('namespace').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
 
 ___
 
@@ -209,7 +209,7 @@ makeKubeObject<KubeNamespace\>('namespace').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
 
 ___
 
@@ -234,7 +234,7 @@ makeKubeObject<KubeNamespace\>('namespace').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
 
 ___
 
@@ -258,4 +258,4 @@ makeKubeObject<KubeNamespace\>('namespace').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)
