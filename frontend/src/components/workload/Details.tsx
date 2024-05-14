@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import {
   ConditionsSection,
   ContainersSection,
@@ -11,11 +12,21 @@ import {
 
 interface WorkloadDetailsProps {
   workloadKind: KubeObject;
+  drawerName?: string;
+  drawerNamespace?: string;
 }
 
 export default function WorkloadDetails(props: WorkloadDetailsProps) {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const params = useParams<{ namespace: string; name: string }>();
+
+  const namespace = props.drawerNamespace ? props.drawerNamespace : params.namespace;
+  const name = props.drawerName ? props.drawerName : params.name;
+
   const { workloadKind } = props;
+
+  const drawerNamespace = useTypedSelector(state => state.drawerMode.currentDrawerNamespace);
+  const drawerName = useTypedSelector(state => state.drawerMode.currentDrawerName);
+
   const { t } = useTranslation(['glossary', 'translation']);
 
   function renderUpdateStrategy(item: Workload) {
@@ -78,9 +89,9 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
   return (
     <DetailsGrid
       resourceType={workloadKind}
-      name={name}
+      name={name || drawerName}
       withEvents
-      namespace={namespace}
+      namespace={namespace || drawerNamespace}
       extraInfo={item =>
         item && [
           {

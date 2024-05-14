@@ -9,6 +9,7 @@ import { setAppSettings } from '../../../redux/configSlice';
 import { defaultTableRowsPerPageOptions } from '../../../redux/configSlice';
 import { ActionButton, NameValueTable, SectionBox } from '../../common';
 import TimezoneSelect from '../../common/TimezoneSelect';
+import DrawerModeButton from './DrawerModeButton';
 import { useSettings } from './hook';
 import NumRowsInput from './NumRowsInput';
 import ThemeChangeButton from './ThemeChangeButton';
@@ -68,6 +69,10 @@ export default function Settings() {
           {
             name: t('translation|Theme'),
             value: <ThemeChangeButton showBothIcons />,
+          },
+          {
+            name: t('translation|Details on list view'),
+            value: <DrawerModeButton />,
           },
           {
             name: t('translation|Number of rows for tables'),

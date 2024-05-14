@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import StatefulSet from '../../lib/k8s/statefulSet';
-import { LightTooltip } from '../common';
+import { useTypedSelector } from '../../redux/reducers/reducers';
+import { LightTooltip, Link } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function StatefulSetList() {
   const { t } = useTranslation('glossary');
+  const drawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
 
   function renderPods(statefulSet: StatefulSet) {
     const { readyReplicas, replicas } = statefulSet.status;
@@ -18,7 +20,22 @@ export default function StatefulSetList() {
       title={t('Stateful Sets')}
       resourceClass={StatefulSet}
       columns={[
-        'name',
+        // 'name',
+        {
+          id: 'name',
+          label: t('Name'),
+          getter: (statefulSet: StatefulSet) => {
+            if (drawerEnabled) {
+              return (
+                <>
+                  <Link kubeObject={statefulSet} drawerEnabled={drawerEnabled} />
+                </>
+              );
+            }
+
+            return <Link kubeObject={statefulSet} />;
+          },
+        },
         'namespace',
         {
           id: 'pods',

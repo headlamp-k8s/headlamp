@@ -6,6 +6,7 @@ import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo } from '../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -85,6 +86,9 @@ export function PodListRenderer(props: PodListProps) {
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
+  // NOTEZ: Will need to use slices of state for drawerOpen for every list view
+  const drawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
+
   return (
     <ResourceListView
       title={t('Pods')}
@@ -95,7 +99,20 @@ export function PodListRenderer(props: PodListProps) {
       hideColumns={hideColumns}
       errorMessage={Pod.getErrorMessage(error)}
       columns={[
-        'name',
+        // 'name',
+        {
+          label: t('translation|Name'),
+          getter: (pod: Pod) => {
+            if (drawerEnabled) {
+              return (
+                <>
+                  <Link kubeObject={pod} drawerEnabled={drawerEnabled} />
+                </>
+              );
+            }
+            return <Link kubeObject={pod} />;
+          },
+        },
         'namespace',
         {
           label: t('Restarts'),

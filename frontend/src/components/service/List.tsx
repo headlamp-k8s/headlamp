@@ -1,17 +1,35 @@
 import { useTranslation } from 'react-i18next';
 import Service from '../../lib/k8s/service';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import LabelListItem from '../common/LabelListItem';
+import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ServiceList() {
   const { t } = useTranslation(['glossary', 'translation']);
+  const drawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
 
   return (
     <ResourceListView
       title={t('Services')}
       resourceClass={Service}
       columns={[
-        'name',
+        // 'name',
+        {
+          id: 'name',
+          label: t('translation|Name'),
+          getter: (service: Service) => {
+            if (drawerEnabled) {
+              return (
+                <>
+                  <Link kubeObject={service} drawerEnabled={drawerEnabled} />
+                </>
+              );
+            }
+            return <Link kubeObject={service} />;
+          },
+          sort: true,
+        },
         'namespace',
         {
           id: 'type',

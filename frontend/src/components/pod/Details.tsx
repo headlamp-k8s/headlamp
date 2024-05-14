@@ -14,6 +14,7 @@ import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { EventStatus, HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ActionButton, LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
@@ -381,20 +382,33 @@ export interface PodDetailsProps {
   showLogsDefault?: boolean;
 }
 
+// function useQuery() {
+//   const { search } = useLocation();
+
+//   return React.useMemo(() => new URLSearchParams(search), [search]);
+// }
+
 export default function PodDetails(props: PodDetailsProps) {
   const { showLogsDefault } = props;
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
+
+  // const params = useQuery();
+
   const [showLogs, setShowLogs] = React.useState(!!showLogsDefault);
   const [showTerminal, setShowTerminal] = React.useState(false);
   const { t } = useTranslation('glossary');
   const [isAttached, setIsAttached] = React.useState(false);
   const dispatchHeadlampEvent = useEventCallback();
 
+  const isDetailDrawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
+  const currentDrawerNamespace = useTypedSelector(state => state.drawerMode.currentDrawerNamespace);
+  const currentDrawerName = useTypedSelector(state => state.drawerMode.currentDrawerName);
+
   return (
     <DetailsGrid
       resourceType={Pod}
-      name={name}
-      namespace={namespace}
+      name={isDetailDrawerEnabled ? currentDrawerName : name}
+      namespace={isDetailDrawerEnabled ? currentDrawerNamespace : namespace}
       withEvents
       actions={item =>
         item && [

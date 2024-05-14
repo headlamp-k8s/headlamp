@@ -50,6 +50,7 @@
   "Delete Plugin": "",
   "Are you sure you want to delete this plugin?": "",
   "Save": "",
+  "Drawer Mode": "",
   "Enter a value between {{ minRows }} and {{ maxRows }}.": "Geben Sie einen Wert zwischen {{ minRows }} und {{ maxRows }} ein.",
   "Custom row value": "Benutzerdefinierter Zeilenwert",
   "Apply": "Anwenden",

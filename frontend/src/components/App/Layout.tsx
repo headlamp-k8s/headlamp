@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useClustersConf } from '../../lib/k8s';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
@@ -18,6 +19,7 @@ import store from '../../redux/stores/store';
 import { fetchStatelessClusterKubeConfigs, processClusterComparison } from '../../stateless/';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
+import DetailsDrawer from '../DetailsDrawer/DetailsDrawer';
 import Sidebar, { NavigationTabs } from '../Sidebar';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
@@ -70,6 +72,13 @@ export default function Layout({}: LayoutProps) {
    * indexDB and then sends the backend to parse it and then updates the parsed value into redux
    * store on an interval.
    * */
+  // DETAIL DRAWER MODE
+  const isDetailDrawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
+  console.log('LAY - isDetailDrawerEnabled', isDetailDrawerEnabled);
+
+  const params = useParams();
+  console.log('LAY - params: ', params);
+
   useEffect(() => {
     window.clusterConfigFetchHandler = setInterval(
       () => {
@@ -181,6 +190,7 @@ export default function Layout({}: LayoutProps) {
             </Container>
           </Box>
         </Main>
+        {isDetailDrawerEnabled && <DetailsDrawer />}
         <ActionsNotifier />
       </Box>
     </>
