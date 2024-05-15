@@ -33,7 +33,7 @@ slug: "plugin_registry.Registry"
 
 #### Defined in
 
-[plugin/registry.tsx:163](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L163)
+[plugin/registry.tsx:163](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L163)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:212](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L212)
+[plugin/registry.tsx:212](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L212)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:220](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L220)
+[plugin/registry.tsx:220](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L220)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:153](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L153)
+[plugin/registry.tsx:153](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L153)
 
 ___
 
@@ -137,7 +137,7 @@ register.registerDetailsViewSection('biolatency', resource => {
 
 #### Defined in
 
-[plugin/registry.tsx:185](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L185)
+[plugin/registry.tsx:185](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L185)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:145](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L145)
+[plugin/registry.tsx:145](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L145)
 
 ___
 
@@ -185,4 +185,4 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:121](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/plugin/registry.tsx#L121)
+[plugin/registry.tsx:121](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L121)

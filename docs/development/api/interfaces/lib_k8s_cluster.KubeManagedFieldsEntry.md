@@ -28,7 +28,7 @@ automatically converted.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:248](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L248)
+[lib/k8s/cluster.ts:248](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L248)
 
 ___
 
@@ -41,7 +41,7 @@ There is currently only one possible value: "FieldsV1"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:253](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L253)
+[lib/k8s/cluster.ts:253](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L253)
 
 ___
 
@@ -53,7 +53,7 @@ FieldsV1 holds the first JSON version format as described in the "FieldsV1" type
 
 #### Defined in
 
-[lib/k8s/cluster.ts:257](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L257)
+[lib/k8s/cluster.ts:257](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L257)
 
 ___
 
@@ -65,7 +65,7 @@ Manager is an identifier of the workflow managing these fields.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:261](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L261)
+[lib/k8s/cluster.ts:261](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L261)
 
 ___
 
@@ -78,7 +78,7 @@ created. The only valid values for this field are 'Apply' and 'Update'.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:266](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L266)
+[lib/k8s/cluster.ts:266](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L266)
 
 ___
 
@@ -95,7 +95,7 @@ Subresource field and it always corresponds to the version of the main resource.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:275](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L275)
+[lib/k8s/cluster.ts:275](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L275)
 
 ___
 
@@ -110,4 +110,4 @@ removed from the entry because another manager took it over.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:282](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/cluster.ts#L282)
+[lib/k8s/cluster.ts:282](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L282)

@@ -14,7 +14,7 @@ slug: "lib_k8s_endpoints.KubeEndpointSubset"
 
 #### Defined in
 
-[lib/k8s/endpoints.ts:22](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/endpoints.ts#L22)
+[lib/k8s/endpoints.ts:22](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/endpoints.ts#L22)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/endpoints.ts:23](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/endpoints.ts#L23)
+[lib/k8s/endpoints.ts:23](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/endpoints.ts#L23)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/endpoints.ts:24](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/endpoints.ts#L24)
+[lib/k8s/endpoints.ts:24](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/endpoints.ts#L24)

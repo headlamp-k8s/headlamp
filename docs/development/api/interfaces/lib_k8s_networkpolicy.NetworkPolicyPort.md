@@ -14,7 +14,7 @@ slug: "lib_k8s_networkpolicy.NetworkPolicyPort"
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:7](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/networkpolicy.tsx#L7)
+[lib/k8s/networkpolicy.tsx:7](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/networkpolicy.tsx#L7)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:5](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/networkpolicy.tsx#L5)
+[lib/k8s/networkpolicy.tsx:5](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/networkpolicy.tsx#L5)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:6](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/networkpolicy.tsx#L6)
+[lib/k8s/networkpolicy.tsx:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/networkpolicy.tsx#L6)

@@ -14,7 +14,7 @@ slug: "plugin_registry.DefaultDetailsViewSection"
 
 #### Defined in
 
-[components/DetailsViewSection/detailsViewSectionSlice.ts:13](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L13)
+[components/DetailsViewSection/detailsViewSectionSlice.ts:13](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L13)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/detailsViewSectionSlice.ts:18](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L18)
+[components/DetailsViewSection/detailsViewSectionSlice.ts:18](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L18)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/detailsViewSectionSlice.ts:16](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L16)
+[components/DetailsViewSection/detailsViewSectionSlice.ts:16](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L16)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/detailsViewSectionSlice.ts:15](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L15)
+[components/DetailsViewSection/detailsViewSectionSlice.ts:15](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L15)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/detailsViewSectionSlice.ts:17](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L17)
+[components/DetailsViewSection/detailsViewSectionSlice.ts:17](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L17)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/detailsViewSectionSlice.ts:14](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L14)
+[components/DetailsViewSection/detailsViewSectionSlice.ts:14](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L14)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/detailsViewSectionSlice.ts:12](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L12)
+[components/DetailsViewSection/detailsViewSectionSlice.ts:12](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/DetailsViewSection/detailsViewSectionSlice.ts#L12)

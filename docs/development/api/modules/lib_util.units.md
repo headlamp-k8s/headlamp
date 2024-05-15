@@ -14,7 +14,7 @@ slug: "lib_util.units"
 
 #### Defined in
 
-[lib/units.ts:10](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L10)
+[lib/units.ts:10](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L10)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/units.ts:12](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L12)
+[lib/units.ts:12](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L12)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/units.ts:11](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L11)
+[lib/units.ts:11](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L11)
 
 ## Functions
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[lib/units.ts:62](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L62)
+[lib/units.ts:62](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L62)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[lib/units.ts:14](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L14)
+[lib/units.ts:14](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L14)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/units.ts:18](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L18)
+[lib/units.ts:18](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L18)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[lib/units.ts:72](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L72)
+[lib/units.ts:72](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L72)
 
 ___
 
@@ -144,4 +144,4 @@ ___
 
 #### Defined in
 
-[lib/units.ts:49](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/units.ts#L49)
+[lib/units.ts:49](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/units.ts#L49)

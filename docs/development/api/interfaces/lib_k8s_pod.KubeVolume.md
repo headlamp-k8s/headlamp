@@ -18,4 +18,4 @@ slug: "lib_k8s_pod.KubeVolume"
 
 #### Defined in
 
-[lib/k8s/pod.ts:13](https://github.com/headlamp-k8s/headlamp/blob/2ce94491/frontend/src/lib/k8s/pod.ts#L13)
+[lib/k8s/pod.ts:13](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/pod.ts#L13)
