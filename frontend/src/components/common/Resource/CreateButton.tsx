@@ -18,10 +18,11 @@ import EditorDialog from './EditorDialog';
 
 interface CreateButtonProps {
   isNarrow?: boolean;
+  initialContent?: string | object;
 }
 
 export default function CreateButton(props: CreateButtonProps) {
-  const { isNarrow } = props;
+  const { isNarrow, initialContent } = props;
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -132,7 +133,7 @@ export default function CreateButton(props: CreateButtonProps) {
         </Button>
       )}
       <EditorDialog
-        item={{}}
+        item={initialContent || {}}
         open={openDialog}
         onClose={() => setOpenDialog(false)}
         onSave={handleSave}
