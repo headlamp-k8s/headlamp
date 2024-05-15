@@ -119,6 +119,9 @@ export default function EditorDialog(props: EditorDialogProps) {
   // Update the code when the item changes, but only if the code hasn't been touched.
   React.useEffect(() => {
     if (!item || Object.keys(item || {}).length === 0) {
+      const defaultCode = '# Enter your YAML or JSON here';
+      originalCodeRef.current = { code: defaultCode, format: 'yaml' };
+      setCode({ code: defaultCode, format: 'yaml' });
       return;
     }
 
