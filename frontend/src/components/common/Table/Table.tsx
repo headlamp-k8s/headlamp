@@ -1,5 +1,5 @@
 import { Box, Paper } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 import {
   MaterialReactTable,
   MRT_ColumnDef as MaterialTableColumn,
