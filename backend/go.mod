@@ -16,7 +16,7 @@ require (
 	github.com/gorilla/schema v1.2.1
 	github.com/knadh/koanf v1.5.0
 	github.com/pkg/errors v0.9.1
-	github.com/rs/zerolog v1.31.0
+	github.com/rs/zerolog v1.32.0
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/oauth2 v0.20.0
 	helm.sh/helm/v3 v3.15.0
