@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.20.0
 	github.com/gobwas/glob v0.2.3
 	github.com/gofrs/flock v0.8.1
-	github.com/google/uuid v1.5.0
+	github.com/google/uuid v1.6.0
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/schema v1.3.0
