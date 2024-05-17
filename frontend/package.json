@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "productName": "Headlamp",
+  "engines" : {
+    "npm" : ">=10.0.0",
+    "node" : ">=20.9.0"
+  },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@apidevtools/swagger-parser": "^10.0.3",
