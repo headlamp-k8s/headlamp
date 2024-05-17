@@ -9,7 +9,7 @@ exports[`Storyshots Label/HeaderLabel Header Label 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1 makeStyles-label css-1os2m0i-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-1vtvfmb-MuiTypography-root"
       >
         name
       </p>
@@ -21,7 +21,7 @@ exports[`Storyshots Label/HeaderLabel Header Label 1`] = `
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 makeStyles-value css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-l0k1rq-MuiTypography-root"
         >
           value
         </p>
@@ -40,7 +40,7 @@ exports[`Storyshots Label/HeaderLabel Header Label Tool Tip 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <p
-        class="MuiTypography-root MuiTypography-body1 makeStyles-label css-1os2m0i-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-body1 css-1vtvfmb-MuiTypography-root"
       >
         name
       </p>
@@ -57,7 +57,7 @@ exports[`Storyshots Label/HeaderLabel Header Label Tool Tip 1`] = `
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <p
-          class="MuiTypography-root MuiTypography-body1 makeStyles-value css-1ezega9-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 css-l0k1rq-MuiTypography-root"
         >
           value
         </p>

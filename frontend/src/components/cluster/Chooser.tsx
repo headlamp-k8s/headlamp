@@ -14,7 +14,6 @@ import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -101,52 +100,6 @@ export function ClusterTitle(props: ClusterTitleProps) {
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  chooserDialog: {
-    [theme.breakpoints.up('sm')]: {
-      minWidth: 500,
-    },
-    '& .MuiTypography-h4': {
-      textAlign: 'center',
-      fontSize: '2.2rem',
-      color: theme.palette.primaryColor,
-      paddingTop: theme.spacing(3),
-      paddingBottom: theme.spacing(3),
-    },
-  },
-  chooserDialogCover: {
-    background: theme.palette.common.black,
-  },
-  chooserTitle: {
-    background: theme.palette.common.black,
-    textAlign: 'center',
-    alignItems: 'center',
-    display: 'flex',
-  },
-  logo: {
-    height: '32px',
-    width: 'auto',
-  },
-}));
-
-const useClusterButtonStyles = makeStyles({
-  root: {
-    width: 128,
-    height: 115,
-    paddingTop: '10%',
-  },
-  content: {
-    textAlign: 'center',
-    paddingTop: 0,
-  },
-  clusterName: {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    display: 'block',
-  },
-});
-
 interface ClusterButtonProps extends PropsWithChildren<{}> {
   cluster: Cluster;
   onClick?: (...args: any[]) => void;
@@ -154,19 +107,34 @@ interface ClusterButtonProps extends PropsWithChildren<{}> {
 }
 
 function ClusterButton(props: ClusterButtonProps) {
-  const classes = useClusterButtonStyles();
   const theme = useTheme();
   const { cluster, onClick = undefined, focusedRef } = props;
 
   return (
     <ButtonBase focusRipple ref={focusedRef} onClick={onClick}>
-      <Card className={classes.root}>
-        <CardContent className={classes.content}>
+      <Card
+        sx={{
+          width: 128,
+          height: 115,
+          paddingTop: '10%',
+        }}
+      >
+        <CardContent
+          sx={{
+            textAlign: 'center',
+            paddingTop: 0,
+          }}
+        >
           <Icon icon="mdi:kubernetes" width="50" height="50" color={theme.palette.primaryColor} />
           <Typography
             color="textSecondary"
             gutterBottom
-            className={classes.clusterName}
+            sx={{
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              display: 'block',
+            }}
             title={cluster.name}
           >
             {cluster.name}
@@ -283,7 +251,6 @@ interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' 
 }
 
 export function ClusterDialog(props: ClusterDialogProps) {
-  const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -316,11 +283,22 @@ export function ClusterDialog(props: ClusterDialogProps) {
       fullScreen={fullScreen}
       open={open !== undefined ? open : show}
       onClose={handleClose}
-      className={useCover ? classes.chooserDialogCover : ''}
+      sx={
+        useCover
+          ? {
+              background: theme.palette.common.black,
+            }
+          : {}
+      }
       {...otherProps}
     >
       <DialogTitle
-        className={classes.chooserTitle}
+        sx={{
+          background: theme.palette.common.black,
+          textAlign: 'center',
+          alignItems: 'center',
+          display: 'flex',
+        }}
         buttons={[
           showInfoButton && (
             <IconButton
@@ -339,9 +317,31 @@ export function ClusterDialog(props: ClusterDialogProps) {
           ),
         ]}
       >
-        <AppLogo logoType={'large'} className={classes.logo} themeName="dark" />
+        <AppLogo
+          logoType={'large'}
+          sx={{
+            height: '32px',
+            width: 'auto',
+          }}
+          themeName="dark"
+        />
       </DialogTitle>
-      <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
+      <DialogContent
+        sx={{
+          [theme.breakpoints.up('sm')]: {
+            minWidth: 500,
+          },
+          '& .MuiTypography-h4': {
+            textAlign: 'center',
+            fontSize: '2.2rem',
+            color: theme.palette.primaryColor,
+            paddingTop: theme.spacing(3),
+            paddingBottom: theme.spacing(3),
+          },
+        }}
+      >
+        {children}
+      </DialogContent>
     </Dialog>
   );
 }

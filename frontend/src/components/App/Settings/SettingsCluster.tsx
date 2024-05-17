@@ -1,7 +1,6 @@
 import { Icon, InlineIcon } from '@iconify/react';
 import { Box, Chip, IconButton, TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -12,12 +11,6 @@ import { deleteCluster } from '../../../lib/k8s/apiProxy';
 import { setConfig } from '../../../redux/configSlice';
 import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
-
-const useStyles = makeStyles(() => ({
-  input: {
-    maxWidth: 250,
-  },
-}));
 
 function isValidNamespaceFormat(namespace: string) {
   // We allow empty strings just because that's the default value in our case.
@@ -39,7 +32,6 @@ export default function SettingsCluster() {
   const [userDefaultNamespace, setUserDefaultNamespace] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
-  const classes = useStyles();
   const theme = useTheme();
 
   const history = useHistory();
@@ -205,7 +197,7 @@ export default function SettingsCluster() {
                     ) : (
                       <Icon width={24} icon="mdi:check-bold" />
                     ),
-                    className: classes.input,
+                    sx: { maxWidth: 250 },
                   }}
                 />
               ),
@@ -254,7 +246,7 @@ export default function SettingsCluster() {
                         }
                       },
                       autoComplete: 'off',
-                      className: classes.input,
+                      sx: { maxWidth: 250 },
                     }}
                   />
                   <Box

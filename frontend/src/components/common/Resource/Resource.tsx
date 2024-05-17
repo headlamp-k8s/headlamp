@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
-import { InputLabel, Theme } from '@mui/material';
+import { InputLabel } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Grid, { GridProps, GridSize } from '@mui/material/Grid';
@@ -9,7 +9,7 @@ import Input, { InputProps } from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
 import { BaseTextFieldProps } from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/system';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
@@ -47,7 +47,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import InnerTable from '../InnerTable';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
-import { useMetadataDisplayStyles } from '.';
+import { metadataStyles } from '.';
 import { MainInfoSection, MainInfoSectionProps } from './MainInfoSection/MainInfoSection';
 import { MainInfoHeader } from './MainInfoSection/MainInfoSectionHeader';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
@@ -77,12 +77,6 @@ export function ResourceLink(props: ResourceLinkProps) {
     </Link>
   );
 }
-
-const useDetailsGridStyles = makeStyles((theme: Theme) => ({
-  section: {
-    marginBottom: theme.spacing(2),
-  },
-}));
 
 export interface DetailsGridProps
   extends PropsWithChildren<Omit<MainInfoSectionProps, 'resource'>> {
@@ -122,7 +116,6 @@ export function DetailsGrid(props: DetailsGridProps) {
   } = props;
   const { t } = useTranslation();
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
-  const classes = useDetailsGridStyles();
   const hasPreviousRoute = useHasPreviousRoute();
   const detailViews = useTypedSelector(state => state.detailsViewSection.detailsViewSections);
   const detailViewsProcessors = useTypedSelector(
@@ -329,7 +322,11 @@ export function DetailsGrid(props: DetailsGridProps) {
   }
 
   return (
-    <PageGrid className={classes.section}>
+    <PageGrid
+      sx={theme => ({
+        marginBottom: theme.spacing(2),
+      })}
+    >
       {React.Children.toArray(
         sectionsProcessed.map(section => {
           const Section = has(section, 'section')
@@ -598,14 +595,12 @@ export function VolumeMounts(props: VolumeMountsProps) {
 }
 
 export function LivenessProbes(props: { liveness: KubeContainer['livenessProbe'] }) {
-  const classes = useMetadataDisplayStyles({});
-
   const { liveness } = props;
 
   function LivenessProbeItem(props: { children: React.ReactNode }) {
     return props.children ? (
       <Box p={0.5}>
-        <Typography className={classes.metadataValueLabel} display="inline">
+        <Typography sx={metadataStyles} display="inline">
           {props.children}
         </Typography>
       </Box>
@@ -640,13 +635,6 @@ export function LivenessProbes(props: { liveness: KubeContainer['livenessProbe']
   );
 }
 
-const useContainerInfoStyles = makeStyles((theme: Theme) => ({
-  imageID: {
-    paddingTop: theme.spacing(1),
-    fontSize: '.95rem',
-  },
-}));
-
 export interface ContainerInfoProps {
   container: KubeContainer;
   resource?: KubeObjectInterface | null;
@@ -655,8 +643,6 @@ export interface ContainerInfoProps {
 
 export function ContainerInfo(props: ContainerInfoProps) {
   const { container, status, resource } = props;
-  const theme = useTheme();
-  const classes = useContainerInfoStyles(theme);
   const { t } = useTranslation(['glossary', 'translation']);
 
   const [startedDate, finishDate] = React.useMemo(() => {
@@ -786,7 +772,12 @@ export function ContainerInfo(props: ContainerInfoProps) {
           <>
             <Typography>{container.image}</Typography>
             {status?.imageID && (
-              <Typography className={classes.imageID}>
+              <Typography
+                sx={theme => ({
+                  paddingTop: theme.spacing(1),
+                  fontSize: '.95rem',
+                })}
+              >
                 <Typography component="span" style={{ fontWeight: 'bold' }}>
                   ID:
                 </Typography>{' '}

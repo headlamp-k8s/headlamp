@@ -1,26 +1,13 @@
 import { Icon, IconProps } from '@iconify/react';
-import { Tooltip } from '@mui/material';
+import { styled, Tooltip } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import withStyles from '@mui/styles/withStyles';
 import React from 'react';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
 
 const ExpandedIconSize = 20;
 const CollapsedIconSize = 24;
-
-const IconTooltip = withStyles(() => ({
-  tooltip: {
-    backgroundColor: '#474747',
-    color: '#fff',
-    minWidth: 60,
-    padding: '0.5rem',
-    fontSize: '0.8rem',
-    border: '1px solid #474747',
-    marginLeft: '1rem',
-  },
-}))(Tooltip);
 
 interface ListItemLinkProps {
   primary: string;
@@ -34,6 +21,9 @@ interface ListItemLinkProps {
     [prop: string]: any;
   };
 }
+
+// make a styled() li
+const StyledLi = styled('li')();
 
 export default function ListItemLink(props: ListItemLinkProps) {
   const { primary, pathname, search, icon, name, containerProps, iconOnly, subtitle, ...other } =
@@ -64,18 +54,30 @@ export default function ListItemLink(props: ListItemLinkProps) {
   let listItemLinkContainer = listItemLink;
   if (!primary) {
     listItemLinkContainer = listItemLink && (
-      <IconTooltip title={name} placement="right-start">
+      <Tooltip
+        title={name}
+        placement="right-start"
+        sx={{
+          backgroundColor: '#474747',
+          color: '#fff',
+          minWidth: 60,
+          padding: '0.5rem',
+          fontSize: '0.8rem',
+          border: '1px solid #474747',
+          marginLeft: '1rem',
+        }}
+      >
         {listItemLink}
-      </IconTooltip>
+      </Tooltip>
     );
   }
 
   return (
-    <li {...containerProps}>
+    <StyledLi {...containerProps}>
       <ListItem button component={renderLink} {...other}>
         {listItemLinkContainer}
         {!iconOnly && <ListItemText primary={primary} secondary={subtitle} />}
       </ListItem>
-    </li>
+    </StyledLi>
   );
 }

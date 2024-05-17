@@ -37,8 +37,8 @@ exports[`Storyshots Charts/TileChart With Progress 1`] = `
         >
           
           <div
-            class="recharts-wrapper makeStyles-chart"
-            style="position: relative; cursor: default; width: 112px; height: 112px;"
+            class="recharts-wrapper"
+            style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
           >
             <svg
               class="recharts-surface"

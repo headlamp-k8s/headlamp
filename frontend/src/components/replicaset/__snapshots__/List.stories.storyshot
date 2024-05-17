@@ -9,7 +9,7 @@ exports[`Storyshots ReplicaSet/List Replica Sets 1`] = `
       class="MuiBox-root css-j1fy4m"
     >
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
       >
         <div
           class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -18,7 +18,7 @@ exports[`Storyshots ReplicaSet/List Replica Sets 1`] = `
             class="MuiBox-root css-70qvj9"
           >
             <h1
-              class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
             >
               Replica Sets
             </h1>
@@ -1035,7 +1035,7 @@ pod-template-hash=b123456
                   >
                     <p
                       aria-label="2023-07-07T05:36:02.000Z"
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                       data-mui-internal-clone-element="true"
                     >
                       3mo
@@ -1131,7 +1131,7 @@ pod-template-hash=a123456
                   >
                     <p
                       aria-label="2023-05-25T05:15:05.000Z"
-                      class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                       data-mui-internal-clone-element="true"
                     >
                       3mo

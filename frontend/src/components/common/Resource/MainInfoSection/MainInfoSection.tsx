@@ -6,7 +6,7 @@ import { KubeObject } from '../../../../lib/k8s/cluster';
 import { createRouteURL } from '../../../../lib/router';
 import { HeaderAction } from '../../../../redux/actionButtonsSlice';
 import Loader from '../../../common/Loader';
-import { HeaderStyleProps } from '../../../common/SectionHeader';
+import { HeaderStyle } from '../../../common/SectionHeader';
 import { NameValueTableRow } from '../../../common/SimpleTable';
 import Empty from '../../EmptyContent';
 import SectionBox from '../../SectionBox';
@@ -26,7 +26,7 @@ export interface MainInfoSectionProps {
     | React.ReactNode[]
     | null
     | HeaderAction[];
-  headerStyle?: HeaderStyleProps['headerStyle'];
+  headerStyle?: HeaderStyle;
   noDefaultActions?: boolean;
   /** The route or location to go to. If it's an empty string, then the "browser back" function is used. If null, no back button will be shown. */
   backLink?: string | ReturnType<typeof useLocation> | null;

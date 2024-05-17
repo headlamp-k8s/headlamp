@@ -35,7 +35,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -44,7 +44,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h1
-                  class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
                 >
                   CustomResourceDefinition
                 </h1>
@@ -83,15 +83,15 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -100,12 +100,12 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -114,12 +114,12 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Group
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -128,12 +128,12 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Version
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -142,12 +142,12 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Scope
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -156,12 +156,12 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Resource
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -186,7 +186,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -195,7 +195,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Accepted Names
                 </h2>
@@ -209,10 +209,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             class="MuiBox-root css-1txv3mw"
           >
             <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
             >
               <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+                class="MuiTable-root css-9gafzc-MuiTable-root"
               >
                 <thead
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
@@ -221,25 +221,25 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Plural
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Singular
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Kind
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       List Kind
@@ -290,7 +290,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -299,7 +299,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Versions
                 </h2>
@@ -313,10 +313,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             class="MuiBox-root css-1txv3mw"
           >
             <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
             >
               <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+                class="MuiTable-root css-1ndbor9-MuiTable-root"
               >
                 <thead
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
@@ -325,19 +325,19 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Name
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Served
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Storage
@@ -383,7 +383,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -392,7 +392,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Conditions
                 </h2>
@@ -432,7 +432,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -441,7 +441,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h1
-                  class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
                 >
                   Objects
                 </h1>
@@ -1021,7 +1021,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       >
                         <p
                           aria-label="2021-12-15T14:57:13.000Z"
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                         >
                           3mo
@@ -1067,7 +1067,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       >
                         <p
                           aria-label="2021-12-15T14:57:13.000Z"
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                         >
                           3mo
@@ -1223,7 +1223,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -1232,7 +1232,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Events
                 </h2>
@@ -1246,10 +1246,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             class="MuiBox-root css-1txv3mw"
           >
             <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
             >
               <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+                class="MuiTable-root css-vd1o8p-MuiTable-root"
               >
                 <thead
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
@@ -1258,31 +1258,31 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Type
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Reason
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       From
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Message
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-ojhczg-MuiTableCell-root"
                       scope="col"
                     >
                       Age
@@ -1328,8 +1328,8 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                         class="MuiBox-root css-k008qs"
                       >
                         <label
-                          class="makeStyles-fullText"
                           id=""
+                          style="word-break: break-all; white-space: normal;"
                         >
                           Created
                         </label>
@@ -1340,7 +1340,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     >
                       <p
                         aria-label="2021-03-01T00:00:00.000Z"
-                        class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                         data-mui-internal-clone-element="true"
                       >
                         3mo
@@ -1365,7 +1365,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
     class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
         class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -1374,7 +1374,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
           class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
           >
             Custom Resources
           </h1>
@@ -1960,7 +1960,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 >
                   <p
                     aria-label="2021-12-15T14:57:13.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
                     3mo

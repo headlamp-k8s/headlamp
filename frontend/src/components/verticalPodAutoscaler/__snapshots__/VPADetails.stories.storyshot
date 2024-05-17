@@ -3,7 +3,7 @@
 exports[`Storyshots VPA/VPADetailsView Default 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -40,7 +40,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -49,7 +49,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
               class="MuiBox-root css-70qvj9"
             >
               <h1
-                class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
               >
                 VerticalPodAutoscaler
               </h1>
@@ -99,15 +99,15 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container makeStyles-table css-11lq3yg-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
               >
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Name
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -116,12 +116,12 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Namespace
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -131,12 +131,12 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Creation
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
@@ -145,12 +145,12 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Annotations
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <div
                     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-17wqeb1-MuiGrid-root"
@@ -165,7 +165,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                         <p
                           aria-label="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"autoscaling.k8s.io/v1\\",\\"kind\\":\\"VerticalPodAutoscaler\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"multi-container-vpa\\",\\"namespace\\":\\"default\\"},\\"spec\\":{\\"resourcePolicy\\":{\\"containerPolicies\\":[{\\"containerName\\":\\"web-container\\",\\"controlledResources\\":[\\"cpu\\",\\"memory\\"],\\"controlledValues\\":\\"RequestsAndLimits\\",\\"minAllowed\\":{\\"cpu\\":\\"80m\\",\\"memory\\":\\"512Mi\\"}},{\\"containerName\\":\\"db-container\\",\\"controlledResources\\":[\\"cpu\\",\\"memory\\"],\\"controlledValues\\":\\"RequestsAndLimits\\",\\"minAllowed\\":{\\"cpu\\":\\"1000m\\",\\"memory\\":\\"2Gi\\"}}]},\\"targetRef\\":{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"name\\":\\"multi-container-deployment\\"},\\"updatePolicy\\":{\\"updateMode\\":\\"Auto\\"}}}
 "
-                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-141xs6k-MuiTypography-root"
                           data-mui-internal-clone-element="true"
                         >
                           kubectl.kubernetes.io/last-applied-configuration: …
@@ -175,12 +175,12 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                   </div>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
                   Reference
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -192,12 +192,12 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                   </a>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
                 >
                   Update Policy
                 </dt>
                 <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
                   Update Mode
                   :
@@ -219,7 +219,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -228,7 +228,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Container Policy
                 </h2>
@@ -242,10 +242,10 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
             class="MuiBox-root css-1txv3mw"
           >
             <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
             >
               <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+                class="MuiTable-root css-wd17ns-MuiTable-root"
               >
                 <thead
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
@@ -254,37 +254,37 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Container
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Controlled Resources
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Controlled Values
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Min Allowed
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Max Allowed
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Mode
@@ -375,7 +375,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -384,7 +384,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Conditions
                 </h2>
@@ -398,10 +398,10 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
             class="MuiBox-root css-1txv3mw"
           >
             <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
             >
               <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+                class="MuiTable-root css-vd1o8p-MuiTable-root"
               >
                 <thead
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
@@ -410,31 +410,31 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Type
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Reason
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Message
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Last Transition Time
@@ -468,7 +468,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                     >
                       <p
                         aria-label="2023-11-23T07:18:48.000Z"
-                        class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                         data-mui-internal-clone-element="true"
                       >
                         3 months
@@ -493,7 +493,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -502,7 +502,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Recommendations
                 </h2>
@@ -516,10 +516,10 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
             class="MuiBox-root css-1txv3mw"
           >
             <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
             >
               <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+                class="MuiTable-root css-vd1o8p-MuiTable-root"
               >
                 <thead
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
@@ -528,31 +528,31 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Container
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Lower Bound
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Target
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Upper Bound
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
                       scope="col"
                     >
                       Uncapped Target
@@ -637,7 +637,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
           class="MuiBox-root css-j1fy4m"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
           >
             <div
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -646,7 +646,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
                 class="MuiBox-root css-70qvj9"
               >
                 <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                 >
                   Events
                 </h2>
@@ -683,7 +683,7 @@ exports[`Storyshots VPA/VPADetailsView Default 1`] = `
 exports[`Storyshots VPA/VPADetailsView Error 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -720,7 +720,7 @@ exports[`Storyshots VPA/VPADetailsView Error 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -776,7 +776,7 @@ exports[`Storyshots VPA/VPADetailsView Error 1`] = `
 exports[`Storyshots VPA/VPADetailsView No Item Yet 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -813,7 +813,7 @@ exports[`Storyshots VPA/VPADetailsView No Item Yet 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"

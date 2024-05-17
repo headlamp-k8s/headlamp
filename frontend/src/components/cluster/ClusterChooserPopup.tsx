@@ -13,7 +13,6 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
@@ -23,43 +22,6 @@ import { useCluster, useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { createRouteURL } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-
-const useStyles = makeStyles(theme => ({
-  button: {
-    backgroundColor: theme.palette.sidebarBg,
-    color: theme.palette.primary.contrastText,
-    '&:hover': {
-      color: theme.palette.text.primary,
-    },
-    width: '100%',
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    textTransform: 'none',
-  },
-  list: {
-    width: '280px',
-    minWidth: '280px',
-    minHeight: '200px',
-    maxHeight: '50vh',
-    overflowY: 'auto',
-    position: 'relative',
-
-    '& .MuiListItemIcon-root': {
-      minWidth: 0,
-      paddingRight: theme.spacing(2),
-    },
-    '& .MuiListItem-gutters': {
-      paddingLeft: 0,
-    },
-  },
-  recentClustersSubheader: {
-    paddingLeft: 0,
-    lineHeight: theme.typography.pxToRem(24),
-  },
-  popover: {
-    marginTop: '-5px',
-  },
-}));
 
 function ClusterListItem(props: { cluster: Cluster; onClick: () => void; selected?: boolean }) {
   const { cluster, selected, onClick } = props;
@@ -101,7 +63,6 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
   const [filter, setFilter] = React.useState('');
   const clusters = useClustersConf();
   const history = useHistory();
-  const classes = useStyles();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [activeDescendantIndex, setActiveDescendantIndex] = React.useState<number>(-1);
@@ -249,7 +210,9 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
       }}
       aria-labelledby="chooser-dialog-title"
       aria-busy={clusters === null}
-      className={classes.popover}
+      sx={{
+        marginTop: '-5px',
+      }}
       {...otherProps}
     >
       <Box p={2}>
@@ -269,13 +232,37 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
           }}
           {...activeDescendantProp}
         />
-        <MenuList id="cluster-chooser-list" className={classes.list} dense>
+        <MenuList
+          id="cluster-chooser-list"
+          sx={{
+            width: '280px',
+            minWidth: '280px',
+            minHeight: '200px',
+            maxHeight: '50vh',
+            overflowY: 'auto',
+            position: 'relative',
+            '& .MuiListItemIcon-root': {
+              minWidth: 0,
+              paddingRight: theme.spacing(2),
+            },
+            '& .MuiListItem-gutters': {
+              paddingLeft: 0,
+            },
+          }}
+          dense
+        >
           {recentClusters.length > 0 && (
             <>
               {
                 // We only show the subheader if the recent clusters list is not all the clusters we have.
                 clustersToShow.length > 0 && (
-                  <ListSubheader disableSticky className={classes.recentClustersSubheader}>
+                  <ListSubheader
+                    disableSticky
+                    sx={{
+                      paddingLeft: 0,
+                      lineHeight: theme.typography.pxToRem(24),
+                    }}
+                  >
                     {t('Recent clusters')}
                   </ListSubheader>
                 )
@@ -304,7 +291,17 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
       {helpers.isElectron() && (
         <>
           <Button
-            className={classes.button}
+            sx={{
+              backgroundColor: theme.palette.sidebarBg,
+              color: theme.palette.primary.contrastText,
+              '&:hover': {
+                color: theme.palette.text.primary,
+              },
+              width: '100%',
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              textTransform: 'none',
+            }}
             onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           >
             {t('translation|Add Cluster')}

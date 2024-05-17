@@ -10,8 +10,8 @@ exports[`Storyshots common/ShowHideLabel Basic 1`] = `
     >
       <label
         aria-expanded="false"
-        class="makeStyles-fullText"
         id="label-id"
+        style="word-break: break-all; white-space: normal;"
       >
         This is a placeholder label text that is many characters long. It is meant to be used as a temporary label for a UI element until the actual label is available. The text is long enough to fill up the space allocated for the label and provide a realistic pr
         …
@@ -51,8 +51,8 @@ exports[`Storyshots common/ShowHideLabel Expanded 1`] = `
     >
       <label
         aria-expanded="true"
-        class="makeStyles-fullText"
         id="my-label"
+        style="word-break: break-all; white-space: normal;"
       >
         This is a placeholder label text that is many characters long. It is meant to be used as a temporary label for a UI element until the actual label is available. The text is long enough to fill up the space allocated for the label and provide a realistic preview of how the label will look in the final UI. You can replace this text with the actual label text once it is available. This will ensure that the UI looks complete and professional even during the development phase. Thank you for using this placeholder text!
         <button
@@ -82,8 +82,8 @@ exports[`Storyshots common/ShowHideLabel Short Text 1`] = `
       class="MuiBox-root css-k008qs"
     >
       <label
-        class="makeStyles-fullText"
         id="my-label2"
+        style="word-break: break-all; white-space: normal;"
       >
         Short text
       </label>

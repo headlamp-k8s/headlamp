@@ -5,8 +5,6 @@ import Drawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -34,65 +32,6 @@ export const drawerWidthClosed = 64;
 
 // exported for backwards compatibility for plugins
 export { DefaultSidebars };
-
-const useStyle = makeStyles(theme => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    background: theme.palette.sidebarBg,
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    background: theme.palette.sidebarBg,
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: '56px',
-    [theme.breakpoints.down('xs')]: {
-      background: 'initial',
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: theme.spacing(0),
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: '72px',
-    },
-    background: theme.palette.sidebarBg,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    background: theme.palette.sidebarBg,
-  },
-  sidebarGrid: {
-    height: '100%',
-  },
-  toolbar: theme.mixins.toolbar,
-  linkArea: {
-    '&, & *, & svg': {
-      color: theme.palette.sidebarLink.color,
-    },
-    '& .MuiButton-root': {
-      color: theme.palette.sidebarButtonInLinkArea.color,
-      '&:hover': {
-        background: theme.palette.sidebarButtonInLinkArea.hover.background,
-      },
-    },
-    '& .MuiButton-containedPrimary': {
-      background: theme.palette.sidebarButtonInLinkArea.primary.background,
-      '&:hover': {
-        background: theme.palette.sidebarButtonInLinkArea.hover.background,
-      },
-    },
-  },
-}));
 
 export function useSidebarInfo() {
   const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
@@ -300,7 +239,6 @@ export function PureSidebar({
   search,
   linkArea,
 }: PureSidebarProps) {
-  const classes = useStyle();
   const { t } = useTranslation();
   const temporarySideBarOpen = open === true && isTemporaryDrawer && openUserSelected === true;
 
@@ -324,9 +262,17 @@ export function PureSidebar({
 
   const contents = (
     <>
-      {!isTemporaryDrawer && <Box className={classes.toolbar} />}
+      {!isTemporaryDrawer && (
+        <Box
+          sx={theme => ({
+            ...theme.mixins.toolbar,
+          })}
+        />
+      )}
       <Grid
-        className={classes.sidebarGrid}
+        sx={{
+          height: '100%',
+        }}
         container
         direction="column"
         justifyContent="space-between"
@@ -349,7 +295,27 @@ export function PureSidebar({
           </List>
         </Grid>
         <Grid item>
-          <Box textAlign="center" p={0} className={classes.linkArea}>
+          <Box
+            textAlign="center"
+            p={0}
+            sx={theme => ({
+              '&, & *, & svg': {
+                color: theme.palette.sidebarLink.color,
+              },
+              '& .MuiButton-root': {
+                color: theme.palette.sidebarButtonInLinkArea.color,
+                '&:hover': {
+                  background: theme.palette.sidebarButtonInLinkArea.hover.background,
+                },
+              },
+              '& .MuiButton-containedPrimary': {
+                background: theme.palette.sidebarButtonInLinkArea.primary.background,
+                '&:hover': {
+                  background: theme.palette.sidebarButtonInLinkArea.hover.background,
+                },
+              },
+            })}
+          >
             {linkArea}
           </Box>
         </Grid>
@@ -357,44 +323,62 @@ export function PureSidebar({
     </>
   );
 
-  if (isTemporaryDrawer) {
-    return (
-      <Box component="nav" aria-label={t('translation|Navigation')}>
-        <Drawer
-          variant="temporary"
-          className={clsx(classes.drawer, {
-            [classes.drawerOpen]: temporarySideBarOpen,
-            [classes.drawerClose]: !temporarySideBarOpen,
-          })}
-          classes={{
-            paper: clsx({
-              [classes.drawerOpen]: temporarySideBarOpen,
-              [classes.drawerClose]: !temporarySideBarOpen,
-            }),
-          }}
-          open={temporarySideBarOpen}
-          onClose={onToggleOpen}
-        >
-          {contents}
-        </Drawer>
-      </Box>
-    );
-  }
+  const conditionalProps = isTemporaryDrawer
+    ? {
+        open: temporarySideBarOpen,
+        onClose: onToggleOpen,
+      }
+    : {};
 
   return (
     <Box component="nav" aria-label={t('translation|Navigation')}>
       <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: largeSideBarOpen,
-          [classes.drawerClose]: !largeSideBarOpen,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: largeSideBarOpen,
-            [classes.drawerClose]: !largeSideBarOpen,
-          }),
+        variant={isTemporaryDrawer ? 'temporary' : 'permanent'}
+        sx={theme => {
+          const drawer = {
+            width: drawerWidth,
+            flexShrink: 0,
+            background: theme.palette.sidebarBg,
+          };
+
+          const drawerOpen = {
+            width: drawerWidth,
+            transition: theme.transitions.create('width', {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.enteringScreen,
+            }),
+            background: theme.palette.sidebarBg,
+          };
+
+          const drawerClose = {
+            transition: theme.transitions.create('width', {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
+            overflowX: 'hidden',
+            width: '56px',
+            [theme.breakpoints.down('xs')]: {
+              background: 'initial',
+            },
+            [theme.breakpoints.down('sm')]: {
+              width: theme.spacing(0),
+            },
+            [theme.breakpoints.up('sm')]: {
+              width: '72px',
+            },
+            background: theme.palette.sidebarBg,
+          };
+
+          if (
+            (isTemporaryDrawer && temporarySideBarOpen) ||
+            (!isTemporaryDrawer && largeSideBarOpen)
+          ) {
+            return { ...drawer, ...drawerOpen, '& .MuiPaper-root': { ...drawerOpen } };
+          } else {
+            return { ...drawer, ...drawerClose, '& .MuiPaper-root': { ...drawerClose } };
+          }
         }}
+        {...conditionalProps}
       >
         {contents}
       </Drawer>

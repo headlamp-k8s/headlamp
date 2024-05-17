@@ -2,27 +2,9 @@ import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 
-type HeaderStyle = 'main' | 'subsection' | 'normal' | 'label';
-
-export interface HeaderStyleProps {
-  noPadding?: boolean;
-  headerStyle?: HeaderStyle;
-}
-
-const useStyles = makeStyles(theme => ({
-  sectionHeader: ({ noPadding }: HeaderStyleProps) => ({
-    padding: theme.spacing(noPadding ? 0 : 2),
-    paddingTop: theme.spacing(noPadding ? 0 : 3),
-    paddingRight: theme.spacing(noPadding ? 0 : 2),
-  }),
-  sectionTitle: ({ headerStyle }: HeaderStyleProps) => ({
-    ...theme.palette.headerStyle[headerStyle || 'normal'],
-    whiteSpace: 'pre-wrap',
-  }),
-}));
+export type HeaderStyle = 'main' | 'subsection' | 'normal' | 'label';
 
 export interface SectionHeaderProps {
   title: string;
@@ -34,7 +16,6 @@ export interface SectionHeaderProps {
 
 export default function SectionHeader(props: SectionHeaderProps) {
   const { noPadding = false, headerStyle = 'main', titleSideActions = [] } = props;
-  const classes = useStyles({ noPadding, headerStyle });
   const actions = props.actions || [];
   const titleVariants: { [key: string]: Variant } = {
     main: 'h1',
@@ -48,7 +29,11 @@ export default function SectionHeader(props: SectionHeaderProps) {
       container
       alignItems="center"
       justifyContent="space-between"
-      className={classes.sectionHeader}
+      sx={theme => ({
+        padding: theme.spacing(noPadding ? 0 : 2),
+        paddingTop: theme.spacing(noPadding ? 0 : 3),
+        paddingRight: '0',
+      })}
       spacing={2}
     >
       <Grid item>
@@ -58,7 +43,10 @@ export default function SectionHeader(props: SectionHeaderProps) {
               <Typography
                 variant={titleVariants[headerStyle]}
                 noWrap
-                className={classes.sectionTitle}
+                sx={theme => ({
+                  ...theme.palette.headerStyle[headerStyle || 'normal'],
+                  whiteSpace: 'pre-wrap',
+                })}
               >
                 {props.title}
               </Typography>

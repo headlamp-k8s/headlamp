@@ -18,7 +18,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
             class="MuiBox-root css-j1fy4m"
           >
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
             >
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -27,7 +27,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   class="MuiBox-root css-70qvj9"
                 >
                   <h2
-                    class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
                   >
                     Overview
                   </h2>
@@ -80,8 +80,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           
                           <div
-                            class="recharts-wrapper makeStyles-chart"
-                            style="position: relative; cursor: default; width: 112px; height: 112px;"
+                            class="recharts-wrapper"
+                            style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
                           >
                             <svg
                               class="recharts-surface"
@@ -179,8 +179,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           
                           <div
-                            class="recharts-wrapper makeStyles-chart"
-                            style="position: relative; cursor: default; width: 112px; height: 112px;"
+                            class="recharts-wrapper"
+                            style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
                           >
                             <svg
                               class="recharts-surface"
@@ -279,8 +279,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           
                           <div
-                            class="recharts-wrapper makeStyles-chart"
-                            style="position: relative; cursor: default; width: 112px; height: 112px;"
+                            class="recharts-wrapper"
+                            style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
                           >
                             <svg
                               class="recharts-surface"
@@ -382,8 +382,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           
                           <div
-                            class="recharts-wrapper makeStyles-chart"
-                            style="position: relative; cursor: default; width: 112px; height: 112px;"
+                            class="recharts-wrapper"
+                            style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
                           >
                             <svg
                               class="recharts-surface"
@@ -462,7 +462,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
             class="MuiBox-root css-j1fy4m"
           >
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
             >
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -471,7 +471,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   class="MuiBox-root css-70qvj9"
                 >
                   <h1
-                    class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
                   >
                     Events
                   </h1>
@@ -1237,7 +1237,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <span
                             aria-label="FailedGetResourceMetric"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1tmhfi1-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                             style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                           >
@@ -1252,8 +1252,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                             class="MuiBox-root css-k008qs"
                           >
                             <label
-                              class="makeStyles-fullText"
                               id="abc123456"
+                              style="word-break: break-all; white-space: normal;"
                             >
                               failed to get cpu utilization: missing request for cpu
                             </label>
@@ -1265,7 +1265,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <p
                             aria-label="2024-02-13T15:42:17.000Z"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                           >
                             3mo
@@ -1311,7 +1311,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <span
                             aria-label="FailedGetResourceMetric"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1tmhfi1-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                             style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                           >
@@ -1326,8 +1326,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                             class="MuiBox-root css-k008qs"
                           >
                             <label
-                              class="makeStyles-fullText"
                               id="b123456"
+                              style="word-break: break-all; white-space: normal;"
                             >
                               failed to get cpu utilization: missing request for cpu
                             </label>
@@ -1339,7 +1339,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <p
                             aria-label="2024-02-13T14:42:17.000Z"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                           >
                             3mo
@@ -1385,7 +1385,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <span
                             aria-label="FailedGetResourceMetric"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1tmhfi1-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                             style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                           >
@@ -1400,8 +1400,8 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                             class="MuiBox-root css-k008qs"
                           >
                             <label
-                              class="makeStyles-fullText"
                               id="b12345"
+                              style="word-break: break-all; white-space: normal;"
                             >
                               failed to get cpu utilization: missing request for cpu
                             </label>
@@ -1413,7 +1413,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         >
                           <p
                             aria-label="2023-07-13T14:42:17.000Z"
-                            class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                            class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                             data-mui-internal-clone-element="true"
                           >
                             3mo

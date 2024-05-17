@@ -8,7 +8,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import * as yaml from 'js-yaml';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,31 +30,6 @@ if (process.env.NODE_ENV === 'test') {
   // const monaco = monacoEditor;
   monaco = require('monaco-editor');
 }
-
-const useStyle = makeStyles(theme => ({
-  dialogContent: {
-    height: '80%',
-    // minHeight: '600px',
-    overflowY: 'hidden',
-  },
-  terminalCode: {
-    color: theme.palette.common.white,
-  },
-  terminal: {
-    backgroundColor: theme.palette.common.black,
-    height: '500px',
-    width: '100%',
-    overflow: 'scroll',
-    marginTop: theme.spacing(3),
-  },
-  containerFormControl: {
-    minWidth: '11rem',
-  },
-  scrollable: {
-    overflowY: 'auto',
-    overflowX: 'hidden',
-  },
-}));
 
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
@@ -85,7 +59,6 @@ export default function EditorDialog(props: EditorDialogProps) {
   };
   const { i18n } = useTranslation();
   const [lang, setLang] = React.useState(i18n.language);
-  const classes = useStyle();
   const themeName = getThemeName();
 
   const originalCodeRef = React.useRef({ code: '', format: item ? 'yaml' : '' });
@@ -336,7 +309,12 @@ export default function EditorDialog(props: EditorDialogProps) {
         <Loader title={t('Loading editor')} />
       ) : (
         <React.Fragment>
-          <DialogContent className={classes.dialogContent}>
+          <DialogContent
+            sx={{
+              height: '80%',
+              overflowY: 'hidden',
+            }}
+          >
             <Box display="flex" flexDirection="row-reverse">
               <Box p={1}>
                 <FormGroup row>
@@ -367,7 +345,15 @@ export default function EditorDialog(props: EditorDialogProps) {
                   {
                     label: t('translation|Documentation'),
                     component: (
-                      <Box p={2} className={classes.scrollable} maxHeight={600} height={600}>
+                      <Box
+                        p={2}
+                        sx={{
+                          overflowY: 'auto',
+                          overflowX: 'hidden',
+                        }}
+                        maxHeight={600}
+                        height={600}
+                      >
                         <DocsViewer docSpecs={docSpecs} />
                       </Box>
                     ),

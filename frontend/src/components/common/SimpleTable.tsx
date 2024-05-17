@@ -7,8 +7,6 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
@@ -16,58 +14,6 @@ import { useURLState } from '../../lib/util';
 import { useSettings } from '../App/Settings/hook';
 import Empty from './EmptyContent';
 import Loader from './Loader';
-
-const useTableStyle = makeStyles(theme => ({
-  headerCell: {
-    fontWeight: 'bold',
-    paddingBottom: theme.spacing(0.5),
-  },
-  sortCell: {
-    whiteSpace: 'nowrap',
-  },
-  table: ({ gridTemplateColumns }: { gridTemplateColumns: string }) => ({
-    minWidth: '100%',
-    width: 'auto',
-    display: 'grid',
-    gridTemplateColumns: gridTemplateColumns || '1fr',
-    [theme.breakpoints.down('sm')]: {
-      overflowX: 'auto', // make it responsive
-    },
-    '& .MuiTableCell-root': {
-      padding: '8px 16px 7px 16px',
-      [theme.breakpoints.down('sm')]: {
-        padding: '15px 24px 15px 16px',
-      },
-      overflow: 'hidden',
-      width: '100%',
-      wordWrap: 'break-word',
-    },
-    '& .MuiTableBody-root': {
-      background: theme.palette.tables.body.background,
-
-      '& .MuiTableRow-root:last-child': {
-        '& .MuiTableCell-root': {
-          borderBottom: 'none',
-        },
-      },
-    },
-    '& .MuiTableCell-head': {
-      overflow: 'hidden',
-      textOverflow: 'unset',
-      whiteSpace: 'nowrap',
-      color: theme.palette.tables.head.text,
-      background: theme.palette.tables.head.background,
-      width: '100%',
-      minWidth: 'max-content',
-    },
-    '& .MuiTableHead-root, & .MuiTableRow-root, & .MuiTableBody-root': {
-      display: 'contents',
-    },
-  }),
-  tableContainer: {
-    overflowY: 'hidden',
-  },
-}));
 
 type sortFunction = (arg1: any, arg2: any) => number;
 type getterFunction = (arg: any) => any;
@@ -217,7 +163,6 @@ export default function SimpleTable(props: SimpleTableProps) {
 
     return templates.join(' ');
   }, [columns]);
-  const classes = useTableStyle({ gridTemplateColumns });
   const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
     !defaultSortingColumn || defaultSortingColumn > 0
   );
@@ -369,8 +314,11 @@ export default function SimpleTable(props: SimpleTableProps) {
     </Paper>
   ) : (
     <TableContainer
-      className={clsx(classes.tableContainer, className)}
-      sx={sx}
+      className={className}
+      sx={{
+        overflowY: 'hidden',
+        ...sx,
+      }}
       component={Paper}
       variant="outlined"
     >
@@ -392,7 +340,48 @@ export default function SimpleTable(props: SimpleTableProps) {
           </Box>
         )
       }
-      <Table className={classes.table} size="small">
+      <Table
+        sx={theme => ({
+          minWidth: '100%',
+          width: 'auto',
+          display: 'grid',
+          gridTemplateColumns: gridTemplateColumns || '1fr',
+          [theme.breakpoints.down('sm')]: {
+            overflowX: 'auto', // make it responsive
+          },
+          '& .MuiTableCell-root': {
+            padding: '8px 16px 7px 16px',
+            [theme.breakpoints.down('sm')]: {
+              padding: '15px 24px 15px 16px',
+            },
+            overflow: 'hidden',
+            width: '100%',
+            wordWrap: 'break-word',
+          },
+          '& .MuiTableBody-root': {
+            background: theme.palette.tables.body.background,
+
+            '& .MuiTableRow-root:last-child': {
+              '& .MuiTableCell-root': {
+                borderBottom: 'none',
+              },
+            },
+          },
+          '& .MuiTableCell-head': {
+            overflow: 'hidden',
+            textOverflow: 'unset',
+            whiteSpace: 'nowrap',
+            color: theme.palette.tables.head.text,
+            background: theme.palette.tables.head.background,
+            width: '100%',
+            minWidth: 'max-content',
+          },
+          '& .MuiTableHead-root, & .MuiTableRow-root, & .MuiTableBody-root': {
+            display: 'contents',
+          },
+        })}
+        size="small"
+      >
         {!noTableHeader && (
           <TableHead>
             <TableRow>
@@ -401,7 +390,12 @@ export default function SimpleTable(props: SimpleTableProps) {
                 return (
                   <TableCell
                     key={`tabletitle_${i}`}
-                    className={clsx(classes.headerCell, className, sort ? classes.sortCell : '')}
+                    className={className}
+                    sx={theme => ({
+                      fontWeight: 'bold',
+                      paddingBottom: theme.spacing(0.5),
+                      ...(sort ? { whiteSpace: 'nowrap' } : {}),
+                    })}
                     {...otherProps}
                   >
                     {header || label}

@@ -4,10 +4,10 @@ exports[`Storyshots TopBar No Token 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed makeStyles-appbar mui-fixed css-xx4di6-MuiPaper-root-MuiAppBar-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1nczbvg-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular makeStyles-toolbar css-hyum1k-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-js7vbf-MuiToolbar-root"
     >
       <svg
         aria-hidden="true"
@@ -18,10 +18,10 @@ exports[`Storyshots TopBar No Token 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
+        class="MuiBox-root css-i9gxme"
       />
       <div
-        class="makeStyles-clusterTitle"
+        class="MuiBox-root css-3n7f37"
       />
     </div>
   </nav>
@@ -32,10 +32,10 @@ exports[`Storyshots TopBar One Cluster 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed makeStyles-appbar mui-fixed css-xx4di6-MuiPaper-root-MuiAppBar-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1nczbvg-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular makeStyles-toolbar css-hyum1k-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-js7vbf-MuiToolbar-root"
     >
       <svg
         aria-hidden="true"
@@ -46,10 +46,10 @@ exports[`Storyshots TopBar One Cluster 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
+        class="MuiBox-root css-i9gxme"
       />
       <div
-        class="makeStyles-clusterTitle"
+        class="MuiBox-root css-3n7f37"
       />
       <button
         aria-controls="primary-user-menu"
@@ -73,10 +73,10 @@ exports[`Storyshots TopBar Processor Action 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed makeStyles-appbar mui-fixed css-xx4di6-MuiPaper-root-MuiAppBar-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1nczbvg-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular makeStyles-toolbar css-hyum1k-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-js7vbf-MuiToolbar-root"
     >
       <svg
         aria-hidden="true"
@@ -87,10 +87,10 @@ exports[`Storyshots TopBar Processor Action 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
+        class="MuiBox-root css-i9gxme"
       />
       <div
-        class="makeStyles-clusterTitle"
+        class="MuiBox-root css-3n7f37"
       />
       <p>
         meow
@@ -104,10 +104,10 @@ exports[`Storyshots TopBar Token 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed makeStyles-appbar mui-fixed css-xx4di6-MuiPaper-root-MuiAppBar-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1nczbvg-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular makeStyles-toolbar css-hyum1k-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-js7vbf-MuiToolbar-root"
     >
       <svg
         aria-hidden="true"
@@ -118,10 +118,10 @@ exports[`Storyshots TopBar Token 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
+        class="MuiBox-root css-i9gxme"
       />
       <div
-        class="makeStyles-clusterTitle"
+        class="MuiBox-root css-3n7f37"
       />
     </div>
   </nav>
@@ -132,10 +132,10 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed makeStyles-appbar mui-fixed css-xx4di6-MuiPaper-root-MuiAppBar-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1nczbvg-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular makeStyles-toolbar css-hyum1k-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-js7vbf-MuiToolbar-root"
     >
       <svg
         aria-hidden="true"
@@ -146,10 +146,10 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
+        class="MuiBox-root css-i9gxme"
       />
       <div
-        class="makeStyles-clusterTitle"
+        class="MuiBox-root css-3n7f37"
       >
         <button
           class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-tsm8af-MuiButtonBase-root-MuiButton-root"
