@@ -20,6 +20,7 @@ import (
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"k8s.io/client-go/tools/clientcmd/api"
 )
 
 const (
@@ -550,4 +551,52 @@ func TestDeletePlugin(t *testing.T) {
 	// check if plugin was deleted
 	_, err = os.Stat(pluginDir)
 	assert.True(t, os.IsNotExist(err))
+}
+
+func TestHandleClusterAPI_XForwardedHost(t *testing.T) {
+	// Create a new server for testing
+	proxyServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Verify that X-Forwarded-Host is set to r.Host
+		assert.Equal(t, r.Host, r.Header.Get("X-Forwarded-Host"))
+		w.WriteHeader(http.StatusOK)
+		_, err := w.Write([]byte("OK"))
+		require.NoError(t, err)
+	}))
+	defer proxyServer.Close()
+
+	kubeConfigStore := kubeconfig.NewContextStore()
+
+	err := kubeConfigStore.AddContext(&kubeconfig.Context{
+		Name: "test",
+		Cluster: &api.Cluster{
+			Server: proxyServer.URL,
+		},
+	})
+	require.NoError(t, err)
+
+	cache := cache.New[interface{}]()
+
+	c := HeadlampConfig{
+		useInCluster:    false,
+		kubeConfigPath:  config.GetDefaultKubeConfigPath(),
+		cache:           cache,
+		kubeConfigStore: kubeConfigStore,
+	}
+
+	handler := createHeadlampHandler(&c)
+
+	// Create a test request to the cluster API endpoint
+	ctx := context.Background()
+	req, err := http.NewRequestWithContext(ctx, "GET", "/clusters/test/version", nil)
+	require.NoError(t, err)
+
+	// Create a response recorder to capture the response
+	rr := httptest.NewRecorder()
+
+	// Serve the test request
+	handler.ServeHTTP(rr, req)
+
+	// Check the status code and response body
+	assert.Equal(t, http.StatusOK, rr.Code)
+	assert.Equal(t, "OK", rr.Body.String())
 }
