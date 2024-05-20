@@ -71,7 +71,7 @@
   "Current name": "Current name",
   "The current name of cluster. You can define custom modified name.": "The current name of cluster. You can define custom modified name.",
   "Change name": "Change name",
-  "This will add an extension field in your kubeconfig file for \"{{ clusterName }}. Are you sure\"?": "This will add an extension field in your kubeconfig file for \"{{ clusterName }}. Are you sure\"?",
+  "Are you sure you want to change the name for \"{{ clusterName }}\"?": "Are you sure you want to change the name for \"{{ clusterName }}\"?",
   "Remove Cluster": "Remove Cluster",
   "Server": "Server",
   "light theme": "light theme",

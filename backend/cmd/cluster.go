@@ -33,4 +33,5 @@ type KubeconfigRequest struct {
 type RenameClusterRequest struct {
 	NewClusterName string `json:"newClusterName"`
 	Source         string `json:"source"`
+	Stateless      bool   `json:"stateless"`
 }

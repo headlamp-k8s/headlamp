@@ -1658,26 +1658,16 @@ export async function testClusterHealth(cluster?: string) {
 
 export async function setCluster(clusterReq: ClusterRequest) {
   const kubeconfig = clusterReq.kubeconfig;
+  let requestURL = '/cluster';
 
   if (kubeconfig) {
     await storeStatelessClusterKubeconfig(kubeconfig);
     // We just send parsed kubeconfig from the backend to the frontend.
-    return request(
-      '/parseKubeConfig',
-      {
-        method: 'POST',
-        body: JSON.stringify(clusterReq),
-        headers: {
-          ...JSON_HEADERS,
-        },
-      },
-      false,
-      false
-    );
+    requestURL = '/parseKubeConfig';
   }
 
   return request(
-    '/cluster',
+    requestURL,
     {
       method: 'POST',
       body: JSON.stringify(clusterReq),
@@ -1717,11 +1707,11 @@ export async function deleteCluster(cluster: string) {
  * @param cluster
  */
 export async function renameCluster(cluster: string, newClusterName: string, source: string) {
+  let stateless = false;
   if (cluster) {
     const kubeconfig = await findKubeconfigByClusterName(cluster);
     if (kubeconfig !== null) {
-      // @TODO: Update kubeconfig in indexDB
-      return window.location.reload();
+      stateless = true;
     }
   }
 
@@ -1730,11 +1720,38 @@ export async function renameCluster(cluster: string, newClusterName: string, sou
     {
       method: 'PUT',
       headers: { ...getHeadlampAPIHeaders() },
-      body: JSON.stringify({ newClusterName, source }),
+      body: JSON.stringify({ newClusterName, source, stateless }),
     },
     false,
     false
   );
+}
+
+/**
+ * parseKubeConfig sends call to backend to parse kubeconfig and send back
+ * the parsed clusters and contexts.
+ * @param clusterReq - The cluster request object.
+ */
+export async function parseKubeConfig(clusterReq: ClusterRequest) {
+  const kubeconfig = clusterReq.kubeconfig;
+
+  if (kubeconfig) {
+    return request(
+      '/parseKubeConfig',
+      {
+        method: 'POST',
+        body: JSON.stringify(clusterReq),
+        headers: {
+          ...JSON_HEADERS,
+          ...getHeadlampAPIHeaders(),
+        },
+      },
+      false,
+      false
+    );
+  }
+
+  return null;
 }
 
 // @todo: Move startPortForward, stopPortForward, and getPortForwardStatus to a portForward.ts

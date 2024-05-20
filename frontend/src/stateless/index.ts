@@ -240,12 +240,18 @@ export function findKubeconfigByClusterName(clusterName: string): Promise<string
             const kubeconfig = kubeconfigObject.kubeconfig;
 
             const parsedKubeconfig = jsyaml.load(atob(kubeconfig)) as KubeconfigObject;
+            // Check for "headlamp_info" in extensions
+            const matchingContext = parsedKubeconfig.contexts.find(
+              context =>
+                context.context.extensions?.find(extension => extension.name === 'headlamp_info')
+                  ?.extension.customName === clusterName
+            );
 
             const matchingKubeconfig = parsedKubeconfig.clusters.find(
               cluster => cluster.name === clusterName
             );
 
-            if (matchingKubeconfig) {
+            if (matchingKubeconfig || matchingContext) {
               resolve(kubeconfig);
             } else {
               cursor.continue();
@@ -464,6 +470,119 @@ export async function deleteClusterKubeconfig(clusterName: string): Promise<stri
   });
 }
 
+/**
+ * Update the kubeconfig context extensions in IndexedDB.
+ * @param kubeconfig - The kubeconfig to store.
+ * @param customName - The custom name for the context extension.
+ * @param clusterName - The name of the cluster to update the kubeconfig context for.
+ * @returns promise that resolves when the kubeconfig is successfully updated and stored.
+ * @throws Error if IndexedDB is not supported.
+ * @throws Error if the kubeconfig is invalid.
+ */
+export function updateStatelessClusterKubeconfig(
+  kubeconfig: string,
+  customName: string,
+  clusterName: string
+): Promise<void> {
+  return new Promise<void>(async (resolve, reject) => {
+    try {
+      const request = indexedDB.open('kubeconfigs', 1) as any;
+      // Parse the kubeconfig from base64
+      const parsedKubeconfig = jsyaml.load(atob(kubeconfig)) as KubeconfigObject;
+
+      // Find the context with the matching cluster name or custom name in headlamp_info
+      const matchingContext = parsedKubeconfig.contexts.find(
+        context =>
+          context.context.cluster === clusterName ||
+          context.context.extensions?.find(extension => extension.name === 'headlamp_info')
+            ?.extension.customName === clusterName
+      );
+
+      if (matchingContext) {
+        const extensions = matchingContext.context.extensions || [];
+        const headlampExtension = extensions.find(extension => extension.name === 'headlamp_info');
+
+        if (matchingContext.context.cluster === clusterName) {
+          // Push the new extension if the cluster name matches
+          extensions.push({
+            extension: {
+              customName: customName,
+            },
+            name: 'headlamp_info',
+          });
+        } else if (headlampExtension) {
+          // Update the existing extension if found
+          headlampExtension.extension.customName = customName;
+        }
+
+        // Ensure the extensions property is updated
+        matchingContext.context.extensions = extensions;
+      } else {
+        console.error('No context found matching the cluster name:', clusterName);
+        reject('No context found matching the cluster name');
+        return;
+      }
+
+      // Convert the updated kubeconfig back to base64
+      const updatedKubeconfig = btoa(jsyaml.dump(parsedKubeconfig));
+
+      // The onupgradeneeded event is fired when the database is created for the first time.
+      request.onupgradeneeded = handleDatabaseUpgrade;
+      // The onsuccess event is fired when the database is opened.
+      // This event is where you specify the actions to take when the database is opened.
+      request.onsuccess = function handleDatabaseSuccess(event: DatabaseEvent) {
+        const db = event.target.result;
+        if (db) {
+          const transaction = db.transaction(['kubeconfigStore'], 'readwrite');
+          const store = transaction.objectStore('kubeconfigStore');
+
+          // Get the existing kubeconfig entry by clusterName
+          store.openCursor().onsuccess = function getSuccess(event: Event) {
+            const successEvent = event as CursorSuccessEvent;
+            const cursor = successEvent.target?.result;
+            if (cursor) {
+              // Update the kubeconfig entry with the new kubeconfig
+              cursor.value.kubeconfig = updatedKubeconfig;
+              // Put the updated kubeconfig entry back into IndexedDB
+              const putRequest = store.put(cursor.value);
+              // The onsuccess event is fired when the request has succeeded.
+              putRequest.onsuccess = function putSuccess() {
+                console.log('Updated kubeconfig with custom name and stored in IndexedDB');
+                resolve(); // Resolve the promise when the kubeconfig is successfully updated and stored
+              };
+
+              // The onerror event is fired when the request has failed.
+              putRequest.onerror = function putError(event: Event) {
+                const errorEvent = event as DatabaseErrorEvent;
+                console.error(errorEvent.target ? errorEvent.target.error : 'An error occurred');
+                reject(errorEvent.target ? errorEvent.target.error : 'An error occurred');
+              };
+            } else {
+              console.error('No kubeconfig entry found for cluster name:', clusterName);
+              reject('No kubeconfig entry found for cluster name');
+            }
+          };
+
+          store.openCursor().onerror = function getError(event: Event) {
+            const errorEvent = event as DatabaseErrorEvent;
+            console.error(errorEvent.target ? errorEvent.target.error : 'An error occurred');
+            reject(errorEvent.target ? errorEvent.target.error : 'An error occurred');
+          };
+        } else {
+          console.error('Failed to open IndexedDB');
+          reject('Failed to open IndexedDB');
+        }
+      };
+
+      // The onerror event is fired when the database is opened.
+      // This is where you handle errors
+      request.onerror = handleDataBaseError;
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 const exportFunctions = {
   storeStatelessClusterKubeconfig,
   getStatelessClusterKubeConfigs,
@@ -472,6 +591,7 @@ const exportFunctions = {
   processClusterComparison,
   fetchStatelessClusterKubeConfigs,
   deleteClusterKubeconfig,
+  updateStatelessClusterKubeconfig,
 };
 
 export default exportFunctions;

@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
-import { deleteCluster, renameCluster } from '../../../lib/k8s/apiProxy';
-import { setConfig } from '../../../redux/configSlice';
+import { deleteCluster, parseKubeConfig, renameCluster } from '../../../lib/k8s/apiProxy';
+import { setConfig, setStatelessConfig } from '../../../redux/configSlice';
+import { findKubeconfigByClusterName, updateStatelessClusterKubeconfig } from '../../../stateless/';
 import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 
@@ -57,15 +58,31 @@ export default function SettingsCluster() {
     try {
       storeNewClusterName(newClusterName);
       renameCluster(cluster || '', newClusterName, source)
-        .then(config => {
-          dispatch(setConfig(config));
+        .then(async config => {
+          if (cluster) {
+            const kubeconfig = await findKubeconfigByClusterName(cluster);
+            if (kubeconfig !== null) {
+              await updateStatelessClusterKubeconfig(kubeconfig, newClusterName, cluster);
+              // Make another request for updated kubeconfig
+              const updatedKubeconfig = await findKubeconfigByClusterName(cluster);
+              if (updatedKubeconfig !== null) {
+                parseKubeConfig({ kubeconfig: updatedKubeconfig })
+                  .then((config: any) => {
+                    dispatch(setStatelessConfig(config));
+                  })
+                  .catch((err: Error) => {
+                    console.error('Error updating cluster name:', err.message);
+                  });
+              }
+            } else {
+              dispatch(setConfig(config));
+            }
+          }
           history.push('/');
           window.location.reload();
         })
         .catch((err: Error) => {
-          if (err.message === 'Not Found') {
-            // TODO: create notification with error message
-          }
+          console.error('Error updating cluster name:', err.message);
         });
     } catch (error) {
       console.error('Error updating cluster name:', error);
@@ -372,7 +389,7 @@ export default function SettingsCluster() {
                           }}
                           confirmTitle={t('translation|Change name')}
                           confirmDescription={t(
-                            'translation|This will add an extension field in your kubeconfig file for "{{ clusterName }}. Are you sure"?',
+                            'translation|Are you sure you want to change the name for "{{ clusterName }}"?',
                             { clusterName: cluster }
                           )}
                           disabled={!newClusterName || !isValidCurrentName}
