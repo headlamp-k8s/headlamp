@@ -33,4 +33,8 @@ contextBridge.exposeInMainWorld('desktopApi', {
       ipcRenderer.on(channel, (event, ...args) => func(...args));
     }
   },
+
+  removeListener: (channel, func) => {
+    ipcRenderer.removeListener(channel, func);
+  },
 });
