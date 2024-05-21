@@ -8,14 +8,11 @@ export interface FilterState {
   namespaces: Set<string>;
   /** The search string to filter on. */
   search: string;
-  /** The categories to filter on. */
-  categories: string[];
 }
 
 export const initialState: FilterState = {
   namespaces: new Set(),
   search: '',
-  categories: [],
 };
 
 /**
@@ -58,19 +55,6 @@ export function filterResource(
     }
 
     matches = filterGeneric(item, filter, matchCriteria);
-  }
-
-  if (filter.categories.length > 0) {
-    const resourceCategories =
-      typeof item.jsonData!.status !== 'undefined' &&
-      typeof item.jsonData!.status.acceptedNames.categories !== 'undefined'
-        ? item.jsonData!.status.acceptedNames.categories
-        : null;
-    if (resourceCategories) {
-      matches = resourceCategories.some((category: string) => filter.categories.includes(category));
-    } else {
-      matches = false;
-    }
   }
 
   return matches;
@@ -146,38 +130,17 @@ const filterSlice = createSlice({
     setSearchFilter(state, action: PayloadAction<string>) {
       state.search = action.payload;
     },
-    /**
-     * Sets the category filter with an array of strings.
-     */
-    setCategoryFilter(state, action: PayloadAction<string>) {
-      if (action.payload === null) {
-        state.categories.splice(0, state.categories.length);
-      } else {
-        state.categories = [...state.categories, action.payload];
-      }
-    },
-    removeCategoryFilter(state, action: PayloadAction<string>) {
-      console.log('removing : ', action.payload, 'from: ', state.categories.toString());
-      state.categories = state.categories.filter(category => category !== action.payload);
-      console.log('after removing : ', state.categories.toString());
-    },
+
     /**
      * Resets the filter state.
      */
     resetFilter(state) {
       state.namespaces = new Set();
       state.search = '';
-      state.categories.splice(0, state.categories.length);
     },
   },
 });
 
-export const {
-  setNamespaceFilter,
-  setSearchFilter,
-  setCategoryFilter,
-  removeCategoryFilter,
-  resetFilter,
-} = filterSlice.actions;
+export const { setNamespaceFilter, setSearchFilter, resetFilter } = filterSlice.actions;
 
 export default filterSlice.reducer;
