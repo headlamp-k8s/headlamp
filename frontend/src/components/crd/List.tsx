@@ -11,13 +11,13 @@ export default function CustomResourceDefinitionList() {
       title={t('glossary|Custom Resources')}
       headerProps={{
         noNamespaceFilter: true,
-        noCategoriesFilter: false,
       }}
       resourceClass={CRD}
       columns={[
         {
           label: t('glossary|Resource'),
-          getter: crd => (
+          getValue: crd => crd.spec.names.kind,
+          render: crd => (
             <Link
               routeName="customresources"
               params={{
@@ -30,7 +30,8 @@ export default function CustomResourceDefinitionList() {
         },
         {
           label: t('glossary|Definition'),
-          getter: crd => (
+          getValue: crd => crd.metadata.name,
+          render: crd => (
             <Link
               routeName="crd"
               params={{
@@ -40,35 +41,14 @@ export default function CustomResourceDefinitionList() {
               {crd.metadata.name}
             </Link>
           ),
-          sort: (c1: CRD, c2: CRD) => {
-            if (c1.metadata.name < c2.metadata.name) {
-              return -1;
-            } else if (c1.metadata.name > c2.metadata.name) {
-              return 1;
-            }
-            return 0;
-          },
         },
         {
           label: t('translation|Group'),
-          getter: crd => crd.spec.group,
-          sort: true,
+          getValue: crd => crd.spec.group,
         },
         {
           label: t('Scope'),
-          getter: crd => {
-            return crd.spec.scope;
-          },
-          sort: true,
-        },
-        {
-          label: t('Categories'),
-          getter: crd => {
-            const categories = crd.jsonData!.status.acceptedNames.categories;
-            return typeof categories !== 'undefined'
-              ? categories.toString().split(',').join(', ')
-              : '';
-          },
+          getValue: crd => crd.spec.scope,
         },
         'age',
       ]}
