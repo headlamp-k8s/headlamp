@@ -1007,7 +1007,7 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 		}
 
 		r.Host = clusterURL.Host
-		r.Header.Set("X-Forwarded-Host", r.Header.Get("Host"))
+		r.Header.Set("X-Forwarded-Host", r.Host)
 		r.URL.Host = clusterURL.Host
 		r.URL.Path = mux.Vars(r)["api"]
 		r.URL.Scheme = clusterURL.Scheme
