@@ -496,7 +496,7 @@ async function repeatStreamFunc(
   ) {
     const endpoint = apiEndpoints[endpointIndex];
     const fullArgs = [...args];
-    let errCbIndex = 2;
+    let errCbIndex = funcName === 'get' ? 2 : 1;
     if (endpoint.isNamespaced) {
       ++errCbIndex;
     }
