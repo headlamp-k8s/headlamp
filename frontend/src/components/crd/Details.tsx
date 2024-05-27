@@ -58,6 +58,11 @@ export default function CustomResourceDefinitionDetails() {
                 </Link>
               ),
             },
+            {
+              name: t('translation|Categories'),
+              value: item.getCategories().join(', '),
+              hide: item.getCategories().length === 0,
+            },
           ]
         }
       />
