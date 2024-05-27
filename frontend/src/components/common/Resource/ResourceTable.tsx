@@ -42,6 +42,8 @@ export type ResourceTableColumn<RowItem> = {
    * "min-content"
    */
   gridTemplate?: string | number;
+  /** Options for the select filter */
+  filterSelectOptions?: TableColumn<any>['filterSelectOptions'];
 } & (
   | {
       /** To render a simple value provide property name of the item */
@@ -266,6 +268,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
               sx: { ...(column.cellProps?.sx ?? {}), width: 'unset', minWidth: 'unset' },
             },
             gridTemplate: column.gridTemplate ?? 1,
+            filterSelectOptions: column.filterSelectOptions,
           };
 
           if ('getValue' in column) {
