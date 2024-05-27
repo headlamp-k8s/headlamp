@@ -5703,9 +5703,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
-                  >
-                    0.0.0.1
-                  </span>
+                  />
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -5717,9 +5715,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                 >
                   <span
                     class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
-                  >
-                    0.0.0.2
-                  </span>
+                  />
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"

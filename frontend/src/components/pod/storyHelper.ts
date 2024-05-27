@@ -150,7 +150,7 @@ const successful = {
     restartPolicy: 'Never',
   },
   status: {
-    ...basePod.status,
+    startTime: stateDate,
     phase: 'Succeeded',
     conditions: [
       {

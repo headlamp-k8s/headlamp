@@ -117,7 +117,7 @@ export function PodListRenderer(props: PodListProps) {
         {
           id: 'ip',
           label: t('glossary|IP'),
-          getValue: (pod: Pod) => String(pod.status.podIP),
+          getValue: (pod: Pod) => pod.status?.podIP ?? '',
         },
         {
           id: 'node',

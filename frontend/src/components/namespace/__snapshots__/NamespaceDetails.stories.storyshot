@@ -2424,7 +2424,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-113h9jm-MuiTableCell-root"
                         data-index="4"
                       >
-                        0.0.0.2
+                        
                       </td>
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-19qh9pa-MuiTableCell-root"
