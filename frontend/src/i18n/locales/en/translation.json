@@ -269,6 +269,7 @@
   "Group": "Group",
   "Accepted Names": "Accepted Names",
   "Versions": "Versions",
+  "Categories": "Categories",
   "Spawn Job": "Spawn Job",
   "This will trigger a new Job based on the CronJob {{ name }}": "This will trigger a new Job based on the CronJob {{ name }}",
   "Job Name": "Job Name",

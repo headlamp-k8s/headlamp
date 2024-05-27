@@ -1383,6 +1383,83 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
           />
         </div>
       </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <div
+              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-clttge-MuiAutocomplete-root"
+            >
+              <div
+                class="MuiBox-root css-1dipl1t"
+              >
+                <div
+                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                  style="margin-top: 0px;"
+                >
+                  <label
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
+                    data-shrink="true"
+                    for="mui-test-id"
+                    id="mui-test-id-label"
+                  >
+                    Namespaces
+                  </label>
+                  <div
+                    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
+                  >
+                    <input
+                      aria-autocomplete="both"
+                      aria-expanded="false"
+                      aria-invalid="false"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
+                      id="mui-test-id"
+                      placeholder="Filter"
+                      role="combobox"
+                      spellcheck="false"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
+                    >
+                      <button
+                        aria-label="Open"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-1aav1nn-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+                        tabindex="-1"
+                        title="Open"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                          data-testid="ArrowDropDownIcon"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M7 10l5 5 5-5z"
+                          />
+                        </svg>
+                        <span
+                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       class="MuiBox-root css-1txv3mw"
@@ -1518,8 +1595,8 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
           class="MuiTableContainer-root css-nhjqqh-MuiTableContainer-root"
         >
           <table
-            class="MuiTable-root css-1v00ztz-MuiTable-root"
-            style="--header-0-size: 180; --col-0-size: 180; --header-1-size: 180; --col-1-size: 180; --header-2-size: 180; --col-2-size: 180; --header-3-size: 180; --col-3-size: 180; --header-age-size: 180; --col-age-size: 180;"
+            class="MuiTable-root css-6s04ct-MuiTable-root"
+            style="--header-0-size: 180; --col-0-size: 180; --header-1-size: 180; --col-1-size: 180; --header-2-size: 180; --col-2-size: 180; --header-3-size: 180; --col-3-size: 180; --header-4-size: 180; --col-4-size: 180; --header-age-size: 180; --col-age-size: 180;"
           >
             <thead
               class="MuiTableHead-root css-114s3s2-MuiTableHead-root"
@@ -1836,9 +1913,86 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                   </div>
                 </th>
                 <th
-                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hzrbgy-MuiTableCell-root"
                   colspan="1"
                   data-index="4"
+                  scope="col"
+                >
+                  <div
+                    class="Mui-TableHeadCell-Content MuiBox-root css-1w86f15"
+                  >
+                    <div
+                      class="Mui-TableHeadCell-Content-Labels MuiBox-root css-68rqdf"
+                    >
+                      <div
+                        class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-lapokc"
+                      >
+                        Categories
+                      </div>
+                      <span
+                        aria-label="Sort by Categories ascending"
+                        class="MuiBadge-root css-1c32n2y-MuiBadge-root"
+                        data-mui-internal-clone-element="true"
+                      >
+                        <span
+                          aria-label="Sort by Categories ascending"
+                          class="MuiButtonBase-root MuiTableSortLabel-root Mui-active css-118d58w-MuiButtonBase-root-MuiTableSortLabel-root"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc css-1vweko9-MuiSvgIcon-root-MuiTableSortLabel-icon"
+                            data-testid="SyncAltIcon"
+                            focusable="false"
+                            style="transform: rotate(-90deg) scaleX(0.9) translateX(-1px);"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="m18 12 4-4-4-4v3H3v2h15zM6 12l-4 4 4 4v-3h15v-2H6z"
+                            />
+                          </svg>
+                        </span>
+                        <span
+                          class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightCircular MuiBadge-overlapCircular css-dniquu-MuiBadge-badge"
+                        >
+                          0
+                        </span>
+                      </span>
+                    </div>
+                    <div
+                      class="Mui-TableHeadCell-Content-Actions MuiBox-root css-epvm6"
+                    >
+                      <button
+                        aria-label="Column Actions"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1a0q64w-MuiButtonBase-root-MuiIconButton-root"
+                        data-mui-internal-clone-element="true"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                          data-testid="MoreVertIcon"
+                          focusable="false"
+                          style="transform: scale(0.9);"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2"
+                          />
+                        </svg>
+                        <span
+                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
+                  colspan="1"
+                  data-index="5"
                   scope="col"
                 >
                   <div
@@ -1955,8 +2109,14 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                   Namespaced
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-11hnma5-MuiTableCell-root"
                   data-index="4"
+                >
+                  
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
+                  data-index="5"
                 >
                   <p
                     aria-label="2021-12-15T14:57:13.000Z"

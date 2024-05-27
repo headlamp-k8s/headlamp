@@ -269,6 +269,7 @@
   "Group": "Grupo",
   "Accepted Names": "Nomes aceites",
   "Versions": "Versões",
+  "Categories": "",
   "Spawn Job": "Criar Job",
   "This will trigger a new Job based on the CronJob {{ name }}": "Isto irá despoletar um novo Job baseado no CronJob {{ name }}",
   "Job Name": "Nome do Job",

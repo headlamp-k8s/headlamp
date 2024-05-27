@@ -269,6 +269,7 @@
   "Group": "Gruppe",
   "Accepted Names": "Akzeptierte Namen",
   "Versions": "Versionen",
+  "Categories": "",
   "Spawn Job": "Erzeuge Job",
   "This will trigger a new Job based on the CronJob {{ name }}": "Dies löst einen neuen Job aus, der auf dem CronJob {{ name }} basiert.",
   "Job Name": "Job Name",
