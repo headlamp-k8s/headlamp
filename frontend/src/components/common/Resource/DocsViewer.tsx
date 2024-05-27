@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { TreeView } from '@mui/x-tree-view/TreeView';
-import * as buffer from 'buffer';
+// import * as buffer from 'buffer';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import getDocDefinitions from '../../../lib/docs';
@@ -11,7 +11,7 @@ import Empty from '../EmptyContent';
 import Loader from '../Loader';
 
 // Buffer class is not polyffiled with CRA(v5) so we manually do it here
-window.Buffer = buffer.Buffer;
+// window.Buffer = buffer.Buffer;
 
 // @todo: Declare strict types.
 function DocsViewer(props: { docSpecs: any }) {

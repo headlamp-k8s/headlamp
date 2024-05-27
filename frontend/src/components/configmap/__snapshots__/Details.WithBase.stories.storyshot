@@ -1,0 +1,1082 @@
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-p0cik4"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary css-w7fpvq-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
+          />
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+            style="padding-top: 3px;"
+          >
+            Back
+          </p>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-p0cik4"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <div
+              class="MuiBox-root css-70qvj9"
+            >
+              <h1
+                class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
+              >
+                ConfigMap
+              </h1>
+              <div
+                class="MuiBox-root css-ldp2l3"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              >
+                <button
+                  aria-label="View YAML"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-p0cik4"
+      >
+        <div
+          class="MuiBox-root css-j1fy4m"
+        >
+          <div
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root css-1txv3mw"
+          >
+            <div
+              class="MuiBox-root css-0"
+            >
+              <dl
+                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+              >
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
+                >
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    my-pvc
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
+                >
+                  Namespace
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    default
+                  </a>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 css-1qti38g-MuiTypography-root"
+                  >
+                    2023-04-27T20:31:27.000Z
+                  </span>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-p0cik4"
+      >
+        <div
+          class="MuiBox-root css-j1fy4m"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            >
+              <div
+                class="MuiBox-root css-70qvj9"
+              >
+                <h2
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
+                >
+                  Data
+                </h2>
+                <div
+                  class="MuiBox-root css-ldp2l3"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-1txv3mw"
+          >
+            <dl
+              class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+            >
+              <dt
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
+              >
+                storageClassName
+              </dt>
+              <dd
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
+              >
+                <div
+                  class="MuiBox-root css-1rsqta2"
+                >
+                  <section
+                    style="display: flex; position: relative; text-align: initial; width: 100%; height: 100%;"
+                  >
+                    <div
+                      data-keybinding-context="8"
+                      data-mode-id="plaintext"
+                      style="width: 100%;"
+                    >
+                      <div
+                        class="monaco-editor showUnused showDeprecated vs"
+                        data-uri="inmemory://model/8"
+                        role="code"
+                        style="width: 5px; height: 3vh;"
+                      >
+                        <div
+                          class="overflow-guard"
+                          data-mprt="3"
+                          style="width: 5px; height: 5px;"
+                        >
+                          <div
+                            aria-hidden="true"
+                            class="margin"
+                            role="presentation"
+                            style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; height: 19px; width: 26px;"
+                          >
+                            <div
+                              class="glyph-margin"
+                              style="left: 0px; width: 0px; height: 19px;"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="margin-view-zones"
+                              role="presentation"
+                              style="position: absolute;"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="margin-view-overlays"
+                              role="presentation"
+                              style="position: absolute; width: 26px; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; height: 19px;"
+                            >
+                              <div
+                                style="position:absolute;top:0px;width:100%;height:19px;"
+                              >
+                                <div
+                                  class="current-line current-line-margin-both"
+                                  style="width:26px; height:19px;"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="monaco-scrollable-element editor-scrollable vs"
+                            data-mprt="5"
+                            role="presentation"
+                            style="position: absolute; overflow: hidden; left: 26px; width: -21px; height: 5px;"
+                          >
+                            <div
+                              class="lines-content monaco-editor-background"
+                              style="position: absolute; overflow: hidden; width: 1000000px; height: 1000000px; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; left: 0px;"
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="view-overlays"
+                                role="presentation"
+                                style="position: absolute; height: 0px; width: 60px;"
+                              >
+                                <div
+                                  style="position:absolute;top:0px;width:100%;height:19px;"
+                                >
+                                  <div
+                                    class="current-line"
+                                    style="width:60px; height:19px;"
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                aria-hidden="true"
+                                class="view-rulers"
+                                role="presentation"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="view-zones"
+                                role="presentation"
+                                style="position: absolute;"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="view-lines monaco-mouse-cursor-text"
+                                data-mprt="7"
+                                role="presentation"
+                                style="position: absolute; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; width: 60px; height: 19px;"
+                              >
+                                <div
+                                  class="view-line"
+                                  style="top:0px;height:19px;"
+                                >
+                                  <span>
+                                    <span
+                                      class="mtk1"
+                                    >
+                                      default
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                class="contentWidgets"
+                                data-mprt="1"
+                                style="position: absolute; top: 0px;"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="cursors-layer cursor-line-style cursor-solid"
+                                role="presentation"
+                              >
+                                <div
+                                  class="cursor monaco-mouse-cursor-text "
+                                  style="height: 19px; top: 0px; left: 0px; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; display: block; visibility: hidden; width: 2px;"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              aria-hidden="true"
+                              class="visible scrollbar horizontal"
+                              role="presentation"
+                              style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
+                            >
+                              <div
+                                class="slider"
+                                style="position: absolute; top: 0px; left: 0px; height: 12px; transform: translate3d(0px, 0px, 0px); contain: strict; width: 20px;"
+                              />
+                            </div>
+                            <canvas
+                              aria-hidden="true"
+                              class="decorationsOverviewRuler"
+                              height="5"
+                              style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; right: 0px; width: 14px; height: 5px;"
+                              width="14"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="visible scrollbar vertical"
+                              role="presentation"
+                              style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
+                            >
+                              <div
+                                class="slider"
+                                style="position: absolute; top: 0px; left: 0px; width: 14px; transform: translate3d(0px, 0px, 0px); contain: strict; height: 20px;"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            aria-hidden="true"
+                            role="presentation"
+                            style="width: -17px;"
+                          />
+                          <textarea
+                            aria-autocomplete="both"
+                            aria-haspopup="false"
+                            aria-label="Editor content;Press Alt+F1 for Accessibility Options."
+                            aria-multiline="true"
+                            aria-roledescription="editor"
+                            autocapitalize="off"
+                            autocomplete="off"
+                            autocorrect="off"
+                            class="inputarea monaco-mouse-cursor-text"
+                            data-mprt="6"
+                            role="textbox"
+                            spellcheck="false"
+                            style="font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; top: 0px; left: 0px; width: 1px; height: 1px;"
+                            tabindex="0"
+                            wrap="off"
+                          />
+                          <div
+                            class="monaco-editor-background textAreaCover"
+                            style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px;"
+                          />
+                          <div
+                            class="overlayWidgets"
+                            data-mprt="4"
+                            style="width: 5px;"
+                          >
+                            <div
+                              style="position: absolute; top: 0px; right: 50%;"
+                              widgetid="editor.contrib.quickInputWidget"
+                            />
+                          </div>
+                          <div
+                            aria-hidden="true"
+                            class="minimap slider-mouseover"
+                            data-mprt="8"
+                            role="presentation"
+                            style="position: absolute; left: -17px; width: 8px; height: 5px;"
+                          >
+                            <div
+                              class="minimap-shadow-visible"
+                              style="height: 5px;"
+                            />
+                            <canvas
+                              height="5"
+                              style="position: absolute; left: 0px; width: 8px; height: 5px;"
+                              width="8"
+                            />
+                            <canvas
+                              class="minimap-decorations-layer"
+                              height="5"
+                              style="position: absolute; left: 0px; width: 8px; height: 5px;"
+                              width="8"
+                            />
+                            <div
+                              class="minimap-slider"
+                              style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; width: 8px; display: none; top: 0px; height: 0px;"
+                            >
+                              <div
+                                class="minimap-slider-horizontal"
+                                style="position: absolute; left: 0px; width: 8px; top: 0px; height: 0px;"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="overflowingContentWidgets"
+                          data-mprt="2"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="context-view"
+                          style="display: none;"
+                        />
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
+              >
+                volumeMode
+              </dt>
+              <dd
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
+              >
+                <div
+                  class="MuiBox-root css-1rsqta2"
+                >
+                  <section
+                    style="display: flex; position: relative; text-align: initial; width: 100%; height: 100%;"
+                  >
+                    <div
+                      data-keybinding-context="9"
+                      data-mode-id="plaintext"
+                      style="width: 100%;"
+                    >
+                      <div
+                        class="monaco-editor showUnused showDeprecated vs"
+                        data-uri="inmemory://model/9"
+                        role="code"
+                        style="width: 5px; height: 3vh;"
+                      >
+                        <div
+                          class="overflow-guard"
+                          data-mprt="3"
+                          style="width: 5px; height: 5px;"
+                        >
+                          <div
+                            aria-hidden="true"
+                            class="margin"
+                            role="presentation"
+                            style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; height: 19px; width: 26px;"
+                          >
+                            <div
+                              class="glyph-margin"
+                              style="left: 0px; width: 0px; height: 19px;"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="margin-view-zones"
+                              role="presentation"
+                              style="position: absolute;"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="margin-view-overlays"
+                              role="presentation"
+                              style="position: absolute; width: 26px; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; height: 19px;"
+                            >
+                              <div
+                                style="position:absolute;top:0px;width:100%;height:19px;"
+                              >
+                                <div
+                                  class="current-line current-line-margin-both"
+                                  style="width:26px; height:19px;"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="monaco-scrollable-element editor-scrollable vs"
+                            data-mprt="5"
+                            role="presentation"
+                            style="position: absolute; overflow: hidden; left: 26px; width: -21px; height: 5px;"
+                          >
+                            <div
+                              class="lines-content monaco-editor-background"
+                              style="position: absolute; overflow: hidden; width: 1000000px; height: 1000000px; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; left: 0px;"
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="view-overlays"
+                                role="presentation"
+                                style="position: absolute; height: 0px; width: 75px;"
+                              >
+                                <div
+                                  style="position:absolute;top:0px;width:100%;height:19px;"
+                                >
+                                  <div
+                                    class="current-line"
+                                    style="width:75px; height:19px;"
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                aria-hidden="true"
+                                class="view-rulers"
+                                role="presentation"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="view-zones"
+                                role="presentation"
+                                style="position: absolute;"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="view-lines monaco-mouse-cursor-text"
+                                data-mprt="7"
+                                role="presentation"
+                                style="position: absolute; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; width: 75px; height: 19px;"
+                              >
+                                <div
+                                  class="view-line"
+                                  style="top:0px;height:19px;"
+                                >
+                                  <span>
+                                    <span
+                                      class="mtk1"
+                                    >
+                                      Filesystem
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                class="contentWidgets"
+                                data-mprt="1"
+                                style="position: absolute; top: 0px;"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="cursors-layer cursor-line-style cursor-solid"
+                                role="presentation"
+                              >
+                                <div
+                                  class="cursor monaco-mouse-cursor-text "
+                                  style="height: 19px; top: 0px; left: 0px; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; display: block; visibility: hidden; width: 2px;"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              aria-hidden="true"
+                              class="visible scrollbar horizontal"
+                              role="presentation"
+                              style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
+                            >
+                              <div
+                                class="slider"
+                                style="position: absolute; top: 0px; left: 0px; height: 12px; transform: translate3d(0px, 0px, 0px); contain: strict; width: 20px;"
+                              />
+                            </div>
+                            <canvas
+                              aria-hidden="true"
+                              class="decorationsOverviewRuler"
+                              height="5"
+                              style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; right: 0px; width: 14px; height: 5px;"
+                              width="14"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="visible scrollbar vertical"
+                              role="presentation"
+                              style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
+                            >
+                              <div
+                                class="slider"
+                                style="position: absolute; top: 0px; left: 0px; width: 14px; transform: translate3d(0px, 0px, 0px); contain: strict; height: 20px;"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            aria-hidden="true"
+                            role="presentation"
+                            style="width: -17px;"
+                          />
+                          <textarea
+                            aria-autocomplete="both"
+                            aria-haspopup="false"
+                            aria-label="Editor content;Press Alt+F1 for Accessibility Options."
+                            aria-multiline="true"
+                            aria-roledescription="editor"
+                            autocapitalize="off"
+                            autocomplete="off"
+                            autocorrect="off"
+                            class="inputarea monaco-mouse-cursor-text"
+                            data-mprt="6"
+                            role="textbox"
+                            spellcheck="false"
+                            style="font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; top: 0px; left: 0px; width: 1px; height: 1px;"
+                            tabindex="0"
+                            wrap="off"
+                          />
+                          <div
+                            class="monaco-editor-background textAreaCover"
+                            style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px;"
+                          />
+                          <div
+                            class="overlayWidgets"
+                            data-mprt="4"
+                            style="width: 5px;"
+                          >
+                            <div
+                              style="position: absolute; top: 0px; right: 50%;"
+                              widgetid="editor.contrib.quickInputWidget"
+                            />
+                          </div>
+                          <div
+                            aria-hidden="true"
+                            class="minimap slider-mouseover"
+                            data-mprt="8"
+                            role="presentation"
+                            style="position: absolute; left: -17px; width: 8px; height: 5px;"
+                          >
+                            <div
+                              class="minimap-shadow-visible"
+                              style="height: 5px;"
+                            />
+                            <canvas
+                              height="5"
+                              style="position: absolute; left: 0px; width: 8px; height: 5px;"
+                              width="8"
+                            />
+                            <canvas
+                              class="minimap-decorations-layer"
+                              height="5"
+                              style="position: absolute; left: 0px; width: 8px; height: 5px;"
+                              width="8"
+                            />
+                            <div
+                              class="minimap-slider"
+                              style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; width: 8px; display: none; top: 0px; height: 0px;"
+                            >
+                              <div
+                                class="minimap-slider-horizontal"
+                                style="position: absolute; left: 0px; width: 8px; top: 0px; height: 0px;"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="overflowingContentWidgets"
+                          data-mprt="2"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="context-view"
+                          style="display: none;"
+                        />
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
+              >
+                volumeName
+              </dt>
+              <dd
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
+              >
+                <div
+                  class="MuiBox-root css-1rsqta2"
+                >
+                  <section
+                    style="display: flex; position: relative; text-align: initial; width: 100%; height: 100%;"
+                  >
+                    <div
+                      data-keybinding-context="10"
+                      data-mode-id="plaintext"
+                      style="width: 100%;"
+                    >
+                      <div
+                        class="monaco-editor showUnused showDeprecated vs"
+                        data-uri="inmemory://model/10"
+                        role="code"
+                        style="width: 5px; height: 3vh;"
+                      >
+                        <div
+                          class="overflow-guard"
+                          data-mprt="3"
+                          style="width: 5px; height: 5px;"
+                        >
+                          <div
+                            aria-hidden="true"
+                            class="margin"
+                            role="presentation"
+                            style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; height: 19px; width: 26px;"
+                          >
+                            <div
+                              class="glyph-margin"
+                              style="left: 0px; width: 0px; height: 19px;"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="margin-view-zones"
+                              role="presentation"
+                              style="position: absolute;"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="margin-view-overlays"
+                              role="presentation"
+                              style="position: absolute; width: 26px; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; height: 19px;"
+                            >
+                              <div
+                                style="position:absolute;top:0px;width:100%;height:19px;"
+                              >
+                                <div
+                                  class="current-line current-line-margin-both"
+                                  style="width:26px; height:19px;"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="monaco-scrollable-element editor-scrollable vs"
+                            data-mprt="5"
+                            role="presentation"
+                            style="position: absolute; overflow: hidden; left: 26px; width: -21px; height: 5px;"
+                          >
+                            <div
+                              class="lines-content monaco-editor-background"
+                              style="position: absolute; overflow: hidden; width: 1000000px; height: 1000000px; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; left: 0px;"
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="view-overlays"
+                                role="presentation"
+                                style="position: absolute; height: 0px; width: 85px;"
+                              >
+                                <div
+                                  style="position:absolute;top:0px;width:100%;height:19px;"
+                                >
+                                  <div
+                                    class="current-line"
+                                    style="width:85px; height:19px;"
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                aria-hidden="true"
+                                class="view-rulers"
+                                role="presentation"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="view-zones"
+                                role="presentation"
+                                style="position: absolute;"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="view-lines monaco-mouse-cursor-text"
+                                data-mprt="7"
+                                role="presentation"
+                                style="position: absolute; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; width: 85px; height: 19px;"
+                              >
+                                <div
+                                  class="view-line"
+                                  style="top:0px;height:19px;"
+                                >
+                                  <span>
+                                    <span
+                                      class="mtk1"
+                                    >
+                                      pvc-abc-1234
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div
+                                class="contentWidgets"
+                                data-mprt="1"
+                                style="position: absolute; top: 0px;"
+                              />
+                              <div
+                                aria-hidden="true"
+                                class="cursors-layer cursor-line-style cursor-solid"
+                                role="presentation"
+                              >
+                                <div
+                                  class="cursor monaco-mouse-cursor-text "
+                                  style="height: 19px; top: 0px; left: 0px; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; display: block; visibility: hidden; width: 2px;"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              aria-hidden="true"
+                              class="visible scrollbar horizontal"
+                              role="presentation"
+                              style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
+                            >
+                              <div
+                                class="slider"
+                                style="position: absolute; top: 0px; left: 0px; height: 12px; transform: translate3d(0px, 0px, 0px); contain: strict; width: 20px;"
+                              />
+                            </div>
+                            <canvas
+                              aria-hidden="true"
+                              class="decorationsOverviewRuler"
+                              height="5"
+                              style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; right: 0px; width: 14px; height: 5px;"
+                              width="14"
+                            />
+                            <div
+                              aria-hidden="true"
+                              class="visible scrollbar vertical"
+                              role="presentation"
+                              style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
+                            >
+                              <div
+                                class="slider"
+                                style="position: absolute; top: 0px; left: 0px; width: 14px; transform: translate3d(0px, 0px, 0px); contain: strict; height: 20px;"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            aria-hidden="true"
+                            role="presentation"
+                            style="width: -17px;"
+                          />
+                          <textarea
+                            aria-autocomplete="both"
+                            aria-haspopup="false"
+                            aria-label="Editor content;Press Alt+F1 for Accessibility Options."
+                            aria-multiline="true"
+                            aria-roledescription="editor"
+                            autocapitalize="off"
+                            autocomplete="off"
+                            autocorrect="off"
+                            class="inputarea monaco-mouse-cursor-text"
+                            data-mprt="6"
+                            role="textbox"
+                            spellcheck="false"
+                            style="font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; font-feature-settings: "liga" off, "calt" off; line-height: 19px; letter-spacing: 0px; top: 0px; left: 0px; width: 1px; height: 1px;"
+                            tabindex="0"
+                            wrap="off"
+                          />
+                          <div
+                            class="monaco-editor-background textAreaCover"
+                            style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px;"
+                          />
+                          <div
+                            class="overlayWidgets"
+                            data-mprt="4"
+                            style="width: 5px;"
+                          >
+                            <div
+                              style="position: absolute; top: 0px; right: 50%;"
+                              widgetid="editor.contrib.quickInputWidget"
+                            />
+                          </div>
+                          <div
+                            aria-hidden="true"
+                            class="minimap slider-mouseover"
+                            data-mprt="8"
+                            role="presentation"
+                            style="position: absolute; left: -17px; width: 8px; height: 5px;"
+                          >
+                            <div
+                              class="minimap-shadow-visible"
+                              style="height: 5px;"
+                            />
+                            <canvas
+                              height="5"
+                              style="position: absolute; left: 0px; width: 8px; height: 5px;"
+                              width="8"
+                            />
+                            <canvas
+                              class="minimap-decorations-layer"
+                              height="5"
+                              style="position: absolute; left: 0px; width: 8px; height: 5px;"
+                              width="8"
+                            />
+                            <div
+                              class="minimap-slider"
+                              style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; width: 8px; display: none; top: 0px; height: 0px;"
+                            >
+                              <div
+                                class="minimap-slider-horizontal"
+                                style="position: absolute; left: 0px; width: 8px; top: 0px; height: 0px;"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="overflowingContentWidgets"
+                          data-mprt="2"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class="context-view"
+                          style="display: none;"
+                        />
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-p0cik4"
+      >
+        <div
+          class="MuiBox-root css-j1fy4m"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            >
+              <div
+                class="MuiBox-root css-70qvj9"
+              >
+                <h2
+                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root css-ldp2l3"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-1txv3mw"
+          >
+            <div
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
+            >
+              <table
+                class="MuiTable-root css-vd1o8p-MuiTable-root"
+              >
+                <thead
+                  class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+                      scope="col"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+                      scope="col"
+                    >
+                      From
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+                      scope="col"
+                    >
+                      Message
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-ojhczg-MuiTableCell-root"
+                      scope="col"
+                    >
+                      Age
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                    >
+                      Normal
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                    >
+                      Created
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                    >
+                      kubelet
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                    >
+                      <div
+                        class="MuiBox-root css-k008qs"
+                      >
+                        <label
+                          id=""
+                          style="word-break: break-all; white-space: normal;"
+                        >
+                          Created
+                        </label>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                    >
+                      <p
+                        aria-label="2021-03-01T00:00:00.000Z"
+                        class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
+                        data-mui-internal-clone-element="true"
+                      >
+                        3mo
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

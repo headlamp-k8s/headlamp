@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext", "es2020"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,14 +14,21 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client", "vite-plugin-svgr/client", "vitest/globals"]
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "typedocOptions": {
     "out": "../docs/development/api",
-    "entryPoints": ["src/lib/k8s/", "src/redux/reducers/config.tsx",  "src/lib/k8s/cluster.ts", "src/lib/router.tsx", "src/lib/util.ts", "src/plugin/lib.ts", "src/plugin/registry.tsx"],
+    "entryPoints": [
+      "src/lib/k8s/",
+      "src/redux/reducers/config.tsx",
+      "src/lib/k8s/cluster.ts",
+      "src/lib/router.tsx",
+      "src/lib/util.ts",
+      "src/plugin/lib.ts",
+      "src/plugin/registry.tsx"
+    ],
     "entryPointStrategy": "expand",
     "theme": "hugo",
     "excludeExternals": true,

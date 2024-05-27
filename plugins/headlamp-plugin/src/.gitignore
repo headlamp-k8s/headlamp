@@ -6,4 +6,5 @@ lib/
 plugin/
 redux/
 resources/
+stateless/
 react-app-env.d.ts

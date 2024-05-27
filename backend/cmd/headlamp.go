@@ -166,10 +166,14 @@ func baseURLReplace(staticDir string, baseURL string) {
 
 	copyReplace(indexBaseURL,
 		index,
+		[]byte("headlampBaseUrl = './'"),
+		[]byte("headlampBaseUrl = '"+replaceURL+"'"),
+		// Replace any resource that has "./" in it
 		[]byte("./"),
-		[]byte(baseURL+"/"),
-		[]byte("headlampBaseUrl=\".\""),
-		[]byte("headlampBaseUrl=\""+replaceURL+"\""))
+		[]byte(baseURL+"/"))
+
+	// Insert baseURL in css url() imports, they don't have "./" in them
+	copyReplace(index, index, []byte("url("), []byte("url("+baseURL+"/"), []byte(""), []byte(""))
 }
 
 func getOidcCallbackURL(r *http.Request, config *HeadlampConfig) string {

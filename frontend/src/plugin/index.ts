@@ -3,8 +3,29 @@
  * loading the plugins.
  * The lib.ts file should carry the bits to be used by plugins whereas
  */
+import * as Iconify from '@iconify/react';
+import * as ReactMonacoEditor from '@monaco-editor/react';
+import * as MuiLab from '@mui/lab';
+import * as MuiMaterial from '@mui/material';
+import * as MuiStyles from '@mui/styles';
+import * as Lodash from 'lodash';
+import * as MonacoEditor from 'monaco-editor';
+import * as Notistack from 'notistack';
+import * as React from 'react';
+import * as ReactJSX from 'react/jsx-runtime';
+import * as ReactDOM from 'react-dom';
+import * as ReactRedux from 'react-redux';
+import * as ReactRouter from 'react-router-dom';
+import * as Recharts from 'recharts';
 import semver from 'semver';
+import * as CommonComponents from '../components/common';
 import helpers from '../helpers';
+import * as K8s from '../lib/k8s';
+import * as ApiProxy from '../lib/k8s/apiProxy';
+import * as Crd from '../lib/k8s/crd';
+import * as Notification from '../lib/notification';
+import * as Router from '../lib/router';
+import * as Utils from '../lib/util';
 import { eventAction, HeadlampEventType } from '../redux/headlampEventSlice';
 import store from '../redux/stores/store';
 import { ConfigStore } from './configStore';
@@ -13,32 +34,28 @@ import { PluginInfo } from './pluginsSlice';
 import Registry, * as registryToExport from './registry';
 
 window.pluginLib = {
-  ApiProxy: require('../lib/k8s/apiProxy'),
-  ReactMonacoEditor: require('@monaco-editor/react'),
-  MonacoEditor: require(process.env.NODE_ENV === 'test'
-    ? 'monaco-editor/esm/vs/editor/editor.api.js'
-    : 'monaco-editor'),
-  K8s: require('../lib/k8s'),
-  ConfigStore: ConfigStore,
-  // Anything that is part of the lib/k8s/ folder should be imported after the K8s import, to
-  // avoid circular dependencies' issues.
-  Crd: require('../lib/k8s/crd'),
-  CommonComponents: require('../components/common'),
-  MuiMaterial: require('@mui/material'),
-  MuiStyles: require('@mui/styles'),
-  MuiLab: require('@mui/lab'),
-  React: require('react'),
-  ReactJSX: require('react/jsx-runtime'),
-  ReactDOM: require('react-dom'),
-  Recharts: require('recharts'),
-  ReactRouter: require('react-router-dom'),
-  ReactRedux: require('react-redux'),
-  Router: require('../lib/router'),
-  Utils: require('../lib/util'),
-  Iconify: require('@iconify/react'),
-  Lodash: require('lodash'),
-  Notistack: require('notistack'),
-  Notification: require('../lib/notification'),
+  ApiProxy,
+  ReactMonacoEditor,
+  MonacoEditor,
+  K8s,
+  ConfigStore,
+  Crd,
+  CommonComponents,
+  MuiMaterial,
+  MuiStyles,
+  MuiLab,
+  React,
+  ReactJSX,
+  ReactDOM,
+  Recharts,
+  ReactRouter,
+  ReactRedux,
+  Router,
+  Utils,
+  Iconify,
+  Lodash,
+  Notistack,
+  Notification,
   Headlamp,
   Plugin,
   ...registryToExport,
@@ -60,18 +77,7 @@ window.plugins = {};
  * @see Plugin
  */
 function loadDevPlugins() {
-  const context = require.context(
-    './plugins', // Context folder
-    true, // Include subdirectories
-    // Include one subdirectory level that has an index.js file
-    /^\.\/[a-zA-Z_\-0-9]+\/index\.(js|ts|tsx)+$/
-  );
-
-  // @todo: keys() is non-deterministic here because filesystems can be non-deterministic.
-  //        Loading plugins in sorted() order is probably less problematic.
-  for (const module of context.keys()) {
-    context(module);
-  }
+  import.meta.glob(['./plugins/*.index.{js,ts,tsx}'], { eager: true });
 }
 
 /**

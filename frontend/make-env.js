@@ -1,10 +1,8 @@
 'use strict';
-
 // Creates the .env file
-
-const fs = require('fs');
-const {execSync} = require('child_process');
-const appInfo = require('../app/package.json');
+import { execSync } from 'child_process';
+import fs from 'fs';
+const appInfo = JSON.parse(fs.readFileSync('../app/package.json', 'utf8'));
 
 const gitVersion = execSync('git rev-parse HEAD').toString().trim();
 
@@ -17,8 +15,8 @@ const envContents = {
 function createEnvText() {
   let text = '';
   Object.entries(envContents).forEach(([key, value]) => {
-    text += `${key}=${value}\n`
-  })
+    text += `${key}=${value}\n`;
+  });
 
   return text;
 }

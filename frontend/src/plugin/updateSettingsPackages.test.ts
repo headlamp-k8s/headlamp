@@ -1,4 +1,3 @@
-import { describe, expect, test } from '@jest/globals';
 import { updateSettingsPackages } from './index';
 import { PluginInfo } from './pluginsSlice';
 

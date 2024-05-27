@@ -7,7 +7,7 @@ export default function ConfigMapList() {
 
   return (
     <ResourceListView
-      title={t('Config Maps')}
+      title={t('glossary|Config Maps')}
       resourceClass={ConfigMap}
       columns={[
         'name',

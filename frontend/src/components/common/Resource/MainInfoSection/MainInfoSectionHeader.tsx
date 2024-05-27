@@ -37,7 +37,7 @@ export function MainInfoHeader(props: MainInfoHeaderProps) {
     state => state.actionButtons.headerActionsProcessors
   );
   function setupAction(headerAction: HeaderActionType) {
-    let Action = has(headerAction, 'action') ? (headerAction as HeaderAction).action : headerAction;
+    let Action = has(headerAction, 'action') ? (headerAction as any).action : headerAction;
 
     if (!noDefaultActions && has(headerAction, 'id')) {
       switch ((headerAction as HeaderAction).id) {

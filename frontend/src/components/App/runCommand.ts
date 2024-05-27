@@ -37,7 +37,7 @@ export function runCommand(
     throw new Error('runCommand only works in Headlamp app mode.');
   }
 
-  if (process.env.REACT_APP_ENABLE_RUN_CMD !== 'true') {
+  if (import.meta.env.REACT_APP_ENABLE_RUN_CMD !== 'true') {
     throw new Error('Running commands is disabled.');
   }
 

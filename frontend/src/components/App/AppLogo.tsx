@@ -3,10 +3,10 @@ import { SxProps } from '@mui/system';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { ReactComponent as LogoDark } from '../../resources/icon-dark.svg';
-import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
-import { ReactComponent as LogoWithTextDark } from '../../resources/logo-dark.svg';
-import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
+import LogoDark from '../../resources/icon-dark.svg?react';
+import LogoLight from '../../resources/icon-light.svg?react';
+import LogoWithTextDark from '../../resources/logo-dark.svg?react';
+import LogoWithTextLight from '../../resources/logo-light.svg?react';
 import { EmptyContent } from '../common';
 import ErrorBoundary from '../common/ErrorBoundary';
 

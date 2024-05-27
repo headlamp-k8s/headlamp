@@ -1,0 +1,8 @@
+<div>
+  <a
+    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+    href="/"
+  >
+    a link
+  </a>
+</div>

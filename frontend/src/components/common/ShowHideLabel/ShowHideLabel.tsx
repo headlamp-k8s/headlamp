@@ -16,7 +16,7 @@ export default function ShowHideLabel(props: ShowHideLabelProps) {
   const [expanded, setExpanded] = React.useState(show);
 
   const labelIdOrRandom = React.useMemo(() => {
-    if (!!labelId || !!process.env.UNDER_TEST) {
+    if (!!labelId || !!import.meta.env.UNDER_TEST) {
       return labelId;
     }
 

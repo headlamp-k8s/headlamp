@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Storyshots DetailsViewSection Match Render It 1`] = `<div />`;
-
-exports[`Storyshots DetailsViewSection No Match No Render 1`] = `<div />`;

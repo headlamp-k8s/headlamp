@@ -28,7 +28,7 @@ describe('eventsSlice', () => {
     });
 
     it('should run event callback', () => {
-      const eventCallback = jest.fn(async () => {});
+      const eventCallback = vi.fn(async () => {});
       store.dispatch(addEventCallback(eventCallback));
 
       store.dispatch(
@@ -43,12 +43,12 @@ describe('eventsSlice', () => {
 
     it('should run multiple event callbacks sequentially', () => {
       const callbackResponses: number[] = [];
-      const eventCallback = jest.fn(async () => {
+      const eventCallback = vi.fn(async () => {
         callbackResponses.push(0);
       });
       store.dispatch(addEventCallback(eventCallback));
 
-      const eventCallback1 = jest.fn(async () => {
+      const eventCallback1 = vi.fn(async () => {
         callbackResponses.push(1);
       });
       store.dispatch(addEventCallback(eventCallback1));

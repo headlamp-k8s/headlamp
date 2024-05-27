@@ -7,10 +7,10 @@
     "npm": ">=10.0.0",
     "node": ">=20.9.0"
   },
+  "type": "module",
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^9.0.9",
+    "@apidevtools/json-schema-ref-parser": "9.0.9",
     "@apidevtools/swagger-parser": "^10.0.3",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@iconify/icons-mdi": "^1.2.9",
@@ -24,23 +24,22 @@
     "@mui/x-tree-view": "^6.17.0",
     "@octokit/core": "^3.5.1",
     "@reduxjs/toolkit": "^1.9.3",
-    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/glob": "^8.1.0",
     "@types/humanize-duration": "^3.27.1",
     "@types/js-yaml": "^4.0.3",
     "@types/json-patch": "0.0.30",
     "@types/lodash": "^4.14.175",
-    "@types/node": "^14.17.21",
+    "@types/node": "^20.12.11",
     "@types/react": "^17.0.27",
     "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.19",
     "@types/react-router-dom": "^5.3.1",
     "@types/react-window": "^1.8.5",
     "@types/semver": "^7.3.8",
-    "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "base64-arraybuffer": "^1.0.2",
     "buffer": "^6.0.3",
     "console-browserify": "^1.2.0",
@@ -56,6 +55,7 @@
     "eslint-plugin-unused-imports": "^1.1.5",
     "fake-indexeddb": "^5.0.1",
     "github-markdown-css": "^5.1.0",
+    "glob": "^10.4.1",
     "https-browserify": "^1.0.0",
     "humanize-duration": "^3.27.2",
     "i18next": "^20.6.1",
@@ -67,7 +67,6 @@
     "lodash": "^4.17.21",
     "material-react-table": "^2.13.0",
     "monaco-editor": "^0.25.2",
-    "monaco-editor-webpack-plugin": "^4.2.0",
     "notistack": "^2.0.8",
     "openapi-types": "^9.3.0",
     "patch-package": "^6.4.7",
@@ -84,7 +83,6 @@
     "react-redux": "^7.2.5",
     "react-router": "^5.3.0",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "5.0.0",
     "react-window": "^1.8.7",
     "recharts": "^2.1.4",
     "semver": "^7.3.5",
@@ -95,28 +93,32 @@
     "url": "^0.11.0",
     "util": "^0.12.4",
     "vfile": "^5.3.0",
-    "webpack": "^5.66.0",
+    "vite": "^5.2.11",
+    "vite-plugin-node-polyfills": "^0.22.0",
+    "vite-plugin-svgr": "^4.2.0",
     "xterm": "^4.19.0",
     "xterm-addon-fit": "^0.5.0",
     "xterm-addon-search": "^0.9.0"
   },
+  "overrides": {
+    "domain-browser": "npm:dry-uninstall"
+  },
   "scripts": {
     "prestart": "npm run make-version",
-    "start": "cross-env HEADLAMP_BACKEND_TOKEN=headlamp react-scripts start",
+    "start": "cross-env REACT_APP_HEADLAMP_BACKEND_TOKEN=headlamp vite",
+    "preview": "vite preview",
     "prebuild": "npm run make-version",
-    "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && npx shx rm -f build/frontend/index.baseUrl.html",
-    "test": "cross-env UNDER_TEST=true react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --cache -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin  ../e2e-tests/tests/*.ts ../e2e-tests/playwright.config.ts --ignore-pattern ../plugins/headlamp-plugin/template --ignore-pattern ../plugins/headlamp-plugin/lib/",
-    "format": "prettier --config package.json --write --cache src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js ../e2e-tests/tests/*.ts ../e2e-tests/playwright.config.ts",
-    "format-check": "prettier --config package.json --check src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js ../e2e-tests/tests/*.ts ../e2e-tests/playwright.config.ts",
-    "storybook": "storybook dev -p 6006 -s public",
-    "build-typedoc": "npx typedoc",
-    "build-storybook": "storybook build -s public -o ../docs/development/storybook",
-    "i18n": "npx --no-install i18next ./src/**/*.ts* ./src/**/**/*.ts* ./src/**/**/**/*.ts* -c ./src/i18n/i18next-parser.config.js",
+    "build": "cross-env PUBLIC_URL=./ NODE_OPTIONS=--max-old-space-size=8096 vite build && npx shx rm -f build/frontend/index.baseUrl.html",
+    "test": "vitest",
+    "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin --ignore-pattern ../plugins/headlamp-plugin/template --ignore-pattern ../plugins/headlamp-plugin/lib/",
+    "format": "prettier --config package.json --write src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js",
+    "format-check": "prettier --config package.json --check src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js",
+    "storybook": "storybook dev -p 6006",
+    "build-typedoc": "typedoc",
+    "build-storybook": "storybook build -o ../docs/development/storybook",
+    "i18n": "i18next 'src/**/*.{ts,tsx}' -c ./src/i18n/i18next-parser.config.js",
     "tsc": "tsc",
-    "make-version": "node ./make-env.js",
-    "postinstall": "patch-package"
+    "make-version": "node ./make-env.js"
   },
   "browserslist": {
     "production": [
@@ -174,54 +176,30 @@
       "plugin:jsx-a11y/recommended"
     ]
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/build/",
-      "!src/**/*.stories*.{js,jsx,ts,tsx}"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 43.34,
-        "branches": 37.61,
-        "functions": 38.09,
-        "lines": 43.16
-      }
-    },
-    "coverageReporters": [
-      "text"
-    ],
-    "transformIgnorePatterns": [
-      "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|spacetime|monaco-editor.+|react-monaco-editor|@monaco-editor/react)"
-    ],
-    "resetMocks": false
-  },
   "prettier": "@kinvolk/eslint-config/prettier-config",
   "devDependencies": {
     "@axe-core/react": "^4.3.2",
     "@storybook/addon-actions": "7.6.7",
     "@storybook/addon-essentials": "7.6.7",
     "@storybook/addon-links": "7.6.7",
-    "@storybook/addon-storyshots": "7.6.7",
+    "@storybook/builder-vite": "^8.1.0",
     "@storybook/node-logger": "7.6.7",
-    "@storybook/preset-create-react-app": "^7.6.7",
     "@storybook/react": "7.6.7",
-    "@storybook/react-webpack5": "^7.6.7",
+    "@storybook/react-vite": "^7.6.19",
+    "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/user-event": "^14.5.1",
     "@types/nock": "^11.1.0",
     "@types/redux-mock-store": "^1.0.4",
+    "@vitest/coverage-v8": "^1.6.0",
     "fetch-mock": "^9.11.0",
     "http-proxy-middleware": "^2.0.1",
     "husky": "^4.3.8",
     "i18next-parser": "^7.9.0",
-    "jest-canvas-mock": "^2.4.0",
-    "jest-html-reporter": "^3.10.2",
-    "jest-websocket-mock": "^2.5.0",
+    "jsdom": "^24.0.0",
     "lint-staged": "^10.5.4",
     "msw": "^0.47.4",
     "msw-storybook-addon": "^1.10.0",
-    "nock": "^13.5.4",
+    "nock": "^14.0.0-beta.6",
     "prettier": "^2.7.1",
     "redux-mock-store": "^1.5.4",
     "resize-observer-polyfill": "^1.5.1",
@@ -230,7 +208,9 @@
     "typedoc-hugo-theme": "1.0.0",
     "typedoc-plugin-markdown": "3.11.14",
     "typedoc-plugin-rename-defaults": "0.4.0",
-    "vm-browserify": "^1.1.2",
-    "ws": "^8.16.0"
+    "vitest": "^1.6.0",
+    "vitest-canvas-mock": "^0.3.3",
+    "vitest-websocket-mock": "^0.3.0",
+    "vm-browserify": "^1.1.2"
   }
 }

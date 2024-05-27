@@ -11,7 +11,7 @@ import notificationsReducer, {
 describe('loadNotifications', () => {
   it('should return an empty array when localStorage.getItem returns null', () => {
     const orig = Storage.prototype.getItem;
-    Storage.prototype.getItem = jest.fn(() => null);
+    Storage.prototype.getItem = vi.fn(() => null);
     const result = loadNotifications();
     expect(result).toEqual([]);
     Storage.prototype.getItem = orig;
@@ -56,8 +56,9 @@ describe('notificationsSlice', () => {
 
   beforeEach(() => {
     const mockLocalStorage = {
-      getItem: jest.fn(),
-      setItem: jest.fn(),
+      getItem: vi.fn(),
+      setItem: vi.fn(),
+      clear: vi.fn(),
     };
     localStorage = mockLocalStorage as any;
 

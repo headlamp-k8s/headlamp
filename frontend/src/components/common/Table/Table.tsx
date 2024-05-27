@@ -182,6 +182,16 @@ export default function Table<RowItem extends Record<string, any>>({
     })
     .join(' ');
 
+  const paginationSelectProps = import.meta.env.UNDER_TEST
+    ? {
+        inputProps: {
+          SelectDisplayProps: {
+            'aria-controls': 'test-id',
+          },
+        },
+      }
+    : undefined;
+
   const table = useMaterialReactTable({
     ...tableProps,
     columns: tableColumns ?? [],
@@ -217,10 +227,14 @@ export default function Table<RowItem extends Record<string, any>>({
         </Box>
       </Box>
     ),
+    muiSearchTextFieldProps: {
+      id: 'table-search-field',
+    },
     muiPaginationProps: {
       rowsPerPageOptions: rowsPerPageOptions,
       showFirstButton: false,
       showLastButton: false,
+      SelectProps: paginationSelectProps,
     },
     muiTableBodyCellProps: {
       sx: {

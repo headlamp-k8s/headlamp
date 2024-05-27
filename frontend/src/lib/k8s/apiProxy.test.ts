@@ -3,14 +3,16 @@
  * https://github.com/nock/nock
  */
 
-import WS from 'jest-websocket-mock';
 import nock from 'nock';
+import { Mock, MockedFunction } from 'vitest';
+import WS from 'vitest-websocket-mock';
+import exportFunctions from '../../helpers';
 import * as auth from '../auth';
 import * as cluster from '../cluster';
 import * as apiProxy from './apiProxy';
 
-const baseApiUrl = 'http://localhost';
-const wsUrl = 'ws://localhost';
+const baseApiUrl = exportFunctions.getAppUrl();
+const wsUrl = baseApiUrl.replace('http', 'ws');
 const testPath = '/test/url';
 const mockResponse = { message: 'mock response' };
 const clusterName = 'test-cluster';
@@ -112,17 +114,16 @@ describe('apiProxy', () => {
         .get(`/clusters/test-cluster${testPath}`)
         .reply(200, mockResponse, { 'X-Authorization': 'newToken' });
 
-      const setTokenSpy = jest.spyOn(auth, 'setToken');
+      const setTokenSpy = vi.spyOn(auth, 'setToken');
       await apiProxy.clusterRequest(testPath, { cluster: clusterName });
       expect(setTokenSpy).toHaveBeenCalledWith(clusterName, 'newToken');
+      auth.deleteTokens();
     });
   });
 
   describe('apiFactory, apiFactoryWithNamespace', () => {
-    const mockServers: any = {};
-    let mockServer: WS;
-    let cb: jest.Mock;
-    let errCb: jest.Mock;
+    let cb: Mock;
+    let errCb: Mock;
 
     beforeEach(() => {
       nock(baseApiUrl)
@@ -136,40 +137,37 @@ describe('apiProxy', () => {
         )
         .reply(200, mockConfigMapList);
 
-      cb = jest.fn();
-      errCb = jest.fn();
+      cb = vi.fn();
+      errCb = vi.fn();
 
-      jest.spyOn(console, 'warn').mockImplementation();
+      // vi.spyOn(console, 'warn');
     });
 
     afterEach(() => {
       nock.cleanAll();
       WS.clean();
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
     describe('singleApiFactory', () => {
-      it('Successfully creates API client for single resource', done => {
-        expect.assertions(3);
-
-        mockServer = new WS(
-          `${wsUrl}/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`
+      it('Successfully creates API client for single resource', async () => {
+        const server = new WS(
+          `${wsUrl}clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/${mockSingleResource[2]}`
         );
 
         const client = apiProxy.apiFactory(...mockSingleResource);
         client.list(cb, errCb, {}, clusterName);
 
-        mockServer.on('connection', async (socket: any) => {
-          expect(cb).toHaveBeenNthCalledWith(1, []);
+        await server.connected;
+        console.log('connected');
 
-          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+        expect(cb).toHaveBeenNthCalledWith(1, []);
 
-          socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
+        server.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+        expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
 
-          done();
-        });
+        server.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+        expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
       });
     });
 
@@ -177,26 +175,22 @@ describe('apiProxy', () => {
       it('Successfully creates API client for multiple resources', async () => {
         expect.assertions(10);
 
-        const connections = mockMultipleResource.map(([group, version, resource]) => {
-          return new Promise<void>(resolve => {
-            mockServers[resource] = new WS(
-              `${wsUrl}/clusters/${clusterName}/apis/${group}/${version}/${resource}`
-            );
-            const client = apiProxy.apiFactory(group, version, resource);
-            client.list(cb, errCb, {}, clusterName);
+        const connections = mockMultipleResource.map(async ([group, version, resource]) => {
+          const server = new WS(
+            `${wsUrl}clusters/${clusterName}/apis/${group}/${version}/${resource}`
+          );
+          const client = apiProxy.apiFactory(group, version, resource);
+          client.list(cb, errCb, {}, clusterName);
 
-            mockServers[resource].on('connection', async (socket: any) => {
-              expect(cb).toHaveBeenCalledWith([]);
+          await server.connected;
 
-              socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-              expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+          expect(cb).toHaveBeenCalledWith([]);
 
-              socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
-              expect(cb).toHaveBeenCalledWith([{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
+          server.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+          expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
 
-              resolve();
-            });
-          });
+          server.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+          expect(cb).toHaveBeenCalledWith([{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
         });
 
         await Promise.all(connections);
@@ -205,11 +199,11 @@ describe('apiProxy', () => {
     });
 
     describe('simpleApiFactoryWithNamespace', () => {
-      it('Successfully creates API client for single namespaced resource', done => {
+      it('Successfully creates API client for single namespaced resource', async () => {
         expect.assertions(4);
 
-        mockServer = new WS(
-          `${wsUrl}/clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/namespaces/${namespace}/${mockSingleResource[2]}`
+        const mockServer = new WS(
+          `${wsUrl}clusters/${clusterName}/apis/${mockSingleResource[0]}/${mockSingleResource[1]}/namespaces/${namespace}/${mockSingleResource[2]}`
         );
 
         const client = apiProxy.apiFactoryWithNamespace(...mockSingleResource);
@@ -217,17 +211,15 @@ describe('apiProxy', () => {
 
         client.list(namespace, cb, errCb, {}, clusterName);
 
-        mockServer.on('connection', async (socket: any) => {
-          expect(cb).toHaveBeenNthCalledWith(1, []);
+        await mockServer.connected;
 
-          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+        expect(cb).toHaveBeenNthCalledWith(1, []);
 
-          socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
+        mockServer.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+        expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
 
-          done();
-        });
+        mockServer.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+        expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
       });
     });
 
@@ -235,26 +227,22 @@ describe('apiProxy', () => {
       it('Successfully creates API client for multiple namespaced resources', async () => {
         expect.assertions(10);
 
-        const connections = mockMultipleResource.map(([group, version, resource]) => {
-          return new Promise<void>(resolve => {
-            mockServers[resource] = new WS(
-              `${wsUrl}/clusters/${clusterName}/apis/${group}/${version}/namespaces/${namespace}/${resource}`
-            );
-            const client = apiProxy.apiFactoryWithNamespace(group, version, resource);
-            client.list(namespace, cb, errCb, {}, clusterName);
+        const connections = mockMultipleResource.map(async ([group, version, resource]) => {
+          const mockServer = new WS(
+            `${wsUrl}clusters/${clusterName}/apis/${group}/${version}/namespaces/${namespace}/${resource}`
+          );
+          const client = apiProxy.apiFactoryWithNamespace(group, version, resource);
+          client.list(namespace, cb, errCb, {}, clusterName);
 
-            mockServers[resource].on('connection', async (socket: any) => {
-              expect(cb).toHaveBeenCalledWith([]);
+          await mockServer.connected;
 
-              socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-              expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+          expect(cb).toHaveBeenCalledWith([]);
 
-              socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
-              expect(cb).toHaveBeenCalledWith([{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
+          mockServer.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+          expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
 
-              resolve();
-            });
-          });
+          mockServer.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+          expect(cb).toHaveBeenCalledWith([{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
         });
 
         await Promise.all(connections);
@@ -389,8 +377,8 @@ describe('apiProxy', () => {
 
   describe('streamResult', () => {
     let mockServer: WS;
-    let cb: jest.Mock;
-    let errCb: jest.Mock;
+    let cb: Mock;
+    let errCb: Mock;
 
     beforeEach(() => {
       nock(baseApiUrl)
@@ -398,85 +386,81 @@ describe('apiProxy', () => {
         .query(true)
         .reply(200, mockConfigMap);
 
-      cb = jest.fn();
-      errCb = jest.fn();
+      cb = vi.fn();
+      errCb = vi.fn();
 
-      mockServer = new WS(`${wsUrl}/clusters/${clusterName}${streamResultsUrl}`);
-      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
-      jest.spyOn(console, 'error').mockImplementation();
-      jest.spyOn(console, 'warn').mockImplementation();
+      mockServer = new WS(`${wsUrl}clusters/${clusterName}${streamResultsUrl}`);
+      vi.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      // vi.spyOn(console, 'warn').mockImplementation();
     });
 
     afterEach(() => {
       nock.cleanAll();
       WS.clean();
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
-    it('Successfully handles ADDED, MODIFIED, and DELETED types', done => {
+    it('Successfully handles ADDED, MODIFIED, and DELETED types', async () => {
       expect.assertions(4);
 
       apiProxy.streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, {
         watch: '1',
       });
 
-      mockServer.on('connection', async (socket: any) => {
-        expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
+      await mockServer.connected;
 
-        socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-        expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
+      expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
 
-        socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
-        expect(cb).toHaveBeenNthCalledWith(3, modifiedConfigMap);
+      mockServer.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+      expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
 
-        socket.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
-        expect(cb).toHaveBeenNthCalledWith(4, mockConfigMap);
+      mockServer.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+      expect(cb).toHaveBeenNthCalledWith(3, modifiedConfigMap);
 
-        done();
-      });
+      mockServer.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
+      expect(cb).toHaveBeenNthCalledWith(4, mockConfigMap);
     });
 
-    it('Successfully handles error messages', done => {
+    it('Successfully handles error messages', async () => {
       expect.assertions(2);
 
       apiProxy.streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, {
         watch: '1',
       });
 
-      mockServer.on('connection', async (socket: any) => {
-        expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
+      await mockServer.connected;
+      expect(cb).toHaveBeenNthCalledWith(1, mockConfigMap);
 
-        socket.send(JSON.stringify(errorMessage));
-        expect(cb).toHaveBeenNthCalledWith(2, errorMessage.object);
-
-        done();
-      });
+      mockServer.send(JSON.stringify(errorMessage));
+      expect(cb).toHaveBeenNthCalledWith(2, errorMessage.object);
     });
 
-    it('Successfully handles stream cancellation', done => {
-      expect.assertions(2);
+    it('Successfully handles stream cancellation', () =>
+      new Promise<void>(done => {
+        expect.assertions(2);
 
-      apiProxy
-        .streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, { watch: '1' })
-        .then(cancel => {
-          mockServer.on('connection', async (socket: any) => {
-            socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-            expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
-            cancel();
-            socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+        apiProxy
+          .streamResult(streamResultsUrl, mockConfigMap.metadata.name, cb, errCb, { watch: '1' })
+          .then(cancel => {
+            mockServer.on('connection', async (socket: any) => {
+              socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+              expect(cb).toHaveBeenNthCalledWith(2, mockConfigMap);
+              cancel();
+              socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
 
-            expect(cb).toHaveBeenCalledTimes(2);
-            done();
-          });
-        })
-        .catch(err => done(err));
-    });
+              expect(cb).toHaveBeenCalledTimes(2);
+              done();
+            });
+          })
+          .catch(err => done(err));
+      }));
   });
 
   describe('streamResults, streamResultsForCluster', () => {
     let mockServer: WS;
-    let cb: jest.Mock;
-    let errCb: jest.Mock;
+    let cb: Mock;
+    let errCb: Mock;
 
     beforeEach(() => {
       nock(baseApiUrl)
@@ -484,177 +468,186 @@ describe('apiProxy', () => {
         .query(true)
         .reply(200, mockConfigMapList);
 
-      cb = jest.fn();
-      errCb = jest.fn();
+      cb = vi.fn();
+      errCb = vi.fn();
 
-      mockServer = new WS(`${wsUrl}/clusters/${clusterName}${streamResultsUrl}`);
-      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
-      jest.spyOn(console, 'error').mockImplementation();
-      jest.spyOn(console, 'warn').mockImplementation();
+      mockServer = new WS(`${wsUrl}clusters/${clusterName}${streamResultsUrl}`);
+      vi.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      // vi.spyOn(console, 'warn').mockImplementation();
     });
 
     afterEach(() => {
       nock.cleanAll();
       WS.clean();
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
     describe('streamResults', () => {
-      it('Successfully starts a stream and receives data', done => {
-        expect.assertions(2);
+      it('Successfully starts a stream and receives data', () =>
+        new Promise<void>(done => {
+          expect.assertions(2);
 
-        apiProxy.streamResults(streamResultsUrl, cb, errCb, {
-          watch: '1',
-        });
+          apiProxy.streamResults(streamResultsUrl, cb, errCb, {
+            watch: '1',
+          });
 
-        mockServer.on('connection', async (socket: any) => {
-          expect(cb).toHaveBeenNthCalledWith(1, []);
+          mockServer.on('connection', async (socket: any) => {
+            expect(cb).toHaveBeenNthCalledWith(1, []);
 
-          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+            socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+            expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
 
-          done();
-        });
-      });
+            done();
+          });
+        }));
     });
 
     describe('streamResultsForCluster', () => {
-      it('Successfully handles ADDED, MODIFIED, and DELETED types', done => {
-        expect.assertions(4);
+      it('Successfully handles ADDED, MODIFIED, and DELETED types', () =>
+        new Promise<void>(done => {
+          expect.assertions(4);
 
-        apiProxy.streamResultsForCluster(
-          streamResultsUrl,
-          { cb, errCb, cluster: clusterName },
-          { watch: '1' }
-        );
-
-        mockServer.on('connection', async (socket: any) => {
-          expect(cb).toHaveBeenNthCalledWith(1, []);
-
-          socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
-
-          socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(3, [{ actionType: 'MODIFIED', ...modifiedConfigMap }]);
-
-          socket.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
-          expect(cb).toHaveBeenNthCalledWith(4, []);
-
-          done();
-        });
-      });
-
-      it('Successfully handles error messages', done => {
-        apiProxy.streamResultsForCluster(
-          streamResultsUrl,
-          { cb, errCb, cluster: clusterName },
-          { watch: '1' }
-        );
-
-        mockServer.on('connection', async (socket: any) => {
-          socket.send(JSON.stringify(errorMessage));
-          expect(console.error).toHaveBeenCalledWith(
-            'Error in update',
-            expect.objectContaining({
-              object: expect.objectContaining({
-                actionType: errorMessage.object.actionType,
-                message: errorMessage.object.message,
-                reason: errorMessage.object.reason,
-              }),
-              type: errorMessage.type,
-            })
-          );
-          done();
-        });
-      });
-
-      it('Successfully handles stream cancellation', done => {
-        expect.assertions(2);
-
-        apiProxy
-          .streamResultsForCluster(
+          apiProxy.streamResultsForCluster(
             streamResultsUrl,
             { cb, errCb, cluster: clusterName },
             { watch: '1' }
-          )
-          .then(cancel => {
-            mockServer.on('connection', async socket => {
-              socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
-              expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
-              cancel();
-              socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+          );
 
-              expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
-              done();
-            });
-          })
-          .catch(err => done(err));
-      });
+          mockServer.on('connection', async (socket: any) => {
+            expect(cb).toHaveBeenNthCalledWith(1, []);
+
+            socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+            expect(cb).toHaveBeenNthCalledWith(2, [{ actionType: 'ADDED', ...mockConfigMap }]);
+
+            socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+            expect(cb).toHaveBeenNthCalledWith(3, [
+              { actionType: 'MODIFIED', ...modifiedConfigMap },
+            ]);
+
+            socket.send(JSON.stringify({ type: 'DELETED', object: mockConfigMap }));
+            expect(cb).toHaveBeenNthCalledWith(4, []);
+
+            done();
+          });
+        }));
+
+      it('Successfully handles error messages', () =>
+        new Promise<void>(done => {
+          apiProxy.streamResultsForCluster(
+            streamResultsUrl,
+            { cb, errCb, cluster: clusterName },
+            { watch: '1' }
+          );
+
+          mockServer.on('connection', async (socket: any) => {
+            socket.send(JSON.stringify(errorMessage));
+            expect(console.error).toHaveBeenCalledWith(
+              'Error in update',
+              expect.objectContaining({
+                object: expect.objectContaining({
+                  actionType: errorMessage.object.actionType,
+                  message: errorMessage.object.message,
+                  reason: errorMessage.object.reason,
+                }),
+                type: errorMessage.type,
+              })
+            );
+            done();
+          });
+        }));
+
+      it('Successfully handles stream cancellation', () =>
+        new Promise<void>(done => {
+          expect.assertions(2);
+
+          apiProxy
+            .streamResultsForCluster(
+              streamResultsUrl,
+              { cb, errCb, cluster: clusterName },
+              { watch: '1' }
+            )
+            .then(cancel => {
+              mockServer.on('connection', async socket => {
+                socket.send(JSON.stringify({ type: 'ADDED', object: mockConfigMap }));
+                expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+                cancel();
+                socket.send(JSON.stringify({ type: 'MODIFIED', object: modifiedConfigMap }));
+
+                expect(cb).toHaveBeenCalledWith([{ actionType: 'ADDED', ...mockConfigMap }]);
+                done();
+              });
+            })
+            .catch(err => done(err));
+        }));
     });
   });
 
   describe('stream', () => {
     let mockServer: WS;
-    let cb: jest.Mock;
-    let connectCb: jest.Mock;
-    let failCb: jest.Mock;
+    let cb: Mock;
+    let connectCb: Mock;
+    let failCb: Mock;
 
     beforeEach(() => {
-      cb = jest.fn();
-      connectCb = jest.fn();
-      failCb = jest.fn();
+      cb = vi.fn();
+      connectCb = vi.fn();
+      failCb = vi.fn();
 
-      mockServer = new WS(`${wsUrl}/clusters/${clusterName}${testPath}`);
-      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
-      jest.spyOn(console, 'warn').mockImplementation();
+      mockServer = new WS(`${wsUrl}clusters/${clusterName}${testPath}`);
+      vi.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      // vi.spyOn(console, 'warn').mockImplementation();
     });
 
     afterEach(() => {
       WS.clean();
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
-    it('Successfully connects to the server and receives messages', done => {
-      expect.assertions(2);
+    it('Successfully connects to the server and receives messages', () =>
+      new Promise<void>(done => {
+        expect.assertions(2);
 
-      apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
+        apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
 
-      mockServer.on('connection', async (socket: any) => {
-        expect(connectCb).toHaveBeenCalled();
+        mockServer.on('connection', async (socket: any) => {
+          expect(connectCb).toHaveBeenCalled();
 
-        socket.send(JSON.stringify(mockResponse));
-        expect(cb).toHaveBeenNthCalledWith(1, mockResponse);
+          socket.send(JSON.stringify(mockResponse));
+          expect(cb).toHaveBeenNthCalledWith(1, mockResponse);
 
-        done();
-      });
-    });
+          done();
+        });
+      }));
 
-    it('Successfully handles WebSocket errors', done => {
-      apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
+    it('Successfully handles WebSocket errors', () =>
+      new Promise<void>(done => {
+        apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
 
-      mockServer.on('connection', async (socket: any) => {
-        socket.close();
+        mockServer.on('connection', async (socket: any) => {
+          socket.close();
 
-        // Sleep to avoid timing out
-        await new Promise(resolve => setTimeout(resolve, 100));
-        expect(failCb).toHaveBeenCalled();
+          // Sleep to avoid timing out
+          await new Promise(resolve => setTimeout(resolve, 100));
+          expect(failCb).toHaveBeenCalled();
 
-        done();
-      });
-    });
+          done();
+        });
+      }));
 
-    it('Successfully handles stream cancellation', done => {
-      const { cancel } = apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
+    it('Successfully handles stream cancellation', () =>
+      new Promise<void>(done => {
+        const { cancel } = apiProxy.stream(testPath, cb, { connectCb, failCb, isJson: true });
 
-      mockServer.on('connection', async () => {
-        cancel();
+        mockServer.on('connection', async () => {
+          cancel();
 
-        mockServer.send(JSON.stringify(mockResponse));
-        expect(cb).not.toHaveBeenCalled();
+          mockServer.send(JSON.stringify(mockResponse));
+          expect(cb).not.toHaveBeenCalled();
 
-        done();
-      });
-    });
+          done();
+        });
+      }));
   });
 
   describe('apply', () => {
@@ -672,13 +665,13 @@ describe('apiProxy', () => {
           ],
         });
 
-      jest.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
-      jest.spyOn(console, 'warn').mockImplementation();
+      vi.spyOn(cluster, 'getCluster').mockReturnValue(clusterName);
+      // vi.spyOn(console, 'warn').mockImplementation();
     });
 
     afterEach(() => {
       nock.cleanAll();
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
     it('Successfully creates a new resource with POST', async () => {
@@ -735,18 +728,18 @@ describe('apiProxy', () => {
   });
 
   describe('metrics', () => {
-    let onMetrics: jest.Mock;
-    let onError: jest.Mock;
+    let onMetrics: Mock;
+    let onError: Mock;
 
     beforeEach(() => {
-      onMetrics = jest.fn();
-      onError = jest.fn();
-      jest.spyOn(console, 'warn').mockImplementation();
+      onMetrics = vi.fn();
+      onError = vi.fn();
+      // vi.spyOn(console, 'warn').mockImplementation();
     });
 
     afterEach(() => {
       nock.cleanAll();
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
     it('Successfully retrieves metrics', async () => {
@@ -920,7 +913,7 @@ describe('apiProxy', () => {
     ];
 
     beforeEach(() => {
-      (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+      (global.fetch as MockedFunction<typeof fetch>) = vi
         .fn()
         .mockImplementation((url, options) => {
           if (url.includes('portforward') && !url.includes('list')) {
@@ -952,7 +945,7 @@ describe('apiProxy', () => {
     });
 
     afterEach(() => {
-      jest.resetAllMocks();
+      vi.resetAllMocks();
     });
 
     describe('startPortForward', () => {
@@ -993,7 +986,7 @@ describe('apiProxy', () => {
     const drainNodeErrorResponse = 'Something went wrong';
 
     beforeEach(() => {
-      (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+      (global.fetch as MockedFunction<typeof fetch>) = vi
         .fn()
         .mockImplementation((url, options) => {
           if (options.method === 'POST' && url.includes('drain-node')) {
@@ -1019,25 +1012,24 @@ describe('apiProxy', () => {
     });
 
     afterEach(() => {
-      jest.resetAllMocks();
+      vi.resetAllMocks();
     });
 
     describe('drainNode', () => {
       it('Successfully drains a node', async () => {
         const response = await apiProxy.drainNode(clusterName, nodeName);
         expect(response).toEqual(mockResponse);
-        expect(fetch).toHaveBeenCalledWith(
-          expect.stringContaining('drain-node'),
-          expect.objectContaining({
-            method: 'POST',
-            headers: { map: expect.objectContaining({ 'content-type': 'application/json' }) },
-            body: JSON.stringify({ cluster: clusterName, nodeName }),
-          })
-        );
+
+        const [url, options] = (fetch as Mock).mock.lastCall;
+
+        expect(url).toContain('drain-node');
+        expect(options.method).toBe('POST');
+        expect(options.headers.get('content-type')).toEqual('application/json');
+        expect(options.body).toEqual(JSON.stringify({ cluster: clusterName, nodeName }));
       });
 
       it('Successfully handles drainNode with error', async () => {
-        (global.fetch as jest.MockedFunction<typeof fetch>) = jest.fn().mockImplementation(() => {
+        (global.fetch as MockedFunction<typeof fetch>) = vi.fn().mockImplementation(() => {
           return Promise.resolve({
             ok: false,
             json: () => Promise.resolve(drainNodeErrorResponse),
@@ -1054,17 +1046,16 @@ describe('apiProxy', () => {
       it('Successfully gets drain node status', async () => {
         const response = await apiProxy.drainNodeStatus(clusterName, nodeName);
         expect(response).toEqual(mockResponse);
-        expect(fetch).toHaveBeenCalledWith(
-          expect.stringContaining('drain-node-status'),
-          expect.objectContaining({
-            method: 'GET',
-            headers: { map: expect.objectContaining({ 'content-type': 'application/json' }) },
-          })
-        );
+
+        const [url, options] = (fetch as Mock).mock.lastCall;
+
+        expect(url).toContain('drain-node-status');
+        expect(options.method).toBe('GET');
+        expect(options.headers.get('content-type')).toEqual('application/json');
       });
 
       it('Successfully handles drainNodeStatus with error', async () => {
-        (global.fetch as jest.MockedFunction<typeof fetch>) = jest.fn().mockImplementation(() => {
+        (global.fetch as MockedFunction<typeof fetch>) = vi.fn().mockImplementation(() => {
           return Promise.resolve({
             ok: false,
             json: () => Promise.resolve(drainNodeErrorResponse),
@@ -1083,7 +1074,7 @@ describe('apiProxy', () => {
     const fakePluginName = 'fake-plugin';
 
     beforeEach(() => {
-      (global.fetch as jest.MockedFunction<typeof fetch>) = jest
+      (global.fetch as MockedFunction<typeof fetch>) = vi
         .fn()
         .mockImplementation((url, options) => {
           if (url.endsWith(`/plugins/${pluginName}`) && options.method === 'DELETE') {
@@ -1107,7 +1098,7 @@ describe('apiProxy', () => {
     });
 
     afterEach(() => {
-      jest.resetAllMocks();
+      vi.resetAllMocks();
     });
 
     it('Successfully deletes a plugin', async () => {

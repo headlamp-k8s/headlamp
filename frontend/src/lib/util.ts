@@ -47,7 +47,7 @@ export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
   const fromDate = new Date(date);
   let now = new Date();
 
-  if (process.env.UNDER_TEST === 'true') {
+  if (import.meta.env.UNDER_TEST === 'true') {
     // For testing, we consider the current moment to be 3 months from the dates we are testing.
     const days = 24 * 3600 * 1000; // in ms
     now = new Date(fromDate.getTime() + 90 * days);
@@ -87,7 +87,7 @@ export function localeDate(date: DateParam) {
   let locale: string | undefined = undefined;
 
   // Force the same conditions under test, so snapshots are the same.
-  if (process.env.UNDER_TEST === 'true') {
+  if (import.meta.env.UNDER_TEST === 'true') {
     options.timeZone = 'UTC';
     options.hour12 = true;
     locale = 'en-US';
@@ -389,7 +389,9 @@ export function normalizeUnit(resourceType: string, quantity: string) {
  */
 export function useId(prefix = '') {
   const [id] = React.useState<string | undefined>(
-    process.env.UNDER_TEST === 'true' ? prefix + 'id' : prefix + Math.random().toString(16).slice(2)
+    import.meta.env.UNDER_TEST === 'true'
+      ? prefix + 'id'
+      : prefix + Math.random().toString(16).slice(2)
   );
 
   return id;
