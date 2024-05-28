@@ -12,6 +12,12 @@ export class RuntimeClass extends KubeObject<KubeRuntimeClass> {
   static apiVersion = 'node.k8s.io/v1';
   static isNamespaced = false;
 
+  static getBaseObject(): KubeRuntimeClass {
+    const baseObject = super.getBaseObject() as KubeRuntimeClass;
+    baseObject.handler = '';
+    return baseObject;
+  }
+
   get spec() {
     return this.jsonData.spec;
   }

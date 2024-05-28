@@ -43,6 +43,35 @@ class Deployment extends KubeObject<KubeDeployment> {
     const labels = this.spec.selector.matchLabels || {};
     return Object.keys(labels).map(key => `${key}=${labels[key]}`);
   }
+
+  static getBaseObject(): KubeDeployment {
+    const baseObject = super.getBaseObject() as KubeDeployment;
+    baseObject.metadata = {
+      ...baseObject.metadata,
+      namespace: '',
+      labels: { app: 'headlamp' },
+    };
+    baseObject.spec = {
+      selector: {
+        matchLabels: { app: 'headlamp' },
+      },
+      template: {
+        spec: {
+          containers: [
+            {
+              name: '',
+              image: '',
+              ports: [{ containerPort: 80 }],
+              imagePullPolicy: 'Always',
+            },
+          ],
+          nodeName: '',
+        },
+      },
+    };
+
+    return baseObject;
+  }
 }
 
 export default Deployment;

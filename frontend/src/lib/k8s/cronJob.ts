@@ -49,6 +49,37 @@ class CronJob extends KubeObject<KubeCronJob> {
     return this.getValue('status');
   }
 
+  static getBaseObject(): KubeCronJob {
+    const baseObject = super.getBaseObject() as KubeCronJob;
+    baseObject.metadata = {
+      ...baseObject.metadata,
+      namespace: '',
+    };
+    baseObject.spec = {
+      suspend: false,
+      schedule: '',
+      successfulJobsHistoryLimit: 3,
+      failedJobsHistoryLimit: 1,
+      concurrencyPolicy: 'Allow',
+      jobTemplate: {
+        spec: {
+          template: {
+            spec: {
+              containers: [
+                {
+                  name: '',
+                  image: '',
+                  imagePullPolicy: 'Always',
+                },
+              ],
+            },
+          },
+        },
+      },
+    };
+    return baseObject;
+  }
+
   getContainers(): KubeContainer[] {
     return this.spec.jobTemplate?.spec?.template?.spec?.containers || [];
   }

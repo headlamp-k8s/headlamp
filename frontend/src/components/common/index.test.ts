@@ -19,6 +19,7 @@ const checkExports = [
   'Chart',
   'ConfirmDialog',
   'ConfirmButton',
+  'CreateResourceButton',
   'Dialog',
   'EmptyContent',
   'ErrorPage',
