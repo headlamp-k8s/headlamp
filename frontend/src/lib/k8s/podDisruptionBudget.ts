@@ -36,8 +36,14 @@ export interface KubePDB extends KubeObjectInterface {
   };
 }
 
-class PDB extends makeKubeObject<KubePDB>('podDisruptionBudget') {
+class PDB extends makeKubeObject<KubePDB>('PodDisruptionBudget') {
   static apiEndpoint = apiFactoryWithNamespace(['policy', 'v1', 'poddisruptionbudgets']);
+
+  static getBaseObject(): KubePDB {
+    const baseObject = super.getBaseObject() as KubePDB;
+    baseObject.spec = { selector: { matchLabels: {} } };
+    return baseObject;
+  }
 
   get spec(): KubePDB['spec'] {
     return this.jsonData!.spec;

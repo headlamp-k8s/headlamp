@@ -457,7 +457,11 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     get kind() {
-      return this.jsonData!.kind;
+      return this.jsonData!.kind ?? this._class().kind;
+    }
+
+    static get kind() {
+      return this.className;
     }
 
     get isNamespaced() {
@@ -870,6 +874,18 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         default:
           return 'Error';
       }
+    }
+
+    static getBaseObject() {
+      return {
+        apiVersion: `${this.apiEndpoint.apiInfo[0].group ?? ''}/${
+          this.apiEndpoint.apiInfo[0].version
+        }`.replace(/^\/|\/$/, ''),
+        kind: this.kind,
+        metadata: {
+          name: '',
+        },
+      };
     }
   }
 
