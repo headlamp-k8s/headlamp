@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import ConfigMap from '../../lib/k8s/configMap';
+import { CreateResourceButton } from '../common/CreateResourceButton';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ConfigMapList() {
@@ -8,6 +9,9 @@ export default function ConfigMapList() {
   return (
     <ResourceListView
       title={t('glossary|Config Maps')}
+      headerProps={{
+        titleSideActions: [<CreateResourceButton resource="Config Map" />],
+      }}
       resourceClass={ConfigMap}
       columns={[
         'name',

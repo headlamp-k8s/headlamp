@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Secret from '../../lib/k8s/secret';
+import { CreateResourceButton } from '../common/CreateResourceButton';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function SecretList() {
@@ -8,6 +9,9 @@ export default function SecretList() {
   return (
     <ResourceListView
       title={t('Secrets')}
+      headerProps={{
+        titleSideActions: [<CreateResourceButton resource="Secret" />],
+      }}
       resourceClass={Secret}
       columns={[
         'name',
