@@ -36,6 +36,7 @@ export default function CreateButton(props: CreateButtonProps) {
   const dispatchCreateEvent = useEventCallback(HeadlampEventType.CREATE_RESOURCE);
   const clusters = useClusterGroup();
   const [targetCluster, setTargetCluster] = React.useState(clusters[0] || '');
+  const itemRef = React.useRef({});
 
   // When the clusters in the group change, we want to reset the target cluster
   // if it's not in the new list of clusters.
@@ -148,7 +149,7 @@ export default function CreateButton(props: CreateButtonProps) {
         </Button>
       )}
       <EditorDialog
-        item={{}}
+        item={itemRef.current}
         open={openDialog}
         onClose={() => setOpenDialog(false)}
         onSave={handleSave}
