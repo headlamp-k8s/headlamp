@@ -41,6 +41,49 @@ class NetworkPolicy extends KubeObject<KubeNetworkPolicy> {
   static apiVersion = 'networking.k8s.io/v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeNetworkPolicy {
+    const baseObject = super.getBaseObject() as KubeNetworkPolicy;
+    baseObject.egress = [
+      {
+        ports: [
+          {
+            port: 80,
+            protocol: 'TCP',
+          },
+        ],
+        to: [
+          {
+            podSelector: {
+              matchLabels: { app: 'headlamp' },
+            },
+          },
+        ],
+      },
+    ];
+    baseObject.ingress = [
+      {
+        ports: [
+          {
+            port: 80,
+            protocol: 'TCP',
+          },
+        ],
+        from: [
+          {
+            podSelector: {
+              matchLabels: { app: 'headlamp' },
+            },
+          },
+        ],
+      },
+    ];
+    baseObject.podSelector = {
+      matchLabels: { app: 'headlamp' },
+    };
+    baseObject.policyTypes = ['Ingress', 'Egress'];
+    return baseObject;
+  }
+
   static get pluralName() {
     return 'networkpolicies';
   }

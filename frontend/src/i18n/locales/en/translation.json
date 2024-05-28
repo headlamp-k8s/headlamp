@@ -146,6 +146,7 @@
   "Lost connection to the cluster.": "Lost connection to the cluster.",
   "No": "No",
   "Yes": "Yes",
+  "Create {{ name }}": "Create {{ name }}",
   "Toggle fullscreen": "Toggle fullscreen",
   "Close": "Close",
   "Head back <1>home</1>.": "Head back <1>home</1>.",

@@ -45,6 +45,26 @@ class Service extends KubeObject<KubeService> {
   static apiVersion = 'v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeService {
+    const baseObject = super.getBaseObject() as KubeService;
+    baseObject.spec = {
+      clusterIP: '',
+      ports: [
+        {
+          name: '',
+          nodePort: 30000,
+          port: 80,
+          protocol: 'TCP',
+          targetPort: 80,
+        },
+      ],
+      type: 'ClusterIP',
+      externalIPs: [],
+      selector: {},
+    };
+    return baseObject;
+  }
+
   get spec(): KubeService['spec'] {
     return this.jsonData.spec;
   }
