@@ -11,6 +11,7 @@ export interface KubeCRD extends KubeObjectInterface {
       singular: string;
       kind: string;
       listKind: string;
+      categories?: string[];
     };
     versions: {
       name: string;
@@ -27,6 +28,22 @@ export interface KubeCRD extends KubeObjectInterface {
     }[];
     scope: string;
     [other: string]: any;
+  };
+  status?: {
+    acceptedNames?: {
+      kind: string;
+      plural: string;
+      shortNames: string[];
+      categories?: string[];
+    };
+    conditions?: {
+      type: string;
+      status: string;
+      lastTransitionTime: string;
+      reason: string;
+      message: string;
+    }[];
+    storedVersions?: string[];
   };
 }
 
@@ -46,6 +63,10 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
 
   get spec(): KubeCRD['spec'] {
     return this.jsonData!.spec;
+  }
+
+  get status(): KubeCRD['status'] {
+    return this.jsonData!.status;
   }
 
   get plural(): string {
@@ -87,6 +108,10 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
       singularName: this.spec.names.singular,
       pluralName: this.spec.names.plural,
     });
+  }
+
+  getCategories() {
+    return this.status?.acceptedNames?.categories ?? [];
   }
 }
 

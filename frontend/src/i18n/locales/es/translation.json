@@ -267,6 +267,7 @@
   "No custom resources found": "No se encontraron custom resources",
   "Loading resource definition details": "Cargando detalles de la definición del recurso",
   "Group": "Grupo",
+  "Categories": "",
   "Accepted Names": "Nombres Aceptados",
   "Versions": "Versiones",
   "Spawn Job": "Crear Job",

@@ -22,6 +22,7 @@ const mockCRDMap: { [crdName: string]: KubeCRD | null } = {
         singular: 'mycustomresource',
         kind: 'MyCustomResource',
         listKind: 'MyCustomResourceList',
+        categories: ['all', 'category1'],
       },
       versions: [
         {
