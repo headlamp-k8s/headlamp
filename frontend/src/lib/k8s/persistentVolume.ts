@@ -20,6 +20,25 @@ class PersistentVolume extends KubeObject<KubePersistentVolume> {
   static apiVersion = 'v1';
   static isNamespaced = false;
 
+  static getBaseObject(): KubePersistentVolume {
+    const baseObject = super.getBaseObject() as KubePersistentVolume;
+    baseObject.metadata = {
+      ...baseObject.metadata,
+      namespace: '',
+    };
+    baseObject.spec = {
+      capacity: {
+        storage: '',
+      },
+    };
+    baseObject.status = {
+      message: '',
+      phase: '',
+      reason: '',
+    };
+    return baseObject;
+  }
+
   get spec() {
     return this.jsonData.spec;
   }

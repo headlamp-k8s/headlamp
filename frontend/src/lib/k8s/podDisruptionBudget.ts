@@ -41,6 +41,12 @@ class PDB extends KubeObject<KubePDB> {
   static apiVersion = 'policy/v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubePDB {
+    const baseObject = super.getBaseObject() as KubePDB;
+    baseObject.spec = { selector: { matchLabels: {} } };
+    return baseObject;
+  }
+
   get spec(): KubePDB['spec'] {
     return this.jsonData.spec;
   }

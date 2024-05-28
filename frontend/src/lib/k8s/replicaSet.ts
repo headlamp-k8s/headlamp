@@ -38,6 +38,34 @@ class ReplicaSet extends KubeObject<KubeReplicaSet> {
     return this.jsonData.status;
   }
 
+  static getBaseObject(): KubeReplicaSet {
+    const baseObject = super.getBaseObject() as KubeReplicaSet;
+    baseObject.metadata = {
+      ...baseObject.metadata,
+      namespace: '',
+    };
+    baseObject.spec = {
+      minReadySeconds: 0,
+      replicas: 1,
+      selector: {
+        matchLabels: { app: 'headlamp' },
+      },
+      template: {
+        spec: {
+          containers: [
+            {
+              name: '',
+              image: '',
+              imagePullPolicy: 'Always',
+            },
+          ],
+          nodeName: '',
+        },
+      },
+    };
+    return baseObject;
+  }
+
   getContainers(): KubeContainer[] {
     return this.spec?.template?.spec?.containers || [];
   }
