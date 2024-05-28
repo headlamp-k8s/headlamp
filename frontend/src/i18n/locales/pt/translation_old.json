@@ -1,3 +1,0 @@
-{
-  "This will add an extension field in your kubeconfig file for \"{{ clusterName }}. Are you sure\"?": ""
-}
