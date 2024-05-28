@@ -32,6 +32,32 @@ class ValidatingWebhookConfiguration extends makeKubeObject<KubeValidatingWebhoo
     'validatingwebhookconfigurations'
   );
 
+  static getBaseObject(): KubeValidatingWebhookConfiguration {
+    const baseObject = super.getBaseObject() as KubeValidatingWebhookConfiguration;
+    baseObject.webhooks = [
+      {
+        admissionReviewVersions: [],
+        clientConfig: {
+          caBundle: '',
+          service: {
+            name: '',
+            namespace: '',
+          },
+        },
+        name: '',
+        rules: [
+          {
+            apiGroups: [],
+            apiVersions: [],
+            operations: [],
+            resources: [],
+          },
+        ],
+      },
+    ];
+    return baseObject;
+  }
+
   get webhooks(): KubeValidatingWebhookConfiguration['webhooks'] {
     return this.jsonData!.webhooks;
   }
