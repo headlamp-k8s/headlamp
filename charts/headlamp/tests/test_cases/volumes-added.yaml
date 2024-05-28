@@ -1,8 +1,5 @@
-# custom values for headlamp with volume added.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-# -- Headlamp pod's volumes
+# This is a test case for volumes in the Headlamp deployment.
+# The volumes field is a list of dictionaries that specify the volumes to add to the Headlamp deployment.
 volumes:
   - name: plugins
     emptyDir: {}
