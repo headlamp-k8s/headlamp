@@ -29,7 +29,7 @@ import {
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
-import { localeDate } from '../../../lib/util';
+import { localeDate, useId } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
@@ -645,66 +645,125 @@ export function ContainerInfo(props: ContainerInfoProps) {
   const { container, status, resource } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
-  const [startedDate, finishDate] = React.useMemo(() => {
-    let startedDate =
-      status?.state?.running?.startedAt || status?.state?.terminated?.startedAt || '';
-    if (!!startedDate) {
-      startedDate = localeDate(startedDate);
+  const [startedDate, finishDate, lastStateStartedDate, lastStateFinishDate] = React.useMemo(() => {
+    function getStartedDate(state?: KubeContainerStatus['state']) {
+      let startedDate = state?.running?.startedAt || state?.terminated?.startedAt || '';
+      if (!!startedDate) {
+        startedDate = localeDate(startedDate);
+      }
+      return startedDate;
     }
 
-    let finishDate = status?.state?.terminated?.finishedAt ?? '';
-    if (!!finishDate) {
-      finishDate = localeDate(finishDate);
+    function getFinishDate(state?: KubeContainerStatus['state']) {
+      let finishDate = state?.terminated?.finishedAt || '';
+      if (!!finishDate) {
+        finishDate = localeDate(finishDate);
+      }
+      return finishDate;
     }
 
-    return [startedDate, finishDate];
+    return [
+      getStartedDate(status?.state),
+      getFinishDate(status?.state),
+      getStartedDate(status?.lastState),
+      getFinishDate(status?.lastState),
+    ];
   }, [status]);
 
-  function getContainerStatusLabel() {
-    if (!status || !container) {
-      return undefined;
-    }
+  function ContainerStatusLabel(props: {
+    state?: KubeContainerStatus['state'] | null;
+    container?: KubeContainer;
+  }) {
+    const { state, container } = props;
 
-    let state: KubeContainerStatus['state']['waiting' | 'terminated'] | null = null;
-    let label = t('translation|Ready');
-    let statusType: StatusLabelProps['status'] = '';
+    const [stateDetails, label, statusType] = React.useMemo(() => {
+      let stateDetails: KubeContainerStatus['state']['waiting' | 'terminated'] | null = null;
+      let label = t('translation|Ready');
+      let statusType: StatusLabelProps['status'] = '';
 
-    if (!!status.state.waiting) {
-      state = status.state.waiting;
-      statusType = 'warning';
-      label = t('translation|Waiting');
-    } else if (!!status.state.running) {
-      statusType = 'success';
-      label = t('translation|Running');
-    } else if (!!status.state.terminated) {
-      if (status.state.terminated.exitCode === 0) {
-        statusType = '';
-        label = status.state.terminated.reason;
-      } else {
-        statusType = 'error';
-        label = t('translation|Error');
+      if (!state) {
+        return [stateDetails, label, statusType];
       }
+
+      if (!!state.waiting) {
+        stateDetails = state.waiting;
+        statusType = 'warning';
+        label = t('translation|Waiting');
+      } else if (!!state.running) {
+        statusType = 'success';
+        label = t('translation|Running');
+      } else if (!!state.terminated) {
+        stateDetails = state.terminated;
+        if (state.terminated.exitCode === 0) {
+          statusType = '';
+          label = state.terminated.reason;
+        } else {
+          statusType = 'error';
+          label = t('translation|Error');
+        }
+      }
+
+      return [stateDetails, label, statusType];
+    }, [state]);
+
+    if (!state || !container) {
+      return null;
     }
 
-    const tooltipID = 'container-state-message-' + container.name;
+    const tooltipID = 'container-state-message-' + (container?.name ?? '');
 
     return (
       <Box>
         <Box>
           <StatusLabel
             status={statusType}
-            aria-describedby={!!state?.message ? tooltipID : undefined}
+            aria-describedby={!!stateDetails?.message ? tooltipID : undefined}
           >
-            {label + (state?.reason ? ` (${state.reason})` : '')}
+            {label + (stateDetails?.reason ? ` (${stateDetails.reason})` : '')}
           </StatusLabel>
-          {!!state && state.message && (
-            <LightTooltip role="tooltip" title={state.message} interactive id={tooltipID}>
+          {!!stateDetails && stateDetails.message && (
+            <LightTooltip role="tooltip" title={stateDetails.message} interactive id={tooltipID}>
               <Box aria-label="hidden" display="inline" px={1} style={{ verticalAlign: 'bottom' }}>
                 <Icon icon="mdi:alert-outline" width="1.3rem" height="1.3rem" aria-label="hidden" />
               </Box>
             </LightTooltip>
           )}
         </Box>
+      </Box>
+    );
+  }
+
+  function StatusValue(props: {
+    rows: { name: string; value: string | number; hide?: boolean }[];
+  }) {
+    const { rows } = props;
+    const id = useId('status-value-');
+
+    const rowsToDisplay = React.useMemo(() => {
+      return rows.filter(({ hide }) => !hide);
+    }, [rows]);
+
+    if (rowsToDisplay.length === 0) {
+      return null;
+    }
+
+    return (
+      <Box>
+        {rowsToDisplay.map(({ name, value }, idx) => {
+          const rowId = `${id}-${idx}`;
+          return (
+            <Grid container spacing={2} direction="row" key={rowId}>
+              <Grid item>
+                <Typography id={rowId} color="textSecondary">
+                  {name}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography aria-labelledby={rowId}>{value}</Typography>
+              </Grid>
+            </Grid>
+          );
+        })}
       </Box>
     );
   }
@@ -734,7 +793,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
       },
       {
         name: t('translation|Status'),
-        value: getContainerStatusLabel(),
+        value: <ContainerStatusLabel state={status?.state} container={container} />,
         hide: !status,
       },
       {
@@ -756,6 +815,38 @@ export function ContainerInfo(props: ContainerInfoProps) {
         name: t('translation|Restart Count'),
         value: status?.restartCount,
         hide: !status,
+      },
+      {
+        name: t('translation|Last State'),
+        value: (
+          <Grid container direction="column" spacing={1}>
+            <Grid item>
+              <ContainerStatusLabel state={status?.lastState} container={container} />
+            </Grid>
+            <Grid item>
+              <StatusValue
+                rows={[
+                  {
+                    name: t('translation|Exit Code'),
+                    value: status?.lastState?.terminated?.exitCode,
+                    hide: !status?.lastState?.terminated,
+                  },
+                  {
+                    name: t('translation|Started'),
+                    value: lastStateStartedDate,
+                    hide: !lastStateStartedDate,
+                  },
+                  {
+                    name: t('translation|Finished'),
+                    value: lastStateFinishDate,
+                    hide: !lastStateFinishDate,
+                  },
+                ]}
+              />
+            </Grid>
+          </Grid>
+        ),
+        hide: Object.keys(status?.lastState ?? {}).length === 0,
       },
       {
         name: t('Container ID'),

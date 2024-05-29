@@ -214,6 +214,7 @@
   "Started": "",
   "Finished": "",
   "Restart Count": "Anzahl der Neustarts",
+  "Last State": "",
   "No data to be shown.": "Es sind keine Daten zum Anzeigen vorhanden.",
   "Init Containers": "Init-Container",
   "Conditions": "Bedingungen",

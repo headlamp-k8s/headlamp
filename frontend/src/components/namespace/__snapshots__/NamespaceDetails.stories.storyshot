@@ -1847,12 +1847,12 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                               Restarts
                             </div>
                             <span
-                              aria-label="Sort by Restarts descending"
+                              aria-label="Sort by Restarts ascending"
                               class="MuiBadge-root css-1c32n2y-MuiBadge-root"
                               data-mui-internal-clone-element="true"
                             >
                               <span
-                                aria-label="Sort by Restarts descending"
+                                aria-label="Sort by Restarts ascending"
                                 class="MuiButtonBase-root MuiTableSortLabel-root Mui-active css-118d58w-MuiButtonBase-root-MuiTableSortLabel-root"
                                 role="button"
                                 tabindex="0"
@@ -2314,7 +2314,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ia5azj-MuiTableCell-root"
                         data-index="1"
                       >
-                        0
+                        1 (3mo ago)
                       </td>
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-l8pc90-MuiTableCell-root"
