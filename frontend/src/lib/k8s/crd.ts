@@ -93,7 +93,7 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
     return [group, version, name];
   }
 
-  get isNamespaced(): boolean {
+  get isNamespacedScope(): boolean {
     return this.spec.scope === 'Namespaced';
   }
 
