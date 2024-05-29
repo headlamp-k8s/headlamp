@@ -160,7 +160,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
       'age',
     ];
 
-    if (crd.isNamespaced) {
+    if (crd.isNamespacedScope) {
       colsToDisplay.splice(1, 0, 'namespace');
     }
 
