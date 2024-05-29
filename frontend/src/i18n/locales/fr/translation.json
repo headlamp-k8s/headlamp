@@ -214,6 +214,7 @@
   "Started": "",
   "Finished": "",
   "Restart Count": "Nombre de redémarrages",
+  "Last State": "",
   "No data to be shown.": "Aucune donnée à montrer.",
   "Init Containers": "Conteneurs d'initialisation",
   "Conditions": "Conditions",

@@ -724,7 +724,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                         class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                         style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                       >
-                        Error
+                        Error (Error)
                       </span>
                     </div>
                   </div>
@@ -2985,6 +2985,117 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
                 >
+                  Last State
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-direction-xs-column css-ffjoah-MuiGrid-root"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                    >
+                      <div
+                        class="MuiBox-root css-0"
+                      >
+                        <div
+                          class="MuiBox-root css-0"
+                        >
+                          <span
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                            style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                          >
+                            Error (Error)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                    >
+                      <div
+                        class="MuiBox-root css-0"
+                      >
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              class="MuiTypography-root MuiTypography-body1 css-3mzles-MuiTypography-root"
+                              id="status-value-id-0"
+                            >
+                              Exit Code
+                            </p>
+                          </div>
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              aria-labelledby="status-value-id-0"
+                              class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+                            >
+                              2
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              class="MuiTypography-root MuiTypography-body1 css-3mzles-MuiTypography-root"
+                              id="status-value-id-1"
+                            >
+                              Started
+                            </p>
+                          </div>
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              aria-labelledby="status-value-id-1"
+                              class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+                            >
+                              2022-01-01T00:05:00.000Z
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              class="MuiTypography-root MuiTypography-body1 css-3mzles-MuiTypography-root"
+                              id="status-value-id-2"
+                            >
+                              Finished
+                            </p>
+                          </div>
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              aria-labelledby="status-value-id-2"
+                              class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+                            >
+                              2022-01-01T00:05:00.000Z
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
+                >
                   Container ID
                 </dt>
                 <dd
@@ -4047,7 +4158,128 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                 >
-                  0
+                  1
+                </dd>
+                <dt
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
+                >
+                  Last State
+                </dt>
+                <dd
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-direction-xs-column css-ffjoah-MuiGrid-root"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                    >
+                      <div
+                        class="MuiBox-root css-0"
+                      >
+                        <div
+                          class="MuiBox-root css-0"
+                        >
+                          <span
+                            aria-describedby="container-state-message-imagepullbackoff"
+                            class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                            style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                          >
+                            Error (ImagePullBackOff)
+                          </span>
+                          <div
+                            aria-label="hidden"
+                            class="MuiBox-root css-a56neh"
+                            data-mui-internal-clone-element="true"
+                            role="tooltip"
+                            style="vertical-align: bottom;"
+                          >
+                            <span />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                    >
+                      <div
+                        class="MuiBox-root css-0"
+                      >
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              class="MuiTypography-root MuiTypography-body1 css-3mzles-MuiTypography-root"
+                              id="status-value-id-0"
+                            >
+                              Exit Code
+                            </p>
+                          </div>
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              aria-labelledby="status-value-id-0"
+                              class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+                            >
+                              1
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              class="MuiTypography-root MuiTypography-body1 css-3mzles-MuiTypography-root"
+                              id="status-value-id-1"
+                            >
+                              Started
+                            </p>
+                          </div>
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              aria-labelledby="status-value-id-1"
+                              class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+                            >
+                              2022-01-01T00:05:00.000Z
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              class="MuiTypography-root MuiTypography-body1 css-3mzles-MuiTypography-root"
+                              id="status-value-id-2"
+                            >
+                              Finished
+                            </p>
+                          </div>
+                          <div
+                            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                          >
+                            <p
+                              aria-labelledby="status-value-id-2"
+                              class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+                            >
+                              2022-01-01T00:05:00.000Z
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -5980,7 +6212,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                         class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
-                        Completed
+                        Completed (Completed)
                       </span>
                     </div>
                   </div>
