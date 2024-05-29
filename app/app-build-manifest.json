@@ -3,7 +3,7 @@
   "plugins": [
     {
       "name": "app-catalog",
-      "archive": "https://github.com/headlamp-k8s/plugins/releases/download/app-catalog-0.1.4/app-catalog-0.1.4.tgz"
+      "archive": "https://github.com/headlamp-k8s/plugins/releases/download/app-catalog-0.2.0/app-catalog-0.2.0.tgz"
     },
     {
       "name": "prometheus",
