@@ -142,6 +142,7 @@
     "name": "Kinvolk",
     "email": "hello@kinvolk.io"
   },
+  "prettier": "@kinvolk/eslint-config/prettier-config",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
