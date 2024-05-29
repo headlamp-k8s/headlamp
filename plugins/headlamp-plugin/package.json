@@ -96,7 +96,7 @@
     "humanize-duration": "^3.27.2",
     "i18next": "^20.6.1",
     "i18next-browser-languagedetector": "^6.1.1",
-    "i18next-parser": "^4.7.0",
+    "i18next-parser": "^7.9.0",
     "if-env": "^1.0.4",
     "imports-loader": "^1.1.0",
     "is-plain-object": "^5.0.0",

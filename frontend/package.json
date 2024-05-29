@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "productName": "Headlamp",
-  "engines" : {
-    "npm" : ">=10.0.0",
-    "node" : ">=20.9.0"
+  "engines": {
+    "npm": ">=10.0.0",
+    "node": ">=20.9.0"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
@@ -214,7 +214,7 @@
     "fetch-mock": "^9.11.0",
     "http-proxy-middleware": "^2.0.1",
     "husky": "^4.3.8",
-    "i18next-parser": "^4.7.0",
+    "i18next-parser": "^7.9.0",
     "jest-canvas-mock": "^2.4.0",
     "jest-html-reporter": "^3.10.2",
     "jest-websocket-mock": "^2.5.0",
