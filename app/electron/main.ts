@@ -506,7 +506,7 @@ function startElecron() {
       frontendPath = path.join(process.resourcesPath, 'frontend', 'index.html');
     }
 
-    const startUrl =
+    const startUrl = (
       process.env.ELECTRON_START_URL ||
       url.format({
         pathname: frontendPath,
@@ -515,7 +515,13 @@ function startElecron() {
         query: {
           backendToken: backendToken,
         },
-      });
+      })
+    )
+      // Windows paths use backslashes and for consistency we want to use forward slashes.
+      // For example: when application triggers refresh it requests a URL with forward slashes and
+      // we use startUrl to determine if it's an internal or external URL. So it's easier to
+      // convert everything to forward slashes.
+      .replace(/\\/g, '/');
 
     // WSL has a problem with full size window placement, so make it smaller.
     const withMargin = isWSL();
