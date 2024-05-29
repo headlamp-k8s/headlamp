@@ -35,7 +35,11 @@ export default function StatefulSetList() {
         {
           id: 'containers',
           label: t('Containers'),
-          getValue: statefulSet => statefulSet.containerNames.join(', '),
+          getValue: statefulSet =>
+            statefulSet
+              .getContainers()
+              .map(c => c.name)
+              .join(', '),
           render: statefulSet => {
             const containerNames = statefulSet.getContainers().map((c: KubeContainer) => c.name);
             const containerTooltip = containerNames.join('\n');
