@@ -449,8 +449,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
 
-      const namespace = opts?.namespace;
-      if (!!namespace) {
+      if (this.apiEndpoint.isNamespaced) {
         args.unshift(opts?.namespace || null);
       }
 
@@ -586,7 +585,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       const createInstance = (item: T) => this.create(item) as U;
       const args: any[] = [name, (obj: T) => onGet(createInstance(obj))];
 
-      if (!!namespace) {
+      if (this.apiEndpoint.isNamespaced) {
         args.unshift(namespace);
       }
 
@@ -660,9 +659,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     delete() {
       const args: string[] = [this.getName()];
-      const namespace = this.getNamespace();
-      if (!!namespace) {
-        args.unshift(namespace);
+      if (this.isNamespaced) {
+        args.unshift(this.getNamespace()!);
       }
 
       return this._class().apiEndpoint.delete(...args, {}, this._clusterName);
@@ -708,9 +706,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       const patchMethod = this._class().apiEndpoint.patch;
       const args: Parameters<typeof patchMethod> = [body];
 
-      const namespace = this.getNamespace();
-      if (!!namespace) {
-        args.push(namespace);
+      if (this.isNamespaced) {
+        args.push(this.getNamespace());
       }
 
       args.push(this.getName());
