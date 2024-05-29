@@ -500,11 +500,11 @@ export default function PodDetails(props: PodDetailsProps) {
           },
           {
             name: t('Host IP'),
-            value: item.status.hostIP,
+            value: item.status.hostIP ?? '',
           },
           {
             name: t('Pod IP'),
-            value: item.status.podIP,
+            value: item.status.podIP ?? '',
           },
           {
             name: t('QoS Class'),

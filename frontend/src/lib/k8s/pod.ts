@@ -35,7 +35,7 @@ export interface KubePod extends KubeObjectInterface {
     containerStatuses: KubeContainerStatus[];
     initContainerStatuses?: KubeContainerStatus[];
     ephemeralContainerStatuses?: KubeContainerStatus[];
-    hostIP: string;
+    hostIP?: string;
     message?: string;
     phase: string;
     qosClass?: string;
