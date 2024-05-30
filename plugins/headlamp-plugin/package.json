@@ -46,7 +46,7 @@
     "@storybook/node-logger": "7.6.7",
     "@storybook/preset-create-react-app": "^7.6.7",
     "@storybook/react": "7.6.7",
-    "@storybook/react-webpack5": "^7.6.7",
+    "@storybook/react-webpack5": "^7.6.19",
     "@svgr/webpack": "^6.2.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
