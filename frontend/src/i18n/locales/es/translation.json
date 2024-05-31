@@ -144,9 +144,8 @@
   "All namespaces": "Todos los esp. de nombre",
   "From": "De",
   "Age": "Edad",
-  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "",
-  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_many": "",
-  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})": "",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_plural": "",
   "Release Notes ({{ appVersion }})": "Notas de lanzamiento ({{ appVersion }})",
   "Fetching release information…": "Obteniendo información de la versión…",
   "Skip": "Saltar",
@@ -391,5 +390,8 @@
   "\"{{metricName}}\" on pods": "\"{{metricName}}\" en pods",
   "resource {{resourceName}} on pods": "recurso {{resourceName}} en pods",
   "resource {{resourceName}} of container {{containerName}} on pods": "recurso {{resourceName}} del contenedor {{containerName}} en pods",
-  "Warning. Incompatible plugins disabled: ({{ pluginList }})": "Advertencia. Plugins incompatibles deshabilitados: ({{ pluginList }})"
+  "Warning. Incompatible plugins disabled: ({{ pluginList }})": "Advertencia. Plugins incompatibles deshabilitados: ({{ pluginList }})",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_many": "",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": ""
 }

@@ -131,6 +131,10 @@ function getTranslationChanges() {
 describe('Forgotten translations', () => {
   test('Check uncommitted translations', async () => {
     execSync('npm run i18n', { cwd: frontendDir });
+    if (getTranslationChanges()) {
+      console.error('git diff');
+      console.error(execSync(`git diff ${frontendDir}/src/i18n/locales/*/*.json`).toString());
+    }
     expect(getTranslationChanges()).toBe('');
   });
 });
