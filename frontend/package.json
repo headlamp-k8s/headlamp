@@ -86,7 +86,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.0",
     "react-window": "^1.8.7",
-    "recharts": "^2.1.4",
+    "recharts": "^2.12.7",
     "semver": "^7.3.5",
     "spacetime": "^7.4.0",
     "stream-browserify": "^3.0.0",
