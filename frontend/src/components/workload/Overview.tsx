@@ -13,6 +13,7 @@ import Pod from '../../lib/k8s/pod';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import StatefulSet from '../../lib/k8s/statefulSet';
 import { getReadyReplicas, getTotalReplicas } from '../../lib/util';
+import Link from '../common/Link';
 import { PageGrid, ResourceLink } from '../common/Resource';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
@@ -93,16 +94,21 @@ export default function Overview() {
     );
   });
 
+  function ChartLink(workload: KubeObject) {
+    const linkName = workload.pluralName;
+    return <Link routeName={linkName}>{linkName}</Link>;
+  }
+
   return (
     <PageGrid>
       <SectionBox py={2} mt={1}>
         <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={2}>
-          {workloads.map(({ className: name }) => (
-            <Grid item lg={3} md={4} xs={6} key={name}>
+          {workloads.map(workload => (
+            <Grid item lg={3} md={4} xs={6} key={workload.name}>
               <WorkloadCircleChart
-                workloadData={workloadsData[name] || null}
+                workloadData={workloadsData[workload.name] || null}
                 // @todo: Use a plural from from the class itself when we have it
-                title={name + 's'}
+                title={ChartLink(workload)}
                 partialLabel={t('translation|Failed')}
                 totalLabel={t('translation|Running')}
               />
