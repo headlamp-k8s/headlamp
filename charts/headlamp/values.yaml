@@ -167,10 +167,13 @@ ingress:
   ingressClassName: ""
 
   # -- Hostname(s) for the Ingress resource
+  # Please refer to https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-v1/#IngressSpec for more information.
   hosts:
     []
     # - host: chart-example.local
-    #   paths: []
+    #   paths:
+    #     path: /
+    #     type: ImplementationSpecifichosts
   # -- Ingress TLS configuration
   tls: []
   #  - secretName: chart-example-tls
