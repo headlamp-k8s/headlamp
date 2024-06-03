@@ -61,6 +61,12 @@ spec:
           image: "{{ .Values.image.registry}}/{{ .Values.image.repository }}:{{ .Values.image.tag | default (printf "v%s" .Chart.AppVersion) }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{ if or $oidc .Values.env }}
+          {{- if $oidc.externalSecret.enabled }}
+          # Check if externalSecret is enabled
+          envFrom:
+          - secretRef:
+              name: {{ $oidc.externalSecret.name }}
+          {{- else }}
           env:
             {{- if $oidc.secret.create }}
             {{- if $oidc.clientID }}
@@ -91,11 +97,6 @@ spec:
                   name: {{ $oidc.secret.name }}
                   key: scopes
             {{- end }}
-            {{- else if $oidc.externalSecret.enabled }}
-            # Check if externalSecret is enabled
-            envFrom:
-            - secretRef:
-                name: {{ $oidc.externalSecret.name }}
             {{- else }}
             {{- if $oidc.clientID }}
             - name: OIDC_CLIENT_ID
@@ -117,6 +118,7 @@ spec:
             {{- if .Values.env }}
             {{- toYaml .Values.env | nindent 12 }}
             {{- end }}
+          {{- end }}
           {{- end }}
           args:
             - "-in-cluster"
