@@ -139,7 +139,7 @@
     "semver": "^7.3.5",
     "shx": "^0.3.4",
     "spacetime": "^7.4.0",
-    "storybook": "^7.6.7",
+    "storybook": "^8.1.6",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "style-loader": "^3.3.1",
