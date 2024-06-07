@@ -31,7 +31,7 @@ export default function ServiceList() {
         {
           id: 'ports',
           label: t('Ports'),
-          getValue: service => service.getPorts().join(', '),
+          getValue: service => service.getPorts()?.join(', '),
           render: service => <LabelListItem labels={service.getPorts()} />,
         },
         {
