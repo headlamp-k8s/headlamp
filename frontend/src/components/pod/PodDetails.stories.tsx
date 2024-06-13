@@ -187,4 +187,20 @@ Successful.parameters = {
       ],
     },
   },
+}
+
+export const ManyPorts = Template.bind({});
+ManyPorts.args = {
+  podName: 'manyports',
 };
+ManyPorts.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/api/v1/namespaces/default/pods/manyports', () =>
+          HttpResponse.json(podList.find(pod => pod.metadata.name === 'manyports'))
+        ),
+      ],
+    },
+  },
+}
