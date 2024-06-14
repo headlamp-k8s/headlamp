@@ -49,6 +49,10 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
 
   function getBackLink() {
+    if (backLink === null) {
+      return false;
+    }
+
     if (!!backLink || backLink === '') {
       return backLink;
     }
