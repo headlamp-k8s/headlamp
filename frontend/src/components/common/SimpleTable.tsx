@@ -127,7 +127,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     emptyMessage = null,
     page: initialPage = 0,
     // @todo: This is a workaround due to how the pagination is built by default.
-    showPagination = !process.env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
+    showPagination = !import.meta.env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
     errorMessage = null,
     defaultSortingColumn,
     noTableHeader = false,

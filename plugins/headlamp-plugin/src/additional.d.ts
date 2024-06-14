@@ -2,8 +2,6 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
-import * as React from 'react';
-
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test';
@@ -46,7 +44,7 @@ declare module '*.webp' {
   export default src;
 }
 
-declare module "*.svg" {
+declare module '*.svg' {
   const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
   export default content;
 }

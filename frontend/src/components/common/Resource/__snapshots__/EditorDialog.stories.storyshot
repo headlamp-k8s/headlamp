@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Storyshots Resource/EditorDialog Editor Dialog With Resource 1`] = `
-<div
-  aria-hidden="true"
-/>
-`;
-
-exports[`Storyshots Resource/EditorDialog Editor Dialog With Resource Closed 1`] = `<div />`;

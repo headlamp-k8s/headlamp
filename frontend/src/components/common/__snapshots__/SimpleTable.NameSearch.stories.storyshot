@@ -1,0 +1,167 @@
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-70qvj9"
+      >
+        <h1
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
+        >
+          Test
+        </h1>
+        <div
+          class="MuiBox-root css-ldp2l3"
+        />
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+        >
+          <div
+            class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1tw9w9k-MuiAutocomplete-root"
+          >
+            <div
+              class="MuiBox-root css-1dipl1t"
+            >
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                style="margin-top: 0px;"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-standard css-1n1vwza-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="true"
+                  for="namespaces-filter"
+                  id="namespaces-filter-label"
+                >
+                  Namespaces
+                </label>
+                <div
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
+                >
+                  <input
+                    aria-autocomplete="both"
+                    aria-expanded="false"
+                    aria-invalid="false"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
+                    id="namespaces-filter"
+                    placeholder="Filter"
+                    role="combobox"
+                    spellcheck="false"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
+                  >
+                    <button
+                      aria-label="Open"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-1aav1nn-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+                      tabindex="-1"
+                      title="Open"
+                      type="button"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        data-testid="ArrowDropDownIcon"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M7 10l5 5 5-5z"
+                        />
+                      </svg>
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
+  >
+    <table
+      class="MuiTable-root css-9gafzc-MuiTable-root"
+    >
+      <thead
+        class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+        >
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+            scope="col"
+          >
+            UID
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+            scope="col"
+          >
+            Labels
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+      >
+        <tr
+          class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+          >
+            mydefinition.phonyresources2.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+          >
+            MyNamespace2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+          >
+            phony2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+          >
+            {"mykey2":"mylabel"}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

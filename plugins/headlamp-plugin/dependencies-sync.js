@@ -24,6 +24,7 @@ const dependenciesFrontDoesNotHave = new Set([
   '@babel/preset-typescript',
   '@remix-run/router',
   '@svgr/webpack',
+  '@storybook/react-webpack5',
   'babel-loader',
   'css-loader',
   'env-paths',
@@ -41,6 +42,17 @@ const dependenciesFrontDoesNotHave = new Set([
   'is-plain-object',
   'tsconfig-paths-webpack-plugin',
   'vm-browserify',
+  '@storybook/addon-storyshots',
+  '@storybook/preset-create-react-app',
+  'jest-canvas-mock',
+  'jest-html-reporter',
+  'jest-websocket-mock',
+  'react-scripts',
+  'ws',
+  '@babel/plugin-proposal-private-property-in-object',
+  '@types/webpack-env',
+  'monaco-editor-webpack-plugin',
+  'webpack',
 ]);
 
 // Dependencies from frontend/package.json that aren't wanted by headlamp-plugin.
@@ -51,6 +63,19 @@ const dependenciesToNotCopy = [
   'typedoc-hugo-theme',
   'typedoc-plugin-markdown',
   'typedoc-plugin-rename-defaults',
+  '@storybook/builder-vite',
+  '@storybook/react-vite',
+  '@vitejs/plugin-react',
+  '@vitest/coverage-v8',
+  'vite',
+  'vite-plugin-svgr',
+  'vite-plugin-env-compatible',
+  'vite-plugin-node-polyfills',
+  'vitest',
+  'vitest-canvas-mock',
+  'vitest-websocket-mock',
+  'jsdom',
+  'glob',
 ];
 
 const yargs = require('yargs/yargs');

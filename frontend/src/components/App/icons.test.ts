@@ -1,6 +1,6 @@
 import { error } from 'console';
 import fs from 'fs';
-import glob from 'glob';
+import * as glob from 'glob';
 import mdiIcons from './icons';
 
 // the usedIcons array is used to check that all icons are used in the frontend

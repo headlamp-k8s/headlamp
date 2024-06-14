@@ -1,14 +1,14 @@
-const path = require('path');
-const fs = require('fs');
-const sharedConfig = require('./i18nextSharedConfig');
+import fs from 'fs';
+import path from 'path';
+import sharedConfig from './i18nextSharedConfig.mjs';
 
-const directoryPath = path.join(__dirname, './locales/');
+const directoryPath = path.join(import.meta.dirname, './locales/');
 const currentLocales = [];
 const contextSeparator = sharedConfig.contextSeparator;
 
 fs.readdirSync(directoryPath).forEach(file => currentLocales.push(file));
 
-module.exports = {
+export default {
   lexers: {
     default: ['JsxLexer'],
   },

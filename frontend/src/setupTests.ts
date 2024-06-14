@@ -1,9 +1,7 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
-import 'jest-canvas-mock';
+import '@testing-library/jest-dom/vitest';
+import indexeddb from 'fake-indexeddb';
+
+globalThis.indexedDB = indexeddb;
 
 if (typeof TextDecoder === 'undefined' && typeof require !== 'undefined') {
   (global as any).TextDecoder = require('util').TextDecoder;
@@ -15,19 +13,23 @@ if (typeof ResizeObserver === 'undefined' && typeof require !== 'undefined') {
   (global as any).ResizeObserver = require('resize-observer-polyfill');
 }
 
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // Deprecated
-    removeListener: jest.fn(), // Deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
+if (globalThis.window) {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(), // Deprecated
+      removeListener: vi.fn(), // Deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
+}
+
+vi.mock('@mui/material/utils/useId', () => ({ default: vi.fn().mockReturnValue('mock-test-id') }));
 
 beforeEach(() => {
   // Clears the database and adds some testing data.

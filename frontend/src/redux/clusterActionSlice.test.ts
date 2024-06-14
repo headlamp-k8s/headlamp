@@ -15,7 +15,7 @@ const middlewares = [thunk];
 type DispatchType = ThunkDispatch<RootState, undefined, AnyAction>;
 const mockStore = configureStore<RootState, DispatchType>(middlewares);
 
-jest.setTimeout(10000);
+vi.setConfig({ testTimeout: 10000 });
 
 describe('clusterActionSlice', () => {
   let store: ReturnType<typeof mockStore>;
@@ -27,7 +27,7 @@ describe('clusterActionSlice', () => {
 
   describe('executeClusterAction', () => {
     it('should execute cluster action', async () => {
-      const callback = jest.fn(() => Promise.resolve());
+      const callback = vi.fn(() => Promise.resolve());
       const action: CallbackAction = {
         callback,
         startMessage: 'Starting',
@@ -40,9 +40,9 @@ describe('clusterActionSlice', () => {
         cancelledOptions: {},
       };
 
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       const dispatchedAction = store.dispatch(executeClusterAction(action));
-      jest.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD);
+      vi.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD);
       await dispatchedAction;
       const actions = store.getActions();
       expect(actions[0].type).toBe('clusterAction/execute/pending');
@@ -57,12 +57,12 @@ describe('clusterActionSlice', () => {
           }),
         })
       );
-      jest.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD);
+      vi.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD);
     });
 
     it('should dispatch a cancelled action if is cancelled within grace period', async () => {
-      const callback = jest.fn(() => Promise.resolve());
-      const cancelCallback = jest.fn(() => Promise.resolve());
+      const callback = vi.fn(() => Promise.resolve());
+      const cancelCallback = vi.fn(() => Promise.resolve());
 
       const action: CallbackAction = {
         callback,
@@ -77,10 +77,10 @@ describe('clusterActionSlice', () => {
         cancelCallback: cancelCallback,
       };
 
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       const dispatchedAction = store.dispatch(executeClusterAction(action));
 
-      jest.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD / 2);
+      vi.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD / 2);
 
       const actionKey = store.getActions().find(action => action.payload?.id !== undefined)
         ?.payload?.id;
@@ -104,7 +104,7 @@ describe('clusterActionSlice', () => {
     });
 
     it('should dispatch an error action if the callback throws an error', async () => {
-      const callback = jest.fn(() => {
+      const callback = vi.fn(() => {
         throw new Error('Something went wrong');
       });
 
@@ -120,9 +120,9 @@ describe('clusterActionSlice', () => {
         cancelledOptions: {},
       };
 
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       const dispatchedAction = store.dispatch(executeClusterAction(action));
-      jest.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD);
+      vi.advanceTimersByTime(CLUSTER_ACTION_GRACE_PERIOD);
       await dispatchedAction;
 
       // error action is done
@@ -169,6 +169,6 @@ describe('clusterActionSlice', () => {
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 });

@@ -1,58 +1,108 @@
-import initStoryshots, { Stories2SnapsConverter } from '@storybook/addon-storyshots';
-import * as rtl from '@testing-library/react';
+import 'vitest-canvas-mock';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material';
+import { StylesProvider } from '@mui/styles';
+import type { Meta, StoryFn } from '@storybook/react';
+import { composeStories } from '@storybook/react';
+import { render, waitFor } from '@testing-library/react';
 import path from 'path';
+import themesConf from './lib/themes';
 
-/**
- * The storyshot addon has some bug where the path is src/
- *  and the cwd is src, so it makes src/src folders.
- */
-class OurConverter extends Stories2SnapsConverter {
-  getStoryshotFile(fileName: string) {
-    const name = super.getStoryshotFile(fileName);
-    if (name.startsWith('src')) {
-      return path.join('..', name);
-    }
-    return name;
+type StoryFile = {
+  default: Meta;
+  [name: string]: StoryFn | Meta;
+};
+
+const withThemeProvider = (Story: any) => {
+  const lightTheme = themesConf['light'];
+  const theme = lightTheme;
+
+  const ourThemeProvider = (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
+
+  const generateClassName = (rule: any, styleSheet: any) =>
+    `${styleSheet?.options.classNamePrefix}-${rule.key}`;
+
+  return <StylesProvider generateClassName={generateClassName}>{ourThemeProvider}</StylesProvider>;
+};
+
+const compose = (entry: StoryFile) => {
+  try {
+    return composeStories(entry);
+  } catch (e) {
+    throw new Error(
+      `There was an issue composing stories for the module: ${JSON.stringify(entry)}, ${e}`
+    );
   }
+};
+
+function getAllStoryFiles() {
+  // Place the glob you want to match your story files
+  const storyFiles = Object.entries(
+    import.meta.glob<StoryFile>('./**/*.stories.tsx', {
+      eager: true,
+    })
+  );
+
+  return storyFiles.map(([filePath, storyFile]) => {
+    const storyDir = path.dirname(filePath);
+    const componentName = path.basename(filePath).replace(/\.(stories|story)\.[^/.]+$/, '');
+    return { filePath, storyFile, componentName, storyDir };
+  });
 }
 
-jest.mock('@mui/utils/useId', () => jest.fn().mockReturnValue('mui-test-id'));
+// Recreate similar options to Storyshots. Place your configuration below
+const options = {
+  suite: 'Storybook Tests',
+  storyKindRegex: /^.*?DontTest$/,
+  snapshotsDirName: '__snapshots__',
+  snapshotExtension: '.stories.storyshot',
+};
 
-initStoryshots({
-  stories2snapsConverter: new OurConverter(),
-  asyncJest: true,
-  test: async ({ story, context, done }) => {
-    // We use React Testing library here, and our custom converter.
-    const converter = new OurConverter();
-    const snapshotFilename = converter.getSnapshotFileName(context) || '';
+vi.mock('@iconify/react', () => ({
+  Icon: () => null,
+  InlineIcon: () => null,
+}));
 
-    // Re-render for state changes:
-    // https://github.com/storybookjs/storybook/issues/7745#issuecomment-801940326
-    // Difference to above is we do everything within an act(),
-    //   so that the initial render is also within an act.
-    const jsx = story.render();
-    await rtl.act(async () => {
-      const { unmount, rerender, container } = await rtl.render(jsx);
-      // wait for state changes
-      await rtl.act(() => new Promise(resolve => setTimeout(resolve)));
+getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
+  describe(options.suite, () => {
+    const meta = storyFile.default;
+    const title = meta.title || componentName;
 
-      await rtl.act(async () => {
-        await rerender(jsx);
+    if (options.storyKindRegex.test(title) || meta.parameters?.storyshots?.disable) {
+      // Skip component tests if they are disabled
+      return;
+    }
+
+    describe(title, () => {
+      const stories = Object.entries(compose(storyFile)).map(([name, story]) => ({
+        name,
+        story,
+      }));
+
+      if (stories.length <= 0) {
+        throw new Error(
+          `No stories found for this module: ${title}. Make sure there is at least one valid story for this module, without a disable parameter, or add parameters.storyshots.disable in the default export of this file.`
+        );
+      }
+
+      stories.forEach(({ name, story }) => {
+        test(name, async () => {
+          const mounted = render(withThemeProvider(story));
+
+          const snapshotPath = path.join(
+            storyDir,
+            options.snapshotsDirName,
+            `${componentName}.${name}${options.snapshotExtension}`
+          );
+
+          await waitFor(() => expect(mounted.container).toMatchFileSnapshot(snapshotPath));
+        });
       });
-      expect(container).toMatchSpecificSnapshot(snapshotFilename);
-
-      unmount();
     });
-
-    done!();
-  },
-  snapshotSerializers: [
-    {
-      print: (val: any, serialize) => {
-        const root = val.container.firstChild;
-        return serialize(root);
-      },
-      test: val => val.hasOwnProperty('container'),
-    },
-  ],
+  });
 });

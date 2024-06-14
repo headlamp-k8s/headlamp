@@ -1,0 +1,37 @@
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+    style="background-color: rgba(0, 0, 0, 0.87);"
+  >
+    <ul
+      class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+    >
+      <li
+        class="css-1wel91t"
+      >
+        <a
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
+          />
+          <div
+            class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+          >
+            <span
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+            >
+              Cluster
+            </span>
+          </div>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Storyshots AlertNotification Error 1`] = `<div />`;
-
-exports[`Storyshots AlertNotification No Error 1`] = `<div />`;

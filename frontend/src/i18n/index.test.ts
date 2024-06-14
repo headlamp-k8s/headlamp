@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 import { error } from 'console';
 import fs from 'fs';
-import glob from 'glob';
+import * as glob from 'glob';
 
 const path = require('node:path');
 const allowlist = require('./allowlist.json');

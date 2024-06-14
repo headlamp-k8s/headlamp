@@ -1,0 +1,143 @@
+<div>
+  <div
+    class="MuiBox-root css-0"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+    >
+      Test changing the page and rows per page.
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+    >
+      <b>
+        Current URL search:
+      </b>
+       
+      ?p=2
+    </p>
+    <div
+      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
+    >
+      <table
+        class="MuiTable-root css-1ndbor9-MuiTable-root"
+      >
+        <thead
+          class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+        >
+          <tr
+            class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+          >
+            <th
+              class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+              scope="col"
+            >
+              Namespace
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+              scope="col"
+            >
+              Number
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+        >
+          <tr
+            class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Name 0
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Namespace 0
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Name 1
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Namespace 1
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Name 2
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Namespace 2
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Name 3
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Namespace 3
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Name 4
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            >
+              Namespace 4
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+            />
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

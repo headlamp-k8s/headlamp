@@ -6,19 +6,6 @@ import { KubeconfigObject } from '../lib/k8s/kubeconfig';
 import { ConfigState, setStatelessConfig } from '../redux/configSlice';
 import store from '../redux/stores/store';
 
-let indexedDBtest: any;
-
-// Import 'fake-indexeddb' only in the testing environment
-if (process.env.NODE_ENV === 'test') {
-  import('fake-indexeddb')
-    .then(module => {
-      indexedDBtest = module.indexedDB;
-    })
-    .catch(error => {
-      console.error('Error importing fake-indexeddb:', error);
-    });
-}
-
 /**
  * ParsedConfig is the object that is fetched from the backend.
  * It has cluster information as keys. The values are the same as the KubeconfigObject.
@@ -117,10 +104,7 @@ function handleDataBaseError(event: DatabaseErrorEvent, reject: (reason?: any) =
  */
 export function storeStatelessClusterKubeconfig(kubeconfig: string): Promise<void> {
   return new Promise<void>(async (resolve, reject) => {
-    const request =
-      process.env.NODE_ENV === 'test'
-        ? indexedDBtest.open('kubeconfigs', 1)
-        : indexedDB.open('kubeconfigs', 1);
+    const request = indexedDB.open('kubeconfigs', 1) as any;
 
     // The onupgradeneeded event is fired when the database is created for the first time.
     request.onupgradeneeded = handleDatabaseUpgrade;
@@ -175,10 +159,7 @@ export function storeStatelessClusterKubeconfig(kubeconfig: string): Promise<voi
  */
 export function getStatelessClusterKubeConfigs(): Promise<string[]> {
   return new Promise<string[]>(async (resolve, reject) => {
-    const request =
-      process.env.NODE_ENV === 'test'
-        ? indexedDBtest.open('kubeconfigs', 1)
-        : indexedDB.open('kubeconfigs', 1);
+    const request = indexedDB.open('kubeconfigs', 1) as any;
 
     // The onupgradeneeded event is fired when the database is created for the first time.
     request.onupgradeneeded = handleDatabaseUpgrade;
@@ -234,10 +215,7 @@ export function getStatelessClusterKubeConfigs(): Promise<string[]> {
 export function findKubeconfigByClusterName(clusterName: string): Promise<string | null> {
   return new Promise<string | null>(async (resolve, reject) => {
     try {
-      const request =
-        process.env.NODE_ENV === 'test'
-          ? indexedDBtest.open('kubeconfigs', 1)
-          : indexedDB.open('kubeconfigs', 1);
+      const request = indexedDB.open('kubeconfigs', 1) as any;
 
       // The onupgradeneeded event is fired when the database is created for the first time.
       request.onupgradeneeded = handleDatabaseUpgrade;
@@ -316,7 +294,7 @@ export function getUserIdFromLocalStorage(): string {
  */
 function generateSecureToken(length = 16): string {
   const buffer = new Uint8Array(length);
-  if (process.env.NODE_ENV === 'test') {
+  if (import.meta.env.NODE_ENV === 'test') {
     // Use Math.random() in the testing environment
     return Array.from(buffer, () => Math.floor(Math.random() * 16).toString(16)).join('');
   }
@@ -427,10 +405,7 @@ export async function fetchStatelessClusterKubeConfigs(dispatch: any) {
 export async function deleteClusterKubeconfig(clusterName: string): Promise<string | null> {
   return new Promise<string | null>(async (resolve, reject) => {
     try {
-      const request =
-        process.env.NODE_ENV === 'test'
-          ? indexedDBtest.open('kubeconfigs', 1)
-          : indexedDB.open('kubeconfigs', 1);
+      const request = indexedDB.open('kubeconfigs', 1) as any;
 
       // The onupgradeneeded event is fired when the database is created for the first time.
       request.onupgradeneeded = handleDatabaseUpgrade;

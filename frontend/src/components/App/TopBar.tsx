@@ -22,7 +22,6 @@ import {
   AppBarAction,
   AppBarActionsProcessor,
   DefaultAppBarAction,
-  HeaderAction,
   HeaderActionType,
 } from '../../redux/actionButtonsSlice';
 import { setVersionDialogOpen } from '../../redux/actions/actions';
@@ -133,7 +132,7 @@ function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[
   const actions = (function stateActions() {
     return React.Children.toArray(
       appBarActions.map(action => {
-        const Action = has(action, 'action') ? (action as HeaderAction).action : action;
+        const Action = has(action, 'action') ? action.action : action;
         if (React.isValidElement(Action)) {
           return (
             <ErrorBoundary>
@@ -161,7 +160,7 @@ function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] })
   const actions = (function stateActions() {
     return React.Children.toArray(
       appBarActions.map(action => {
-        const Action = has(action, 'action') ? (action as HeaderAction).action : action;
+        const Action = has(action, 'action') ? action.action : action;
         if (React.isValidElement(Action)) {
           return <ErrorBoundary>{Action}</ErrorBoundary>;
         } else if (Action === null) {

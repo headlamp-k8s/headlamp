@@ -5,6 +5,9 @@ import ErrorComponent from '../common/ErrorPage';
 export default function NotFoundComponent() {
   const { t } = useTranslation();
   return (
-    <ErrorComponent graphic={headlampBrokenImage} title={t(`Whoops! This page doesn't exist`)} />
+    <ErrorComponent
+      graphic={headlampBrokenImage as any}
+      title={t(`Whoops! This page doesn't exist`)}
+    />
   );
 }
