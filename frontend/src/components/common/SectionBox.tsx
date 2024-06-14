@@ -33,7 +33,7 @@ export function SectionBox(props: SectionBoxProps) {
 
   return (
     <>
-      {actualBackLink !== undefined && <BackLink to={actualBackLink} />}
+      {actualBackLink && <BackLink to={actualBackLink} />}
       <Box py={0} {...outterBoxProps}>
         {title && titleElem}
         <Box
