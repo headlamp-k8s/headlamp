@@ -217,6 +217,7 @@ export default function Table<RowItem extends Record<string, any>>({
         pageSize: pageSize,
       },
     },
+    positionActionsColumn: 'last',
     layoutMode: 'grid',
     // Need to provide our own empty message
     // because default one breaks with our custom layout
@@ -271,7 +272,10 @@ export default function Table<RowItem extends Record<string, any>>({
     },
     muiTableProps: {
       sx: {
-        gridTemplateColumns,
+        gridTemplateColumns:
+          tableProps.enableRowActions === true
+            ? `${gridTemplateColumns} 0.05fr`
+            : gridTemplateColumns,
       },
     },
     muiTableHeadProps: {
