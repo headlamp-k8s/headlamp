@@ -4,6 +4,8 @@ import {
   MaterialReactTable,
   MRT_ColumnDef as MaterialTableColumn,
   MRT_Localization,
+  MRT_Row,
+  MRT_TableInstance,
   MRT_TableOptions as MaterialTableOptions,
   useMaterialReactTable,
 } from 'material-react-table';
@@ -53,6 +55,12 @@ export type TableProps<RowItem extends Record<string, any>> = Omit<
   'columns'
 > & {
   columns: TableColumn<RowItem>[];
+  renderRowActionMenuItems?: (props: {
+    closeMenu: () => void;
+    row: MRT_Row<RowItem>;
+    staticRowIndex?: number;
+    table: MRT_TableInstance<RowItem>;
+  }) => ReactNode[];
   /**
    * Message to show when the table is empty
    */
@@ -217,6 +225,7 @@ export default function Table<RowItem extends Record<string, any>>({
         pageSize: pageSize,
       },
     },
+    positionActionsColumn: 'last',
     layoutMode: 'grid',
     // Need to provide our own empty message
     // because default one breaks with our custom layout
@@ -271,7 +280,10 @@ export default function Table<RowItem extends Record<string, any>>({
     },
     muiTableProps: {
       sx: {
-        gridTemplateColumns,
+        gridTemplateColumns:
+          tableProps.enableRowActions === true
+            ? `${gridTemplateColumns} 0.05fr`
+            : gridTemplateColumns,
       },
     },
     muiTableHeadProps: {

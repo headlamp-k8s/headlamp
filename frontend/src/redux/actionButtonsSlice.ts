@@ -10,6 +10,8 @@ export type HeaderActionType =
   | ReactNode;
 export type DetailsViewFunc = HeaderActionType;
 
+export type RowActionType = ((item: any) => JSX.Element | null | ReactNode) | null;
+
 export type AppBarActionType =
   | ((...args: any[]) => JSX.Element | null | ReactNode)
   | null
@@ -21,6 +23,11 @@ export type HeaderAction = {
   action?: HeaderActionType;
 };
 
+export type RowAction = {
+  id: string;
+  action?: RowActionType;
+};
+
 export type AppBarAction = {
   id: string;
   action?: AppBarActionType;
@@ -30,6 +37,7 @@ export enum DefaultHeaderAction {
   RESTART = 'RESTART',
   DELETE = 'DELETE',
   EDIT = 'EDIT',
+  VIEW = 'VIEW',
   SCALE = 'SCALE',
   POD_LOGS = 'POD_LOGS',
   POD_TERMINAL = 'POD_TERMINAL',
