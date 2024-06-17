@@ -3,7 +3,7 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { StylesProvider } from '@mui/styles';
 import type { Meta, StoryFn } from '@storybook/react';
 import { composeStories } from '@storybook/react';
-import { render, waitFor } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import path from 'path';
 import themesConf from './lib/themes';
 
@@ -92,15 +92,23 @@ getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
 
       stories.forEach(({ name, story }) => {
         test(name, async () => {
-          const mounted = render(withThemeProvider(story));
+          const jsx = withThemeProvider(story);
 
-          const snapshotPath = path.join(
-            storyDir,
-            options.snapshotsDirName,
-            `${componentName}.${name}${options.snapshotExtension}`
-          );
+          await act(async () => {
+            const { unmount, asFragment, rerender } = render(jsx);
+            rerender(jsx);
+            rerender(jsx);
+            await act(() => new Promise(resolve => setTimeout(resolve)));
 
-          await waitFor(() => expect(mounted.container).toMatchFileSnapshot(snapshotPath));
+            const snapshotPath = path.join(
+              storyDir,
+              options.snapshotsDirName,
+              `${componentName}.${name}${options.snapshotExtension}`
+            );
+
+            expect(asFragment()).toMatchFileSnapshot(snapshotPath);
+            unmount();
+          });
         });
       });
     });

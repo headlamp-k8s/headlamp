@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiContainer-root MuiContainer-maxWidthXl css-4hqp1a-MuiContainer-root"
   >
@@ -45,7 +45,7 @@
                   class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
                     role="alert"
                   >
                     <div
@@ -1009,9 +1009,7 @@
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-g49sdf-MuiTableCell-root"
                     data-index="7"
-                  >
-                    
-                  </td>
+                  />
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-nzc431-MuiTableCell-root"
                     data-index="8"
@@ -1086,9 +1084,7 @@
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-165tvm3-MuiTableCell-root"
                     data-index="5"
-                  >
-                    
-                  </td>
+                  />
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-4hrpnu-MuiTableCell-root"
                     data-index="6"
@@ -1098,9 +1094,7 @@
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-g49sdf-MuiTableCell-root"
                     data-index="7"
-                  >
-                    
-                  </td>
+                  />
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-nzc431-MuiTableCell-root"
                     data-index="8"
@@ -1248,4 +1242,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

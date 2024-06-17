@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="SnackbarContainer-bottom SnackbarContainer-left SnackbarContainer-root css-uwcd5u"
   >
@@ -47,4 +47,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

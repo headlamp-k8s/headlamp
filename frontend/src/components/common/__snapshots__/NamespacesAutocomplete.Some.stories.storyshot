@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1tw9w9k-MuiAutocomplete-root"
   >
@@ -64,4 +64,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

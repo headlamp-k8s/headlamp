@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <span
     aria-label="a label
 another label
@@ -8,4 +8,4 @@ yet another label"
   >
     a label, another label, yet another label
   </span>
-</div>
+</DocumentFragment>

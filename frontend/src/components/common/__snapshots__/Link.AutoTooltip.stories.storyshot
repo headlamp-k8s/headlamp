@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <span
     aria-label="a link"
     class=""
@@ -11,4 +11,4 @@
       a link
     </a>
   </span>
-</div>
+</DocumentFragment>

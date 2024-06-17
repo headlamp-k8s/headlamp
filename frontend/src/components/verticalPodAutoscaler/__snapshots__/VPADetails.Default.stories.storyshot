@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
@@ -67,19 +67,7 @@
               />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-              >
-                <button
-                  aria-label="View YAML"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
-                  data-mui-internal-clone-element="true"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </div>
+              />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
@@ -193,9 +181,7 @@
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
-                    Deployment
-                    /
-                    multi-container-deployment
+                    Deployment/multi-container-deployment
                   </a>
                 </dd>
                 <dt
@@ -206,9 +192,7 @@
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                 >
-                  Update Mode
-                  :
-                  Auto
+                  Update Mode:Auto
                 </dd>
               </dl>
             </div>
@@ -326,9 +310,7 @@
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      
-                    </td>
+                    />
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     />
@@ -358,9 +340,7 @@
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      
-                    </td>
+                    />
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                     />
@@ -683,4 +663,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

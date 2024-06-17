@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <nav
     aria-label="Navigation"
     class="MuiBox-root css-0"
@@ -183,4 +183,4 @@
       </div>
     </div>
   </nav>
-</div>
+</DocumentFragment>

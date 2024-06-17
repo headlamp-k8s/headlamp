@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     aria-busy="false"
     aria-live="polite"
@@ -81,4 +81,4 @@
       5 / 10 Requested
     </p>
   </div>
-</div>
+</DocumentFragment>

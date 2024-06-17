@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded css-xj31rx-MuiPaper-root"
   >
@@ -668,4 +668,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

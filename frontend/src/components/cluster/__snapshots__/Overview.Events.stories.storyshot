@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiContainer-root MuiContainer-maxWidthXl css-4hqp1a-MuiContainer-root"
   >
@@ -75,7 +75,6 @@
                           aria-live="polite"
                           class="MuiBox-root css-2esbmj"
                         >
-                          
                           <div
                             class="recharts-wrapper"
                             style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
@@ -108,29 +107,14 @@
                                 tabindex="0"
                               >
                                 <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
-                                />
-                                <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
+                                  class="recharts-layer"
                                 >
-                                  <path
-                                    class="recharts-sector"
-                                    cx="61"
-                                    cy="61"
-                                    d="M 61,16.199999999999996
-    A 44.800000000000004,44.800000000000004,0,
-    1,1,
-    60.99921809249515,16.20000000682343
-  L 60.999410078712856,27.200000005148027
-            A 33.800000000000004,33.800000000000004,0,
-            1,0,
-            61,27.199999999999996 Z"
-                                    fill="#e0e0e0"
-                                    name="total"
-                                    role="img"
-                                    stroke="#e0e0e0"
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                    tabindex="-1"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
                                     tabindex="-1"
                                   />
                                 </g>
@@ -193,7 +177,6 @@
                           aria-live="polite"
                           class="MuiBox-root css-2esbmj"
                         >
-                          
                           <div
                             class="recharts-wrapper"
                             style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
@@ -226,29 +209,14 @@
                                 tabindex="0"
                               >
                                 <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
-                                />
-                                <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
+                                  class="recharts-layer"
                                 >
-                                  <path
-                                    class="recharts-sector"
-                                    cx="61"
-                                    cy="61"
-                                    d="M 61,16.199999999999996
-    A 44.800000000000004,44.800000000000004,0,
-    1,1,
-    60.99921809249515,16.20000000682343
-  L 60.999410078712856,27.200000005148027
-            A 33.800000000000004,33.800000000000004,0,
-            1,0,
-            61,27.199999999999996 Z"
-                                    fill="#e0e0e0"
-                                    name="total"
-                                    role="img"
-                                    stroke="#e0e0e0"
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                    tabindex="-1"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
                                     tabindex="-1"
                                   />
                                 </g>
@@ -296,7 +264,6 @@
                           >
                             Pods
                           </p>
-                          
                         </div>
                         <p
                           class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
@@ -312,7 +279,6 @@
                           aria-live="polite"
                           class="MuiBox-root css-2esbmj"
                         >
-                          
                           <div
                             class="recharts-wrapper"
                             style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
@@ -345,55 +311,21 @@
                                 tabindex="0"
                               >
                                 <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
+                                  class="recharts-layer"
                                 >
-                                  <path
-                                    class="recharts-sector"
-                                    cx="61"
-                                    cy="61"
-                                    d="M 61,16.199999999999996
-    A 44.800000000000004,44.800000000000004,0,
-    0,1,
-    61,105.80000000000001
-  L 61,94.80000000000001
-            A 33.800000000000004,33.800000000000004,0,
-            0,0,
-            61,27.199999999999996 Z"
-                                    fill="#000"
-                                    name="ready"
-                                    role="img"
-                                    stroke="#e0e0e0"
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                    tabindex="-1"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                    tabindex="-1"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
                                     tabindex="-1"
                                   />
                                 </g>
-                                <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
-                                >
-                                  <path
-                                    class="recharts-sector"
-                                    cx="61"
-                                    cy="61"
-                                    d="M 61,105.80000000000001
-    A 44.800000000000004,44.800000000000004,0,
-    0,1,
-    60.99999999999999,16.199999999999996
-  L 60.99999999999999,27.199999999999996
-            A 33.800000000000004,33.800000000000004,0,
-            0,0,
-            61,94.80000000000001 Z"
-                                    fill="#c62828"
-                                    name="notReady"
-                                    role="img"
-                                    stroke="#e0e0e0"
-                                    tabindex="-1"
-                                  />
-                                </g>
-                                <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
-                                />
                                 <text
                                   class="recharts-text recharts-label"
                                   fill="#808080"
@@ -438,7 +370,6 @@
                           >
                             Nodes
                           </p>
-                          
                         </div>
                         <p
                           class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
@@ -454,7 +385,6 @@
                           aria-live="polite"
                           class="MuiBox-root css-2esbmj"
                         >
-                          
                           <div
                             class="recharts-wrapper"
                             style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
@@ -487,36 +417,21 @@
                                 tabindex="0"
                               >
                                 <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
+                                  class="recharts-layer"
                                 >
-                                  <path
-                                    class="recharts-sector"
-                                    cx="61"
-                                    cy="61"
-                                    d="M 61,16.199999999999996
-    A 44.800000000000004,44.800000000000004,0,
-    1,1,
-    60.99921809249515,16.20000000682343
-  L 60.999410078712856,27.200000005148027
-            A 33.800000000000004,33.800000000000004,0,
-            1,0,
-            61,27.199999999999996 Z"
-                                    fill="#000"
-                                    name="ready"
-                                    role="img"
-                                    stroke="#e0e0e0"
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                    tabindex="-1"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                    tabindex="-1"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
                                     tabindex="-1"
                                   />
                                 </g>
-                                <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
-                                />
-                                <g
-                                  class="recharts-layer recharts-pie-sector"
-                                  tabindex="-1"
-                                />
                                 <text
                                   class="recharts-text recharts-label"
                                   fill="#808080"
@@ -704,7 +619,7 @@
                         class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
                       >
                         <div
-                          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
+                          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
                           role="alert"
                         >
                           <div
@@ -1643,4 +1558,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

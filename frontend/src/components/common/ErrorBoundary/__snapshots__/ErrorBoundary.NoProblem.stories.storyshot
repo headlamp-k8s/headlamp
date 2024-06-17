@@ -1,5 +1,5 @@
-<div>
+<DocumentFragment>
   <i>
     This is not failing.
   </i>
-</div>
+</DocumentFragment>

@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-0"
     style="display: flex; margin-bottom: 5px;"
@@ -12,4 +12,4 @@
     </a>
     (Prefix)
   </div>
-</div>
+</DocumentFragment>

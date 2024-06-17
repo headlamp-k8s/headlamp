@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <button
     aria-label="View YAML"
     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
@@ -10,4 +10,4 @@
       class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
-</div>
+</DocumentFragment>

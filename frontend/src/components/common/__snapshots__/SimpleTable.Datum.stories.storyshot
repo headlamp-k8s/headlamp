@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
   >
@@ -115,4 +115,4 @@
       </tbody>
     </table>
   </div>
-</div>
+</DocumentFragment>

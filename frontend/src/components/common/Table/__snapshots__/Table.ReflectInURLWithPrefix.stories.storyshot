@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-0"
   >
@@ -13,8 +13,7 @@
       <b>
         Current URL search:
       </b>
-       
-      ?p=2
+       ?p=2
     </p>
     <div
       class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded css-xj31rx-MuiPaper-root"
@@ -625,4 +624,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
@@ -76,19 +76,7 @@
               />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-              >
-                <button
-                  aria-label="View YAML"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
-                  data-mui-internal-clone-element="true"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </div>
+              />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
@@ -909,8 +897,7 @@
                     >
                       ID:
                     </span>
-                     
-                    sha256:554cfcf2aa85635c0b1ae9506f36f50118419766221651e70dfdc94631317b4d
+                     sha256:554cfcf2aa85635c0b1ae9506f36f50118419766221651e70dfdc94631317b4d
                   </p>
                 </dd>
                 <dt
@@ -1177,4 +1164,4 @@
     </div>
   </div>
   ;
-</div>
+</DocumentFragment>

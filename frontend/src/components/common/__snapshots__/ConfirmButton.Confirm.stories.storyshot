@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <button
     aria-label="confirm undo"
     class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
@@ -11,4 +11,4 @@
     />
   </button>
   <div />
-</div>
+</DocumentFragment>

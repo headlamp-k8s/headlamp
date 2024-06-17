@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <button
     class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary css-w7fpvq-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
@@ -99,4 +99,4 @@
       />
     </div>
   </div>
-</div>
+</DocumentFragment>

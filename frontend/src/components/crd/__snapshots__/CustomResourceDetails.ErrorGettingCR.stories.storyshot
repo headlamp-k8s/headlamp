@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-19midj6"
   >
@@ -8,4 +8,4 @@
       Error getting custom resource nonexistentcustomresource: No mock custom resource for you
     </p>
   </div>
-</div>
+</DocumentFragment>

@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
@@ -76,19 +76,7 @@
               />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-              >
-                <button
-                  aria-label="View YAML"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
-                  data-mui-internal-clone-element="true"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </div>
+              />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
@@ -776,7 +764,6 @@
                   >
                     busybox
                   </p>
-                  
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
@@ -930,8 +917,7 @@
                     >
                       ID:
                     </span>
-                     
-                    docker.io/library/busybox@sha256:125113b35efe765c89a8ed49593e719532318d26828c58e26b26dd7c4c28a673
+                     docker.io/library/busybox@sha256:125113b35efe765c89a8ed49593e719532318d26828c58e26b26dd7c4c28a673
                   </p>
                 </dd>
                 <dt
@@ -1029,7 +1015,6 @@
                   >
                     busybox
                   </p>
-                  
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-16fae59-MuiGrid-root"
@@ -1214,4 +1199,4 @@
     </div>
   </div>
   ;
-</div>
+</DocumentFragment>

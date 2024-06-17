@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-j1fy4m"
   >
@@ -495,9 +495,7 @@
                     aria-label="Default Ingress Class"
                     class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
                     data-mui-internal-clone-element="true"
-                  >
-                    
-                  </p>
+                  />
                 </td>
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
@@ -656,4 +654,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

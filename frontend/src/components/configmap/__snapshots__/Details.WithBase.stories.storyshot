@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
@@ -67,19 +67,7 @@
               />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-              >
-                <button
-                  aria-label="View YAML"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
-                  data-mui-internal-clone-element="true"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </div>
+              />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
@@ -328,7 +316,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="visible scrollbar horizontal"
+                              class="invisible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -346,7 +334,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="visible scrollbar vertical"
+                              class="invisible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >
@@ -575,7 +563,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="visible scrollbar horizontal"
+                              class="invisible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -593,7 +581,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="visible scrollbar vertical"
+                              class="invisible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >
@@ -822,7 +810,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="visible scrollbar horizontal"
+                              class="invisible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -840,7 +828,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="visible scrollbar vertical"
+                              class="invisible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >
@@ -1079,4 +1067,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiTabs-root css-1ujnqem-MuiTabs-root"
   >
@@ -71,4 +71,4 @@
       We start on the second tab using defaultIndex=1
     </p>
   </div>
-</div>
+</DocumentFragment>
