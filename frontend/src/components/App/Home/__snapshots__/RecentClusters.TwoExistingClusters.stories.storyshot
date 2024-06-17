@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     aria-labelledby="#recent-clusters-label"
     class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-spacing-xs-2 css-1vj4bu4-MuiGrid-root"
@@ -58,4 +58,4 @@
       </button>
     </div>
   </div>
-</div>
+</DocumentFragment>

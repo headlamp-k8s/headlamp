@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-cmkit5-MuiPaper-root"
   >
@@ -16,7 +16,6 @@
           >
             My chart
           </p>
-          
         </div>
         <p
           class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
@@ -32,7 +31,6 @@
           aria-live="polite"
           class="MuiBox-root css-2esbmj"
         >
-          
           <div
             class="recharts-wrapper"
             style="position: relative; cursor: default; width: 112px; height: 112px; margin-left: auto; margin-right: auto;"
@@ -103,4 +101,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

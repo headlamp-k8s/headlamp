@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <nav
     aria-label="Appbar Tools"
     class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation1 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1nczbvg-MuiPaper-root-MuiAppBar-root"
@@ -105,4 +105,4 @@
       />
     </div>
   </nav>
-</div>
+</DocumentFragment>

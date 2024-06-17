@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column css-1b95sop-MuiGrid-root"
   >
@@ -17,13 +17,12 @@
       </h1>
       <h2
         class="MuiTypography-root MuiTypography-h2 css-15otqr2-MuiTypography-root"
+      />
+      <h3
+        class="MuiTypography-root MuiTypography-h3 css-3hjpok-MuiTypography-root"
       >
-        <h3
-          class="MuiTypography-root MuiTypography-h3 css-3hjpok-MuiTypography-root"
-        >
-          Not sure what to do!
-        </h3>
-      </h2>
+        Not sure what to do!
+      </h3>
     </div>
   </div>
-</div>
+</DocumentFragment>

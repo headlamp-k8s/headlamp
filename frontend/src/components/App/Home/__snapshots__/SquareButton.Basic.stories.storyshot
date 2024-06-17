@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <button
     class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
     tabindex="0"
@@ -22,4 +22,4 @@
       class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
-</div>
+</DocumentFragment>

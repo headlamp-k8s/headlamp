@@ -1,6 +1,4 @@
-<div
-  aria-hidden="true"
->
+<DocumentFragment>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-bsyb48-MuiGrid-root"
   >
@@ -801,8 +799,7 @@
                     >
                       ID:
                     </span>
-                     
-                    docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+                     docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
                   </p>
                 </dd>
                 <dt
@@ -1009,4 +1006,4 @@
     </div>
   </div>
   ;
-</div>
+</DocumentFragment>

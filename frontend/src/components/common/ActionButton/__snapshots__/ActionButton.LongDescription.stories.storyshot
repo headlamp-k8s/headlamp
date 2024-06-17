@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <button
     aria-label="Some label"
     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
@@ -10,4 +10,4 @@
       class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
-</div>
+</DocumentFragment>

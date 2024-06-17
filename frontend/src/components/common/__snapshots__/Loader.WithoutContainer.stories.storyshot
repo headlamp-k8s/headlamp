@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <span
     class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
     role="progressbar"
@@ -19,4 +19,4 @@
       />
     </svg>
   </span>
-</div>
+</DocumentFragment>

@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-0"
   >
@@ -105,11 +105,9 @@
           class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
           href="/"
         >
-          Deployment
-          : 
-          kube-scheduler
+          Deployment: kube-scheduler
         </a>
       </dd>
     </dl>
   </div>
-</div>
+</DocumentFragment>

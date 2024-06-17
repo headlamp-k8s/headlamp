@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     aria-busy="true"
     aria-live="polite"
@@ -34,4 +34,4 @@
       </span>
     </div>
   </div>
-</div>
+</DocumentFragment>

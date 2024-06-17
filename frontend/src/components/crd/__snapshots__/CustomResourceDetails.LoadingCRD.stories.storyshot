@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-5cned0"
   >
@@ -23,4 +23,4 @@
       </svg>
     </span>
   </div>
-</div>
+</DocumentFragment>

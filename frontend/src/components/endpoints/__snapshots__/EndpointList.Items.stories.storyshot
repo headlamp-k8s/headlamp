@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-j1fy4m"
   >
@@ -936,4 +936,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

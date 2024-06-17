@@ -1,7 +1,5 @@
-<div
-  aria-hidden="true"
->
+<DocumentFragment>
   <main
     class="MuiBox-root css-0"
   />
-</div>
+</DocumentFragment>

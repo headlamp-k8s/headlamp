@@ -1,8 +1,8 @@
-<div>
+<DocumentFragment>
   <p
     class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
     data-mui-internal-clone-element="true"
   >
     Some label
   </p>
-</div>
+</DocumentFragment>

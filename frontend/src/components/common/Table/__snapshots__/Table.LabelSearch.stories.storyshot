@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
   >
@@ -788,4 +788,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

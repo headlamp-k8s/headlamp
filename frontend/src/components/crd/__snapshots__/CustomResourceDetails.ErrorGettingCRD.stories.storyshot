@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-19midj6"
   >
@@ -8,4 +8,4 @@
       Error getting custom resource definition error.crd.io: No mock CRD for you
     </p>
   </div>
-</div>
+</DocumentFragment>

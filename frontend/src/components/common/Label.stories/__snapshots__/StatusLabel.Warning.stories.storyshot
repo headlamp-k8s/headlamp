@@ -1,8 +1,8 @@
-<div>
+<DocumentFragment>
   <span
     class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
     style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
   >
     warning
   </span>
-</div>
+</DocumentFragment>

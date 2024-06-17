@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomRight css-1mdvdtb-MuiSnackbar-root"
     role="presentation"
@@ -69,4 +69,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

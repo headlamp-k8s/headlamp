@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-j1fy4m"
   >
@@ -749,9 +749,7 @@
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-11hnma5-MuiTableCell-root"
                   data-index="4"
-                >
-                  
-                </td>
+                />
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="5"
@@ -892,4 +890,4 @@
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>

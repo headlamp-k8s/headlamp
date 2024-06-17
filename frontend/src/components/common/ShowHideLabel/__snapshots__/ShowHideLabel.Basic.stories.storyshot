@@ -1,4 +1,4 @@
-<div>
+<DocumentFragment>
   <div
     class="MuiBox-root css-1v5z18m"
   >
@@ -10,8 +10,7 @@
         id="label-id"
         style="word-break: break-all; white-space: normal;"
       >
-        This is a placeholder label text that is many characters long. It is meant to be used as a temporary label for a UI element until the actual label is available. The text is long enough to fill up the space allocated for the label and provide a realistic pr
-        …
+        This is a placeholder label text that is many characters long. It is meant to be used as a temporary label for a UI element until the actual label is available. The text is long enough to fill up the space allocated for the label and provide a realistic pr…
         <button
           aria-controls="label-id"
           arial-label="Expand"
@@ -26,4 +25,4 @@
       </label>
     </div>
   </div>
-</div>
+</DocumentFragment>
