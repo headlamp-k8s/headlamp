@@ -79,3 +79,4 @@ See [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAIN
 | config.oidc.externalSecret.enabled | bool   | `false`               | Enable this option if you want to use an external secret for OIDC configuration.                      |
 | config.oidc.externalSecret.name    | string | `""`                  | Name of the external OIDC secret to be used by headlamp.                                              |
 | config.pluginsDir                  | string | `"/headlamp/plugins"` | directory to look for plugins                                                                         |
+| config.extraArgs                   | array  | `[]`                  | Extra arguments that can be given to the container                                                    |
