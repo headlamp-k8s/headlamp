@@ -5,7 +5,7 @@ import { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from 
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { KubeObject } from '../../../lib/k8s/cluster';
-import { useFilterFunc } from '../../../lib/util';
+import { getClusterGroup, useFilterFunc } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
@@ -66,7 +66,7 @@ export type ResourceTableColumn<RowItem> = {
     }
 );
 
-type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
+type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind' | 'cluster';
 
 export interface ResourceTableProps<RowItem> {
   /** The columns to be rendered, like used in Table, or by name. */
@@ -225,6 +225,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
   const { t } = useTranslation(['glossary', 'translation']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
+  const clusters = getClusterGroup();
   const tableProcessors = useTypedSelector(state => state.resourceTable.tableColumnsProcessors);
   const defaultFilterFunc = useFilterFunc();
   const [columnVisibility, setColumnVisibility] = useState(() =>
@@ -245,7 +246,11 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
           processorInfo.processor({ id: id || '', columns: processedColumns }) || [];
       });
     }
-    const allColumns = processedColumns
+    function removeClusterColIfNeeded(cols: typeof columns) {
+      return cols.filter(col => clusters.length > 1 || col !== 'cluster');
+    }
+
+    const allColumns = removeClusterColIfNeeded(processedColumns)
       .map((col, index): TableColumn<KubeObject> => {
         const indexId = String(index);
 
@@ -333,6 +338,12 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
                 ) : (
                   ''
                 ),
+            };
+          case 'cluster':
+            return {
+              id: 'cluster',
+              header: t('glossary|Cluster'),
+              accessorFn: (resource: KubeObject) => resource.cluster,
             };
           case 'type':
           case 'kind':
