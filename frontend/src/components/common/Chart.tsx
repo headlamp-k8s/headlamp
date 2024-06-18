@@ -28,7 +28,7 @@ export interface PercentageCircleProps {
   size?: number;
   dataKey?: string;
   label?: string | null;
-  title?: string | null;
+  title?: string | JSX.Element | null;
   legend?: string | null;
   total?: number;
   totalProps?: {
