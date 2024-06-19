@@ -821,10 +821,7 @@ func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Hand
 		// skip if cluster is not using OIDC auth
 		oidcAuthConfig, err := kContext.OidcConfig()
 		if err != nil {
-			logger.Log(logger.LevelError, map[string]string{"cluster": cluster},
-				err, "failed to get oidc config")
 			next.ServeHTTP(w, r)
-
 			return
 		}
 
