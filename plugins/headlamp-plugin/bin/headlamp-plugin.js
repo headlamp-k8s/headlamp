@@ -231,7 +231,7 @@ function extract(pluginPackagesPath, outputPlugins) {
 
 /**
  * Start watching for changes, and build again if there are changes.
- * @returns {0} Exit code, where 0 is success.
+ * @returns {number} - Exit code, where 0 is success.
  */
 function start() {
   /**
@@ -271,22 +271,31 @@ function start() {
   /**
    * Inform if @kinvolk/headlamp-plugin is outdated.
    */
-  function informIfOutdated() {
-    console.log('Checking if headlamp-plugin is up to date...');
-    const outdated = getNpmOutdated();
-    if ('@kinvolk/headlamp-plugin' in outdated) {
-      const url = `https://github.com/kinvolk/headlamp/releases`;
-      console.warn(
-        '    @kinvolk/headlamp-plugin is out of date. Run the following command to upgrade \n' +
-          `    See release notes here: ${url}` +
-          '    npx @kinvolk/headlamp-plugin upgrade'
-      );
-    } else {
-      console.log('    @kinvolk/headlamp-plugin is up to date.');
-    }
+  async function informIfOutdated() {
+    console.log('Checking if @kinvolk/headlamp-plugin is up to date...');
+    child_process.exec('npm outdated --json', (error, stdout) => {
+      if (error) {
+        // npm outdated exit codes 1 when something is not up to date.
+        const result = stdout.toString();
+        const outdated = JSON.parse(result);
+        if ('@kinvolk/headlamp-plugin' in outdated) {
+          const url = `https://github.com/headlamp-k8s/headlamp/releases`;
+          console.warn(
+            '    @kinvolk/headlamp-plugin is out of date. Run the following command to upgrade \n' +
+              `    See release notes here: ${url}` +
+              '    npx @kinvolk/headlamp-plugin upgrade'
+          );
+          return;
+        }
+      }
+    });
   }
 
-  informIfOutdated();
+  setTimeout(() => {
+    informIfOutdated().catch(error => {
+      console.error('Error checking if @kinvolk/headlamp-plugin is up to date:', error);
+    });
+  }, 500);
 
   config.watch = true;
   config.mode = 'development';
