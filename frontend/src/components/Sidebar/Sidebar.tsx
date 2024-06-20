@@ -262,13 +262,11 @@ export function PureSidebar({
 
   const contents = (
     <>
-      {!isTemporaryDrawer && (
-        <Box
-          sx={theme => ({
-            ...theme.mixins.toolbar,
-          })}
-        />
-      )}
+      <Box
+        sx={theme => ({
+          ...theme.mixins.toolbar,
+        })}
+      />
       <Grid
         sx={{
           height: '100%',
