@@ -400,7 +400,7 @@ export function PureTopBar({
       >
         <Toolbar
           sx={{
-            [theme.breakpoints.down('xs')]: {
+            [theme.breakpoints.down('sm')]: {
               paddingLeft: 0,
               paddingRight: 0,
             },
