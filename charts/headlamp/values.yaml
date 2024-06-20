@@ -172,8 +172,8 @@ ingress:
     []
     # - host: chart-example.local
     #   paths:
-    #     path: /
-    #     type: ImplementationSpecifichosts
+    #     - path: /
+    #       type: ImplementationSpecifichosts
   # -- Ingress TLS configuration
   tls: []
   #  - secretName: chart-example-tls
