@@ -1,8 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import sharedConfig from './i18nextSharedConfig.mjs';
 
-const directoryPath = path.join(import.meta.dirname, './locales/');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const directoryPath = path.join(__dirname, './locales/');
 const currentLocales = [];
 const contextSeparator = sharedConfig.contextSeparator;
 
