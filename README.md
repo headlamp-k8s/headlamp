@@ -1,4 +1,5 @@
-# Headlamp <img align="right" width=384 src="docs/headlamp_light.svg"> [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7551/badge)](https://www.bestpractices.dev/projects/7551)
+# Headlamp <img align="right" width=384 src="docs/headlamp_light.svg"> [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7551/badge)](https://www.bestpractices.dev/projects/7551) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/headlamp-k8s/headlamp/badge)](https://scorecard.dev/viewer/?uri=github.com/headlamp-k8s/headlamp)
+
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 

@@ -36,14 +36,7 @@ export default function HeadlampButton({
   }
 
   return (
-    <Box
-      sx={theme => ({
-        paddingTop: theme.spacing(1.5),
-        paddingLeft: isSmall ? 0 : open ? theme.spacing(2) : theme.spacing(1),
-        paddingBottom: theme.spacing(1),
-        margin: isSmall && !open ? 5 : 0,
-      })}
-    >
+    <Box>
       <Button
         onClick={onToggleOpen}
         sx={theme => ({
