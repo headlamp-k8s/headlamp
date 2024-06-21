@@ -141,7 +141,6 @@ export default function SidebarItem(props: SidebarItemProps) {
             },
 
             ...(!hasParent && {
-              textTransform: 'uppercase',
               color: theme.palette.sidebarLink.main.color,
               marginLeft: '5px',
               marginRight: '5px',
