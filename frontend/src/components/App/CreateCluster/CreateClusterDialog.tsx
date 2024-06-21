@@ -5,7 +5,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography/Typography';
 import * as React from 'react';
@@ -39,15 +38,9 @@ const CreateClusterDialog: React.FC<CreateClusterDialogProps> = ({
   creatingDone,
 }) => {
   const [clusterName, setClusterName] = React.useState('');
-  const [clusterType, setClusterType] = React.useState('');
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setClusterName(event.target.value);
-    onEditorChanged();
-  };
-
-  const handleTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setClusterType(event.target.value);
     onEditorChanged();
   };
 
@@ -55,7 +48,6 @@ const CreateClusterDialog: React.FC<CreateClusterDialogProps> = ({
     return null;
   }
 
-  const clusterTypes = [{ label: 'minikube', value: 'minikube' }];
   return (
     <>
       <Dialog open={open} onClose={onClose}>
@@ -63,27 +55,6 @@ const CreateClusterDialog: React.FC<CreateClusterDialogProps> = ({
         <DialogContent>
           {!saving && (
             <FormControl fullWidth>
-              <Box pt={2}>
-                <TextField
-                  id="cluster-type-select"
-                  select
-                  value={clusterType}
-                  label="Cluster Type"
-                  defaultValue="minikube"
-                  helperText="Please select the cluster type"
-                  onChange={handleTypeChange}
-                >
-                  {clusterTypes.map(option => (
-                    <MenuItem
-                      key={option.value}
-                      value={option.value}
-                      selected={option.value === clusterType}
-                    >
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Box>
               <Box pt={2}>
                 <TextField
                   id="cluster-name-input"
@@ -108,7 +79,7 @@ const CreateClusterDialog: React.FC<CreateClusterDialogProps> = ({
         {!saving && (
           <DialogActions>
             <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={() => onSave({ clusterName, clusterType })}>{saveLabel}</Button>
+            <Button onClick={() => onSave({ clusterName })}>{saveLabel}</Button>
           </DialogActions>
         )}
         {creatingDone && (
