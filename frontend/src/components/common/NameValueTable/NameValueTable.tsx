@@ -66,8 +66,10 @@ export default function NameValueTable(props: NameValueTableProps) {
       container
       component="dl" // mount a Definition List
       sx={theme => ({
-        border: '1px solid #e7e7e7',
+        border: '1px solid',
+        borderColor: theme.palette.tables.head.borderColor,
         borderRadius: theme.shape.borderRadius + 'px',
+        overflow: 'hidden',
       })}
     >
       {visibleRows.flatMap(

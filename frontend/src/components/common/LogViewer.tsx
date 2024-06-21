@@ -132,7 +132,7 @@ export function LogViewer(props: LogViewerProps) {
   return (
     <Dialog title={title} withFullScreen onClose={onClose} {...other}>
       <DialogContent
-        sx={{
+        sx={theme => ({
           height: '80%',
           minHeight: '80%',
           display: 'flex',
@@ -148,10 +148,10 @@ export function LogViewer(props: LogViewerProps) {
             width: '100%',
             height: '100%',
             '& .terminal.xterm': {
-              padding: 10,
+              padding: theme.spacing(1),
             },
           },
-        }}
+        })}
       >
         <Grid container justifyContent="space-between" alignItems="center" wrap="nowrap">
           <Grid item container spacing={1}>
