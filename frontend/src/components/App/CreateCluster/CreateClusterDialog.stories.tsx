@@ -15,7 +15,7 @@ export const OpenDialog = {
     open: true,
     onClose: () => {},
     onSave: data => {
-      console.log(`Cluster created: ${data.clusterName}, Type: ${data.clusterType}`);
+      console.log(`Cluster created: ${data.clusterName}`);
     },
     saveLabel: 'Create Cluster',
     errorMessage: '',
@@ -33,7 +33,7 @@ export const Creating = {
     open: true,
     onClose: () => {},
     onSave: data => {
-      console.log(`Cluster created: ${data.clusterName}, Type: ${data.clusterType}`);
+      console.log(`Cluster created: ${data.clusterName}`);
     },
     saveLabel: 'Create Cluster',
     errorMessage: '',
@@ -56,7 +56,7 @@ export const Done = {
     open: true,
     onClose: () => {},
     onSave: data => {
-      console.log(`Cluster created: ${data.clusterName}, Type: ${data.clusterType}`);
+      console.log(`Cluster created: ${data.clusterName}`);
     },
     saveLabel: 'Create Cluster',
     errorMessage: '',
