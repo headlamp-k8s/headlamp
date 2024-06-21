@@ -99,7 +99,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -213,7 +213,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
             class="MuiBox-root css-1txv3mw"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
             >
               <dt
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -749,7 +749,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -863,7 +863,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
             class="MuiBox-root css-1txv3mw"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
             >
               <dt
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"

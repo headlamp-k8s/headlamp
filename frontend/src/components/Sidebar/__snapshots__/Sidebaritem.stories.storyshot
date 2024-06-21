@@ -10,7 +10,7 @@ exports[`Storyshots Sidebar/SidebarItem Selected 1`] = `
       class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
-        class="css-164h5tf"
+        class="css-1jcp995"
       >
         <a
           class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-sayhe9-MuiButtonBase-root-MuiListItem-root"
@@ -52,7 +52,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist 1`] = `
       class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
-        class="css-1wel91t"
+        class="css-1icvoo8"
       >
         <a
           class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
@@ -138,7 +138,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist Expanded 1`] = `
       class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
-        class="css-164h5tf"
+        class="css-1jcp995"
       >
         <a
           class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-sayhe9-MuiButtonBase-root-MuiListItem-root"
@@ -224,7 +224,7 @@ exports[`Storyshots Sidebar/SidebarItem Unselected 1`] = `
       class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
-        class="css-1wel91t"
+        class="css-1icvoo8"
       >
         <a
           class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"

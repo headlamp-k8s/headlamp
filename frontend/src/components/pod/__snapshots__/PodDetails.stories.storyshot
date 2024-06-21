@@ -108,7 +108,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -699,7 +699,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
@@ -1120,7 +1120,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -1713,7 +1713,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
@@ -1838,7 +1838,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
@@ -1966,7 +1966,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
@@ -2339,7 +2339,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -2932,7 +2932,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
@@ -3524,7 +3524,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -4110,7 +4110,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
@@ -4600,7 +4600,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -5172,7 +5172,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"
@@ -5597,7 +5597,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -6183,7 +6183,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               class="MuiBox-root css-4cxybv"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 css-u4nmjw-MuiGrid-root"

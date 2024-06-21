@@ -158,7 +158,7 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -605,7 +605,7 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"

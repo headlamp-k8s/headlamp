@@ -379,7 +379,7 @@ export default function Terminal(props: TerminalProps) {
       {...other}
     >
       <DialogContent
-        sx={{
+        sx={theme => ({
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
@@ -393,10 +393,10 @@ export default function Terminal(props: TerminalProps) {
             overflow: 'hidden',
             width: '100%',
             '& .terminal.xterm': {
-              padding: 10,
+              padding: theme.spacing(1),
             },
           },
-        }}
+        })}
       >
         <Box>
           <FormControl sx={{ minWidth: '11rem' }}>

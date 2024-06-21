@@ -99,7 +99,7 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
@@ -558,7 +558,7 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
               class="MuiBox-root css-0"
             >
               <dl
-                class="MuiGrid-root MuiGrid-container css-bddxam-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-container css-uximdg-MuiGrid-root"
               >
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 css-trrd7p-MuiGrid-root"
