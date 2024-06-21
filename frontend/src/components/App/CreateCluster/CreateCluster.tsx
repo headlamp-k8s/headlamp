@@ -10,10 +10,11 @@ import CreateClusterDialog from './CreateClusterDialog';
 
 interface CreateClusterProps {
   isNarrow?: boolean;
+  onClusterCreationStarted?: () => void;
 }
 
 export default function CreateCluster(props: CreateClusterProps) {
-  const { isNarrow } = props;
+  const { isNarrow, onClusterCreationStarted } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const [saving, setSaving] = React.useState(false);
@@ -34,9 +35,10 @@ export default function CreateCluster(props: CreateClusterProps) {
 
   console.log(openDialog, errorMessage, setErrorMessage, setSavingLines, savingLines);
 
-  function handleSave({ clusterName }: { clusterName: string; clusterType: string }) {
+  function handleSave({ clusterName }: { clusterName: string }) {
     console.log('runFunc handleSave', clusterName);
     setSaving(true);
+    onClusterCreationStarted && onClusterCreationStarted();
 
     function runFunc(clusterName: string) {
       const minikube = runCommand('minikube', ['start', '-p', clusterName], {});
@@ -60,6 +62,7 @@ export default function CreateCluster(props: CreateClusterProps) {
       minikube.on('runFunc exit', code => {
         console.log('runFunc exit code:', code);
         setCreatingDone(true);
+        setSaving(false);
         // if (code === 0) {
         //   resolve({ stdoutData, errorData });
         // } else {
@@ -101,9 +104,11 @@ export default function CreateCluster(props: CreateClusterProps) {
           onClick={() => {
             setOpenDialog(true);
           }}
-          startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
+          startIcon={<InlineIcon icon="mdi:ship-wheel" />}
         >
-          {t('translation|New Cluster')}
+          {saving
+            ? t('translation|Check Minikube creation status')
+            : t('translation|New Minikube Cluster')}
         </Button>
       )}
       <CreateClusterDialog
@@ -113,7 +118,11 @@ export default function CreateCluster(props: CreateClusterProps) {
         saveLabel={t('translation|Create')}
         errorMessage={errorMessage}
         onEditorChanged={() => setErrorMessage('')}
-        title={saving ? t('translation|Creating Cluster') : t('translation|New Cluster')}
+        title={
+          saving
+            ? t('translation|Creating Minikube Cluster')
+            : t('translation|New Minikube Cluster')
+        }
         saving={saving}
         savingLines={allDataRef.current}
         creatingDone={creatingDone}
