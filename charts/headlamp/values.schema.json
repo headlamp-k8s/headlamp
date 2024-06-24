@@ -237,14 +237,7 @@
             "description": "Name of the environment variable"
           },
           "value": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ],
+            "type": "string",
             "description": "Value of the environment variable"
           }
         },
