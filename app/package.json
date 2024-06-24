@@ -168,7 +168,7 @@
     "electron-wix-msi": "^4.0.0",
     "find-process": "^1.4.7",
     "i18next": "^20.6.1",
-    "i18next-fs-backend": "^2.1.1",
+    "i18next-fs-backend": "^2.3.1",
     "mkdirp": "^1.0.4",
     "open": "^7.4.2",
     "regenerator-runtime": "^0.13.11",
