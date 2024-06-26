@@ -272,7 +272,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
           };
 
           if ('getValue' in column) {
-            mrtColumn.accessorFn = column.getValue;
+            mrtColumn.accessorFn = item => column.getValue?.(item) ?? '';
           } else if ('getter' in column) {
             mrtColumn.accessorFn = column.getter;
           } else {
