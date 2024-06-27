@@ -17,7 +17,7 @@ export interface KubeLoadBalancerIngress {
 export interface KubeService extends KubeObjectInterface {
   spec: {
     clusterIP: string;
-    ports: {
+    ports?: {
       name: string;
       nodePort: number;
       port: number;
