@@ -60,6 +60,7 @@ class Service extends makeKubeObject<KubeService>('service') {
     ).join(', ');
   }
 
+  /** testing */
   getPorts() {
     return this.spec?.ports?.map(port => port.port);
   }

@@ -11,6 +11,8 @@ type Cluster struct {
 	Metadata map[string]interface{} `json:"meta_data"`
 }
 
+// testing...
+
 type ClusterReq struct {
 	Name   *string `json:"name"`
 	Server *string `json:"server"`
