@@ -494,12 +494,12 @@
                           Taints
                         </div>
                         <span
-                          aria-label="Sort by Taints descending"
+                          aria-label="Sort by Taints ascending"
                           class="MuiBadge-root css-1c32n2y-MuiBadge-root"
                           data-mui-internal-clone-element="true"
                         >
                           <span
-                            aria-label="Sort by Taints descending"
+                            aria-label="Sort by Taints ascending"
                             class="MuiButtonBase-root MuiTableSortLabel-root Mui-active css-118d58w-MuiButtonBase-root-MuiTableSortLabel-root"
                             role="button"
                             tabindex="0"
