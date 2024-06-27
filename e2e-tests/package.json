@@ -12,6 +12,6 @@
     "@types/node": "^20.12.2"
   },
   "dependencies": {
-    "yaml": "^2.3.4"
+    "yaml": "^2.4.3"
   }
 }
