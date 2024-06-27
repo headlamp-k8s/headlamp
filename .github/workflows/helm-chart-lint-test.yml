@@ -5,7 +5,12 @@ on:
     paths:
       - charts/**
       - '!charts/**/README.md'
-
+  push:
+    branches:
+      - main
+      - rc-*
+      - testing-rc-*
+    
 permissions:
   contents: read
 
