@@ -7,8 +7,14 @@ on:
       - "v*"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   winget-update:
+    permissions:
+      contents: write  # for Git to git push
+      pull-requests: write  # for creating PRs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Headlamp

@@ -9,6 +9,9 @@ on:
 
 env:
   LATEST_HEADLAMP_TAG: latest
+permissions:
+  contents: read
+
 jobs:
   create_pr_to_upgrade_homebrew:
     name: Create PR to upgrade homebrew
