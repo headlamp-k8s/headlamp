@@ -1,0 +1,96 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /app
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /backend
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /docker-extension
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /e2e-tests
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /load-tests
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/app-menus
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/change-logo
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/cluster-chooser
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/details-view
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/dynamic-clusters
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/headlamp-events
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/pod-counter
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/sidebar
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/examples/tables
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/headlamp-plugin
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/headlamp-plugin/template
+    schedule:
+      interval: daily

@@ -9,6 +9,9 @@ on:
 
 env:
   LATEST_HEADLAMP_TAG: latest
+permissions:
+  contents: read
+
 jobs:
   create_pr_to_upgrade_homebrew:
     name: Create PR to upgrade homebrew
@@ -18,8 +21,13 @@ jobs:
       pull-requests: write # needed to open a pull request
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+        with:
+          egress-policy: audit
+
       - name: Checkout headlamp repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           path: headlamp
           fetch-depth: 0
@@ -43,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.KINVOLK_REPOS_TOKEN }}
       - name: Check out homebrew-cask repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           repository: headlamp-k8s/homebrew-cask
           path: homebrew-cask

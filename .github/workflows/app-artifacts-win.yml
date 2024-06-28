@@ -23,34 +23,39 @@ jobs:
       actions: write # needed to upload artifacts
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v4
+    - name: Harden Runner
+      uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+      with:
+        egress-policy: audit
+
+    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       with:
         path: build-helper
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       with:
         repository: headlamp-k8s/headlamp
         ref: ${{ github.event.inputs.buildBranch }}
         path: headlamp
     - name: Setup nodejs
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
       with:
         node-version: 20.x
         cache: 'npm'
         cache-dependency-path: |
           headlamp/app/package-lock.json
           headlamp/frontend/package-lock.json
-    - uses: actions/setup-go@v5
+    - uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
       with:
         go-version: '1.22.*'
         cache-dependency-path: |
           headlamp/backend/go.sum
     - name: Dependencies
-      uses: crazy-max/ghaction-chocolatey@v1
+      uses: crazy-max/ghaction-chocolatey@e80bd39bb49cae70b67ea53d52d00833a7255c21 # v1.7.0
       with:
         args: install make
     - name: Azure login
       if: ${{ inputs.signBinaries }}
-      uses: azure/login@v2
+      uses: azure/login@6c251865b4e6290e7b78be643ea2d005bc51f69a # v2.1.1
       with:
         client-id: ${{ secrets.WINDOWS_CLIENT_ID }}
         tenant-id: ${{ secrets.AZ_TENANT_ID }}
@@ -89,7 +94,7 @@ jobs:
         make app-win
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
       with:
         name: Win exes
         path: ./headlamp/app/dist/Headlamp*.*

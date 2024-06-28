@@ -24,17 +24,22 @@ jobs:
 
     steps:
 
+    - name: Harden Runner
+      uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+      with:
+        egress-policy: audit
+
     - name: Set up Go
-      uses: actions/setup-go@v5
+      uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
       with:
         go-version: '1.22.*'
       id: go
 
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
     - name: setup and run golangci-lint 
-      uses: golangci/golangci-lint-action@v4
+      uses: golangci/golangci-lint-action@d6238b002a20823d52840fda27e2d4891c5952dc # v4.0.1
       with:
         version: v1.54
         working-directory: backend

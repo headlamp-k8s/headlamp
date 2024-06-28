@@ -7,12 +7,22 @@ on:
       - "v*"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   winget-update:
+    permissions:
+      contents: write  # for Git to git push
     runs-on: ubuntu-latest
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+        with:
+          egress-policy: audit
+
       - name: Checkout Headlamp
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           token: ${{ secrets.KINVOLK_REPOS_TOKEN }}
           # we need the full history for the git tag command, so fetch all the branches
@@ -30,7 +40,7 @@ jobs:
       # Set up Node.js environment, pay attention to the version
       # Some features might not be available in older versions
       - name: Create node.js environment
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: "21"
 
@@ -53,7 +63,7 @@ jobs:
 
       # checkout the winget-pkgs repository
       - name: Checkout winget-pkgs
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           repository: headlamp-k8s/winget-pkgs
           path: winget-pkgs
