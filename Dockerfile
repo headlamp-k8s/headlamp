@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # Final container image
-ARG IMAGE_BASE=alpine:3.18
+ARG IMAGE_BASE=alpine:3
 FROM ${IMAGE_BASE} as image-base
 
 FROM --platform=${BUILDPLATFORM} golang:1.22 as backend-build
