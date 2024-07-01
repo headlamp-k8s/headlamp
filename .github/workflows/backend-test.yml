@@ -4,7 +4,12 @@ on:
   pull_request:
     paths:
       - 'backend/**'
-
+  push:
+    branches:
+      - main
+      - rc-*
+      - testing-rc-*
+    
 permissions:
   contents: read
 

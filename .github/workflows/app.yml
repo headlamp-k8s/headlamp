@@ -11,6 +11,8 @@ on:
   push:
     branches:
       - main
+      - rc-*
+      - testing-rc-*
     paths:
     - 'frontend/**'
     - Makefile

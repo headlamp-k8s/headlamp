@@ -14,7 +14,12 @@ on:
     - Dockerfile
     - Dockerfile.plugins
     - 'e2e-tests/**'
-
+  push:
+    branches:
+      - main
+      - rc-*
+      - testing-rc-*
+  
 permissions:
   contents: read
 
