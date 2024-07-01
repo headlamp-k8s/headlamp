@@ -104,9 +104,9 @@ serviceAccount:
 clusterRoleBinding:
   # -- Specified whether a cluster role binding should be created
   create: true
-  # -- Cluster role name (If not set: default using "cluster-admin" role)
   # -- Set name of the Cluster Role with limited permissions from you cluster
-  # clusterRoleName: user-ro
+  # for example - clusterRoleName: user-ro
+  clusterRoleName: cluster-admin
   # -- Annotations to add to the cluster role binding
   annotations: {}
 
