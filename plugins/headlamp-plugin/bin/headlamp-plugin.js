@@ -985,8 +985,8 @@ function test(packageFolder) {
   return runScriptOnPackages(packageFolder, 'test', script, { UNDER_TEST: 'true' });
 }
 
-const headlampPluginBin = fs.realpathSync(process.argv[1]);
-console.log('headlampPluginBin path:', headlampPluginBin);
+// const headlampPluginBin = fs.realpathSync(process.argv[1]);
+// console.log('headlampPluginBin path:', headlampPluginBin);
 
 yargs(process.argv.slice(2))
   .command(
