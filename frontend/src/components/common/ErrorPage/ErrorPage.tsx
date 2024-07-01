@@ -53,7 +53,7 @@ export default function ErrorComponent(props: ErrorComponentProps) {
               message
             ) : (
               <Trans t={t}>
-                Head back <Link href="/">home</Link>.
+                Head back <Link href={window.desktopApi ? '#' : '/'}>home</Link>.
               </Trans>
             )}
           </Typography>
