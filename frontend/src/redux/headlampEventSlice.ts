@@ -43,6 +43,8 @@ export enum HeadlampEventType {
   LIST_VIEW = 'headlamp.list-view',
   /** Events related to loading events for a resource. */
   OBJECT_EVENTS = 'headlamp.object-events',
+  /** Events related to loading owned resources in the details view. */
+  DETAILS_VIEW_OWNED_RESOURCES = 'headlamp.details-view-owned-resources',
 }
 
 /**
