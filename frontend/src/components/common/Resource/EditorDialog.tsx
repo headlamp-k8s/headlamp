@@ -70,6 +70,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: isReadOnly(),
+    automaticLayout: true,
   };
   const { i18n } = useTranslation();
   const [lang, setLang] = React.useState(i18n.language);

@@ -425,7 +425,7 @@ export function DataField(props: DataFieldProps) {
           value={value as string}
           language={language}
           onMount={handleEditorDidMount}
-          options={{ readOnly: true, lineNumbers: 'off' }}
+          options={{ readOnly: true, lineNumbers: 'off', automaticLayout: true }}
           theme={themeName === 'dark' ? 'vs-dark' : 'light'}
         />
       </Box>
@@ -446,7 +446,7 @@ export function DataField(props: DataFieldProps) {
             value={value as string}
             language={language}
             onMount={handleEditorDidMount}
-            options={{ readOnly: true, lineNumbers: 'off' }}
+            options={{ readOnly: true, lineNumbers: 'off', automaticLayout: true }}
             theme={themeName === 'dark' ? 'vs-dark' : 'light'}
           />
         </Box>
