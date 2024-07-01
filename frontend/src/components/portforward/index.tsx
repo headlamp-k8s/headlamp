@@ -1,5 +1,5 @@
-import { Icon, InlineIcon } from '@iconify/react';
-import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { InlineIcon } from '@iconify/react';
+import { Box, Menu, MenuItem } from '@mui/material';
 import MuiLink from '@mui/material/Link';
 import { useTheme } from '@mui/system';
 import { useSnackbar } from 'notistack';
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
 import { listPortForward, startPortForward, stopOrDeletePortForward } from '../../lib/k8s/apiProxy';
 import { getCluster } from '../../lib/util';
-import { Link, Loader, SectionBox, SimpleTable, StatusLabel } from '../common';
+import { ActionButton, Link, Loader, SectionBox, SimpleTable, StatusLabel } from '../common';
 import {
   PORT_FORWARD_RUNNING_STATUS,
   PORT_FORWARD_STOP_STATUS,
@@ -261,13 +261,11 @@ export default function PortForwardingList() {
               });
               return (
                 <>
-                  <IconButton
-                    aria-label={t('translation|More')}
+                  <ActionButton
+                    description={t('translation|More')}
                     onClick={e => handleClick(e, portforward)}
-                    size="medium"
-                  >
-                    <Icon icon={'mdi:dots-vertical'} />
-                  </IconButton>
+                    icon="mdi:dots-vertical"
+                  />
                   <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                     {filteredOptions.map(option => (
                       <MenuItem onClick={() => handleClose(option)}>

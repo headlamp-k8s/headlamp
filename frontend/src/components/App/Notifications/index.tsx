@@ -21,7 +21,7 @@ import { useClustersConf } from '../../../lib/k8s';
 import Event from '../../../lib/k8s/event';
 import { createRouteURL } from '../../../lib/router';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { DateLabel } from '../../common';
+import { ActionButton, DateLabel } from '../../common';
 import Empty from '../../common/EmptyContent';
 import {
   defaultMaxNotificationsStored,
@@ -93,15 +93,11 @@ function NotificationsList(props: {
           </Grid>
           {!notification.seen && (
             <Grid item md={1}>
-              <Tooltip title={t('translation|Mark as read')}>
-                <IconButton
-                  onClick={e => notificationSeenUnseenHandler(e, notification)}
-                  aria-label={t('translation|Mark as read')}
-                  size="medium"
-                >
-                  <Icon icon="mdi:circle" color={theme.palette.error.main} height={12} width={12} />
-                </IconButton>
-              </Tooltip>
+              <ActionButton
+                description={t('translation|Mark as read')}
+                onClick={e => notificationSeenUnseenHandler(e, notification)}
+                icon="mdi:circle"
+              />
             </Grid>
           )}
           <Grid item md={12}>
