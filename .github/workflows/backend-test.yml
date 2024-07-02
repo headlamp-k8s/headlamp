@@ -60,6 +60,7 @@ jobs:
 
       - name: Run tests and calculate code coverage
         run: |
+          set -x
           cd backend
           go test ./... -coverprofile=coverage.out -covermode=atomic -coverpkg=./...
           testcoverage=$(go tool cover -func=coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
@@ -72,6 +73,12 @@ jobs:
       - name: Get base branch code coverage
         if: ${{ github.event_name }} == 'pull_request'
         run: |
+          set -x
+          if [[ -z "${{ github.base_ref }}" ]]; then
+            echo "Base branch is empty. Skipping code coverage comparison."
+            exit 0
+          fi
+
           cd backend
           base_branch="${{ github.base_ref }}"
           testcoverage="${{ env.coverage }}"
@@ -86,6 +93,12 @@ jobs:
       - name: Compare code coverage
         if: ${{ github.event_name }} == 'pull_request'
         run: |
+          set -x
+          if [[ -z "${{ github.base_ref }}" ]]; then
+            echo "Base branch is empty. Skipping code coverage comparison."
+            exit 0
+          fi
+
           testcoverage="${{ env.coverage }}"
           base_coverage="${{ env.base_coverage }}"
           if [[ -z $testcoverage || -z $base_coverage ]]; then
@@ -105,6 +118,11 @@ jobs:
       - name: Comment on PR
         if: ${{ github.event_name }} == 'pull_request'
         run: |
+          set -x
+          if [[ -z "${{ github.base_ref }}" ]]; then
+            echo "Base branch is empty. Skipping code coverage comparison."
+            exit 0
+          fi
           testcoverage="${{ env.coverage }}"
           base_coverage="${{ env.base_coverage }}"
           coverage_diff="${{ env.coverage_diff }}"
