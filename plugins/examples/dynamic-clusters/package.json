@@ -31,5 +31,12 @@
   },
   "devDependencies": {
     "@kinvolk/headlamp-plugin": "^0.9.2"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "vite-plugin-node-polyfills": "^0.22.0"
+  },
+  "overrides": {
+    "domain-browser": "npm:dry-uninstall"
   }
 }
