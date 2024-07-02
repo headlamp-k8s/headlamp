@@ -47,7 +47,7 @@ function ClusterNotFoundPopup() {
       alignItems="center"
     >
       <Box p={0.5}>{t(`Something went wrong with cluster {{ cluster }}`, { cluster })}</Box>
-      <Button variant="contained" size="small" href="/">
+      <Button variant="contained" size="small" href={window.desktopApi ? '#' : '/'}>
         {t('Choose another cluster')}
       </Button>
     </Box>
