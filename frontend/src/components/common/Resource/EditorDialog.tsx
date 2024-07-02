@@ -77,6 +77,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   const themeName = getThemeName();
 
   const originalCodeRef = React.useRef({ code: '', format: item ? 'yaml' : '' });
+
   const [code, setCode] = React.useState(originalCodeRef.current);
   const codeRef = React.useRef(code);
   const lastCodeCheckHandler = React.useRef(0);
@@ -96,7 +97,6 @@ export default function EditorDialog(props: EditorDialogProps) {
     localStorage.setItem('useSimpleEditor', JSON.stringify(data));
     setUseSimpleEditorState(data);
   }
-
   // Update the code when the item changes, but only if the code hasn't been touched.
   React.useEffect(() => {
     if (!item || Object.keys(item || {}).length === 0) {

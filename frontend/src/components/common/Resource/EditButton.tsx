@@ -108,7 +108,7 @@ export default function EditButton(props: EditButtonProps) {
       />
       {openDialog && (
         <EditorDialog
-          item={item.jsonData}
+          item={item.getEditableObject()}
           open={openDialog}
           onClose={() => setOpenDialog(false)}
           onSave={handleSave}
