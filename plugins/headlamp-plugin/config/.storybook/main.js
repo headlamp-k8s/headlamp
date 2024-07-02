@@ -1,25 +1,28 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  stories: [
-    '../../../../../src/**/*.stories.mdx',
-    '../../../../../src/**/*.stories.@(js|jsx|ts|tsx)',
-  ],
+  stories: ['../../../../../src/**/*.mdx', '../../../../../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     // '@storybook/addon-interactions',
     '@storybook/preset-create-react-app',
   ],
+
   core: {
-    builder: 'webpack5',
     disableTelemetry: true,
   },
-  framework: '@storybook/react',
+
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
+  },
 
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   typescript: {
     check: false,
+    reactDocgen: 'react-docgen-typescript',
   },
 
   webpackFinal: async config => {
@@ -44,4 +47,6 @@ module.exports = {
 
     return newConfig;
   },
+
+  docs: {},
 };
