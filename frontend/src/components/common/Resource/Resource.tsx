@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
-import { InputLabel } from '@mui/material';
+import { Button, InputLabel } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Grid, { GridProps, GridSize } from '@mui/material/Grid';
@@ -644,7 +644,8 @@ export interface ContainerInfoProps {
 export function ContainerInfo(props: ContainerInfoProps) {
   const { container, status, resource } = props;
   const { t } = useTranslation(['glossary', 'translation']);
-
+  const [maxPortsToShow, setMaxPortsToShow] = React.useState(5);
+  const portsToShow = container.ports?.slice(0, 5 * maxPortsToShow);
   const [startedDate, finishDate, lastStateStartedDate, lastStateFinishDate] = React.useMemo(() => {
     function getStartedDate(state?: KubeContainerStatus['state']) {
       let startedDate = state?.running?.startedAt || state?.terminated?.startedAt || '';
@@ -738,7 +739,6 @@ export function ContainerInfo(props: ContainerInfoProps) {
   }) {
     const { rows } = props;
     const id = useId('status-value-');
-
     const rowsToDisplay = React.useMemo(() => {
       return rows.filter(({ hide }) => !hide);
     }, [rows]);
@@ -904,9 +904,9 @@ export function ContainerInfo(props: ContainerInfoProps) {
         name: t('Ports'),
         value: (
           <Grid container>
-            {container.ports?.map(({ containerPort, protocol }, index) => (
+            {portsToShow?.map(({ containerPort, protocol }, index) => (
               <>
-                <Grid item xs={12} key={`port_line_${index}`}>
+                <Grid item md={4} key={`port_line_${index}`}>
                   <Box display="flex" alignItems={'center'}>
                     <Box px={0.5} minWidth={120}>
                       <ValueLabel>{`${protocol}:`}</ValueLabel>
@@ -917,7 +917,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
                     )}
                   </Box>
                 </Grid>
-                {index < container.ports!.length - 1 && (
+                {index !== 0 && index % 2 === 0 && index < portsToShow!.length - 1 && (
                   <Grid item xs={12}>
                     <Box mt={2} mb={2}>
                       <Divider />
@@ -926,6 +926,18 @@ export function ContainerInfo(props: ContainerInfoProps) {
                 )}
               </>
             ))}
+            {container.ports?.length! > 5 &&
+              portsToShow &&
+              container.ports &&
+              portsToShow.length < container.ports.length && (
+                <Grid item xs={12}>
+                  <Box display="flex" mt={2}>
+                    <Button onClick={() => setMaxPortsToShow(prev => prev * 2)}>
+                      {t('translation|Show More')}
+                    </Button>
+                  </Box>
+                </Grid>
+              )}
           </Grid>
         ),
         hide: _.isEmpty(container.ports),

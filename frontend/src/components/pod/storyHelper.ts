@@ -581,6 +581,88 @@ const running = {
   },
 };
 
+const manyPorts = {
+  ...basePod,
+  metadata: {
+    ...basePod.metadata,
+    name: 'manyports',
+  },
+  spec: {
+    ...basePod.spec,
+    containers: [
+      {
+        name: 'nginx-many-ports',
+        image: 'nginx:1.14.2',
+        ports: [],
+        imagePullPolicy: 'IfNotPresent',
+      },
+    ],
+  },
+  status: {
+    ...basePod.status,
+    phase: 'Running',
+    conditions: [
+      {
+        type: 'Initialized',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'Ready',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'ContainersReady',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'PodScheduled',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+    ],
+    containerStatuses: [
+      {
+        name: 'nginx',
+        state: {
+          running: {
+            startedAt: stateDate,
+          },
+        },
+        lastState: {},
+        ready: true,
+        restartCount: 0,
+        image: 'docker.io/library/nginx:1.14.2',
+        imageID:
+          'docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d',
+        containerID:
+          'containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584',
+        started: true,
+      },
+    ],
+  },
+};
+
+function addManyPortsToPod(pod: KubePod) {
+  if (!pod.spec?.containers[0]?.ports) {
+    return;
+  }
+  for (let i = 0; i < 100; i++) {
+    pod.spec?.containers[0]?.ports?.push({
+      containerPort: 80 + i,
+      protocol: 'TCP',
+    });
+  }
+}
+
+addManyPortsToPod(manyPorts);
+
 const nominatedNode = {
   ...basePod,
   metadata: {
@@ -749,4 +831,5 @@ export const podList = [
   running,
   nominatedNode,
   readinessGate,
+  manyPorts,
 ];
