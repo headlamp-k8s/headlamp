@@ -70,6 +70,7 @@ jobs:
         shell: bash
 
       - name: Get base branch code coverage
+        if: ${{ github.event_name }} == 'pull_request'
         run: |
           cd backend
           base_branch="${{ github.base_ref }}"
@@ -83,6 +84,7 @@ jobs:
         shell: bash
 
       - name: Compare code coverage
+        if: ${{ github.event_name }} == 'pull_request'
         run: |
           testcoverage="${{ env.coverage }}"
           base_coverage="${{ env.base_coverage }}"
@@ -101,6 +103,7 @@ jobs:
         shell: bash
 
       - name: Comment on PR
+        if: ${{ github.event_name }} == 'pull_request'
         run: |
           testcoverage="${{ env.coverage }}"
           base_coverage="${{ env.base_coverage }}"
