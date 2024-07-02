@@ -269,6 +269,10 @@
           "type": "boolean",
           "description": "Specifies whether a cluster role binding should be created"
         },
+        "clusterRoleName": {
+          "type": "string",
+          "description": "The name of the Cluster Role from you cluster"
+        },
         "annotations": {
           "type": "object",
           "description": "Annotations to add to the cluster role binding"
