@@ -143,7 +143,10 @@ export interface KubeconfigObject {
         /** name is the nickname of the extension. */
         name: string;
         /** Extension holds the extension information */
-        extension: {};
+        extension: {
+          /** customName is the custom name for the cluster. */
+          customName?: string;
+        };
       }>;
     };
   }>;

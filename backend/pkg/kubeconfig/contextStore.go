@@ -2,6 +2,7 @@ package kubeconfig
 
 import (
 	"context"
+	"encoding/json"
 	"time"
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
@@ -32,7 +33,31 @@ func NewContextStore() ContextStore {
 
 // AddContext adds a context to the store.
 func (c *contextStore) AddContext(headlampContext *Context) error {
-	return c.cache.Set(context.Background(), headlampContext.Name, headlampContext)
+	name := headlampContext.Name
+
+	if headlampContext.KubeContext != nil && headlampContext.KubeContext.Extensions["headlamp_info"] != nil {
+		info := headlampContext.KubeContext.Extensions["headlamp_info"]
+		// Convert the runtime.Unknown object to a byte slice
+		unknownBytes, err := json.Marshal(info)
+		if err != nil {
+			return err
+		}
+
+		// Now, decode the byte slice into your desired struct
+		var customObj CustomObject
+
+		err = json.Unmarshal(unknownBytes, &customObj)
+		if err != nil {
+			return err
+		}
+
+		// If the custom name is set, use it as the context name
+		if customObj.CustomName != "" {
+			name = customObj.CustomName
+		}
+	}
+
+	return c.cache.Set(context.Background(), name, headlampContext)
 }
 
 // GetContexts returns all contexts in the store.

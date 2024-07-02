@@ -61,8 +61,12 @@
   "Number of rows for tables": "Zeilen pro Tabelle",
   "Timezone to display for dates": "Zeitzone",
   "Namespaces must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character.": "Namespaces dürfen nur alphanumerische Kleinbuchstaben oder \"-\" enthalten und müssen mit einem alphanumerischen Zeichen beginnen und enden.",
+  "Cluster name must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character.": "",
   "Cluster Settings ({{ clusterName }})": "Cluster-Einstellungen ({{ clusterName }})",
   "Cluster Settings": "Cluster-Einstellungen",
+  "The current name of cluster. You can define custom modified name.": "",
+  "Change name": "",
+  "Are you sure you want to change the name for \"{{ clusterName }}\"?": "",
   "Default namespace": "Standard-Namespace",
   "The default namespace for e.g. when applying resources (when not specified directly).": "Der Standard-Namespace z. B. für die Anwendung von Ressourcen (wenn nicht anders angegeben).",
   "Allowed namespaces": "Erlaubte Namespaces",
@@ -144,8 +148,8 @@
   "All namespaces": "Alle Namespaces",
   "From": "Von",
   "Age": "Alter",
-  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "",
-  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})": "",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_plural": "",
   "Release Notes ({{ appVersion }})": "Versionshinweise ({{ appVersion }})",
   "Fetching release information…": "Abrufen von Release-Informationen…",
   "Skip": "Überspringen",
@@ -390,5 +394,7 @@
   "\"{{metricName}}\" on pods": "\"{{metricName}}\" auf Pods",
   "resource {{resourceName}} on pods": "Ressource {{resourceName}} auf Pods",
   "resource {{resourceName}} of container {{containerName}} on pods": "Ressource {{resourceName}} des Containers {{containerName}} auf Pods",
-  "Warning. Incompatible plugins disabled: ({{ pluginList }})": "Warnung. Inkompatible Plugins deaktiviert: ({{ pluginList }})"
+  "Warning. Incompatible plugins disabled: ({{ pluginList }})": "Warnung. Inkompatible Plugins deaktiviert: ({{ pluginList }})",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "",
+  "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": ""
 }

@@ -600,3 +600,64 @@ func TestHandleClusterAPI_XForwardedHost(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rr.Code)
 	assert.Equal(t, "OK", rr.Body.String())
 }
+
+func TestRenameCluster(t *testing.T) {
+	kubeConfigByte, err := os.ReadFile("./headlamp_testdata/kubeconfig")
+	require.NoError(t, err)
+
+	kubeConfig := base64.StdEncoding.EncodeToString(kubeConfigByte)
+	req := ClusterReq{
+		KubeConfig: &kubeConfig,
+	}
+	cache := cache.New[interface{}]()
+	kubeConfigStore := kubeconfig.NewContextStore()
+
+	c := HeadlampConfig{
+		useInCluster:          false,
+		kubeConfigPath:        "./headlamp_testdata/kubeconfig",
+		enableDynamicClusters: true,
+		cache:                 cache,
+		kubeConfigStore:       kubeConfigStore,
+	}
+	handler := createHeadlampHandler(&c)
+
+	r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	clusters := c.getClusters()
+
+	assert.Equal(t, http.StatusCreated, r.Code)
+	assert.Equal(t, 2, len(clusters))
+
+	tests := []struct {
+		name          string
+		clusterReq    RenameClusterRequest
+		expectedState int
+	}{
+		{
+			name: "passStatefull",
+			clusterReq: RenameClusterRequest{
+				NewClusterName: "minikubetestworks",
+				Stateless:      false,
+				Source:         "kubeconfig",
+			},
+			expectedState: http.StatusCreated,
+		},
+		{
+			name: "stateless",
+			clusterReq: RenameClusterRequest{
+				NewClusterName: "minikubetest",
+				Stateless:      true,
+			},
+			expectedState: http.StatusCreated,
+		},
+	}
+
+	for _, tc := range tests {
+		r, err = getResponseFromRestrictedEndpoint(handler, "PUT", "/cluster/minikube", tc.clusterReq)
+		require.NoError(t, err)
+		assert.Equal(t, tc.expectedState, r.Code)
+	}
+}

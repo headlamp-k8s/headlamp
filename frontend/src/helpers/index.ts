@@ -309,6 +309,7 @@ function getProductName(): string | undefined {
 export interface ClusterSettings {
   defaultNamespace?: string;
   allowedNamespaces?: string[];
+  currentName?: string;
 }
 
 function storeClusterSettings(clusterName: string, settings: ClusterSettings) {

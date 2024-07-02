@@ -9,7 +9,59 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
+	"k8s.io/apimachinery/pkg/runtime"
 )
+
+// MarshalCustomObject marshals the runtime.Unknown object into a CustomObject.
+func MarshalCustomObject(info runtime.Object, contextName string) (kubeconfig.CustomObject, error) {
+	// Convert the runtime.Unknown object to a byte slice
+	unknownBytes, err := json.Marshal(info)
+	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+			err, "unmarshaling context data")
+
+		return kubeconfig.CustomObject{}, err
+	}
+
+	// Now, decode the byte slice into CustomObject
+	var customObj kubeconfig.CustomObject
+
+	err = json.Unmarshal(unknownBytes, &customObj)
+	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+			err, "unmarshaling into CustomObject")
+
+		return kubeconfig.CustomObject{}, err
+	}
+
+	return customObj, nil
+}
+
+// setKeyInCache sets the context in the cache with the given key.
+func (c *HeadlampConfig) setKeyInCache(key string, context kubeconfig.Context) error {
+	// check context is present
+	_, err := c.kubeConfigStore.GetContext(key)
+	if err != nil && err.Error() == "key not found" {
+		// To ensure stateless clusters are not visible to other users, they are marked as internal clusters.
+		// They are stored in the proxy cache and accessed through the /config endpoint.
+		context.Internal = true
+		if err = c.kubeConfigStore.AddContextWithKeyAndTTL(&context, key, ContextCacheTTL); err != nil {
+			logger.Log(logger.LevelError, map[string]string{"key": key},
+				err, "adding context to cache")
+
+			return err
+		}
+	} else {
+		if err = c.kubeConfigStore.UpdateTTL(key, ContextUpdateChacheTTL); err != nil {
+			logger.Log(logger.LevelError, map[string]string{"key": key},
+				err, "updating context ttl")
+
+			return err
+		}
+	}
+
+	return nil
+}
 
 // Handles stateless cluster requests if kubeconfig is set and dynamic clusters are enabled.
 // It returns context key which is used to store the context in the cache.
@@ -39,30 +91,28 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 	for _, context := range contexts {
 		context := context
 
-		if context.Name != clusterName {
+		info := context.KubeContext.Extensions["headlamp_info"]
+		if info != nil {
+			customObj, err := MarshalCustomObject(info, context.Name)
+			if err != nil {
+				logger.Log(logger.LevelError, map[string]string{"cluster": context.Name},
+					err, "marshaling custom object")
+
+				return "", err
+			}
+
+			// Check if the CustomName field is present
+			if customObj.CustomName != "" {
+				key = customObj.CustomName + userID
+			}
+		} else if context.Name != clusterName {
 			contextKey = clusterName
 			continue
 		}
 
 		// check context is present
-		_, err := c.kubeConfigStore.GetContext(key)
-		if err != nil && err.Error() == "key not found" {
-			// To ensure stateless clusters are not visible to other users, they are marked as internal clusters.
-			// They are stored in the proxy cache and accessed through the /config endpoint.
-			context.Internal = true
-			if err = c.kubeConfigStore.AddContextWithKeyAndTTL(&context, key, ContextCacheTTL); err != nil {
-				logger.Log(logger.LevelError, map[string]string{"key": key},
-					err, "adding context to cache")
-
-				return "", err
-			}
-		} else {
-			if err = c.kubeConfigStore.UpdateTTL(key, ContextUpdateChacheTTL); err != nil {
-				logger.Log(logger.LevelError, map[string]string{"key": key},
-					err, "updating context ttl")
-
-				return "", err
-			}
+		if err := c.setKeyInCache(key, context); err != nil {
+			return "", err
 		}
 
 		contextKey = key
