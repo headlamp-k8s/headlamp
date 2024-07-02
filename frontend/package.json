@@ -34,6 +34,7 @@
     "@types/react": "^17.0.27",
     "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.19",
+    "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.1",
     "@types/react-window": "^1.8.5",
     "@types/semver": "^7.3.8",
@@ -150,10 +151,10 @@
     "../app/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
     ],
-    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{ts,tsx}": [
+    "../plugins/headlamp-plugin/{bin,lib}/**/*.{ts,tsx}": [
       "eslint -c package.json --fix"
     ],
-    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "../plugins/headlamp-plugin/{bin,lib}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
     ],
     "../plugins/examples/**/*.{ts,tsx}": [
