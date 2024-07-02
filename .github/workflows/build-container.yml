@@ -35,7 +35,9 @@ jobs:
       with:
         node-version: 20.x
     - name: Start cluster
-      uses: medyagh/setup-minikube@d8c0eb871f6f455542491d86a574477bd3894533 # latest
+      uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.0.0
+      with:
+          cluster_name: test
       # now you can run kubectl to see the pods in the cluster
     - name: Try the cluster!
       run: kubectl get pods -A
@@ -50,7 +52,6 @@ jobs:
       if: steps.cache-image-restore.outputs.cache-hit == 'true'
       run: |
         export SHELL=/bin/bash
-        eval $(minikube -p minikube docker-env)
         docker load -i ~/image-cache/headlamp-plugins-test.tar
         docker load -i ~/image-cache/headlamp.tar
     - name: Make a .plugins folder for testing later
@@ -75,16 +76,20 @@ jobs:
       if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         export SHELL=/bin/bash
-        eval $(minikube -p minikube docker-env)
         DOCKER_IMAGE_VERSION=latest make image
         DOCKER_IMAGE_VERSION=latest DOCKER_PLUGINS_IMAGE_NAME=headlamp-plugins-test make build-plugins-container
         echo -n "verifying images:"
         docker images
+    - name: Import images to kind
+      if: steps.cache-image-restore.outputs.cache-hit != 'true'
+      run: |
+        export SHELL=/bin/bash
+        kind load docker-image ghcr.io/headlamp-k8s/headlamp-plugins-test:latest --name test
+        kind load docker-image ghcr.io/headlamp-k8s/headlamp:latest --name test
     - name: Test .plugins folder
       if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         export SHELL=/bin/bash
-        eval $(minikube -p minikube docker-env)
         echo "----------------------------"
         echo "Test .plugins folder is copied to the right place in the image by 'make image'"
         echo "--- Files in the image /headlamp/ folder: ---"
@@ -110,28 +115,41 @@ jobs:
           exit 1
         fi
     - name: Deploy to cluster
-      run:
-        kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
+      run: kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
     - name: Run e2e tests
       run: |
-        echo "------------------sleeping 3...------------------"
+        echo "------------------------------------sleeping 3...------------------------------------"
         sleep 6
-        minikube service list
-        minikube service headlamp -n kube-system --url
+        kubectl get services --all-namespaces
         kubectl get deployments -n kube-system
-        minikube logs | tail -10
-        echo "------------------waiting for headlamp deployment to be available...------------------"
+        echo "------------------Waiting for headlamp deployment to be available...------------------"
         kubectl wait deployment -n kube-system headlamp --for condition=Available=True --timeout=30s
-        minikube service headlamp -n kube-system --url
-        echo "------------------opening the service------------------"
-        export SERVICE_URL=$(minikube service headlamp -n kube-system --url | tail -1)
+        echo "----------------------------------Opening the service----------------------------------"
+        IP_ADDRESS=$(kubectl get nodes -o=jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
+        SERVICE_PORT=$(kubectl get services headlamp -n kube-system -o=jsonpath='{.spec.ports[0].nodePort}')
+        export SERVICE_URL="http://${IP_ADDRESS}:${SERVICE_PORT}"
         echo $SERVICE_URL
         curl -L $SERVICE_URL | grep -q "Headlamp: Kubernetes Web UI"        
-        echo "------------------Getting HEADLAMP_TOKEN------------------"
+        echo "--------------------------------Getting HEADLAMP_TOKEN--------------------------------"
         kubectl create serviceaccount headlamp-admin --namespace kube-system
         kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
         export HEADLAMP_TOKEN=$(kubectl create token headlamp-admin --duration 24h -n kube-system)
-        echo "------------------Running playwright e2e tests------------------"
+        echo "---------------------------------Certificate handling---------------------------------"
+        export KUBECONFIG=$HOME/.kube/config
+        ca_data=$(yq e '.clusters[0].cluster."certificate-authority-data"' $KUBECONFIG | base64 --decode)
+        echo "$ca_data" > ca.crt
+        kubectl config set-cluster kind-test --certificate-authority=$(pwd)/ca.crt --server=https://${IP_ADDRESS}:${SERVICE_PORT}
+        kubectl config unset clusters.kind-test.certificate-authority-data
+        cc_data=$(yq e '.users[0].user."client-certificate-data"' $KUBECONFIG | base64 --decode)
+        echo "$cc_data" > client.crt
+        ck_data=$(yq e '.users[0].user."client-key-data"' $KUBECONFIG | base64 --decode)
+        echo "$ck_data" > client.key
+        kubectl config set-credentials admin@kind-test --client-certificate=$(pwd)/client.crt --client-key=$(pwd)/client.key
+        kubectl config unset users.admin@kind-test.client-certificate-data
+        kubectl config unset users.admin@kind-test.client-key-data
+        echo "Modified kubeconfig:"
+        cat $KUBECONFIG
+        echo "-----------------------------Running playwright e2e tests-----------------------------"
         cd e2e-tests
         npm ci
         npx playwright install --with-deps
@@ -147,7 +165,6 @@ jobs:
       if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         export SHELL=/bin/bash
-        eval $(minikube -p minikube docker-env)
         mkdir -p ~/image-cache
         docker save -o ~/image-cache/headlamp-plugins-test.tar ghcr.io/headlamp-k8s/headlamp-plugins-test
         docker save -o ~/image-cache/headlamp.tar ghcr.io/headlamp-k8s/headlamp
