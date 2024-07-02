@@ -7,10 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Fab from '@mui/material/Fab';
 import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
 import MuiInput from '@mui/material/Input';
 import { styled, useTheme } from '@mui/material/styles';
-import Tooltip from '@mui/material/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -22,17 +20,19 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
+import ActionButton, { ButtonStyle } from '../ActionButton';
 import { LightTooltip } from '../Tooltip';
 import AuthVisible from './AuthVisible';
 
 interface ScaleButtonProps {
   item: KubeObject;
+  buttonStyle?: ButtonStyle;
   options?: CallbackActionOptions;
 }
 
 export default function ScaleButton(props: ScaleButtonProps) {
   const dispatch = useDispatch();
-  const { item, options = {} } = props;
+  const { item, buttonStyle, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const location = useLocation();
   const { t } = useTranslation();
@@ -83,16 +83,14 @@ export default function ScaleButton(props: ScaleButtonProps) {
         console.error(`Error while getting authorization for scaling button in ${item}:`, err);
       }}
     >
-      <Tooltip title={t('translation|Scale') as string}>
-        <IconButton
-          aria-label={t('translation|scale')}
-          onClick={() => {
-            setOpenDialog(true);
-          }}
-        >
-          <Icon icon="mdi:content-copy" />
-        </IconButton>
-      </Tooltip>
+      <ActionButton
+        description={t('translation|Scale')}
+        buttonStyle={buttonStyle}
+        onClick={() => {
+          setOpenDialog(true);
+        }}
+        icon="mdi:content-copy"
+      />
       <ScaleDialog resource={item} open={openDialog} onClose={handleClose} onSave={handleSave} />
     </AuthVisible>
   );
