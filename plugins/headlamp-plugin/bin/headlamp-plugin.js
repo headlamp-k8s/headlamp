@@ -13,6 +13,8 @@ const child_process = require('child_process');
 const validate = require('validate-npm-package-name');
 const yargs = require('yargs/yargs');
 const headlampPluginPkg = require('../package.json');
+const pluginManager = require('../plugin-management-utils');
+const { table } = require('table');
 
 /**
  * Creates a new plugin folder.
@@ -983,8 +985,8 @@ function test(packageFolder) {
   return runScriptOnPackages(packageFolder, 'test', script, { UNDER_TEST: 'true' });
 }
 
-const headlampPluginBin = fs.realpathSync(process.argv[1]);
-console.log('headlampPluginBin path:', headlampPluginBin);
+// const headlampPluginBin = fs.realpathSync(process.argv[1]);
+// console.log('headlampPluginBin path:', headlampPluginBin);
 
 yargs(process.argv.slice(2))
   .command(
@@ -1170,6 +1172,167 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = test(argv.package);
+    }
+  )
+  .command(
+    'install <URL>',
+    'Install a plugin from the Artiface Hub URL',
+    yargs => {
+      yargs
+        .positional('URL', {
+          describe: 'URL of the plugin to install',
+          type: 'string',
+        })
+        .option('folderName', {
+          describe: 'Name of the folder to install the plugin into',
+          type: 'string',
+        })
+        .option('headlampVersion', {
+          describe: 'Version of headlamp to install the plugin into',
+          type: 'string',
+        })
+        .option('quiet', {
+          alias: 'q',
+          describe: 'Do not print logs',
+          type: 'boolean',
+        });
+    },
+    async argv => {
+      const { URL, folderName, headlampVersion, quiet } = argv;
+      const progressCallback = quiet
+        ? null
+        : data => {
+            if (data.type === 'error' || data.type === 'success') {
+              console.error(data.type, ':', data.message);
+            }
+          }; // Use console.log for logs if not in quiet mode
+      try {
+        await pluginManager.install(URL, folderName, headlampVersion, progressCallback);
+      } catch (e) {
+        console.error(e.message);
+        process.exit(1); // Exit with error status
+      }
+    }
+  )
+  .command(
+    'update <pluginName>',
+    'Update a plugin to the latest version',
+    yargs => {
+      yargs
+        .positional('pluginName', {
+          describe: 'Name of the plugin to update',
+          type: 'string',
+        })
+        .positional('folderName', {
+          describe: 'Name of the folder that contains the plugin',
+          type: 'string',
+        })
+        .positional('headlampVersion', {
+          describe: 'Version of headlamp to update the plugin into',
+          type: 'string',
+        })
+        .option('quiet', {
+          alias: 'q',
+          describe: 'Do not print logs',
+          type: 'boolean',
+        });
+    },
+    async argv => {
+      const { pluginName, folderName, headlampVersion, quiet } = argv;
+      const progressCallback = quiet
+        ? null
+        : data => {
+            if (data.type === 'error' || data.type === 'success') {
+              console.error(data.type, ':', data.message);
+            }
+          }; // Use console.log for logs if not in quiet mode
+      try {
+        await pluginManager.update(pluginName, folderName, headlampVersion, progressCallback);
+      } catch (e) {
+        console.error(e.message);
+        process.exit(1); // Exit with error status
+      }
+    }
+  )
+  .command(
+    'uninstall <pluginName>',
+    'Uninstall a plugin',
+    yargs => {
+      yargs
+        .positional('pluginName', {
+          describe: 'Name of the plugin to uninstall',
+          type: 'string',
+        })
+        .option('folderName', {
+          describe: 'Name of the folder that contains the plugin',
+          type: 'string',
+        })
+        .option('quiet', {
+          alias: 'q',
+          describe: 'Do not print logs',
+          type: 'boolean',
+        });
+    },
+    async argv => {
+      const { pluginName, folderName, quiet } = argv;
+      const progressCallback = quiet
+        ? null
+        : data => {
+            if (data.type === 'error' || data.type === 'success') {
+              console.error(data.type, ':', data.message);
+            }
+          }; // Use console.log for logs if not in quiet mode
+      try {
+        await pluginManager.uninstall(pluginName, folderName, progressCallback);
+      } catch (e) {
+        console.error(e.message);
+        process.exit(1); // Exit with error status
+      }
+    }
+  )
+  .command(
+    'list',
+    'List installed plugins',
+    yargs => {
+      yargs
+        .option('folderName', {
+          describe: 'Name of the folder that contains the plugins',
+          type: 'string',
+        })
+        .option('json', {
+          alias: 'j',
+          describe: 'Output in JSON format',
+          type: 'boolean',
+        });
+    },
+    async argv => {
+      const { folderName, json } = argv;
+      const progressCallback = data => {
+        if (json) {
+          console.log(JSON.stringify(data.data));
+        } else {
+          // display table
+          const rows = [
+            ['Name', 'Version', 'Folder Name', 'ArticaftHub URL', 'ArtifactHub Version'],
+          ];
+          data.data.forEach(plugin => {
+            rows.push([
+              plugin.pluginName,
+              plugin.pluginVersion,
+              plugin.folderName,
+              plugin.artifacthubURL,
+              plugin.artifacthubVersion,
+            ]);
+          });
+          console.log(table(rows));
+        }
+      };
+      try {
+        await pluginManager.list(folderName, progressCallback);
+      } catch (e) {
+        console.error(e.message);
+        process.exit(1); // Exit with error status
+      }
     }
   )
   .demandCommand(1, '')

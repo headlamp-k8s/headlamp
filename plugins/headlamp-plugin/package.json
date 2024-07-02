@@ -165,7 +165,8 @@
     "template",
     "lib",
     "types",
-    ".storybook"
+    ".storybook",
+    "plugin-management-utils.js"
   ],
   "keywords": [
     "headlamp",
@@ -176,5 +177,8 @@
     "plugins"
   ],
   "author": "Kinvolk GmbH",
-  "license": "Apache 2.0"
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }

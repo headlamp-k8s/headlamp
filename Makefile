@@ -115,6 +115,8 @@ frontend-test:
 plugins-test:
 	cd plugins/headlamp-plugin && npm install && ./test-headlamp-plugin.js
 	cd plugins/headlamp-plugin && ./test-plugins-examples.sh
+	cd plugins/headlamp-plugin && node ./headlamp-plugin-management.test.js
+	cd plugins/headlamp-plugin && npx jest ./plugin-management-utils.test.js
 
 # IMAGE_BASE can be used to specify a base final image.
 #   IMAGE_BASE=debian:latest make image
