@@ -90,7 +90,7 @@ export default function ScaleButton(props: ScaleButtonProps) {
             setOpenDialog(true);
           }}
         >
-          <Icon icon="mdi:content-copy" />
+          <Icon icon="mdi:expand-all" />
         </IconButton>
       </Tooltip>
       <ScaleDialog resource={item} open={openDialog} onClose={handleClose} onSave={handleSave} />
