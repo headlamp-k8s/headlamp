@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { RuntimeClass } from '../../lib/k8s/runtime';
+import { CreateResourceButton } from '../common/CreateResourceButton';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export function RuntimeClassList() {
@@ -8,6 +9,9 @@ export function RuntimeClassList() {
   return (
     <ResourceListView
       title={t('glossary|RuntimeClass')}
+      headerProps={{
+        titleSideActions: [<CreateResourceButton resource="RuntimeClass" />],
+      }}
       resourceClass={RuntimeClass}
       columns={[
         'name',
