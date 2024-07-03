@@ -48,6 +48,11 @@ headlamp-plugin --help
   headlamp-plugin.js test [package]         Test. <package> defaults to current
                                             working directory. Can also be a
                                             folder of packages.
+  headlamp-plugin.js list                   List installed plugins.
+  headlamp-plugin.js install [URL]          Install a plugin from the specified 
+                                            Artifact Hub URL.
+  headlamp-plugin.js update [pluginName]    Update the plugin to the latest version.
+  headlamp-plugin.js uninstall [pluginName] Uninstall the plugin.
 ```
 
 ## Development notes
