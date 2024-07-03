@@ -50,7 +50,8 @@ export default defineConfig({
       },
     ],
     coverage: {
-      reporter: ['text'],
+      reporter: [['text', {maxCols: 200}]],
+      exclude: ['node_modules/**', 'build/**'],
     },
     restoreMocks: false,
     setupFiles: ['./src/setupTests.ts'],
