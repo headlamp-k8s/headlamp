@@ -78,7 +78,8 @@ export default function ScaleButton(props: ScaleButtonProps) {
   return (
     <AuthVisible
       item={item}
-      authVerb="update"
+      authVerb="patch"
+      subresource="scale"
       onError={(err: Error) => {
         console.error(`Error while getting authorization for scaling button in ${item}:`, err);
       }}
