@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react';
 import {
   Button,
   Dialog,
@@ -6,8 +5,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  IconButton,
-  Tooltip,
 } from '@mui/material';
 import _ from 'lodash';
 import { useState } from 'react';
@@ -21,6 +18,7 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
+import ActionButton from '../ActionButton';
 import AuthVisible from './AuthVisible';
 
 interface RestartButtonProps {
@@ -81,15 +79,13 @@ export function RestartButton(props: RestartButtonProps) {
         console.error(`Error while getting authorization for restart button in ${item}:`, err);
       }}
     >
-      <Tooltip title={t('translation|Restart') as string}>
-        <IconButton
-          aria-label={t('translation|restart')}
-          onClick={() => setOpenDialog(true)}
-          size="medium"
-        >
-          <Icon icon="mdi:restart" />
-        </IconButton>
-      </Tooltip>
+      <ActionButton
+        description={t('translation|Restart')}
+        onClick={() => {
+          setOpenDialog(true);
+        }}
+        icon="mdi:restart"
+      />
       <RestartDialog resource={item} open={openDialog} onClose={handleClose} onSave={handleSave} />
     </AuthVisible>
   );

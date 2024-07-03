@@ -1,9 +1,7 @@
-import { Icon } from '@iconify/react';
 import {
   Box,
   Button,
   FormControl,
-  IconButton,
   ListItemSecondaryAction,
   ListItemText,
   MenuItem,
@@ -16,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../../helpers';
 import { defaultTableRowsPerPageOptions, setAppSettings } from '../../../redux/configSlice';
+import { ActionButton } from '../../common';
 
 export default function NumRowsInput(props: { defaultValue: number[] }) {
   const { t } = useTranslation(['frequent', 'settings']);
@@ -119,16 +118,14 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
           >
             {t('translation|Apply')}
           </Button>
-          <IconButton
-            aria-label={t('translation|Delete')}
+          <ActionButton
+            description={t('translation|Delete')}
             onClick={() => {
               setOptions(defaultTableRowsPerPageOptions);
               setSelectedValue(defaultTableRowsPerPageOptions[0]);
             }}
-            size="medium"
-          >
-            <Icon icon="mdi:delete" />
-          </IconButton>
+            icon="mdi:delete"
+          />
         </Box>
       </Box>
     ) : (
@@ -149,17 +146,15 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
                 <ListItemText primary={option} />
                 {isCustom && (
                   <ListItemSecondaryAction>
-                    <IconButton
-                      size="small"
-                      aria-label={t('translation|Delete')}
+                    <ActionButton
+                      description={t('translation|Delete')}
                       onClick={() => {
                         setOptions(defaultTableRowsPerPageOptions);
                         setSelectedValue(defaultTableRowsPerPageOptions[0]);
                         setIsSelectOpen(false);
                       }}
-                    >
-                      <Icon icon="mdi:delete" />
-                    </IconButton>
+                      icon="mdi:delete"
+                    />
                   </ListItemSecondaryAction>
                 )}
               </MenuItem>
