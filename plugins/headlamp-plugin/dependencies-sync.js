@@ -66,7 +66,7 @@ const dependenciesToNotCopy = [
   '@storybook/builder-vite',
   '@storybook/react-vite',
   '@vitejs/plugin-react',
-  '@vitest/coverage-v8',
+  '@vitest/coverage-istanbul',
   'vite',
   'vite-plugin-svgr',
   'vite-plugin-env-compatible',

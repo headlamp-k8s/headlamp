@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgr from 'vite-plugin-svgr';
+import { coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig({
   define: {
@@ -49,9 +50,17 @@ export default defineConfig({
         replacement: __dirname + '/node_modules/monaco-editor/esm/vs/editor/editor.api',
       },
     ],
+
     coverage: {
-      reporter: [['text', {maxCols: 200}]],
-      exclude: ['node_modules/**', 'build/**'],
+      provider: 'istanbul',
+      reporter: [['text', { maxCols: 200 }]],
+      exclude: [
+        ...coverageConfigDefaults.exclude,
+        'node_modules/**',
+        'build/**',
+        'src/**/*.stories*.{js,jsx,ts,tsx}',
+      ],
+      include: ['src/**/*.{js,jsx,ts,tsx}'],
     },
     restoreMocks: false,
     setupFiles: ['./src/setupTests.ts'],
