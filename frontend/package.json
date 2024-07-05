@@ -117,6 +117,7 @@
     "build-typedoc": "typedoc",
     "build-storybook": "storybook build -o ../docs/development/storybook",
     "i18n": "i18next 'src/**/*.{ts,tsx}' -c ./src/i18n/i18next-parser.config.js",
+    "check-i18n": "i18next 'src/**/*.{ts,tsx}' -c ./src/i18n/i18next-parser.config.js --fail-on-update || { echo '\n\n[i18n] Some translations are missing or outdated. Run `npm run i18n` to update them.\n\n'; exit 1; }",
     "tsc": "tsc",
     "make-version": "node ./make-env.js"
   },
@@ -134,7 +135,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run check-i18n && lint-staged"
     }
   },
   "lint-staged": {
