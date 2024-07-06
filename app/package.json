@@ -169,7 +169,7 @@
     "find-process": "^1.4.7",
     "i18next": "^20.6.1",
     "i18next-fs-backend": "^2.1.1",
-    "mkdirp": "^1.0.4",
+    "mkdirp": "^3.0.1",
     "open": "^7.4.2",
     "regenerator-runtime": "^0.13.11",
     "yargs": "^16.2.0"
