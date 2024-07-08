@@ -60,18 +60,20 @@ export class PluginManager {
    * Sends a request to install a plugin from the specified ArtifactHub URL.
    *
    * @param {string} identifier - The unique identifier for the plugin.
+   * @param {string} name - The name of the plugin to be installed.
    * @param {string} URL - The URL from where the plugin will be installed.
    * @static
    * @example
    * PluginManager.install('pluginID', ' https://artifacthub.io/packages/headlamp/<repo_name>/<plugin_name>');
    */
-  static install(identifier: string, URL: string) {
+  static install(identifier: string, name: string, URL: string) {
     window.desktopApi.send(
       'plugin-manager',
       JSON.stringify({
         action: 'INSTALL',
         identifier,
         URL,
+        pluginName: name,
       })
     );
   }
