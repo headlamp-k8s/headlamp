@@ -9,7 +9,7 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
-import ActionButton from '../ActionButton';
+import ActionButton, { ButtonStyle } from '../ActionButton';
 import AuthVisible from './AuthVisible';
 import EditorDialog from './EditorDialog';
 import ViewButton from './ViewButton';
@@ -17,11 +17,13 @@ import ViewButton from './ViewButton';
 interface EditButtonProps {
   item: KubeObject;
   options?: CallbackActionOptions;
+  buttonStyle?: ButtonStyle;
+  afterConfirm?: () => void;
 }
 
 export default function EditButton(props: EditButtonProps) {
   const dispatch = useDispatch();
-  const { item, options = {} } = props;
+  const { item, options = {}, buttonStyle, afterConfirm } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const [isReadOnly, setIsReadOnly] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string>('');
@@ -73,6 +75,9 @@ export default function EditButton(props: EditButtonProps) {
       resource: item,
       status: EventStatus.CLOSED,
     });
+    if (afterConfirm) {
+      afterConfirm();
+    }
   }
 
   if (!item) {
@@ -97,6 +102,7 @@ export default function EditButton(props: EditButtonProps) {
     >
       <ActionButton
         description={t('translation|Edit')}
+        buttonStyle={buttonStyle}
         onClick={() => {
           setOpenDialog(true);
           dispatchHeadlampEditEvent({

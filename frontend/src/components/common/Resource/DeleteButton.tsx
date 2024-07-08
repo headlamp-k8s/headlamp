@@ -9,18 +9,20 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
-import ActionButton from '../ActionButton';
+import ActionButton, { ButtonStyle } from '../ActionButton';
 import { ConfirmDialog } from '../Dialog';
 import AuthVisible from './AuthVisible';
 
 interface DeleteButtonProps {
   item?: KubeObject;
   options?: CallbackActionOptions;
+  buttonStyle?: ButtonStyle;
+  afterConfirm?: () => void;
 }
 
 export default function DeleteButton(props: DeleteButtonProps) {
   const dispatch = useDispatch();
-  const { item, options } = props;
+  const { item, options, buttonStyle, afterConfirm } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
   const location = useLocation();
   const { t } = useTranslation(['translation']);
@@ -68,15 +70,19 @@ export default function DeleteButton(props: DeleteButtonProps) {
     >
       <ActionButton
         description={t('translation|Delete')}
+        buttonStyle={buttonStyle}
         onClick={() => {
           setOpenAlert(true);
         }}
         icon="mdi:delete"
       />
+
       <ConfirmDialog
         open={openAlert}
         title={t('translation|Delete item')}
-        description={t('translation|Are you sure you want to delete this item?')}
+        description={t('translation|Are you sure you want to delete item {{ itemName }}?', {
+          itemName: item.metadata.name,
+        })}
         handleClose={() => setOpenAlert(false)}
         onConfirm={() => {
           deleteFunc();
@@ -84,6 +90,9 @@ export default function DeleteButton(props: DeleteButtonProps) {
             resource: item,
             status: EventStatus.CONFIRMED,
           });
+          if (afterConfirm) {
+            afterConfirm();
+          }
         }}
       />
     </AuthVisible>
