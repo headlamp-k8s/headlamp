@@ -2,7 +2,17 @@ import 'regenerator-runtime/runtime';
 import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
 import { randomBytes } from 'crypto';
 import dotenv from 'dotenv';
-import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  dialog,
+  ipcMain,
+  Menu,
+  MenuItem,
+  MessageBoxOptions,
+  screen,
+  shell,
+} from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import find_process from 'find-process';
@@ -223,34 +233,72 @@ class PluginManagerEventListeners {
    * @private
    */
   private handleInstall(eventData: Action, updateCache: (progress: ProgressResp) => void) {
-    const { identifier, URL, destinationFolder, headlampVersion } = eventData;
-    if (!URL) {
-      this.cache[identifier] = {
-        action: 'INSTALL',
-        progress: { type: 'error', message: 'URL is required' },
-      };
-      return;
+    const { identifier, URL, destinationFolder, headlampVersion, pluginName } = eventData;
+
+    if (!mainWindow) {
+      return Promise.resolve({ type: 'error', message: 'Main window is not available' });
     }
 
+    if (!URL) {
+      return Promise.resolve({ type: 'error', message: 'URL is required' });
+    }
+
+    const dialogOptions: MessageBoxOptions = {
+      type: 'question',
+      buttons: ['Yes', 'No'],
+      defaultId: 1,
+      title: 'Plugin Installation',
+      message: 'Do you want to install this plugin?',
+      detail: `You are about to install ${pluginName} plugin from: ${URL}\nDo you want to proceed?`,
+    };
     const controller = new AbortController();
     this.cache[identifier] = {
       action: 'INSTALL',
-      progress: { type: 'info', message: 'installing plugin' },
-      percentage: 10,
+      progress: { type: 'info', message: 'waiting for user consent' },
+      percentage: 0,
       controller,
     };
 
-    PluginManager.install(
-      URL,
-      destinationFolder,
-      headlampVersion,
-      progress => {
-        updateCache(progress);
-      },
-      controller.signal
-    );
-  }
+    return dialog
+      .showMessageBox(mainWindow, dialogOptions)
+      .then(({ response }) => {
+        console.log('User response:', response);
+        if (response === 1) {
+          // User clicked "No"
+          this.cache[identifier] = {
+            action: 'INSTALL',
+            progress: { type: 'error', message: 'installation cancelled due to user consent' },
+            percentage: 0,
+            controller,
+          };
+          return { type: 'error', message: 'Installation cancelled due to user consent' };
+        }
 
+        // User clicked "Yes", proceed with installation
+        this.cache[identifier] = {
+          action: 'INSTALL',
+          progress: { type: 'info', message: 'installing plugin' },
+          percentage: 10,
+          controller,
+        };
+
+        PluginManager.install(
+          URL,
+          destinationFolder,
+          headlampVersion,
+          progress => {
+            updateCache(progress);
+          },
+          controller.signal
+        );
+
+        return { type: 'info', message: 'Installation started' };
+      })
+      .catch(error => {
+        console.error('Error during installation process:', error);
+        return { type: 'error', message: 'An error occurred during the installation process' };
+      });
+  }
   /**
    * Handles the update process.
    *
