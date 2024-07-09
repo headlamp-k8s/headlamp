@@ -157,20 +157,6 @@ const commonRules = {
     borderRadius: 4,
   },
   components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        '@global': {
-          '@media (prefers-reduced-motion: reduce)': {
-            '*': {
-              animationDuration: '0.01ms !important',
-              animationIterationCount: '1 !important',
-              transitionDuration: '0.01ms !important',
-              scrollBehavior: 'auto !important',
-            },
-          },
-        },
-      },
-    },
     MuiSelect: {
       defaultProps: {
         variant: 'standard' as 'filled' | 'outlined' | 'standard',
