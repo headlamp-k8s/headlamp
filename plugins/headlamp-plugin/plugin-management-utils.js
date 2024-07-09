@@ -204,6 +204,7 @@ class PluginManager {
           const pluginVersion = packageJson.version || null;
           const artifacthubURL = packageJson.artifacthub ? packageJson.artifacthub.url : null;
           const repoName = packageJson.artifacthub ? packageJson.artifacthub.repoName : null;
+          const author = packageJson.artifacthub ? packageJson.artifacthub.author : null;
           const artifacthubVersion = packageJson.artifacthub
             ? packageJson.artifacthub.version
             : null;
@@ -215,6 +216,7 @@ class PluginManager {
             folderName: pluginFolder.name,
             artifacthubURL: artifacthubURL,
             repoName: repoName,
+            author: author,
             artifacthubVersion: artifacthubVersion,
           });
         }
@@ -371,6 +373,7 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
     url: `https://artifacthub.io/packages/headlamp/${pluginInfo.repository.name}/${pluginName}`,
     version: pluginInfo.version,
     repoName: pluginInfo.repository.name,
+    author: pluginInfo.repository.user_alias,
   };
   packageJSON.isManagedByHeadlampPlugin = true;
   fs.writeFileSync(`${tempFolder}/package.json`, JSON.stringify(packageJSON, null, 2));

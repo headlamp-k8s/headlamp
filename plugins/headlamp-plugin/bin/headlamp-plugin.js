@@ -1312,16 +1312,14 @@ yargs(process.argv.slice(2))
           console.log(JSON.stringify(data.data));
         } else {
           // display table
-          const rows = [
-            ['Name', 'Version', 'Folder Name', 'ArticaftHub URL', 'ArtifactHub Version'],
-          ];
+          const rows = [['Name', 'Version', 'Folder Name', 'Repo', 'Author']];
           data.data.forEach(plugin => {
             rows.push([
               plugin.pluginName,
               plugin.pluginVersion,
               plugin.folderName,
-              plugin.artifacthubURL,
-              plugin.artifacthubVersion,
+              plugin.repoName,
+              plugin.author,
             ]);
           });
           console.log(table(rows));
