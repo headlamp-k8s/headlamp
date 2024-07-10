@@ -293,11 +293,8 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
     throw new Error('Download cancelled');
   }
 
-  // create a temp folder
-  const tempFolder = fs.mkdirSync(
-    path.join(os.tmpdir() + `/${pluginName}-${Date.now().toString()}/${pluginName}`),
-    { recursive: true }
-  );
+  const tempDir = await fs.mkdtempSync(path.join(os.tmpdir(), 'headlamp-plugin-temp-'));
+  const tempFolder = fs.mkdirSync(path.join(tempDir, pluginName), { recursive: true });
 
   if (progressCallback) {
     progressCallback({ type: 'info', message: 'Downloading Plugin' });
