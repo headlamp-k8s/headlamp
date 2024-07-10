@@ -257,6 +257,17 @@ function validatePluginName(pluginName) {
 }
 
 /**
+ * @param {string} archiveURL - the one to validate
+ * @returns true if the archiveURL looks good.
+ */
+function validateArchiveURL(archiveURL) {
+  return (
+    archiveURL.startsWith('https://artifacthub.io/packages/') ||
+    archiveURL.startsWith('https://github.com/yolossn/headlamp-plugins/')
+  );
+}
+
+/**
  * Downloads and extracts a plugin from the specified URL.
  * @param {string} URL - The URL of the plugin to download and extract.
  * @param {string} headlampVersion - The version of Headlamp for compatibility checking.
@@ -284,6 +295,10 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
   }
 
   const archiveURL = pluginInfo.data['headlamp/plugin/archive-url'];
+  if (!validateArchiveURL(archiveURL)) {
+    throw new Error('Invalid plugin/archive-url');
+  }
+
   let checksum = pluginInfo.data['headlamp/plugin/archive-checksum'];
   if (!archiveURL || !checksum) {
     throw new Error('Invalid plugin metadata. Please check the plugin details.');
