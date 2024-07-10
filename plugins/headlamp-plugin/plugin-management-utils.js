@@ -1,6 +1,11 @@
-/*plugin-management-utils.js has the core logic for managing plugins in Headlamp.
- * It provides methods for installing, updating, and uninstalling plugins, as well as listing installed plugins.
- * It is used by headlamp-plugin cli and the Headlamp electron app to manage plugins.
+/**
+ * plugin-management-utils.js has the core logic for managing plugins in Headlamp.
+ *
+ * Provides methods for installing, updating, listing and uninstalling plugins.
+ *
+ * Used by:
+ * - plugins/headlamp-plugin/bin/headlamp-plugin.js cli
+ * - app/ to manage plugins.
  */
 const fetch = require('node-fetch').default;
 const fs = require('fs');
