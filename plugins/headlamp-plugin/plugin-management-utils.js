@@ -243,6 +243,20 @@ class PluginManager {
 }
 
 /**
+ * Checks the plugin name is a valid one.
+ *
+ * Look for "..", "/", or "\" in the plugin name.
+ *
+ * @param {string} pluginName
+ *
+ * @returns true if the name is valid.
+ */
+function validatePluginName(pluginName) {
+  const invalidPattern = /[\/\\]|(\.\.)/;
+  return !invalidPattern.test(pluginName);
+}
+
+/**
  * Downloads and extracts a plugin from the specified URL.
  * @param {string} URL - The URL of the plugin to download and extract.
  * @param {string} headlampVersion - The version of Headlamp for compatibility checking.
@@ -265,6 +279,10 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
     progressCallback({ type: 'info', message: 'Plugin Metadata Fetched' });
   }
   const pluginName = pluginInfo.name;
+  if (!validatePluginName(pluginName)) {
+    throw new Error('Invalid plugin name');
+  }
+
   const archiveURL = pluginInfo.data['headlamp/plugin/archive-url'];
   let checksum = pluginInfo.data['headlamp/plugin/archive-checksum'];
   if (!archiveURL || !checksum) {
