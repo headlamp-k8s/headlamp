@@ -1,6 +1,11 @@
-/*plugin-management-utils.js has the core logic for managing plugins in Headlamp.
- * It provides methods for installing, updating, and uninstalling plugins, as well as listing installed plugins.
- * It is used by headlamp-plugin cli and the Headlamp electron app to manage plugins.
+/**
+ * plugin-management-utils.js has the core logic for managing plugins in Headlamp.
+ *
+ * Provides methods for installing, updating, listing and uninstalling plugins.
+ *
+ * Used by:
+ * - plugins/headlamp-plugin/bin/headlamp-plugin.js cli
+ * - app/ to manage plugins.
  */
 const fetch = require('node-fetch').default;
 const fs = require('fs');
@@ -238,6 +243,31 @@ class PluginManager {
 }
 
 /**
+ * Checks the plugin name is a valid one.
+ *
+ * Look for "..", "/", or "\" in the plugin name.
+ *
+ * @param {string} pluginName
+ *
+ * @returns true if the name is valid.
+ */
+function validatePluginName(pluginName) {
+  const invalidPattern = /[\/\\]|(\.\.)/;
+  return !invalidPattern.test(pluginName);
+}
+
+/**
+ * @param {string} archiveURL - the one to validate
+ * @returns true if the archiveURL looks good.
+ */
+function validateArchiveURL(archiveURL) {
+  return (
+    archiveURL.startsWith('https://artifacthub.io/packages/') ||
+    archiveURL.startsWith('https://github.com/yolossn/headlamp-plugins/')
+  );
+}
+
+/**
  * Downloads and extracts a plugin from the specified URL.
  * @param {string} URL - The URL of the plugin to download and extract.
  * @param {string} headlampVersion - The version of Headlamp for compatibility checking.
@@ -260,7 +290,15 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
     progressCallback({ type: 'info', message: 'Plugin Metadata Fetched' });
   }
   const pluginName = pluginInfo.name;
+  if (!validatePluginName(pluginName)) {
+    throw new Error('Invalid plugin name');
+  }
+
   const archiveURL = pluginInfo.data['headlamp/plugin/archive-url'];
+  if (!validateArchiveURL(archiveURL)) {
+    throw new Error('Invalid plugin/archive-url');
+  }
+
   let checksum = pluginInfo.data['headlamp/plugin/archive-checksum'];
   if (!archiveURL || !checksum) {
     throw new Error('Invalid plugin metadata. Please check the plugin details.');
@@ -288,11 +326,8 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
     throw new Error('Download cancelled');
   }
 
-  // create a temp folder
-  const tempFolder = fs.mkdirSync(
-    path.join(os.tmpdir() + `/${pluginName}-${Date.now().toString()}/${pluginName}`),
-    { recursive: true }
-  );
+  const tempDir = await fs.mkdtempSync(path.join(os.tmpdir(), 'headlamp-plugin-temp-'));
+  const tempFolder = fs.mkdirSync(path.join(tempDir, pluginName), { recursive: true });
 
   if (progressCallback) {
     progressCallback({ type: 'info', message: 'Downloading Plugin' });

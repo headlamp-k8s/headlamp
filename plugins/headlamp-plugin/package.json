@@ -166,7 +166,7 @@
     "lib",
     "types",
     ".storybook",
-    "plugin-management-utils.js"
+    "plugin-management/plugin-management.js"
   ],
   "keywords": [
     "headlamp",

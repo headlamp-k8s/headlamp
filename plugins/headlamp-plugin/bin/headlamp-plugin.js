@@ -13,7 +13,7 @@ const child_process = require('child_process');
 const validate = require('validate-npm-package-name');
 const yargs = require('yargs/yargs');
 const headlampPluginPkg = require('../package.json');
-const pluginManager = require('../plugin-management-utils');
+const pluginManager = require('../plugin-management/plugin-management');
 const { table } = require('table');
 
 /**
