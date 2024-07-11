@@ -947,6 +947,18 @@ function apiScaleFactory(apiRoot: string, resource: string) {
       const cluster = clusterName || getCluster() || '';
       return put(url(body.metadata.namespace!, body.metadata.name), body, undefined, { cluster });
     },
+    patch: (
+      body: {
+        spec: {
+          replicas: number;
+        };
+      },
+      metadata: KubeMetadata,
+      clusterName?: string
+    ) => {
+      const cluster = clusterName || getCluster() || '';
+      return patch(url(metadata.namespace!, metadata.name), body, false, { cluster });
+    },
   };
 
   function url(namespace: string, name: string) {
@@ -985,7 +997,7 @@ export function patch(
   const opts = {
     method: 'PATCH',
     body,
-    headers: { ...JSON_HEADERS, 'Content-Type': 'application/json-patch+json' },
+    headers: { ...JSON_HEADERS, 'Content-Type': 'application/merge-patch+json' },
     autoLogoutOnAuthError,
     cluster,
     ...requestOptions,

@@ -686,18 +686,19 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
       type ApiEndpointWithScale = {
         scale: {
-          put: (
-            data: { metadata: KubeMetadata; spec: { replicas: number } },
+          patch: (
+            body: { spec: { replicas: number } },
+            metadata: KubeMetadata,
             clusterName?: string
           ) => Promise<any>;
         };
       };
 
-      return (this._class().apiEndpoint as ApiEndpointWithScale).scale.put(
+      return (this._class().apiEndpoint as ApiEndpointWithScale).scale.patch(
         {
-          metadata: this.metadata,
           spec,
         },
+        this.metadata,
         this._clusterName
       );
     }

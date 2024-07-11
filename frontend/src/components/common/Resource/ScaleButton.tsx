@@ -78,7 +78,8 @@ export default function ScaleButton(props: ScaleButtonProps) {
   return (
     <AuthVisible
       item={item}
-      authVerb="update"
+      authVerb="patch"
+      subresource="scale"
       onError={(err: Error) => {
         console.error(`Error while getting authorization for scaling button in ${item}:`, err);
       }}
@@ -90,7 +91,7 @@ export default function ScaleButton(props: ScaleButtonProps) {
             setOpenDialog(true);
           }}
         >
-          <Icon icon="mdi:content-copy" />
+          <Icon icon="mdi:expand-all" />
         </IconButton>
       </Tooltip>
       <ScaleDialog resource={item} open={openDialog} onClose={handleClose} onSave={handleSave} />
@@ -162,8 +163,9 @@ function ScaleDialog(props: ScaleDialogProps) {
               <Fab
                 size="small"
                 color="primary"
-                onClick={() => setNumReplicas(numReplicas => numReplicas - 1)}
+                onClick={() => setNumReplicas(numReplicas => Math.max(0, numReplicas - 1))}
                 aria-label={t('translation|Decrement')}
+                disabled={numReplicas <= 0}
               >
                 <Icon icon="mdi:minus" width="22px" />
               </Fab>
@@ -171,7 +173,7 @@ function ScaleDialog(props: ScaleDialogProps) {
                 type="number"
                 value={numReplicas}
                 sx={{ marginLeft: '6px', marginRight: '6px' }}
-                onChange={e => setNumReplicas(Number(e.target.value))}
+                onChange={e => setNumReplicas(Math.max(0, Number(e.target.value)))}
                 aria-labelledby={desiredNumReplicasLabel}
                 inputProps={{
                   min: 0,
