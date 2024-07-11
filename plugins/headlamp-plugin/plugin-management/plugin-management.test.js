@@ -1,4 +1,4 @@
-const PluginManager = require('./plugin-management-utils.js');
+const PluginManager = require('./plugin-management.js');
 const tmp = require('tmp');
 const fs = require('fs');
 const semver = require('semver');
