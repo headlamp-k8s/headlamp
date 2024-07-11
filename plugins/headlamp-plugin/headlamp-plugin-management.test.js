@@ -1,3 +1,4 @@
+#!/bin/env node
 const { execSync } = require('child_process');
 const assert = require('assert');
 const fs = require('fs');
