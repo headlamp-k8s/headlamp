@@ -679,8 +679,11 @@ function singleApiFactory(group: string, version: string, resource: string) {
       queryParams?: QueryParameters,
       cluster?: string
     ) => streamResult(url, name, cb, errCb, queryParams, cluster),
-    post: (body: KubeObjectInterface, queryParams?: QueryParameters, cluster?: string) =>
-      post(url + asQuery(queryParams), body, true, { cluster }),
+    post: (
+      body: JSON | object | KubeObjectInterface,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => post(url + asQuery(queryParams), body, true, { cluster }),
     put: (body: KubeObjectInterface, queryParams?: QueryParameters, cluster?: string) =>
       put(`${url}/${body.metadata.name}` + asQuery(queryParams), body, true, { cluster }),
     patch: (body: OpPatch[], name: string, queryParams?: QueryParameters, cluster?: string) =>
