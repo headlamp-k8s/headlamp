@@ -11,12 +11,18 @@ const ColoredSnackbar = styled(Snackbar)({
   },
 });
 
-function UpdatePopup(props: {
+export interface UpdatePopupProps {
+  /** URL for the release */
   releaseDownloadURL?: string | null;
+  /** Whether the release is being fetched */
   fetchingRelease?: boolean;
+  /** If release fetch failed */
   releaseFetchFailed?: boolean;
+  /** if the user wants to skip a release */
   skipUpdateHandler: () => void;
-}) {
+}
+
+function UpdatePopup(props: UpdatePopupProps) {
   const [show, setShow] = React.useState(true);
   const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
   const { t } = useTranslation();

@@ -1,4 +1,4 @@
-import UpdatePopup from './UpdatePopup';
+import UpdatePopup, { UpdatePopupProps } from './UpdatePopup';
 
 export default {
   title: 'common/ReleaseNotes/UpdatePopup',
@@ -12,8 +12,17 @@ export const Show = {
   },
 };
 
-export const Closed = {
+export const Fetching = {
   args: {
-    releaseDownloadURL: 'https://example.com',
-  },
+    releaseDownloadURL: null,
+    fetchingRelease: true,
+  } as UpdatePopupProps,
+};
+
+export const FetchFailed = {
+  args: {
+    releaseDownloadURL: null,
+    fetchingRelease: false,
+    releaseFetchFailed: true,
+  } as UpdatePopupProps,
 };
