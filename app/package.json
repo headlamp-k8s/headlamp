@@ -162,7 +162,7 @@
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
-    "electron-wix-msi": "^4.0.0",
+    "electron-wix-msi": "^5.1.3",
     "find-process": "^1.4.7",
     "i18next": "^23.12.1",
     "i18next-fs-backend": "^2.3.1",
