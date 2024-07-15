@@ -170,6 +170,6 @@
     "i18next-fs-backend": "^2.1.1",
     "mkdirp": "^3.0.1",
     "regenerator-runtime": "^0.13.11",
-    "yargs": "^16.2.0"
+    "yargs": "^17.7.2"
   }
 }
