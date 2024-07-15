@@ -15,8 +15,8 @@ import {
 } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import find_process from 'find-process';
-import fs from 'fs';
 import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
 import { userInfo } from 'node:os';
 import { platform } from 'os';
 import path from 'path';
