@@ -166,8 +166,8 @@
     "electron-log": "^4.4.1",
     "electron-wix-msi": "^4.0.0",
     "find-process": "^1.4.7",
-    "i18next": "^20.6.1",
-    "i18next-fs-backend": "^2.1.1",
+    "i18next": "^23.12.1",
+    "i18next-fs-backend": "^2.3.1",
     "mkdirp": "^3.0.1",
     "regenerator-runtime": "^0.13.11",
     "yargs": "^17.7.2"
