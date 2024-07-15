@@ -15,7 +15,6 @@
  * - The manifests directory will be created if it does not exist, and it will contain the generated YAML files.
  */
 
-const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
 
