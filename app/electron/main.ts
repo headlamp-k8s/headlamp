@@ -19,7 +19,6 @@ import find_process from 'find-process';
 import fs from 'fs';
 import { spawnSync } from 'node:child_process';
 import { userInfo } from 'node:os';
-import open from 'open';
 import { platform } from 'os';
 import path from 'path';
 import url from 'url';
@@ -1316,9 +1315,7 @@ function attachServerEventHandlers(serverProcess: ChildProcessWithoutNullStreams
 if (isHeadlessMode) {
   serverProcess = startServer(['-html-static-dir', path.join(process.resourcesPath, './frontend')]);
   attachServerEventHandlers(serverProcess);
-  (async () => {
-    await open(`http://localhost:${defaultPort}`);
-  })();
+  shell.openExternal(`http://localhost:${defaultPort}`);
 } else {
   startElecron();
 }
