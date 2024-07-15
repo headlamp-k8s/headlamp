@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
 import { randomBytes } from 'crypto';
 import dotenv from 'dotenv';
