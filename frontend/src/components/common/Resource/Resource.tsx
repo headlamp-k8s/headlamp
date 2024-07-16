@@ -558,12 +558,11 @@ export function ConditionsTable(props: ConditionsTableProps) {
 }
 
 export interface VolumeMountsProps {
-  mounts?:
-    | {
-        mountPath: string;
-        name: string;
-        readOnly: boolean;
-      }[];
+  mounts?: {
+    mountPath: string;
+    name: string;
+    readOnly: boolean;
+  }[];
 }
 
 export function VolumeMounts(props: VolumeMountsProps) {
