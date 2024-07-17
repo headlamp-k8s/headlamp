@@ -242,7 +242,7 @@ export const executeClusterAction = createAsyncThunk(
         if (controller.signal.aborted) {
           return rejectWithValue('Action cancelled');
         }
-        callback();
+        await Promise.resolve(callback());
         dispatchSuccess();
       } catch (err) {
         if ((err as Error).message === 'Action cancelled' || controller.signal.aborted) {
