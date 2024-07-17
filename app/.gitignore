@@ -7,4 +7,5 @@
 /electron/i18n-helper.js
 /electron/preload.js
 /electron/windowSize.js
+/electron/plugin-management
 electron/windowSize.test.js

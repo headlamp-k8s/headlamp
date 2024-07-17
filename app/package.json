@@ -16,6 +16,9 @@
     "package": "npm run build && electron-builder build --publish never",
     "package-msi": "npm run build && node windows/msi/build.js",
     "prod-deps": "mkdirp prod_deps && cd ./prod_deps && copyfiles -f ../package.json ../package-lock.json . && npm i --only=prod && cd .. && npx --no-install rimraf ./prod_deps/node_modules/.bin",
+    "copy-plugin-manager": "mkdirp ./electron/plugin-management && copyfiles -f ../plugins/headlamp-plugin/plugin-management/plugin-management.js ./electron/plugin-management",
+    "prestart": "npm run copy-plugin-manager",
+    "prebuild": "npm run copy-plugin-manager",
     "start": "node scripts/start.js",
     "test": "jest"
   },
@@ -114,7 +117,8 @@
       "electron/locales/",
       "electron/i18next.config.js",
       "electron/i18n-helper.js",
-      "electron/windowSize.js"
+      "electron/windowSize.js",
+      "electron/plugin-management"
     ],
     "extraResources": [
       {
@@ -156,7 +160,6 @@
     "jest": "^27.4.7",
     "mime-types": "^2.1.35",
     "octokit": "^2.0.14",
-    "tar": "^6.1.13",
     "typescript": "4.5.5"
   },
   "dependencies": {
@@ -166,12 +169,14 @@
     "dotenv": "^16.0.1",
     "electron-log": "^4.4.1",
     "electron-wix-msi": "^4.0.0",
+    "env-paths": "^3.0.0",
     "find-process": "^1.4.7",
     "i18next": "^20.6.1",
     "i18next-fs-backend": "^2.1.1",
     "mkdirp": "^1.0.4",
     "open": "^7.4.2",
     "regenerator-runtime": "^0.13.11",
+    "tar": "^6.2.1",
     "yargs": "^16.2.0"
   }
 }
