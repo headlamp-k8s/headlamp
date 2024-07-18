@@ -11,15 +11,22 @@ const ColoredSnackbar = styled(Snackbar)({
   },
 });
 
-function UpdatePopup(props: {
+export interface UpdatePopupProps {
+  /** URL for the release */
   releaseDownloadURL?: string | null;
+  /** Whether the release is being fetched */
   fetchingRelease?: boolean;
+  /** If release fetch failed */
   releaseFetchFailed?: boolean;
+  /** if the user wants to skip a release */
   skipUpdateHandler: () => void;
-}) {
+}
+
+function UpdatePopup(props: UpdatePopupProps) {
   const [show, setShow] = React.useState(true);
   const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
   const { t } = useTranslation();
+  const [closeSnackError, setCloseSnackError] = React.useState(false);
 
   if (fetchingRelease && !releaseDownloadURL) {
     return (
@@ -65,7 +72,10 @@ function UpdatePopup(props: {
           vertical: 'bottom',
           horizontal: 'right',
         }}
-        open={releaseFetchFailed}
+        open={releaseFetchFailed && !closeSnackError}
+        onClose={() => {
+          setCloseSnackError(true);
+        }}
         message={t('translation|Failed to fetch release information')}
         ContentProps={{
           'aria-describedby': 'updatePopup',
@@ -91,7 +101,10 @@ function UpdatePopup(props: {
         ContentProps={{
           'aria-describedby': 'updatePopup',
         }}
-        open={fetchingRelease}
+        open={fetchingRelease && !closeSnackError}
+        onClose={() => {
+          setCloseSnackError(true);
+        }}
         action={
           <React.Fragment>
             <Button
