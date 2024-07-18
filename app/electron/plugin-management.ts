@@ -300,8 +300,17 @@ function validatePluginName(pluginName) {
  * @returns true if the archiveURL looks good.
  */
 function validateArchiveURL(archiveURL) {
+  const githubRegex = /^https:\/\/github\.com\/[^/]+\/[^/]+\/(releases|archive)\/.*$/;
+  const bitbucketRegex = /^https:\/\/bitbucket\.org\/[^/]+\/[^/]+\/(downloads|get)\/.*$/;
+  const gitlabRegex = /^https:\/\/gitlab\.com\/[^/]+\/[^/]+\/(-\/archive|releases)\/.*$/;
+
+  // @todo There is a test plugin at https://github.com/yolossn/headlamp-plugins/
+  // need to move that somewhere else, or test differently.
+
   return (
-    archiveURL.startsWith('https://artifacthub.io/packages/') ||
+    githubRegex.test(archiveURL) ||
+    bitbucketRegex.test(archiveURL) ||
+    gitlabRegex.test(archiveURL) ||
     archiveURL.startsWith('https://github.com/yolossn/headlamp-plugins/')
   );
 }
