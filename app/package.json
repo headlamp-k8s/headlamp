@@ -5,6 +5,10 @@
   "main": "electron/main.js",
   "homepage": "https://github.com/headlamp-k8s/headlamp/#readme",
   "productName": "Headlamp",
+  "engines": {
+    "npm": ">=10.0.0",
+    "node": ">=20.11.1"
+  },
   "scripts": {
     "build": "npm run copy-icons && npm run copy-plugins && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
     "compile-electron": "babel electron --out-dir electron/ --extensions .ts",
