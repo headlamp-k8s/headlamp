@@ -21,8 +21,8 @@ import { platform } from 'os';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
-import PluginManager from '../../plugins/headlamp-plugin/plugin-management/plugin-management';
 import i18n from './i18next.config';
+import { PluginManager } from './plugin-management';
 import windowSize from './windowSize';
 
 dotenv.config({ path: path.join(process.resourcesPath, '.env') });
