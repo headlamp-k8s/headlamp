@@ -20,6 +20,7 @@ import fs from 'fs';
 import { spawnSync } from 'node:child_process';
 import { userInfo } from 'node:os';
 import open from 'open';
+import { platform } from 'os';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
@@ -31,6 +32,33 @@ dotenv.config({ path: path.join(process.resourcesPath, '.env') });
 
 const pathInfoDebug = false;
 let pathInfo;
+
+const isDev = process.env.ELECTRON_DEV || false;
+let frontendPath = '';
+
+if (isDev) {
+  frontendPath = path.resolve('..', 'frontend', 'build', 'index.html');
+} else {
+  frontendPath = path.join(process.resourcesPath, 'frontend', 'index.html');
+}
+const backendToken = randomBytes(32).toString('hex');
+
+const startUrl = (
+  process.env.ELECTRON_START_URL ||
+  url.format({
+    pathname: frontendPath,
+    protocol: 'file:',
+    slashes: true,
+    query: {
+      backendToken: backendToken,
+    },
+  })
+)
+  // Windows paths use backslashes and for consistency we want to use forward slashes.
+  // For example: when application triggers refresh it requests a URL with forward slashes and
+  // we use startUrl to determine if it's an internal or external URL. So it's easier to
+  // convert everything to forward slashes.
+  .replace(/\\/g, '/');
 
 /**
  * On MacOS apps do not get the same environment variables as the terminal.
@@ -97,9 +125,7 @@ const args = yargs
 const isHeadlessMode = args.headless;
 let disableGPU = args['disable-gpu'];
 const defaultPort = 4466;
-const backendToken = randomBytes(32).toString('hex');
 
-const isDev = process.env.ELECTRON_DEV || false;
 const useExternalServer = process.env.EXTERNAL_SERVER || false;
 const shouldCheckForUpdates = process.env.HEADLAMP_CHECK_FOR_UPDATES !== 'false';
 const manifestDir = isDev ? path.resolve('./') : process.resourcesPath;
@@ -515,6 +541,17 @@ function quitServerProcess() {
   serverProcess = null;
 }
 
+function getAcceleratorForPlatform(navigation: 'left' | 'right') {
+  switch (platform()) {
+    case 'darwin':
+      return navigation === 'right' ? 'Cmd+]' : 'Cmd+[';
+    case 'win32':
+      return navigation === 'right' ? 'Alt+Right' : 'Alt+Left';
+    default:
+      return navigation === 'right' ? 'Alt+Right' : 'Alt+Left';
+  }
+}
+
 function getDefaultAppMenu(): AppMenu[] {
   const isMac = process.platform === 'darwin';
 
@@ -647,11 +684,6 @@ function getDefaultAppMenu(): AppMenu[] {
       id: 'original-view',
       submenu: [
         {
-          label: i18n.t('Reload'),
-          role: 'forcereload',
-          id: 'original-force-reload',
-        },
-        {
           label: i18n.t('Toggle Developer Tools'),
           role: 'toggledevtools',
           id: 'original-toggle-dev-tools',
@@ -677,6 +709,46 @@ function getDefaultAppMenu(): AppMenu[] {
           label: i18n.t('Toggle Fullscreen'),
           role: 'togglefullscreen',
           id: 'original-toggle-fullscreen',
+        },
+      ],
+    },
+    {
+      label: i18n.t('Navigate'),
+      id: 'original-navigate',
+      submenu: [
+        {
+          label: i18n.t('Reload'),
+          role: 'forcereload',
+          id: 'original-force-reload',
+        },
+        sep,
+        {
+          label: i18n.t('Go to Home'),
+          role: 'homescreen',
+          id: 'original-home-screen',
+          click: () => {
+            mainWindow?.loadURL(startUrl);
+          },
+        },
+        {
+          label: i18n.t('Go Back'),
+          role: 'back',
+          id: 'original-back',
+          accelerator: getAcceleratorForPlatform('left'),
+          enabled: false,
+          click: () => {
+            mainWindow?.webContents.goBack();
+          },
+        },
+        {
+          label: i18n.t('Go Forward'),
+          role: 'forward',
+          id: 'original-forward',
+          accelerator: getAcceleratorForPlatform('right'),
+          enabled: false,
+          click: () => {
+            mainWindow?.webContents.goForward();
+          },
         },
       ],
     },
@@ -881,30 +953,6 @@ function startElecron() {
   console.log('Check for updates: ', shouldCheckForUpdates);
 
   async function createWindow() {
-    let frontendPath = '';
-    if (isDev) {
-      frontendPath = path.resolve('..', 'frontend', 'build', 'index.html');
-    } else {
-      frontendPath = path.join(process.resourcesPath, 'frontend', 'index.html');
-    }
-
-    const startUrl = (
-      process.env.ELECTRON_START_URL ||
-      url.format({
-        pathname: frontendPath,
-        protocol: 'file:',
-        slashes: true,
-        query: {
-          backendToken: backendToken,
-        },
-      })
-    )
-      // Windows paths use backslashes and for consistency we want to use forward slashes.
-      // For example: when application triggers refresh it requests a URL with forward slashes and
-      // we use startUrl to determine if it's an internal or external URL. So it's easier to
-      // convert everything to forward slashes.
-      .replace(/\\/g, '/');
-
     // WSL has a problem with full size window placement, so make it smaller.
     const withMargin = isWSL();
     const { width, height } = windowSize(screen.getPrimaryDisplay().workAreaSize, withMargin);
@@ -929,6 +977,19 @@ function startElecron() {
       // otherwise open url in a browser and prevent default
       shell.openExternal(url);
       return { action: 'deny' };
+    });
+
+    mainWindow.webContents.on('did-start-navigation', () => {
+      const navigateMenu = Menu.getApplicationMenu()?.getMenuItemById('original-navigate')?.submenu;
+      const goBackMenu = navigateMenu?.getMenuItemById('original-back');
+      if (!!goBackMenu) {
+        goBackMenu.enabled = mainWindow?.webContents.canGoBack() || false;
+      }
+
+      const goForwardMenu = navigateMenu?.getMenuItemById('original-forward');
+      if (!!goForwardMenu) {
+        goForwardMenu.enabled = mainWindow?.webContents.canGoForward() || false;
+      }
     });
 
     mainWindow.webContents.on('dom-ready', () => {
