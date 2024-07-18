@@ -35,11 +35,19 @@ import Registry, * as registryToExport from './registry';
 
 window.pluginLib = {
   ApiProxy,
-  ReactMonacoEditor,
+  ReactMonacoEditor: {
+    ...ReactMonacoEditor,
+    // required for compatibility with plugins built with webpack
+    __esModule: true,
+  },
   MonacoEditor,
   K8s,
   ConfigStore,
-  Crd,
+  Crd: {
+    ...Crd,
+    // required for compatibility with plugins built with webpack
+    __esModule: true,
+  },
   CommonComponents,
   MuiMaterial,
   MuiStyles,
