@@ -1,4 +1,11 @@
 {
-    "presets": ["@babel/preset-env", "@babel/preset-typescript"],
-    "plugins": []
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "20"
+      }
+    }],
+    "@babel/preset-typescript"
+  ],
+  "plugins": []
 }

@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
 import { randomBytes } from 'crypto';
 import dotenv from 'dotenv';
@@ -14,18 +13,16 @@ import {
   shell,
 } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
-import log from 'electron-log';
 import find_process from 'find-process';
-import fs from 'fs';
 import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
 import { userInfo } from 'node:os';
-import open from 'open';
 import { platform } from 'os';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
-import PluginManager from '../../plugins/headlamp-plugin/plugin-management/plugin-management';
 import i18n from './i18next.config';
+import { PluginManager } from './plugin-management';
 import windowSize from './windowSize';
 
 dotenv.config({ path: path.join(process.resourcesPath, '.env') });
@@ -522,12 +519,12 @@ let serverProcessQuit: boolean;
 
 function quitServerProcess() {
   if ((!serverProcess || serverProcessQuit) && process.platform !== 'win32') {
-    log.error('server process already not running');
+    console.error('server process already not running');
     return;
   }
 
   intentionalQuit = true;
-  log.info('stopping server process...');
+  console.info('stopping server process...');
 
   if (!serverProcess) {
     return;
@@ -939,8 +936,7 @@ function killProcess(pid: number) {
 }
 
 function startElecron() {
-  log.transports.file.level = 'info';
-  log.info('App starting...');
+  console.info('App starting...');
 
   let appVersion: string;
   if (isDev && process.env.HEADLAMP_APP_VERSION) {
@@ -1246,13 +1242,13 @@ function startElecron() {
   }
 
   if (disableGPU) {
-    log.info('Disabling GPU hardware acceleration. Reason: related flag is set.');
+    console.info('Disabling GPU hardware acceleration. Reason: related flag is set.');
   } else if (
     disableGPU === undefined &&
     process.platform === 'linux' &&
     ['arm', 'arm64'].includes(process.arch)
   ) {
-    log.info(
+    consolg.info(
       'Disabling GPU hardware acceleration. Reason: known graphical issues in Linux on ARM (use --disable-gpu=false to force it if needed).'
     );
     disableGPU = true;
@@ -1287,27 +1283,27 @@ app.on('quit', quitServerProcess);
  */
 function attachServerEventHandlers(serverProcess: ChildProcessWithoutNullStreams) {
   serverProcess.on('error', err => {
-    log.error(`server process failed to start: ${err}`);
+    console.error(`server process failed to start: ${err}`);
   });
   serverProcess.stdout.on('data', data => {
-    log.info(`server process stdout: ${data}`);
+    console.info(`server process stdout: ${data}`);
   });
   serverProcess.stderr.on('data', data => {
     const sterrMessage = `server process stderr: ${data}`;
     if (data && data.indexOf && data.indexOf('Requesting') !== -1) {
       // The server prints out urls it's getting, which aren't errors.
-      log.info(sterrMessage);
+      console.info(sterrMessage);
     } else {
-      log.error(sterrMessage);
+      console.error(sterrMessage);
     }
   });
   serverProcess.on('close', (code, signal) => {
     const closeMessage = `server process process exited with code:${code} signal:${signal}`;
     if (!intentionalQuit) {
       // @todo: message mainWindow, or loadURL to an error url?
-      log.error(closeMessage);
+      console.error(closeMessage);
     } else {
-      log.info(closeMessage);
+      console.info(closeMessage);
     }
     serverProcessQuit = true;
   });
@@ -1316,9 +1312,7 @@ function attachServerEventHandlers(serverProcess: ChildProcessWithoutNullStreams
 if (isHeadlessMode) {
   serverProcess = startServer(['-html-static-dir', path.join(process.resourcesPath, './frontend')]);
   attachServerEventHandlers(serverProcess);
-  (async () => {
-    await open(`http://localhost:${defaultPort}`);
-  })();
+  shell.openExternal(`http://localhost:${defaultPort}`);
 } else {
   startElecron();
 }

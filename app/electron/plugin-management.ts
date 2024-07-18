@@ -7,15 +7,14 @@
  * - plugins/headlamp-plugin/bin/headlamp-plugin.js cli
  * - app/ to manage plugins.
  */
-const fs = require('fs');
-const os = require('os');
-const zlib = require('zlib');
-const tar = require('tar');
-const path = require('path');
-const crypto = require('crypto');
-const stream = require('stream');
-const semver = require('semver');
-const envPaths = require('env-paths');
+import crypto from 'crypto';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import semver from 'semver';
+import stream from 'stream';
+import tar from 'tar';
+import zlib from 'zlib';
 
 // comment out for testing
 // function sleep(ms) {
@@ -24,6 +23,33 @@ const envPaths = require('env-paths');
 //   //   setTimeout(resolve, ms+2000);
 //   // });
 // }
+
+/**
+ * `ProgressResp` is an interface for progress response.
+ *
+ * @interface
+ * @property {string} type - The type of the progress response.
+ * @property {string} message - The message of the progress response.
+ * @property {Record<string, any>} data - Additional data for the progress response. Optional.
+ */
+interface ProgressResp {
+  type: string;
+  message: string;
+  data?: Record<string, any>;
+}
+
+type ProgressCallback = (progress: ProgressResp) => void;
+
+interface PluginData {
+  pluginName: string;
+  pluginTitle: string;
+  pluginVersion: string;
+  folderName: string;
+  artifacthubURL: string;
+  repoName: string;
+  author: string;
+  artifacthubVersion: string;
+}
 
 class PluginManager {
   /**
@@ -39,8 +65,8 @@ class PluginManager {
     URL,
     destinationFolder = defaultPluginsDir(),
     headlampVersion = '',
-    progressCallback = null,
-    signal = null
+    progressCallback: null | ProgressCallback = null,
+    signal: AbortSignal | null = null
   ) {
     try {
       const [name, tempFolder] = await downloadExtractPlugin(
@@ -70,12 +96,14 @@ class PluginManager {
     }
   }
 
+  // progress function type that takes ProgressResp as argument and returns void
+  // type ProgressCallback = (progress: ProgressResp) => void;
   /**
    * Updates an installed plugin to the latest version.
    * @param {string} pluginName - The name of the plugin to update.
    * @param {string} [destinationFolder=defaultPluginsDir()] - The folder where the plugin is installed.
    * @param {string} [headlampVersion=""] - The version of Headlamp for compatibility checking.
-   * @param {function} [progressCallback=null] - Optional callback for progress updates.
+   * @param {null | ProgressCallback} [progressCallback=null] - Optional callback for progress updates.
    * @param {AbortSignal} [signal=null] - Optional AbortSignal for cancellation.
    * @returns {Promise<void>} A promise that resolves when the update is complete.
    */
@@ -83,11 +111,15 @@ class PluginManager {
     pluginName,
     destinationFolder = defaultPluginsDir(),
     headlampVersion = '',
-    progressCallback = null,
-    signal = null
-  ) {
+    progressCallback: null | ProgressCallback = null,
+    signal: AbortSignal | null = null
+  ): Promise<void> {
     try {
+      // @todo: should list call take progressCallback?
       const installedPlugins = PluginManager.list(destinationFolder);
+      if (!installedPlugins) {
+        throw new Error('InstalledPlugins not found');
+      }
       const plugin = installedPlugins.find(p => p.pluginName === pluginName);
       if (!plugin) {
         throw new Error('Plugin not found');
@@ -149,9 +181,17 @@ class PluginManager {
    * @param {function} [progressCallback=null] - Optional callback for progress updates.
    * @returns {void}
    */
-  static uninstall(name, folder = defaultPluginsDir(), progressCallback = null) {
+  static uninstall(
+    name,
+    folder = defaultPluginsDir(),
+    progressCallback: null | ProgressCallback = null
+  ) {
     try {
+      // @todo: should list call take progressCallback?
       const installedPlugins = PluginManager.list(folder);
+      if (!installedPlugins) {
+        throw new Error('InstalledPlugins not found');
+      }
       const plugin = installedPlugins.find(p => p.pluginName === name);
       if (!plugin) {
         throw new Error('Plugin not found');
@@ -185,9 +225,9 @@ class PluginManager {
    * @param {function} [progressCallback=null] - Optional callback for progress updates.
    * @returns {Array<object>} An array of objects representing valid plugins.
    */
-  static list(folder = defaultPluginsDir(), progressCallback = null) {
+  static list(folder = defaultPluginsDir(), progressCallback: null | ProgressCallback = null) {
     try {
-      const pluginsData = [];
+      const pluginsData: PluginData[] = [];
 
       // Read all entries in the specified folder
       const entries = fs.readdirSync(folder, { withFileTypes: true });
@@ -336,7 +376,7 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
   }
 
   // await sleep(4000); // comment out for testing
-  const archResponse = await fetch(archiveURL, { redirect: 'follow', follow: 10 }, { signal });
+  const archResponse = await fetch(archiveURL, { redirect: 'follow', signal });
   if (!archResponse.ok) {
     throw new Error(`Failed to download tarball. Status code: ${archResponse.status}`);
   }
@@ -349,8 +389,12 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
     progressCallback({ type: 'info', message: 'Plugin Downloaded' });
   }
 
-  const archChunks = [];
+  const archChunks: Uint8Array[] = [];
   let archBufferLengeth = 0;
+
+  if (!archResponse.body) {
+    throw new Error('Download empty');
+  }
 
   for await (const chunk of archResponse.body) {
     archChunks.push(chunk);
@@ -375,15 +419,15 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
   const archStream = new stream.PassThrough();
   archStream.end(archBuffer);
 
-  const extractStream = archStream.pipe(zlib.createGunzip()).pipe(
+  const extractStream: stream.Writable = archStream.pipe(zlib.createGunzip()).pipe(
     tar.extract({
       cwd: tempFolder,
       strip: 1,
       sync: true,
-    })
+    }) as unknown as stream.Writable
   );
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     extractStream.on('finish', () => {
       resolve();
     });
@@ -435,7 +479,7 @@ async function fetchPluginInfo(URL, progressCallback, signal) {
     if (progressCallback) {
       progressCallback({ type: 'info', message: 'Fetching Plugin Metadata' });
     }
-    const response = await fetch(apiURL, { redirect: 'follow', follow: 10 }, { signal });
+    const response = await fetch(apiURL, { redirect: 'follow', signal });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -485,9 +529,23 @@ function checkValidPluginFolder(folder) {
  * @returns {string} The path to the default plugins directory.
  */
 function defaultPluginsDir() {
-  const paths = envPaths('Headlamp', { suffix: '' });
-  const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
-  return path.join(configDir, 'plugins');
+  let baseDir;
+
+  switch (process.platform) {
+    case 'win32':
+      baseDir = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
+      break;
+    case 'darwin':
+      baseDir = path.join(os.homedir(), 'Library', 'Application Support');
+      break;
+    default:
+      baseDir = process.env.XDG_DATA_HOME || path.join(os.homedir(), '.local', 'share');
+  }
+
+  const configDirPath = path.join(baseDir, 'Headlamp');
+  const dataDir = fs.existsSync(configDirPath) ? configDirPath : baseDir;
+
+  return path.join(dataDir, 'plugins');
 }
 
-module.exports = PluginManager;
+export { PluginManager };

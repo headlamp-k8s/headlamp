@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * This script is used to push assets to a release.
  * It can be used to push a single asset or more, and by default it will also push a checksums.txt file.
@@ -64,6 +66,7 @@ async function getChecksums(release) {
         repo,
         asset_id: checksums.id,
         headers: {
+          // NOTE: because application/octet-stream is given it downloads the file.
           accept: 'application/octet-stream',
         },
       }
@@ -121,8 +124,17 @@ function createChecksumsContents(checksums) {
   return contents;
 }
 
+/**
+ * @param {string} extension - the extension to look up.
+ * @returns the mimetype of the given extension
+ * @rtype string
+ */
 function getMimeType(extension) {
-  return mime.lookup(extension) || 'application/octet-stream';
+  const res = mime.lookup(extension);
+  if (typeof res !== 'string') {
+    return 'application/octet-stream';
+  }
+  return res;
 }
 
 async function pushFiles(release, files) {
@@ -166,7 +178,6 @@ async function pushFiles(release, files) {
 
     const headers = {
       'Content-Type': getMimeType(filePath.split('.').pop()),
-      'Content-Length': data.length,
     };
 
     console.log(`Uploading ${baseFileName}, type: ${headers['Content-Type']}...`);
@@ -177,7 +188,7 @@ async function pushFiles(release, files) {
         repo,
         release_id: release.id,
         name: baseFileName,
-        data: data,
+        data: `@${filePath}`,
         headers,
       });
     } catch (e) {
