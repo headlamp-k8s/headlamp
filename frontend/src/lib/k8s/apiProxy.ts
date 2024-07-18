@@ -257,9 +257,18 @@ async function refreshToken(token: string | null): Promise<void> {
   };
 
   try {
+    const headers = new Headers({
+      ...JSON_HEADERS,
+    });
+
+    const token = getToken(cluster);
+    if (!!token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+
     const response = await fetch(tokenUrl, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, ...JSON_HEADERS },
+      headers,
       body: JSON.stringify(tokenData),
     });
 
@@ -1733,12 +1742,18 @@ export function startPortForward(
   address: string = '',
   id: string = ''
 ) {
+  const headers = new Headers({
+    ...JSON_HEADERS,
+  });
+
+  const token = getToken(cluster);
+  if (!!token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'POST',
-    headers: new Headers({
-      Authorization: `Bearer ${getToken(cluster)}`,
-      ...JSON_HEADERS,
-    }),
+    headers,
     body: JSON.stringify({
       cluster,
       namespace,
@@ -1823,12 +1838,18 @@ export function listPortForward(cluster: string) {
  * to get the status of the drain node process.
  */
 export function drainNode(cluster: string, nodeName: string) {
+  const headers = new Headers({
+    ...JSON_HEADERS,
+  });
+
+  const token = getToken(cluster);
+  if (!!token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+
   return fetch(`${helpers.getAppUrl()}drain-node`, {
     method: 'POST',
-    headers: new Headers({
-      Authorization: `Bearer ${getToken(cluster)}`,
-      ...JSON_HEADERS,
-    }),
+    headers,
     body: JSON.stringify({
       cluster,
       nodeName,
@@ -1865,12 +1886,18 @@ interface DrainNodeStatus {
  * @throws {Error} if the response is not ok
  */
 export function drainNodeStatus(cluster: string, nodeName: string): Promise<DrainNodeStatus> {
+  const headers = new Headers({
+    ...JSON_HEADERS,
+  });
+
+  const token = getToken(cluster);
+  if (!!token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+
   return fetch(`${helpers.getAppUrl()}drain-node-status?cluster=${cluster}&nodeName=${nodeName}`, {
     method: 'GET',
-    headers: new Headers({
-      Authorization: `Bearer ${getToken(cluster)}`,
-      ...JSON_HEADERS,
-    }),
+    headers,
   }).then(response => {
     return response.json().then((data: DrainNodeStatus) => {
       if (!response.ok) {
