@@ -79,11 +79,11 @@ and join the discussion on the
 [#headlamp](https://kubernetes.slack.com/messages/headlamp) channel
 in the Kubernetes Slack.
 
-## Roadmap
+## Roadmap / Release Planning
 
 If you are interested in the direction of the project, we maintain a
-[Roadmap](https://github.com/headlamp-k8s/headlamp/projects/2) for it with the
-biggest changes planned so far.
+[Roadmap](https://github.com/orgs/headlamp-k8s/projects/1/views/1) for it, with the
+biggest changes planned so far, as well as a [board](https://github.com/orgs/headlamp-k8s/projects/1/) tracking each release.
 
 ## License
 
