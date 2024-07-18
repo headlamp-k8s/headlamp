@@ -2,10 +2,7 @@
 // @ts-check
 'use strict';
 
-const webpack = require('webpack');
-const config = require('../config/webpack.config');
 const fs = require('fs-extra');
-const FileManagerPlugin = require('filemanager-webpack-plugin');
 const envPaths = require('env-paths');
 const path = require('path');
 const resolve = path.resolve;
@@ -15,6 +12,11 @@ const yargs = require('yargs/yargs');
 const headlampPluginPkg = require('../package.json');
 const pluginManager = require('../plugin-management/plugin-management');
 const { table } = require('table');
+
+// ES imports
+const viteCopyPluginPromise = import('vite-plugin-static-copy');
+const viteConfigPromise = import('../config/vite.config.mjs');
+const vitePromise = import('vite');
 
 /**
  * Creates a new plugin folder.
@@ -111,42 +113,6 @@ function create(name, link) {
 }
 
 /**
- * Compile callback for webpack to show any warnings + errors.
- */
-function compileMessages(err, stats) {
-  if (err && err.message) {
-    console.log(err);
-    // This should be a failure.
-    return 1;
-  }
-  if (stats && stats.compilation) {
-    const printList = {
-      Warnings: stats.compilation.warnings,
-      Errors: stats.compilation.errors,
-    };
-
-    Object.entries(printList).forEach(([key, value]) => {
-      if (value.length === 0) {
-        return;
-      }
-
-      console.log(`${key}:\n`);
-      for (const item of value) {
-        console.log(item);
-        console.log('\n');
-      }
-    });
-
-    if (stats.hasErrors()) {
-      // This should be a failure.
-      return 1;
-    }
-  }
-
-  return 0;
-}
-
-/**
  * extract copies folders of packages in the form:
  *   packageName/dist/main.js to packageName/main.js
  *   packageName/package.json to packageName/package.json
@@ -233,15 +199,15 @@ function extract(pluginPackagesPath, outputPlugins) {
 
 /**
  * Start watching for changes, and build again if there are changes.
- * @returns {number} - Exit code, where 0 is success.
+ * @returns {Promise<number>} Exit code, where 0 is success.
  */
-function start() {
+async function start() {
   /**
    * Copies the built plugin to the app config folder ~/.config/Headlamp/plugins/
    *
    * Adds a webpack config plugin for copying the folder.
    */
-  function copyToPluginsFolder(webpackConfig) {
+  async function copyToPluginsFolder(viteConfig) {
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
     // @todo: should the whole package name be used here,
@@ -250,24 +216,22 @@ function start() {
     const paths = envPaths('Headlamp', { suffix: '' });
     const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
 
-    webpackConfig.plugins = [
-      new FileManagerPlugin({
-        events: {
-          onEnd: {
-            copy: [
-              {
-                source: './dist/*',
-                destination: path.join(configDir, 'plugins', packageName),
-              },
-              {
-                source: './package.json',
-                destination: path.join(configDir, 'plugins', packageName, 'package.json'),
-              },
-            ],
+    const { viteStaticCopy } = await viteCopyPluginPromise;
+
+    viteConfig.plugins.push(
+      viteStaticCopy({
+        targets: [
+          {
+            src: './dist/*',
+            dest: path.join(configDir, 'plugins', packageName),
           },
-        },
-      }),
-    ];
+          {
+            src: './package.json',
+            dest: path.join(configDir, 'plugins', packageName),
+          },
+        ],
+      })
+    );
   }
 
   /**
@@ -299,23 +263,25 @@ function start() {
     });
   }, 500);
 
-  config.watch = true;
-  config.mode = 'development';
-  process.env['BABEL_ENV'] = 'development';
-  copyToPluginsFolder(config);
-  let exitCode = 0;
-  webpack(config, (err, stats) => {
-    // We are checking the exit code of the compileMessages function.
-    // It should be 0 if there are no errors, and 1 if there are errors.
-    exitCode = compileMessages(err, stats);
-    if (exitCode !== 0) {
-      console.error('Failed to start watching for changes.');
-    } else {
-      console.log('Watching for changes to plugin...');
-    }
-  });
+  const config = (await viteConfigPromise).default;
+  const vite = await vitePromise;
 
-  return exitCode;
+  await copyToPluginsFolder(config);
+
+  if (config.build) {
+    config.build.watch = {};
+    config.build.sourcemap = 'inline';
+  }
+
+  try {
+    await vite.build(config);
+  } catch (e) {
+    console.error(e);
+    console.error('Failed to start watching for changes.');
+    return 1;
+  }
+
+  return 0;
 }
 
 /**
@@ -484,36 +450,34 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
  * Build the plugin package or folder of packages for production.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
- * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ * @returns {Promise<0 | 1>} Exit code, where 0 is success, 1 is failure.
  */
-function build(packageFolder) {
+async function build(packageFolder) {
   if (!fs.existsSync(packageFolder)) {
     console.error(`"${packageFolder}" does not exist. Not building.`);
     return 1;
   }
 
   const oldCwd = process.cwd();
-  const oldBabelEnv = process.env['BABEL_ENV'];
-  process.env['BABEL_ENV'] = 'production';
 
-  function buildPackage(folder) {
+  async function buildPackage(folder) {
     if (!fs.existsSync(path.join(folder, 'package.json'))) {
       return false;
     }
 
     process.chdir(folder);
     console.log(`Building "${folder}" for production...`);
-    webpack(config, (err, stats) => {
-      // We are checking the exit code of the compileMessages function.
-      // It should be 0 if there are no errors, and 1 if there are errors.
-      const exitCode = compileMessages(err, stats);
-      if (exitCode !== 0) {
-        console.error(`Failed to build "${folder}" for production.`);
-      } else {
-        console.log(`Finished building "${folder}" for production.`);
-      }
-      process.exit(exitCode);
-    });
+    const config = await viteConfigPromise;
+    const vite = await vitePromise;
+    try {
+      await vite.build(config.default);
+      console.log(`Finished building "${folder}" for production.`);
+    } catch (e) {
+      console.error(e);
+      console.error(`Failed to build "${folder}" for production.`);
+      process.exit(1);
+    }
+
     process.chdir(oldCwd);
     return true;
   }
@@ -538,8 +502,6 @@ function build(packageFolder) {
   if (!(buildPackage(packageFolder) || buildFolderOfPackages())) {
     console.error(`"${packageFolder}" does not contain a package or packages. Not building.`);
   }
-
-  process.env['BABEL_ENV'] = oldBabelEnv;
 
   return 0;
 }
@@ -981,7 +943,7 @@ function storybook_build(packageFolder) {
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function test(packageFolder) {
-  const script = `react-scripts test --transformIgnorePatterns "/node_modules/(?!monaco-editor|spacetime|d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|@kinvolk/headlamp-plugin)"`;
+  const script = `vitest -c node_modules/@kinvolk/headlamp-plugin/config/vite.config.mjs`;
   return runScriptOnPackages(packageFolder, 'test', script, { UNDER_TEST: 'true' });
 }
 
@@ -999,12 +961,13 @@ yargs(process.argv.slice(2))
         default: '.',
       });
     },
-    argv => {
-      process.exitCode = build(argv.package);
+    async argv => {
+      // @ts-ignore
+      process.exitCode = await build(argv.package);
     }
   )
-  .command('start', 'Watch for changes and build plugin.', {}, () => {
-    process.exitCode = start();
+  .command('start', 'Watch for changes and build plugin.', {}, async () => {
+    process.exitCode = await start();
   })
   .command(
     'create <name>',
@@ -1022,6 +985,7 @@ yargs(process.argv.slice(2))
         });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = create(argv.name, argv.link);
     }
   )
@@ -1045,6 +1009,7 @@ yargs(process.argv.slice(2))
       });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = extract(argv.pluginPackages, argv.outputPlugins);
     }
   )
@@ -1065,6 +1030,7 @@ yargs(process.argv.slice(2))
         });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = format(argv.package, argv.check);
     }
   )
@@ -1086,6 +1052,7 @@ yargs(process.argv.slice(2))
         });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = lint(argv.package, argv.fix);
     }
   )
@@ -1102,6 +1069,7 @@ yargs(process.argv.slice(2))
       });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = tsc(argv.package);
     }
   )
@@ -1116,6 +1084,7 @@ yargs(process.argv.slice(2))
       });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = storybook(argv.package);
     }
   )
@@ -1131,6 +1100,7 @@ yargs(process.argv.slice(2))
       });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = storybook_build(argv.package);
     }
   )
@@ -1157,6 +1127,7 @@ yargs(process.argv.slice(2))
         });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = upgrade(argv.package, argv.skipPackageUpdates, argv.headlampPluginVersion);
     }
   )
@@ -1171,6 +1142,7 @@ yargs(process.argv.slice(2))
       });
     },
     argv => {
+      // @ts-ignore
       process.exitCode = test(argv.package);
     }
   )
