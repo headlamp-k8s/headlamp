@@ -47,6 +47,18 @@ function testHeadlampPlugin() {
   checkFileExists(join('.plugins', PACKAGE_NAME, 'main.js'));
   checkFileExists(join('.plugins', PACKAGE_NAME, 'package.json'));
 
+  // test packing works
+  const tmpDir = fs.mkdtempSync('headlamp-plugin-test-');
+  run(`node bin/headlamp-plugin.js package ${PACKAGE_NAME} ${tmpDir}`);
+  checkFileExists(join(tmpDir, `${PACKAGE_NAME}-0.0.1.tar.gz`));
+  // extract archive and check files
+  const extractionFolder = join(tmpDir, 'dst');
+  fs.mkdirSync(extractionFolder, { recursive: true });
+  run(`tar -xzf ${join(tmpDir, `${PACKAGE_NAME}-0.0.1.tar.gz`)} -C ${extractionFolder}`);
+  checkFileExists(join(extractionFolder, `${PACKAGE_NAME}`, 'main.js'));
+  checkFileExists(join(extractionFolder, `${PACKAGE_NAME}`, 'package.json'));
+  fs.rmSync(tmpDir, { recursive: true });
+
   // test format command and that default code is formatted correctly
   fs.rmSync(PACKAGE_NAME, { recursive: true });
   run(`node bin/headlamp-plugin.js create ${PACKAGE_NAME} --link`);

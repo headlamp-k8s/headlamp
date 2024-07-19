@@ -21,6 +21,9 @@ headlamp-plugin --help
   <pluginPackages> <outputPlugins>          inPackages/packageName/dist/main.js
                                             to
                                             outputPlugins/packageName/main.js.
+  headlamp-plugin.js package [pluginPath]   Creates a tarball of the plugin
+  [outputDir]                               package in the format Headlamp
+                                            expects.
   headlamp-plugin.js format [package]       format the plugin code with
                                             prettier. <package> defaults to
                                             current working directory. Can also
@@ -49,7 +52,7 @@ headlamp-plugin --help
                                             working directory. Can also be a
                                             folder of packages.
   headlamp-plugin.js list                   List installed plugins.
-  headlamp-plugin.js install [URL]          Install a plugin from the specified 
+  headlamp-plugin.js install [URL]          Install a plugin from the specified
                                             Artifact Hub URL.
   headlamp-plugin.js update [pluginName]    Update the plugin to the latest version.
   headlamp-plugin.js uninstall [pluginName] Uninstall the plugin.
