@@ -9,3 +9,4 @@
 /electron/windowSize.js
 /electron/plugin-management.js
 electron/windowSize.test.js
+electron/env-paths.js
