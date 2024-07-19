@@ -15,6 +15,7 @@ import semver from 'semver';
 import stream from 'stream';
 import tar from 'tar';
 import zlib from 'zlib';
+import envPaths from './env-paths';
 
 // comment out for testing
 // function sleep(ms) {
@@ -51,7 +52,7 @@ interface PluginData {
   artifacthubVersion: string;
 }
 
-class PluginManager {
+export class PluginManager {
   /**
    * Installs a plugin from the specified URL.
    * @param {string} URL - The URL of the plugin to install.
@@ -529,23 +530,7 @@ function checkValidPluginFolder(folder) {
  * @returns {string} The path to the default plugins directory.
  */
 function defaultPluginsDir() {
-  let baseDir;
-
-  switch (process.platform) {
-    case 'win32':
-      baseDir = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
-      break;
-    case 'darwin':
-      baseDir = path.join(os.homedir(), 'Library', 'Application Support');
-      break;
-    default:
-      baseDir = process.env.XDG_DATA_HOME || path.join(os.homedir(), '.local', 'share');
-  }
-
-  const configDirPath = path.join(baseDir, 'Headlamp');
-  const dataDir = fs.existsSync(configDirPath) ? configDirPath : baseDir;
-
-  return path.join(dataDir, 'plugins');
+  const paths = envPaths('Headlamp', { suffix: '' });
+  const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
+  return path.join(configDir, 'plugins');
 }
-
-export { PluginManager };

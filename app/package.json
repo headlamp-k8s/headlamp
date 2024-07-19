@@ -119,6 +119,7 @@
       "electron/i18next.config.js",
       "electron/i18n-helper.js",
       "electron/windowSize.js",
+      "electron/env-paths.js",
       "electron/plugin-management.js"
     ],
     "extraResources": [
