@@ -13,7 +13,7 @@ const child_process = require('child_process');
 const validate = require('validate-npm-package-name');
 const yargs = require('yargs/yargs');
 const headlampPluginPkg = require('../package.json');
-const pluginManager = require('../plugin-management/plugin-management');
+const PluginManager = require('../plugin-management/plugin-management').PluginManager;
 const { table } = require('table');
 
 /**
@@ -1207,7 +1207,7 @@ yargs(process.argv.slice(2))
             }
           }; // Use console.log for logs if not in quiet mode
       try {
-        await pluginManager.install(URL, folderName, headlampVersion, progressCallback);
+        await PluginManager.install(URL, folderName, headlampVersion, progressCallback);
       } catch (e) {
         console.error(e.message);
         process.exit(1); // Exit with error status
@@ -1247,7 +1247,7 @@ yargs(process.argv.slice(2))
             }
           }; // Use console.log for logs if not in quiet mode
       try {
-        await pluginManager.update(pluginName, folderName, headlampVersion, progressCallback);
+        await PluginManager.update(pluginName, folderName, headlampVersion, progressCallback);
       } catch (e) {
         console.error(e.message);
         process.exit(1); // Exit with error status
@@ -1283,7 +1283,7 @@ yargs(process.argv.slice(2))
             }
           }; // Use console.log for logs if not in quiet mode
       try {
-        await pluginManager.uninstall(pluginName, folderName, progressCallback);
+        await PluginManager.uninstall(pluginName, folderName, progressCallback);
       } catch (e) {
         console.error(e.message);
         process.exit(1); // Exit with error status
@@ -1326,7 +1326,7 @@ yargs(process.argv.slice(2))
         }
       };
       try {
-        await pluginManager.list(folderName, progressCallback);
+        await PluginManager.list(folderName, progressCallback);
       } catch (e) {
         console.error(e.message);
         process.exit(1); // Exit with error status

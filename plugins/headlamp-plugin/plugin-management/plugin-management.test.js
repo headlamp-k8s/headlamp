@@ -1,7 +1,11 @@
-const PluginManager = require('./plugin-management.js');
+const pluginManagement = require('./plugin-management.js');
 const tmp = require('tmp');
 const fs = require('fs');
 const semver = require('semver');
+
+const PluginManager = pluginManagement.PluginManager;
+const validateArchiveURL = pluginManagement.validateArchiveURL;
+
 
 // Mocking progressCallback function for testing
 // eslint-disable-next-line
@@ -99,5 +103,43 @@ describe('PluginManager Test Cases', () => {
     });
 
     fs.rmdirSync(tempDir, { recursive: true });
+  });
+});
+
+describe('validateArchiveURL', () => {
+  test('valid GitHub release URL', () => {
+    expect(validateArchiveURL('https://github.com/headlamp-k8s/headlamp/releases/download/v0.24.1/Headlamp-0.24.1-win-x64.exe')).toBe(true);
+  });
+
+  test('valid GitHub archive URL', () => {
+    expect(validateArchiveURL('https://github.com/owner/repo/archive/refs/tags/v1.0.0.zip')).toBe(true);
+  });
+
+  test('valid Bitbucket download URL', () => {
+    expect(validateArchiveURL('https://bitbucket.org/owner/repo/downloads/package-1.0.0.zip')).toBe(true);
+  });
+
+  test('valid Bitbucket get archive URL', () => {
+    expect(validateArchiveURL('https://bitbucket.org/owner/repo/get/v1.0.0.tar.gz')).toBe(true);
+  });
+
+  test('valid GitLab release URL', () => {
+    expect(validateArchiveURL('https://gitlab.com/gitlab-org/gitlab/-/archive/v17.2.0-ee/gitlab-v17.2.0-ee.tar.gz')).toBe(true);
+  });
+
+  test('invalid URL', () => {
+    expect(validateArchiveURL('https://example.com/some/invalid/url')).toBe(false);
+  });
+
+  test('invalid GitHub URL', () => {
+    expect(validateArchiveURL('https://github.com/owner/repo/invalid/path')).toBe(false);
+  });
+
+  test('invalid Bitbucket URL', () => {
+    expect(validateArchiveURL('https://bitbucket.org/owner/repo/invalid/path')).toBe(false);
+  });
+
+  test('invalid GitLab URL', () => {
+    expect(validateArchiveURL('https://gitlab.com/owner/repo/invalid/path')).toBe(false);
   });
 });
