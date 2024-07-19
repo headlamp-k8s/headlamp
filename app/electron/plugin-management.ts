@@ -13,7 +13,7 @@ import os from 'os';
 import path from 'path';
 import semver from 'semver';
 import stream from 'stream';
-import tar from 'tar';
+import * as tar from 'tar';
 import zlib from 'zlib';
 import envPaths from './env-paths';
 
