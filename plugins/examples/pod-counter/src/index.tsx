@@ -20,6 +20,9 @@ registerAppBarAction(PodCounter);
 
 // We can also reorder the actions in the app bar.
 registerAppBarAction(function reorderNotifications({ actions }: AppBarActionsProcessorArgs) {
+  if (!actions) {
+    return actions;
+  }
   // Remove the notifications action button
   const newActions = actions.filter(action => action.id !== DefaultAppBarAction.NOTIFICATION);
 
