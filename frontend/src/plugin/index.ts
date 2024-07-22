@@ -7,6 +7,7 @@ import * as Iconify from '@iconify/react';
 import * as ReactMonacoEditor from '@monaco-editor/react';
 import * as MuiLab from '@mui/lab';
 import * as MuiMaterial from '@mui/material';
+import * as MuiMaterialStyles from '@mui/material/styles';
 import * as MuiStyles from '@mui/styles';
 import * as Lodash from 'lodash';
 import * as MonacoEditor from 'monaco-editor';
@@ -49,7 +50,10 @@ window.pluginLib = {
     __esModule: true,
   },
   CommonComponents,
-  MuiMaterial,
+  MuiMaterial: {
+    ...MuiMaterial,
+    styles: MuiMaterialStyles,
+  },
   MuiStyles,
   MuiLab,
   React,
