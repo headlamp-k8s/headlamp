@@ -6,10 +6,10 @@
 import nock from 'nock';
 import { Mock, MockedFunction } from 'vitest';
 import WS from 'vitest-websocket-mock';
-import exportFunctions from '../../helpers';
-import * as auth from '../auth';
-import * as cluster from '../cluster';
-import * as apiProxy from './apiProxy';
+import exportFunctions from '../../../helpers';
+import * as auth from '../../auth';
+import * as cluster from '../../cluster';
+import * as apiProxy from '../apiProxy';
 
 const baseApiUrl = exportFunctions.getAppUrl();
 const wsUrl = baseApiUrl.replace('http', 'ws');
