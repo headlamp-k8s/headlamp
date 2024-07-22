@@ -989,7 +989,9 @@ function startElecron() {
     });
 
     mainWindow.webContents.on('dom-ready', () => {
-      mainWindow?.webContents.send('currentMenu', getDefaultAppMenu());
+      const defaultMenu = getDefaultAppMenu();
+      const currentMenu = JSON.parse(JSON.stringify(defaultMenu));
+      mainWindow?.webContents.send('currentMenu', currentMenu);
     });
 
     mainWindow.on('closed', () => {
