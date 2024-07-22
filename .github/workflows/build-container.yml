@@ -118,8 +118,8 @@ jobs:
       run: kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
     - name: Run e2e tests
       run: |
-        echo "------------------------------------sleeping 3...------------------------------------"
-        sleep 6
+        echo "------------------------------------sleeping 12...------------------------------------"
+        sleep 12
         kubectl get services --all-namespaces
         kubectl get deployments -n kube-system
         echo "------------------Waiting for headlamp deployment to be available...------------------"
