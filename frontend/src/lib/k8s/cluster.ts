@@ -706,6 +706,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         args.unshift(this.getNamespace()!);
       }
 
+      // @ts-ignore
       return this._class().apiEndpoint.delete(...args, {}, this._clusterName);
     }
 
@@ -748,13 +749,14 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     patch(body: OpPatch[]) {
       const patchMethod = this._class().apiEndpoint.patch;
-      const args: Parameters<typeof patchMethod> = [body];
+      const args: Partial<Parameters<typeof patchMethod>> = [body];
 
       if (this.isNamespaced) {
         args.push(this.getNamespace());
       }
 
       args.push(this.getName());
+      // @ts-ignore
       return this._class().apiEndpoint.patch(...args, {}, this._clusterName);
     }
 

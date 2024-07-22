@@ -27,7 +27,7 @@ import { getLastScheduleTime, getSchedule } from './List';
 
 function SpawnJobDialog(props: {
   cronJob: CronJob;
-  applyFunc: (newItem: KubeObjectInterface) => Promise<JSON>;
+  applyFunc: (newItem: KubeObjectInterface) => Promise<KubeObjectInterface>;
   openJobDialog: boolean;
   setOpenJobDialog: (open: boolean) => void;
 }) {

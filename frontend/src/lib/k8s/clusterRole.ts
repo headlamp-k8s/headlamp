@@ -1,7 +1,8 @@
 import { apiFactory } from './apiProxy';
-import Role from './role';
+import { makeKubeObject } from './cluster';
+import { KubeRole } from './role';
 
-class ClusterRole extends Role {
+class ClusterRole extends makeKubeObject<KubeRole>('role') {
   static apiEndpoint = apiFactory('rbac.authorization.k8s.io', 'v1', 'clusterroles');
 
   static get className() {
@@ -10,6 +11,10 @@ class ClusterRole extends Role {
 
   get detailsRoute() {
     return 'clusterRole';
+  }
+
+  get rules() {
+    return this.jsonData!.rules;
   }
 }
 
