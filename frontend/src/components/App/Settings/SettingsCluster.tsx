@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
-import { deleteCluster } from '../../../lib/k8s/apiProxy';
-import { setConfig } from '../../../redux/configSlice';
+import { deleteCluster, parseKubeConfig, renameCluster } from '../../../lib/k8s/apiProxy';
+import { setConfig, setStatelessConfig } from '../../../redux/configSlice';
+import { findKubeconfigByClusterName, updateStatelessClusterKubeconfig } from '../../../stateless/';
 import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 
@@ -24,6 +25,18 @@ function isValidNamespaceFormat(namespace: string) {
   return regex.test(namespace);
 }
 
+function isValidClusterNameFormat(name: string) {
+  // We allow empty isValidClusterNameFormat just because that's the default value in our case.
+  if (!name) {
+    return true;
+  }
+
+  // Validates that the namespace is a valid DNS-1123 label and returns a boolean.
+  // https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names
+  const regex = new RegExp('^[a-z0-9]([-a-z0-9]*[a-z0-9])?$');
+  return regex.test(name);
+}
+
 export default function SettingsCluster() {
   const cluster = useCluster();
   const clusterConf = useClustersConf();
@@ -32,10 +45,49 @@ export default function SettingsCluster() {
   const [userDefaultNamespace, setUserDefaultNamespace] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
+  const [newClusterName, setNewClusterName] = React.useState(cluster || '');
   const theme = useTheme();
 
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const clusterInfo = (clusterConf && clusterConf[cluster || '']) || null;
+  const source = clusterInfo?.meta_data?.source || '';
+
+  const handleUpdateClusterName = (source: string) => {
+    try {
+      renameCluster(cluster || '', newClusterName, source)
+        .then(async config => {
+          if (cluster) {
+            const kubeconfig = await findKubeconfigByClusterName(cluster);
+            if (kubeconfig !== null) {
+              await updateStatelessClusterKubeconfig(kubeconfig, newClusterName, cluster);
+              // Make another request for updated kubeconfig
+              const updatedKubeconfig = await findKubeconfigByClusterName(cluster);
+              if (updatedKubeconfig !== null) {
+                parseKubeConfig({ kubeconfig: updatedKubeconfig })
+                  .then((config: any) => {
+                    storeNewClusterName(newClusterName);
+                    dispatch(setStatelessConfig(config));
+                  })
+                  .catch((err: Error) => {
+                    console.error('Error updating cluster name:', err.message);
+                  });
+              }
+            } else {
+              dispatch(setConfig(config));
+            }
+          }
+          history.push('/');
+          window.location.reload();
+        })
+        .catch((err: Error) => {
+          console.error('Error updating cluster name:', err.message);
+        });
+    } catch (error) {
+      console.error('Error updating cluster name:', error);
+    }
+  };
 
   const removeCluster = () => {
     deleteCluster(cluster || '')
@@ -75,6 +127,10 @@ export default function SettingsCluster() {
   React.useEffect(() => {
     if (clusterSettings?.defaultNamespace !== userDefaultNamespace) {
       setUserDefaultNamespace(clusterSettings?.defaultNamespace || '');
+    }
+
+    if (clusterSettings?.currentName !== cluster) {
+      setNewClusterName(clusterSettings?.currentName || '');
     }
 
     // Avoid re-initializing settings as {} just because the cluster is not yet set.
@@ -139,10 +195,31 @@ export default function SettingsCluster() {
     });
   }
 
+  function storeNewClusterName(name: string) {
+    let actualName = name;
+    if (name === cluster) {
+      actualName = '';
+      setNewClusterName(actualName);
+    }
+
+    setClusterSettings((settings: ClusterSettings | null) => {
+      const newSettings = { ...(settings || {}) };
+      if (isValidClusterNameFormat(name)) {
+        newSettings.currentName = actualName;
+      }
+      return newSettings;
+    });
+  }
+
   const isValidDefaultNamespace = isValidNamespaceFormat(userDefaultNamespace);
+  const isValidCurrentName = isValidClusterNameFormat(newClusterName);
   const isValidNewAllowedNamespace = isValidNamespaceFormat(newAllowedNamespace);
   const invalidNamespaceMessage = t(
     "translation|Namespaces must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
+  );
+
+  const invalidClusterNameMessage = t(
+    "translation|Cluster name must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
   );
 
   return (
@@ -166,6 +243,62 @@ export default function SettingsCluster() {
           ],
         }}
       >
+        {helpers.isElectron() && (
+          <NameValueTable
+            rows={[
+              {
+                name: t('translation|Name'),
+                value: (
+                  <TextField
+                    onChange={event => {
+                      let value = event.target.value;
+                      value = value.replace(' ', '');
+                      setNewClusterName(value);
+                    }}
+                    value={newClusterName}
+                    placeholder={cluster}
+                    error={!isValidCurrentName}
+                    helperText={
+                      isValidCurrentName
+                        ? t(
+                            'translation|The current name of cluster. You can define custom modified name.'
+                          )
+                        : invalidClusterNameMessage
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <Box pt={2} textAlign="right">
+                          <ConfirmButton
+                            onConfirm={() => {
+                              if (isValidCurrentName) {
+                                handleUpdateClusterName(source);
+                              }
+                            }}
+                            confirmTitle={t('translation|Change name')}
+                            confirmDescription={t(
+                              'translation|Are you sure you want to change the name for "{{ clusterName }}"?',
+                              { clusterName: cluster }
+                            )}
+                            disabled={!newClusterName || !isValidCurrentName}
+                          >
+                            {t('translation|Apply')}
+                          </ConfirmButton>
+                        </Box>
+                      ),
+                      onKeyPress: event => {
+                        if (event.key === 'Enter' && isValidCurrentName) {
+                          handleUpdateClusterName(source);
+                        }
+                      },
+                      autoComplete: 'off',
+                      sx: { maxWidth: 250 },
+                    }}
+                  />
+                ),
+              },
+            ]}
+          />
+        )}
         <NameValueTable
           rows={[
             {

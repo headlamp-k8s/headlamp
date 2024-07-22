@@ -11,6 +11,9 @@ import (
 	"runtime"
 	"strings"
 
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	k8sruntime "k8s.io/apimachinery/pkg/runtime"
+
 	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
@@ -44,6 +47,32 @@ type OidcConfig struct {
 	ClientSecret string
 	IdpIssuerURL string
 	Scopes       []string
+}
+
+// CustomObject represents the custom object that holds the HeadlampInfo regarding custom name.
+type CustomObject struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	CustomName string `json:"customName"`
+}
+
+// DeepCopyObject returns a copy of the CustomObject.
+func (o *CustomObject) DeepCopyObject() k8sruntime.Object {
+	return o.DeepCopy()
+}
+
+// DeepCopy creates a deep copy of the CustomObject.
+func (o *CustomObject) DeepCopy() *CustomObject {
+	if o == nil {
+		return nil
+	}
+
+	copied := &CustomObject{}
+	o.ObjectMeta.DeepCopyInto(&copied.ObjectMeta)
+	copied.TypeMeta = o.TypeMeta
+	copied.CustomName = o.CustomName
+
+	return copied
 }
 
 // ClientConfig returns a clientcmd.ClientConfig for the context.
