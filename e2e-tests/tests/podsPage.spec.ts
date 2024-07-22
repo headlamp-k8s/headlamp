@@ -38,4 +38,6 @@ test('multi tab create delete pod', async ({ browser }) => {
 
   await realtimeUpdate1.deletePod(name);
   await realtimeUpdate2.confirmPodDeletion(name);
+
+  console.log('testing');
 });
