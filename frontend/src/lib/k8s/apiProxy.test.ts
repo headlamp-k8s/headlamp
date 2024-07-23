@@ -791,12 +791,17 @@ describe('apiProxy', () => {
 
   describe('testAuth', () => {
     const apiPath = '/apis/authorization.k8s.io/v1/selfsubjectrulesreviews';
-    const spec = { namespace: namespace };
+    const customNamespace = 'custom-namespace';
+    const specDefault = { namespace: namespace };
+    const specCustom = { namespace: customNamespace };
 
     beforeEach(() => {
       nock(baseApiUrl)
-        .persist()
-        .post(`/clusters/${clusterName}${apiPath}`, { spec })
+        .post(`/clusters/${clusterName}${apiPath}`, { spec: specDefault })
+        .reply(200, mockResponse);
+
+      nock(baseApiUrl)
+        .post(`/clusters/${clusterName}${apiPath}`, { spec: specCustom })
         .reply(200, mockResponse);
     });
 
@@ -804,24 +809,36 @@ describe('apiProxy', () => {
       nock.cleanAll();
     });
 
-    it('Successfully handles authentication', async () => {
+    it('Successfully handles authentication with default namespace', async () => {
       const response = await apiProxy.testAuth(clusterName);
       expect(response).toEqual(mockResponse);
     });
 
+    it('Successfully handles authentication with custom namespace', async () => {
+      const response = await apiProxy.testAuth(clusterName, customNamespace);
+      expect(response).toEqual(mockResponse);
+    });
+
     it.each([
-      [401, errorResponse401],
-      [500, errorResponse500],
+      [401, errorResponse401, namespace],
+      [500, errorResponse500, namespace],
+      [401, errorResponse401, customNamespace],
+      [500, errorResponse500, customNamespace],
     ])(
       'Successfully handles authentication with error status %d',
-      async (statusCode, errorResponse) => {
+      async (statusCode, errorResponse, namespace) => {
         nock.cleanAll();
         nock(baseApiUrl)
-          .persist()
-          .post(`/clusters/${clusterName}${apiPath}`, { spec })
+          .post(`/clusters/${clusterName}${apiPath}`, { spec: specDefault })
           .reply(statusCode, { message: errorResponse.error });
 
-        await expect(apiProxy.testAuth(clusterName)).rejects.toThrow(errorResponse.error);
+        nock(baseApiUrl)
+          .post(`/clusters/${clusterName}${apiPath}`, { spec: specCustom })
+          .reply(statusCode, { message: errorResponse.error });
+
+        await expect(apiProxy.testAuth(clusterName, namespace)).rejects.toThrow(
+          errorResponse.error
+        );
       }
     );
   });
