@@ -1,8 +1,6 @@
 module github.com/headlamp-k8s/headlamp/backend
 
-go 1.22.0
-
-toolchain go1.22.3
+go 1.22.4
 
 require (
 	github.com/coreos/go-oidc v2.2.1+incompatible
