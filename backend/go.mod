@@ -152,8 +152,8 @@ require (
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.30.2 // indirect
-	k8s.io/apiserver v0.30.2 // indirect
+	k8s.io/apiextensions-apiserver v0.30.3 // indirect
+	k8s.io/apiserver v0.30.3 // indirect
 	k8s.io/component-base v0.30.3 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	oras.land/oras-go v1.2.5 // indirect
