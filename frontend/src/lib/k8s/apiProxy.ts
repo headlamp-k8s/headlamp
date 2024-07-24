@@ -1641,8 +1641,8 @@ export async function metrics(
 //@todo: these need documenting.
 //@todo: these need return types.
 
-export async function testAuth(cluster = '') {
-  const spec = { namespace: 'default' };
+export async function testAuth(cluster = '', namespace = 'default') {
+  const spec = { namespace };
   const clusterName = cluster || getCluster();
 
   return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', { spec }, false, {
