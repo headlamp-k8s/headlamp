@@ -47,7 +47,7 @@ jobs:
       with:
         path: ~/image-cache
         # cache the container image. All the paths this PR depends on except the e2e-tests folder for the key.
-        key: ${{ runner.os }}-image-${{ hashFiles('backend/pkg/**', 'backend/cmd/**', 'frontend/src/**', 'frontend/package.json', 'frontend/package-lock.json', 'Makefile', '.github/**', 'Dockerfile', 'Dockerfile.plugins') }}
+        key: ${{ runner.os }}-image-${{ hashFiles('backend/pkg/**', 'backend/cmd/**', 'backend/go.*', 'frontend/src/**', 'frontend/package.json', 'frontend/package-lock.json', 'Makefile', '.github/workflows/build-container.yml', 'Dockerfile', 'Dockerfile.plugins') }}
     - name: Restore Cached Docker Images
       if: steps.cache-image-restore.outputs.cache-hit == 'true'
       run: |
@@ -81,7 +81,6 @@ jobs:
         echo -n "verifying images:"
         docker images
     - name: Import images to kind
-      if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
         export SHELL=/bin/bash
         kind load docker-image ghcr.io/headlamp-k8s/headlamp-plugins-test:latest --name test
