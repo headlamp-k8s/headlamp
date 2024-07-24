@@ -642,37 +642,37 @@ function getDefaultAppMenu(): AppMenu[] {
     // { role: 'appMenu' }
     ...(isMac
       ? [
-          {
-            label: app.name,
-            submenu: [
-              aboutMenu,
-              sep,
-              {
-                label: i18n.t('Services'),
-                role: 'services',
-                id: 'original-services',
-              },
-              sep,
-              {
-                label: i18n.t('Hide'),
-                role: 'hide',
-                id: 'original-hide',
-              },
-              {
-                label: i18n.t('Hide Others'),
-                role: 'hideothers',
-                id: 'original-hide-others',
-              },
-              {
-                label: i18n.t('Show All'),
-                role: 'unhide',
-                id: 'original-show-all',
-              },
-              sep,
-              quitMenu,
-            ],
-          },
-        ]
+        {
+          label: app.name,
+          submenu: [
+            aboutMenu,
+            sep,
+            {
+              label: i18n.t('Services'),
+              role: 'services',
+              id: 'original-services',
+            },
+            sep,
+            {
+              label: i18n.t('Hide'),
+              role: 'hide',
+              id: 'original-hide',
+            },
+            {
+              label: i18n.t('Hide Others'),
+              role: 'hideothers',
+              id: 'original-hide-others',
+            },
+            {
+              label: i18n.t('Show All'),
+              role: 'unhide',
+              id: 'original-show-all',
+            },
+            sep,
+            quitMenu,
+          ],
+        },
+      ]
       : []),
     // { role: 'fileMenu' }
     {
@@ -681,10 +681,10 @@ function getDefaultAppMenu(): AppMenu[] {
       submenu: [
         isMac
           ? {
-              label: i18n.t('Close'),
-              role: 'close',
-              id: 'original-close',
-            }
+            label: i18n.t('Close'),
+            role: 'close',
+            id: 'original-close',
+          }
           : quitMenu,
       ],
     },
@@ -710,31 +710,31 @@ function getDefaultAppMenu(): AppMenu[] {
         },
         ...(isMac
           ? [
-              {
-                label: i18n.t('Paste and Match Style'),
-                role: 'pasteAndMatchStyle',
-                id: 'original-paste-and-match-style',
-              },
-              deleteMenu,
-              selectAllMenu,
-              sep,
-              {
-                label: i18n.t('Speech'),
-                id: 'original-speech',
-                submenu: [
-                  {
-                    label: i18n.t('Start Speaking'),
-                    role: 'startspeaking',
-                    id: 'original-start-speaking',
-                  },
-                  {
-                    label: i18n.t('Stop Speaking'),
-                    role: 'stopspeaking',
-                    id: 'original-stop-speaking',
-                  },
-                ],
-              },
-            ]
+            {
+              label: i18n.t('Paste and Match Style'),
+              role: 'pasteAndMatchStyle',
+              id: 'original-paste-and-match-style',
+            },
+            deleteMenu,
+            selectAllMenu,
+            sep,
+            {
+              label: i18n.t('Speech'),
+              id: 'original-speech',
+              submenu: [
+                {
+                  label: i18n.t('Start Speaking'),
+                  role: 'startspeaking',
+                  id: 'original-start-speaking',
+                },
+                {
+                  label: i18n.t('Stop Speaking'),
+                  role: 'stopspeaking',
+                  id: 'original-stop-speaking',
+                },
+              ],
+            },
+          ]
           : [deleteMenu, sep, selectAllMenu]),
       ],
     },
@@ -823,26 +823,26 @@ function getDefaultAppMenu(): AppMenu[] {
         },
         ...(isMac
           ? [
-              sep,
-              {
-                label: i18n.t('Bring All to Front'),
-                role: 'front',
-                id: 'original-front',
-              },
-              sep,
-              {
-                label: i18n.t('Window'),
-                role: 'window',
-                id: 'original-window',
-              },
-            ]
+            sep,
+            {
+              label: i18n.t('Bring All to Front'),
+              role: 'front',
+              id: 'original-front',
+            },
+            sep,
+            {
+              label: i18n.t('Window'),
+              role: 'window',
+              id: 'original-window',
+            },
+          ]
           : [
-              {
-                label: i18n.t('Close'),
-                role: 'close',
-                id: 'original-close',
-              },
-            ]),
+            {
+              label: i18n.t('Close'),
+              role: 'close',
+              id: 'original-close',
+            },
+          ]),
       ],
     },
     {
