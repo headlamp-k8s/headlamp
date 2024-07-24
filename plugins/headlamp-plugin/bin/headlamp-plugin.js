@@ -236,6 +236,7 @@ function extract(pluginPackagesPath, outputPlugins, logSteps = true) {
 
   if (!(extractPackage() || extractFolderOfPackages())) {
     console.error(`"${pluginPackagesPath}" does not contain packages. Not extracting.`);
+    return 1;
   }
 
   return 0;
