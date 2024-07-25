@@ -1,17 +1,27 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Box, Chip, IconButton, TextField } from '@mui/material';
+import {
+  Box,
+  Chip,
+  FormControl,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster, parseKubeConfig, renameCluster } from '../../../lib/k8s/apiProxy';
 import { setConfig, setStatelessConfig } from '../../../redux/configSlice';
 import { findKubeconfigByClusterName, updateStatelessClusterKubeconfig } from '../../../stateless/';
-import { Link, NameValueTable, SectionBox } from '../../common';
+import { Link, Loader, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
+import Empty from '../../common/EmptyContent';
 
 function isValidNamespaceFormat(namespace: string) {
   // We allow empty strings just because that's the default value in our case.
@@ -37,19 +47,54 @@ function isValidClusterNameFormat(name: string) {
   return regex.test(name);
 }
 
+interface ClusterSelectorProps {
+  currentCluster?: string;
+  clusters: string[];
+}
+
+function ClusterSelector(props: ClusterSelectorProps) {
+  const { currentCluster = '', clusters } = props;
+  const history = useHistory();
+  const { t } = useTranslation('glossary');
+
+  return (
+    <FormControl variant="outlined" margin="normal" sx={{ minWidth: 250 }}>
+      <Select
+        labelId="settings--cluster-selector"
+        value={currentCluster}
+        onChange={event => {
+          history.replace(`/settings/cluster?c=${event.target.value}`);
+        }}
+        label={t('glossary|Cluster')}
+        autoWidth
+        aria-label={t('glossary|Cluster selector')}
+      >
+        {clusters.map(clusterName => (
+          <MenuItem key={clusterName} value={clusterName}>
+            {clusterName}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+}
+
 export default function SettingsCluster() {
-  const cluster = useCluster();
   const clusterConf = useClustersConf();
+  const clusters = Object.values(clusterConf || {}).map(cluster => cluster.name);
   const { t } = useTranslation(['translation']);
   const [defaultNamespace, setDefaultNamespace] = React.useState('default');
   const [userDefaultNamespace, setUserDefaultNamespace] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
+  const [cluster, setCluster] = React.useState(useCluster() || '');
+  const clusterFromURLRef = React.useRef('');
   const [newClusterName, setNewClusterName] = React.useState(cluster || '');
   const theme = useTheme();
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const clusterInfo = (clusterConf && clusterConf[cluster || '']) || null;
   const source = clusterInfo?.meta_data?.source || '';
@@ -154,17 +199,26 @@ export default function SettingsCluster() {
     return () => {
       if (timeoutHandle) {
         clearTimeout(timeoutHandle);
-        timeoutHandle = null;
+        clusterFromURLRef.current = '';
       }
     };
   }, [userDefaultNamespace]);
 
+  React.useEffect(() => {
+    const clusterFromUrl = new URLSearchParams(location.search).get('c');
+    clusterFromURLRef.current = clusterFromUrl || '';
+
+    if (clusterFromUrl && clusters.includes(clusterFromUrl)) {
+      setCluster(clusterFromUrl);
+    } else if (clusters.length > 0 && !clusterFromUrl) {
+      history.replace(`/settings/cluster?c=${clusters[0]}`);
+    } else {
+      setCluster('');
+    }
+  }, [location.search, clusters]);
+
   function isEditingDefaultNamespace() {
     return clusterSettings?.defaultNamespace !== userDefaultNamespace;
-  }
-
-  if (!cluster) {
-    return null;
   }
 
   function storeNewAllowedNamespace(namespace: string) {
@@ -222,27 +276,62 @@ export default function SettingsCluster() {
     "translation|Cluster name must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
   );
 
+  // If we don't have yet a cluster name from the URL, we are still loading.
+  if (!clusterFromURLRef.current) {
+    return <Loader title="Loading" />;
+  }
+
+  if (clusters.length === 0) {
+    return (
+      <>
+        <SectionBox title={t('translation|Cluster Settings')} backLink />
+        <Empty color={theme.palette.mode === 'dark' ? 'error.light' : 'error.main'}>
+          {t('translation|There seem to be no clusters configured…')}
+        </Empty>
+      </>
+    );
+  }
+
+  if (!cluster) {
+    return (
+      <>
+        <SectionBox title={t('translation|Cluster Settings')} backLink>
+          <Typography
+            color={theme.palette.mode === 'dark' ? 'error.light' : 'error.main'}
+            component="h3"
+            variant="h6"
+          >
+            {t(
+              'translation|Cluster {{ clusterName }} does not exist. Please select a valid cluster:',
+              {
+                clusterName: clusterFromURLRef.current,
+              }
+            )}
+          </Typography>
+          <ClusterSelector clusters={clusters} />
+        </SectionBox>
+      </>
+    );
+  }
+
   return (
     <>
       <SectionBox
-        title={
-          Object.keys(clusterConf || {}).length > 1
-            ? t('translation|Cluster Settings ({{ clusterName }})', { clusterName: cluster || '' })
-            : t('translation|Cluster Settings')
-        }
+        title={t('translation|Cluster Settings ({{ clusterName }})', {
+          clusterName: cluster,
+        })}
         backLink
-        headerProps={{
-          actions: [
-            <Link
-              routeName={'settings'}
-              align="right"
-              style={{ color: theme.palette.text.primary }}
-            >
-              {t('translation|General Settings')}
-            </Link>,
-          ],
-        }}
       >
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <ClusterSelector clusters={clusters} currentCluster={cluster} />
+          <Link
+            routeName="cluster"
+            params={{ cluster: cluster }}
+            tooltip={t('translation|Go to cluster')}
+          >
+            {t('translation|Go to cluster')}
+          </Link>
+        </Box>
         {helpers.isElectron() && (
           <NameValueTable
             rows={[
@@ -369,6 +458,7 @@ export default function SettingsCluster() {
                           }}
                           disabled={!newAllowedNamespace}
                           size="medium"
+                          aria-label={t('translation|Add namespace')}
                         >
                           <InlineIcon icon="mdi:plus-circle" />
                         </IconButton>

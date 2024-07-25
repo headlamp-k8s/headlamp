@@ -35,12 +35,22 @@ function prepareRoutes(
       name: 'settings',
       icon: 'mdi:cog',
       label: t('translation|Settings'),
-      url: '/settings',
+      url: '/settings/general',
       subList: [
+        {
+          name: 'settingsGeneral',
+          label: t('translation|General'),
+          url: '/settings/general',
+        },
         {
           name: 'plugins',
           label: t('translation|Plugins'),
           url: '/settings/plugins',
+        },
+        {
+          name: 'settingsCluster',
+          label: t('glossary|Cluster'),
+          url: '/settings/cluster',
         },
       ],
     },

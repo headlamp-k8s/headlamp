@@ -1,4 +1,5 @@
-import { generatePath } from 'react-router';
+import React from 'react';
+import { generatePath, useHistory } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import Home from '../components/App/Home';
@@ -85,6 +86,7 @@ import WorkloadOverview from '../components/workload/Overview';
 import helpers from '../helpers';
 import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import store from '../redux/stores/store';
+import { useCluster } from './k8s';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
 import ReplicaSet from './k8s/replicaSet';
@@ -669,11 +671,11 @@ const defaultRoutes: {
     ),
   },
   settings: {
-    path: '/settings',
+    path: '/settings/general',
     exact: true,
     name: 'Settings',
     sidebar: {
-      item: 'settings',
+      item: 'settingsGeneral',
       sidebar: DefaultSidebars.HOME,
     },
     useClusterURL: false,
@@ -684,7 +686,6 @@ const defaultRoutes: {
       </PageGrid>
     ),
   },
-
   settingsClusters: {
     path: '/settings/clusters',
     exact: true,
@@ -702,7 +703,32 @@ const defaultRoutes: {
     path: '/settings',
     exact: true,
     name: 'Cluster Settings',
-    sidebar: 'settingsCluster',
+    sidebar: {
+      item: 'settingsCluster',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: true,
+    noAuthRequired: true,
+    component: () => {
+      const cluster = useCluster();
+      const history = useHistory();
+
+      React.useEffect(() => {
+        history.replace(`/settings/cluster?c=${cluster}`);
+      }, []);
+
+      return <></>;
+    },
+  },
+  settingsClusterHomeContext: {
+    path: '/settings/cluster',
+    exact: true,
+    name: 'Cluster Settings',
+    sidebar: {
+      item: 'settingsCluster',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
     noAuthRequired: true,
     component: () => (
       <PageGrid>
@@ -838,6 +864,11 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   // Add cluster to the params if it is not already there
   if (!fullParams.cluster && !!cluster) {
     fullParams.cluster = cluster;
+  }
+
+  // @todo: Remove this hack once we support redirection in routes
+  if (routeName === 'settingsCluster') {
+    return `/settings/cluster?c=${fullParams.cluster}`;
   }
 
   const url = getRoutePath(route);
