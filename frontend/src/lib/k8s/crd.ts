@@ -52,6 +52,7 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
     ['apiextensions.k8s.io', 'v1', 'customresourcedefinitions'],
     ['apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions']
   );
+  static readOnlyFields = ['metadata.managedFields'];
 
   static get className(): string {
     return 'CustomResourceDefinition';

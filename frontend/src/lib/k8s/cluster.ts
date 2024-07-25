@@ -1,4 +1,5 @@
 import { OpPatch } from 'json-patch';
+import { JSONPath } from 'jsonpath-plus';
 import { cloneDeep, unset } from 'lodash';
 import React from 'react';
 import helpers from '../../helpers';
@@ -329,6 +330,11 @@ export interface AuthRequestResourceAttrs {
   group?: string;
   verb?: string;
 }
+type JsonPath<T> = T extends object
+  ? {
+      [K in keyof T]: K extends string ? `${K}` | `${K}.${JsonPath<T[K]>}` : never;
+    }[keyof T]
+  : never;
 
 // @todo: uses of makeKubeObject somehow end up in an 'any' type.
 
@@ -343,6 +349,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
   class KubeObject {
     static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
     jsonData: T | null = null;
+    public static readOnlyFields: JsonPath<T>[];
     private readonly _clusterName: string;
 
     constructor(json: T) {
@@ -428,6 +435,26 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     static get isNamespaced() {
       return this.apiEndpoint.isNamespaced;
+    }
+
+    getEditableObject() {
+      const fieldsToRemove = this._class().readOnlyFields;
+      const code = this.jsonData ? cloneDeep(this.jsonData) : {};
+
+      fieldsToRemove?.forEach((path: JsonPath<T>) => {
+        JSONPath({
+          path,
+          json: code,
+          callback: (result, type, fullPayload) => {
+            if (fullPayload.parent && fullPayload.parentProperty) {
+              delete fullPayload.parent[fullPayload.parentProperty];
+            }
+          },
+          resultType: 'all',
+        });
+      });
+
+      return code;
     }
 
     // @todo: apiList has 'any' return type.
