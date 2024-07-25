@@ -19,9 +19,9 @@ Tags:
   - monitoring
   - logging
   - cncf
+ReleaseNotesUrl: __RELEASE_NOTES_URL__
 Documentations:
   - DocumentLabel: headlamp documentation
     DocumentUrl: https://headlamp.dev/docs/latest
-ReleaseNotesUrl: __RELEASE_NOTES_URL__
 ManifestType: defaultLocale
-ManifestVersion: 1.5.0
+ManifestVersion: 1.6.0
