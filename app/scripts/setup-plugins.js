@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const tar = require('tar');
+const glob = require('glob');
 var zlib = require('zlib');
 const os = require('os');
 const https = require('https');
@@ -37,14 +38,32 @@ async function extractArchive(
         }
 
         // Move the plugins contents to the plugins folder
-        fs.copyFileSync(
-          path.join(tmpFolder, 'package', 'dist', 'main.js'),
-          path.join(pluginFolder, 'main.js')
-        );
-        fs.copyFileSync(
-          path.join(tmpFolder, 'package', 'package.json'),
-          path.join(pluginFolder, 'package.json')
-        );
+        const mainLocationExpr = path.join(tmpFolder, '*', 'main.js');
+        const mainLocations = glob.sync(mainLocationExpr);
+        const mainLocation = mainLocations[0];
+        if (mainLocation && fs.existsSync(mainLocation)) {
+          fs.copyFileSync(path.join(mainLocation), path.join(pluginFolder, 'main.js'));
+          const packageJsonLocation = path.dirname(mainLocation);
+          fs.copyFileSync(
+            path.join(packageJsonLocation, 'package.json'),
+            path.join(pluginFolder, 'package.json')
+          );
+          resolve();
+          return;
+        }
+
+        // Compatibility with legacy tarball structure
+        if (fs.existsSync(path.join(tmpFolder, 'package', 'dist'))) {
+          // Move the plugins contents to the plugins folder
+          fs.copyFileSync(
+            path.join(tmpFolder, 'package', 'dist', 'main.js'),
+            path.join(pluginFolder, 'main.js')
+          );
+          fs.copyFileSync(
+            path.join(tmpFolder, 'package', 'package.json'),
+            path.join(pluginFolder, 'package.json')
+          );
+        }
         resolve();
       });
   });
