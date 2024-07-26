@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/mutatingWebhookConfiguration"
-linkTitle: "lib/k8s/mutatingWebhookConfiguration"
-slug: "lib_k8s_mutatingWebhookConfiguration"
----
+[API](../API.md) / lib/k8s/mutatingWebhookConfiguration
+
+# Module: lib/k8s/mutatingWebhookConfiguration
 
 ## Classes
 

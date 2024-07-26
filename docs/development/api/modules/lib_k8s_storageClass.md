@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/storageClass"
-linkTitle: "lib/k8s/storageClass"
-slug: "lib_k8s_storageClass"
----
+[API](../API.md) / lib/k8s/storageClass
+
+# Module: lib/k8s/storageClass
 
 ## Classes
 

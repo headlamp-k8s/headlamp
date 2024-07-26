@@ -1,8 +1,6 @@
----
-title: "Interface: KubeJob"
-linkTitle: "KubeJob"
-slug: "lib_k8s_job.KubeJob"
----
+[API](../API.md) / [lib/k8s/job](../modules/lib_k8s_job.md) / KubeJob
+
+# Interface: KubeJob
 
 [lib/k8s/job](../modules/lib_k8s_job.md).KubeJob
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_job.KubeJob"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -84,7 +82,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/job.ts:12](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/job.ts#L12)
+[lib/k8s/job.ts:12](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/job.ts#L12)
 
 ___
 
@@ -98,4 +96,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/job.ts:20](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/job.ts#L20)
+[lib/k8s/job.ts:20](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/job.ts#L20)

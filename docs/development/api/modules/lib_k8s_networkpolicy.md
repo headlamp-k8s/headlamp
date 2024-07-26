@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/networkpolicy"
-linkTitle: "lib/k8s/networkpolicy"
-slug: "lib_k8s_networkpolicy"
----
+[API](../API.md) / lib/k8s/networkpolicy
+
+# Module: lib/k8s/networkpolicy
 
 ## Classes
 

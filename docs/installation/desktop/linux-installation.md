@@ -1,7 +1,7 @@
 ---
 title: Linux Installation
-linktitle: Linux
-weight: 15
+sidebar_label: Linux
+sidebar_position: 1
 ---
 
 We ship Headlamp the Linux desktop in several formats: [Flatpak](#flatpak), [AppImage](#appimage), [Tarballs](#tarballs).
@@ -25,6 +25,7 @@ flatpak run io.kinvolk.Headlamp
 ### Upgrading
 
 To upgrading Headlamp when it's installed via Flatpak, run:
+
 ```bash
 flatpak update io.kinvolk.Headlamp
 ```
@@ -44,6 +45,7 @@ You can then run it with the following command (examplified for the AMD64, 0.16.
 
 To run Headlamp from one of the tarballs, after downloading the tarball for the [latest release](https://github.com/headlamp-k8s/headlamp/releases/latest), you have to extract the contents from it and run
 the `headlamp` binary in the resulting folder (examplified below for the AMD64, 0.16.0 version):
+
 ```bash
 tar xvzf ./Headlamp-0.16.0-linux-x64.tar.gz
 cd Headlamp-0.16.0-linux-x64

@@ -1,8 +1,6 @@
----
-title: "Interface: NetworkPolicyEgressRule"
-linkTitle: "NetworkPolicyEgressRule"
-slug: "lib_k8s_networkpolicy.NetworkPolicyEgressRule"
----
+[API](../API.md) / [lib/k8s/networkpolicy](../modules/lib_k8s_networkpolicy.md) / NetworkPolicyEgressRule
+
+# Interface: NetworkPolicyEgressRule
 
 [lib/k8s/networkpolicy](../modules/lib_k8s_networkpolicy.md).NetworkPolicyEgressRule
 
@@ -14,7 +12,7 @@ slug: "lib_k8s_networkpolicy.NetworkPolicyEgressRule"
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:22](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/networkpolicy.tsx#L22)
+[lib/k8s/networkpolicy.tsx:22](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/networkpolicy.tsx#L22)
 
 ___
 
@@ -24,4 +22,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:23](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/networkpolicy.tsx#L23)
+[lib/k8s/networkpolicy.tsx:23](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/networkpolicy.tsx#L23)

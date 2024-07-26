@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/daemonSet"
-linkTitle: "lib/k8s/daemonSet"
-slug: "lib_k8s_daemonSet"
----
+[API](../API.md) / lib/k8s/daemonSet
+
+# Module: lib/k8s/daemonSet
 
 ## Classes
 

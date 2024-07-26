@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/limitRange"
-linkTitle: "lib/k8s/limitRange"
-slug: "lib_k8s_limitRange"
----
+[API](../API.md) / lib/k8s/limitRange
+
+# Module: lib/k8s/limitRange
 
 ## Classes
 

@@ -1,8 +1,6 @@
----
-title: "Class: PersistentVolume"
-linkTitle: "PersistentVolume"
-slug: "lib_k8s_persistentVolume.PersistentVolume"
----
+[API](../API.md) / [lib/k8s/persistentVolume](../modules/lib_k8s_persistentVolume.md) / PersistentVolume
+
+# Class: PersistentVolume
 
 [lib/k8s/persistentVolume](../modules/lib_k8s_persistentVolume.md).PersistentVolume
 
@@ -30,7 +28,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Properties
 
@@ -48,12 +46,12 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').constructor
 | `isNamespaced` | `boolean` |
 | `list` | (`cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<() => `void`\> |
 | `patch` | (`body`: `OpPatch`[], `name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
-| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
+| `post` | (`body`: `object` \| `JSON` \| [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 | `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/persistentVolume.ts:19](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/persistentVolume.ts#L19)
+[lib/k8s/persistentVolume.ts:19](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/persistentVolume.ts#L19)
 
 ___
 
@@ -67,7 +65,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L318)
+[lib/k8s/cluster.ts:319](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L319)
 
 ## Accessors
 
@@ -81,7 +79,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').className
 
 #### Defined in
 
-[lib/k8s/persistentVolume.ts:21](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/persistentVolume.ts#L21)
+[lib/k8s/persistentVolume.ts:21](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/persistentVolume.ts#L21)
 
 ___
 
@@ -95,7 +93,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/persistentVolume.ts:25](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/persistentVolume.ts#L25)
+[lib/k8s/persistentVolume.ts:25](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/persistentVolume.ts#L25)
 
 ## Methods
 
@@ -121,7 +119,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:294](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L294)
 
 ___
 
@@ -146,7 +144,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:321](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L321)
 
 ___
 
@@ -170,7 +168,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L317)
 
 ___
 
@@ -197,7 +195,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:304](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L304)
 
 ___
 
@@ -223,7 +221,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:299](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L299)
 
 ___
 
@@ -248,7 +246,7 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:313](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L313)
 
 ___
 
@@ -272,4 +270,4 @@ makeKubeObject<KubePersistentVolume\>('persistentVolume').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:310](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L310)

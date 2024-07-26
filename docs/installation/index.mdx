@@ -1,13 +1,9 @@
 ---
-title: Installation / Deployment
-linktitle: Installation
-weight: 2
+title: Installation
+sidebar_position: 2
 ---
 
-Headlamp can be deployed in a Kubernetes [cluster](./in-cluster), or run as a [desktop](./desktop/) application.
-
-Please check the guides in this section for [installing the desktop application](./desktop/)
-or deploying Headlamp [in your cluster](./in-cluster/).
+Headlamp can be deployed in a Kubernetes [cluster](./in-cluster/index.md), or run as a [desktop](./desktop/index.mdx) application.
 
 ## Authentication / Log-in
 
@@ -28,28 +24,46 @@ kubectl -n kube-system create serviceaccount headlamp-admin
 ```
 
 2. Give admin rights to the account (check the
-[RBAC docs](https://kubernetes.io/docs/reference/access-authn-authz/rbac) if you want to set more
-restrictive permissions):
+   :
+
+:::tip
+
+Check [RBAC docs](https://kubernetes.io/docs/reference/access-authn-authz/rbac) if you want to set more
+   restrictive permissions)
+
+:::
 
 ```shell
 kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
 ```
 
-3. If you are running Headlamp in a Kubernetes cluster with version greater than 1.24, create the token using the following command:
+3. Create the token using the following command:
 
-```shell
-kubectl create token headlamp-admin -n kube-system
-```
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="apple" label="Kubernetes 1.24+" default>
+    ```shell
+   kubectl create token headlamp-admin -n kube-system
+   ```
+  </TabItem>
+  <TabItem value="orange" label="Older versions">
+    ```shell
+   export HEADLAMP_SECRET=$(kubectl get secrets --namespace kube-system -o custom-columns=":metadata.name" | grep "headlamp-admin-token")
+   kubectl get secret $HEADLAMP_SECRET --namespace kube-system --template=\{\{.data.token\}\} | base64 --decode
+   ```
+  </TabItem>
+</Tabs>
+
+
 
 Otherwise, run the following command to get the token associated with the service account:
 
-```shell
-export HEADLAMP_SECRET=$(kubectl get secrets --namespace kube-system -o custom-columns=":metadata.name" | grep "headlamp-admin-token")
-kubectl get secret $HEADLAMP_SECRET --namespace kube-system --template=\{\{.data.token\}\} | base64 --decode
-```
+
 
 Once you have the Service Account token, paste it when prompted by Headlamp.
 
 ### Use OIDC
 
-For OpenIDConnect, please see the [in-cluster installation](./in-cluster/oidc.md#accessing-using-oidc) docs.
+For OpenIDConnect, please see the [in-cluster installation](./in-cluster/oidc.md) docs.

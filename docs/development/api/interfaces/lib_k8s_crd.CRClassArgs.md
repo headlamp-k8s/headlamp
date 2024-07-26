@@ -1,8 +1,6 @@
----
-title: "Interface: CRClassArgs"
-linkTitle: "CRClassArgs"
-slug: "lib_k8s_crd.CRClassArgs"
----
+[API](../API.md) / [lib/k8s/crd](../modules/lib_k8s_crd.md) / CRClassArgs
+
+# Interface: CRClassArgs
 
 [lib/k8s/crd](../modules/lib_k8s_crd.md).CRClassArgs
 
@@ -14,7 +12,7 @@ slug: "lib_k8s_crd.CRClassArgs"
 
 #### Defined in
 
-[lib/k8s/crd.ts:94](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L94)
+[lib/k8s/crd.ts:120](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L120)
 
 ___
 
@@ -24,7 +22,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:100](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L100)
+[lib/k8s/crd.ts:126](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L126)
 
 ___
 
@@ -34,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:98](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L98)
+[lib/k8s/crd.ts:124](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L124)
 
 ___
 
@@ -44,4 +42,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:99](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L99)
+[lib/k8s/crd.ts:125](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L125)

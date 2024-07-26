@@ -1,8 +1,6 @@
----
-title: "Interface: QueryParameters"
-linkTitle: "QueryParameters"
-slug: "lib_k8s_apiProxy.QueryParameters"
----
+[API](../API.md) / [lib/k8s/apiProxy](../modules/lib_k8s_apiProxy.md) / QueryParameters
+
+# Interface: QueryParameters
 
 [lib/k8s/apiProxy](../modules/lib_k8s_apiProxy.md).QueryParameters
 
@@ -28,7 +26,7 @@ Can be 'true'
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:164](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L164)
+[lib/k8s/apiProxy.ts:164](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L164)
 
 ___
 
@@ -61,7 +59,7 @@ the last resourceVersion value returned by the server and not miss any modificat
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:112](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L112)
+[lib/k8s/apiProxy.ts:112](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L112)
 
 ___
 
@@ -76,7 +74,7 @@ Can be '' or 'All'
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:119](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L119)
+[lib/k8s/apiProxy.ts:119](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L119)
 
 ___
 
@@ -90,7 +88,7 @@ fieldSeletor restricts the list of returned objects by their fields. Defaults to
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:125](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L125)
+[lib/k8s/apiProxy.ts:125](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L125)
 
 ___
 
@@ -106,7 +104,7 @@ labelSelector restricts the list of returned objects by their labels. Defaults t
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:132](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L132)
+[lib/k8s/apiProxy.ts:132](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L132)
 
 ___
 
@@ -132,7 +130,7 @@ This field is not supported if watch is true.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:149](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L149)
+[lib/k8s/apiProxy.ts:149](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L149)
 
 ___
 
@@ -147,7 +145,7 @@ Can be '' or 'true'
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:184](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L184)
+[lib/k8s/apiProxy.ts:184](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L184)
 
 ___
 
@@ -164,7 +162,7 @@ Defaults to unset
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:157](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L157)
+[lib/k8s/apiProxy.ts:157](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L157)
 
 ___
 
@@ -178,7 +176,7 @@ The resource version to match.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:178](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L178)
+[lib/k8s/apiProxy.ts:178](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L178)
 
 ___
 
@@ -195,7 +193,7 @@ Can be 'true'.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:172](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L172)
+[lib/k8s/apiProxy.ts:172](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L172)
 
 ___
 
@@ -211,4 +209,4 @@ Can be 1.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:191](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L191)
+[lib/k8s/apiProxy.ts:191](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L191)

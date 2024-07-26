@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/kubeconfig"
-linkTitle: "lib/k8s/kubeconfig"
-slug: "lib_k8s_kubeconfig"
----
+[API](../API.md) / lib/k8s/kubeconfig
+
+# Module: lib/k8s/kubeconfig
 
 ## Interfaces
 

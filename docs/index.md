@@ -1,5 +1,6 @@
 ---
-title: Headlamp
+title: Introduction
+sidebar_position: 1
 ---
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
@@ -21,3 +22,4 @@ in the Kubernetes Slack.
 ## Frequently Asked Questions
 
 For more information about Headlamp, see the [Headlamp FAQ](./faq.md).
+    

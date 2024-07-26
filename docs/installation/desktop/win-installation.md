@@ -1,15 +1,16 @@
 ---
 title: Windows Installation
-linktitle: Windows
-weight: 20
+sidebar_label: Windows
+sidebar_position: 3
 ---
 
-Headlamp is available for Windows as a direct download from its [releases page](https://github.com/kinvolk/headlamp/releases) on Github (.exe file) and from package registries
+Headlamp is available for Windows as a direct download from its [releases page](https://github.com/headlamp-k8s/headlamp/releases) on Github (.exe file) and from package registries
 like [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and [Chocolatey](https://chocolatey.org/).
 
 ## Install via Winget
 
 To install Headlamp from the Winget registry. Simply run the following command:
+
 ```powershell
 winget install headlamp
 ```
@@ -17,16 +18,17 @@ winget install headlamp
 ### Upgrading
 
 To upgrade Headlamp when its installed with Winget, run the command:
+
 ```powershell
 winget upgrade headlamp
 ```
-
 
 ## Install via Chocolatey
 
 To install Headlamp from the Chocolatey registry, first install the choco command by following
 its [official instructions](https://chocolatey.org/install#generic).
 After `choco` is available, [install Headlamp](https://community.chocolatey.org/packages/headlamp#install) by running the following command:
+
 ```powershell
 choco install headlamp
 ```
@@ -34,6 +36,7 @@ choco install headlamp
 ### Upgrading
 
 To upgrade Headlamp when its installed with Chocolatey, run the command:
+
 ```powershell
 choco upgrade headlamp
 ```

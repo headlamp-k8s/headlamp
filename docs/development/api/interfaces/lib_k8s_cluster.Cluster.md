@@ -1,8 +1,6 @@
----
-title: "Interface: Cluster"
-linkTitle: "Cluster"
-slug: "lib_k8s_cluster.Cluster"
----
+[API](../API.md) / [lib/k8s/cluster](../modules/lib_k8s_cluster.md) / Cluster
+
+# Interface: Cluster
 
 [lib/k8s/cluster](../modules/lib_k8s_cluster.md).Cluster
 
@@ -20,7 +18,7 @@ Either 'oidc' or ''. '' means unknown.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:35](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L35)
+[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L36)
 
 ___
 
@@ -30,7 +28,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:30](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L30)
+[lib/k8s/cluster.ts:31](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L31)
 
 ___
 
@@ -40,4 +38,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:31](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L31)
+[lib/k8s/cluster.ts:32](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L32)

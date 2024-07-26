@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/ingressClass"
-linkTitle: "lib/k8s/ingressClass"
-slug: "lib_k8s_ingressClass"
----
+[API](../API.md) / lib/k8s/ingressClass
+
+# Module: lib/k8s/ingressClass
 
 ## Classes
 

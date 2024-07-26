@@ -1,8 +1,6 @@
----
-title: "Interface: KubeLimitRange"
-linkTitle: "KubeLimitRange"
-slug: "lib_k8s_limitRange.KubeLimitRange"
----
+[API](../API.md) / [lib/k8s/limitRange](../modules/lib_k8s_limitRange.md) / KubeLimitRange
+
+# Interface: KubeLimitRange
 
 [lib/k8s/limitRange](../modules/lib_k8s_limitRange.md).KubeLimitRange
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_limitRange.KubeLimitRange"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -71,4 +69,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/limitRange.tsx:27](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/limitRange.tsx#L27)
+[lib/k8s/limitRange.tsx:27](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/limitRange.tsx#L27)

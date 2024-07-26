@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/persistentVolumeClaim"
-linkTitle: "lib/k8s/persistentVolumeClaim"
-slug: "lib_k8s_persistentVolumeClaim"
----
+[API](../API.md) / lib/k8s/persistentVolumeClaim
+
+# Module: lib/k8s/persistentVolumeClaim
 
 ## Classes
 

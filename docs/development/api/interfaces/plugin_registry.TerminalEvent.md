@@ -1,8 +1,6 @@
----
-title: "Interface: TerminalEvent"
-linkTitle: "TerminalEvent"
-slug: "plugin_registry.TerminalEvent"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / TerminalEvent
+
+# Interface: TerminalEvent
 
 [plugin/registry](../modules/plugin_registry.md).TerminalEvent
 
@@ -23,7 +21,7 @@ Event fired when using the terminal.
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:163](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L163)
+[redux/headlampEventSlice.ts:163](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L163)
 
 ___
 
@@ -33,4 +31,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:162](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L162)
+[redux/headlampEventSlice.ts:162](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L162)

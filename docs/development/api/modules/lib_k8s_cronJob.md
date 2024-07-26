@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/cronJob"
-linkTitle: "lib/k8s/cronJob"
-slug: "lib_k8s_cronJob"
----
+[API](../API.md) / lib/k8s/cronJob
+
+# Module: lib/k8s/cronJob
 
 ## Classes
 

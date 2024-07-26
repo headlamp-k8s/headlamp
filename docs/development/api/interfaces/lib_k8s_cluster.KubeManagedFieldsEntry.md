@@ -1,8 +1,6 @@
----
-title: "Interface: KubeManagedFieldsEntry"
-linkTitle: "KubeManagedFieldsEntry"
-slug: "lib_k8s_cluster.KubeManagedFieldsEntry"
----
+[API](../API.md) / [lib/k8s/cluster](../modules/lib_k8s_cluster.md) / KubeManagedFieldsEntry
+
+# Interface: KubeManagedFieldsEntry
 
 [lib/k8s/cluster](../modules/lib_k8s_cluster.md).KubeManagedFieldsEntry
 
@@ -28,7 +26,7 @@ automatically converted.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:248](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L248)
+[lib/k8s/cluster.ts:249](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L249)
 
 ___
 
@@ -41,7 +39,7 @@ There is currently only one possible value: "FieldsV1"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:253](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L253)
+[lib/k8s/cluster.ts:254](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L254)
 
 ___
 
@@ -53,7 +51,7 @@ FieldsV1 holds the first JSON version format as described in the "FieldsV1" type
 
 #### Defined in
 
-[lib/k8s/cluster.ts:257](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L257)
+[lib/k8s/cluster.ts:258](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L258)
 
 ___
 
@@ -65,7 +63,7 @@ Manager is an identifier of the workflow managing these fields.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:261](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L261)
+[lib/k8s/cluster.ts:262](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L262)
 
 ___
 
@@ -78,7 +76,7 @@ created. The only valid values for this field are 'Apply' and 'Update'.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:266](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L266)
+[lib/k8s/cluster.ts:267](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L267)
 
 ___
 
@@ -95,7 +93,7 @@ Subresource field and it always corresponds to the version of the main resource.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:275](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L275)
+[lib/k8s/cluster.ts:276](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L276)
 
 ___
 
@@ -110,4 +108,4 @@ removed from the entry because another manager took it over.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:282](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L282)
+[lib/k8s/cluster.ts:283](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L283)

@@ -1,8 +1,6 @@
----
-title: "Interface: PluginLoadingErrorEvent"
-linkTitle: "PluginLoadingErrorEvent"
-slug: "plugin_registry.PluginLoadingErrorEvent"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / PluginLoadingErrorEvent
+
+# Interface: PluginLoadingErrorEvent
 
 [plugin/registry](../modules/plugin_registry.md).PluginLoadingErrorEvent
 
@@ -25,7 +23,7 @@ Event fired when there is an error while loading a plugin.
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:206](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L206)
+[redux/headlampEventSlice.ts:206](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L206)
 
 ___
 
@@ -35,4 +33,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:205](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L205)
+[redux/headlampEventSlice.ts:205](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L205)

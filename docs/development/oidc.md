@@ -1,6 +1,6 @@
 ---
 title: Testing OIDC
-weight: 5
+sidebar_position: 4
 ---
 
 OIDC (OpenID Connect) is a protocol that allows web applications to authenticate users through an identity provider and obtain basic profile information about the user.

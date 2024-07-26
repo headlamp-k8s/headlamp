@@ -1,8 +1,6 @@
----
-title: "Interface: StreamResultsParams"
-linkTitle: "StreamResultsParams"
-slug: "lib_k8s_apiProxy.StreamResultsParams"
----
+[API](../API.md) / [lib/k8s/apiProxy](../modules/lib_k8s_apiProxy.md) / StreamResultsParams
+
+# Interface: StreamResultsParams
 
 [lib/k8s/apiProxy](../modules/lib_k8s_apiProxy.md).StreamResultsParams
 
@@ -14,7 +12,7 @@ slug: "lib_k8s_apiProxy.StreamResultsParams"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1113](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L1113)
+[lib/k8s/apiProxy.ts:1137](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L1137)
 
 ___
 
@@ -24,7 +22,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1115](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L1115)
+[lib/k8s/apiProxy.ts:1139](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L1139)
 
 ___
 
@@ -34,4 +32,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1114](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/apiProxy.ts#L1114)
+[lib/k8s/apiProxy.ts:1138](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/apiProxy.ts#L1138)

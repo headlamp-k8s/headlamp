@@ -1,8 +1,6 @@
----
-title: "Class: StatefulSet"
-linkTitle: "StatefulSet"
-slug: "lib_k8s_statefulSet.StatefulSet"
----
+[API](../API.md) / [lib/k8s/statefulSet](../modules/lib_k8s_statefulSet.md) / StatefulSet
+
+# Class: StatefulSet
 
 [lib/k8s/statefulSet](../modules/lib_k8s_statefulSet.md).StatefulSet
 
@@ -30,7 +28,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Properties
 
@@ -46,13 +44,14 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').constructor
 
 | Name | Type |
 | :------ | :------ |
-| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\>  } |
+| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> ; `patch`: (`body`: { `spec`: { `replicas`: `number`  }  }, `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md), `clusterName?`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\>  } |
 | `scale.get` | (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> |
+| `scale.patch` | (`body`: { `spec`: { `replicas`: `number`  }  }, `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md), `clusterName?`: `string`) => `Promise`<`any`\> |
 | `scale.put` | (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/statefulSet.ts:32](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/statefulSet.ts#L32)
+[lib/k8s/statefulSet.ts:32](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/statefulSet.ts#L32)
 
 ___
 
@@ -66,7 +65,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L318)
+[lib/k8s/cluster.ts:319](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L319)
 
 ## Accessors
 
@@ -80,7 +79,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').className
 
 #### Defined in
 
-[lib/k8s/statefulSet.ts:34](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/statefulSet.ts#L34)
+[lib/k8s/statefulSet.ts:34](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/statefulSet.ts#L34)
 
 ___
 
@@ -94,7 +93,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/statefulSet.ts:38](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/statefulSet.ts#L38)
+[lib/k8s/statefulSet.ts:38](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/statefulSet.ts#L38)
 
 ## Methods
 
@@ -108,7 +107,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/statefulSet.ts:42](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/statefulSet.ts#L42)
+[lib/k8s/statefulSet.ts:42](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/statefulSet.ts#L42)
 
 ___
 
@@ -134,7 +133,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:294](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L294)
 
 ___
 
@@ -159,7 +158,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:321](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L321)
 
 ___
 
@@ -183,7 +182,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L317)
 
 ___
 
@@ -210,7 +209,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:304](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L304)
 
 ___
 
@@ -236,7 +235,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:299](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L299)
 
 ___
 
@@ -261,7 +260,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:313](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L313)
 
 ___
 
@@ -285,4 +284,4 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:310](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L310)

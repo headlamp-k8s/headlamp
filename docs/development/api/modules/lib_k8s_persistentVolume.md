@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/persistentVolume"
-linkTitle: "lib/k8s/persistentVolume"
-slug: "lib_k8s_persistentVolume"
----
+[API](../API.md) / lib/k8s/persistentVolume
+
+# Module: lib/k8s/persistentVolume
 
 ## Classes
 

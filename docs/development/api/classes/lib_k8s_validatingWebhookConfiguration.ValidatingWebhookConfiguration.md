@@ -1,8 +1,6 @@
----
-title: "Class: ValidatingWebhookConfiguration"
-linkTitle: "ValidatingWebhookConfiguration"
-slug: "lib_k8s_validatingWebhookConfiguration.ValidatingWebhookConfiguration"
----
+[API](../API.md) / [lib/k8s/validatingWebhookConfiguration](../modules/lib_k8s_validatingWebhookConfiguration.md) / ValidatingWebhookConfiguration
+
+# Class: ValidatingWebhookConfiguration
 
 [lib/k8s/validatingWebhookConfiguration](../modules/lib_k8s_validatingWebhookConfiguration.md).ValidatingWebhookConfiguration
 
@@ -32,7 +30,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Properties
 
@@ -50,12 +48,12 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 | `isNamespaced` | `boolean` |
 | `list` | (`cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<() => `void`\> |
 | `patch` | (`body`: `OpPatch`[], `name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
-| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
+| `post` | (`body`: `object` \| `JSON` \| [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 | `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/validatingWebhookConfiguration.ts:29](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/validatingWebhookConfiguration.ts#L29)
+[lib/k8s/validatingWebhookConfiguration.ts:29](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/validatingWebhookConfiguration.ts#L29)
 
 ___
 
@@ -71,7 +69,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L318)
+[lib/k8s/cluster.ts:319](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L319)
 
 ## Accessors
 
@@ -85,7 +83,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/validatingWebhookConfiguration.ts:35](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/validatingWebhookConfiguration.ts#L35)
+[lib/k8s/validatingWebhookConfiguration.ts:35](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/validatingWebhookConfiguration.ts#L35)
 
 ## Methods
 
@@ -113,7 +111,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:294](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L294)
 
 ___
 
@@ -140,7 +138,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:321](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L321)
 
 ___
 
@@ -166,7 +164,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L317)
 
 ___
 
@@ -195,7 +193,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:304](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L304)
 
 ___
 
@@ -223,7 +221,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:299](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L299)
 
 ___
 
@@ -250,7 +248,7 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:313](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L313)
 
 ___
 
@@ -276,4 +274,4 @@ makeKubeObject<KubeValidatingWebhookConfiguration\>(
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:310](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L310)

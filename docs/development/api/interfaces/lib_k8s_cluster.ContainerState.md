@@ -1,8 +1,6 @@
----
-title: "Interface: ContainerState"
-linkTitle: "ContainerState"
-slug: "lib_k8s_cluster.ContainerState"
----
+[API](../API.md) / [lib/k8s/cluster](../modules/lib_k8s_cluster.md) / ContainerState
+
+# Interface: ContainerState
 
 [lib/k8s/cluster](../modules/lib_k8s_cluster.md).ContainerState
 
@@ -20,7 +18,7 @@ slug: "lib_k8s_cluster.ContainerState"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1227](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1227)
+[lib/k8s/cluster.ts:1255](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1255)
 
 ___
 
@@ -42,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1230](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1230)
+[lib/k8s/cluster.ts:1258](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1258)
 
 ___
 
@@ -59,4 +57,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1239](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1239)
+[lib/k8s/cluster.ts:1267](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1267)

@@ -1,6 +1,7 @@
 ---
 title: i18n Internationalization / Localization
-linkTitle: Internationalization
+sidebar_label: Internationalization
+sidebar_position: 5
 ---
 
 Headlamp's internationalization uses the i18next, i18next-parser, and
@@ -27,5 +28,4 @@ One way to change the locale is to use `?lng=en` in the URL.
 
 Dynamic imports and the webpack code splitting feature we
 load locale files from `src/i18n/locales/{{lng}}/{{ns}}.json`
-where {{lng}} is the language code, and {{ns}} is the namespace.
-
+where `{{lng}}` is the language code, and `{{ns}}` is the namespace.

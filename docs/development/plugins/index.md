@@ -1,11 +1,11 @@
 ---
 title: Plugins
-linkTitle: Plugins
+sidebar_position: 6
 ---
 
 Plugins are one of the key features of Headlamp. They allow you to change how and what information is displayed, as well as other functionality. The ultimate goal of the plugins system is to allow vendors to build and deploy Headlamp with extra functionality without having to maintain a fork of the project.
 
-# Using plugins
+## Using plugins
 
 Headlamp looks for plugins in different places.
 It looks at the Headlamp's configuration folder first:
@@ -27,10 +27,10 @@ MyPlugin3/
     main.js
 ```
 
-See the [shipping & deploying plugins](./building.md#shipping--deploying-plugins) section
+See the [shipping & deploying plugins](./building.md#shipping-and-deploying-plugins) section
 for more details.
 
-# Developing Plugins
+## Developing Plugins
 
 Plugins are supposed to be built and shipped out-of-tree, i.e. instead of managing the plugins'
 code within the Headlamp project or a Headlamp fork (which would require

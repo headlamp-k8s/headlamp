@@ -1,13 +1,13 @@
 ---
 title: Contribution Guidelines
-linktitle: Contributing
+sidebar_label: Contributing
+sidebar_position: 4
 ---
 
 This section has information on how to contribute to Headlamp. It assumes you have cloned
 this repository (or your own Github fork).
-
 Any contributions to the project are accepted under the terms of the project's
-license ([Apache 2.0](../LICENSE)).
+license ([Apache 2.0](https://github.com/headlamp-k8s/headlamp/blob/main/LICENSE)).
 
 ## Code of Conduct
 
@@ -68,7 +68,6 @@ the CI checks are passing for your PR.
 For the general guidelines on making PRs/commits easier to review, please check
 out Kinvolk's
 [contribution guidelines on git](https://github.com/kinvolk/contribution/tree/master/topics/git.md).
-
 
 ## Testing
 

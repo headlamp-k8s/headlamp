@@ -1,8 +1,6 @@
----
-title: "Interface: EventListEvent"
-linkTitle: "EventListEvent"
-slug: "plugin_registry.EventListEvent"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / EventListEvent
+
+# Interface: EventListEvent
 
 [plugin/registry](../modules/plugin_registry.md).EventListEvent
 
@@ -23,7 +21,7 @@ Event fired when kubernetes events are loaded (for a resource or not).
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:270](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L270)
+[redux/headlampEventSlice.ts:270](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L270)
 
 ___
 
@@ -33,4 +31,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:269](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L269)
+[redux/headlampEventSlice.ts:269](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L269)

@@ -1,8 +1,6 @@
----
-title: "Enumeration: DefaultAppBarAction"
-linkTitle: "DefaultAppBarAction"
-slug: "plugin_registry.DefaultAppBarAction"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / DefaultAppBarAction
+
+# Enumeration: DefaultAppBarAction
 
 [plugin/registry](../modules/plugin_registry.md).DefaultAppBarAction
 
@@ -14,7 +12,7 @@ slug: "plugin_registry.DefaultAppBarAction"
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:42](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/actionButtonsSlice.ts#L42)
+[redux/actionButtonsSlice.ts:42](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/actionButtonsSlice.ts#L42)
 
 ___
 
@@ -24,7 +22,7 @@ ___
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:43](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/actionButtonsSlice.ts#L43)
+[redux/actionButtonsSlice.ts:43](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/actionButtonsSlice.ts#L43)
 
 ___
 
@@ -34,7 +32,7 @@ ___
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:44](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/actionButtonsSlice.ts#L44)
+[redux/actionButtonsSlice.ts:44](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/actionButtonsSlice.ts#L44)
 
 ___
 
@@ -44,4 +42,4 @@ ___
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:45](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/actionButtonsSlice.ts#L45)
+[redux/actionButtonsSlice.ts:45](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/actionButtonsSlice.ts#L45)

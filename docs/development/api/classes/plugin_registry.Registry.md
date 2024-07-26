@@ -1,8 +1,6 @@
----
-title: "Class: Registry"
-linkTitle: "Registry"
-slug: "plugin_registry.Registry"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / Registry
+
+# Class: Registry
 
 [plugin/registry](../modules/plugin_registry.md).Registry
 
@@ -33,7 +31,7 @@ slug: "plugin_registry.Registry"
 
 #### Defined in
 
-[plugin/registry.tsx:163](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L163)
+[plugin/registry.tsx:164](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L164)
 
 ___
 
@@ -55,7 +53,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:212](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L212)
+[plugin/registry.tsx:213](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L213)
 
 ___
 
@@ -77,7 +75,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:220](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L220)
+[plugin/registry.tsx:221](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L221)
 
 ___
 
@@ -100,7 +98,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:153](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L153)
+[plugin/registry.tsx:154](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L154)
 
 ___
 
@@ -137,7 +135,7 @@ register.registerDetailsViewSection('biolatency', resource => {
 
 #### Defined in
 
-[plugin/registry.tsx:185](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L185)
+[plugin/registry.tsx:186](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L186)
 
 ___
 
@@ -159,7 +157,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:145](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L145)
+[plugin/registry.tsx:146](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L146)
 
 ___
 
@@ -177,7 +175,7 @@ ___
 | `itemName` | `string` |
 | `itemLabel` | `string` |
 | `url` | `string` |
-| `opts` | `Pick`<[`SidebarEntryProps`](../interfaces/plugin_registry.SidebarEntryProps.md), ``"sidebar"`` \| ``"icon"`` \| ``"useClusterURL"``\> |
+| `opts` | `Pick`<[`SidebarEntryProps`](../interfaces/plugin_registry.SidebarEntryProps.md), ``"sidebar"`` \| ``"useClusterURL"`` \| ``"icon"``\> |
 
 #### Returns
 
@@ -185,4 +183,4 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:121](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L121)
+[plugin/registry.tsx:122](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L122)

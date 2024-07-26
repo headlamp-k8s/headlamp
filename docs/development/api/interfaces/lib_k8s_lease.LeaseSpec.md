@@ -1,8 +1,6 @@
----
-title: "Interface: LeaseSpec"
-linkTitle: "LeaseSpec"
-slug: "lib_k8s_lease.LeaseSpec"
----
+[API](../API.md) / [lib/k8s/lease](../modules/lib_k8s_lease.md) / LeaseSpec
+
+# Interface: LeaseSpec
 
 [lib/k8s/lease](../modules/lib_k8s_lease.md).LeaseSpec
 
@@ -14,7 +12,7 @@ slug: "lib_k8s_lease.LeaseSpec"
 
 #### Defined in
 
-[lib/k8s/lease.ts:5](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/lease.ts#L5)
+[lib/k8s/lease.ts:5](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/lease.ts#L5)
 
 ___
 
@@ -24,7 +22,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/lease.ts:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/lease.ts#L6)
+[lib/k8s/lease.ts:6](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/lease.ts#L6)
 
 ___
 
@@ -34,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/lease.ts:7](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/lease.ts#L7)
+[lib/k8s/lease.ts:7](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/lease.ts#L7)
 
 ___
 
@@ -44,4 +42,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/lease.ts:8](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/lease.ts#L8)
+[lib/k8s/lease.ts:8](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/lease.ts#L8)

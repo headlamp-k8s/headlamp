@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/cluster"
-linkTitle: "lib/k8s/cluster"
-slug: "lib_k8s_cluster"
----
+[API](../API.md) / lib/k8s/cluster
+
+# Module: lib/k8s/cluster
 
 ## References
 

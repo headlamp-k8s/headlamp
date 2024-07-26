@@ -1,5 +1,6 @@
 ---
 title: Development
+sidebar_position: 5
 ---
 
 This is a quickstart guide for building and running Headlamp for development.
@@ -16,7 +17,7 @@ These are the required dependencies to get started. Other dependencies are pulle
 - [Node.js](https://nodejs.org/en/download/) Latest LTS (20.11.1 at time of writing). Many of us use [nvm](https://github.com/nvm-sh/nvm) for installing multiple versions of Node.
 - [Go](https://go.dev/doc/install), (1.22 at time of writing)
 - [Make](https://www.gnu.org/software/make/) (GNU). Often installed by default. On Windows this can be installed with the "chocolatey" package manager that is installed with node.
-- [Kubernetes](https://kubernetes.io/), we suggest [minikube](https://minikube.sigs.k8s.io/docs/) as one good K8s installation for testing locally. Other k8s installations are supported (see [platforms](../platforms.md)).
+- [Kubernetes](https://kubernetes.io/), we suggest [minikube](https://minikube.sigs.k8s.io/docs/) as one good K8s installation for testing locally. Other k8s installations are supported (see [platforms](../platforms.md).
 
 ## Build the code
 
@@ -100,7 +101,6 @@ make app-win-msi
 
 See the generated app files in app/dist/ .
 
-
 ### Running the app on Ubuntu WSL
 
 Headlamp on WSL requires some packages installed (maybe it requires more) to run the app.
@@ -115,7 +115,6 @@ Some of these are also needed some of them only for the end to end tests.
 sudo apt-get install firefox libgstreamer-plugins-bad1.0-0 libegl1 libnotify4 libopengl0 libwoff1 libharfbuzz-icu0 libgstreamer-gl1.0-0 libwebpdemux2 libenchant1c2a libsecret-1-0 libhyphen0 libevdev2 libgles2 gstreamer1.0-libav
 ```
 
-
 ## Build a container image
 
 The following command builds a container image for Headlamp from the current
@@ -128,7 +127,7 @@ make image
 
 ### Custom container base images
 
-The Dockerfile takes a build argument for the base image used. You can specify the 
+The Dockerfile takes a build argument for the base image used. You can specify the
 base image used using the IMAGE_BASE environment variable with make.
 
 ```bash
@@ -139,7 +138,7 @@ If no IMAGE_BASE is specified, then a default image is used (see Dockerfile for 
 
 This is useful if there are requirements on what base images can be used in an environment.
 
-So far Debian variants (including Ubuntu), and Alpine Linux are supported. 
+So far Debian variants (including Ubuntu), and Alpine Linux are supported.
 If you have other requirements, please get in touch.
 
 ### Running the container image
@@ -181,14 +180,14 @@ This is needed because minikube looks for container images in there, not
 ones made in the local docker environment.
 
 ```bash
-$ eval $(minikube docker-env)
-$ DOCKER_IMAGE_VERSION=development make image
+eval $(minikube docker-env)
+DOCKER_IMAGE_VERSION=development make image
 ```
 
 #### Create a deployment yaml.
 
 ```bash
-$ kubectl create deployment headlamp -n kube-system --image=headlamp-k8s/headlamp:development -o yaml --dry-run -- /headlamp/headlamp-server -html-static-dir /headlamp/frontend -in-cluster -plugins-dir=/headlamp/plugins > minikube-headlamp.yaml
+kubectl create deployment headlamp -n kube-system --image=headlamp-k8s/headlamp:development -o yaml --dry-run -- /headlamp/headlamp-server -html-static-dir /headlamp/frontend -in-cluster -plugins-dir=/headlamp/plugins > minikube-headlamp.yaml
 ```
 
 To use the local container image we change the `imagePullPolicy` to Never.
@@ -232,12 +231,12 @@ status: {}
 Now we create the deployment.
 
 ```bash
-$ kubectl apply -f minikube-headlamp.yaml
+kubectl apply -f minikube-headlamp.yaml
 ```
 
 Then we expose the deployment, and get a URL where we can see it.
 
-```bash
+```
 $ kubectl expose deployment headlamp -n kube-system --type=NodePort --port=4466
 service/headlamp exposed
 
@@ -272,7 +271,7 @@ as well as showing the release notes after updating to a new version.
 
 This behavior can be turned off by adding the following to a `.env` file in the `app/` folder:
 
-```
+```bash
 HEADLAMP_CHECK_FOR_UPDATES=false
 ```
 

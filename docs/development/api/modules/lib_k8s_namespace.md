@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/namespace"
-linkTitle: "lib/k8s/namespace"
-slug: "lib_k8s_namespace"
----
+[API](../API.md) / lib/k8s/namespace
+
+# Module: lib/k8s/namespace
 
 ## Classes
 

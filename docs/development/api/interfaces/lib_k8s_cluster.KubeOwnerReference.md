@@ -1,8 +1,6 @@
----
-title: "Interface: KubeOwnerReference"
-linkTitle: "KubeOwnerReference"
-slug: "lib_k8s_cluster.KubeOwnerReference"
----
+[API](../API.md) / [lib/k8s/cluster](../modules/lib_k8s_cluster.md) / KubeOwnerReference
+
+# Interface: KubeOwnerReference
 
 [lib/k8s/cluster](../modules/lib_k8s_cluster.md).KubeOwnerReference
 
@@ -16,7 +14,7 @@ API version of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:198](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L198)
+[lib/k8s/cluster.ts:199](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L199)
 
 ___
 
@@ -35,7 +33,7 @@ otherwise 422 (Unprocessable Entity) will be returned.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:210](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L210)
+[lib/k8s/cluster.ts:211](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L211)
 
 ___
 
@@ -47,7 +45,7 @@ If true, this reference points to the managing controller.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:212](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L212)
+[lib/k8s/cluster.ts:213](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L213)
 
 ___
 
@@ -59,7 +57,7 @@ Kind of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:214](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L214)
+[lib/k8s/cluster.ts:215](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L215)
 
 ___
 
@@ -71,7 +69,7 @@ Name of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:216](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L216)
+[lib/k8s/cluster.ts:217](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L217)
 
 ___
 
@@ -83,4 +81,4 @@ UID of the referent.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:218](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L218)
+[lib/k8s/cluster.ts:219](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L219)

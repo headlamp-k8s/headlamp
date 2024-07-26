@@ -1,8 +1,6 @@
----
-title: "Interface: RestartResourceEvent"
-linkTitle: "RestartResourceEvent"
-slug: "plugin_registry.RestartResourceEvent"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / RestartResourceEvent
+
+# Interface: RestartResourceEvent
 
 [plugin/registry](../modules/plugin_registry.md).RestartResourceEvent
 
@@ -23,7 +21,7 @@ Event fired when restarting a resource.
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:130](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L130)
+[redux/headlampEventSlice.ts:130](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L130)
 
 ___
 
@@ -33,4 +31,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:129](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L129)
+[redux/headlampEventSlice.ts:129](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L129)

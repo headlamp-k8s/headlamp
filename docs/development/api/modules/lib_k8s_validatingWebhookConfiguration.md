@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/validatingWebhookConfiguration"
-linkTitle: "lib/k8s/validatingWebhookConfiguration"
-slug: "lib_k8s_validatingWebhookConfiguration"
----
+[API](../API.md) / lib/k8s/validatingWebhookConfiguration
+
+# Module: lib/k8s/validatingWebhookConfiguration
 
 ## Classes
 

@@ -1,8 +1,6 @@
----
-title: "Class: Plugin"
-linkTitle: "Plugin"
-slug: "plugin_lib.Plugin"
----
+[API](../API.md) / [plugin/lib](../modules/plugin_lib.md) / Plugin
+
+# Class: Plugin
 
 [plugin/lib](../modules/plugin_lib.md).Plugin
 
@@ -40,4 +38,4 @@ The return code is not used, but used to be required.
 
 #### Defined in
 
-[plugin/lib.ts:49](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/lib.ts#L49)
+[plugin/lib.ts:49](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/lib.ts#L49)

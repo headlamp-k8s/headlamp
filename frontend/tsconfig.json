@@ -30,13 +30,13 @@
       "src/plugin/registry.tsx"
     ],
     "entryPointStrategy": "expand",
-    "theme": "hugo",
     "excludeExternals": true,
     "excludePrivate": true,
     "excludeProtected": true,
-    "hideBreadcrumbs": true,
     "readme": "none",
     "hideInPageTOC": true,
-    "indexTitle": "API"
+    "name": "API",
+    "indexTitle": "API Reference",
+    "entryDocument": "API.md"
   }
 }
