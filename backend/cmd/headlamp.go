@@ -69,6 +69,8 @@ const ContextCacheTTL = 5 * time.Minute // minutes
 
 const ContextUpdateChacheTTL = 20 * time.Second // seconds
 
+const JWTExpirationTTL = 10 * time.Second // seconds
+
 type clientConfig struct {
 	Clusters                []Cluster `json:"clusters"`
 	IsDyanmicClusterEnabled bool      `json:"isDynamicClusterEnabled"`
@@ -685,41 +687,50 @@ func parseClusterAndToken(r *http.Request) (string, string) {
 	return cluster, token
 }
 
-func isTokenAboutToExpire(token string) bool {
-	const TokenParts = 3
-
-	// parse expiry time from token
-	parts := strings.Split(token, ".")
-	if len(parts) != TokenParts {
-		return false
-	}
-
-	payloadPart := parts[1]
-
-	payloadBytes, err := base64.RawStdEncoding.DecodeString(payloadPart)
+func decodePayload(payload string) (map[string]interface{}, error) {
+	payloadBytes, err := base64.RawStdEncoding.DecodeString(payload)
 	if err != nil {
-		logger.Log(logger.LevelError, nil, err, "failed to decode payload")
-
-		return false
+		return nil, err
 	}
 
-	var payload map[string]interface{}
-	if err := json.Unmarshal(payloadBytes, &payload); err != nil {
-		logger.Log(logger.LevelError, nil, err, "failed to unmarshal payload")
-
-		return false
+	var payloadMap map[string]interface{}
+	if err := json.Unmarshal(payloadBytes, &payloadMap); err != nil {
+		return nil, err
 	}
 
-	// check if token is expired
+	return payloadMap, nil
+}
+
+func getExpiryTime(payload map[string]interface{}) (time.Time, error) {
 	exp, ok := payload["exp"].(float64)
 	if !ok {
+		return time.Time{}, errors.New("expiry time not found or invalid")
+	}
+
+	return time.Unix(int64(exp), 0), nil
+}
+
+func isTokenAboutToExpire(token string) bool {
+	const tokenParts = 3
+
+	parts := strings.Split(token, ".")
+	if len(parts) != tokenParts {
 		return false
 	}
 
-	// if token is not about to expire, then skip
-	expTime := time.Unix(int64(exp), 0)
+	payload, err := decodePayload(parts[1])
+	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "failed to decode payload")
+		return false
+	}
 
-	return time.Until(expTime) <= time.Second*10
+	expiryTime, err := getExpiryTime(payload)
+	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "failed to get expiry time")
+		return false
+	}
+
+	return time.Until(expiryTime) <= JWTExpirationTTL
 }
 
 //nolint:funlen
