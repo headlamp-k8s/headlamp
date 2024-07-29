@@ -23,13 +23,15 @@ for plugin in $plugins; do
 
   archivedir=$TMPDIR/$plugin
   mkdir -p $archivedir
-  tar -xzf $TMPDIR/$plugin.tgz -C $archivedir --wildcards '*/dist/main.js' '*/package.json'
+  tar -xzf $TMPDIR/$plugin.tgz -C $archivedir --wildcards '*/main.js' '*/package.json'
 
   ls -lr $archivedir
 
+  extracted_dir=$(find $archivedir -mindepth 1 -maxdepth 1 -type d)
+
   dir=$DESTDIR/$plugin
   mkdir -p $dir
-  cp $archivedir/package/dist/main.js $archivedir/package/package.json $dir
+  cp $extracted_dir/main.js $extracted_dir/package.json $dir
 
   echo " done"
 done
