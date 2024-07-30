@@ -11,7 +11,7 @@ If you are using Typescript for developing the plugin, the
 `@kinvolk/headlamp-plugin/types`. Please notice that the whole external
 plugin mechanics are still in an early development phase and thus only the
 actual type declarations (and not the corresponding code) is shipped in this
-package at the moment.
+package.
 
 ## Hello Kubernetes
 
