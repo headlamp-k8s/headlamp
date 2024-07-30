@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/runtime"
-linkTitle: "lib/k8s/runtime"
-slug: "lib_k8s_runtime"
----
+[API](../API.md) / lib/k8s/runtime
+
+# Module: lib/k8s/runtime
 
 ## Classes
 

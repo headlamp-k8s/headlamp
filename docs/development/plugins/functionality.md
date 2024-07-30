@@ -1,6 +1,6 @@
 ---
 title: Plugins Functionality
-linktitle: Functionality
+sidebar_label: Functionality
 ---
 
 Headlamp's plugins exist for changing or adding functionality related to
@@ -40,12 +40,12 @@ These are:
 Thus, plugins only need to install dependencies that are not yet provided by Headlamp.
 Yet, if any dependencies already covered by Headlamp are installed by the plugins, you
 just need to make sure they are the same version that Headlamp supports, as these will
-not be bundled when [building the plugin](../building.md).
+not be bundled when [building the plugin](./building.md).
 Particularly, the mentioned modules will be replaced by their version that's included
 in a global objects called `pluginLib`.
 
 Older plugin development guides still asked developers to use e.g. React in the following
-way `const React = window.pluginLib.React`, but this is no longer needed.
+way `const React: window.pluginLib.React`, but this is no longer needed.
 
 ## Functionality
 
@@ -61,7 +61,7 @@ Show a component in the app bar (in the top right) with
 
 ![screenshot of the header showing two actions](./images/podcounter_screenshot.png)
 
-- Example plugin shows [How To Register an App Bar Action](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/pod-counter)
+- Example plugin shows [How To Register an App Bar Action](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/pod-counter)
 - API reference for [registerAppBarAction](../api/modules/plugin_registry.md#registerappbaraction)
 
 ### App Logo
@@ -71,18 +71,18 @@ Change the logo (at the top left) with
 
 ![screenshot of the logo being changed](./images/change-logo.png)
 
-- Example plugin shows [How To Change The Logo](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
+- Example plugin shows [How To Change The Logo](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/change-logo)
 - API reference for [registerAppLogo](../api/modules/plugin_registry.md#registerapplogo)
 
 ### App Menus
 
 Add menus when Headlamp is running as an app.
-[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md/#setappmenu)
+[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md#setappmenu)
 
 ![screenshot of the logo being changed](./images/app-menus.png)
 
-- Example plugin shows [How To Add App Menus](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/app-menus)
-- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md/#setappmenu)
+- Example plugin shows [How To Add App Menus](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/app-menus)
+- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md#setappmenu)
 
 ### Cluster Chooser
 
@@ -91,7 +91,7 @@ Change the Cluster Chooser button (in the middle top of the Headlamp app bar) wi
 
 ![screenshot of the cluster chooser button](./images/cluster-chooser.png)
 
-- Example plugin shows [How To Register Cluster Chooser button](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/clusterchooser)
+- Example plugin shows [How To Register Cluster Chooser button](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/clusterchooser)
 - API reference for [registerClusterChooser](../api/modules/plugin_registry.md#registerclusterchooser)
 
 ### Details View Header Action
@@ -102,19 +102,19 @@ Show a component to the top right area of a detail view
 
 ![screenshot of the header showing two actions](./images/header_actions_screenshot.png)
 
-- Example plugin shows [How To set a Details View Header Action](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/details-view)
+- Example plugin shows [How To set a Details View Header Action](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/details-view)
 - API reference for [registerDetailsViewHeaderAction](../api/modules/plugin_registry.md#registerdetailsviewheaderaction)
 
 ### Details View Section
 
-Change sections in cluster resources' details views with [registerDetailsViewSectionsProcessor](../api/modules/plugin_registry.md#registerDetailsViewSectionsProcessor). This allows you to remove, add, update, or shuffle sections within details views, including the back link.
+Change sections in cluster resources' details views with [registerDetailsViewSectionsProcessor](../api/modules/plugin_registry.md#registerdetailsviewsectionsprocessor). This allows you to remove, add, update, or shuffle sections within details views, including the back link.
 
 Or simply append a component at the bottom of different details views with
 [registerDetailsViewSection](../api/modules/plugin_registry.md#registerdetailsviewsection).
 
 ![screenshot of the appended Details View Section](./images/details-view.jpeg)
 
-- Example plugin shows [How To set a Details View Section](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/details-view)
+- Example plugin shows [How To set a Details View Section](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/details-view)
 - API reference for [registerDetailsViewSection](../api/modules/plugin_registry.md#registerdetailsviewsection)
 
 ### Dynamic Clusters
@@ -122,7 +122,7 @@ Or simply append a component at the bottom of different details views with
 Set a cluster dynamically, rather than have the backend read it from configuration files.
 [Headlamp.setCluster](../api/classes/plugin_lib.Headlamp.md#setcluster).
 
-- Example plugin shows [How To Dynamically Set a Cluster](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/dynamic-clusters)
+- Example plugin shows [How To Dynamically Set a Cluster](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/dynamic-clusters)
 - API reference for [Headlamp.setCluster](../api/classes/plugin_lib.Headlamp.md#setcluster)
 
 ### Route
@@ -130,10 +130,9 @@ Set a cluster dynamically, rather than have the backend read it from configurati
 Show a component (in Headlamps main area) at a given URL with
 [registerRoute](../api/modules/plugin_registry.md#registerroute).
 
-- Example plugin shows [How To Register a Route](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar), and how to remove a route.
+- Example plugin shows [How To Register a Route](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/sidebar), and how to remove a route.
 - API reference for [registerRoute](../api/modules/plugin_registry.md#registerroute)
 - API reference for [registerRouteFilter](../api/modules/plugin_registry.md#registerroutefilter)
-
 
 ### Sidebar Item
 
@@ -143,7 +142,7 @@ Remove sidebar items with [registerSidebarEntryFilter](../api/modules/plugin_reg
 
 ![screenshot of the sidebar being changed](./images/sidebar.png)
 
-- Example plugin shows [How To add items to the sidebar](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar), and also how to remove sidebar items.
+- Example plugin shows [How To add items to the sidebar](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/sidebar), and also how to remove sidebar items.
 - API reference for [registerSidebarEntry](../api/modules/plugin_registry.md#registersidebarentry)
 - API reference for [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registersidebarentryfilter)
 
@@ -153,7 +152,7 @@ Change what tables across Headlamp show with [registerResourceTableColumnsProces
 
 ![screenshot of the pods list with a context menu added by a plugin](./images/table-context-menu.png)
 
-- Example plugin shows [How to add a context menu to each row in the pods list table](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/tables).
+- Example plugin shows [How to add a context menu to each row in the pods list table](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/tables).
 - API reference for [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registerresourcetablecolumnsprocessor)
 
 ### Headlamp Events
@@ -164,14 +163,13 @@ React to Headlamp events with [registerHeadlampEventCallback](../api/modules/plu
 
 ![screenshot of a snackbar notification when an event occurred](./images/event-snackbar.png)
 
-- Example plugin shows [How to show snackbars for Headlamp events](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/headlamp-events).
+- Example plugin shows [How to show snackbars for Headlamp events](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/headlamp-events).
 - API reference for [registerHeadlampEventCallback](../api/modules/plugin_registry.md#registerheadlampeventcallback)
-
 
 ### Plugin Settings
 
 The plugins can have user configurable settings that can be used to change the behavior of the plugin. The plugin settings can be created using [registerPluginSettings](../api/modules/plugin_registry.md#registerpluginsettings).
 
-- Example plugin shows [How to create plugin settings and use them](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
+- Example plugin shows [How to create plugin settings and use them](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/change-logo)
 
 ![screenshot of the plugin settings](./images/plugin-settings.png)

@@ -1,6 +1,6 @@
 ---
 title: Backend
-weight: 5
+sidebar_position: 1
 ---
 
 Headlamp's backend is written in Go and is in charge of redirecting the
@@ -22,7 +22,6 @@ make backend
 ```
 
 Once built, it can be run in development mode (insecure / don't use in production) using:
-
 
 ```bash
 make run-backend

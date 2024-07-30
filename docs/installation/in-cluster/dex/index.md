@@ -1,21 +1,18 @@
 ---
 title: How to Set Up Headlamp in minikube with Dex OIDC Authentication
-linktitle: 'Tutorial: OIDC with Dex'
+sidebar_label: "Tutorial: OIDC with Dex"
 ---
 
 In this tutorial, we'll walk through the process of configuring Headlamp within a Minikube cluster while utilizing Dex for OIDC (OpenID Connect) authentication. This tutorial is based on Dex version 2.38.0, Minikube version v1.31.2, and Headlamp version 0.22.0.
-
 
 ## Configuring Dex
 
 To enable OIDC authentication in your Minikube cluster, you'll need to configure Dex. Before proceeding, follow the [getting started guide](https://dexidp.io/docs/getting-started/) to set up your Dex instance.Follow these steps to configure Dex:
 
-1. Create a Dex configuration file. The following example demonstrates a basic configuration file for Dex, containing a 
-static client, connector, and static password.
+1. Create a Dex configuration file. The following example demonstrates a basic configuration file for Dex, containing a
+   static client, connector, and static password.
 
-**dex-config.yaml**
-
-```yaml
+```yaml title="dex-config.yaml"
 issuer: <YOUR-DEX-URL>
 
 storage:
@@ -25,27 +22,28 @@ web:
   http: 0.0.0.0:5556
 
 staticClients:
-- id: example-app
-  redirectURIs:
-  - 'http://localhost:8000'
-  name: 'Example App'
-  secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+  - id: example-app
+    redirectURIs:
+      - "http://localhost:8000"
+    name: "Example App"
+    secret: ZXhhbXBsZS1hcHAtc2VjcmV0
 
 connectors:
-- type: mockCallback
-  id: mock
-  name: Example
+  - type: mockCallback
+    id: mock
+    name: Example
 
 # Let dex keep a list of passwords which can be used to login to dex.
 enablePasswordDB: true
 
 staticPasswords:
-- email: "admin@example.com"
-  # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
-  hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
-  username: "admin"
-  userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+  - email: "admin@example.com"
+    # bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
+    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+    username: "admin"
+    userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
 ```
+
 2. Start Dex with the following command:
 
 ```shell
@@ -75,21 +73,19 @@ Replace `<YOUR-DEX-URL>` with the actual URL of your Dex instance and `<CLIENT-I
 
 Once your cluster is operational, you need to configure a cluster role and a cluster role binding for the Dex user. This step is essential for enabling the Kubernetes API server to identify the user. In this example, we'll be associating the user with the predefined `cluster-admin` Role.
 
-**clusterRoleBinding.yaml**
-
-```yaml
+```yaml title="clusterRoleBinding.yaml"
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: admin-user-clusterrolebinding
 subjects:
-- kind: User
-  name: admin@example.com
-  apiGroup: rbac.authorization.k8s.io
-roleRef:
-    kind: ClusterRole
-    name: cluster-admin
+  - kind: User
+    name: admin@example.com
     apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
 ```
 
 Create the cluster role binding by running the following command:
@@ -107,6 +103,7 @@ Once you've set up your cluster and created a ClusterRoleBinding, it's time to c
 ```shell
 kubectl krew install oidc-login
 ```
+
 ![OIDC Login Install](./oidc-login-install.jpg)
 
 2. Set Up `oidc-login`, Configure oidc-login with the necessary parameters by running the following command:
@@ -118,7 +115,6 @@ kubectl oidc-login setup --oidc-issuer-url=https://<YOUR-DEX-URL> \ --oidc-clien
 
 ![OIDC Login Setup](./oidc-login-setup1.jpg)
 ![OIDC Login Setup](./oidc-login-setup2.jpg)
-
 
 3. Create OIDC User for the Cluster, later this user will be mapped to the dex cluster.
 
@@ -149,24 +145,22 @@ kubectl get ns
 
 Upon running this command, a new browser window will open, prompting you to log in. Once you've completed the login process, you can close the window. You should see the namespaces in your cluster.
 
-
 # Setting up Headlamp with Dex OIDC Authentication
 
 To configure Headlamp, you can use the Headlamp Helm chart. Follow these steps to set it up with OIDC(OpenID Connect) authentication:
 
 1. Before setting up Headlamp add `http://localhost:4466/oidc-callback` to the `redirectURIs`
-in the Dex configuration.
-
+   in the Dex configuration.
 
 2. Create a `values.yaml` file and add the following OIDC configuration to it:
 
-```yaml
+```yaml title="values.yaml"
 config:
-    oidc:
-    clientID: "<YOUR-CLIENT-ID>"
-    clientSecret: "<YOUR-CLIENT-SECRET>"
-    issuerURL: "<YOUR-DEX-URL>"
-    scopes: "email"
+  oidc:
+  clientID: "<YOUR-CLIENT-ID>"
+  clientSecret: "<YOUR-CLIENT-SECRET>"
+  issuerURL: "<YOUR-DEX-URL>"
+  scopes: "email"
 ```
 
 Replace `<YOUR-CLIENT-ID>`,`<YOUR-CLIENT-SECRET>`,`<YOUR-DEX-URL>` with your specific OIDC configuration details.
@@ -181,7 +175,6 @@ helm install headlamp-oidc headlamp/headlamp -f values.yaml --namespace=headlamp
 ![Headlamp install](./headlamp-install.jpg)
 
 This will install Headlamp in the headlamp namespace with the OIDC configuration from the values.yaml file.
-
 
 4. After a successful installation, you can access Headlamp by port-forwarding to the pod:
 

@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/endpoints"
-linkTitle: "lib/k8s/endpoints"
-slug: "lib_k8s_endpoints"
----
+[API](../API.md) / lib/k8s/endpoints
+
+# Module: lib/k8s/endpoints
 
 ## Classes
 

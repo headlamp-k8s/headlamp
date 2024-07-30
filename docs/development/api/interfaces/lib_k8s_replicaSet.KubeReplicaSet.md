@@ -1,8 +1,6 @@
----
-title: "Interface: KubeReplicaSet"
-linkTitle: "KubeReplicaSet"
-slug: "lib_k8s_replicaSet.KubeReplicaSet"
----
+[API](../API.md) / [lib/k8s/replicaSet](../modules/lib_k8s_replicaSet.md) / KubeReplicaSet
+
+# Interface: KubeReplicaSet
 
 [lib/k8s/replicaSet](../modules/lib_k8s_replicaSet.md).KubeReplicaSet
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_replicaSet.KubeReplicaSet"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -86,7 +84,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/replicaSet.ts:13](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/replicaSet.ts#L13)
+[lib/k8s/replicaSet.ts:13](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/replicaSet.ts#L13)
 
 ___
 
@@ -107,4 +105,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/replicaSet.ts:23](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/replicaSet.ts#L23)
+[lib/k8s/replicaSet.ts:23](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/replicaSet.ts#L23)

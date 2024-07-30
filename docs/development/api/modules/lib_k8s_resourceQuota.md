@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/resourceQuota"
-linkTitle: "lib/k8s/resourceQuota"
-slug: "lib_k8s_resourceQuota"
----
+[API](../API.md) / lib/k8s/resourceQuota
+
+# Module: lib/k8s/resourceQuota
 
 ## Classes
 

@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/roleBinding"
-linkTitle: "lib/k8s/roleBinding"
-slug: "lib_k8s_roleBinding"
----
+[API](../API.md) / lib/k8s/roleBinding
+
+# Module: lib/k8s/roleBinding
 
 ## Classes
 

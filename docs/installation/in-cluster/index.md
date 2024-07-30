@@ -1,10 +1,12 @@
 ---
-title: In-cluster Deployment
-weight: 10
+title: In-cluster
+sidebar_position: 1
 ---
 
 A common use-case for any Kubernetes web UI is to deploy it in-cluster and
 set up an ingress server for having it available to users.
+
+## Using Helm
 
 The easiest way to install headlamp in your existing cluster is to
 use [helm](https://helm.sh/docs/intro/quickstart/) with our [helm chart](https://github.com/headlamp-k8s/headlamp/tree/main/charts/headlamp).
@@ -24,11 +26,12 @@ As usual it is possible to configure the helm release via the [values file](http
 helm install my-headlamp headlamp/headlamp --namespace kube-system -f values.yaml
 
 # install headlamp by setting your values directly
-
 helm install my-headlamp headlamp/headlamp --namespace kube-system --set replicaCount=2
 ```
 
-We also maintain a simple/vanilla [file](https://github.com/kinvolk/headlamp/blob/main/kubernetes-headlamp.yaml)
+## Using simple yaml
+
+We also maintain a simple/vanilla [file](https://github.com/headlamp-k8s/headlamp/blob/main/kubernetes-headlamp.yaml)
 for setting up a Headlamp deployment and service. Be sure to review it and change
 anything you need.
 
@@ -45,7 +48,7 @@ kubectl apply -f https://raw.githubusercontent.com/kinvolk/headlamp/main/kuberne
 With the instructions in the previous section, the Headlamp service should be
 running, but you still need the
 ingress server as mentioned. We provide an example sample ingress yaml file
-for this purpose, but you have to manually replace the __URL__ placeholder
+for this purpose, but you have to manually replace the **URL** placeholder
 with the desired URL (the ingress file also assumes that you have contour
 and a cert-manager set up, but if you don't then you'll just not have TLS).
 
@@ -57,6 +60,7 @@ curl -s https://raw.githubusercontent.com/kinvolk/headlamp/main/kubernetes-headl
 ```
 
 and with that, you'll have a configured ingress file, so verify it and apply it:
+
 ```bash
 kubectl apply -f ./headlamp-ingress.yaml
 ```

@@ -1,8 +1,6 @@
----
-title: "Interface: PluginsLoadedEvent"
-linkTitle: "PluginsLoadedEvent"
-slug: "plugin_registry.PluginsLoadedEvent"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / PluginsLoadedEvent
+
+# Interface: PluginsLoadedEvent
 
 [plugin/registry](../modules/plugin_registry.md).PluginsLoadedEvent
 
@@ -22,7 +20,7 @@ Event fired when all plugins are loaded.
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:224](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L224)
+[redux/headlampEventSlice.ts:224](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L224)
 
 ___
 
@@ -32,4 +30,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:223](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L223)
+[redux/headlampEventSlice.ts:223](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L223)

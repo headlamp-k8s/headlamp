@@ -1,8 +1,6 @@
----
-title: "Class: Namespace"
-linkTitle: "Namespace"
-slug: "lib_k8s_namespace.Namespace"
----
+[API](../API.md) / [lib/k8s/namespace](../modules/lib_k8s_namespace.md) / Namespace
+
+# Class: Namespace
 
 [lib/k8s/namespace](../modules/lib_k8s_namespace.md).Namespace
 
@@ -30,7 +28,7 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Properties
 
@@ -48,12 +46,12 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 | `isNamespaced` | `boolean` |
 | `list` | (`cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<() => `void`\> |
 | `patch` | (`body`: `OpPatch`[], `name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
-| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
+| `post` | (`body`: `object` \| `JSON` \| [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 | `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/namespace.ts:11](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/namespace.ts#L11)
+[lib/k8s/namespace.ts:11](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/namespace.ts#L11)
 
 ___
 
@@ -67,7 +65,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L318)
+[lib/k8s/cluster.ts:319](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L319)
 
 ## Accessors
 
@@ -81,7 +79,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/namespace.ts:13](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/namespace.ts#L13)
+[lib/k8s/namespace.ts:13](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/namespace.ts#L13)
 
 ## Methods
 
@@ -107,7 +105,7 @@ makeKubeObject<KubeNamespace\>('namespace').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:294](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L294)
 
 ___
 
@@ -132,7 +130,7 @@ makeKubeObject<KubeNamespace\>('namespace').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:321](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L321)
 
 ___
 
@@ -156,7 +154,35 @@ makeKubeObject<KubeNamespace\>('namespace').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L317)
+
+___
+
+### isValidNamespaceFormat
+
+▸ `Static` **isValidNamespaceFormat**(`namespace`): `boolean`
+
+This function validates the custom namespace input matches the crieria for DNS-1123 label names.
+
+**`params`** namespace: string
+
+**`see`** https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `namespace` | `string` |
+
+#### Returns
+
+`boolean`
+
+true if the namespace is valid, false otherwise.
+
+#### Defined in
+
+[lib/k8s/namespace.ts:23](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/namespace.ts#L23)
 
 ___
 
@@ -183,7 +209,7 @@ makeKubeObject<KubeNamespace\>('namespace').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:304](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L304)
 
 ___
 
@@ -209,7 +235,7 @@ makeKubeObject<KubeNamespace\>('namespace').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:299](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L299)
 
 ___
 
@@ -234,7 +260,7 @@ makeKubeObject<KubeNamespace\>('namespace').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:313](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L313)
 
 ___
 
@@ -258,4 +284,4 @@ makeKubeObject<KubeNamespace\>('namespace').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:310](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L310)

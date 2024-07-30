@@ -1,8 +1,6 @@
----
-title: "Class: RoleBinding"
-linkTitle: "RoleBinding"
-slug: "lib_k8s_roleBinding.RoleBinding"
----
+[API](../API.md) / [lib/k8s/roleBinding](../modules/lib_k8s_roleBinding.md) / RoleBinding
+
+# Class: RoleBinding
 
 [lib/k8s/roleBinding](../modules/lib_k8s_roleBinding.md).RoleBinding
 
@@ -32,7 +30,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Properties
 
@@ -48,13 +46,14 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').constructor
 
 | Name | Type |
 | :------ | :------ |
-| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\>  } |
+| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> ; `patch`: (`body`: { `spec`: { `replicas`: `number`  }  }, `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md), `clusterName?`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\>  } |
 | `scale.get` | (`namespace`: `string`, `name`: `string`, `clusterName?`: `string`) => `Promise`<`any`\> |
+| `scale.patch` | (`body`: { `spec`: { `replicas`: `number`  }  }, `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md), `clusterName?`: `string`) => `Promise`<`any`\> |
 | `scale.put` | (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }, `clusterName?`: `string`) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:19](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/roleBinding.ts#L19)
+[lib/k8s/roleBinding.ts:19](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/roleBinding.ts#L19)
 
 ___
 
@@ -68,7 +67,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L318)
+[lib/k8s/cluster.ts:319](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L319)
 
 ## Accessors
 
@@ -82,7 +81,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').className
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:21](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/roleBinding.ts#L21)
+[lib/k8s/roleBinding.ts:21](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/roleBinding.ts#L21)
 
 ___
 
@@ -96,7 +95,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:25](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/roleBinding.ts#L25)
+[lib/k8s/roleBinding.ts:25](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/roleBinding.ts#L25)
 
 ## Methods
 
@@ -122,7 +121,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:294](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L294)
 
 ___
 
@@ -147,7 +146,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:321](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L321)
 
 ___
 
@@ -171,7 +170,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L317)
 
 ___
 
@@ -198,7 +197,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:304](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L304)
 
 ___
 
@@ -224,7 +223,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:299](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L299)
 
 ___
 
@@ -249,7 +248,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:313](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L313)
 
 ___
 
@@ -273,4 +272,4 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:310](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L310)

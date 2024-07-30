@@ -1,8 +1,6 @@
----
-title: "Interface: KubeLoadBalancerIngress"
-linkTitle: "KubeLoadBalancerIngress"
-slug: "lib_k8s_service.KubeLoadBalancerIngress"
----
+[API](../API.md) / [lib/k8s/service](../modules/lib_k8s_service.md) / KubeLoadBalancerIngress
+
+# Interface: KubeLoadBalancerIngress
 
 [lib/k8s/service](../modules/lib_k8s_service.md).KubeLoadBalancerIngress
 
@@ -14,7 +12,7 @@ slug: "lib_k8s_service.KubeLoadBalancerIngress"
 
 #### Defined in
 
-[lib/k8s/service.ts:12](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/service.ts#L12)
+[lib/k8s/service.ts:12](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/service.ts#L12)
 
 ___
 
@@ -24,7 +22,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:13](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/service.ts#L13)
+[lib/k8s/service.ts:13](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/service.ts#L13)
 
 ___
 
@@ -34,4 +32,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:14](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/service.ts#L14)
+[lib/k8s/service.ts:14](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/service.ts#L14)

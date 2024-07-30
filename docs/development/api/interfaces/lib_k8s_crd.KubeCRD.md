@@ -1,8 +1,6 @@
----
-title: "Interface: KubeCRD"
-linkTitle: "KubeCRD"
-slug: "lib_k8s_crd.KubeCRD"
----
+[API](../API.md) / [lib/k8s/crd](../modules/lib_k8s_crd.md) / KubeCRD
+
+# Interface: KubeCRD
 
 [lib/k8s/crd](../modules/lib_k8s_crd.md).KubeCRD
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_crd.KubeCRD"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -78,7 +76,8 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `group` | `string` |
-| `names` | { `kind`: `string` ; `listKind`: `string` ; `plural`: `string` ; `singular`: `string`  } |
+| `names` | { `categories?`: `string`[] ; `kind`: `string` ; `listKind`: `string` ; `plural`: `string` ; `singular`: `string`  } |
+| `names.categories?` | `string`[] |
 | `names.kind` | `string` |
 | `names.listKind` | `string` |
 | `names.plural` | `string` |
@@ -89,4 +88,26 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L6)
+[lib/k8s/crd.ts:6](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L6)
+
+___
+
+### status
+
+• `Optional` **status**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `acceptedNames?` | { `categories?`: `string`[] ; `kind`: `string` ; `plural`: `string` ; `shortNames`: `string`[]  } |
+| `acceptedNames.categories?` | `string`[] |
+| `acceptedNames.kind` | `string` |
+| `acceptedNames.plural` | `string` |
+| `acceptedNames.shortNames` | `string`[] |
+| `conditions?` | { `lastTransitionTime`: `string` ; `message`: `string` ; `reason`: `string` ; `status`: `string` ; `type`: `string`  }[] |
+| `storedVersions?` | `string`[] |
+
+#### Defined in
+
+[lib/k8s/crd.ts:32](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L32)

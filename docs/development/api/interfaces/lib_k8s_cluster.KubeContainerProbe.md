@@ -1,8 +1,6 @@
----
-title: "Interface: KubeContainerProbe"
-linkTitle: "KubeContainerProbe"
-slug: "lib_k8s_cluster.KubeContainerProbe"
----
+[API](../API.md) / [lib/k8s/cluster](../modules/lib_k8s_cluster.md) / KubeContainerProbe
+
+# Interface: KubeContainerProbe
 
 [lib/k8s/cluster](../modules/lib_k8s_cluster.md).KubeContainerProbe
 
@@ -20,7 +18,7 @@ slug: "lib_k8s_cluster.KubeContainerProbe"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1188](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1188)
+[lib/k8s/cluster.ts:1216](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1216)
 
 ___
 
@@ -30,7 +28,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1198](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1198)
+[lib/k8s/cluster.ts:1226](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1226)
 
 ___
 
@@ -49,7 +47,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1182](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1182)
+[lib/k8s/cluster.ts:1210](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1210)
 
 ___
 
@@ -59,7 +57,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1194](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1194)
+[lib/k8s/cluster.ts:1222](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1222)
 
 ___
 
@@ -69,7 +67,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1196](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1196)
+[lib/k8s/cluster.ts:1224](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1224)
 
 ___
 
@@ -79,7 +77,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1197](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1197)
+[lib/k8s/cluster.ts:1225](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1225)
 
 ___
 
@@ -95,7 +93,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1191](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1191)
+[lib/k8s/cluster.ts:1219](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1219)
 
 ___
 
@@ -105,4 +103,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:1195](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L1195)
+[lib/k8s/cluster.ts:1223](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L1223)

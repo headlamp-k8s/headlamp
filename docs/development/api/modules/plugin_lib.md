@@ -1,8 +1,6 @@
----
-title: "Module: plugin/lib"
-linkTitle: "plugin/lib"
-slug: "plugin_lib"
----
+[API](../API.md) / plugin/lib
+
+# Module: plugin/lib
 
 ## Classes
 

@@ -1,8 +1,6 @@
----
-title: "Interface: ScaleResourceEvent"
-linkTitle: "ScaleResourceEvent"
-slug: "plugin_registry.ScaleResourceEvent"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / ScaleResourceEvent
+
+# Interface: ScaleResourceEvent
 
 [plugin/registry](../modules/plugin_registry.md).ScaleResourceEvent
 
@@ -23,7 +21,7 @@ Event fired when scaling a resource.
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:115](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L115)
+[redux/headlampEventSlice.ts:115](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L115)
 
 ___
 
@@ -33,4 +31,4 @@ ___
 
 #### Defined in
 
-[redux/headlampEventSlice.ts:114](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/redux/headlampEventSlice.ts#L114)
+[redux/headlampEventSlice.ts:114](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/redux/headlampEventSlice.ts#L114)

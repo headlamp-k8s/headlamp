@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/statefulSet"
-linkTitle: "lib/k8s/statefulSet"
-slug: "lib_k8s_statefulSet"
----
+[API](../API.md) / lib/k8s/statefulSet
+
+# Module: lib/k8s/statefulSet
 
 ## Classes
 

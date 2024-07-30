@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/token"
-linkTitle: "lib/k8s/token"
-slug: "lib_k8s_token"
----
+[API](../API.md) / lib/k8s/token
+
+# Module: lib/k8s/token
 
 ## Interfaces
 

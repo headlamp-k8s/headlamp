@@ -1,6 +1,6 @@
 ---
 title: Contributing to Internationalization
-linkTitle: Contributing
+sidebar_label: Contributing
 ---
 
 This section introduces some concepts for contributing translations, and is
@@ -17,8 +17,8 @@ be translated and which should be left in the original form.
 
 We have only two main [i18next namespaces](https://www.i18next.com/principles/namespaces):
 
-* **glossary**: For Kubernetes jargon or terms/sentences that are very technical.
-* **translation**: Default namespace, used for everything else not in the **glossary** namespace.
+- **glossary**: For Kubernetes jargon or terms/sentences that are very technical.
+- **translation**: Default namespace, used for everything else not in the **glossary** namespace.
 
 We do have a third namespace that concerns only the desktop app related strings: **app**.
 
@@ -29,7 +29,7 @@ In Headlamp, namespaces are separated by a `|` character. E.g. `t('glossary|Pod'
 In order to better express context for a translation, we use the [i18next context](https://www.i18next.com/principles/context) feature. It is used like this:
 
 ```typescript
-    return t('translation|Desired', { context: 'pods' });
+return t("translation|Desired", { context: "pods" });
 ```
 
 In the example above, we give the extra context of "pods" for the word "Desired", meaning it refers to the concept of pod, and precisely more than one (in case the target language of
@@ -37,15 +37,15 @@ the translation distinguishes between plural and singular for this word).
 
 In the translated files, the context will show up in the respective key as:
 
-  ```json
-      "Desired//context:pods": ""
-  ```
+```json
+    "Desired//context:pods": ""
+```
 
 And should be translated without that context suffix. For example, for Spanish:
 
-  ```json
-      "Desired//context:pods": "Deseados"
-  ```
+```json
+    "Desired//context:pods": "Deseados"
+```
 
 #### Technical Jargon words
 
@@ -67,7 +67,6 @@ like `1.000.000`.
 
 Here is an example which can use number formatting:
 
-
 ```JavaScript
     return t('{{numReady, number}} / {{numItems, number}} Requested', {
       numReady: podsReady.length,
@@ -83,7 +82,7 @@ Here's an example of using date formatting:
 
 ```Javascript
     return t('appsection:When {{ date, date }}', {
-      date: new Date(),
+
     });
 ```
 
@@ -106,13 +105,13 @@ be stored as empty strings (defaulting to English) in the translation files.
 In order to more easily spot and translate the missing strings, we have two CLI
 tools:
 
-* *extract-empty-translations.js*: This script (in ./frontend/src/i18n/tools/)
+- _extract-empty-translations.js_: This script (in ./frontend/src/i18n/tools/)
   will extract the strings without a corresponding translation from the translation
   files, and copy them into a new file.
   E.g. `$ node copy-empty-translations.js ../locales/de/translation.json` will
   by default create a `../locales/de/translation_empty.json`. This file can be
   used to translate the strings in a more isolated way.
-* *copy-translations.js*: This script (in ./frontend/src/i18n/tools/)
+- _copy-translations.js_: This script (in ./frontend/src/i18n/tools/)
   by default copies any existing translations from one source translation file to
   a target one, if the same key is not translated in the destination file.
   E.g. `$ node copy-translations.js ../locales/de/translation_no_longer_empty.json ../locales/de/translation.json` will

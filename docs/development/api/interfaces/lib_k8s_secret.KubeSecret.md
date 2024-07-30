@@ -1,8 +1,6 @@
----
-title: "Interface: KubeSecret"
-linkTitle: "KubeSecret"
-slug: "lib_k8s_secret.KubeSecret"
----
+[API](../API.md) / [lib/k8s/secret](../modules/lib_k8s_secret.md) / KubeSecret
+
+# Interface: KubeSecret
 
 [lib/k8s/secret](../modules/lib_k8s_secret.md).KubeSecret
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_secret.KubeSecret"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -34,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/secret.ts:5](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/secret.ts#L5)
+[lib/k8s/secret.ts:5](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/secret.ts#L5)
 
 ___
 
@@ -57,7 +55,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -71,7 +69,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -81,4 +79,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/secret.ts:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/secret.ts#L6)
+[lib/k8s/secret.ts:6](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/secret.ts#L6)

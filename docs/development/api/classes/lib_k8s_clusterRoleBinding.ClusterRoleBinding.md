@@ -1,8 +1,6 @@
----
-title: "Class: ClusterRoleBinding"
-linkTitle: "ClusterRoleBinding"
-slug: "lib_k8s_clusterRoleBinding.ClusterRoleBinding"
----
+[API](../API.md) / [lib/k8s/clusterRoleBinding](../modules/lib_k8s_clusterRoleBinding.md) / ClusterRoleBinding
+
+# Class: ClusterRoleBinding
 
 [lib/k8s/clusterRoleBinding](../modules/lib_k8s_clusterRoleBinding.md).ClusterRoleBinding
 
@@ -30,7 +28,7 @@ slug: "lib_k8s_clusterRoleBinding.ClusterRoleBinding"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L317)
+[lib/k8s/cluster.ts:318](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L318)
 
 ## Properties
 
@@ -48,7 +46,7 @@ slug: "lib_k8s_clusterRoleBinding.ClusterRoleBinding"
 | `isNamespaced` | `boolean` |
 | `list` | (`cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<() => `void`\> |
 | `patch` | (`body`: `OpPatch`[], `name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
-| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
+| `post` | (`body`: `object` \| `JSON` \| [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 | `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md), `cluster?`: `string`) => `Promise`<`any`\> |
 
 #### Overrides
@@ -57,7 +55,7 @@ slug: "lib_k8s_clusterRoleBinding.ClusterRoleBinding"
 
 #### Defined in
 
-[lib/k8s/clusterRoleBinding.ts:5](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/clusterRoleBinding.ts#L5)
+[lib/k8s/clusterRoleBinding.ts:5](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/clusterRoleBinding.ts#L5)
 
 ## Accessors
 
@@ -71,7 +69,7 @@ slug: "lib_k8s_clusterRoleBinding.ClusterRoleBinding"
 
 #### Defined in
 
-[lib/k8s/clusterRoleBinding.ts:11](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/clusterRoleBinding.ts#L11)
+[lib/k8s/clusterRoleBinding.ts:11](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/clusterRoleBinding.ts#L11)
 
 ___
 
@@ -89,7 +87,7 @@ RoleBinding.roleRef
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:21](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/roleBinding.ts#L21)
+[lib/k8s/roleBinding.ts:21](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/roleBinding.ts#L21)
 
 ___
 
@@ -107,7 +105,7 @@ RoleBinding.subjects
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:25](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/roleBinding.ts#L25)
+[lib/k8s/roleBinding.ts:25](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/roleBinding.ts#L25)
 
 ___
 
@@ -125,7 +123,7 @@ RoleBinding.className
 
 #### Defined in
 
-[lib/k8s/clusterRoleBinding.ts:7](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/clusterRoleBinding.ts#L7)
+[lib/k8s/clusterRoleBinding.ts:7](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/clusterRoleBinding.ts#L7)
 
 ## Methods
 
@@ -151,7 +149,7 @@ RoleBinding.className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:293](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L293)
+[lib/k8s/cluster.ts:294](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L294)
 
 ___
 
@@ -176,7 +174,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:320](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L320)
+[lib/k8s/cluster.ts:321](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L321)
 
 ___
 
@@ -200,7 +198,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:316](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L316)
+[lib/k8s/cluster.ts:317](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L317)
 
 ___
 
@@ -227,7 +225,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:303](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L303)
+[lib/k8s/cluster.ts:304](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L304)
 
 ___
 
@@ -253,7 +251,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:298](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L298)
+[lib/k8s/cluster.ts:299](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L299)
 
 ___
 
@@ -278,7 +276,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L312)
+[lib/k8s/cluster.ts:313](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L313)
 
 ___
 
@@ -302,4 +300,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L309)
+[lib/k8s/cluster.ts:310](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L310)

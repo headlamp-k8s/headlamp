@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/replicaSet"
-linkTitle: "lib/k8s/replicaSet"
-slug: "lib_k8s_replicaSet"
----
+[API](../API.md) / lib/k8s/replicaSet
+
+# Module: lib/k8s/replicaSet
 
 ## Classes
 

@@ -1,8 +1,6 @@
----
-title: "Interface: KubeService"
-linkTitle: "KubeService"
-slug: "lib_k8s_service.KubeService"
----
+[API](../API.md) / [lib/k8s/service](../modules/lib_k8s_service.md) / KubeService
+
+# Interface: KubeService
 
 [lib/k8s/service](../modules/lib_k8s_service.md).KubeService
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_service.KubeService"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -79,13 +77,13 @@ ___
 | :------ | :------ |
 | `clusterIP` | `string` |
 | `externalIPs` | `string`[] |
-| `ports` | { `name`: `string` ; `nodePort`: `number` ; `port`: `number` ; `protocol`: `string` ; `targetPort`: `string` \| `number`  }[] |
+| `ports?` | { `name`: `string` ; `nodePort`: `number` ; `port`: `number` ; `protocol`: `string` ; `targetPort`: `string` \| `number`  }[] |
 | `selector` | { `[key: string]`: `string`;  } |
 | `type` | `string` |
 
 #### Defined in
 
-[lib/k8s/service.ts:18](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/service.ts#L18)
+[lib/k8s/service.ts:18](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/service.ts#L18)
 
 ___
 
@@ -103,4 +101,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:34](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/service.ts#L34)
+[lib/k8s/service.ts:34](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/service.ts#L34)

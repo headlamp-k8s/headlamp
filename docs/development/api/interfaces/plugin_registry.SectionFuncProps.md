@@ -1,8 +1,6 @@
----
-title: "Interface: SectionFuncProps"
-linkTitle: "SectionFuncProps"
-slug: "plugin_registry.SectionFuncProps"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / SectionFuncProps
+
+# Interface: SectionFuncProps
 
 [plugin/registry](../modules/plugin_registry.md).SectionFuncProps
 
@@ -14,7 +12,7 @@ slug: "plugin_registry.SectionFuncProps"
 
 #### Defined in
 
-[plugin/registry.tsx:68](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L68)
+[plugin/registry.tsx:69](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L69)
 
 ## Methods
 
@@ -35,4 +33,4 @@ slug: "plugin_registry.SectionFuncProps"
 
 #### Defined in
 
-[plugin/registry.tsx:69](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/registry.tsx#L69)
+[plugin/registry.tsx:70](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/registry.tsx#L70)

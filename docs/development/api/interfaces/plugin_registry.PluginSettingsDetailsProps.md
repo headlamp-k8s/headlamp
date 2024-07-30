@@ -1,8 +1,6 @@
----
-title: "Interface: PluginSettingsDetailsProps"
-linkTitle: "PluginSettingsDetailsProps"
-slug: "plugin_registry.PluginSettingsDetailsProps"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / PluginSettingsDetailsProps
+
+# Interface: PluginSettingsDetailsProps
 
 [plugin/registry](../modules/plugin_registry.md).PluginSettingsDetailsProps
 
@@ -23,7 +21,7 @@ readonly - The data object is readonly and cannot be modified.
 
 #### Defined in
 
-[plugin/pluginsSlice.ts:18](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/pluginsSlice.ts#L18)
+[plugin/pluginsSlice.ts:18](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/pluginsSlice.ts#L18)
 
 ## Methods
 
@@ -45,4 +43,4 @@ Callback function to be triggered when there's a change in data.
 
 #### Defined in
 
-[plugin/pluginsSlice.ts:12](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/pluginsSlice.ts#L12)
+[plugin/pluginsSlice.ts:12](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/pluginsSlice.ts#L12)

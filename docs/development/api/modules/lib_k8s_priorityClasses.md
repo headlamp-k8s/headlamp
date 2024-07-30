@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/priorityClasses"
-linkTitle: "lib/k8s/priorityClasses"
-slug: "lib_k8s_priorityClasses"
----
+[API](../API.md) / lib/k8s/priorityClasses
+
+# Module: lib/k8s/priorityClasses
 
 ## References
 
@@ -24,4 +22,4 @@ Renames and re-exports [PriorityClass](../classes/lib_k8s_priorityClass.Priority
 
 #### Defined in
 
-[lib/k8s/priorityClasses.ts:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/priorityClasses.ts#L6)
+[lib/k8s/priorityClasses.ts:6](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/priorityClasses.ts#L6)

@@ -1,8 +1,6 @@
----
-title: "Interface: KubeStorageClass"
-linkTitle: "KubeStorageClass"
-slug: "lib_k8s_storageClass.KubeStorageClass"
----
+[API](../API.md) / [lib/k8s/storageClass](../modules/lib_k8s_storageClass.md) / KubeStorageClass
+
+# Interface: KubeStorageClass
 
 [lib/k8s/storageClass](../modules/lib_k8s_storageClass.md).KubeStorageClass
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_storageClass.KubeStorageClass"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -71,7 +69,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:5](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/storageClass.ts#L5)
+[lib/k8s/storageClass.ts:5](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/storageClass.ts#L5)
 
 ___
 
@@ -81,7 +79,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/storageClass.ts#L6)
+[lib/k8s/storageClass.ts:6](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/storageClass.ts#L6)
 
 ___
 
@@ -91,4 +89,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:7](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/storageClass.ts#L7)
+[lib/k8s/storageClass.ts:7](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/storageClass.ts#L7)

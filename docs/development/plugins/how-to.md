@@ -1,13 +1,12 @@
 ---
 title: How to create a Plugin
-linktitle: How-to
 ---
 
 This section will walk you through a basic plugin development.
 
 ## Types
 
-If you are using Typescript for developing the plugin, the 
+If you are using Typescript for developing the plugin, the
 `@kinvolk/headlamp-plugin` package does ship some type declarations in
 `@kinvolk/headlamp-plugin/types`. Please notice that the whole external
 plugin mechanics are still in an early development phase and thus only the
@@ -20,8 +19,8 @@ The following example will show a basic plugin declaration and registration
 in a file that should match the `src/index.tsx` structure explained in the
 [building](./building) section.
 
-```tsx
-import { registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
+```tsx title="/src/index.tsx"
+import { registerAppBarAction } from "@kinvolk/headlamp-plugin/lib";
 registerAppBarAction(<span>Hello Kubernetes</span>);
 ```
 
@@ -30,13 +29,13 @@ registerAppBarAction(<span>Hello Kubernetes</span>);
 Let's create a plugin that just gets the number of pods in the cluster and
 displays that information in the top bar (i.e. registers an "app bar action").
 
-```tsx
+```tsx title="/src/index.tsx"
 import { K8s, registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
 import { Typography } from '@mui/material';
 
 function PodCounter() {
-  const [pods, error] = K8s.ResourceClasses.Pod.useList();
-  const msg = pods === null ? 'Loading…' : pods.length.toString();
+  const [pods, error]: K8s.ResourceClasses.Pod.useList();
+  const msg: pods === null ? 'Loading…' : pods.length.toString();
 
   return (
     <Typography color="textPrimary" sx={{fontStyle: 'italic'}}>

@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/crd"
-linkTitle: "lib/k8s/crd"
-slug: "lib_k8s_crd"
----
+[API](../API.md) / lib/k8s/crd
+
+# Module: lib/k8s/crd
 
 ## Classes
 
@@ -34,7 +32,7 @@ slug: "lib_k8s_crd"
 
 #### Defined in
 
-[lib/k8s/crd.ts:104](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L104)
+[lib/k8s/crd.ts:130](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L130)
 
 ▸ **makeCustomResourceClass**(`args`): `ReturnType`<typeof [`makeKubeObject`](lib_k8s_cluster.md#makekubeobject)\>
 
@@ -50,4 +48,4 @@ slug: "lib_k8s_crd"
 
 #### Defined in
 
-[lib/k8s/crd.ts:108](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/crd.ts#L108)
+[lib/k8s/crd.ts:134](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/crd.ts#L134)

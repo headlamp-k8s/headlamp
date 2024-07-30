@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/clusterRole"
-linkTitle: "lib/k8s/clusterRole"
-slug: "lib_k8s_clusterRole"
----
+[API](../API.md) / lib/k8s/clusterRole
+
+# Module: lib/k8s/clusterRole
 
 ## Classes
 

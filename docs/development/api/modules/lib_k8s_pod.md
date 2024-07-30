@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/pod"
-linkTitle: "lib/k8s/pod"
-slug: "lib_k8s_pod"
----
+[API](../API.md) / lib/k8s/pod
+
+# Module: lib/k8s/pod
 
 ## Classes
 

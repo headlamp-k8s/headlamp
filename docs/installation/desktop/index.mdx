@@ -1,6 +1,6 @@
 ---
-title: Desktop App Installation
-weight: 100
+title: Desktop App
+sidebar_position: 2
 ---
 
 Headlamp can be run as a desktop application, for users who don't want to
@@ -9,6 +9,10 @@ deploy it in cluster, or those who want to manage unrelated clusters locally.
 Currently there are desktop apps for [Linux](./linux-installation.md), [Mac](./mac-installation.md), and [Windows](./win-installation.md).
 
 Please check the following guides for the installation in your desired platform.
+
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
 
 ## Use a non-default kube config file
 
@@ -30,15 +34,23 @@ KUBECONFIG=/my/different/kubeconfig /path/to/headlamp
 If you need to use more than one kube config file at the same time, you can list
 each config file path with a separator.
 
-On unix:
-```bash
-KUBECONFIG=kubeconfig1:kubeconfig2:kubeconfig3 /path/to/headlamp
-```
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-On windows cmd/PowerShell:
-```
-KUBECONFIG=kubeconfig1;kubeconfig2;kubeconfig3 /path/to/headlamp
-```
+<Tabs>
+  <TabItem value="unix" label="Unix" default>
+    ```bash
+    KUBECONFIG=kubeconfig1:kubeconfig2:kubeconfig3 /path/to/headlamp
+    ```
+  </TabItem>
+  <TabItem value="powershell" label="PowerShell">
+    ```powershell
+    KUBECONFIG=kubeconfig1;kubeconfig2;kubeconfig3 /path/to/headlamp
+    ```
+  </TabItem>
+</Tabs>
+
+
 
 ## Access using OIDC
 

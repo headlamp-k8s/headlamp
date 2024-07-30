@@ -1,6 +1,6 @@
 ---
 title: Testing
-weight: 5
+sidebar_position: 3
 ---
 
 ## Load testing Headlamp
@@ -18,9 +18,9 @@ Steps:
 
 - Create load in a cluster
 - Run Headlamp and see if it works well compared to low load
-    - performance profiles
-    - CPU/memory usage
-    - feel
+  - performance profiles
+  - CPU/memory usage
+  - feel
 
 ### Kwok for low resource usage load testing of Headlamp
 
@@ -71,7 +71,7 @@ node scripts/create-events.js 9000 1 & node scripts/create-nodes.js 100 1 & node
 
 #### Cleaning up clusters
 
-Kwok clusters can take up a lot of resources even doing nothing, 
+Kwok clusters can take up a lot of resources even doing nothing,
 due to the Kubernetes API server using resources even when idle.
 
 So when you're done, you can delete them like this.

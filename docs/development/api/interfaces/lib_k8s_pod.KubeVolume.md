@@ -1,8 +1,6 @@
----
-title: "Interface: KubeVolume"
-linkTitle: "KubeVolume"
-slug: "lib_k8s_pod.KubeVolume"
----
+[API](../API.md) / [lib/k8s/pod](../modules/lib_k8s_pod.md) / KubeVolume
+
+# Interface: KubeVolume
 
 [lib/k8s/pod](../modules/lib_k8s_pod.md).KubeVolume
 
@@ -18,4 +16,4 @@ slug: "lib_k8s_pod.KubeVolume"
 
 #### Defined in
 
-[lib/k8s/pod.ts:13](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/pod.ts#L13)
+[lib/k8s/pod.ts:13](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/pod.ts#L13)

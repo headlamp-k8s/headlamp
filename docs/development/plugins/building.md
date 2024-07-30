@@ -1,6 +1,6 @@
 ---
 title: Building and Shipping Plugins
-linktitle: Building & Shipping
+sidebar_label: Building & Shipping
 ---
 
 This section explains how to start developing a Headlamp plugin, and how
@@ -19,7 +19,7 @@ npm run start
 There's some basic code inside src/index.tsx.
 
 Now run Headlamp (the desktop app or the
-[development version](../_index.md#run-the-code)),
+[development version](../index.md#run-the-code)),
 and your plugin should be loaded.
 
 Using the above commands means that Headlamp will **automatically reload**
@@ -78,7 +78,7 @@ This will create a file with the bundled plugin in
 
 ### Building a folder of packages at once
 
-For convienience the `headlamp-plugin build` command can build a 
+For convienience the `headlamp-plugin build` command can build a
 package or folder of packages.
 
 ```bash
@@ -94,15 +94,15 @@ be placed in a "plugins directory", for Headlamp to load them.
 For example, if we have built 3 plugins called MyPlugin1, MyPlugin2, and
 MyPlugin3, they should be added to a directory in the following structure:
 
-  ```
-  .plugins/
-    MyPlugin1/
-      main.js
-    MyPlugin2/
-      main.js
-    MyPlugin3/
-      main.js
-  ```
+```
+.plugins/
+  MyPlugin1/
+    main.js
+  MyPlugin2/
+    main.js
+  MyPlugin3/
+    main.js
+```
 
 If our plugins are places in `myplugins`, we can conveniently create that
 folder with the following command:
@@ -112,6 +112,7 @@ npx @kinvolk/headlamp-plugin extract ./myplugins /path/to/.plugins
 ```
 
 This also works individually (for each plugin):
+
 ```bash
 npx @kinvolk/headlamp-plugin extract ./myplugins/MyPlugin1 /path/to/./plugins
 ```
@@ -133,7 +134,7 @@ or within the current folder as `.plugins` if the former doesn't exist.
 
 ### Bundling plugins with desktop version
 
-To build a Headlamp app with a set of plugins, first extract some plugins 
+To build a Headlamp app with a set of plugins, first extract some plugins
 into the .plugins folder in the root of the "headlamp" repo.
 
 ```bash
@@ -158,11 +159,11 @@ for more information on building a container image with your plugins.
 
 ## Writing storybook stories
 
-What is a storybook story? 
+What is a storybook story?
 
 From https://storybook.js.org/docs/web-components/get-started/introduction
 
-> Storybook is a tool for UI development. It makes development faster and 
+> Storybook is a tool for UI development. It makes development faster and
 > easier by isolating components. This allows you to work on one component
 > at a time. You can develop entire UIs without needing to start up a
 > complex dev stack, force certain data into your database,
@@ -179,7 +180,7 @@ $ npm run storybook
 ```
 
 Your browser should open and show you a Message component with three
-different states the component can be in. 
+different states the component can be in.
 
 Notices that there is a Message.stories.tsx to go along with the Message.tsx
 which has the `<Message>` component defined within it. See that file for an
@@ -187,13 +188,13 @@ example of how to write a story.
 
 ### Snapshot testing
 
-Another benefit of writing storybook stories is that they can act as 
-unit tests for regression testing. With storyshots it will save snapshots 
-of html for the different states that a component can be in. See the 
+Another benefit of writing storybook stories is that they can act as
+unit tests for regression testing. With storyshots it will save snapshots
+of html for the different states that a component can be in. See the
 [Snapshot tests](https://storybook.js.org/docs/react/writing-tests/snapshot-testing)
 guide in the storybook documentation for more information.
 
-This is in addition to the benefit of making sure your components can be 
+This is in addition to the benefit of making sure your components can be
 manually tested and developed quickly in isolation.
 
 See the [storybook documentation](https://storybook.js.org/docs/) for full
@@ -212,13 +213,12 @@ name: Headlamp plugin linting, type checking, and testing
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     defaults:
@@ -244,14 +244,13 @@ jobs:
 
 Please see the github documentation for further details on workflows and actions.
 
-
 ## Upgrading package
 
 There's a command which handles much of upgrading plugins to the latest headlamp-plugin version. This upgrade command also audits packages, formats code, lints and type checks.
 
 Additionally this handles some code changes needed for plugins. For example, it handles running the material-ui 4 to mui 5 'codemod' code changes, and creates missing configuration added in different versions of headlamp-plugin.
 
-Testing is necessary after running the upgrade command. 
+Testing is necessary after running the upgrade command.
 Of course make sure you have a backup of your plugin folder before running it.
 
 ```bash

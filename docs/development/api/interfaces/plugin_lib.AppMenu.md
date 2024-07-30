@@ -1,8 +1,6 @@
----
-title: "Interface: AppMenu"
-linkTitle: "AppMenu"
-slug: "plugin_lib.AppMenu"
----
+[API](../API.md) / [plugin/lib](../modules/plugin_lib.md) / AppMenu
+
+# Interface: AppMenu
 
 [plugin/lib](../modules/plugin_lib.md).AppMenu
 
@@ -26,7 +24,7 @@ The submenus of this menu
 
 #### Defined in
 
-[plugin/lib.ts:74](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/lib.ts#L74)
+[plugin/lib.ts:74](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/lib.ts#L74)
 
 ___
 
@@ -38,4 +36,4 @@ A URL to open (if not starting with http, then it'll be opened in the external b
 
 #### Defined in
 
-[plugin/lib.ts:72](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/plugin/lib.ts#L72)
+[plugin/lib.ts:72](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/plugin/lib.ts#L72)

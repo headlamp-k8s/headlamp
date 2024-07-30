@@ -207,7 +207,6 @@
     "resize-observer-polyfill": "^1.5.1",
     "storybook": "^7.6.7",
     "typedoc": "0.22.10",
-    "typedoc-hugo-theme": "1.0.0",
     "typedoc-plugin-markdown": "3.11.14",
     "typedoc-plugin-rename-defaults": "0.4.0",
     "vitest-canvas-mock": "^0.3.3",

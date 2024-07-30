@@ -1,8 +1,6 @@
----
-title: "Interface: IngressBackend"
-linkTitle: "IngressBackend"
-slug: "lib_k8s_ingress.IngressBackend"
----
+[API](../API.md) / [lib/k8s/ingress](../modules/lib_k8s_ingress.md) / IngressBackend
+
+# Interface: IngressBackend
 
 [lib/k8s/ingress](../modules/lib_k8s_ingress.md).IngressBackend
 
@@ -22,7 +20,7 @@ slug: "lib_k8s_ingress.IngressBackend"
 
 #### Defined in
 
-[lib/k8s/ingress.ts:38](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/ingress.ts#L38)
+[lib/k8s/ingress.ts:38](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/ingress.ts#L38)
 
 ___
 
@@ -41,4 +39,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/ingress.ts:31](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/ingress.ts#L31)
+[lib/k8s/ingress.ts:31](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/ingress.ts#L31)

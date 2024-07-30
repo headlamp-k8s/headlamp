@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/event"
-linkTitle: "lib/k8s/event"
-slug: "lib_k8s_event"
----
+[API](../API.md) / lib/k8s/event
+
+# Module: lib/k8s/event
 
 ## Classes
 

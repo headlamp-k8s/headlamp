@@ -1,8 +1,6 @@
----
-title: "Interface: CrossVersionObjectReference"
-linkTitle: "CrossVersionObjectReference"
-slug: "lib_k8s_hpa.CrossVersionObjectReference"
----
+[API](../API.md) / [lib/k8s/hpa](../modules/lib_k8s_hpa.md) / CrossVersionObjectReference
+
+# Interface: CrossVersionObjectReference
 
 [lib/k8s/hpa](../modules/lib_k8s_hpa.md).CrossVersionObjectReference
 
@@ -14,7 +12,7 @@ slug: "lib_k8s_hpa.CrossVersionObjectReference"
 
 #### Defined in
 
-[lib/k8s/hpa.ts:5](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/hpa.ts#L5)
+[lib/k8s/hpa.ts:5](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/hpa.ts#L5)
 
 ___
 
@@ -24,7 +22,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/hpa.ts:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/hpa.ts#L6)
+[lib/k8s/hpa.ts:6](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/hpa.ts#L6)
 
 ___
 
@@ -34,4 +32,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/hpa.ts:7](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/hpa.ts#L7)
+[lib/k8s/hpa.ts:7](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/hpa.ts#L7)

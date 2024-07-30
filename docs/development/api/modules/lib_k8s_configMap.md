@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/configMap"
-linkTitle: "lib/k8s/configMap"
-slug: "lib_k8s_configMap"
----
+[API](../API.md) / lib/k8s/configMap
+
+# Module: lib/k8s/configMap
 
 ## Classes
 

@@ -1,8 +1,6 @@
----
-title: "Interface: KubeDeployment"
-linkTitle: "KubeDeployment"
-slug: "lib_k8s_deployment.KubeDeployment"
----
+[API](../API.md) / [lib/k8s/deployment](../modules/lib_k8s_deployment.md) / KubeDeployment
+
+# Interface: KubeDeployment
 
 [lib/k8s/deployment](../modules/lib_k8s_deployment.md).KubeDeployment
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_deployment.KubeDeployment"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -86,7 +84,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/deployment.ts:12](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/deployment.ts#L12)
+[lib/k8s/deployment.ts:12](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/deployment.ts#L12)
 
 ___
 
@@ -100,4 +98,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/deployment.ts:24](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/deployment.ts#L24)
+[lib/k8s/deployment.ts:24](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/deployment.ts#L24)

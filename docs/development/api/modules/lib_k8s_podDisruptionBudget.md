@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/podDisruptionBudget"
-linkTitle: "lib/k8s/podDisruptionBudget"
-slug: "lib_k8s_podDisruptionBudget"
----
+[API](../API.md) / lib/k8s/podDisruptionBudget
+
+# Module: lib/k8s/podDisruptionBudget
 
 ## Classes
 

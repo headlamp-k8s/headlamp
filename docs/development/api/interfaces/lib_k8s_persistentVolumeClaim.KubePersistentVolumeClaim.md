@@ -1,8 +1,6 @@
----
-title: "Interface: KubePersistentVolumeClaim"
-linkTitle: "KubePersistentVolumeClaim"
-slug: "lib_k8s_persistentVolumeClaim.KubePersistentVolumeClaim"
----
+[API](../API.md) / [lib/k8s/persistentVolumeClaim](../modules/lib_k8s_persistentVolumeClaim.md) / KubePersistentVolumeClaim
+
+# Interface: KubePersistentVolumeClaim
 
 [lib/k8s/persistentVolumeClaim](../modules/lib_k8s_persistentVolumeClaim.md).KubePersistentVolumeClaim
 
@@ -24,7 +22,7 @@ slug: "lib_k8s_persistentVolumeClaim.KubePersistentVolumeClaim"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -47,7 +45,7 @@ Cannot be updated.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -61,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:57](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/cluster.ts#L57)
 
 ___
 
@@ -88,7 +86,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/persistentVolumeClaim.ts:5](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/persistentVolumeClaim.ts#L5)
+[lib/k8s/persistentVolumeClaim.ts:5](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/persistentVolumeClaim.ts#L5)
 
 ___
 
@@ -111,4 +109,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/persistentVolumeClaim.ts:19](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/k8s/persistentVolumeClaim.ts#L19)
+[lib/k8s/persistentVolumeClaim.ts:19](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/k8s/persistentVolumeClaim.ts#L19)

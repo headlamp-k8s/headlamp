@@ -22,7 +22,7 @@
     "out": "../docs/development/api",
     "entryPoints": [
       "src/lib/k8s/",
-      "src/redux/reducers/config.tsx",
+      "src/redux/reducers/reducers.tsx",
       "src/lib/k8s/cluster.ts",
       "src/lib/router.tsx",
       "src/lib/util.ts",
@@ -30,13 +30,13 @@
       "src/plugin/registry.tsx"
     ],
     "entryPointStrategy": "expand",
-    "theme": "hugo",
     "excludeExternals": true,
     "excludePrivate": true,
     "excludeProtected": true,
-    "hideBreadcrumbs": true,
     "readme": "none",
     "hideInPageTOC": true,
-    "indexTitle": "API"
+    "name": "API",
+    "indexTitle": "API Reference",
+    "entryDocument": "API.md"
   }
 }

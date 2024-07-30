@@ -1,8 +1,6 @@
----
-title: "Module: lib/k8s/priorityClass"
-linkTitle: "lib/k8s/priorityClass"
-slug: "lib_k8s_priorityClass"
----
+[API](../API.md) / lib/k8s/priorityClass
+
+# Module: lib/k8s/priorityClass
 
 ## Classes
 

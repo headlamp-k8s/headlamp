@@ -1,8 +1,6 @@
----
-title: "Enumeration: DefaultSidebars"
-linkTitle: "DefaultSidebars"
-slug: "plugin_registry.DefaultSidebars"
----
+[API](../API.md) / [plugin/registry](../modules/plugin_registry.md) / DefaultSidebars
+
+# Enumeration: DefaultSidebars
 
 [plugin/registry](../modules/plugin_registry.md).DefaultSidebars
 
@@ -14,7 +12,7 @@ slug: "plugin_registry.DefaultSidebars"
 
 #### Defined in
 
-[components/Sidebar/sidebarSlice.ts:6](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/Sidebar/sidebarSlice.ts#L6)
+[components/Sidebar/sidebarSlice.ts:6](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/components/Sidebar/sidebarSlice.ts#L6)
 
 ___
 
@@ -24,4 +22,4 @@ ___
 
 #### Defined in
 
-[components/Sidebar/sidebarSlice.ts:7](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/components/Sidebar/sidebarSlice.ts#L7)
+[components/Sidebar/sidebarSlice.ts:7](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/components/Sidebar/sidebarSlice.ts#L7)

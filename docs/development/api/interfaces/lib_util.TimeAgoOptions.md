@@ -1,8 +1,6 @@
----
-title: "Interface: TimeAgoOptions"
-linkTitle: "TimeAgoOptions"
-slug: "lib_util.TimeAgoOptions"
----
+[API](../API.md) / [lib/util](../modules/lib_util.md) / TimeAgoOptions
+
+# Interface: TimeAgoOptions
 
 [lib/util](../modules/lib_util.md).TimeAgoOptions
 
@@ -14,4 +12,4 @@ slug: "lib_util.TimeAgoOptions"
 
 #### Defined in
 
-[lib/util.ts:36](https://github.com/headlamp-k8s/headlamp/blob/45b84205/frontend/src/lib/util.ts#L36)
+[lib/util.ts:36](https://github.com/headlamp-k8s/headlamp/blob/072d2509b/frontend/src/lib/util.ts#L36)
