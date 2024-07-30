@@ -44,5 +44,7 @@ To install Headlamp from its official installer, first download the _.exe_ file 
 
 ### Upgrading
 
-Until we have an automatic update, to upgrade Headlamp when it's installed directly from its
-installer, you have to download the new version of the installer and re-install it.
+To upgrade Headlamp when it's installed directly from its installer, you have to
+download the new version of the installer and re-install it. There is no automatic upgrade.
+
+If you install via Chocolatey or Winget they can manage upgrades for you.
