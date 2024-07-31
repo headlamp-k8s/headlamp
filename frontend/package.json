@@ -87,7 +87,7 @@
     "spacetime": "^7.4.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
-    "typescript": "4.5.5",
+    "typescript": "5.5.4",
     "url": "^0.11.0",
     "util": "^0.12.4",
     "vfile": "^5.3.0",
@@ -100,7 +100,8 @@
     "xterm-addon-search": "^0.9.0"
   },
   "overrides": {
-    "domain-browser": "npm:dry-uninstall"
+    "domain-browser": "npm:dry-uninstall",
+    "typescript": "5.5.4"
   },
   "scripts": {
     "prestart": "npm run make-version",
