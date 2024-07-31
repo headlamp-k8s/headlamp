@@ -1,12 +1,13 @@
 import { Grid, GridProps } from '@mui/material';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ValueLabel } from '../Label';
 
+// TODO: use ReactNode after migration to react 18
 export interface NameValueTableRow {
   /** The name (key) for this row */
-  name: string | JSX.Element;
+  name: ReactNode;
   /** The value for this row */
-  value?: string | JSX.Element | JSX.Element[];
+  value?: ReactNode;
   /** Whether this row should be hidden (can be a boolean or a function that will take the
    * @param value and return a boolean) */
   hide?: boolean | ((value: NameValueTableRow['value']) => boolean);
@@ -21,11 +22,7 @@ export interface NameValueTableProps {
   valueCellProps?: GridProps;
 }
 
-function Value({
-  value,
-}: {
-  value: string | JSX.Element | JSX.Element[] | undefined;
-}): JSX.Element | null {
+function Value({ value }: { value: ReactNode }): ReactNode {
   if (typeof value === 'undefined') {
     return null;
   } else if (typeof value === 'string') {

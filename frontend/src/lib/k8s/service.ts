@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeCondition, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeCondition, KubeObject, KubeObjectInterface } from './cluster';
 
 export interface KubePortStatus {
   error?: string;
@@ -39,15 +39,16 @@ export interface KubeService extends KubeObjectInterface {
   };
 }
 
-class Service extends makeKubeObject<KubeService>('service') {
+class Service extends KubeObject<KubeService> {
+  static objectName = 'service';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'services');
 
   get spec(): KubeService['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getExternalAddresses() {

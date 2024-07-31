@@ -4,6 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { makeMockKubeObject } from '../../test/mocker';
 import { SectionBox } from '../common';
 import DetailsViewSection, { DetailsViewSectionProps } from './DetailsViewSection';
 import { setDetailsView } from './detailsViewSectionSlice';
@@ -58,10 +59,10 @@ const Template: StoryFn<DetailsViewSectionProps> = args => {
 
 export const MatchRenderIt = Template.bind({});
 MatchRenderIt.args = {
-  resource: { kind: 'Node' },
+  resource: makeMockKubeObject({ kind: 'Node' }),
 };
 
 export const NoMatchNoRender = Template.bind({});
 NoMatchNoRender.args = {
-  resource: { kind: 'DoesNotExist' },
+  resource: makeMockKubeObject({ kind: 'DoesNotExist' }),
 };

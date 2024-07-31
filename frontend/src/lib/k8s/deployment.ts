@@ -2,9 +2,9 @@ import { apiFactoryWithNamespace } from './apiProxy';
 import {
   KubeContainer,
   KubeMetadata,
+  KubeObject,
   KubeObjectInterface,
   LabelSelector,
-  makeKubeObject,
 } from './cluster';
 import { KubePodSpec } from './pod';
 
@@ -26,7 +26,8 @@ export interface KubeDeployment extends KubeObjectInterface {
   };
 }
 
-class Deployment extends makeKubeObject<KubeDeployment>('Deployment') {
+class Deployment extends KubeObject<KubeDeployment> {
+  static objectName = 'Deployment';
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'deployments', true);
 
   get spec() {

@@ -115,7 +115,7 @@ function CrInstancesView({ crds }: { crds: CRD[]; key: string }) {
           {
             label: 'Categories',
             getValue: cr => {
-              const categories = getCRDForCR(cr).jsonData!.status.acceptedNames.categories;
+              const categories = getCRDForCR(cr).jsonData.status?.acceptedNames?.categories;
               return categories !== undefined ? categories.toString().split(',').join(', ') : '';
             },
           },

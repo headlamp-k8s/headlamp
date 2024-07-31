@@ -1,21 +1,23 @@
 import '../../../i18n/config';
-import _ from 'lodash';
+import _, { List } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { KubeMetrics, KubeObject } from '../../../lib/k8s/cluster';
+import Node from '../../../lib/k8s/node';
+import Pod from '../../../lib/k8s/pod';
 import { PercentageCircleProps } from '../Chart';
 import TileChart from '../TileChart';
 
 export interface CircularChartProps extends Omit<PercentageCircleProps, 'data'> {
   /** Items to display in the chart (should have a corresponding value in @param itemsMetrics) */
-  items: KubeObject[] | null;
+  items: Node[] | Pod[] | null;
   /** Metrics to display in the chart (for items in @param items) */
   itemsMetrics: KubeMetrics[] | null;
   /** Whether no metrics are available. If true, then instead of a chart, a message will be displayed */
   noMetrics?: boolean;
   /** Function to get the "used" value for the metrics in question */
-  resourceUsedGetter?: (node: KubeObject) => number;
+  resourceUsedGetter?: (node: KubeMetrics) => number;
   /** Function to get the "available" value for the metrics in question */
-  resourceAvailableGetter?: (node: KubeObject) => number;
+  resourceAvailableGetter?: (node: Node | Pod) => number;
   /** Function to create a legend for the data */
   getLegend?: (used: number, available: number) => string;
   /** Tooltip to display when hovering over the chart */
@@ -56,7 +58,7 @@ export function CircularChart(props: CircularChartProps) {
 
     const nodeMetrics = filterMetrics(items, itemsMetrics);
     const usedValue = _.sumBy(nodeMetrics, resourceUsedGetter);
-    const availableValue = _.sumBy(items, resourceAvailableGetter);
+    const availableValue = _.sumBy(items as List<Node | Pod>, resourceAvailableGetter);
 
     return [usedValue, availableValue];
   }

@@ -18,7 +18,7 @@ export default {
   ],
 } as Meta;
 
-const Template: StoryFn<MetadataDisplayProps> = args => <MetadataDisplayComponent {...args} />;
+const Template: StoryFn<MetadataDisplayProps<any>> = args => <MetadataDisplayComponent {...args} />;
 
 const mockResource: KubeObjectInterface = {
   kind: 'MyKind',

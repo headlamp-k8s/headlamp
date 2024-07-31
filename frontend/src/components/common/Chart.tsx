@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   Bar,
   BarChart,
@@ -28,8 +28,8 @@ export interface PercentageCircleProps {
   size?: number;
   dataKey?: string;
   label?: string | null;
-  title?: string | JSX.Element | null;
-  legend?: string | null;
+  title?: ReactNode;
+  legend?: ReactNode;
   total?: number;
   totalProps?: {
     [propName: string]: any;
@@ -170,7 +170,7 @@ const StyledBarChart = styled(BarChart)(({ theme }) => ({
 export interface PercentageBarProps {
   data: ChartDataPoint[];
   total?: number;
-  tooltipFunc?: ((data: any) => JSX.Element | string) | null;
+  tooltipFunc?: ((data: any) => ReactNode) | null;
 }
 
 export function PercentageBar(props: PercentageBarProps) {

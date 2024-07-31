@@ -2,9 +2,9 @@ import { apiFactoryWithNamespace } from './apiProxy';
 import {
   KubeContainer,
   KubeMetadata,
+  KubeObject,
   KubeObjectInterface,
   LabelSelector,
-  makeKubeObject,
 } from './cluster';
 import { KubePodSpec } from './pod';
 
@@ -28,15 +28,16 @@ export interface KubeDaemonSet extends KubeObjectInterface {
   };
 }
 
-class DaemonSet extends makeKubeObject<KubeDaemonSet>('DaemonSet') {
+class DaemonSet extends KubeObject<KubeDaemonSet> {
+  static objectName = 'DaemonSet';
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'daemonsets');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getContainers(): KubeContainer[] {

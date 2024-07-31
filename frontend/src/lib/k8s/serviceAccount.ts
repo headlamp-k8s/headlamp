@@ -1,5 +1,5 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './cluster';
 
 export interface KubeServiceAccount extends KubeObjectInterface {
   secrets: {
@@ -12,11 +12,12 @@ export interface KubeServiceAccount extends KubeObjectInterface {
   }[];
 }
 
-class ServiceAccount extends makeKubeObject<KubeServiceAccount>('serviceAccount') {
+class ServiceAccount extends KubeObject<KubeServiceAccount> {
+  static objectName = 'serviceAccount';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'serviceaccounts');
 
   get secrets(): KubeServiceAccount['secrets'] {
-    return this.jsonData!.secrets;
+    return this.jsonData.secrets;
   }
 }
 

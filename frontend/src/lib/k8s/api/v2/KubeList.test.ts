@@ -17,7 +17,7 @@ class MockKubeObject implements KubeObjectInterface {
 
 describe('KubeList.applyUpdate', () => {
   const itemClass = MockKubeObject as unknown as KubeObjectClass;
-  const initialList = {
+  const initialList: KubeList<any> = {
     kind: 'MockKubeList',
     apiVersion: 'v1',
     items: [
