@@ -206,9 +206,9 @@
     "redux-mock-store": "^1.5.4",
     "resize-observer-polyfill": "^1.5.1",
     "storybook": "^7.6.7",
-    "typedoc": "0.22.10",
-    "typedoc-plugin-markdown": "3.11.14",
-    "typedoc-plugin-rename-defaults": "0.4.0",
+    "typedoc": "^0.26.5",
+    "typedoc-plugin-markdown": "^4.2.3",
+    "typedoc-plugin-rename-defaults": "^0.7.1",
     "vitest-canvas-mock": "^0.3.3",
     "vitest-websocket-mock": "^0.3.0",
     "vm-browserify": "^1.1.2"
