@@ -1,5 +1,5 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './cluster';
 
 export interface KubePersistentVolumeClaim extends KubeObjectInterface {
   spec?: {
@@ -26,17 +26,16 @@ export interface KubePersistentVolumeClaim extends KubeObjectInterface {
   };
 }
 
-class PersistentVolumeClaim extends makeKubeObject<KubePersistentVolumeClaim>(
-  'persistentVolumeClaim'
-) {
+class PersistentVolumeClaim extends KubeObject<KubePersistentVolumeClaim> {
+  static objectName = 'persistentVolumeClaim';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'persistentvolumeclaims');
 
   get spec() {
-    return this.jsonData?.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData?.status;
+    return this.jsonData.status;
   }
 }
 

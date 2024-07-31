@@ -1,5 +1,5 @@
 import { apiFactory } from './apiProxy';
-import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface, LabelSelector } from './cluster';
 import { KubeRuleWithOperations, KubeWebhookClientConfig } from './mutatingWebhookConfiguration';
 
 export interface KubeValidatingWebhookConfiguration extends KubeObjectInterface {
@@ -23,9 +23,8 @@ export interface KubeValidatingWebhookConfiguration extends KubeObjectInterface 
   }[];
 }
 
-class ValidatingWebhookConfiguration extends makeKubeObject<KubeValidatingWebhookConfiguration>(
-  'ValidatingWebhookConfiguration'
-) {
+class ValidatingWebhookConfiguration extends KubeObject<KubeValidatingWebhookConfiguration> {
+  static objectName = 'ValidatingWebhookConfiguration';
   static apiEndpoint = apiFactory(
     'admissionregistration.k8s.io',
     'v1',
@@ -33,7 +32,7 @@ class ValidatingWebhookConfiguration extends makeKubeObject<KubeValidatingWebhoo
   );
 
   get webhooks(): KubeValidatingWebhookConfiguration['webhooks'] {
-    return this.jsonData!.webhooks;
+    return this.jsonData.webhooks;
   }
 }
 

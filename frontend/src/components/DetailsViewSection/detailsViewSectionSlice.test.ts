@@ -3,7 +3,6 @@ import detailsViewSectionReducer, {
   addDetailsViewSectionsProcessor,
   DefaultDetailsViewSection,
   DetailsViewSection,
-  DetailsViewSectionProcessorType,
   DetailsViewsSectionProcessor,
   setDetailsView,
   setDetailsViewSection,
@@ -67,7 +66,7 @@ describe('detailsViewSectionSlice', () => {
     it('should add a new details view sections processor when provided as an object', () => {
       const processor: DetailsViewsSectionProcessor = {
         id: 'test-processor',
-        processor: info => info.actions,
+        processor: () => [{ id: 'test-section' }],
       };
       store.dispatch(addDetailsViewSectionsProcessor(processor));
       expect(store.getState().detailsViewSection.detailsViewSectionsProcessors).toEqual([
@@ -76,7 +75,7 @@ describe('detailsViewSectionSlice', () => {
     });
 
     it('should add a new details view sections processor when provided as a function', () => {
-      const processorFunc: DetailsViewSectionProcessorType = info => info.actions;
+      const processorFunc = () => [{ id: 'test-section' }];
       store.dispatch(addDetailsViewSectionsProcessor(processorFunc));
       const processors = store.getState().detailsViewSection.detailsViewSectionsProcessors;
       expect(processors).toHaveLength(1);

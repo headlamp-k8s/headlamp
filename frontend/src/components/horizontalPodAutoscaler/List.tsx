@@ -1,5 +1,6 @@
 import { Chip } from '@mui/material';
 import { styled } from '@mui/system';
+import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import HPA from '../../lib/k8s/hpa';
 import { Link } from '../common';
@@ -49,7 +50,7 @@ export default function HpaList() {
               .map(it => it.shortValue)
               .join(', '),
           render: (hpa: HPA) => {
-            const value: JSX.Element[] = [];
+            const value: ReactNode[] = [];
             const metrics = hpa.metrics(t);
             if (metrics.length) {
               value.push(

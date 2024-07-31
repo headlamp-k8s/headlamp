@@ -105,15 +105,14 @@ export function useKubeObject<T extends KubeObjectClass>({
     staleTime: 5000,
     queryKey,
     queryFn: async () => {
-      if (!endpoint) return;
       const url = makeUrl(
-        [KubeObjectEndpoint.toUrl(endpoint, namespace), name],
+        [KubeObjectEndpoint.toUrl(endpoint!, namespace), name],
         cleanedUpQueryParams
       );
       const obj: KubeObjectInterface = await clusterFetch(url, {
         cluster,
       }).then(it => it.json());
-      return new kubeObjectClass(obj);
+      return new kubeObjectClass(obj) as Instance;
     },
   });
 
@@ -345,7 +344,7 @@ function _useKubeObjectLists<T extends KubeObjectClass>({
   queryParams?: QueryParameters;
 }): [Array<InstanceType<T>> | null, ApiError | null] &
   QueryListResponse<KubeList<InstanceType<T>>, InstanceType<T>, ApiError> {
-  const clusterResults: Record<string, ReturnType<typeof useKubeObjectList>> = {};
+  const clusterResults: Record<string, ReturnType<typeof useKubeObjectList<T>>> = {};
 
   for (const cluster of clusters) {
     clusterResults[cluster] = useKubeObjectList({
@@ -356,12 +355,12 @@ function _useKubeObjectLists<T extends KubeObjectClass>({
     });
   }
 
-  let items = null;
+  let items: Array<InstanceType<T>> | null = null;
   for (const cluster of clusters) {
     if (items === null) {
       items = clusterResults[cluster].items;
     } else {
-      items = items.concat(clusterResults[cluster].items);
+      items = items.concat(clusterResults[cluster].items!);
     }
   }
 

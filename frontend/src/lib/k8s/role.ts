@@ -1,5 +1,5 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './cluster';
 
 export interface KubeRole extends KubeObjectInterface {
   rules: {
@@ -8,14 +8,15 @@ export interface KubeRole extends KubeObjectInterface {
     resourceNames: string[];
     resources: string[];
     verbs: string[];
-  };
+  }[];
 }
 
-class Role extends makeKubeObject<KubeRole>('role') {
+class Role extends KubeObject<KubeRole> {
+  static objectName = 'role';
   static apiEndpoint = apiFactoryWithNamespace('rbac.authorization.k8s.io', 'v1', 'roles');
 
   get rules() {
-    return this.jsonData!.rules;
+    return this.jsonData.rules;
   }
 }
 

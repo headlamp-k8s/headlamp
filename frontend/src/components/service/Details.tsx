@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import Endpoints from '../../lib/k8s/endpoints';
+import Endpoint from '../../lib/k8s/endpoints';
 import Service from '../../lib/k8s/service';
 import { Link } from '../common';
 import Empty from '../common/EmptyContent';
@@ -18,7 +18,7 @@ export default function ServiceDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { t } = useTranslation(['glossary', 'translation']);
 
-  const [endpoints, endpointsError] = Endpoints.useList({ namespace });
+  const [endpoints, endpointsError] = Endpoint.useList({ namespace });
 
   function getOwnedEndpoints(item: Service) {
     return item ? endpoints?.filter(endpoint => endpoint.getName() === item.getName()) : null;

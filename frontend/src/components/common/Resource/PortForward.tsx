@@ -12,7 +12,7 @@ import {
   startPortForward,
   stopOrDeletePortForward,
 } from '../../../lib/k8s/apiProxy';
-import { KubeContainer, KubeObject } from '../../../lib/k8s/cluster';
+import { KubeContainer, KubeObjectInterface } from '../../../lib/k8s/cluster';
 import Pod from '../../../lib/k8s/pod';
 import Service from '../../../lib/k8s/service';
 import { getCluster } from '../../../lib/util';
@@ -21,7 +21,7 @@ export { type PortForward as PortForwardState } from '../../../lib/k8s/api/v1/po
 
 interface PortForwardProps {
   containerPort: number | string;
-  resource?: KubeObject;
+  resource?: KubeObjectInterface;
 }
 
 export const PORT_FORWARDS_STORAGE_KEY = 'portforwards';
@@ -149,14 +149,14 @@ function PortForwardContent(props: PortForwardProps) {
   }
 
   function handlePortForward() {
-    if (!namespace || !cluster) {
+    if (!namespace || !cluster || !pods) {
       return;
     }
 
     setError(null);
 
     const resourceName = name || '';
-    const podNamespace = isPod ? namespace : pods![0].metadata.namespace;
+    const podNamespace = isPod ? namespace : pods[0].metadata.namespace!;
     const serviceNamespace = namespace;
     const serviceName = !isPod ? resourceName : '';
     const podName = isPod ? resourceName : pods![0].metadata.name;
@@ -259,7 +259,7 @@ function PortForwardContent(props: PortForwardProps) {
     });
   }
 
-  if (isPod && (!resource || resource.status.phase === 'Failed')) {
+  if (isPod && (!resource || (resource as Pod).status.phase === 'Failed')) {
     return null;
   }
 

@@ -32,7 +32,7 @@ export default function ClassList() {
         {
           id: 'allowVolumeExpansion',
           label: t('Allow Volume Expansion'),
-          getValue: storageClass => storageClass.allowVolumeExpansion,
+          getValue: storageClass => String(storageClass.allowVolumeExpansion),
         },
         'age',
       ]}

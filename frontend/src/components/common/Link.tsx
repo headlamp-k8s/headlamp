@@ -1,7 +1,7 @@
 import MuiLink from '@mui/material/Link';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { makeKubeObject } from '../../lib/k8s/cluster';
+import { KubeObject } from '../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
 import { LightTooltip } from './Tooltip';
 
@@ -24,7 +24,7 @@ export interface LinkProps extends LinkBaseProps {
 }
 
 export interface LinkObjectProps extends LinkBaseProps {
-  kubeObject: InstanceType<ReturnType<typeof makeKubeObject>>;
+  kubeObject?: KubeObject | null;
   [prop: string]: any;
 }
 
@@ -32,8 +32,8 @@ function PureLink(props: React.PropsWithChildren<LinkProps | LinkObjectProps>) {
   if ((props as LinkObjectProps).kubeObject) {
     const { kubeObject, ...otherProps } = props as LinkObjectProps;
     return (
-      <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()} {...otherProps}>
-        {props.children || kubeObject.getName()}
+      <MuiLink component={RouterLink} to={kubeObject!.getDetailsLink()} {...otherProps}>
+        {props.children || kubeObject!.getName()}
       </MuiLink>
     );
   }

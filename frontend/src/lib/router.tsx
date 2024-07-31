@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { generatePath, useHistory } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
@@ -114,7 +114,7 @@ export interface Route {
   /** The sidebar entry this Route should enable, or null if it shouldn't enable any. If an object is passed with item and sidebar, it will try to enable the given sidebar and the given item. */
   sidebar: string | null | { item: string | null; sidebar: string | DefaultSidebars };
   /** Shown component for this route. */
-  component: () => JSX.Element;
+  component: () => ReactNode;
   /** Hide the appbar at the top. */
   hideAppBar?: boolean;
   /** Whether the route should be disabled (not registered). */
