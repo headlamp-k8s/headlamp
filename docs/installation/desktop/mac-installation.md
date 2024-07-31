@@ -35,4 +35,7 @@ Once the installation process is completed you can find Headlamp as a desktop ap
 
 ### Upgrading
 
-Until we have an automatic update, to upgrade Headlamp when it's installed directly via the releases page, you have to download any newer version and re-install it.
+To upgrade Headlamp when it's installed directly via the releases page, you have to download any newer version and re-install it. There is no automatic upgrade.
+
+If you install via brew it can manage upgrades for you.
+
