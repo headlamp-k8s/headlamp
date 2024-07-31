@@ -1,5 +1,6 @@
 'use strict';
 
+const child_process = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -16,6 +17,26 @@ exports.default = async context => {
     fs.cpSync('./prod_deps/node_modules', dest, { recursive: true });
   } catch (err) {
     console.error('Failed to copy node_modules after pack:', err);
+  }
+
+  // Mac has a problem with symlinks in the node_modules directory, so we replace them.
+  if (context.electronPlatformName === 'darwin') {
+    const tmpNodeModules = dest + '.tmp';
+
+    // Copy the node_modules directory to a temporary location, replacing any symlinks with the files they point to
+    child_process.spawnSync('rsync', [
+      '--archive',
+      '--verbose',
+      '--copy-links',
+      dest + '/',
+      tmpNodeModules,
+    ]);
+
+    // Remove the original node_modules directory
+    fs.rmSync(dest, { recursive: true, force: true });
+
+    // Move the copied directory back to the original location
+    fs.renameSync(tmpNodeModules, dest);
   }
 
   if (fs.existsSync('.env')) {
