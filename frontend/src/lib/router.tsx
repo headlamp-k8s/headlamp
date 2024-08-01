@@ -15,6 +15,7 @@ import { PageGrid } from '../components/common/Resource/Resource';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import CustomResourceDetails from '../components/crd/CustomResourceDetails';
+import { CrInstanceList } from '../components/crd/CustomResourceInstancesList';
 import CustomResourceList from '../components/crd/CustomResourceList';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
@@ -651,6 +652,13 @@ const defaultRoutes: {
     name: 'Custom Resources',
     sidebar: 'crds',
     component: () => <CustomResourceList />,
+  },
+  crs: {
+    path: '/crs',
+    exact: true,
+    name: 'CRInstances',
+    sidebar: 'crs',
+    component: () => <CrInstanceList />,
   },
   notifications: {
     path: '/notifications',
