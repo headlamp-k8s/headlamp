@@ -7,7 +7,10 @@ export interface ClusterChooserProps {
   clickHandler: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   cluster?: string;
 }
-export type ClusterChooserType = React.ComponentType<ClusterChooserProps> | ReactElement | null;
+export type ClusterChooserType =
+  | React.ComponentType<ClusterChooserProps>
+  | ReactElement<ClusterChooserProps>
+  | null;
 
 const SpanClusterName = styled('span')({
   textOverflow: 'ellipsis',

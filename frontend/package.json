@@ -87,7 +87,7 @@
     "spacetime": "^7.4.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
-    "typescript": "4.5.5",
+    "typescript": "5.5.4",
     "url": "^0.11.0",
     "util": "^0.12.4",
     "vfile": "^5.3.0",
@@ -100,7 +100,8 @@
     "xterm-addon-search": "^0.9.0"
   },
   "overrides": {
-    "domain-browser": "npm:dry-uninstall"
+    "domain-browser": "npm:dry-uninstall",
+    "typescript": "5.5.4"
   },
   "scripts": {
     "prestart": "npm run make-version",
@@ -205,9 +206,9 @@
     "redux-mock-store": "^1.5.4",
     "resize-observer-polyfill": "^1.5.1",
     "storybook": "^7.6.7",
-    "typedoc": "0.22.10",
-    "typedoc-plugin-markdown": "3.11.14",
-    "typedoc-plugin-rename-defaults": "0.4.0",
+    "typedoc": "^0.26.5",
+    "typedoc-plugin-markdown": "^4.2.3",
+    "typedoc-plugin-rename-defaults": "^0.7.1",
     "vitest-canvas-mock": "^0.3.3",
     "vitest-websocket-mock": "^0.3.0",
     "vm-browserify": "^1.1.2"

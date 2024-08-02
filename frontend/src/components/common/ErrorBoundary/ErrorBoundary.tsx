@@ -1,4 +1,4 @@
-import { Children, Component, ComponentType, isValidElement, ReactElement } from 'react';
+import { Component, ComponentType, isValidElement, ReactElement } from 'react';
 import { eventAction, HeadlampEventType } from '../../../redux/headlampEventSlice';
 import store from '../../../redux/stores/store';
 
@@ -52,6 +52,10 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, State> 
     if (isValidElement(this.props.fallback)) {
       return this.props.fallback;
     }
-    return this.props.fallback ? Children.toArray([<this.props.fallback error={error} />]) : null;
+    const FallbackComponent = this.props.fallback as
+      | ComponentType<{ error: Error }>
+      | undefined
+      | null;
+    return FallbackComponent ? <FallbackComponent error={error} /> : null;
   }
 }
