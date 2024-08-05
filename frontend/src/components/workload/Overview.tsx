@@ -104,9 +104,9 @@ export default function Overview() {
       <SectionBox py={2} mt={1}>
         <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={2}>
           {workloads.map(workload => (
-            <Grid item lg={3} md={4} xs={6} key={workload.name}>
+            <Grid item lg={3} md={4} xs={6} key={workload.className}>
               <WorkloadCircleChart
-                workloadData={workloadsData[workload.name] || null}
+                workloadData={workloadsData[workload.className] || null}
                 // @todo: Use a plural from from the class itself when we have it
                 title={ChartLink(workload)}
                 partialLabel={t('translation|Failed')}
