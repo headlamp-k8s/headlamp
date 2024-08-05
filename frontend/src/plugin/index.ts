@@ -8,7 +8,6 @@ import * as ReactMonacoEditor from '@monaco-editor/react';
 import * as MuiLab from '@mui/lab';
 import * as MuiMaterial from '@mui/material';
 import * as MuiMaterialStyles from '@mui/material/styles';
-import * as MuiStyles from '@mui/styles';
 import * as Lodash from 'lodash';
 import * as MonacoEditor from 'monaco-editor';
 import * as Notistack from 'notistack';
@@ -54,7 +53,6 @@ window.pluginLib = {
     ...MuiMaterial,
     styles: MuiMaterialStyles,
   },
-  MuiStyles,
   MuiLab,
   React,
   ReactJSX,

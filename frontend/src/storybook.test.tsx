@@ -1,6 +1,5 @@
 import 'vitest-canvas-mock';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material';
-import { StylesProvider } from '@mui/styles';
 import type { Meta, StoryFn } from '@storybook/react';
 import { composeStories } from '@storybook/react';
 import { act, render } from '@testing-library/react';
@@ -16,18 +15,13 @@ const withThemeProvider = (Story: any) => {
   const lightTheme = themesConf['light'];
   const theme = lightTheme;
 
-  const ourThemeProvider = (
+  return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Story />
       </ThemeProvider>
     </StyledEngineProvider>
   );
-
-  const generateClassName = (rule: any, styleSheet: any) =>
-    `${styleSheet?.options.classNamePrefix}-${rule.key}`;
-
-  return <StylesProvider generateClassName={generateClassName}>{ourThemeProvider}</StylesProvider>;
 };
 
 const compose = (entry: StoryFile) => {
