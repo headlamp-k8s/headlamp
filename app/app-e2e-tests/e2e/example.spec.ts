@@ -1,4 +1,4 @@
-import { expect, Page, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { _electron } from '@playwright/test';
 import { spawn } from 'child_process';
 
@@ -86,34 +86,6 @@ test('launch app', async () => {
   window.on('console', console.log);
   // Click button.
   // await window.click('text=Click me');
-});
-
-class HeadlampPage {
-  constructor(private page: Page) {}
-
-  async homepage() {
-    await this.page.goto('http://localhost:3000/');
-    await this.page.waitForLoadState('domcontentloaded');
-    await this.page.waitForSelector('button');
-    await this.page.click('button');
-  }
-}
-
-test('launch app w/page', async () => {
-  // Launch Electron app.
-  const electronApp = await electron.launch({
-    cwd: '/home/vtaylor/headlamp/app/electron',
-    timeout: 0,
-    args: ['main.js'],
-  });
-
-  // const context = await electronApp.context();
-  const page = await electronApp.firstWindow();
-  const headlampPage = new HeadlampPage(page);
-
-  electronApp.on('window', async () => {
-    await headlampPage.homepage();
-  });
 });
 
 test('launch app with integrated shell commands', async () => {
