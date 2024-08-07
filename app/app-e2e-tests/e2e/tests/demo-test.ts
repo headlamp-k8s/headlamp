@@ -4,7 +4,6 @@ export class headlampAppPage {
   constructor(private page: Page) {}
 
   async navHomepage() {
-    await this.page.waitForLoadState('domcontentloaded');
     await this.page.goto('http://localhost:3000/');
 
     await expect(this.page.getByRole('button', { name: 'Home' })).toBeVisible();
@@ -12,7 +11,6 @@ export class headlampAppPage {
   }
 
   async navNotifactions() {
-    await this.page.waitForLoadState('domcontentloaded');
     await this.page.goto('http://localhost:3000/');
 
     await expect(this.page.getByRole('button', { name: 'Notifications' })).toBeVisible();
