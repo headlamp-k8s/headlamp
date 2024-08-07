@@ -53,8 +53,8 @@ export default function Overview() {
     return totalReplicasDiff;
   }
 
-  // Get all items except the pods since those shouldn't be shown in the table (only the chart).
-  function getJointItems() {
+  // All items except the pods since those shouldn't be shown in the table (only the chart).
+  const jointItems = React.useMemo(() => {
     let joint: Workload[] = [];
 
     // Return null if no items are yet loaded, so we show the spinner in the table.
@@ -70,7 +70,7 @@ export default function Overview() {
       joint = joint.concat(items);
     }
     return joint;
-  }
+  }, [workloadsData]);
 
   const workloads: KubeObject[] = [
     Pod,
@@ -104,9 +104,9 @@ export default function Overview() {
       <SectionBox py={2} mt={1}>
         <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={2}>
           {workloads.map(workload => (
-            <Grid item lg={3} md={4} xs={6} key={workload.name}>
+            <Grid item lg={3} md={4} xs={6} key={workload.className}>
               <WorkloadCircleChart
-                workloadData={workloadsData[workload.name] || null}
+                workloadData={workloadsData[workload.className] || null}
                 // @todo: Use a plural from from the class itself when we have it
                 title={ChartLink(workload)}
                 partialLabel={t('translation|Failed')}
@@ -137,7 +137,7 @@ export default function Overview() {
           },
           'age',
         ]}
-        data={getJointItems()}
+        data={jointItems}
         headerProps={{
           noNamespaceFilter: false,
         }}
