@@ -16,6 +16,7 @@
     "copy-plugins": "npx --no-install rimraf build/.plugins && mkdirp build/.plugins && copyfiles ../.plugins build/.plugins",
     "dev": "npm run compile-electron && cross-env ELECTRON_DEV=1 electron .",
     "dev-only-app": "npm run compile-electron && cross-env ELECTRON_DEV=1 ELECTRON_START_URL=http://localhost:3000 EXTERNAL_SERVER=true electron .",
+    "dev-only-app-cluster": "npm run compile-electron && node scripts/cluster-dev-start.js",
     "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js",
     "package": "npm run build && electron-builder build --publish never",
     "package-msi": "npm run build && node windows/msi/build.js",
