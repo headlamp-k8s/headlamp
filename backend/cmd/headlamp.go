@@ -863,7 +863,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	// Start server
 	err := http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler) //nolint:gosec
 	if err != nil {
-		logger.Log(logger.LevelError, nil, nil, "Failed to start server")
+		logger.Log(logger.LevelError, nil, err, "Failed to start server")
 		os.Exit(1)
 	}
 }
