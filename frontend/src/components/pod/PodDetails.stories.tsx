@@ -129,3 +129,9 @@ Successful.args = {
   useGet: usePhonyGet,
   podName: 'successful',
 };
+
+export const ManyPorts = Template.bind({});
+ManyPorts.args = {
+  useGet: usePhonyGet,
+  podName: 'manyports',
+};
