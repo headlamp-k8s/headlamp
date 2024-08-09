@@ -166,10 +166,10 @@ export function filterSources(
       semver.coerce(packageInfo.devDependencies?.['@kinvolk/headlamp-plugin']) || '',
       compatibleVersion
     );
-    if (!isCompatible) {
-      incompatiblePlugins[packageInfo.name] = packageInfo;
-      return false;
-    }
+    // if (!isCompatible) {
+    //   incompatiblePlugins[packageInfo.name] = packageInfo;
+    //   return false;
+    // }
     return true;
   });
 

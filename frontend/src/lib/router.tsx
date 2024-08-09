@@ -53,6 +53,7 @@ import PriorityClassList from '../components/priorityClass/List';
 import ReplicaSetList from '../components/replicaset/List';
 import ResourceQuotaDetails from '../components/resourceQuota/Details';
 import ResourceQuotaList from '../components/resourceQuota/List';
+import { GraphView } from '../components/resoureceMap/GraphView';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
 import RoleDetails from '../components/role/Details';
@@ -752,6 +753,13 @@ const defaultRoutes: {
     noAuthRequired: true,
     disabled: !helpers.isElectron(),
     component: () => <KubeConfigLoader />,
+  },
+  map: {
+    path: '/map',
+    exact: true,
+    name: 'Map',
+    sidebar: 'map',
+    component: () => <GraphView height="calc(100vh - 64px)" />,
   },
 };
 

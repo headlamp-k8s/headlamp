@@ -1180,10 +1180,10 @@ export async function streamResultsForCluster(
 
       add(items, kind);
 
-      const watchUrl =
-        url +
-        asQuery({ ...queryParams, ...{ watch: '1', resourceVersion: metadata.resourceVersion } });
-      socket = stream(watchUrl, update, { isJson: true, cluster: clusterName });
+      // const watchUrl =
+      //   url +
+      //   asQuery({ ...queryParams, ...{ watch: '1', resourceVersion: metadata.resourceVersion } });
+      // socket = stream(watchUrl, update, { isJson: true, cluster: clusterName });
     } catch (err) {
       console.error('Error in api request', { err, url });
       if (errCb && typeof errCb === 'function') {

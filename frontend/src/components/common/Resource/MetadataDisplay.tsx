@@ -1,5 +1,5 @@
-import { Icon } from '@iconify/react';
-import { Box } from '@mui/material';
+import { Icon, InlineIcon } from '@iconify/react';
+import { Box, Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography, { TypographyProps } from '@mui/material/Typography';
@@ -10,6 +10,7 @@ import { KubeObject, KubeObjectInterface, KubeOwnerReference } from '../../../li
 import Theme from '../../../lib/themes';
 import { localeDate } from '../../../lib/util';
 import { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
+import { GraphView } from '../../resoureceMap/GraphView';
 import Link from '../Link';
 import { LightTooltip } from '../Tooltip';
 
@@ -132,8 +133,25 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
   ).concat(makeExtraRows(resource) || []);
 
   return (
-    <Box>
-      <NameValueTable rows={mainRows} />
+    <Box display="flex" gap="1rem">
+      <Box sx={{ width: '70%' }}>
+        <NameValueTable rows={mainRows} />
+      </Box>
+      <Box sx={{ flex: 1, display: 'flex', position: 'relative' }}>
+        <GraphView
+          hideHeader
+          height="auto"
+          groupingOptions={{ disable: true }}
+          defaultFilters={[{ type: 'related', id: resource?.metadata?.uid }]}
+        />
+        <Button
+          color="primary"
+          startIcon={<InlineIcon icon="mdi:map" />}
+          sx={{ position: 'absolute', bottom: 0, left: 0, margin: '1rem' }}
+        >
+          View on Map
+        </Button>
+      </Box>
     </Box>
   );
 }

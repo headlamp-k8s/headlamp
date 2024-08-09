@@ -234,6 +234,11 @@ function prepareRoutes(
         },
       ],
     },
+    {
+      name: 'map',
+      label: t('glossary|Map'),
+      icon: 'mdi:map',
+    },
   ];
 
   const sidebars: { [key: string]: SidebarItemProps[] } = {

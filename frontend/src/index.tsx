@@ -66,4 +66,4 @@ async function loadAxe() {
     }
   }
 }
-loadAxe();
+// loadAxe();

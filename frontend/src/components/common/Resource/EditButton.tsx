@@ -86,7 +86,6 @@ export default function EditButton(props: EditButtonProps) {
   return (
     <AuthVisible
       item={item}
-      authVerb="update"
       onError={(err: Error) => {
         console.error(`Error while getting authorization for edit button in ${item}:`, err);
         setIsReadOnly(true);

@@ -1,0 +1,30 @@
+:root {
+  --graph-animation-duration: 0.3s;
+}
+
+.react-flow__node,
+.react-flow__edge,
+.react-flow__edges path {
+  transition: all;
+  transition-duration: var(--graph-animation-duration);
+
+  animation: appear 0.15s;
+  animation-delay: var(--graph-animation-duration);
+  animation-fill-mode: both;
+  /* animation-timing-function: linear; */
+
+  will-change: width, height;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.react-flow__pane:not(.dragging) .react-flow__viewport {
+  transition: transform var(--graph-animation-duration);
+}

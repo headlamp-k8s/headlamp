@@ -1,0 +1,2676 @@
+[
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "ddb39c5805992201b18435a7cb60d14a4a847ba1616a9fa46db308af1665c88f",
+      "containerName": "konnectivity-agent",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/apiserver-network-proxy/agent:v0.1.6-hotfix.20240116",
+      "containerImageDigest": "sha256:186473cf0a31771a84572c2245ab61e4b1e26340ca151169868dc1c666d481a0"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "konnectivity-agent-f8456cc6b-ch57p",
+      "podLabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "containerName": "konnectivity-agent"
+    },
+    "mountnsid": 4026535204,
+    "pid": 2443229,
+    "comm": "proxy-agent",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.144",
+      "version": 4,
+      "namespace": "kube-system",
+      "podname": "konnectivity-agent-f8456cc6b-ch57p",
+      "kind": "pod",
+      "podlabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "port": 36144
+    },
+    "dst": {
+      "addr": "52.224.132.229",
+      "version": 4,
+      "kind": "raw",
+      "port": 443
+    },
+    "sent": 305273,
+    "received": 14315
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 423272,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": { "addr": "127.0.0.1", "version": 4, "kind": "raw", "port": 5432 },
+    "dst": { "addr": "127.0.0.1", "version": 4, "kind": "raw", "port": 41558 },
+    "sent": 36731,
+    "received": 2403
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "72ff2a5e6d66bf53f7107c198ba047147cb41afaae122f8085c5427b2f5a060b",
+      "containerName": "gitaly",
+      "containerImageName": "registry.gitlab.com/gitlab-org/build/cng/gitaly:v17.1.0",
+      "containerImageDigest": "sha256:f51f7970c72dec6662c7ace94596b7b7fff0c99cd9fd78d8ad7443f9563c27bf"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-gitaly-0",
+      "podLabels": {
+        "app": "gitaly",
+        "apps.kubernetes.io/pod-index": "0",
+        "chart": "gitaly-8.1.0",
+        "controller-revision-hash": "my-gitlab-gitaly-bd678cbd9",
+        "heritage": "Helm",
+        "release": "my-gitlab",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-gitaly-0"
+      },
+      "containerName": "gitaly"
+    },
+    "mountnsid": 4026534006,
+    "pid": 609845,
+    "comm": "gitaly",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.207",
+      "version": 6,
+      "kind": "raw",
+      "port": 9236
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.204",
+      "version": 6,
+      "kind": "raw",
+      "port": 42450
+    },
+    "sent": 29643,
+    "received": 288
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "0ef541070103510cadac6e94a568e64ee620f0b829cc3773970471d80a6c4093",
+      "containerName": "konnectivity-agent",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/apiserver-network-proxy/agent:v0.1.6-hotfix.20240116",
+      "containerImageDigest": "sha256:186473cf0a31771a84572c2245ab61e4b1e26340ca151169868dc1c666d481a0"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "konnectivity-agent-f8456cc6b-9dwxd",
+      "podLabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "containerName": "konnectivity-agent"
+    },
+    "mountnsid": 4026535271,
+    "pid": 2443762,
+    "comm": "proxy-agent",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.198",
+      "version": 4,
+      "namespace": "kube-system",
+      "podname": "konnectivity-agent-f8456cc6b-9dwxd",
+      "kind": "pod",
+      "podlabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "port": 49832
+    },
+    "dst": {
+      "addr": "52.224.132.229",
+      "version": 4,
+      "kind": "raw",
+      "port": 443
+    },
+    "sent": 20320,
+    "received": 11303
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "ddb39c5805992201b18435a7cb60d14a4a847ba1616a9fa46db308af1665c88f",
+      "containerName": "konnectivity-agent",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/apiserver-network-proxy/agent:v0.1.6-hotfix.20240116",
+      "containerImageDigest": "sha256:186473cf0a31771a84572c2245ab61e4b1e26340ca151169868dc1c666d481a0"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "konnectivity-agent-f8456cc6b-ch57p",
+      "podLabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "containerName": "konnectivity-agent"
+    },
+    "mountnsid": 4026535204,
+    "pid": 2443229,
+    "comm": "proxy-agent",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.144",
+      "version": 4,
+      "namespace": "kube-system",
+      "podname": "konnectivity-agent-f8456cc6b-ch57p",
+      "kind": "pod",
+      "podlabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "port": 50296
+    },
+    "dst": {
+      "addr": "52.224.132.229",
+      "version": 4,
+      "kind": "raw",
+      "port": 443
+    },
+    "sent": 17632,
+    "received": 3720
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "9b5428de3a8c52809ec6615da28b012aff662038dd23df3658e3ff61d57226be",
+      "containerName": "metrics",
+      "containerImageName": "docker.io/bitnami/postgres-exporter:0.12.0-debian-11-r86",
+      "containerImageDigest": "sha256:102480f6e9fc5d2e6e5e98717183d49d6980855ee4b5b581e5a0eee7b0a763e8"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "metrics"
+    },
+    "mountnsid": 4026532840,
+    "pid": 420389,
+    "comm": "postgres_export",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.206",
+      "version": 6,
+      "kind": "raw",
+      "port": 9187
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.204",
+      "version": 6,
+      "kind": "raw",
+      "port": 51278
+    },
+    "sent": 14981,
+    "received": 288
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "0ef541070103510cadac6e94a568e64ee620f0b829cc3773970471d80a6c4093",
+      "containerName": "konnectivity-agent",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/apiserver-network-proxy/agent:v0.1.6-hotfix.20240116",
+      "containerImageDigest": "sha256:186473cf0a31771a84572c2245ab61e4b1e26340ca151169868dc1c666d481a0"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "konnectivity-agent-f8456cc6b-9dwxd",
+      "podLabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "containerName": "konnectivity-agent"
+    },
+    "mountnsid": 4026535271,
+    "pid": 2443762,
+    "comm": "proxy-agent",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.198",
+      "version": 4,
+      "namespace": "kube-system",
+      "podname": "konnectivity-agent-f8456cc6b-9dwxd",
+      "kind": "pod",
+      "podlabels": {
+        "app": "konnectivity-agent",
+        "component": "tunnel",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "f8456cc6b"
+      },
+      "port": 37952
+    },
+    "dst": {
+      "addr": "52.224.132.229",
+      "version": 4,
+      "kind": "raw",
+      "port": 443
+    },
+    "sent": 11398,
+    "received": 3293
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "852fd6423e98c0254ed32ff4168c2a509419eec13e46816b1f3a27f933a9cca6",
+      "containerName": "prometheus-server",
+      "containerImageName": "quay.io/prometheus/prometheus:v2.38.0",
+      "containerImageDigest": "sha256:aa1687dd552ed98df598cc0fed2effbc62a0f05236bc2253c65520ddd4f2afce"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-prometheus-server-646489c599-sbpcw",
+      "podLabels": {
+        "app": "prometheus",
+        "chart": "prometheus-15.18.0",
+        "component": "server",
+        "heritage": "Helm",
+        "pod-template-hash": "646489c599",
+        "release": "my-gitlab"
+      },
+      "containerName": "prometheus-server"
+    },
+    "mountnsid": 4026534009,
+    "pid": 608728,
+    "comm": "prometheus",
+    "ipversion": 6,
+    "src": { "addr": "::1", "version": 6, "kind": "raw", "port": 9090 },
+    "dst": { "addr": "::1", "version": 6, "kind": "raw", "port": 49874 },
+    "sent": 9286,
+    "received": 285
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477028,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34050
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3476896,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34042
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3478005,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34456
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477867,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34430
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477185,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35804
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477457,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35852
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477136,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35782
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3476831,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34038
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477371,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35836
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477467,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35856
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477075,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35774
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477288,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35820
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477743,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34402
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477184,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35788
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477769,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34414
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477138,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35786
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477559,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 35868
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477909,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34444
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477804,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34420
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3476974,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34046
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3477662,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34390
+    },
+    "sent": 8669,
+    "received": 2631
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 3478076,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.128",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-webservice-default-58dbdc5556-4fdkh",
+      "kind": "pod",
+      "podlabels": {
+        "app": "webservice",
+        "chart": "webservice-8.1.0",
+        "gitlab.com/webservice-name": "default",
+        "heritage": "Helm",
+        "pod-template-hash": "58dbdc5556",
+        "release": "my-gitlab"
+      },
+      "port": 34460
+    },
+    "sent": 8457,
+    "received": 2409
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d38b57266998c539493f52fca09d55e6b135f40453ad997f397dd3d4afe97f06",
+      "containerName": "controller",
+      "containerImageName": "sha256:b7c8e5e285c0a247776882de8af0895b1e46bab32e7a1090e43e7fbb845bac50",
+      "containerImageDigest": "sha256:54f7fe2c6c5a9db9a0ebf1131797109bb7a4d91f56b9b362bde2abd237dd1974"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-nginx-ingress-controller-7fbf55b798-h4npw",
+      "podLabels": {
+        "app": "nginx-ingress",
+        "component": "controller",
+        "pod-template-hash": "7fbf55b798",
+        "release": "my-gitlab"
+      },
+      "containerName": "controller"
+    },
+    "mountnsid": 4026534553,
+    "pid": 588375,
+    "comm": "nginx-ingress-c",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.186",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-nginx-ingress-controller-7fbf55b798-h4npw",
+      "kind": "pod",
+      "podlabels": {
+        "app": "nginx-ingress",
+        "component": "controller",
+        "pod-template-hash": "7fbf55b798",
+        "release": "my-gitlab"
+      },
+      "port": 49788
+    },
+    "dst": {
+      "addr": "10.0.0.1",
+      "version": 4,
+      "namespace": "default",
+      "podname": "kubernetes",
+      "kind": "svc",
+      "podlabels": { "component": "apiserver", "provider": "kubernetes" },
+      "port": 443
+    },
+    "sent": 7231,
+    "received": 17739
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "abae34ec25463d0358b5aa2e438acc5c6f90e380a332cdbcc2f24a38b410f568",
+      "containerName": "metrics-server",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/metrics-server:v0.6.3",
+      "containerImageDigest": "sha256:c49553d5b948fcf5b23bed3718c797f42ebe87d7ae5f2c6f537f530b65cadaec"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "metrics-server-5cd44496f4-hzlnn",
+      "podLabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "containerName": "metrics-server"
+    },
+    "mountnsid": 4026533241,
+    "pid": 11739,
+    "comm": "metrics-server",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.161",
+      "version": 4,
+      "namespace": "kube-system",
+      "podname": "metrics-server-5cd44496f4-hzlnn",
+      "kind": "pod",
+      "podlabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "port": 57792
+    },
+    "dst": {
+      "addr": "52.224.132.229",
+      "version": 4,
+      "kind": "raw",
+      "port": 443
+    },
+    "sent": 6296,
+    "received": 29470
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "1d2e657836482ed0d0be83e67a4d4e2d00068857f010fc5ad16e30d3af43d2fd",
+      "containerName": "metrics-server",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/metrics-server:v0.6.3",
+      "containerImageDigest": "sha256:c49553d5b948fcf5b23bed3718c797f42ebe87d7ae5f2c6f537f530b65cadaec"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "metrics-server-5cd44496f4-97g52",
+      "podLabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "containerName": "metrics-server"
+    },
+    "mountnsid": 4026533243,
+    "pid": 11740,
+    "comm": "metrics-server",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.118",
+      "version": 6,
+      "kind": "raw",
+      "port": 4443
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.144",
+      "version": 6,
+      "kind": "raw",
+      "port": 39836
+    },
+    "sent": 6288,
+    "received": 768
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "1d2e657836482ed0d0be83e67a4d4e2d00068857f010fc5ad16e30d3af43d2fd",
+      "containerName": "metrics-server",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/metrics-server:v0.6.3",
+      "containerImageDigest": "sha256:c49553d5b948fcf5b23bed3718c797f42ebe87d7ae5f2c6f537f530b65cadaec"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "metrics-server-5cd44496f4-97g52",
+      "podLabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "containerName": "metrics-server"
+    },
+    "mountnsid": 4026533243,
+    "pid": 11740,
+    "comm": "metrics-server",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.118",
+      "version": 6,
+      "kind": "raw",
+      "port": 4443
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.198",
+      "version": 6,
+      "kind": "raw",
+      "port": 38918
+    },
+    "sent": 6226,
+    "received": 1195
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "77d335c5e168dfe4c6b67860edf568928bf4c5f9e45e98d0c558156d78936720",
+      "containerName": "controller",
+      "containerImageName": "sha256:b7c8e5e285c0a247776882de8af0895b1e46bab32e7a1090e43e7fbb845bac50",
+      "containerImageDigest": "sha256:54f7fe2c6c5a9db9a0ebf1131797109bb7a4d91f56b9b362bde2abd237dd1974"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-nginx-ingress-controller-7fbf55b798-zn2kk",
+      "podLabels": {
+        "app": "nginx-ingress",
+        "component": "controller",
+        "pod-template-hash": "7fbf55b798",
+        "release": "my-gitlab"
+      },
+      "containerName": "controller"
+    },
+    "mountnsid": 4026534477,
+    "pid": 587061,
+    "comm": "nginx-ingress-c",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.119",
+      "version": 6,
+      "kind": "raw",
+      "port": 10254
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.204",
+      "version": 6,
+      "kind": "raw",
+      "port": 44406
+    },
+    "sent": 5596,
+    "received": 289
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d38b57266998c539493f52fca09d55e6b135f40453ad997f397dd3d4afe97f06",
+      "containerName": "controller",
+      "containerImageName": "sha256:b7c8e5e285c0a247776882de8af0895b1e46bab32e7a1090e43e7fbb845bac50",
+      "containerImageDigest": "sha256:54f7fe2c6c5a9db9a0ebf1131797109bb7a4d91f56b9b362bde2abd237dd1974"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-nginx-ingress-controller-7fbf55b798-h4npw",
+      "podLabels": {
+        "app": "nginx-ingress",
+        "component": "controller",
+        "pod-template-hash": "7fbf55b798",
+        "release": "my-gitlab"
+      },
+      "containerName": "controller"
+    },
+    "mountnsid": 4026534553,
+    "pid": 588375,
+    "comm": "nginx-ingress-c",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.186",
+      "version": 6,
+      "kind": "raw",
+      "port": 10254
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.204",
+      "version": 6,
+      "kind": "raw",
+      "port": 33864
+    },
+    "sent": 5436,
+    "received": 289
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "79c46f55983fa452a41e8037d910419ccd799d7815e2cc7949410b10aa16ac86",
+      "containerName": "gitlab-exporter",
+      "containerImageName": "registry.gitlab.com/gitlab-org/build/cng/gitlab-exporter:15.0.0",
+      "containerImageDigest": "sha256:b565f5b4a4398ada8f17ddf81b823ee2adec933da5a3a48a204085fd1d337bfb"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-gitlab-exporter-86b8897d66-mxsdk",
+      "podLabels": {
+        "app": "gitlab-exporter",
+        "chart": "gitlab-exporter-8.1.0",
+        "heritage": "Helm",
+        "pod-template-hash": "86b8897d66",
+        "release": "my-gitlab"
+      },
+      "containerName": "gitlab-exporter"
+    },
+    "mountnsid": 4026534028,
+    "pid": 604677,
+    "comm": "server.rb:289",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.177",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-gitlab-exporter-86b8897d66-mxsdk",
+      "kind": "pod",
+      "podlabels": {
+        "app": "gitlab-exporter",
+        "chart": "gitlab-exporter-8.1.0",
+        "heritage": "Helm",
+        "pod-template-hash": "86b8897d66",
+        "release": "my-gitlab"
+      },
+      "port": 60178
+    },
+    "dst": {
+      "addr": "10.0.166.41",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql",
+      "kind": "svc",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "helm.sh/chart": "postgresql-12.5.2"
+      },
+      "port": 5432
+    },
+    "sent": 4943,
+    "received": 3530
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "abae34ec25463d0358b5aa2e438acc5c6f90e380a332cdbcc2f24a38b410f568",
+      "containerName": "metrics-server",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/metrics-server:v0.6.3",
+      "containerImageDigest": "sha256:c49553d5b948fcf5b23bed3718c797f42ebe87d7ae5f2c6f537f530b65cadaec"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "metrics-server-5cd44496f4-hzlnn",
+      "podLabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "containerName": "metrics-server"
+    },
+    "mountnsid": 4026533241,
+    "pid": 11739,
+    "comm": "metrics-server",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.161",
+      "version": 6,
+      "kind": "raw",
+      "port": 4443
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.144",
+      "version": 6,
+      "kind": "raw",
+      "port": 57232
+    },
+    "sent": 4230,
+    "received": 1153
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "1d2e657836482ed0d0be83e67a4d4e2d00068857f010fc5ad16e30d3af43d2fd",
+      "containerName": "metrics-server",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/metrics-server:v0.6.3",
+      "containerImageDigest": "sha256:c49553d5b948fcf5b23bed3718c797f42ebe87d7ae5f2c6f537f530b65cadaec"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "metrics-server-5cd44496f4-97g52",
+      "podLabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "containerName": "metrics-server"
+    },
+    "mountnsid": 4026533243,
+    "pid": 11740,
+    "comm": "metrics-server",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.118",
+      "version": 4,
+      "namespace": "kube-system",
+      "podname": "metrics-server-5cd44496f4-97g52",
+      "kind": "pod",
+      "podlabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "port": 59586
+    },
+    "dst": {
+      "addr": "52.224.132.229",
+      "version": 4,
+      "kind": "raw",
+      "port": 443
+    },
+    "sent": 4096,
+    "received": 24979
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "fa475b78082abe9c8c0fd439f5dce2cd180d2730355780cbb0e293f5a0f27f13",
+      "containerName": "certmanager-controller",
+      "containerImageName": "quay.io/jetstack/cert-manager-controller:v1.12.11",
+      "containerImageDigest": "sha256:aa67912671dfdc675a6696f17816ce1f67baae56f99365b120f22c8d640f8062"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-certmanager-7d44fbfdc4-bw5g4",
+      "podLabels": {
+        "app": "certmanager",
+        "app.kubernetes.io/component": "controller",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "certmanager",
+        "app.kubernetes.io/version": "v1.12.11",
+        "helm.sh/chart": "certmanager-v1.12.11",
+        "pod-template-hash": "7d44fbfdc4"
+      },
+      "containerName": "certmanager-controller"
+    },
+    "mountnsid": 4026534487,
+    "pid": 590297,
+    "comm": "controller",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.179",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-certmanager-7d44fbfdc4-bw5g4",
+      "kind": "pod",
+      "podlabels": {
+        "app": "certmanager",
+        "app.kubernetes.io/component": "controller",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "certmanager",
+        "app.kubernetes.io/version": "v1.12.11",
+        "helm.sh/chart": "certmanager-v1.12.11",
+        "pod-template-hash": "7d44fbfdc4"
+      },
+      "port": 58946
+    },
+    "dst": {
+      "addr": "10.0.0.1",
+      "version": 4,
+      "namespace": "default",
+      "podname": "kubernetes",
+      "kind": "svc",
+      "podlabels": { "component": "apiserver", "provider": "kubernetes" },
+      "port": 443
+    },
+    "sent": 4072,
+    "received": 123466
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "c16b627fe02c5645e0703c23339456a9cccb3c5be24c722a12dbb438edc8810f",
+      "containerName": "certmanager-cainjector",
+      "containerImageName": "quay.io/jetstack/cert-manager-cainjector:v1.12.11",
+      "containerImageDigest": "sha256:a9a6a5ca7e51bb57fcceddfd8fe24ee1f9377c621ccc0f58ceca6b8798577276"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-certmanager-cainjector-9dcd94bfd-j8zzt",
+      "podLabels": {
+        "app": "cainjector",
+        "app.kubernetes.io/component": "cainjector",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "cainjector",
+        "app.kubernetes.io/version": "v1.12.11",
+        "helm.sh/chart": "certmanager-v1.12.11",
+        "pod-template-hash": "9dcd94bfd"
+      },
+      "containerName": "certmanager-cainjector"
+    },
+    "mountnsid": 4026534484,
+    "pid": 589734,
+    "comm": "cainjector",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.194",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-certmanager-cainjector-9dcd94bfd-j8zzt",
+      "kind": "pod",
+      "podlabels": {
+        "app": "cainjector",
+        "app.kubernetes.io/component": "cainjector",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "cainjector",
+        "app.kubernetes.io/version": "v1.12.11",
+        "helm.sh/chart": "certmanager-v1.12.11",
+        "pod-template-hash": "9dcd94bfd"
+      },
+      "port": 52182
+    },
+    "dst": {
+      "addr": "10.0.0.1",
+      "version": 4,
+      "namespace": "default",
+      "podname": "kubernetes",
+      "kind": "svc",
+      "podlabels": { "component": "apiserver", "provider": "kubernetes" },
+      "port": 443
+    },
+    "sent": 3907,
+    "received": 94101
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "2f6c08b68eb01fae91787bddc9ae1d6aa93455c4c8b40e35b4b442189a26749b",
+      "containerName": "coredns",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/coredns:v1.9.4-hotfix.20240520",
+      "containerImageDigest": "sha256:8734b0d06daa4a301d20584e4e80e89d466a7c4eec9cb886edf7e3f00b45ab4c"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "coredns-6745896b65-9p8l6",
+      "podLabels": {
+        "k8s-app": "kube-dns",
+        "kubernetes.azure.com/managedby": "aks",
+        "kubernetes.io/cluster-service": "true",
+        "pod-template-hash": "6745896b65",
+        "version": "v20"
+      },
+      "containerName": "coredns"
+    },
+    "mountnsid": 4026535179,
+    "pid": 2442935,
+    "comm": "coredns",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.132",
+      "version": 6,
+      "kind": "raw",
+      "port": 9153
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.144",
+      "version": 6,
+      "kind": "raw",
+      "port": 57260
+    },
+    "sent": 3633,
+    "received": 364
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "2f6c08b68eb01fae91787bddc9ae1d6aa93455c4c8b40e35b4b442189a26749b",
+      "containerName": "coredns",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/coredns:v1.9.4-hotfix.20240520",
+      "containerImageDigest": "sha256:8734b0d06daa4a301d20584e4e80e89d466a7c4eec9cb886edf7e3f00b45ab4c"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "coredns-6745896b65-9p8l6",
+      "podLabels": {
+        "k8s-app": "kube-dns",
+        "kubernetes.azure.com/managedby": "aks",
+        "kubernetes.io/cluster-service": "true",
+        "pod-template-hash": "6745896b65",
+        "version": "v20"
+      },
+      "containerName": "coredns"
+    },
+    "mountnsid": 4026535179,
+    "pid": 2442935,
+    "comm": "coredns",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.132",
+      "version": 6,
+      "kind": "raw",
+      "port": 9153
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.198",
+      "version": 6,
+      "kind": "raw",
+      "port": 49914
+    },
+    "sent": 3631,
+    "received": 364
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "2f6c08b68eb01fae91787bddc9ae1d6aa93455c4c8b40e35b4b442189a26749b",
+      "containerName": "coredns",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/coredns:v1.9.4-hotfix.20240520",
+      "containerImageDigest": "sha256:8734b0d06daa4a301d20584e4e80e89d466a7c4eec9cb886edf7e3f00b45ab4c"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "coredns-6745896b65-9p8l6",
+      "podLabels": {
+        "k8s-app": "kube-dns",
+        "kubernetes.azure.com/managedby": "aks",
+        "kubernetes.io/cluster-service": "true",
+        "pod-template-hash": "6745896b65",
+        "version": "v20"
+      },
+      "containerName": "coredns"
+    },
+    "mountnsid": 4026535179,
+    "pid": 2442935,
+    "comm": "coredns",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.132",
+      "version": 6,
+      "kind": "raw",
+      "port": 9153
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.144",
+      "version": 6,
+      "kind": "raw",
+      "port": 46098
+    },
+    "sent": 3630,
+    "received": 364
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "d51f8206f853485ab69498823afe9c5e0e6ac575780fe0d654af9ca15180115b",
+      "containerName": "postgresql",
+      "containerImageName": "docker.io/bitnami/postgresql:14.8.0",
+      "containerImageDigest": "sha256:ba5e9a674d6837dc992f1ad3dba96d8348460950bb944020cabea4eafd84c0a1"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-postgresql-0",
+      "podLabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "containerName": "postgresql"
+    },
+    "mountnsid": 4026532674,
+    "pid": 422724,
+    "comm": "postgres",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.206",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-postgresql-0",
+      "kind": "pod",
+      "podlabels": {
+        "app.kubernetes.io/component": "primary",
+        "app.kubernetes.io/instance": "my-gitlab",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "postgresql",
+        "apps.kubernetes.io/pod-index": "0",
+        "controller-revision-hash": "my-gitlab-postgresql-6fd9cb98c5",
+        "helm.sh/chart": "postgresql-12.5.2",
+        "statefulset.kubernetes.io/pod-name": "my-gitlab-postgresql-0"
+      },
+      "port": 5432
+    },
+    "dst": {
+      "addr": "10.224.0.177",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-gitlab-exporter-86b8897d66-mxsdk",
+      "kind": "pod",
+      "podlabels": {
+        "app": "gitlab-exporter",
+        "chart": "gitlab-exporter-8.1.0",
+        "heritage": "Helm",
+        "pod-template-hash": "86b8897d66",
+        "release": "my-gitlab"
+      },
+      "port": 60178
+    },
+    "sent": 3530,
+    "received": 4943
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "b6a942111b540b9ed002022ea7e27125a1a0761f46222fe5bd613561961d1f4f",
+      "containerName": "coredns",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/coredns:v1.9.4-hotfix.20240520",
+      "containerImageDigest": "sha256:8734b0d06daa4a301d20584e4e80e89d466a7c4eec9cb886edf7e3f00b45ab4c"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "coredns-6745896b65-4f4dw",
+      "podLabels": {
+        "k8s-app": "kube-dns",
+        "kubernetes.azure.com/managedby": "aks",
+        "kubernetes.io/cluster-service": "true",
+        "pod-template-hash": "6745896b65",
+        "version": "v20"
+      },
+      "containerName": "coredns"
+    },
+    "mountnsid": 4026535188,
+    "pid": 2443041,
+    "comm": "coredns",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.189",
+      "version": 6,
+      "kind": "raw",
+      "port": 9153
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.198",
+      "version": 6,
+      "kind": "raw",
+      "port": 37448
+    },
+    "sent": 3410,
+    "received": 364
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "b6a942111b540b9ed002022ea7e27125a1a0761f46222fe5bd613561961d1f4f",
+      "containerName": "coredns",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/coredns:v1.9.4-hotfix.20240520",
+      "containerImageDigest": "sha256:8734b0d06daa4a301d20584e4e80e89d466a7c4eec9cb886edf7e3f00b45ab4c"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "coredns-6745896b65-4f4dw",
+      "podLabels": {
+        "k8s-app": "kube-dns",
+        "kubernetes.azure.com/managedby": "aks",
+        "kubernetes.io/cluster-service": "true",
+        "pod-template-hash": "6745896b65",
+        "version": "v20"
+      },
+      "containerName": "coredns"
+    },
+    "mountnsid": 4026535188,
+    "pid": 2443041,
+    "comm": "coredns",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.189",
+      "version": 6,
+      "kind": "raw",
+      "port": 9153
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.144",
+      "version": 6,
+      "kind": "raw",
+      "port": 60288
+    },
+    "sent": 3405,
+    "received": 364
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "b6a942111b540b9ed002022ea7e27125a1a0761f46222fe5bd613561961d1f4f",
+      "containerName": "coredns",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/coredns:v1.9.4-hotfix.20240520",
+      "containerImageDigest": "sha256:8734b0d06daa4a301d20584e4e80e89d466a7c4eec9cb886edf7e3f00b45ab4c"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "coredns-6745896b65-4f4dw",
+      "podLabels": {
+        "k8s-app": "kube-dns",
+        "kubernetes.azure.com/managedby": "aks",
+        "kubernetes.io/cluster-service": "true",
+        "pod-template-hash": "6745896b65",
+        "version": "v20"
+      },
+      "containerName": "coredns"
+    },
+    "mountnsid": 4026535188,
+    "pid": 2443041,
+    "comm": "coredns",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.189",
+      "version": 6,
+      "kind": "raw",
+      "port": 9153
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.198",
+      "version": 6,
+      "kind": "raw",
+      "port": 54160
+    },
+    "sent": 3399,
+    "received": 364
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "79c46f55983fa452a41e8037d910419ccd799d7815e2cc7949410b10aa16ac86",
+      "containerName": "gitlab-exporter",
+      "containerImageName": "registry.gitlab.com/gitlab-org/build/cng/gitlab-exporter:15.0.0",
+      "containerImageDigest": "sha256:b565f5b4a4398ada8f17ddf81b823ee2adec933da5a3a48a204085fd1d337bfb"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "gitlab",
+      "podName": "my-gitlab-gitlab-exporter-86b8897d66-mxsdk",
+      "podLabels": {
+        "app": "gitlab-exporter",
+        "chart": "gitlab-exporter-8.1.0",
+        "heritage": "Helm",
+        "pod-template-hash": "86b8897d66",
+        "release": "my-gitlab"
+      },
+      "containerName": "gitlab-exporter"
+    },
+    "mountnsid": 4026534028,
+    "pid": 604677,
+    "comm": "server.rb:289",
+    "ipversion": 4,
+    "src": {
+      "addr": "10.224.0.177",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-gitlab-exporter-86b8897d66-mxsdk",
+      "kind": "pod",
+      "podlabels": {
+        "app": "gitlab-exporter",
+        "chart": "gitlab-exporter-8.1.0",
+        "heritage": "Helm",
+        "pod-template-hash": "86b8897d66",
+        "release": "my-gitlab"
+      },
+      "port": 9168
+    },
+    "dst": {
+      "addr": "10.224.0.204",
+      "version": 4,
+      "namespace": "gitlab",
+      "podname": "my-gitlab-prometheus-server-646489c599-sbpcw",
+      "kind": "pod",
+      "podlabels": {
+        "app": "prometheus",
+        "chart": "prometheus-15.18.0",
+        "component": "server",
+        "heritage": "Helm",
+        "pod-template-hash": "646489c599",
+        "release": "my-gitlab"
+      },
+      "port": 43432
+    },
+    "sent": 2876,
+    "received": 288
+  },
+  {
+    "runtime": {
+      "runtimeName": "containerd",
+      "containerId": "abae34ec25463d0358b5aa2e438acc5c6f90e380a332cdbcc2f24a38b410f568",
+      "containerName": "metrics-server",
+      "containerImageName": "mcr.microsoft.com/oss/kubernetes/metrics-server:v0.6.3",
+      "containerImageDigest": "sha256:c49553d5b948fcf5b23bed3718c797f42ebe87d7ae5f2c6f537f530b65cadaec"
+    },
+    "k8s": {
+      "node": "aks-agentpool-22749159-vmss000000",
+      "namespace": "kube-system",
+      "podName": "metrics-server-5cd44496f4-hzlnn",
+      "podLabels": {
+        "k8s-app": "metrics-server",
+        "kubernetes.azure.com/managedby": "aks",
+        "pod-template-hash": "5cd44496f4"
+      },
+      "containerName": "metrics-server"
+    },
+    "mountnsid": 4026533241,
+    "pid": 11739,
+    "comm": "metrics-server",
+    "ipversion": 6,
+    "src": {
+      "addr": "::ffff:10.224.0.161",
+      "version": 6,
+      "kind": "raw",
+      "port": 4443
+    },
+    "dst": {
+      "addr": "::ffff:10.224.0.144",
+      "version": 6,
+      "kind": "raw",
+      "port": 46790
+    },
+    "sent": 2773,
+    "received": 487
+  }
+]

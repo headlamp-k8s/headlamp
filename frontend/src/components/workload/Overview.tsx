@@ -17,6 +17,8 @@ import Link from '../common/Link';
 import { PageGrid, ResourceLink } from '../common/Resource';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
+import { GraphView } from '../resoureceMap/GraphView';
+import { WorkloadsSource } from '../resoureceMap/sources/WorkloadSource';
 import { WorkloadCircleChart } from './Charts';
 
 interface WorkloadDict {
@@ -115,6 +117,9 @@ export default function Overview() {
             </Grid>
           ))}
         </Grid>
+      </SectionBox>
+      <SectionBox my={3}>
+        <GraphView defaultSources={[WorkloadsSource]} />
       </SectionBox>
       <ResourceListView
         title={t('Workloads')}
