@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { useMockQuery } from '../../helpers/testHelpers';
 import Secret, { KubeSecret } from '../../lib/k8s/secret';
 import { TestContext } from '../../test';
 import SecretDetails from './Details';
@@ -26,7 +27,7 @@ interface MockerStory {
 const Template: StoryFn = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
-    Secret.useGet = () => [new Secret(json), null, () => {}, () => {}] as any;
+    Secret.useQuery = useMockQuery.data(new Secret(json));
   }
   return <SecretDetails />;
 };

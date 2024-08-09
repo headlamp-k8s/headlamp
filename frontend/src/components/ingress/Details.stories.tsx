@@ -26,7 +26,7 @@ interface MockerStory {
 const Template: Story = (args: MockerStory) => {
   const { ingressJson } = args;
   if (!!ingressJson) {
-    Ingress.useGet = () => [new Ingress(ingressJson), null, () => {}, () => {}] as any;
+    Ingress.useQuery = () => ({ data: new Ingress(ingressJson), error: null } as any);
   }
   return <Details />;
 };

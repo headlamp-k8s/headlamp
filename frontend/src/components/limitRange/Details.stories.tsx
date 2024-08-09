@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockQuery } from '../../helpers/testHelpers';
 import { LimitRange } from '../../lib/k8s/limitRange';
 import { TestContext } from '../../test';
 import { LimitRangeDetails } from './Details';
 import { LIMIT_RANGE_DUMMY_DATA } from './storyHelper';
 
-LimitRange.useGet = () =>
-  [new LimitRange(LIMIT_RANGE_DUMMY_DATA[0]), null, () => {}, () => {}] as any;
+LimitRange.useQuery = useMockQuery.data(new LimitRange(LIMIT_RANGE_DUMMY_DATA[0]));
 
 export default {
   title: 'LimitRange/DetailsView',

@@ -1,4 +1,5 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
 import { KubeObject } from '../../../lib/k8s/cluster';
 
 export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
@@ -25,40 +26,28 @@ export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
  */
 export default function AuthVisible(props: AuthVisibleProps) {
   const { item, authVerb, subresource, namespace, onError, onAuthResult, children } = props;
-  const [visible, setVisible] = React.useState(false);
+  const { data } = useQuery<any>({
+    enabled: !!item,
+    queryKey: ['authVisible', item, authVerb, subresource, namespace],
+    queryFn: () => {
+      try {
+        return item.getAuthorization(authVerb, { subresource, namespace });
+      } catch (e: any) {
+        onError?.(e);
+      }
+    },
+  });
 
-  React.useEffect(() => {
-    let isMounted = true;
-    if (!!item) {
-      item
-        .getAuthorization(authVerb, { subresource, namespace })
-        .then((result: any) => {
-          if (isMounted) {
-            if (result.status?.allowed !== visible) {
-              setVisible(!!result.status?.allowed);
-            }
-            if (!!onAuthResult) {
-              onAuthResult({
-                allowed: result.status?.allowed,
-                reason: result.status?.reason || '',
-              });
-            }
-          }
-        })
-        .catch((err: Error) => {
-          if (isMounted) {
-            if (!!onError) {
-              onError(err);
-            }
-            setVisible(false);
-          }
-        });
+  const visible = data?.status?.allowed ?? false;
+
+  useEffect(() => {
+    if (data) {
+      onAuthResult?.({
+        allowed: visible,
+        reason: data.status?.reason ?? '',
+      });
     }
-
-    return function cleanup() {
-      isMounted = false;
-    };
-  }, [item]);
+  }, [data]);
 
   if (!visible) {
     return null;

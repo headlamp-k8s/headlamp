@@ -128,7 +128,7 @@ export function DetailsGrid(props: DetailsGridProps) {
   const { extraInfo, actions, noDefaultActions, headerStyle, backLink, title, headerSection } =
     otherMainInfoSectionProps;
 
-  const [item, error] = resourceType.useGet(name, namespace);
+  const { data: item, error } = resourceType.useQuery({ name, namespace });
   const prevItemRef = React.useRef<{ uid?: string; version?: string; error?: ApiError }>({});
 
   React.useEffect(() => {
@@ -969,7 +969,8 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
     fieldSelector: resource.kind === 'Node' ? `spec.nodeName=${resource.metadata.name}` : undefined,
   };
 
-  const [pods, error] = Pod.useList(queryData);
+  const { items: pods, error } = Pod.useListQuery({ namespace, queryParams: queryData });
+
   const onlyOneNamespace = !!resource.metadata.namespace || resource.kind === 'Namespace';
   const hideNamespaceFilter = onlyOneNamespace || noSearch;
 

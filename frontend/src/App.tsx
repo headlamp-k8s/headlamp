@@ -1,5 +1,7 @@
 import './i18n/config';
 import './components/App/icons';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -29,13 +31,27 @@ function AppWithRedux(props: React.PropsWithChildren<{}>) {
   );
 }
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 3 * 60_000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+const queryDevtoolsEnabled = false;
+
 function App() {
   return (
     <ErrorBoundary fallback={<ErrorComponent />}>
       <Provider store={store}>
-        <AppWithRedux>
-          <AppContainer />
-        </AppWithRedux>
+        <QueryClientProvider client={queryClient}>
+          {queryDevtoolsEnabled && <ReactQueryDevtools initialIsOpen={false} />}
+
+          <AppWithRedux>
+            <AppContainer />
+          </AppWithRedux>
+        </QueryClientProvider>
       </Provider>
     </ErrorBoundary>
   );

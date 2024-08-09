@@ -316,7 +316,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar horizontal"
+                              class="visible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -334,7 +334,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar vertical"
+                              class="visible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >
@@ -563,7 +563,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar horizontal"
+                              class="visible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -581,7 +581,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar vertical"
+                              class="visible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >
@@ -810,7 +810,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar horizontal"
+                              class="visible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -828,7 +828,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar vertical"
+                              class="visible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >

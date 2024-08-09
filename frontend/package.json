@@ -23,6 +23,8 @@
     "@mui/system": "^5.15.14",
     "@mui/x-tree-view": "^6.17.0",
     "@reduxjs/toolkit": "^1.9.3",
+    "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-query-devtools": "^4.36.1",
     "@testing-library/react": "^12.1.2",
     "@types/glob": "^8.1.0",
     "@types/humanize-duration": "^3.27.1",

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import { ApiError, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
 import { KubeObject, makeKubeObject } from '../../lib/k8s/cluster';
 import CustomResourceDefinition, { KubeCRD } from '../../lib/k8s/crd';
@@ -72,6 +73,12 @@ const mockCRMap: { [name: string]: KubeObject | null } = {
   },
 };
 
+const crdInstances: CustomResourceDefinition[] = [];
+Object.values(mockCRDMap).forEach(data => {
+  if (!!data) {
+    crdInstances.push(new CustomResourceDefinition(data));
+  }
+});
 const CRDMockMethods = {
   usePhonyApiGet: (...args: any) => {
     const [setCRD, name] = args;
@@ -88,16 +95,11 @@ const CRDMockMethods = {
       }
     }, []);
   },
-  usePhonyList: () => {
-    const crdInstances: CustomResourceDefinition[] = [];
-    Object.values(mockCRDMap).forEach(data => {
-      if (!!data) {
-        crdInstances.push(new CustomResourceDefinition(data));
-      }
-    });
-
-    return [crdInstances, null, () => {}, () => {}] as any;
-  },
+  usePhonyQuery: ({ name }: any): any => ({
+    data: new CustomResourceDefinition(mockCRDMap[name]!),
+    error: null,
+  }),
+  usePhonyListQuery: useMockListQuery.data(crdInstances),
 };
 
 class CRMockClass extends makeKubeObject<KubeObject>('customresource') {
@@ -125,6 +127,10 @@ class CRMockClass extends makeKubeObject<KubeObject>('customresource') {
     React.useEffect(() => {
       onList(Object.values(mockCRMap).map(cr => new CRMockClass(cr)));
     }, []);
+  }
+
+  static useListQuery(): any {
+    return { items: Object.values(mockCRMap).map(cr => new CRMockClass(cr)), error: null };
   }
 
   async getAuthorization() {

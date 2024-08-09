@@ -56,7 +56,7 @@ export function makePodStatusLabel(job: Job) {
 }
 
 export default function JobsList() {
-  const [jobs, error] = Job.useList();
+  const { items: jobs, error } = Job.useListQuery();
   return <JobsListRenderer jobs={jobs} error={Job.getErrorMessage(error)} reflectTableInURL />;
 }
 

@@ -6,17 +6,15 @@ import { TestContext } from '../../test';
 import PodDetails from './Details';
 import { podList } from './storyHelper';
 
-const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
-  return [
-    new Pod(
+const usePhonyQuery: KubeObjectClass['useQuery'] = ({ name, namespace }: any): any => {
+  return {
+    data: new Pod(
       podList.find(
         pod => pod.metadata.name === name && pod.metadata.namespace === namespace
       ) as KubePod
     ),
-    null,
-    () => {},
-    () => {},
-  ] as any;
+    error: null,
+  };
 };
 
 export default {
@@ -31,21 +29,18 @@ export default {
 } as Meta;
 
 interface MockerStory {
-  useGet?: KubeObjectClass['useGet'];
-  useList?: KubeObjectClass['useList'];
+  usePhonyQuery?: KubeObjectClass['usePhonyQuery'];
   objectEventsFunc?: typeof Event.objectEvents;
   podName: string;
 }
 
 const Template: Story<MockerStory> = args => {
-  const { useGet, useList, podName, objectEventsFunc } = args;
+  const { usePhonyQuery, podName, objectEventsFunc } = args;
 
-  if (!!useGet) {
-    Pod.useGet = args.useGet!;
+  if (!!usePhonyQuery) {
+    Pod.useQuery = args.usePhonyQuery!;
   }
-  if (!!useList) {
-    Pod.useList = args.useList!;
-  }
+
   if (!!objectEventsFunc) {
     Event.objectEvents = objectEventsFunc!;
   }
@@ -62,19 +57,19 @@ const Template: Story<MockerStory> = args => {
 
 export const PullBackOff = Template.bind({});
 PullBackOff.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
   podName: 'imagepullbackoff',
 };
 
 export const Running = Template.bind({});
 Running.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
   podName: 'running',
 };
 
 export const Error = Template.bind({});
 Error.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
   podName: 'terminated',
   objectEventsFunc: () =>
     Promise.resolve([
@@ -114,18 +109,18 @@ Error.args = {
 
 export const LivenessFailed = Template.bind({});
 LivenessFailed.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
   podName: 'liveness-http',
 };
 
 export const Initializing = Template.bind({});
 Initializing.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
   podName: 'initializing',
 };
 
 export const Successful = Template.bind({});
 Successful.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
   podName: 'successful',
 };

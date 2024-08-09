@@ -4,7 +4,7 @@ import { TestContext } from '../../test';
 import { LeaseDetails } from './Details';
 import { LEASE_DUMMY_DATA } from './storyHelper';
 
-Lease.useGet = () => [new Lease(LEASE_DUMMY_DATA[0]), null, () => {}, () => {}] as any;
+Lease.useQuery = () => ({ data: new Lease(LEASE_DUMMY_DATA[0]), error: null } as any);
 
 export default {
   title: 'Lease/LeaseDetailsView',

@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { styled, useTheme } from '@mui/system';
+import { useQuery } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,7 +28,6 @@ const VersionIcon = styled(Icon)({
 export default function VersionButton() {
   const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const { enqueueSnackbar } = useSnackbar();
-  const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
   const cluster = useCluster();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -62,68 +62,43 @@ export default function VersionButton() {
     ];
   }
 
-  React.useEffect(
-    () => {
-      let stillAlive = true;
-      function fetchVersion() {
-        getVersion()
-          .then((results: StringDict) => {
-            if (!stillAlive) {
-              return;
+  const { data: clusterVersion } = useQuery({
+    placeholderData: null,
+    queryKey: ['version', cluster ?? ''],
+    queryFn: () => {
+      return getVersion()
+        .then((results: StringDict) => {
+          let versionChange = 0;
+          if (clusterVersion && results && results.gitVersion) {
+            versionChange = semver.compare(results.gitVersion, clusterVersion.gitVersion);
+
+            let msg = '';
+            if (versionChange > 0) {
+              msg = t('translation|Cluster version upgraded to {{ gitVersion }}', {
+                gitVersion: results.gitVersion,
+              });
+            } else if (versionChange < 0) {
+              msg = t('translation|Cluster version downgraded to {{ gitVersion }}', {
+                gitVersion: results.gitVersion,
+              });
             }
 
-            setClusterVersion(results);
-            let versionChange = 0;
-            if (clusterVersion && results && results.gitVersion) {
-              versionChange = semver.compare(results.gitVersion, clusterVersion.gitVersion);
-
-              let msg = '';
-              if (versionChange > 0) {
-                msg = t('translation|Cluster version upgraded to {{ gitVersion }}', {
-                  gitVersion: results.gitVersion,
-                });
-              } else if (versionChange < 0) {
-                msg = t('translation|Cluster version downgraded to {{ gitVersion }}', {
-                  gitVersion: results.gitVersion,
-                });
-              }
-
-              if (msg) {
-                enqueueSnackbar(msg, {
-                  key: 'version',
-                  preventDuplicate: true,
-                  autoHideDuration: versionSnackbarHideTimeout,
-                  variant: 'info',
-                });
-              }
+            if (msg) {
+              enqueueSnackbar(msg, {
+                key: 'version',
+                preventDuplicate: true,
+                autoHideDuration: versionSnackbarHideTimeout,
+                variant: 'info',
+              });
             }
-          })
-          .catch((error: Error) => console.error('Getting the cluster version:', error));
-      }
+          }
 
-      if (!clusterVersion) {
-        fetchVersion();
-      }
-
-      const intervalHandler = setInterval(() => {
-        fetchVersion();
-      }, versionFetchInterval);
-
-      return function cleanup() {
-        stillAlive = false;
-        clearInterval(intervalHandler);
-      };
+          return results;
+        })
+        .catch((error: Error) => console.error('Getting the cluster version:', error));
     },
-    // eslint-disable-next-line
-    [clusterVersion]
-  );
-
-  // Use the location to make sure the version is changed, as it depends on the cluster
-  // (defined in the URL ATM).
-  // @todo: Update this if the active cluster management is changed.
-  React.useEffect(() => {
-    setClusterVersion(null);
-  }, [cluster]);
+    refetchInterval: versionFetchInterval,
+  });
 
   function handleClose() {
     setOpen(false);

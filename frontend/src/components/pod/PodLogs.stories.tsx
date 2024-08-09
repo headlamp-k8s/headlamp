@@ -6,30 +6,26 @@ import { TestContext } from '../../test';
 import PodDetails, { PodDetailsProps } from './Details';
 import { podList } from './storyHelper';
 
-const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
-  return [
-    new Pod(
+const usePhonyQuery: KubeObjectClass['useQuery'] = ({ name, namespace }: any): any => {
+  return {
+    data: new Pod(
       podList.find(
         pod => pod.metadata.name === name && pod.metadata.namespace === namespace
       ) as KubePod
     ),
-    null,
-    () => {},
-    () => {},
-  ] as any;
+    error: null,
+  };
 };
 
-const phonyGetAuthorization: KubeObjectClass['getAuthorization'] = async (
+const phonyGetAuthorization: KubeObjectClass['getAuthorization'] = (
   verb: string,
   resourceAttrs?: AuthRequestResourceAttrs
 ) => {
-  return new Promise(exec => {
-    exec({
-      status: {
-        allowed: resourceAttrs?.subresource === 'log',
-      },
-    });
-  });
+  return {
+    status: {
+      allowed: resourceAttrs?.subresource === 'log',
+    },
+  };
 };
 
 // @todo: There is no "PodLogs" component. Stories should be named after the component.
@@ -102,8 +98,8 @@ function getLogs(container: string, onLogs: StreamResultsCb, logsOptions: LogOpt
 
 export const Logs = Template.bind({});
 Logs.args = {
-  useGet: usePhonyGet,
-  'prototype.getAuthorization': phonyGetAuthorization,
+  useQuery: usePhonyQuery,
+  getAuthorization: phonyGetAuthorization,
   'prototype.getLogs': getLogs,
   podName: 'running',
   detailsProps: {

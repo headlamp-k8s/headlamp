@@ -4,7 +4,7 @@ import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import NamespacesList from './List';
 
-Namespace.useList = () => {
+Namespace.useListQuery = () => {
   const objList = generateK8sResourceList<KubeNamespace>(
     {
       kind: 'Namespace',
@@ -19,7 +19,7 @@ Namespace.useList = () => {
     },
     { instantiateAs: Namespace }
   );
-  return [objList, null, () => {}, () => {}] as any;
+  return { items: objList, error: null } as any;
 };
 
 export default {

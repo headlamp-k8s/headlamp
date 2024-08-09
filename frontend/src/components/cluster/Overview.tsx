@@ -23,8 +23,8 @@ import {
 export default function Overview() {
   const { t } = useTranslation(['translation']);
 
-  const [pods] = Pod.useList();
-  const [nodes] = Node.useList();
+  const { items: pods } = Pod.useListQuery();
+  const { items: nodes } = Node.useListQuery();
 
   const [nodeMetrics, metricsError] = Node.useMetrics();
 
@@ -74,7 +74,9 @@ function EventsSection() {
       )
     )
   );
-  const [events, eventsError] = Event.useList({ limit: Event.maxLimit });
+  const { items: events, error: eventsError } = Event.useListQuery({
+    queryParams: { limit: Event.maxLimit },
+  });
 
   const warningActionFilterFunc = (event: Event, search?: string) => {
     if (!filterFunc(event, search)) {
@@ -138,7 +140,7 @@ function EventsSection() {
       }}
       defaultGlobalFilter={eventsFilter ?? undefined}
       data={events}
-      errorMessage={Event.getErrorMessage(eventsError)}
+      errorMessage={Event.getErrorMessage(eventsError as any)}
       columns={[
         {
           label: t('Type'),

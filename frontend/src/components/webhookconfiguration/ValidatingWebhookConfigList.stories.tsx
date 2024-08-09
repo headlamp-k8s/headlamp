@@ -1,5 +1,6 @@
 import Container from '@mui/material/Container';
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import ValidatingWebhookConfiguration from '../../lib/k8s/validatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
@@ -12,8 +13,8 @@ VWCTemplate.metadata.name = 'vwc-test-{{i}}';
 const VWCWithServiceTemplate = createVWC(true);
 VWCWithServiceTemplate.metadata.name = 'vwc-test-with-service-{{i}}';
 
-ValidatingWebhookConfiguration.useList = () => {
-  const objList = generateK8sResourceList(VWCTemplate, {
+ValidatingWebhookConfiguration.useListQuery = useMockListQuery.data(
+  generateK8sResourceList(VWCTemplate, {
     numResults: 3,
     instantiateAs: ValidatingWebhookConfiguration,
   }).concat(
@@ -21,9 +22,8 @@ ValidatingWebhookConfiguration.useList = () => {
       numResults: 3,
       instantiateAs: ValidatingWebhookConfiguration,
     })
-  );
-  return [objList, null, () => {}, () => {}] as any;
-};
+  )
+);
 
 export default {
   title: 'WebhookConfiguration/ValidatingWebhookConfig/List',

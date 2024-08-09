@@ -18,7 +18,7 @@ export default function ServiceDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { t } = useTranslation(['glossary', 'translation']);
 
-  const [endpoints, endpointsError] = Endpoints.useList({ namespace });
+  const { items: endpoints, error: endpointsError } = Endpoints.useListQuery({ namespace });
 
   function getOwnedEndpoints(item: Service) {
     return item ? endpoints?.filter(endpoint => endpoint.getName() === item.getName()) : null;
@@ -93,7 +93,7 @@ export default function ServiceDetails() {
                   <Empty color="error">{endpointsError}</Empty>
                 ) : (
                   <SimpleTable
-                    data={getOwnedEndpoints(item)}
+                    data={getOwnedEndpoints(item) ?? null}
                     columns={[
                       {
                         label: t('translation|Name'),

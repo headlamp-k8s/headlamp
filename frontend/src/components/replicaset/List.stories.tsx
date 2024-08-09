@@ -1,11 +1,12 @@
 import Container from '@mui/material/Container';
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import { TestContext } from '../../test';
 import List from './List';
 
-ReplicaSet.useList = () => {
-  const objList = [
+ReplicaSet.useListQuery = useMockListQuery.data(
+  [
     {
       apiVersion: 'apps/v1',
       kind: 'ReplicaSet',
@@ -217,9 +218,8 @@ ReplicaSet.useList = () => {
         },
       },
     },
-  ].map((data: any) => new ReplicaSet(data));
-  return [objList, null, () => {}, () => {}] as any;
-};
+  ].map((data: any) => new ReplicaSet(data))
+);
 
 export default {
   title: 'ReplicaSet/List',

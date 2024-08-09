@@ -262,7 +262,7 @@ export default function Terminal(props: TerminalProps) {
 
           execOrAttachRef.current = await item.attach(
             container,
-            (items: ArrayBuffer) => onData(xtermRef.current!, items),
+            items => onData(xtermRef.current!, items),
             { failCb: () => shellConnectFailed(xtermRef.current!) }
           );
         } else {
@@ -272,7 +272,7 @@ export default function Terminal(props: TerminalProps) {
 
           execOrAttachRef.current = await item.exec(
             container,
-            (items: ArrayBuffer) => onData(xtermRef.current!, items),
+            items => onData(xtermRef.current!, items),
             { command: [command], failCb: () => shellConnectFailed(xtermRef.current!) }
           );
         }

@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { useMockQuery } from '../../helpers/testHelpers';
 import { KubeRuntimeClass, RuntimeClass } from '../../lib/k8s/runtime';
 import { TestContext } from '../../test';
 import { RuntimeClassDetails as Details } from './Details';
@@ -26,7 +27,7 @@ interface MockerStory {
 const Template: StoryFn = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
-    RuntimeClass.useGet = () => [new RuntimeClass(json), null, () => {}, () => {}] as any;
+    RuntimeClass.useQuery = useMockQuery.data(new RuntimeClass(json));
   }
   return <Details />;
 };

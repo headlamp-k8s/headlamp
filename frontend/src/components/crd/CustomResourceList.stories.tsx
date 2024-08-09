@@ -7,6 +7,7 @@ import { CRDMockMethods } from './storyHelper';
 
 interface MockerStory {
   useApiGet?: KubeObjectClass['useApiGet'];
+  useQuery?: KubeObjectClass['useQuery'];
   routerParams?: TestContextProps['routerMap'];
 }
 
@@ -17,11 +18,13 @@ export default {
 } as Meta;
 
 const Template: Story<MockerStory> = args => {
-  const { useApiGet, routerParams = {} } = args;
+  const { useApiGet, useQuery, routerParams = {} } = args;
   const routerMap: TestContextProps['routerMap'] = routerParams;
 
   overrideKubeObject(CustomResourceDefinition, {
     useApiGet,
+    useQuery,
+    useQueryList: CRDMockMethods.usePhonyListQuery,
   });
 
   return (
@@ -34,6 +37,7 @@ const Template: Story<MockerStory> = args => {
 export const List = Template.bind({});
 List.args = {
   useApiGet: CRDMockMethods.usePhonyApiGet,
+  useQuery: CRDMockMethods.usePhonyQuery,
   routerParams: {
     crd: 'mydefinition.phonyresources.io',
   },

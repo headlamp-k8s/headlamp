@@ -1,11 +1,12 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import PriorityClass, { KubePriorityClass } from '../../lib/k8s/priorityClass';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import PriorityClassList from './List';
 
-PriorityClass.useList = () => {
-  const objList = generateK8sResourceList<KubePriorityClass>(
+PriorityClass.useListQuery = useMockListQuery.data(
+  generateK8sResourceList<KubePriorityClass>(
     {
       description: 'Mission Critical apps.',
       kind: 'PriorityClass',
@@ -24,9 +25,8 @@ PriorityClass.useList = () => {
       value: 1000000,
     },
     { instantiateAs: PriorityClass }
-  );
-  return [objList, null, () => {}, () => {}] as any;
-};
+  )
+);
 
 export default {
   title: 'PriorityClass/PriorityClassListView',

@@ -3,6 +3,7 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { StylesProvider } from '@mui/styles';
 import type { Meta, StoryFn } from '@storybook/react';
 import { composeStories } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { act, render } from '@testing-library/react';
 import path from 'path';
 import themesConf from './lib/themes';
@@ -12,16 +13,27 @@ type StoryFile = {
   [name: string]: StoryFn | Meta;
 };
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 3 * 60_000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 const withThemeProvider = (Story: any) => {
   const lightTheme = themesConf['light'];
   const theme = lightTheme;
 
   const ourThemeProvider = (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <Story />
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <QueryClientProvider client={queryClient}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <Story />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </QueryClientProvider>
   );
 
   const generateClassName = (rule: any, styleSheet: any) =>
@@ -94,11 +106,17 @@ getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
         test(name, async () => {
           const jsx = withThemeProvider(story);
 
+          queryClient.clear();
           await act(async () => {
             const { unmount, asFragment, rerender } = render(jsx);
-            rerender(jsx);
-            rerender(jsx);
-            await act(() => new Promise(resolve => setTimeout(resolve)));
+            await act(async () => {
+              rerender(jsx);
+              await new Promise(resolve => setTimeout(resolve, 1));
+            });
+            await act(async () => {
+              rerender(jsx);
+              await new Promise(resolve => setTimeout(resolve, 1));
+            });
 
             const snapshotPath = path.join(
               storyDir,

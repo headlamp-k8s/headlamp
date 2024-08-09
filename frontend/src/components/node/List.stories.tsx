@@ -4,7 +4,7 @@ import Node from '../../lib/k8s/node';
 import { TestContext } from '../../test';
 import List from './List';
 
-Node.useList = () => {
+Node.useListQuery = () => {
   const objList = [
     {
       apiVersion: 'v1',
@@ -144,7 +144,7 @@ Node.useList = () => {
       },
     },
   ].map((data: any) => new Node(data));
-  return [objList, null, () => {}, () => {}] as any;
+  return { items: objList, error: null } as any;
 };
 
 export default {

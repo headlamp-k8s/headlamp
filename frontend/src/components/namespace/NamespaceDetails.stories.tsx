@@ -20,8 +20,8 @@ const createObj = (name: string) =>
     },
   } as KubeNamespace);
 
-Namespace.useGet = name => {
-  return [new Namespace(createObj(name)), null, () => {}, () => {}] as any;
+Namespace.useQuery = ({ name }: any) => {
+  return { data: new Namespace(createObj(name)), error: null } as any;
 };
 
 export default {

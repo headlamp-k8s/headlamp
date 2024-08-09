@@ -14,11 +14,11 @@ CronJob.getAuthorization = (): Promise<{ status: any }> => {
 
 Job.getAuthorization = CronJob.getAuthorization;
 
-const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
+const usePhonyQuery: KubeObjectClass['useQuery'] = ({ name, namespace }: any) => {
   const cronJobJson = cronJobList.find(
     cronJob => cronJob.metadata.name === name && cronJob.metadata.namespace === namespace
   );
-  return [new CronJob(cronJobJson!), null, () => {}, () => {}] as any;
+  return { data: new CronJob(cronJobJson!), error: null } as any;
 };
 
 export default {
@@ -28,19 +28,15 @@ export default {
 } as Meta;
 
 interface MockerStory {
-  useGet?: KubeObjectClass['useGet'];
-  useList?: KubeObjectClass['useList'];
+  useQuery?: KubeObjectClass['useQuery'];
   cronJobName: string;
 }
 
 const Template: Story<MockerStory> = args => {
-  const { useGet, useList, cronJobName } = args;
+  const { useQuery, cronJobName } = args;
 
-  if (!!useGet) {
-    CronJob.useGet = args.useGet!;
-  }
-  if (!!useList) {
-    CronJob.useList = args.useList!;
+  if (!!useQuery) {
+    CronJob.useQuery = args.useQuery!;
   }
 
   return (
@@ -52,12 +48,12 @@ const Template: Story<MockerStory> = args => {
 
 export const EveryMinute = Template.bind({});
 EveryMinute.args = {
-  useGet: usePhonyGet,
+  useQuery: usePhonyQuery,
   cronJobName: 'every-minute',
 };
 
 export const EveryAst = Template.bind({});
 EveryAst.args = {
-  useGet: usePhonyGet,
+  useQuery: usePhonyQuery,
   cronJobName: 'every-minute-one-char',
 };

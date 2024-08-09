@@ -15,7 +15,7 @@ import { ResourceTableColumn, ResourceTableProps } from '../common/Resource/Reso
 export default function CustomResourceList() {
   const { t } = useTranslation(['glossary', 'translation']);
   const { crd: crdName } = useParams<{ crd: string }>();
-  const [crd, error] = CRD.useGet(crdName);
+  const { data: crd, error } = CRD.useQuery({ name: crdName });
 
   if (!crd && !error) {
     return <Loader title={t('translation|Loading custom resource definition')} />;

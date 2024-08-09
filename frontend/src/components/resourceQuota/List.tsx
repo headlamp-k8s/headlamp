@@ -83,7 +83,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
 }
 
 export default function ResourceQuotaList() {
-  const [resourceQuotas, error] = ResourceQuota.useList();
+  const { items, error } = ResourceQuota.useListQuery();
 
-  return <ResourceQuotaRenderer resourceQuotas={resourceQuotas} error={error} reflectTableInURL />;
+  return <ResourceQuotaRenderer resourceQuotas={items} error={error} reflectTableInURL />;
 }

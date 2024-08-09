@@ -5,7 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -154,11 +154,11 @@ export function NamespacesAutocomplete() {
 function NamespacesFromClusterAutocomplete(
   props: Omit<PureNamespacesAutocompleteProps, 'namespaceNames'>
 ) {
-  const [namespaceNames, setNamespaceNames] = React.useState<string[]>([]);
-
-  Namespace.useApiList((namespaces: Namespace[]) => {
-    setNamespaceNames(namespaces.map(namespace => namespace.metadata.name));
-  });
+  const { data: namespacesList } = Namespace.useListQuery();
+  const namespaceNames = useMemo(
+    () => namespacesList?.items?.map(namespace => namespace.metadata.name) ?? [],
+    [namespacesList]
+  );
 
   return <PureNamespacesAutocomplete namespaceNames={namespaceNames} {...props} />;
 }

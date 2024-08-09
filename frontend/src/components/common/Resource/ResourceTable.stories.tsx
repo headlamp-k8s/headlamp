@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../../helpers/testHelpers';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
 import { TestContext } from '../../../test';
@@ -51,71 +52,67 @@ const TemplateWithFilter: Story<{
 };
 
 class MyPod extends Pod {
-  static useList = () =>
+  static useListQuery = useMockListQuery.data(
     [
-      [
-        {
-          kind: 'Pod',
-          apiVersion: 'v1',
-          metadata: {
-            name: 'mypod0',
-            uid: 'phony0',
-            creationTimestamp: '2021-12-15T14:57:13Z',
-            resourceVersion: '1',
-            selfLink: '0',
-            namespace: 'MyNamespace0',
+      {
+        kind: 'Pod',
+        apiVersion: 'v1',
+        metadata: {
+          name: 'mypod0',
+          uid: 'phony0',
+          creationTimestamp: '2021-12-15T14:57:13Z',
+          resourceVersion: '1',
+          selfLink: '0',
+          namespace: 'MyNamespace0',
+        },
+      },
+      {
+        kind: 'Pod',
+        apiVersion: 'v1',
+        metadata: {
+          name: 'mypod1',
+          uid: 'phony1',
+          creationTimestamp: '2021-12-15T14:57:13Z',
+          resourceVersion: '1',
+          selfLink: '1',
+          namespace: 'MyNamespace1',
+          labels: {
+            mylabel1: 'myvalue1',
           },
         },
-        {
-          kind: 'Pod',
-          apiVersion: 'v1',
-          metadata: {
-            name: 'mypod1',
-            uid: 'phony1',
-            creationTimestamp: '2021-12-15T14:57:13Z',
-            resourceVersion: '1',
-            selfLink: '1',
-            namespace: 'MyNamespace1',
-            labels: {
-              mylabel1: 'myvalue1',
-            },
+      },
+      {
+        kind: 'Pod',
+        apiVersion: 'v1',
+        metadata: {
+          name: 'mypod2',
+          uid: 'phony2',
+          creationTimestamp: '2021-12-15T14:57:13Z',
+          resourceVersion: '1',
+          selfLink: '2',
+          namespace: 'MyNamespace2',
+          labels: {
+            mykey2: 'mylabel',
           },
         },
-        {
-          kind: 'Pod',
-          apiVersion: 'v1',
-          metadata: {
-            name: 'mypod2',
-            uid: 'phony2',
-            creationTimestamp: '2021-12-15T14:57:13Z',
-            resourceVersion: '1',
-            selfLink: '2',
-            namespace: 'MyNamespace2',
-            labels: {
-              mykey2: 'mylabel',
-            },
+      },
+      {
+        kind: 'Pod',
+        apiVersion: 'v1',
+        metadata: {
+          name: 'mypod3',
+          uid: 'phony3',
+          creationTimestamp: '2021-12-15T14:57:13Z',
+          resourceVersion: '1',
+          selfLink: '3',
+          namespace: 'MyNamespace3',
+          labels: {
+            mykey3: 'myvalue3',
           },
         },
-        {
-          kind: 'Pod',
-          apiVersion: 'v1',
-          metadata: {
-            name: 'mypod3',
-            uid: 'phony3',
-            creationTimestamp: '2021-12-15T14:57:13Z',
-            resourceVersion: '1',
-            selfLink: '3',
-            namespace: 'MyNamespace3',
-            labels: {
-              mykey3: 'myvalue3',
-            },
-          },
-        },
-      ].map(pod => new Pod(pod as KubePod)),
-      null,
-      () => {},
-      () => {},
-    ] as any;
+      },
+    ].map(pod => new Pod(pod as KubePod))
+  );
 }
 
 const podData: ResourceTableFromResourceClassProps<MyPod> = {

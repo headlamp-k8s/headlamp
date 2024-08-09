@@ -6,7 +6,8 @@ import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function CustomResourceDefinitionList() {
   const { t } = useTranslation(['glossary', 'frequent']);
-  const [items, error] = CRD.useList();
+  const { items, error } = CRD.useListQuery();
+
   const throttledItems = useThrottle(items, 1000);
 
   const categories = React.useMemo(() => {
@@ -30,7 +31,7 @@ export default function CustomResourceDefinitionList() {
         noNamespaceFilter: false,
       }}
       data={throttledItems}
-      errorMessage={CRD.getErrorMessage(error)}
+      errorMessage={CRD.getErrorMessage(error as any)}
       columns={[
         {
           label: t('glossary|Resource'),

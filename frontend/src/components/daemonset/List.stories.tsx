@@ -1,11 +1,12 @@
 import Container from '@mui/material/Container';
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import { TestContext } from '../../test';
 import List from './List';
 
-DaemonSet.useList = () => {
-  const objList = [
+DaemonSet.useListQuery = useMockListQuery.data(
+  [
     {
       apiVersion: 'apps/v1',
       kind: 'DaemonSet',
@@ -280,9 +281,8 @@ DaemonSet.useList = () => {
         updatedNumberScheduled: 2,
       },
     },
-  ].map((data: any) => new DaemonSet(data));
-  return [objList, null, () => {}, () => {}] as any;
-};
+  ].map((data: any) => new DaemonSet(data))
+);
 
 export default {
   title: 'DaemonSet/List',

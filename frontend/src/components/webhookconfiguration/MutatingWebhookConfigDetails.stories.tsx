@@ -1,11 +1,12 @@
 import { Meta, Story } from '@storybook/react';
-import MWC, { KubeMutatingWebhookConfiguration } from '../../lib/k8s/mutatingWebhookConfiguration';
+import { useMockQuery } from '../../helpers/testHelpers';
+import MWC from '../../lib/k8s/mutatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import MutatingWebhookConfigDetails from './MutatingWebhookConfigDetails';
 import { createMWC } from './storyHelper';
 
-const usePhonyGet: KubeMutatingWebhookConfiguration['useGet'] = (withService: boolean) => {
-  return [new MWC(createMWC(withService)), null, () => {}, () => {}] as any;
+const usePhonyQuery = (withService: boolean) => {
+  return useMockQuery.data(new MWC(createMWC(withService)));
 };
 
 export default {
@@ -26,7 +27,7 @@ interface MockerStory {
 const Template: Story<MockerStory> = args => {
   const { withService } = args;
 
-  MWC.useGet = () => usePhonyGet(withService);
+  MWC.useQuery = usePhonyQuery(withService);
 
   return (
     <TestContext>

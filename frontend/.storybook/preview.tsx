@@ -2,6 +2,7 @@ import React from 'react';
 import themesConf from '../src/lib/themes';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { rest } from 'msw';
 
 // https://github.com/mswjs/msw-storybook-addon
@@ -10,16 +11,27 @@ initialize();
 const darkTheme = themesConf['dark'];
 const lightTheme = themesConf['light'];
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 3 * 60_000,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 const withThemeProvider = (Story, context) => {
   const backgroundColor = context.globals.backgrounds ? context.globals.backgrounds.value : 'light';
   const theme = backgroundColor !== 'dark' ? lightTheme : darkTheme;
 
   const ourThemeProvider = (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <Story {...context} />
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <QueryClientProvider client={queryClient}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <Story {...context} />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </QueryClientProvider>
   );
   return ourThemeProvider;
 };

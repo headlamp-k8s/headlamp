@@ -1,11 +1,12 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import EndpointList from './List';
 
-Endpoints.useList = () => {
-  const objList = generateK8sResourceList<KubeEndpoint>(
+Endpoints.useListQuery = useMockListQuery.data(
+  generateK8sResourceList<KubeEndpoint>(
     {
       kind: 'Endpoints',
       apiVersion: 'v1',
@@ -39,10 +40,8 @@ Endpoints.useList = () => {
       ],
     },
     { instantiateAs: Endpoints }
-  );
-
-  return [objList, null, () => {}, () => {}] as any;
-};
+  )
+);
 
 export default {
   title: 'endpoints/EndpointsListView',

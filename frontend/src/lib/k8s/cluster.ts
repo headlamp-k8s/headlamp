@@ -6,6 +6,7 @@ import helpers from '../../helpers';
 import { createRouteURL } from '../router';
 import { getCluster, timeAgo, useErrorState } from '../util';
 import { useCluster, useConnectApi } from '.';
+import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
@@ -319,6 +320,16 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   className: string;
   [prop: string]: any;
   getAuthorization?: (arg: string, resourceAttrs?: AuthRequestResourceAttrs) => any;
+  useListQuery(options?: {
+    cluster?: string;
+    namespace?: string;
+    queryParams?: QueryParameters;
+  }): ReturnType<typeof useKubeObjectList>;
+  useQuery(options?: {
+    name: string;
+    namespace?: string;
+    cluster?: string;
+  }): ReturnType<typeof useKubeObject>;
 }
 
 export interface AuthRequestResourceAttrs {
@@ -567,6 +578,30 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       useConnectApi(...listCalls);
     }
 
+    static useListQuery<U extends KubeObjectClass>(
+      this: U,
+      options: { cluster?: string; queryParams?: QueryParameters; namespace?: string } = {}
+    ) {
+      return useKubeObjectList({
+        kubeObjectClass: this,
+        cluster: options.cluster,
+        queryParams: options.queryParams as any,
+        namespace: options.namespace,
+      });
+    }
+
+    static useQuery<U extends KubeObjectClass>(
+      this: U,
+      options: { name: string; namespace: string; cluster?: string }
+    ) {
+      return useKubeObject({
+        kubeObjectClass: this,
+        name: options.name,
+        namespace: options.namespace,
+        cluster: options.cluster,
+      });
+    }
+
     static useList<U extends KubeObject>(
       opts?: ApiListOptions
     ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
@@ -690,6 +725,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         args.unshift(this.getNamespace()!);
       }
 
+      // @ts-expect-error
       return this._class().apiEndpoint.delete(...args, {}, this._clusterName);
     }
 
@@ -732,13 +768,14 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     patch(body: OpPatch[]) {
       const patchMethod = this._class().apiEndpoint.patch;
-      const args: Parameters<typeof patchMethod> = [body];
+      const args: Partial<Parameters<typeof patchMethod>> = [body];
 
       if (this.isNamespaced) {
         args.push(this.getNamespace());
       }
 
       args.push(this.getName());
+      // @ts-expect-error
       return this._class().apiEndpoint.patch(...args, {}, this._clusterName);
     }
 

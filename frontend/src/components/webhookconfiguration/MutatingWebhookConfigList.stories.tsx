@@ -1,5 +1,6 @@
 import Container from '@mui/material/Container';
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import MutatingWebhookConfiguration from '../../lib/k8s/mutatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
@@ -12,8 +13,8 @@ MWCTemplate.metadata.name = 'mwc-test-{{i}}';
 const MWCWithServiceTemplate = createMWC(true);
 MWCWithServiceTemplate.metadata.name = 'mwc-test-with-service-{{i}}';
 
-MutatingWebhookConfiguration.useList = () => {
-  const objList = generateK8sResourceList(MWCTemplate, {
+MutatingWebhookConfiguration.useListQuery = useMockListQuery.data(
+  generateK8sResourceList(MWCTemplate, {
     numResults: 3,
     instantiateAs: MutatingWebhookConfiguration,
   }).concat(
@@ -21,9 +22,8 @@ MutatingWebhookConfiguration.useList = () => {
       numResults: 3,
       instantiateAs: MutatingWebhookConfiguration,
     })
-  );
-  return [objList, null, () => {}, () => {}] as any;
-};
+  )
+);
 
 export default {
   title: 'WebhookConfiguration/MutatingWebhookConfig/List',

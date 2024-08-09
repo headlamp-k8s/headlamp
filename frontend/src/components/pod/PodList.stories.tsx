@@ -4,11 +4,10 @@ import { TestContext } from '../../test';
 import PodList from './List';
 import { podList } from './storyHelper';
 
-Pod.useList = () => {
+Pod.useListQuery = (() => {
   const objList = podList.map(data => new Pod(data));
-
-  return [objList, null, () => {}, () => {}] as any;
-};
+  return { items: objList, error: null };
+}) as any;
 
 export default {
   title: 'Pod/PodListView',

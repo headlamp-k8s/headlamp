@@ -10,10 +10,8 @@ interface MockerStory {
   viewType: 'list' | 'details';
   name?: string;
   namespace?: string;
-  useGet?: KubeObjectClass['useGet'];
-  useList?: KubeObjectClass['useList'];
+  useListQuery?: KubeObjectClass['useListQuery'];
   useApiGet?: KubeObjectClass['useApiGet'];
-  useApiList?: KubeObjectClass['useApiList'];
 }
 
 export default {
@@ -23,14 +21,12 @@ export default {
 } as Meta;
 
 const Template: Story<MockerStory> = args => {
-  const { useGet, useList, useApiGet, useApiList, name, namespace, viewType = 'list' } = args;
+  const { useListQuery, useApiGet, name, namespace, viewType = 'list' } = args;
   const routerMap: TestContextProps['routerMap'] = {};
 
   overrideKubeObject(CustomResourceDefinition, {
     useApiGet,
-    useApiList,
-    useGet,
-    useList,
+    useListQuery,
   });
 
   if (!!name) {
@@ -49,7 +45,7 @@ const Template: Story<MockerStory> = args => {
 
 export const List = Template.bind({});
 List.args = {
-  useList: CRDMockMethods.usePhonyList,
+  useListQuery: CRDMockMethods.usePhonyListQuery,
 };
 
 export const Details = Template.bind({});

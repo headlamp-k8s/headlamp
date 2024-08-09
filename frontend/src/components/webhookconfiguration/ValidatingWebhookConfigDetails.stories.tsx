@@ -1,13 +1,12 @@
 import { Meta, Story } from '@storybook/react';
-import VWC, {
-  KubeValidatingWebhookConfiguration,
-} from '../../lib/k8s/validatingWebhookConfiguration';
+import { useMockQuery } from '../../helpers/testHelpers';
+import VWC from '../../lib/k8s/validatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import { createVWC } from './storyHelper';
 import ValidatingWebhookConfigDetails from './ValidatingWebhookConfigDetails';
 
-const usePhonyGet: KubeValidatingWebhookConfiguration['useGet'] = (withService: boolean) => {
-  return [new VWC(createVWC(withService)), null, () => {}, () => {}] as any;
+const usePhonyQuery = (withService: boolean) => {
+  return useMockQuery.data(new VWC(createVWC(withService)));
 };
 
 export default {
@@ -28,7 +27,7 @@ interface MockerStory {
 const Template: Story<MockerStory> = args => {
   const { withService } = args;
 
-  VWC.useGet = () => usePhonyGet(withService);
+  VWC.useQuery = usePhonyQuery(withService);
 
   return (
     <TestContext>

@@ -1,4 +1,5 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockQuery } from '../../helpers/testHelpers';
 import PersistentVolume, { KubePersistentVolume } from '../../lib/k8s/persistentVolume';
 import { TestContext } from '../../test';
 import Details from './ClaimDetails';
@@ -26,7 +27,7 @@ interface MockerStory {
 const Template: Story = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
-    PersistentVolume.useGet = () => [new PersistentVolume(json), null, () => {}, () => {}] as any;
+    PersistentVolume.useQuery = useMockQuery.data(new PersistentVolume(json));
   }
   return <Details />;
 };

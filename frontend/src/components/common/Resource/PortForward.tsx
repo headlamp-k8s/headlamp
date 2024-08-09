@@ -6,6 +6,7 @@ import MuiLink from '@mui/material/Link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
+import { PortForward as PortForwardState } from '../../../lib/k8s/api/v1/portForward';
 import {
   listPortForward,
   startPortForward,
@@ -20,14 +21,6 @@ import ActionButton from '../ActionButton';
 interface PortForwardProps {
   containerPort: number | string;
   resource?: KubeObject;
-}
-
-export interface PortForwardState {
-  id: string;
-  namespace: string;
-  cluster: string;
-  port: string;
-  status: string;
 }
 
 export const PORT_FORWARDS_STORAGE_KEY = 'portforwards';
@@ -77,7 +70,7 @@ function checkIfPodPortForwarding(portforwardParam: {
   );
 }
 
-export default function PortForward(props: PortForwardProps) {
+function PortForwardContent(props: PortForwardProps) {
   const { containerPort, resource } = props;
   const isPod = resource?.kind !== 'Service';
   const service = !isPod ? (resource as Service) : undefined;
@@ -88,9 +81,11 @@ export default function PortForward(props: PortForwardProps) {
   const [loading, setLoading] = React.useState(false);
   const cluster = getCluster();
   const { t } = useTranslation(['translation', 'resource']);
-  const [pods, podsFetchError] = Pod.useList({
+  const { items: pods, error: podsFetchError } = Pod.useListQuery({
     namespace,
-    labelSelector: getPodsSelectorFilter(service),
+    queryParams: {
+      labelSelector: getPodsSelectorFilter(service),
+    },
   });
 
   if (service && podsFetchError && !pods) {
@@ -162,10 +157,10 @@ export default function PortForward(props: PortForwardProps) {
     setError(null);
 
     const resourceName = name || '';
-    const podNamespace = isPod ? namespace : pods[0].metadata.namespace;
+    const podNamespace = isPod ? namespace : pods![0].metadata.namespace;
     const serviceNamespace = namespace;
     const serviceName = !isPod ? resourceName : '';
-    const podName = isPod ? resourceName : pods[0].metadata.name;
+    const podName = isPod ? resourceName : pods![0].metadata.name;
     var port = portForward?.port;
 
     let address = 'localhost';
@@ -362,4 +357,10 @@ export default function PortForward(props: PortForwardProps) {
       )}
     </Box>
   );
+}
+
+export default function PortForward(props: PortForwardProps) {
+  if (!helpers.isElectron()) return null;
+
+  return <PortForwardContent {...props} />;
 }

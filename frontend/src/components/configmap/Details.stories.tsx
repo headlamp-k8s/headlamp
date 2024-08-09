@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { useMockQuery } from '../../helpers/testHelpers';
 import ConfigMap, { KubeConfigMap } from '../../lib/k8s/configMap';
 import { TestContext } from '../../test';
 import Details from './Details';
@@ -26,7 +27,7 @@ interface MockerStory {
 const Template: StoryFn = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
-    ConfigMap.useGet = () => [new ConfigMap(json), null, () => {}, () => {}] as any;
+    ConfigMap.useQuery = useMockQuery.data(new ConfigMap(json));
   }
   return <Details />;
 };

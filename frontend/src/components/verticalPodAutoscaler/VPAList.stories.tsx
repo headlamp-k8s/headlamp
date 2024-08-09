@@ -1,12 +1,13 @@
 import { Meta } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import VPA, { KubeVPA } from '../../lib/k8s/vpa';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import VpaList from './List';
 
 VPA.isEnabled = () => Promise.resolve(true);
-VPA.useList = () => {
-  const objList = generateK8sResourceList<KubeVPA>(
+VPA.useListQuery = useMockListQuery.data(
+  generateK8sResourceList<KubeVPA>(
     {
       apiVersion: 'autoscaling.k8s.io/v1',
       kind: 'VerticalPodAutoscaler',
@@ -106,9 +107,8 @@ VPA.useList = () => {
       },
     },
     { instantiateAs: VPA }
-  );
-  return [objList, null, () => {}, () => {}] as any;
-};
+  )
+);
 
 export default {
   title: 'VPA/VPAListView',

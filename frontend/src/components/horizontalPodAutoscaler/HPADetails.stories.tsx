@@ -6,9 +6,13 @@ import HPA, { KubeHPA } from '../../lib/k8s/hpa';
 import { TestContext } from '../../test';
 import HPADetails from './Details';
 
-const usePhonyGet: KubeObjectClass['useGet'] = () => {
-  return [
-    new HPA({
+HPA.getAuthorization = () => {
+  return { status: { allowed: true, reason: '', code: 200 } };
+};
+
+const usePhonyQuery: KubeObjectClass['useQuery'] = (): any => {
+  return {
+    data: new HPA({
       apiVersion: 'autoscaling/v2',
       kind: 'HorizontalPodAutoscaler',
       metadata: {
@@ -105,7 +109,8 @@ const usePhonyGet: KubeObjectClass['useGet'] = () => {
         lastScaleTime: '2022-10-21T11:15:12Z',
       },
     } as KubeHPA),
-  ] as any;
+    error: null,
+  };
 };
 
 export default {
@@ -124,20 +129,16 @@ export default {
 } as Meta;
 
 interface MockerStory {
-  useGet?: KubeObjectClass['useGet'];
-  useList?: KubeObjectClass['useList'];
+  usePhonyQuery?: KubeObjectClass['usePhonyQuery'];
 }
 
 const Template: Story = (args: MockerStory) => {
-  if (!!args.useGet) {
-    HPA.useGet = args.useGet;
+  if (!!args.usePhonyQuery) {
+    HPA.useQuery = args.usePhonyQuery;
     Event.objectEvents = async (obj: KubeObject) => {
       console.log('object:', obj);
       return [];
     };
-  }
-  if (!!args.useList) {
-    HPA.useList = args.useList;
   }
 
   return <HPADetails />;
@@ -145,15 +146,15 @@ const Template: Story = (args: MockerStory) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
 };
 
 export const NoItemYet = Template.bind({});
 NoItemYet.args = {
-  useGet: () => [null, null, () => {}, () => {}] as any,
+  usePhonyQuery: () => ({ data: null, error: null } as any),
 };
 
 export const Error = Template.bind({});
 Error.args = {
-  useGet: () => [null, 'Phony error is phony!', () => {}, () => {}] as any,
+  usePhonyQuery: () => ({ data: null, error: 'Phony error is phony!' } as any),
 };

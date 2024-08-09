@@ -68,7 +68,7 @@ export interface NamespacedLimitRangesSectionProps {
 export function NamespacedLimitRangesSection(props: NamespacedLimitRangesSectionProps) {
   const { resource } = props;
 
-  const [limitRanges, error] = LimitRange.useList({
+  const { items: limitRanges, error } = LimitRange.useListQuery({
     namespace: resource.metadata.name,
   });
 
@@ -89,14 +89,14 @@ export interface NamespacedResourceQuotasSectionProps {
 export function NamespacedResourceQuotasSection(props: NamespacedResourceQuotasSectionProps) {
   const { resource } = props;
 
-  const [resourceQuotas, error] = ResourceQuota.useList({
+  const { items: resourceQuotasList, error } = ResourceQuota.useListQuery({
     namespace: resource.metadata.name,
   });
 
   return (
     <ResourceQuotaRenderer
       hideColumns={['namespace']}
-      resourceQuotas={resourceQuotas}
+      resourceQuotas={resourceQuotasList}
       error={error}
       noNamespaceFilter
     />

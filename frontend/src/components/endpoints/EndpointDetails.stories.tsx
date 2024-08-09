@@ -1,12 +1,13 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockQuery } from '../../helpers/testHelpers';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
 import { TestContext } from '../../test';
 import EndpointDetails from './Details';
 
-const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
-  return [
-    new Endpoints({
+const usePhonyQuery: KubeObjectClass['useQuery'] = ({ name, namespace }: any): any => {
+  return {
+    data: new Endpoints({
       kind: 'Endpoints',
       apiVersion: 'v1',
       metadata: {
@@ -55,10 +56,8 @@ const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
         },
       ],
     } as KubeEndpoint),
-    null,
-    () => {},
-    () => {},
-  ] as any;
+    error: null,
+  };
 };
 
 export default {
@@ -77,16 +76,12 @@ export default {
 } as Meta;
 
 interface MockerStory {
-  useGet?: KubeObjectClass['useGet'];
-  useList?: KubeObjectClass['useList'];
+  usePhonyQuery?: KubeObjectClass['usePhonyQuery'];
 }
 
 const Template: Story = (args: MockerStory) => {
-  if (!!args.useGet) {
-    Endpoints.useGet = args.useGet;
-  }
-  if (!!args.useList) {
-    Endpoints.useList = args.useList;
+  if (!!args.usePhonyQuery) {
+    Endpoints.useQuery = args.usePhonyQuery;
   }
 
   return (
@@ -98,15 +93,15 @@ const Template: Story = (args: MockerStory) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  useGet: usePhonyGet,
+  usePhonyQuery: usePhonyQuery,
 };
 
 export const NoItemYet = Template.bind({});
 NoItemYet.args = {
-  useGet: () => [null, null, () => {}, () => {}] as any,
+  usePhonyQuery: useMockQuery.noData,
 };
 
 export const Error = Template.bind({});
 Error.args = {
-  useGet: () => [null, 'Phony error is phony!', () => {}, () => {}] as any,
+  usePhonyQuery: useMockQuery.error,
 };

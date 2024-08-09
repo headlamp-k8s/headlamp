@@ -1,11 +1,12 @@
 import Container from '@mui/material/Container';
 import { Meta, StoryFn } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import Event from '../../lib/k8s/event';
 import { TestContext } from '../../test';
 import Overview from './Overview';
 
-Event.useList = () => {
-  const objList = [
+Event.useListQuery = useMockListQuery.data(
+  [
     {
       apiVersion: 'v1',
       count: 1,
@@ -130,9 +131,8 @@ Event.useList = () => {
       reportingComponent: '',
       reportingInstance: '',
     },
-  ].map((data: any) => new Event(data));
-  return [objList, null, () => {}, () => {}] as any;
-};
+  ].map((data: any) => new Event(data))
+);
 
 export default {
   title: 'cluster/Overview',

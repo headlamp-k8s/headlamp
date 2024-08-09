@@ -114,7 +114,7 @@ export default function ResourceTable<RowItem>(
 
 function TableFromResourceClass<RowItem>(props: ResourceTableFromResourceClassProps<RowItem>) {
   const { resourceClass, id, ...otherProps } = props;
-  const [items, error] = resourceClass.useList();
+  const { items, error } = resourceClass.useListQuery();
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);

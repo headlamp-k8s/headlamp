@@ -213,12 +213,12 @@ export function PodListRenderer(props: PodListProps) {
 }
 
 export default function PodList() {
-  const [pods, error] = Pod.useList();
+  const { items: pods, error } = Pod.useListQuery();
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
 
   React.useEffect(() => {
     dispatchHeadlampEvent({
-      resources: pods,
+      resources: pods ?? [],
       resourceKind: 'Pod',
       error: error || undefined,
     });

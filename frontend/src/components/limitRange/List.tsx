@@ -39,7 +39,7 @@ export function LimitRangeRenderer(props: LimitRangeProps) {
 }
 
 export function LimitRangeList() {
-  const [limitRanges, error] = LimitRange.useList();
+  const { items: limitRanges, error } = LimitRange.useListQuery();
 
   return <LimitRangeRenderer limitRanges={limitRanges} error={error} reflectTableInURL />;
 }

@@ -1,4 +1,5 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockQuery } from '../../helpers/testHelpers';
 import StorageClass, { KubeStorageClass } from '../../lib/k8s/storageClass';
 import { TestContext } from '../../test';
 import Details from './ClaimDetails';
@@ -26,7 +27,7 @@ interface MockerStory {
 const Template: Story = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
-    StorageClass.useGet = () => [new StorageClass(json), null, () => {}, () => {}] as any;
+    StorageClass.useQuery = useMockQuery.data(new StorageClass(json));
   }
   return <Details />;
 };

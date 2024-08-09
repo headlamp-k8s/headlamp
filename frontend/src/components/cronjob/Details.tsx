@@ -27,7 +27,7 @@ import { getLastScheduleTime, getSchedule } from './List';
 
 function SpawnJobDialog(props: {
   cronJob: CronJob;
-  applyFunc: (newItem: KubeObjectInterface) => Promise<JSON>;
+  applyFunc: (newItem: KubeObjectInterface) => Promise<KubeObjectInterface>;
   openJobDialog: boolean;
   setOpenJobDialog: (open: boolean) => void;
 }) {
@@ -136,8 +136,8 @@ export default function CronJobDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { t, i18n } = useTranslation('glossary');
 
-  const [jobs, jobsError] = Job.useList({ namespace });
-  const [cronJob, setCronJob] = useState<CronJob | null>(null);
+  const { items: jobs, error: jobsError } = Job.useListQuery({ namespace });
+  const { data: cronJob } = CronJob.useQuery({ name, namespace });
   const [isCronSuspended, setIsCronSuspended] = useState(false);
   const [isCheckingCronSuspendStatus, setIsCheckingCronSuspendStatus] = useState(true);
   const [openJobDialog, setOpenJobDialog] = useState(false);
@@ -270,7 +270,6 @@ export default function CronJobDetails() {
       resourceType={CronJob}
       name={name}
       namespace={namespace}
-      onResourceUpdate={(cronJob: CronJob) => setCronJob(cronJob)}
       withEvents
       actions={actions}
       extraInfo={item =>
@@ -298,7 +297,7 @@ export default function CronJobDetails() {
         cronJob && [
           <JobsListRenderer
             jobs={ownedJobs}
-            error={CronJob.getErrorMessage(jobsError)}
+            error={CronJob.getErrorMessage(jobsError as any)}
             hideColumns={['namespace']}
             noNamespaceFilter
           />,

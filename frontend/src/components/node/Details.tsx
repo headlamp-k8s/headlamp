@@ -43,7 +43,7 @@ export default function NodeDetails() {
   const [nodeMetrics, metricsError] = Node.useMetrics();
   const [isupdatingNodeScheduleProperty, setisUpdatingNodeScheduleProperty] = React.useState(false);
   const [isNodeDrainInProgress, setisNodeDrainInProgress] = React.useState(false);
-  const [nodeFromAPI, nodeError] = Node.useGet(name);
+  const { data: nodeFromAPI, error: nodeError } = Node.useQuery({ name });
   const [node, setNode] = useState(nodeFromAPI);
   const noMetrics = metricsError?.status === 404;
   const [drainDialogOpen, setDrainDialogOpen] = useState(false);

@@ -1,11 +1,12 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import ResourceQuota, { KubeResourceQuota } from '../../lib/k8s/resourceQuota';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import ResourceQuotaList from './List';
 
-ResourceQuota.useList = () => {
-  const objList = generateK8sResourceList<KubeResourceQuota>(
+ResourceQuota.useListQuery = useMockListQuery.data(
+  generateK8sResourceList<KubeResourceQuota>(
     {
       apiVersion: 'v1',
       kind: 'ResourceQuota',
@@ -38,9 +39,8 @@ ResourceQuota.useList = () => {
       },
     },
     { instantiateAs: ResourceQuota }
-  );
-  return [objList, null, () => {}, () => {}] as any;
-};
+  )
+);
 
 export default {
   title: 'ResourceQuota/ResourceQuotaListView',

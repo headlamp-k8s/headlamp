@@ -1,11 +1,12 @@
 import { Meta, Story } from '@storybook/react';
+import { useMockListQuery } from '../../helpers/testHelpers';
 import PDB, { KubePDB } from '../../lib/k8s/podDisruptionBudget';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import PDBList from './List';
 
-PDB.useList = () => {
-  const objList = generateK8sResourceList<KubePDB>(
+PDB.useListQuery = useMockListQuery.data(
+  generateK8sResourceList<KubePDB>(
     {
       kind: 'PodDisruptionBudget',
       metadata: {
@@ -50,9 +51,8 @@ PDB.useList = () => {
       },
     },
     { instantiateAs: PDB }
-  );
-  return [objList, null, () => {}, () => {}] as any;
-};
+  )
+);
 
 export default {
   title: 'PDB/PDBListView',
