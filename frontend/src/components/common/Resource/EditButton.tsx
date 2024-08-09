@@ -114,6 +114,7 @@ export default function EditButton(props: EditButtonProps) {
           onSave={handleSave}
           errorMessage={errorMessage}
           onEditorChanged={() => setErrorMessage('')}
+          externalDispatch
         />
       )}
     </AuthVisible>

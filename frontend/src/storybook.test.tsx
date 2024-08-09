@@ -5,7 +5,9 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { composeStories } from '@storybook/react';
 import { act, render } from '@testing-library/react';
 import path from 'path';
+import { Provider } from 'react-redux';
 import themesConf from './lib/themes';
+import store from './redux/stores/store';
 
 type StoryFile = {
   default: Meta;
@@ -19,7 +21,9 @@ const withThemeProvider = (Story: any) => {
   const ourThemeProvider = (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <Story />
+        <Provider store={store}>
+          <Story />
+        </Provider>
       </ThemeProvider>
     </StyledEngineProvider>
   );

@@ -37,6 +37,29 @@ export interface Cluster {
   [propName: string]: any;
 }
 
+export class BaseKubeObject {
+  static getBaseObject(): KubeObjectInterface {
+    return {
+      apiVersion: 'v1',
+      kind: '',
+      metadata: {
+        name: '',
+        namespace: '',
+        annotations: {},
+        labels: {},
+        creationTimestamp: '',
+        uid: '',
+      },
+    };
+  }
+}
+
+export interface ClassWithBaseObject<T> {
+  new (...args: any[]): T;
+  kind?: string;
+  getBaseObject?(): KubeObjectInterface;
+}
+
 /**
  * This is the base interface for all Kubernetes resources, i.e. it contains fields
  * that all Kubernetes resources have.
