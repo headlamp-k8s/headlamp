@@ -669,11 +669,11 @@ const defaultRoutes: {
     ),
   },
   settings: {
-    path: '/settings',
+    path: '/settings/general',
     exact: true,
     name: 'Settings',
     sidebar: {
-      item: 'settings',
+      item: 'settingsGeneral',
       sidebar: DefaultSidebars.HOME,
     },
     useClusterURL: false,
@@ -684,7 +684,6 @@ const defaultRoutes: {
       </PageGrid>
     ),
   },
-
   settingsClusters: {
     path: '/settings/clusters',
     exact: true,
@@ -702,7 +701,27 @@ const defaultRoutes: {
     path: '/settings',
     exact: true,
     name: 'Cluster Settings',
-    sidebar: 'settingsCluster',
+    sidebar: {
+      item: 'settingsCluster',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: true,
+    noAuthRequired: true,
+    component: () => (
+      <PageGrid>
+        <SettingsCluster />
+      </PageGrid>
+    ),
+  },
+  settingsClusterHomeContext: {
+    path: '/settings/cluster',
+    exact: true,
+    name: 'Cluster Settings',
+    sidebar: {
+      item: 'settingsCluster',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
     noAuthRequired: true,
     component: () => (
       <PageGrid>
@@ -838,6 +857,11 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   // Add cluster to the params if it is not already there
   if (!fullParams.cluster && !!cluster) {
     fullParams.cluster = cluster;
+  }
+
+  // @todo: Remove this hack once we support redirection in routes
+  if (routeName === 'settingsCluster') {
+    return `/settings/cluster?c=${fullParams.cluster}`;
   }
 
   const url = getRoutePath(route);
