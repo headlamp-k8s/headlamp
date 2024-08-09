@@ -12,7 +12,7 @@ export default {
 } as Meta;
 
 const TemplateWithFilter: Story<{
-  resourceTableArgs: ResourceTableFromResourceClassProps<MyPod>;
+  resourceTableArgs: ResourceTableFromResourceClassProps<typeof MyPod>;
   namespaces: string[];
   search: string;
 }> = args => {
@@ -118,12 +118,12 @@ class MyPod extends Pod {
     ] as any;
 }
 
-const podData: ResourceTableFromResourceClassProps<MyPod> = {
+const podData: ResourceTableFromResourceClassProps<typeof MyPod> = {
   columns: ['name', 'namespace', 'age'],
   resourceClass: MyPod,
 };
 
-const withHiddenCols: ResourceTableFromResourceClassProps<MyPod> = {
+const withHiddenCols: ResourceTableFromResourceClassProps<typeof MyPod> = {
   columns: [
     'name',
     'namespace',

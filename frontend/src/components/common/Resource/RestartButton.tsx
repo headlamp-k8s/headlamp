@@ -15,6 +15,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/cluster';
+import Deployment from '../../../lib/k8s/deployment';
+import ReplicaSet from '../../../lib/k8s/replicaSet';
+import StatefulSet from '../../../lib/k8s/statefulSet';
 import { clusterAction } from '../../../redux/clusterActionSlice';
 import {
   EventStatus,
@@ -24,7 +27,7 @@ import {
 import AuthVisible from './AuthVisible';
 
 interface RestartButtonProps {
-  item: KubeObject;
+  item: Deployment | StatefulSet | ReplicaSet;
 }
 
 export function RestartButton(props: RestartButtonProps) {

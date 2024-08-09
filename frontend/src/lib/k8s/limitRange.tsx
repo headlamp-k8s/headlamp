@@ -1,5 +1,5 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './cluster';
 
 export interface LimitRangeSpec {
   limits: {
@@ -27,10 +27,11 @@ export interface KubeLimitRange extends KubeObjectInterface {
   spec: LimitRangeSpec;
 }
 
-export class LimitRange extends makeKubeObject<KubeLimitRange>('LimitRange') {
+export class LimitRange extends KubeObject<KubeLimitRange> {
+  static objectName = 'LimitRange';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'limitranges');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 }

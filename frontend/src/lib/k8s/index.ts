@@ -5,7 +5,7 @@ import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { getCluster, getClusterPrefixedPath } from '../util';
 import { ApiError, clusterRequest } from './apiProxy';
-import { Cluster, KubeObject, LabelSelector, StringDict } from './cluster';
+import { Cluster, LabelSelector, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
 import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
@@ -39,7 +39,7 @@ import ServiceAccount from './serviceAccount';
 import StatefulSet from './statefulSet';
 import StorageClass from './storageClass';
 
-const classList = [
+export const ResourceClasses = {
   ClusterRole,
   ClusterRoleBinding,
   ConfigMap,
@@ -47,11 +47,11 @@ const classList = [
   CronJob,
   DaemonSet,
   Deployment,
-  Endpoints,
+  Endpoint: Endpoints,
   LimitRange,
   Lease,
   ResourceQuota,
-  HPA,
+  HorizontalPodAutoscaler: HPA,
   PodDisruptionBudget,
   PriorityClass,
   Ingress,
@@ -72,20 +72,7 @@ const classList = [
   ServiceAccount,
   StatefulSet,
   StorageClass,
-];
-
-const resourceClassesDict: {
-  [className: string]: KubeObject;
-} = {};
-
-classList.forEach(cls => {
-  // Ideally this should just be the class name, but until we ensure the class name is consistent
-  // (in what comes to the capitalization), we use this lazy approach.
-  const className: string = cls.className.charAt(0).toUpperCase() + cls.className.slice(1);
-  resourceClassesDict[className] = cls;
-});
-
-export const ResourceClasses = resourceClassesDict;
+};
 
 /** Hook for getting or fetching the clusters configuration.
  * This gets the clusters from the redux store. The redux store is updated

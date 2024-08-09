@@ -1,22 +1,30 @@
 import _ from 'lodash';
-import { KubeObjectIface, KubeObjectInterface } from '../lib/k8s/cluster';
+import { KubeMetadata, KubeObject, KubeObjectClass, KubeObjectInterface } from '../lib/k8s/cluster';
 
-interface K8sResourceListGeneratorOptions<T extends KubeObjectInterface> {
+interface K8sResourceListGeneratorOptions<T extends KubeObjectClass> {
   numResults?: number;
-  instantiateAs?: KubeObjectIface<T>;
+  instantiateAs?: T;
 }
 
-export function generateK8sResourceList<T extends KubeObjectInterface = KubeObjectInterface>(
-  baseJson: Omit<T, 'metadata'>,
-  options: K8sResourceListGeneratorOptions<T> = {}
-) {
+export function generateK8sResourceList<
+  C extends typeof KubeObject<any>,
+  T extends KubeObjectInterface
+>(baseJson: Partial<T>, options?: { numResults?: number; instantiateAs: C }): InstanceType<C>[];
+export function generateK8sResourceList<T extends KubeObjectInterface>(
+  baseJson: Partial<T>,
+  options?: { numResults?: number }
+): T[];
+export function generateK8sResourceList<
+  T extends KubeObjectInterface,
+  C extends typeof KubeObject<any>
+>(baseJson: Partial<T>, options: K8sResourceListGeneratorOptions<C> = {}) {
   const { numResults = 5, instantiateAs } = options;
   const list = [];
   for (let i = 0; i < numResults; i++) {
     const json = {
       metadata: {
         name: '',
-      },
+      } as KubeMetadata,
       ..._.cloneDeep(baseJson),
     } as T;
 
@@ -46,3 +54,17 @@ export function generateK8sResourceList<T extends KubeObjectInterface = KubeObje
 
   return list;
 }
+
+export const makeMockKubeObject = (partial: Partial<KubeObjectInterface>) =>
+  new KubeObject({
+    apiVersion: 'v1',
+    kind: 'Pod',
+    metadata: {
+      name: 'my-pod',
+      namespace: 'default',
+      uid: 'abcde',
+      creationTimestamp: new Date('2020-01-01').toISOString(),
+      ...partial.metadata,
+    },
+    ...partial,
+  });

@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import HPA, { KubeHPA } from '../../lib/k8s/hpa';
+import HPA from '../../lib/k8s/hpa';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import HpaList from './List';
@@ -11,7 +11,7 @@ HPA.getAuthorization = (): Promise<{ status: any }> => {
 };
 
 HPA.useList = () => {
-  const objList = generateK8sResourceList<KubeHPA>(
+  const objList = generateK8sResourceList(
     {
       apiVersion: 'autoscaling/v2',
       kind: 'HorizontalPodAutoscaler',

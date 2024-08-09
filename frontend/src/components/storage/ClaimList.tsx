@@ -18,9 +18,9 @@ export default function VolumeClaimList() {
         {
           id: 'className',
           label: t('Class Name'),
-          getValue: volumeClaim => volumeClaim.spec.storageClassName,
+          getValue: volumeClaim => volumeClaim.spec?.storageClassName,
           render: volumeClaim => {
-            const name = volumeClaim.spec.storageClassName;
+            const name = volumeClaim.spec?.storageClassName;
             if (!name) {
               return '';
             }
@@ -34,26 +34,26 @@ export default function VolumeClaimList() {
         {
           id: 'capacity',
           label: t('Capacity'),
-          getValue: volumeClaim => volumeClaim.status.capacity?.storage,
+          getValue: volumeClaim => volumeClaim.status?.capacity?.storage,
           gridTemplate: 0.8,
         },
         {
           id: 'accessModes',
           label: t('Access Modes'),
-          getValue: volumeClaim => volumeClaim.spec.accessModes.join(', '),
-          render: volumeClaim => <LabelListItem labels={volumeClaim.spec.accessModes || []} />,
+          getValue: volumeClaim => volumeClaim.spec?.accessModes?.join(', '),
+          render: volumeClaim => <LabelListItem labels={volumeClaim.spec?.accessModes || []} />,
         },
         {
           id: 'volumeMode',
           label: t('Volume Mode'),
-          getValue: volumeClaim => volumeClaim.spec.volumeMode,
+          getValue: volumeClaim => volumeClaim.spec?.volumeMode,
         },
         {
           id: 'volume',
           label: t('Volume'),
-          getValue: volumeClaim => volumeClaim.spec.volumeName,
+          getValue: volumeClaim => volumeClaim.spec?.volumeName,
           render: volumeClaim => {
-            const name = volumeClaim.spec.volumeName;
+            const name = volumeClaim.spec?.volumeName;
             if (!name) {
               return '';
             }
@@ -67,7 +67,7 @@ export default function VolumeClaimList() {
         {
           id: 'status',
           label: t('translation|Status'),
-          getValue: volume => volume.status.phase,
+          getValue: volume => volume.status?.phase,
           render: volume => makePVCStatusLabel(volume),
           gridTemplate: 0.3,
         },

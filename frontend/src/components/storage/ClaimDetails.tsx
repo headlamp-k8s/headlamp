@@ -7,7 +7,7 @@ import { StatusLabelByPhase } from './utils';
 
 export function makePVCStatusLabel(item: PersistentVolumeClaim) {
   const status = item.status!.phase;
-  return StatusLabelByPhase(status);
+  return StatusLabelByPhase(status!);
 }
 
 export default function VolumeClaimDetails() {
@@ -28,11 +28,11 @@ export default function VolumeClaimDetails() {
           },
           {
             name: t('Capacity'),
-            value: item.spec!.resources.requests.storage,
+            value: item.spec!.resources!.requests.storage,
           },
           {
             name: t('Access Modes'),
-            value: item.spec!.accessModes.join(', '),
+            value: item.spec!.accessModes!.join(', '),
           },
           {
             name: t('Volume Mode'),

@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router-dom';
-import { KubeObject } from '../lib/k8s/cluster';
 import Event from '../lib/k8s/event';
 import defaultStore from '../redux/stores/store';
 
@@ -71,12 +70,10 @@ export function TestContext(props: TestContextProps) {
   );
 }
 
-export function overrideKubeObject(
-  kubeObject: KubeObject,
-  propsToOverride: { [method: keyof KubeObject]: KubeObject[keyof KubeObject] | undefined }
-) {
+export function overrideKubeObject<U>(kubeObject: U, propsToOverride: Partial<U>) {
   for (const [key, value] of Object.entries(propsToOverride)) {
     if (value !== undefined) {
+      // @ts-ignore
       kubeObject[key] = value;
     }
   }

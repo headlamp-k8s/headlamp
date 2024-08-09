@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useCluster } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
-import { KubeObject, Workload } from '../../lib/k8s/cluster';
+import { Workload, WorkloadClass } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import Deployment from '../../lib/k8s/deployment';
@@ -72,7 +72,7 @@ export default function Overview() {
     return joint;
   }, [workloadsData]);
 
-  const workloads: KubeObject[] = [
+  const workloads: WorkloadClass[] = [
     Pod,
     Deployment,
     StatefulSet,
@@ -82,9 +82,9 @@ export default function Overview() {
     CronJob,
   ];
 
-  workloads.forEach((workloadClass: KubeObject) => {
+  workloads.forEach(workloadClass => {
     workloadClass.useApiList(
-      (items: InstanceType<typeof workloadClass>[]) => {
+      (items: Workload[]) => {
         setWorkloads({ [workloadClass.className]: items });
       },
       (err: ApiError) => {
@@ -94,7 +94,7 @@ export default function Overview() {
     );
   });
 
-  function ChartLink(workload: KubeObject) {
+  function ChartLink(workload: WorkloadClass) {
     const linkName = workload.pluralName;
     return <Link routeName={linkName}>{linkName}</Link>;
   }
@@ -124,9 +124,7 @@ export default function Overview() {
             id: 'name',
             label: t('translation|Name'),
             getValue: item => item.metadata.name,
-            render: item => (
-              <ResourceLink resource={item as KubeObject} state={{ backLink: { ...location } }} />
-            ),
+            render: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
           },
           'namespace',
           {

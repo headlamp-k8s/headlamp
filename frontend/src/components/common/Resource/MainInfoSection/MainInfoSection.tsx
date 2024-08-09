@@ -13,16 +13,13 @@ import SectionBox from '../../SectionBox';
 import { MetadataDisplay } from '../MetadataDisplay';
 import { MainInfoHeader } from './MainInfoSectionHeader';
 
-export interface MainInfoSectionProps {
-  resource: KubeObject | null;
-  headerSection?: ((resource: KubeObject | null) => React.ReactNode) | React.ReactNode;
+export interface MainInfoSectionProps<T extends KubeObject> {
+  resource: T | null;
+  headerSection?: ((resource: T | null) => React.ReactNode) | React.ReactNode;
   title?: string;
-  extraInfo?:
-    | ((resource: KubeObject | null) => NameValueTableRow[] | null)
-    | NameValueTableRow[]
-    | null;
+  extraInfo?: ((resource: T | null) => NameValueTableRow[] | null) | NameValueTableRow[] | null;
   actions?:
-    | ((resource: KubeObject | null) => React.ReactNode[] | null)
+    | ((resource: T | null) => React.ReactNode[] | null)
     | React.ReactNode[]
     | null
     | HeaderAction[];
@@ -33,7 +30,7 @@ export interface MainInfoSectionProps {
   error?: string | Error | null;
 }
 
-export function MainInfoSection(props: MainInfoSectionProps) {
+export function MainInfoSection<T extends KubeObject>(props: MainInfoSectionProps<T>) {
   const {
     resource,
     headerSection,

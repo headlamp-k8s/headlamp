@@ -15,7 +15,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import Deployment from '../../../lib/k8s/deployment';
+import ReplicaSet from '../../../lib/k8s/replicaSet';
+import StatefulSet from '../../../lib/k8s/statefulSet';
 import { CallbackActionOptions, clusterAction } from '../../../redux/clusterActionSlice';
 import {
   EventStatus,
@@ -26,7 +28,7 @@ import { LightTooltip } from '../Tooltip';
 import AuthVisible from './AuthVisible';
 
 interface ScaleButtonProps {
-  item: KubeObject;
+  item: Deployment | StatefulSet | ReplicaSet;
   options?: CallbackActionOptions;
 }
 
@@ -99,8 +101,8 @@ export default function ScaleButton(props: ScaleButtonProps) {
   );
 }
 
-interface ScaleDialogProps extends DialogProps {
-  resource: KubeObject;
+interface ScaleDialogProps extends Omit<DialogProps, 'resource'> {
+  resource: Deployment | StatefulSet | ReplicaSet;
   onSave: (numReplicas: number) => void;
   onClose: () => void;
   errorMessage?: string;
@@ -127,7 +129,7 @@ function ScaleDialog(props: ScaleDialogProps) {
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.SCALE_RESOURCE);
 
   function getNumReplicas() {
-    if (!resource?.spec) {
+    if (!('spec' in resource)) {
       return -1;
     }
 

@@ -3,7 +3,7 @@ import { eventAction, HeadlampEventType } from '../../../redux/headlampEventSlic
 import store from '../../../redux/stores/store';
 
 export interface ErrorBoundaryProps {
-  fallback?: ComponentType<{ error: Error }> | ReactElement | null;
+  fallback?: ComponentType<{ error: Error }> | ReactElement<{ error: Error }> | null;
 }
 
 interface State {
@@ -49,13 +49,10 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, State> 
     if (!error) {
       return this.props.children;
     }
-    if (isValidElement(this.props.fallback)) {
-      return this.props.fallback;
+    const FallbackComponent = this.props.fallback;
+    if (isValidElement(FallbackComponent)) {
+      return FallbackComponent;
     }
-    const FallbackComponent = this.props.fallback as
-      | ComponentType<{ error: Error }>
-      | undefined
-      | null;
     return FallbackComponent ? <FallbackComponent error={error} /> : null;
   }
 }

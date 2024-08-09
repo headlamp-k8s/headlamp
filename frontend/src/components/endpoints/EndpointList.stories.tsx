@@ -1,16 +1,19 @@
 import { Meta, Story } from '@storybook/react';
-import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
+import Endpoint from '../../lib/k8s/endpoints';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import EndpointList from './List';
 
-Endpoints.useList = () => {
-  const objList = generateK8sResourceList<KubeEndpoint>(
+Endpoint.useList = () => {
+  const objList = generateK8sResourceList(
     {
       kind: 'Endpoints',
       apiVersion: 'v1',
       metadata: {
+        name: '',
         namespace: '',
+        uid: '',
+        creationTimestamp: '',
       },
       subsets: [
         {
@@ -38,7 +41,7 @@ Endpoints.useList = () => {
         },
       ],
     },
-    { instantiateAs: Endpoints }
+    { instantiateAs: Endpoint }
   );
 
   return [objList, null, () => {}, () => {}] as any;

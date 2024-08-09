@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react';
-import MWC, { KubeMutatingWebhookConfiguration } from '../../lib/k8s/mutatingWebhookConfiguration';
+import MWC from '../../lib/k8s/mutatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import MutatingWebhookConfigDetails from './MutatingWebhookConfigDetails';
 import { createMWC } from './storyHelper';
 
-const usePhonyGet: KubeMutatingWebhookConfiguration['useGet'] = (withService: boolean) => {
+const usePhonyGet = (withService: boolean) => {
   return [new MWC(createMWC(withService)), null, () => {}, () => {}] as any;
 };
 

@@ -90,7 +90,7 @@ export function PodListRenderer(props: PodListProps) {
         'namespace',
         {
           label: t('Restarts'),
-          getValue: (pod: Pod) => {
+          getValue: pod => {
             const { restarts, lastRestartDate } = pod.getDetailedStatus();
             return lastRestartDate.getTime() !== 0
               ? t('{{ restarts }} ({{ abbrevTime }} ago)', {
@@ -103,7 +103,7 @@ export function PodListRenderer(props: PodListProps) {
         {
           id: 'ready',
           label: t('translation|Ready'),
-          getValue: (pod: Pod) => {
+          getValue: pod => {
             const podRow = pod.getDetailedStatus();
             return `${podRow.readyContainers}/${podRow.totalContainers}`;
           },
@@ -117,7 +117,7 @@ export function PodListRenderer(props: PodListProps) {
         {
           id: 'ip',
           label: t('glossary|IP'),
-          getValue: (pod: Pod) => pod.status?.podIP ?? '',
+          getValue: pod => pod.status?.podIP ?? '',
         },
         {
           id: 'node',
@@ -159,7 +159,7 @@ export function PodListRenderer(props: PodListProps) {
 
             return statusTrueCount;
           },
-          render: (pod: Pod) => {
+          render: pod => {
             const readinessGatesStatus = getReadinessGatesStatus(pod);
             const total = Object.keys(readinessGatesStatus).length;
 
@@ -218,7 +218,7 @@ export default function PodList() {
 
   React.useEffect(() => {
     dispatchHeadlampEvent({
-      resources: pods,
+      resources: pods!,
       resourceKind: 'Pod',
       error: error || undefined,
     });

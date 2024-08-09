@@ -2,11 +2,12 @@ import { Grid, GridProps } from '@mui/material';
 import React from 'react';
 import { ValueLabel } from '../Label';
 
+// TODO: use ReactNode after migration to react 18
 export interface NameValueTableRow {
   /** The name (key) for this row */
   name: string | JSX.Element;
   /** The value for this row */
-  value?: string | JSX.Element | JSX.Element[];
+  value?: string | number | null | boolean | JSX.Element | JSX.Element[];
   /** Whether this row should be hidden (can be a boolean or a function that will take the
    * @param value and return a boolean) */
   hide?: boolean | ((value: NameValueTableRow['value']) => boolean);
@@ -24,7 +25,8 @@ export interface NameValueTableProps {
 function Value({
   value,
 }: {
-  value: string | JSX.Element | JSX.Element[] | undefined;
+  // TODO: use ReactNode after migration to react 18
+  value: string | null | number | boolean | JSX.Element | JSX.Element[] | undefined;
 }): JSX.Element | null {
   if (typeof value === 'undefined') {
     return null;
@@ -39,7 +41,7 @@ function Value({
       </>
     );
   } else {
-    return value;
+    return value as JSX.Element | null;
   }
 }
 

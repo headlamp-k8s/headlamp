@@ -1,12 +1,12 @@
 import { Meta, Story } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
-import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
+import Endpoint, { KubeEndpoint } from '../../lib/k8s/endpoints';
 import { TestContext } from '../../test';
 import EndpointDetails from './Details';
 
 const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
   return [
-    new Endpoints({
+    new Endpoint({
       kind: 'Endpoints',
       apiVersion: 'v1',
       metadata: {
@@ -83,10 +83,10 @@ interface MockerStory {
 
 const Template: Story = (args: MockerStory) => {
   if (!!args.useGet) {
-    Endpoints.useGet = args.useGet;
+    Endpoint.useGet = args.useGet;
   }
   if (!!args.useList) {
-    Endpoints.useList = args.useList;
+    Endpoint.useList = args.useList;
   }
 
   return (

@@ -48,7 +48,7 @@ export default {
 interface MockerStory {
   podName: string;
   detailsProps: PodDetailsProps;
-  [key: string]: Pod[keyof typeof Pod | keyof typeof Pod.prototype];
+  [key: string]: Pod[keyof Pod | keyof typeof Pod.prototype];
 }
 
 const Template: Story<MockerStory> = args => {
@@ -57,11 +57,11 @@ const Template: Story<MockerStory> = args => {
   for (const key in podProps) {
     const [prefix, method] = key.split('.');
     if (prefix === 'prototype') {
-      Pod.prototype[method as keyof typeof Pod.prototype] = podProps[key];
+      (Pod as any).prototype[method] = podProps[key];
       continue;
     }
 
-    Pod[key as keyof typeof Pod] = podProps[key];
+    (Pod as any)[key] = podProps[key];
   }
 
   return (

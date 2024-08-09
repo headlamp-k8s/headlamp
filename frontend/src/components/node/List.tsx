@@ -78,7 +78,7 @@ export default function NodeList() {
           label: t('Roles'),
           gridTemplate: 'minmax(150px, .5fr)',
           getValue: node => {
-            return Object.keys(node.metadata.labels)
+            return Object.keys(node.metadata.labels ?? {})
               .filter((t: String) => t.startsWith('node-role.kubernetes.io/'))
               .map(t => t.replace('node-role.kubernetes.io/', ''))
               .join(',');

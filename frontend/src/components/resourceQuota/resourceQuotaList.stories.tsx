@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
-import ResourceQuota, { KubeResourceQuota } from '../../lib/k8s/resourceQuota';
+import ResourceQuota from '../../lib/k8s/resourceQuota';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import ResourceQuotaList from './List';
 
 ResourceQuota.useList = () => {
-  const objList = generateK8sResourceList<KubeResourceQuota>(
+  const objList = generateK8sResourceList(
     {
       apiVersion: 'v1',
       kind: 'ResourceQuota',

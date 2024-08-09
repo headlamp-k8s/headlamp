@@ -270,7 +270,7 @@ export default function CronJobDetails() {
       resourceType={CronJob}
       name={name}
       namespace={namespace}
-      onResourceUpdate={(cronJob: CronJob) => setCronJob(cronJob)}
+      onResourceUpdate={cronJob => setCronJob(cronJob)}
       withEvents
       actions={actions}
       extraInfo={item =>

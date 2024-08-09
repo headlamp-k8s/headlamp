@@ -1,6 +1,6 @@
 import { ResourceClasses } from '.';
 import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectClass, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectClass, KubeObjectInterface } from './cluster';
 
 export interface KubeCRD extends KubeObjectInterface {
   spec: {
@@ -47,7 +47,8 @@ export interface KubeCRD extends KubeObjectInterface {
   };
 }
 
-class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
+class CustomResourceDefinition extends KubeObject<KubeCRD> {
+  static objectName = 'crd';
   static apiEndpoint = apiFactory(
     ['apiextensions.k8s.io', 'v1', 'customresourcedefinitions'],
     ['apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions']
@@ -63,11 +64,11 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
   }
 
   get spec(): KubeCRD['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): KubeCRD['status'] {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get plural(): string {
@@ -98,7 +99,7 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
     return this.spec.scope === 'Namespaced';
   }
 
-  makeCRClass(): KubeObjectClass {
+  makeCRClass(): typeof KubeObject<KubeCRD> {
     const apiInfo: CRClassArgs['apiInfo'] = (this.jsonData as KubeCRD).spec.versions.map(
       versionInfo => ({ group: this.spec.group, version: versionInfo.name })
     );
@@ -130,12 +131,12 @@ export interface CRClassArgs {
 export function makeCustomResourceClass(
   args: [group: string, version: string, pluralName: string][],
   isNamespaced: boolean
-): ReturnType<typeof makeKubeObject>;
-export function makeCustomResourceClass(args: CRClassArgs): ReturnType<typeof makeKubeObject>;
+): KubeObjectClass;
+export function makeCustomResourceClass(args: CRClassArgs): KubeObjectClass;
 export function makeCustomResourceClass(
   args: [group: string, version: string, pluralName: string][] | CRClassArgs,
   isNamespaced?: boolean
-): ReturnType<typeof makeKubeObject> {
+): KubeObjectClass {
   let apiInfoArgs: [group: string, version: string, pluralName: string][] = [];
 
   if (Array.isArray(args)) {
@@ -146,7 +147,7 @@ export function makeCustomResourceClass(
 
   // Used for tests
   if (import.meta.env.UNDER_TEST === 'true') {
-    const knownClass = ResourceClasses[apiInfoArgs[0][2]];
+    const knownClass = (ResourceClasses as Record<string, KubeObjectClass>)[apiInfoArgs[0][2]];
     if (!!knownClass) {
       return knownClass;
     }
@@ -159,7 +160,8 @@ export function makeCustomResourceClass(
   };
 
   const apiFunc = !!objArgs.isNamespaced ? apiFactoryWithNamespace : apiFactory;
-  return class CRClass extends makeKubeObject(objArgs.singleName) {
+  return class CRClass extends KubeObject<any> {
+    static objectName = objArgs.singleName;
     static apiEndpoint = apiFunc(...apiInfoArgs);
   };
 }

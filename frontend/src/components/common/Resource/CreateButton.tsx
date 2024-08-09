@@ -65,7 +65,7 @@ export default function CreateButton(props: CreateButtonProps) {
       if (massagedNewItemDefs[i].kind === 'List') {
         // flatten this List kind with the items that it has which is a list of valid k8s resources
         const deletedItem = massagedNewItemDefs.splice(i, 1);
-        massagedNewItemDefs = massagedNewItemDefs.concat(deletedItem[0].items);
+        massagedNewItemDefs = massagedNewItemDefs.concat(deletedItem[0].items!);
       }
       if (!massagedNewItemDefs[i].metadata?.name) {
         setErrorMessage(

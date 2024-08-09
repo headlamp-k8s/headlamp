@@ -1,15 +1,18 @@
 import { apiFactory } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './cluster';
 
 export interface KubeRuntimeClass extends KubeObjectInterface {
   handler: string;
+  overhead?: any;
+  scheduling?: any;
 }
 
-export class RuntimeClass extends makeKubeObject<KubeRuntimeClass>('RuntimeClass') {
+export class RuntimeClass extends KubeObject<KubeRuntimeClass> {
+  static objectName = 'RuntimeClass';
   static apiEndpoint = apiFactory('node.k8s.io', 'v1', 'runtimeclasses');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   static get pluralName() {

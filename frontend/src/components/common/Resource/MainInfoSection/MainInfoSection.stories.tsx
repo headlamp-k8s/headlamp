@@ -12,7 +12,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<MainInfoSectionProps> = (args: MainInfoSectionProps) => (
+const Template: Story<MainInfoSectionProps<any>> = args => (
   <TestContext>
     <MainInfoSection {...args} />
   </TestContext>

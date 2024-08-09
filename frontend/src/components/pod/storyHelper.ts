@@ -740,7 +740,7 @@ const readinessGate = {
 };
 
 // Exporting so these can be used for details views
-export const podList = [
+export const podList: KubePod[] = [
   imgPullBackOff,
   successful,
   initializing,

@@ -667,7 +667,9 @@
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1k92gn1-MuiTableCell-root"
                   data-index="4"
-                />
+                >
+                  true
+                </td>
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
                   data-index="5"

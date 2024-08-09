@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react';
-import PDB, { KubePDB } from '../../lib/k8s/podDisruptionBudget';
+import PDB from '../../lib/k8s/podDisruptionBudget';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import PDBList from './List';
 
 PDB.useList = () => {
-  const objList = generateK8sResourceList<KubePDB>(
+  const objList = generateK8sResourceList(
     {
       kind: 'PodDisruptionBudget',
       metadata: {

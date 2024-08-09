@@ -166,7 +166,7 @@ export function useFilterFunc<
   };
 }
 
-export function useErrorState(dependentSetter?: (...args: any) => void) {
+export function useErrorState(dependentSetter?: (item: any) => void) {
   const [error, setError] = React.useState<ApiError | null>(null);
 
   React.useEffect(
@@ -179,8 +179,7 @@ export function useErrorState(dependentSetter?: (...args: any) => void) {
     [error]
   );
 
-  // Adding "as any" here because it was getting difficult to validate the setter type.
-  return [error, setError as any];
+  return [error, setError] as const;
 }
 
 type URLStateParams<T> = {

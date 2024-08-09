@@ -113,7 +113,7 @@ export default function NodeDetails() {
           }
           const cloneNode = _.cloneDeep(node);
 
-          cloneNode.spec.unschedulable = !node.spec.unschedulable;
+          cloneNode!.spec.unschedulable = !node!.spec.unschedulable;
           setNode(cloneNode);
         })
         .catch(error => {
@@ -167,7 +167,7 @@ export default function NodeDetails() {
           })}
           onConfirm={() => {
             setDrainDialogOpen(false);
-            handleNodeDrain(node);
+            handleNodeDrain(node!);
           }}
           handleClose={() => setDrainDialogOpen(false)}
           open={drainDialogOpen}
@@ -199,7 +199,7 @@ export default function NodeDetails() {
                   <ActionButton
                     description={cordonOrUncordon}
                     icon={cordon ? 'mdi:check-circle-outline' : 'mdi:cancel'}
-                    onClick={() => handleNodeScheduleState(item, cordon)}
+                    onClick={() => handleNodeScheduleState(item!, cordon)}
                     iconButtonProps={{
                       disabled: isupdatingNodeScheduleProperty,
                     }}

@@ -4,8 +4,8 @@ import {
   KubeCondition,
   KubeContainer,
   KubeContainerStatus,
+  KubeObject,
   KubeObjectInterface,
-  makeKubeObject,
   Time,
 } from './cluster';
 
@@ -26,6 +26,10 @@ export interface KubePodSpec {
     conditionType: string;
   }[];
   volumes?: KubeVolume[];
+  serviceAccountName?: string;
+  serviceAccount?: string;
+  priority?: string;
+  tolerations?: any[];
 }
 
 export interface KubePod extends KubeObjectInterface {
@@ -86,7 +90,8 @@ type PodDetailedStatus = {
   lastRestartDate: Date;
 };
 
-class Pod extends makeKubeObject<KubePod>('Pod') {
+class Pod extends KubeObject<KubePod> {
+  static objectName = 'Pod';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
   protected detailedStatusCache: Partial<{ resourceVersion: string; details: PodDetailedStatus }>;
 
@@ -96,11 +101,11 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
   }
 
   get spec(): KubePod['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): KubePod['status'] {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getLogs(...args: Parameters<oldGetLogs | newGetLogs>): () => void {

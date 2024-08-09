@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { makeMockKubeObject } from '../../test/mocker';
 import { SectionBox } from '../common';
 import DetailsViewSection, { DetailsViewSectionProps } from './DetailsViewSection';
 import { setDetailsView } from './detailsViewSectionSlice';
@@ -35,25 +36,17 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<DetailsViewSectionProps> = args => {
+const Template: StoryFn<DetailsViewSectionProps> = args => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(
       setDetailsView((resource: any) => {
-        if (resource.kind === 'Node') {
-          return {
-            component: (props: { resource: any }) => {
-              const { resource } = props;
-              return (
-                <SectionBox title={'A title'}>
-                  I am a custom detail view. <br />
-                  Made by a {resource.kind} component.
-                </SectionBox>
-              );
-            },
-          };
-        }
-        return null;
+        return (
+          <SectionBox title={'A title'}>
+            I am a custom detail view. <br />
+            Made by a {resource.kind} component.
+          </SectionBox>
+        );
       })
     );
   }, []);
@@ -63,10 +56,10 @@ const Template: Story<DetailsViewSectionProps> = args => {
 
 export const MatchRenderIt = Template.bind({});
 MatchRenderIt.args = {
-  resource: { kind: 'Node' },
+  resource: makeMockKubeObject({ kind: 'Node' }),
 };
 
 export const NoMatchNoRender = Template.bind({});
 NoMatchNoRender.args = {
-  resource: { kind: 'DoesNotExist' },
+  resource: makeMockKubeObject({ kind: 'DoesNotExist' }),
 };
