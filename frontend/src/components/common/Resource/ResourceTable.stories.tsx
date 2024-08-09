@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
 import { TestContext } from '../../../test';
@@ -11,7 +11,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const TemplateWithFilter: Story<{
+const TemplateWithFilter: StoryFn<{
   resourceTableArgs: ResourceTableFromResourceClassProps<MyPod>;
   namespaces: string[];
   search: string;

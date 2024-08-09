@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import MutatingWebhookConfiguration from '../../lib/k8s/mutatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
@@ -40,7 +40,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <Container maxWidth="xl">
       <List />

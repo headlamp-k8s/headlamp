@@ -1,6 +1,5 @@
 import 'vitest-canvas-mock';
-import { StyledEngineProvider, ThemeProvider } from '@mui/material';
-import { StylesProvider } from '@mui/styles';
+import { ThemeProvider } from '@mui/material';
 import type { Meta, StoryFn } from '@storybook/react';
 import { composeStories } from '@storybook/react';
 import { act, render } from '@testing-library/react';
@@ -16,18 +15,11 @@ const withThemeProvider = (Story: any) => {
   const lightTheme = themesConf['light'];
   const theme = lightTheme;
 
-  const ourThemeProvider = (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <Story />
-      </ThemeProvider>
-    </StyledEngineProvider>
+  return (
+    <ThemeProvider theme={theme}>
+      <Story />
+    </ThemeProvider>
   );
-
-  const generateClassName = (rule: any, styleSheet: any) =>
-    `${styleSheet?.options.classNamePrefix}-${rule.key}`;
-
-  return <StylesProvider generateClassName={generateClassName}>{ourThemeProvider}</StylesProvider>;
 };
 
 const compose = (entry: StoryFile) => {
@@ -94,21 +86,24 @@ getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
         test(name, async () => {
           const jsx = withThemeProvider(story);
 
+          const { unmount, asFragment, rerender } = render(jsx);
           await act(async () => {
-            const { unmount, asFragment, rerender } = render(jsx);
             rerender(jsx);
-            rerender(jsx);
-            await act(() => new Promise(resolve => setTimeout(resolve)));
-
-            const snapshotPath = path.join(
-              storyDir,
-              options.snapshotsDirName,
-              `${componentName}.${name}${options.snapshotExtension}`
-            );
-
-            expect(asFragment()).toMatchFileSnapshot(snapshotPath);
-            unmount();
+            await new Promise(resolve => setTimeout(resolve, 1));
           });
+          await act(async () => {
+            rerender(jsx);
+            await new Promise(resolve => setTimeout(resolve, 1));
+          });
+
+          const snapshotPath = path.join(
+            storyDir,
+            options.snapshotsDirName,
+            `${componentName}.${name}${options.snapshotExtension}`
+          );
+
+          expect(asFragment()).toMatchFileSnapshot(snapshotPath);
+          unmount();
         });
       });
     });

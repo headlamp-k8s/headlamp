@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Pod from '../../../lib/k8s/pod';
 import { TestContext } from '../../../test';
 import { generateK8sResourceList } from '../../../test/mocker';
@@ -22,7 +22,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <ResourceListView
       title="My Pod List"

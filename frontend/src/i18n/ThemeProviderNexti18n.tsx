@@ -1,6 +1,6 @@
 import { deDE, enUS, esES, frFR, hiIN, ptPT } from '@mui/material/locale';
 import { createTheme, StyledEngineProvider, Theme, ThemeProvider } from '@mui/material/styles';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../components/common';
 
@@ -21,7 +21,10 @@ function getLocale(locale: string): typeof enUS {
 /** Like a ThemeProvider but uses reacti18next for the language selection
  *  Because Material UI is localized as well.
  */
-const ThemeProviderNexti18n: React.FunctionComponent<{ theme: Theme }> = props => {
+const ThemeProviderNexti18n: React.FunctionComponent<{
+  theme: Theme;
+  children: ReactNode;
+}> = props => {
   const { i18n, ready: isI18nReady } = useTranslation(['translation', 'glossary'], {
     useSuspense: false,
   });

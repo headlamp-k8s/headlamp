@@ -16,7 +16,7 @@ export interface ErrorComponentProps {
   message?: React.ReactNode;
   /** The graphic or element to display as a main graphic. If used as a string, it will be
    * used as the source for displaying an image. By default it is "headlamp-broken.svg". */
-  graphic?: React.ReactChild;
+  graphic?: React.ReactNode;
   /** Whether to use Typography or not. By default it is true. */
   withTypography?: boolean;
 }
@@ -27,7 +27,9 @@ export default function ErrorComponent(props: ErrorComponentProps) {
     title = t('Uh-oh! Something went wrong.'),
     message = '',
     withTypography = true,
-    graphic = headlampBrokenImage,
+    // In vite headlampBrokenImage is a string, but in webpack it is an object
+    // TODO: Remove this once we migrate plugins to vite
+    graphic = headlampBrokenImage as any as string,
   } = props;
   return (
     <Grid

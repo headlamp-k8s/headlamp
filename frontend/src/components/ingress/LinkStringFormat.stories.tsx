@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import Ingress from '../../lib/k8s/ingress';
 import { LinkStringFormat, LinkStringFormatProps } from './Details';
@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<LinkStringFormatProps> = args => <LinkStringFormat {...args} />;
+const Template: StoryFn<LinkStringFormatProps> = args => <LinkStringFormat {...args} />;
 
 const noPath = new Ingress({
   kind: 'Ingress',

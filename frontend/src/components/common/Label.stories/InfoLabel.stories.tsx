@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { InfoLabel as InfoLabelComponent, InfoLabelProps } from '../Label';
 
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<InfoLabelProps> = args => <InfoLabelComponent {...args} />;
+const Template: StoryFn<InfoLabelProps> = args => <InfoLabelComponent {...args} />;
 
 export const InfoLabel = Template.bind({});
 InfoLabel.args = {

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import VWC, {
   KubeValidatingWebhookConfiguration,
 } from '../../lib/k8s/validatingWebhookConfiguration';
@@ -25,7 +25,7 @@ interface MockerStory {
   withService: boolean;
 }
 
-const Template: Story<MockerStory> = args => {
+const Template: StoryFn<MockerStory> = args => {
   const { withService } = args;
 
   VWC.useGet = () => usePhonyGet(withService);

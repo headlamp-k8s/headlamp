@@ -23,7 +23,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     onConfirm();
   }
 
-  const focusedRef = React.useCallback(node => {
+  const focusedRef = React.useCallback((node: HTMLElement) => {
     if (node !== null) {
       node.setAttribute('tabindex', '-1');
       node.focus();

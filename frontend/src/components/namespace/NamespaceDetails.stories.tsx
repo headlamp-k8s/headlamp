@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Namespace, { KubeNamespace } from '../../lib/k8s/namespace';
 import { TestContext } from '../../test';
 import NamespaceDetails from './Details';
@@ -39,7 +39,7 @@ interface MockerStory {
   namespace: string;
 }
 
-const Template: Story<MockerStory> = args => {
+const Template: StoryFn<MockerStory> = args => {
   const { namespace } = args;
 
   return (

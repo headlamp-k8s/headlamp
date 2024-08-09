@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { ValueLabel as ValueLabelComponent } from '../Label';
 
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const ValueLabelTemplate: Story<{}> = args => (
+const ValueLabelTemplate: StoryFn<{}> = args => (
   <ValueLabelComponent {...args}>A ValueLabel is here</ValueLabelComponent>
 );
 

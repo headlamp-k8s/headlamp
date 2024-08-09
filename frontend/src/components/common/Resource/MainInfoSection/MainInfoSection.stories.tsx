@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Pod from '../../../../lib/k8s/pod';
 import { TestContext } from '../../../../test';
 import { podList } from '../../../pod/storyHelper';
@@ -12,7 +12,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<MainInfoSectionProps> = (args: MainInfoSectionProps) => (
+const Template: StoryFn<MainInfoSectionProps> = (args: MainInfoSectionProps) => (
   <TestContext>
     <MainInfoSection {...args} />
   </TestContext>

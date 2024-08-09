@@ -263,7 +263,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     );
     sections.push({
       id: 'LEGACY_SECTIONS_FUNC',
-      section: sectionsFunc(item),
+      section: sectionsFunc(item) as any,
     });
   }
 

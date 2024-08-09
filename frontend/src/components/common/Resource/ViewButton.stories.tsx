@@ -1,5 +1,5 @@
 import '../../../i18n/config';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import ViewButton from './ViewButton';
 import { ViewButtonProps } from './ViewButton';
@@ -10,7 +10,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<ViewButtonProps> = args => <ViewButton {...args} />;
+const Template: StoryFn<ViewButtonProps> = args => <ViewButton {...args} />;
 
 export const View = Template.bind({});
 View.args = {

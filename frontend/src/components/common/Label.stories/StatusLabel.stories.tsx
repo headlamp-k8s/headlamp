@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { StatusLabel as StatusLabelComponent, StatusLabelProps } from '../Label';
 
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<StatusLabelProps> = args => (
+const Template: StoryFn<StatusLabelProps> = args => (
   <StatusLabelComponent {...args}>{args.status}</StatusLabelComponent>
 );
 

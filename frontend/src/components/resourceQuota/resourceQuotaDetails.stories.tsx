@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import ResourceQuota, { KubeResourceQuota } from '../../lib/k8s/resourceQuota';
 import { TestContext } from '../../test';
@@ -62,7 +62,7 @@ interface MockerStory {
   allowEdit?: boolean;
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   if (!!args.useGet) {
     ResourceQuota.useGet = args.useGet;
   }

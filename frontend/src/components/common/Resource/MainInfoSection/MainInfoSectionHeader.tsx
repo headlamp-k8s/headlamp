@@ -20,7 +20,7 @@ export interface MainInfoHeaderProps {
   headerSection?: ((resource: KubeObject | null) => React.ReactNode) | React.ReactNode;
   title?: string;
   actions?:
-    | ((resource: KubeObject | null) => React.ReactNode[] | null)
+    | ((resource: KubeObject | null) => React.ReactNode[] | HeaderAction[] | null)
     | React.ReactNode[]
     | null
     | HeaderAction[];
@@ -36,7 +36,7 @@ export function MainInfoHeader(props: MainInfoHeaderProps) {
   const headerActionsProcessors = useTypedSelector(
     state => state.actionButtons.headerActionsProcessors
   );
-  function setupAction(headerAction: HeaderActionType) {
+  function setupAction(headerAction: HeaderAction) {
     let Action = has(headerAction, 'action') ? (headerAction as any).action : headerAction;
 
     if (!noDefaultActions && has(headerAction, 'id')) {
@@ -58,7 +58,7 @@ export function MainInfoHeader(props: MainInfoHeaderProps) {
       }
     }
 
-    if (!Action || (headerAction as HeaderAction).action === null) {
+    if (!Action || (headerAction as unknown as HeaderAction).action === null) {
       return null;
     }
 
@@ -93,11 +93,11 @@ export function MainInfoHeader(props: MainInfoHeaderProps) {
   let hAccs: HeaderAction[] = [];
   const accs = typeof actions === 'function' ? actions(resource) || [] : actions;
   if (accs !== null) {
-    hAccs = [...accs].map((action, i) => {
+    hAccs = [...accs].map((action, i): HeaderAction => {
       if ((action as HeaderAction)?.id !== undefined) {
         return action as HeaderAction;
       } else {
-        return { id: `gen-${i}`, action };
+        return { id: `gen-${i}`, action: action as HeaderActionType };
       }
     });
   }

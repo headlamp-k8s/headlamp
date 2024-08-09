@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
@@ -59,7 +59,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <EndpointList />;
 };
 

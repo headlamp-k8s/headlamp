@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -35,23 +35,18 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<DetailsViewSectionProps> = args => {
+const Template: StoryFn<DetailsViewSectionProps> = args => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(
-      setDetailsView((resource: any) => {
+      setDetailsView(resource => {
         if (resource.kind === 'Node') {
-          return {
-            component: (props: { resource: any }) => {
-              const { resource } = props;
-              return (
-                <SectionBox title={'A title'}>
-                  I am a custom detail view. <br />
-                  Made by a {resource.kind} component.
-                </SectionBox>
-              );
-            },
-          };
+          return (
+            <SectionBox title={'A title'}>
+              I am a custom detail view. <br />
+              Made by a {resource.kind} component.
+            </SectionBox>
+          );
         }
         return null;
       })

@@ -45,7 +45,7 @@
                   class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
                 >
                   <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-an9bbg-MuiPaper-root-MuiAlert-root"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorInfo MuiAlert-standardInfo MuiAlert-standard css-ut8iii-MuiPaper-root-MuiAlert-root"
                     role="alert"
                   >
                     <div
@@ -961,18 +961,26 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1omirxm-MuiTableCell-root"
                     data-index="1"
                   >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1os2m0i-MuiTypography-root"
+                    >
+                      32000m
+                    </p>
                     <div
-                      class="recharts-responsive-container css-a9n7s9"
-                      style="width: 95%; height: 20px; min-width: 0;"
+                      class="MuiContainer-root MuiContainer-maxWidthLg css-64uahr-MuiContainer-root"
                     />
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-157islm-MuiTableCell-root"
                     data-index="2"
                   >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1os2m0i-MuiTypography-root"
+                    >
+                      128Gi
+                    </p>
                     <div
-                      class="recharts-responsive-container css-a9n7s9"
-                      style="width: 95%; height: 20px; min-width: 0;"
+                      class="MuiContainer-root MuiContainer-maxWidthLg css-64uahr-MuiContainer-root"
                     />
                   </td>
                   <td
@@ -1048,18 +1056,26 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1omirxm-MuiTableCell-root"
                     data-index="1"
                   >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1os2m0i-MuiTypography-root"
+                    >
+                      4000m
+                    </p>
                     <div
-                      class="recharts-responsive-container css-a9n7s9"
-                      style="width: 95%; height: 20px; min-width: 0;"
+                      class="MuiContainer-root MuiContainer-maxWidthLg css-64uahr-MuiContainer-root"
                     />
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-157islm-MuiTableCell-root"
                     data-index="2"
                   >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1os2m0i-MuiTypography-root"
+                    >
+                      15.6Gi
+                    </p>
                     <div
-                      class="recharts-responsive-container css-a9n7s9"
-                      style="width: 95%; height: 20px; min-width: 0;"
+                      class="MuiContainer-root MuiContainer-maxWidthLg css-64uahr-MuiContainer-root"
                     />
                   </td>
                   <td

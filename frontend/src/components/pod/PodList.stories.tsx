@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Pod from '../../lib/k8s/pod';
 import { TestContext } from '../../test';
 import PodList from './List';
@@ -25,7 +25,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <PodList />;
 };
 

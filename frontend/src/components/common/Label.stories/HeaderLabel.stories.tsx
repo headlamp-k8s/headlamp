@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { HeaderLabel as HeaderLabelComponent, HeaderLabelProps } from '../Label';
 
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<HeaderLabelProps> = args => <HeaderLabelComponent {...args} />;
+const Template: StoryFn<HeaderLabelProps> = args => <HeaderLabelComponent {...args} />;
 
 export const HeaderLabel = Template.bind({});
 HeaderLabel.args = {

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';
 import Pod, { KubePod } from '../../lib/k8s/pod';
@@ -37,7 +37,7 @@ interface MockerStory {
   podName: string;
 }
 
-const Template: Story<MockerStory> = args => {
+const Template: StoryFn<MockerStory> = args => {
   const { useGet, useList, podName, objectEventsFunc } = args;
 
   if (!!useGet) {

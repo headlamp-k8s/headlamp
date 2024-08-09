@@ -1,5 +1,5 @@
 import '../../../i18n/config';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import TileChart, { TileChartProps } from './TileChart';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<TileChartProps> = args => <TileChart {...args} />;
+const Template: StoryFn<TileChartProps> = args => <TileChart {...args} />;
 
 export const WithProgress = Template.bind({});
 WithProgress.args = {

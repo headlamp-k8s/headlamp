@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import PersistentVolume, { KubePersistentVolume } from '../../lib/k8s/persistentVolume';
 import { TestContext } from '../../test';
 import Details from './ClaimDetails';
@@ -23,7 +23,7 @@ interface MockerStory {
   json?: KubePersistentVolume;
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
     PersistentVolume.useGet = () => [new PersistentVolume(json), null, () => {}, () => {}] as any;

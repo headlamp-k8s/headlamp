@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import SimpleEditor from './SimpleEditor';
 import { SimpleEditorProps } from './SimpleEditor';
@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<SimpleEditorProps> = args => {
+const Template: StoryFn<SimpleEditorProps> = args => {
   const [value, setValue] = React.useState<string | undefined>('');
   return (
     <SimpleEditor {...args} value={value} onChange={value => setValue(value)} language="yaml" />

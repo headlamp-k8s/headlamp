@@ -21,8 +21,8 @@ import { createRouteURL } from '../../lib/router';
 import {
   AppBarAction,
   AppBarActionsProcessor,
+  AppBarActionType,
   DefaultAppBarAction,
-  HeaderActionType,
 } from '../../redux/actionButtonsSlice';
 import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -128,7 +128,11 @@ export interface PureTopBarProps {
   onToggleOpen: () => void;
 }
 
-function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[] }) {
+function AppBarActionsMenu({
+  appBarActions,
+}: {
+  appBarActions: Array<AppBarAction | AppBarActionType>;
+}) {
   const actions = (function stateActions() {
     return React.Children.toArray(
       appBarActions.map(action => {
@@ -142,10 +146,11 @@ function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[
         } else if (Action === null) {
           return null;
         } else if (typeof Action === 'function') {
+          const ActionComponent = Action as React.FC;
           return (
             <ErrorBoundary>
               <MenuItem>
-                <Action />
+                <ActionComponent />
               </MenuItem>
             </ErrorBoundary>
           );
@@ -156,7 +161,11 @@ function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[
 
   return <>{actions}</>;
 }
-function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] }) {
+function AppBarActions({
+  appBarActions,
+}: {
+  appBarActions: Array<AppBarAction | AppBarActionType>;
+}) {
   const actions = (function stateActions() {
     return React.Children.toArray(
       appBarActions.map(action => {
@@ -166,9 +175,10 @@ function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] })
         } else if (Action === null) {
           return null;
         } else if (typeof Action === 'function') {
+          const ActionComponent = Action as React.FC;
           return (
             <ErrorBoundary>
-              <Action />
+              <ActionComponent />
             </ErrorBoundary>
           );
         }

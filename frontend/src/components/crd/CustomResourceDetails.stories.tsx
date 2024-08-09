@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { ResourceClasses } from '../../lib/k8s';
 import CustomResourceDefinition from '../../lib/k8s/crd';
 import { overrideKubeObject, TestContext } from '../../test';
@@ -27,7 +27,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<CustomResourceDetailsProps> = args => <CustomResourceDetails {...args} />;
+const Template: StoryFn<CustomResourceDetailsProps> = args => <CustomResourceDetails {...args} />;
 
 export const NoError = Template.bind({});
 NoError.args = {

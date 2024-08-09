@@ -67,7 +67,19 @@
               />
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-              />
+              >
+                <button
+                  aria-label="View YAML"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
+                  data-mui-internal-clone-element="true"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
               <div
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
@@ -195,13 +207,13 @@
                     style="display: flex; position: relative; text-align: initial; width: 100%; height: 100%;"
                   >
                     <div
-                      data-keybinding-context="8"
+                      data-keybinding-context="10"
                       data-mode-id="plaintext"
                       style="width: 100%;"
                     >
                       <div
                         class="monaco-editor showUnused showDeprecated vs"
-                        data-uri="inmemory://model/8"
+                        data-uri="inmemory://model/10"
                         role="code"
                         style="width: 5px; height: 3vh;"
                       >
@@ -316,7 +328,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar horizontal"
+                              class="visible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -334,7 +346,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar vertical"
+                              class="visible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >
@@ -442,13 +454,13 @@
                     style="display: flex; position: relative; text-align: initial; width: 100%; height: 100%;"
                   >
                     <div
-                      data-keybinding-context="9"
+                      data-keybinding-context="11"
                       data-mode-id="plaintext"
                       style="width: 100%;"
                     >
                       <div
                         class="monaco-editor showUnused showDeprecated vs"
-                        data-uri="inmemory://model/9"
+                        data-uri="inmemory://model/11"
                         role="code"
                         style="width: 5px; height: 3vh;"
                       >
@@ -563,7 +575,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar horizontal"
+                              class="visible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -581,7 +593,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar vertical"
+                              class="visible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >
@@ -689,13 +701,13 @@
                     style="display: flex; position: relative; text-align: initial; width: 100%; height: 100%;"
                   >
                     <div
-                      data-keybinding-context="10"
+                      data-keybinding-context="12"
                       data-mode-id="plaintext"
                       style="width: 100%;"
                     >
                       <div
                         class="monaco-editor showUnused showDeprecated vs"
-                        data-uri="inmemory://model/10"
+                        data-uri="inmemory://model/12"
                         role="code"
                         style="width: 5px; height: 3vh;"
                       >
@@ -810,7 +822,7 @@
                             </div>
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar horizontal"
+                              class="visible scrollbar horizontal"
                               role="presentation"
                               style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;"
                             >
@@ -828,7 +840,7 @@
                             />
                             <div
                               aria-hidden="true"
-                              class="invisible scrollbar vertical"
+                              class="visible scrollbar vertical"
                               role="presentation"
                               style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;"
                             >

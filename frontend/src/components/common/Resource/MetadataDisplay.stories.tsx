@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { TestContext } from '../../../test';
 import {
@@ -18,7 +18,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<MetadataDisplayProps> = args => <MetadataDisplayComponent {...args} />;
+const Template: StoryFn<MetadataDisplayProps> = args => <MetadataDisplayComponent {...args} />;
 
 const mockResource: KubeObjectInterface = {
   kind: 'MyKind',

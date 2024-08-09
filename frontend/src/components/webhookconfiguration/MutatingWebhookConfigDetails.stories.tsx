@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import MWC, { KubeMutatingWebhookConfiguration } from '../../lib/k8s/mutatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import MutatingWebhookConfigDetails from './MutatingWebhookConfigDetails';
@@ -23,7 +23,7 @@ interface MockerStory {
   withService: boolean;
 }
 
-const Template: Story<MockerStory> = args => {
+const Template: StoryFn<MockerStory> = args => {
   const { withService } = args;
 
   MWC.useGet = () => usePhonyGet(withService);

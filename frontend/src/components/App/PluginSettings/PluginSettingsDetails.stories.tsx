@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { PluginInfo, PluginSettingsDetailsProps } from '../../../plugin/pluginsSlice';
 import { PluginSettingsDetailsPure, PluginSettingsDetailsPureProps } from './PluginSettingsDetails';
@@ -64,9 +64,9 @@ const mockConfig = {
   name: 'mockPlugin',
 };
 
-const Template: Story<PluginSettingsDetailsPureProps> = (args: PluginSettingsDetailsPureProps) => (
-  <PluginSettingsDetailsPure {...args} />
-);
+const Template: StoryFn<PluginSettingsDetailsPureProps> = (
+  args: PluginSettingsDetailsPureProps
+) => <PluginSettingsDetailsPure {...args} />;
 
 export const WithAutoSave = Template.bind({});
 WithAutoSave.args = {

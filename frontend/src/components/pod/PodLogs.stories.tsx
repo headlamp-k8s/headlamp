@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { StreamResultsCb } from '../../lib/k8s/apiProxy';
 import { AuthRequestResourceAttrs, KubeObjectClass } from '../../lib/k8s/cluster';
 import Pod, { KubePod, LogOptions } from '../../lib/k8s/pod';
@@ -51,7 +51,7 @@ interface MockerStory {
   [key: string]: Pod[keyof typeof Pod | keyof typeof Pod.prototype];
 }
 
-const Template: Story<MockerStory> = args => {
+const Template: StoryFn<MockerStory> = args => {
   const { podName, detailsProps, ...podProps } = args;
 
   for (const key in podProps) {

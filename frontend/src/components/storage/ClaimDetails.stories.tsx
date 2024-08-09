@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import PersistentVolumeClaim, {
   KubePersistentVolumeClaim,
 } from '../../lib/k8s/persistentVolumeClaim';
@@ -25,7 +25,7 @@ interface MockerStory {
   json?: KubePersistentVolumeClaim;
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
     PersistentVolumeClaim.useGet = () =>

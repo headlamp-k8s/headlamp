@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { HoverInfoLabel as HoverInfoLabelComponent, HoverInfoLabelProps } from '../Label';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<HoverInfoLabelProps> = args => <HoverInfoLabelComponent {...args} />;
+const Template: StoryFn<HoverInfoLabelProps> = args => <HoverInfoLabelComponent {...args} />;
 
 export const HoverInfoLabel = Template.bind({});
 HoverInfoLabel.args = {

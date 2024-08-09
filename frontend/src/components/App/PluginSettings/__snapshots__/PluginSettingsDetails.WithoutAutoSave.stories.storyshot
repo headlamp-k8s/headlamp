@@ -56,8 +56,8 @@
           <label
             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1a2ml2f-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink="false"
-            for="mui-142"
-            id="mui-142-label"
+            for=":r4i:"
+            id=":r4i:-label"
           >
             Normal Input
           </label>
@@ -67,7 +67,7 @@
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              id="mui-142"
+              id=":r4i:"
               type="text"
               value=""
             />

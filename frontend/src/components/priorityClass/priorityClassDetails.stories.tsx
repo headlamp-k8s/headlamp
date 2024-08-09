@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObject, KubeObjectClass } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';
 import PriorityClass, { KubePriorityClass } from '../../lib/k8s/priorityClass';
@@ -49,7 +49,7 @@ interface MockerStory {
   allowEdit?: boolean;
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   if (!!args.useGet) {
     PriorityClass.useGet = args.useGet;
     Event.objectEvents = async (obj: KubeObject) => {

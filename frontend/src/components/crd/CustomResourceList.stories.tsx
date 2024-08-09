@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import CustomResourceDefinition from '../../lib/k8s/crd';
 import { overrideKubeObject, TestContext, TestContextProps } from '../../test';
@@ -16,7 +16,7 @@ export default {
   decorators: [Story => <Story />],
 } as Meta;
 
-const Template: Story<MockerStory> = args => {
+const Template: StoryFn<MockerStory> = args => {
   const { useApiGet, routerParams = {} } = args;
   const routerMap: TestContextProps['routerMap'] = routerParams;
 

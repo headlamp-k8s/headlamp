@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import Ingress, { KubeIngress } from '../../lib/k8s/ingress';
 import { TestContext } from '../../test';
 import Details from './Details';
@@ -23,7 +23,7 @@ interface MockerStory {
   ingressJson?: KubeIngress;
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   const { ingressJson } = args;
   if (!!ingressJson) {
     Ingress.useGet = () => [new Ingress(ingressJson), null, () => {}, () => {}] as any;
