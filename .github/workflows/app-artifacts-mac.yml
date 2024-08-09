@@ -139,6 +139,41 @@ jobs:
         if-no-files-found: error
         overwrite: true
         retention-days: 2
+  verify-notarization:
+    runs-on: macos-latest
+    needs: notarize
+    permissions:
+      actions: write # for downloading and uploading artifacts
+      contents: read
+    if: ${{ inputs.signBinaries }}
+    strategy:
+      matrix:
+        arch: [x86, arm64]
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4.1.7
+      with:
+        name: dmgs
+        path: ./dmgs
+    - name: Verify Notarization
+      run: |
+        cd ./dmgs
+
+        MOUNT_OUTPUT="$(hdiutil attach ./app/dist/Headlamp*${{ matrix.arch }}*.dmg)"
+        VOLUME_NAME="$(echo "$MOUNT_OUTPUT" | grep -o '/Volumes/[^\s]*')"
+
+        # Check if the app is notarized
+        spctl -a -v "$VOLUME_NAME/Contents/MacOS/Headlamp"
+
+        # Check if the app has symlinks
+        SYMLINKS=$(find "$VOLUME_NAME" -type l -ls | grep node_modules)
+        if [ -n "$SYMLINKS" ]; then
+          echo "Symlinks found in the DMG:"
+          echo "$SYMLINKS"
+          exit 1
+        fi
+
+        hdiutil detach "$VOLUME_NAME"
   stapler:
     runs-on: macos-latest
     needs: notarize
