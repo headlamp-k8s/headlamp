@@ -68,10 +68,6 @@ function prepareRoutes(
           name: 'nodes',
           label: t('glossary|Nodes'),
         },
-        {
-          name: 'crds',
-          label: t('glossary|Custom Resources'),
-        },
       ],
     },
     {
@@ -231,6 +227,17 @@ function prepareRoutes(
         {
           name: 'validatingWebhookConfigurations',
           label: t('glossary|Validating Webhook Configurations'),
+        },
+      ],
+    },
+    {
+      name: 'crds',
+      label: t('glossary|Custom Resources'),
+      icon: 'mdi:file-document-multiple-outline',
+      subList: [
+        {
+          name: 'crs',
+          label: t('glossary|CR Instances'),
         },
       ],
     },
