@@ -90,7 +90,7 @@ import Job from './k8s/job';
 import ReplicaSet from './k8s/replicaSet';
 import { getCluster, getClusterPrefixedPath } from './util';
 
-export interface Route {
+interface BaseRoute {
   /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */
   path: string;
   /** When true, will only match if the path matches the location.pathname exactly. */
@@ -106,17 +106,27 @@ export interface Route {
    * Should URL have the cluster prefix? (default=true)
    */
   useClusterURL?: boolean;
-  /** This route does not require Authentication. */
-  noAuthRequired?: boolean;
-  /** The sidebar entry this Route should enable, or null if it shouldn't enable any. If an object is passed with item and sidebar, it will try to enable the given sidebar and the given item. */
-  sidebar: string | null | { item: string | null; sidebar: string | DefaultSidebars };
+  /** Whether the route should be disabled (not registered). */
+  disabled?: boolean;
+}
+
+export interface RedirectRoute extends BaseRoute {
+  /** The URL/location to redirect to. */
+  target: string | Location | URL;
+}
+
+export interface ComponentRoute extends BaseRoute {
   /** Shown component for this route. */
   component: () => JSX.Element;
   /** Hide the appbar at the top. */
   hideAppBar?: boolean;
-  /** Whether the route should be disabled (not registered). */
-  disabled?: boolean;
+  /** This route does not require Authentication. */
+  noAuthRequired?: boolean;
+  /** The sidebar entry this Route should enable, or null if it shouldn't enable any. If an object is passed with item and sidebar, it will try to enable the given sidebar and the given item. */
+  sidebar: string | null | { item: string | null; sidebar: string | DefaultSidebars };
 }
+
+export type Route = ComponentRoute | RedirectRoute;
 
 const defaultRoutes: {
   [routeName: string]: Route;

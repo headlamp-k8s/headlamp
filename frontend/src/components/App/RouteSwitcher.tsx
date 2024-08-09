@@ -5,11 +5,13 @@ import { Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-do
 import { getToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
 import {
+  ComponentRoute,
   createRouteURL,
   getDefaultRoutes,
   getRoutePath,
   getRouteUseClusterURL,
   NotFoundRoute,
+  RedirectRoute,
   Route as RouteType,
 } from '../../lib/router';
 import { getCluster } from '../../lib/util';
@@ -30,28 +32,48 @@ export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
         !(
           routeFilters.length > 0 &&
           routeFilters.filter(f => f(route)).length !== routeFilters.length
-        ) && !route.disabled
+        ) && !route.disabled,
     );
 
   return (
     <Switch>
-      {filteredRoutes.map((route, index) =>
-        route.name === 'OidcAuth' ? (
-          <Route path={route.path} component={() => <RouteComponent route={route} />} key={index} />
-        ) : (
-          <AuthRoute
-            path={getRoutePath(route)}
-            sidebar={route.sidebar}
-            requiresAuth={!route.noAuthRequired}
-            requiresCluster={getRouteUseClusterURL(route)}
-            exact={!!route.exact}
-            clusters={clusters}
-            requiresToken={props.requiresToken}
-            children={<RouteComponent route={route} key={getCluster()} />}
-            key={`${getCluster()}`}
-          />
-        )
-      )}
+      {filteredRoutes.map((route, index) => {
+        if (route.name === 'OidcAuth') {
+          return (
+            <Route
+              path={route.path}
+              component={() => <RouteComponent route={route} />}
+              key={index}
+            />
+          );
+        }
+        if (!!(route as RedirectRoute).target) {
+          return (
+            <Redirect
+              from={route.path}
+              to={(route as RedirectRoute).target}
+              key={index}
+              exact={!!route.exact}
+            />
+          );
+        }
+        const componentRoute = route as ComponentRoute;
+        if (!!componentRoute.component) {
+          return (
+            <AuthRoute
+              path={getRoutePath(route)}
+              sidebar={componentRoute.sidebar}
+              requiresAuth={!componentRoute.noAuthRequired}
+              requiresCluster={getRouteUseClusterURL(route)}
+              exact={!!route.exact}
+              clusters={clusters}
+              requiresToken={props.requiresToken}
+              children={<RouteComponent route={route} key={getCluster()} />}
+              key={`${getCluster()}`}
+            />
+          );
+        }
+      })}
     </Switch>
   );
 }
@@ -69,8 +91,8 @@ function RouteComponent({ route }: { route: RouteType }) {
         route.name
           ? route.name
           : typeof route.sidebar === 'string'
-          ? route.sidebar
-          : route.sidebar?.item || ''
+            ? route.sidebar
+            : route.sidebar?.item || '',
       )}
     >
       <route.component />
