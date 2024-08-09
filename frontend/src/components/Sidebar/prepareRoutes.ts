@@ -71,6 +71,12 @@ function prepareRoutes(
         {
           name: 'crds',
           label: t('glossary|Custom Resources'),
+          subList: [
+            {
+              name: 'crs',
+              label: t('glossary|CR Instances'),
+            },
+          ],
         },
       ],
     },
