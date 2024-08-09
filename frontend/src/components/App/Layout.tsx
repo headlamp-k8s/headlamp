@@ -15,7 +15,7 @@ import { setConfig } from '../../redux/configSlice';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
-import { fetchStatelessClusterKubeConfigs, processClusterComparison } from '../../stateless/';
+import { fetchStatelessClusterKubeConfigs, isClusterConfigDifferent } from '../../stateless/';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
@@ -92,7 +92,6 @@ export default function Layout({}: LayoutProps) {
    */
   const fetchConfig = () => {
     const clusters = store.getState().config.clusters;
-    const statelessClusters = store.getState().config.statelessClusters;
 
     request('/config', {}, false, false)
       .then(config => {
@@ -104,23 +103,9 @@ export default function Layout({}: LayoutProps) {
           clustersToConfig[cluster.name] = cluster;
         });
 
-        const configToStore = { ...config, clusters: clustersToConfig };
-
-        if (clusters === null) {
+        if (isClusterConfigDifferent(clusters, clustersToConfig)) {
+          const configToStore = { ...config, clusters: clustersToConfig };
           dispatch(setConfig(configToStore));
-        } else {
-          const isConfigDifferent = processClusterComparison(clusters, clustersToConfig, false);
-
-          if (
-            isConfigDifferent ||
-            Object.keys(clustersToConfig).length !== Object.keys(clusters).length
-          ) {
-            if (statelessClusters !== null) {
-              processClusterComparison(clusters, statelessClusters, true);
-            }
-
-            dispatch(setConfig(configToStore));
-          }
         }
 
         /**

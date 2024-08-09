@@ -312,49 +312,47 @@ function generateSecureToken(length = 16): string {
 
 /**
  * Compares the cluster config from the backend and the redux store
- * @param clusters
- * @param clustersToConfig
- * @param isStateless
+ * @param currentConfig
+ * @param newConfig
  * @returns true if the present stored config is different from the fetched one.
  */
-export function processClusterComparison(
-  clusters: ConfigState['clusters'],
-  clustersToConfig: ConfigState['clusters'],
-  isStateless: boolean
+export function isClusterConfigDifferent(
+  currentConfig: ConfigState['clusters'],
+  newConfig: ConfigState['clusters']
 ) {
-  if (!clusters) {
-    // If no clusters, then add all clusters
-    return false;
+  if (!currentConfig || !newConfig) {
+    // If one of the configs is null but the other is not, we want to update the config
+    return !currentConfig !== !newConfig;
   }
 
-  if (!clustersToConfig) {
-    // If no clustersToConfig, then delete all clusters
+  if (Object.keys(newConfig).length !== Object.keys(currentConfig).length) {
     return true;
   }
 
-  let isConfigDifferent = false;
+  Object.keys(newConfig).forEach(key => {
+    if (!currentConfig[key]) {
+      return true;
+    }
 
-  Object.keys(clustersToConfig).forEach(key => {
-    if (!!clusters[key]) {
-      let clusterToCompare = clusters[key];
+    let clusterToCompare = currentConfig[key];
 
-      if (clusterToCompare.useToken !== undefined) {
-        clusterToCompare = _.cloneDeep(clusters[key]);
-        delete clusterToCompare.useToken;
-      }
+    if (clusterToCompare.useToken !== undefined) {
+      clusterToCompare = _.cloneDeep(currentConfig[key]);
+      delete clusterToCompare.useToken;
+    }
 
-      if (isStateless) {
-        if (_.isEqual(clustersToConfig[key], clusterToCompare)) {
-          delete clusters[key];
-        }
-      } else {
-        isConfigDifferent =
-          isConfigDifferent || !_.isEqual(clustersToConfig[key], clusterToCompare);
-      }
+    let newCluster = newConfig[key];
+    if (newCluster.useToken !== undefined) {
+      newCluster = _.cloneDeep(newConfig[key]);
+      delete newCluster.useToken;
+    }
+
+    if (!_.isEqual(newCluster, clusterToCompare)) {
+      return true;
     }
   });
 
-  return isConfigDifferent;
+  return false;
 }
 
 /**
@@ -588,10 +586,12 @@ const exportFunctions = {
   getStatelessClusterKubeConfigs,
   findKubeconfigByClusterName,
   getUserIdFromLocalStorage,
-  processClusterComparison,
+  isClusterConfigDifferent,
   fetchStatelessClusterKubeConfigs,
   deleteClusterKubeconfig,
   updateStatelessClusterKubeconfig,
+  // @deprecated - use isClusterConfigDifferent instead
+  processClusterComparison: isClusterConfigDifferent,
 };
 
 export default exportFunctions;
