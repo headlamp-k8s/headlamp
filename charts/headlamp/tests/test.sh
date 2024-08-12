@@ -8,12 +8,29 @@ CHART_DIR="./charts/headlamp"
 TEST_CASES_DIR="${CHART_DIR}/tests/test_cases"
 EXPECTED_TEMPLATES_DIR="${CHART_DIR}/tests/expected_templates"
 
+# Get the current chart, app and image version
+CURRENT_CHART_VERSION=$(grep '^version:' ${CHART_DIR}/Chart.yaml | awk '{print $2}')
+CURRENT_APP_VERSION=$(grep '^appVersion:' ${CHART_DIR}/Chart.yaml | awk '{print $2}')
+CURRENT_IMAGE_VERSION=$(grep '^appVersion:' ${CHART_DIR}/Chart.yaml | awk '{print $2}')
+
 # Function to render templates for a specific values file
 render_templates() {
     values_file="$1"
     output_dir="$2"
     # Render templates
     helm template headlamp ${CHART_DIR} --values ${values_file} > "${output_dir}/rendered_templates.yaml"
+}
+
+# Function to update expected templates with the current versions
+update_versions_in_expected_templates() {
+    expected_file="$1"
+    # Replace the old chart version with the current chart version
+    sed -i.bak "s/helm.sh\/chart: headlamp-[0-9]\+\.[0-9]\+\.[0-9]\+/helm.sh\/chart: headlamp-${CURRENT_CHART_VERSION}/g" "${expected_file}"
+    # Replace the old app version with the current app version
+    sed -i.bak "s/app.kubernetes.io\/version: \"[0-9]\+\.[0-9]\+\.[0-9]\+\"/app.kubernetes.io\/version: \"${CURRENT_APP_VERSION}\"/g" "${expected_file}"
+    # Replace the old image version with the current image version
+    sed -i.bak "s/ghcr.io\/headlamp-k8s\/headlamp:v[0-9]\+\.[0-9]\+\.[0-9]\+/ghcr.io\/headlamp-k8s\/headlamp:v${CURRENT_IMAGE_VERSION}/g" "${expected_file}"
+    rm -f "${expected_file}.bak"
 }
 
 # Function to compare rendered templates with expected templates
@@ -34,6 +51,7 @@ compare_templates() {
 # Check for default values.yaml test case
 mkdir -p "${CHART_DIR}/tests/defaultvaluetest"
 render_templates "${CHART_DIR}/values.yaml" ${CHART_DIR}/tests/defaultvaluetest
+update_versions_in_expected_templates ${CHART_DIR}/tests/defaultvaluetest/rendered_templates.yaml
 compare_templates "${CHART_DIR}/values.yaml" ${CHART_DIR}/tests/defaultvaluetest ${CHART_DIR}/tests/defaultvaluetest/rendered_templates.yaml
 rm -rf ${CHART_DIR}/tests/defaultvaluetest
 
@@ -51,6 +69,8 @@ if [ "$(ls -A ${TEST_CASES_DIR})" ]; then
             mkdir -p "${output_dir}"
             # Render templates for the current test case
             render_templates "${values_file}" "${output_dir}"
+            # Update expected template versions
+            update_versions_in_expected_templates "${expected_file}"
             # Compare rendered templates with expected templates for the current test case
             compare_templates "${values_file}" "${output_dir}" "${expected_file}"
             # Clean up temporary files
