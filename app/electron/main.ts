@@ -14,9 +14,7 @@ import {
 } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import find_process from 'find-process';
-import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import { userInfo } from 'node:os';
 import { platform } from 'os';
 import path from 'path';
 import url from 'url';
@@ -72,33 +70,15 @@ function addPathFromShellToEnvOnMac() {
     return;
   }
 
-  let defaultShell;
-  try {
-    defaultShell = userInfo().shell || '/bin/zsh';
-  } catch (error) {
-    defaultShell = '/bin/zsh';
+  // Check whether we have needed paths in the PATH. If not, add it.
+  const neededPaths = ['/opt/homebrew/bin/', '/usr/local/bin/'];
+  const paths = (process.env.PATH ?? '').split(':');
+  if (!neededPaths.some(p => paths.includes(p))) {
+    process.env.PATH = [...neededPaths, ...paths].join(':');
+    console.log('PATH env var changed:', process.env.PATH);
   }
 
-  // login interactive shell
-  // f option is to prevent menu on zshell when user has no config.
-  // DISABLE_AUTO_UPDATE is to prevent the shell from updating.
-  const env = { ...process.env, DISABLE_AUTO_UPDATE: 'true' };
-  const result = spawnSync(defaultShell, ['--login', '-fic', 'echo $PATH'], {
-    env: env,
-    encoding: 'utf-8',
-    timeout: 8000, // in case it's stuck
-  });
-
-  if (result.status === 0) {
-    const path = result.stdout.toString();
-    pathInfo = {
-      previousPath: process.env.PATH,
-      newPath: path,
-    };
-    process.env.PATH = path;
-  } else {
-    console.error('Failed to get shell PATH, just using process.env.PATH');
-  }
+  pathInfo = process.env.PATH ?? '';
 }
 addPathFromShellToEnvOnMac();
 
