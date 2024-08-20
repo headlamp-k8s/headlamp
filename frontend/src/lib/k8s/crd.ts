@@ -145,7 +145,7 @@ export function makeCustomResourceClass(
   }
 
   // Used for tests
-  if (import.meta.env.UNDER_TEST === 'true') {
+  if (import.meta.env.UNDER_TEST || import.meta.env.STORYBOOK) {
     const knownClass = ResourceClasses[apiInfoArgs[0][2]];
     if (!!knownClass) {
       return knownClass;

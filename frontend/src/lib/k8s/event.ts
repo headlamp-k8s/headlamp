@@ -1,5 +1,5 @@
-import React from 'react';
-import { CancellablePromise, ResourceClasses } from '.';
+import { useMemo } from 'react';
+import { ResourceClasses } from '.';
 import { ApiError, apiFactoryWithNamespace, QueryParameters } from './apiProxy';
 import { request } from './apiProxy';
 import { KubeMetadata, KubeObject, makeKubeObject } from './cluster';
@@ -164,77 +164,55 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
     return objInstance;
   }
 
-  static useListForClusters(clusterNames: string[], options?: { queryParams?: QueryParameters }) {
-    type EventErrorObj = {
+  /**
+   * Fetch events for given clusters
+   *
+   * Important! Make sure to have the parent component have clusters as a key
+   * so that component remounts when clusters change, instead of rerendering
+   * with different number of clusters
+   */
+  static useListForClusters(
+    clusterNames: string[],
+    options: { queryParams?: QueryParameters } = {}
+  ) {
+    // Calling hooks in a loop is usually forbidden
+    // But if we make sure that clusters don't change between renders it's fine
+    const queries = clusterNames.map(cluster => {
+      return Event.useList({ cluster, ...options.queryParams });
+    });
+
+    type EventsPerCluster = {
       [cluster: string]: {
         warnings: Event[];
         error?: ApiError | null;
       };
     };
-    const [clusters, setClusters] = React.useState<Set<string>>(new Set(clusterNames));
-    const [events, setEvents] = React.useState<EventErrorObj>({});
-    const queryParameters = Object.assign(
-      { limit: this.maxEventsLimit },
-      options?.queryParams ?? {}
-    );
 
-    // Make sure we only update when there are different cluster names
-    React.useEffect(() => {
-      let shouldUpdate = false;
-      for (const cluster of clusterNames) {
-        if (!clusters.has(cluster)) {
-          shouldUpdate = true;
-          break;
-        }
-      }
-      if (shouldUpdate) {
-        setClusters(new Set(clusterNames));
-      }
-    }, [clusters, clusterNames]);
+    const result = useMemo(() => {
+      const res: EventsPerCluster = {};
 
-    React.useEffect(() => {
-      if (clusters.size === 0) {
-        console.debug('No clusters specified when fetching warnings');
-      }
-      const cancellables: CancellablePromise[] = [];
-      for (const cluster of clusters) {
-        const cancelFunc = Event.apiList(
-          (events: Event[]) => {
-            setEvents(prevWarnings => ({
-              ...prevWarnings,
-              [cluster]: {
-                warnings: events,
-                error: null,
-              },
-            }));
-          },
-          error => {
-            setEvents(prevWarnings => ({
-              ...prevWarnings,
-              [cluster]: {
-                warnings: [],
-                error,
-              },
-            }));
-          },
-          {
-            cluster: cluster,
-            queryParams: queryParameters,
-          }
-        )();
-        cancellables.push(cancelFunc);
-      }
+      queries.forEach((query, index) => {
+        const cluster = clusterNames[index];
+        res[cluster] = {
+          warnings: query.data?.items ?? [],
+          error: query.error as ApiError,
+        };
+      });
 
-      return function cancelAllConnectedListings() {
-        for (const cancellable of cancellables) {
-          cancellable.then(c => c());
-        }
-      };
-    }, [clusters]);
+      return res;
+    }, [queries, clusterNames]);
 
-    return events;
+    return result;
   }
 
+  /**
+   * Fetch warning events for given clusters
+   * Amount is limited to {@link Event.maxEventsLimit}
+   *
+   * Important! Make sure to have the parent component have clusters as a key
+   * so that component remounts when clusters change, instead of rerendering
+   * with different number of clusters
+   */
   static useWarningList(clusters: string[], options?: { queryParams?: QueryParameters }) {
     const queryParameters = Object.assign(
       {

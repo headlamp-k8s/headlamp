@@ -2,7 +2,7 @@ import { omit } from 'lodash';
 import { QueryParameters } from './queryParameters';
 
 export function buildUrl(urlOrParts: string | string[], queryParams?: QueryParameters): string {
-  const url = Array.isArray(urlOrParts) ? urlOrParts.join('/') : urlOrParts;
+  const url = Array.isArray(urlOrParts) ? urlOrParts.filter(Boolean).join('/') : urlOrParts;
   return url + asQuery(queryParams);
 }
 
