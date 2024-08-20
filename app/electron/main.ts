@@ -14,7 +14,6 @@ import {
 } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import find_process from 'find-process';
-import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import { userInfo } from 'node:os';
 import { platform } from 'os';
@@ -56,51 +55,6 @@ const startUrl = (
   // we use startUrl to determine if it's an internal or external URL. So it's easier to
   // convert everything to forward slashes.
   .replace(/\\/g, '/');
-
-/**
- * On MacOS apps do not get the same environment variables as the terminal.
- *
- * However we want the same PATH as the shell to run the users terminal programs.
- */
-function addPathFromShellToEnvOnMac() {
-  if (process.platform !== 'darwin') {
-    // only necessary on MacOS
-    return;
-  }
-  if (process.env.TERM_PROGRAM) {
-    // if we are running in a terminal then we already have the correct PATH
-    return;
-  }
-
-  let defaultShell;
-  try {
-    defaultShell = userInfo().shell || '/bin/zsh';
-  } catch (error) {
-    defaultShell = '/bin/zsh';
-  }
-
-  // login interactive shell
-  // f option is to prevent menu on zshell when user has no config.
-  // DISABLE_AUTO_UPDATE is to prevent the shell from updating.
-  const env = { ...process.env, DISABLE_AUTO_UPDATE: 'true' };
-  const result = spawnSync(defaultShell, ['--login', '-fic', 'echo $PATH'], {
-    env: env,
-    encoding: 'utf-8',
-    timeout: 8000, // in case it's stuck
-  });
-
-  if (result.status === 0) {
-    const path = result.stdout.toString();
-    pathInfo = {
-      previousPath: process.env.PATH,
-      newPath: path,
-    };
-    process.env.PATH = path;
-  } else {
-    console.error('Failed to get shell PATH, just using process.env.PATH');
-  }
-}
-addPathFromShellToEnvOnMac();
 
 const args = yargs
   .command('$0 [kubeconfig]', '', yargs => {
@@ -488,13 +442,56 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   serverArgs = serverArgs.concat(flags);
   console.log('arguments passed to backend server', serverArgs);
 
-  // We run detached but not in shell, otherwise it's hard to make sure the
-  // server process gets killed. When changing these options, please make sure
-  // to test quitting the app in the different platforms and making sure the
-  // server process has been correctly quit.
-  const options = { detached: true };
+  /**
+   * The shell selection for spawn.
+   *
+   * Node uses /bin/sh and not the users shell by default on
+   * unix systems. Which can be different.
+   *
+   * @returns the shell to use.
+   */
+  function getSpawnShell(): string {
+    let defaultShell;
+    try {
+      defaultShell = userInfo().shell || '/bin/sh';
+    } catch (error) {
+      defaultShell = '/bin/sh';
+    }
 
-  return spawn(serverFilePath, serverArgs, options);
+    return defaultShell;
+  }
+
+  const shell = getSpawnShell();
+  let result;
+  let useDefaultShell = shell !== '/bin/zsh' || process.platform === 'win32';
+
+  try {
+    if (!useDefaultShell) {
+      result = spawn(
+        shell,
+        ['--login']
+          // disable interactive check for zsh
+          .concat(shell === '/bin/zsh' ? [] : ['--no-rcs'])
+          .concat(['--interactive', '-c', serverFilePath])
+          .concat(serverArgs),
+        {
+          detached: true,
+          env: { ...process.env, DISABLE_AUTO_UPDATE: 'true' },
+        }
+      );
+    }
+  } catch {
+    useDefaultShell = true;
+  }
+
+  if (useDefaultShell) {
+    result = spawn(serverFilePath, serverArgs, {
+      detached: true,
+      shell: true,
+    });
+  }
+
+  return result;
 }
 
 /**
@@ -517,7 +514,7 @@ let serverProcess: ChildProcessWithoutNullStreams | null;
 let intentionalQuit: boolean;
 let serverProcessQuit: boolean;
 
-function quitServerProcess() {
+async function quitServerProcess() {
   if ((!serverProcess || serverProcessQuit) && process.platform !== 'win32') {
     console.error('server process already not running');
     return;
@@ -534,6 +531,22 @@ function quitServerProcess() {
   // @todo: should we try and end the process a bit more gracefully?
   //       What happens if the kill signal doesn't kill it?
   serverProcess.kill();
+
+  if (serverProcess.pid) {
+    killProcess(serverProcess.pid);
+  }
+
+  const runningHeadlamp = await getRunningHeadlampPIDs();
+
+  if (!!runningHeadlamp) {
+    runningHeadlamp.forEach(pid => {
+      try {
+        killProcess(pid);
+      } catch (e) {
+        console.log(`Failed to quit headlamp-server:`, e.message);
+      }
+    });
+  }
 
   serverProcess = null;
 }
@@ -1185,11 +1198,17 @@ function startElecron() {
             try {
               killProcess(pid);
             } catch (e) {
-              console.log(`Failed to quit headlamp-servere:`, e.message);
-              shouldWaitForKill = false;
+              if (e.code === 'ESRCH') {
+                // The process is already dead, no need to wait for it.
+                shouldWaitForKill = false;
+              } else {
+                console.log(`Failed to quit headlamp-servere:`, e.message);
+                shouldWaitForKill = false;
+              }
             }
           });
         } else {
+          serverProcess = null;
           mainWindow.close();
           return;
         }
@@ -1250,7 +1269,7 @@ function startElecron() {
     process.platform === 'linux' &&
     ['arm', 'arm64'].includes(process.arch)
   ) {
-    consolg.info(
+    console.info(
       'Disabling GPU hardware acceleration. Reason: known graphical issues in Linux on ARM (use --disable-gpu=false to force it if needed).'
     );
     disableGPU = true;
@@ -1277,7 +1296,14 @@ function startElecron() {
   });
 }
 
-app.on('quit', quitServerProcess);
+app.on('before-quit', async event => {
+  if (serverProcess === null) {
+    return;
+  }
+  event.preventDefault();
+  await quitServerProcess();
+  app.quit();
+});
 
 /**
  * add some error handlers to the serverProcess.
