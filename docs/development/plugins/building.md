@@ -70,6 +70,7 @@ command:
 
 ```bash
 cd headlamp-myfancy
+npm install
 npm run build
 ```
 
