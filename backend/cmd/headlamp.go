@@ -1071,6 +1071,7 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 				"source":     context.SourceStr(),
 				"namespace":  context.KubeContext.Namespace,
 				"extensions": context.KubeContext.Extensions,
+				"hasExec":    context.HasExec,
 			},
 		})
 	}
