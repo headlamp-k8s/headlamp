@@ -52,6 +52,22 @@ interface PluginData {
   artifacthubVersion: string;
 }
 
+/**
+ * Move directories from currentPath to newPath by copying.
+ * @param currentPath from this path
+ * @param newPath to this path
+ */
+function moveDirs(currentPath: string, newPath: string) {
+  try {
+    fs.cpSync(currentPath, newPath, { recursive: true, force: true });
+    fs.rmSync(currentPath, { recursive: true });
+    console.log(`Moved directory from ${currentPath} to ${newPath}`);
+  } catch (err) {
+    console.error(`Error moving directory from ${currentPath} to ${newPath}:`, err);
+    throw err;
+  }
+}
+
 export class PluginManager {
   /**
    * Installs a plugin from the specified URL.
@@ -84,7 +100,7 @@ export class PluginManager {
         fs.mkdirSync(destinationFolder, { recursive: true });
       }
       // move the plugin to the destination folder
-      fs.renameSync(tempFolder, path.join(destinationFolder, path.basename(name)));
+      moveDirs(tempFolder, path.join(destinationFolder, path.basename(name)));
       if (progressCallback) {
         progressCallback({ type: 'success', message: 'Plugin Installed' });
       }
@@ -162,7 +178,7 @@ export class PluginManager {
       fs.mkdirSync(pluginDir, { recursive: true });
 
       // move the plugin to the destination folder
-      fs.renameSync(tempFolder, pluginDir);
+      moveDirs(tempFolder, pluginDir);
       if (progressCallback) {
         progressCallback({ type: 'success', message: 'Plugin Updated' });
       }
