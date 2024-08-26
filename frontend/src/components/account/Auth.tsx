@@ -94,7 +94,7 @@ export function PureAuthToken({
 }: PureAuthTokenProps) {
   const { t } = useTranslation();
   const cluster = getCluster();
-  const focusedRef = React.useCallback(node => {
+  const focusedRef = React.useCallback((node: HTMLDivElement) => {
     if (node !== null) {
       // node.setAttribute('tabindex', '-1');
       node.focus();

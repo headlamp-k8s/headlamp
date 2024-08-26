@@ -30,7 +30,7 @@ export interface OurDialogTitleProps extends DialogTitleProps {
 export function DialogTitle(props: OurDialogTitleProps) {
   const { children, focusTitle, buttons, disableTypography = false, ...other } = props;
 
-  const focusedRef = React.useCallback(node => {
+  const focusedRef = React.useCallback((node: HTMLElement) => {
     if (node !== null) {
       if (focusTitle) {
         node.setAttribute('tabindex', '-1');

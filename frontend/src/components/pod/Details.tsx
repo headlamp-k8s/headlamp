@@ -37,7 +37,7 @@ interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
   item: Pod;
 }
 
-function PodLogViewer(props: PodLogViewerProps) {
+export function PodLogViewer(props: PodLogViewerProps) {
   const { item, onClose, open, ...other } = props;
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [showPrevious, setShowPrevious] = React.useState<boolean>(false);

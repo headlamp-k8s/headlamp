@@ -22,7 +22,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
   const { defaultValue } = props;
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [options, setOptions] = useState(defaultValue);
-  const focusedRef = useCallback(node => {
+  const focusedRef = useCallback((node: HTMLElement) => {
     if (node !== null) {
       node.focus();
     }

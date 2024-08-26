@@ -67,7 +67,7 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [activeDescendantIndex, setActiveDescendantIndex] = React.useState<number>(-1);
 
-  const focusedRef = React.useCallback(node => {
+  const focusedRef = React.useCallback((node: HTMLElement) => {
     if (node !== null) {
       node.focus();
     }
