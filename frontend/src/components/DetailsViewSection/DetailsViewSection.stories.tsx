@@ -39,19 +39,14 @@ const Template: StoryFn<DetailsViewSectionProps> = args => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(
-      setDetailsView((resource: any) => {
+      setDetailsView(resource => {
         if (resource.kind === 'Node') {
-          return {
-            component: (props: { resource: any }) => {
-              const { resource } = props;
-              return (
-                <SectionBox title={'A title'}>
-                  I am a custom detail view. <br />
-                  Made by a {resource.kind} component.
-                </SectionBox>
-              );
-            },
-          };
+          return (
+            <SectionBox title={'A title'}>
+              I am a custom detail view. <br />
+              Made by a {resource.kind} component.
+            </SectionBox>
+          );
         }
         return null;
       })

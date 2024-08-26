@@ -90,7 +90,7 @@ export default function ServiceDetails() {
             section: (
               <SectionBox title={t('Endpoints')}>
                 {endpointsError ? (
-                  <Empty color="error">{endpointsError}</Empty>
+                  <Empty color="error">{endpointsError.toString()}</Empty>
                 ) : (
                   <SimpleTable
                     data={getOwnedEndpoints(item)}

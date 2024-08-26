@@ -22,7 +22,7 @@ export interface MainInfoSectionProps {
     | NameValueTableRow[]
     | null;
   actions?:
-    | ((resource: KubeObject | null) => React.ReactNode[] | null)
+    | ((resource: KubeObject | null) => React.ReactNode[] | HeaderAction[] | null)
     | React.ReactNode[]
     | null
     | HeaderAction[];

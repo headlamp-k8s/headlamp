@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import ConfigMap, { KubeConfigMap } from '../../lib/k8s/configMap';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import Details from './Details';
 import { BASE_CONFIG_MAP, BASE_EMPTY_CONFIG_MAP } from './storyHelper';
@@ -11,32 +11,56 @@ export default {
   decorators: [
     Story => {
       return (
-        <TestContext>
+        <TestContext routerMap={{ name: 'my-cm' }}>
           <Story />
         </TestContext>
       );
     },
   ],
+  parameters: {
+    msw: {
+      handlers: {
+        storyBase: [
+          http.get('http://localhost:4466/api/v1/configmaps', () => HttpResponse.error()),
+          http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
+            HttpResponse.json({
+              kind: 'EventList',
+              items: [],
+              metadata: {},
+            })
+          ),
+        ],
+      },
+    },
+  },
 } as Meta;
 
-interface MockerStory {
-  json?: KubeConfigMap;
-}
-
-const Template: StoryFn = (args: MockerStory) => {
-  const { json } = args;
-  if (!!json) {
-    ConfigMap.useGet = () => [new ConfigMap(json), null, () => {}, () => {}] as any;
-  }
+const Template: StoryFn = () => {
   return <Details />;
 };
 
 export const WithBase = Template.bind({});
-WithBase.args = {
-  json: BASE_CONFIG_MAP,
+WithBase.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/api/v1/configmaps/my-cm', () =>
+          HttpResponse.json(BASE_CONFIG_MAP)
+        ),
+      ],
+    },
+  },
 };
 
 export const Empty = Template.bind({});
-Empty.args = {
-  json: BASE_EMPTY_CONFIG_MAP,
+Empty.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/api/v1/configmaps/my-cm', () =>
+          HttpResponse.json(BASE_EMPTY_CONFIG_MAP)
+        ),
+      ],
+    },
+  },
 };

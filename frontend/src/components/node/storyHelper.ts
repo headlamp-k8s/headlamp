@@ -11,6 +11,7 @@ export const NODE_DUMMY_DATA: KubeNode[] = [
       namespace: 'default',
       creationTimestamp,
       uid: '123',
+      labels: {},
     },
     spec: {
       podCIDR: '',

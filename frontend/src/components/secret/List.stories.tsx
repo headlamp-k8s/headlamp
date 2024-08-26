@@ -1,15 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { KubeObject } from '../../lib/k8s/cluster';
-import Secret from '../../lib/k8s/secret';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import ListView from './List';
 import { BASE_EMPTY_SECRET, BASE_SECRET } from './storyHelper';
-
-Secret.useList = () => {
-  const objList = [BASE_EMPTY_SECRET, BASE_SECRET].map((data: KubeObject) => new Secret(data));
-
-  return [objList, null, () => {}, () => {}] as any;
-};
 
 export default {
   title: 'Secret/ListView',
@@ -31,3 +24,18 @@ const Template: StoryFn = () => {
 };
 
 export const Items = Template.bind({});
+Items.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/api/v1/secrets', () =>
+          HttpResponse.json({
+            kind: 'SecretList',
+            items: [BASE_EMPTY_SECRET, BASE_SECRET],
+            metadata: {},
+          })
+        ),
+      ],
+    },
+  },
+};

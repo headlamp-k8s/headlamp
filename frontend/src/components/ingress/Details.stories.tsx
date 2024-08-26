@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import Ingress, { KubeIngress } from '../../lib/k8s/ingress';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import Details from './Details';
 import { PORT_INGRESS, RESOURCE_INGRESS, WILDCARD_TLS_INGRESS } from './storyHelper';
@@ -11,23 +11,30 @@ export default {
   decorators: [
     Story => {
       return (
-        <TestContext>
+        <TestContext routerMap={{ name: 'my-ingress' }}>
           <Story />
         </TestContext>
       );
     },
   ],
+  parameters: {
+    msw: {
+      handlers: {
+        storyBase: [
+          http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
+            HttpResponse.json({
+              kind: 'EventList',
+              items: [],
+              metadata: {},
+            })
+          ),
+        ],
+      },
+    },
+  },
 } as Meta;
 
-interface MockerStory {
-  ingressJson?: KubeIngress;
-}
-
-const Template: StoryFn = (args: MockerStory) => {
-  const { ingressJson } = args;
-  if (!!ingressJson) {
-    Ingress.useGet = () => [new Ingress(ingressJson), null, () => {}, () => {}] as any;
-  }
+const Template: StoryFn = () => {
   return <Details />;
 };
 
@@ -35,13 +42,40 @@ export const WithTLS = Template.bind({});
 WithTLS.args = {
   ingressJson: PORT_INGRESS,
 };
+WithTLS.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/apis/networking.k8s.io/v1/ingresses/my-ingress', () =>
+          HttpResponse.json(PORT_INGRESS)
+        ),
+      ],
+    },
+  },
+};
 
 export const WithResource = Template.bind({});
-WithResource.args = {
-  ingressJson: RESOURCE_INGRESS,
+WithResource.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/apis/networking.k8s.io/v1/ingresses/my-ingress', () =>
+          HttpResponse.json(RESOURCE_INGRESS)
+        ),
+      ],
+    },
+  },
 };
 
 export const WithWildcardTLS = Template.bind({});
-WithWildcardTLS.args = {
-  ingressJson: WILDCARD_TLS_INGRESS,
+WithWildcardTLS.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/apis/networking.k8s.io/v1/ingresses/my-ingress', () =>
+          HttpResponse.json(WILDCARD_TLS_INGRESS)
+        ),
+      ],
+    },
+  },
 };

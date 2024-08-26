@@ -1037,7 +1037,7 @@ describe('apiProxy', () => {
         const response = await apiProxy.drainNode(clusterName, nodeName);
         expect(response).toEqual(mockResponse);
 
-        const [url, options] = (fetch as Mock).mock.lastCall;
+        const [url, options] = (fetch as Mock).mock.lastCall!;
 
         expect(url).toContain('drain-node');
         expect(options.method).toBe('POST');
@@ -1064,7 +1064,7 @@ describe('apiProxy', () => {
         const response = await apiProxy.drainNodeStatus(clusterName, nodeName);
         expect(response).toEqual(mockResponse);
 
-        const [url, options] = (fetch as Mock).mock.lastCall;
+        const [url, options] = (fetch as Mock).mock.lastCall!;
 
         expect(url).toContain('drain-node-status');
         expect(options.method).toBe('GET');

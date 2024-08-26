@@ -1,11 +1,10 @@
-import { MockInstance } from 'vitest';
 import helpers from './index';
 
 describe('getAppUrl', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
-  const windowSpy = vi.spyOn(window, 'window', 'get') as MockInstance<any, any>;
+  const windowSpy = vi.spyOn<any, any>(window, 'window', 'get');
 
   test('dev mode', () => {
     vi.spyOn(helpers, 'isDevMode').mockImplementation(() => true);

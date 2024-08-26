@@ -1,14 +1,16 @@
-<DocumentFragment>
-  <span
-    aria-label="A tooltip"
-    class=""
-    data-mui-internal-clone-element="true"
-  >
-    <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-      href="/"
+<body>
+  <div>
+    <span
+      aria-label="A tooltip"
+      class=""
+      data-mui-internal-clone-element="true"
     >
-      a link
-    </a>
-  </span>
-</DocumentFragment>
+      <a
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+        href="/"
+      >
+        a link
+      </a>
+    </span>
+  </div>
+</body>

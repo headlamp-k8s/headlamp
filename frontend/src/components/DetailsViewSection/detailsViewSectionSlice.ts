@@ -111,7 +111,7 @@ const detailsViewSectionSlice = createSlice({
       let section = action.payload as DetailsViewSection;
       if (section.id === undefined) {
         if (section.section === undefined) {
-          section = { id: '', section: section };
+          section = { id: '', section: section as unknown as DetailsViewSectionType };
         } else {
           section = { id: '', section: section.section };
         }

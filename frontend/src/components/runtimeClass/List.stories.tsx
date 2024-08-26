@@ -1,15 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { KubeObject } from '../../lib/k8s/cluster';
-import { RuntimeClass } from '../../lib/k8s/runtime';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import { RuntimeClassList } from './List';
 import { RUNTIME_CLASS_DUMMY_DATA } from './storyHelper';
-
-RuntimeClass.useList = () => {
-  const objList = RUNTIME_CLASS_DUMMY_DATA.map((data: KubeObject) => new RuntimeClass(data));
-
-  return [objList, null, () => {}, () => {}] as any;
-};
 
 export default {
   title: 'RuntimeClass/ListView',
@@ -31,3 +24,18 @@ const Template: StoryFn = () => {
 };
 
 export const Items = Template.bind({});
+Items.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/apis/node.k8s.io/v1/runtimeclasses', () =>
+          HttpResponse.json({
+            kind: 'RuntimeClassList',
+            items: RUNTIME_CLASS_DUMMY_DATA,
+            metadata: {},
+          })
+        ),
+      ],
+    },
+  },
+};

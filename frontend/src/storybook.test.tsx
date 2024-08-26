@@ -1,32 +1,22 @@
 import 'vitest-canvas-mock';
-import { StyledEngineProvider, ThemeProvider } from '@mui/material';
-import type { Meta, StoryFn } from '@storybook/react';
-import { composeStories } from '@storybook/react';
-import { act, render } from '@testing-library/react';
+import { composeStories, type Meta, setProjectAnnotations, type StoryFn } from '@storybook/react';
+import { act, render as testingLibraryRender, waitFor } from '@testing-library/react';
+import { getWorker } from 'msw-storybook-addon';
 import path from 'path';
-import themesConf from './lib/themes';
+import * as previewAnnotations from '../.storybook/preview';
+
+const annotations = setProjectAnnotations([previewAnnotations, { testingLibraryRender }]);
+beforeAll(annotations.beforeAll!);
 
 type StoryFile = {
   default: Meta;
   [name: string]: StoryFn | Meta;
 };
 
-const withThemeProvider = (Story: any) => {
-  const lightTheme = themesConf['light'];
-  const theme = lightTheme;
-
-  return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <Story />
-      </ThemeProvider>
-    </StyledEngineProvider>
-  );
-};
-
 const compose = (entry: StoryFile) => {
   try {
-    return composeStories(entry);
+    const stories = composeStories(entry);
+    return stories;
   } catch (e) {
     throw new Error(
       `There was an issue composing stories for the module: ${JSON.stringify(entry)}, ${e}`
@@ -51,7 +41,6 @@ function getAllStoryFiles() {
 
 // Recreate similar options to Storyshots. Place your configuration below
 const options = {
-  suite: 'Storybook Tests',
   storyKindRegex: /^.*?DontTest$/,
   snapshotsDirName: '__snapshots__',
   snapshotExtension: '.stories.storyshot',
@@ -62,8 +51,50 @@ vi.mock('@iconify/react', () => ({
   InlineIcon: () => null,
 }));
 
-getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
-  describe(options.suite, () => {
+vi.mock('@monaco-editor/react', () => ({
+  loader: { config: () => null },
+  default: () => <div className="mock-monaco-editor" />,
+}));
+
+window.matchMedia = () => ({
+  matches: false,
+  addListener: () => {},
+  removeListener: () => {},
+  media: '',
+  onchange: () => {},
+  addEventListener: () => {},
+  removeEventListener: () => {},
+  dispatchEvent: () => true,
+});
+/**
+ * Recursively walks the tree and replaces any usage of useId
+ */
+function replaceUseId(node: any) {
+  const attributesToReplace = ['id', 'for', 'aria-described', 'aria-labelledby', 'aria-controls'];
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    for (const attr of node.attributes) {
+      if (attributesToReplace.includes(attr.name) && attr.value.includes(':')) {
+        // Update the attribute value here
+        node.setAttribute(attr.name, ':mock-test-id:');
+      }
+    }
+  }
+
+  // Recursively update child nodes
+  for (const child of node.childNodes) {
+    replaceUseId(child);
+  }
+}
+
+describe('Storybook Tests', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
     const meta = storyFile.default;
     const title = meta.title || componentName;
 
@@ -72,7 +103,7 @@ getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
       return;
     }
 
-    describe(title, () => {
+    describe(title, async () => {
       const stories = Object.entries(compose(storyFile)).map(([name, story]) => ({
         name,
         story,
@@ -86,23 +117,57 @@ getAllStoryFiles().forEach(({ storyFile, componentName, storyDir }) => {
 
       stories.forEach(({ name, story }) => {
         test(name, async () => {
-          const jsx = withThemeProvider(story);
+          // Keep track of sent requests to wait for the to finish
+          let requestsSent = 0;
+          let requestsEnded = 0;
+          const worker = getWorker();
+          function onStart() {
+            requestsSent++;
+          }
+          function onEnd() {
+            requestsEnded++;
+          }
+          worker.events.on('request:start', onStart);
+          worker.events.on('request:end', onEnd);
 
           await act(async () => {
-            const { unmount, asFragment, rerender } = render(jsx);
-            rerender(jsx);
-            rerender(jsx);
-            await act(() => new Promise(resolve => setTimeout(resolve)));
-
-            const snapshotPath = path.join(
-              storyDir,
-              options.snapshotsDirName,
-              `${componentName}.${name}${options.snapshotExtension}`
-            );
-
-            expect(asFragment()).toMatchFileSnapshot(snapshotPath);
-            unmount();
+            await story.run();
           });
+
+          // There are a bunch of waterfall requests in the stories
+          // So to make sure all requests are sent we need to skip over some ticks
+          const tickSkipCount = 10;
+          for (let i = 0; i < tickSkipCount; i++) {
+            // Advance timers enough for stuff to appear
+            // but not too much that things like notifications/toasts are hidden
+            act(() => vi.advanceTimersByTime(100));
+            await act(() => new Promise(res => process.nextTick(res)));
+          }
+
+          // And now we make sure all the requests that have been sent have ended
+          await waitFor(() => {
+            if (requestsSent !== requestsEnded) {
+              throw new Error('waiting');
+            }
+          });
+
+          // Cleanup listeners
+          worker.events.removeListener('request:start', onStart);
+          worker.events.removeListener('request:end', onEnd);
+
+          // Put snapshot next to the story
+          const snapshotPath = path.join(
+            storyDir,
+            options.snapshotsDirName,
+            `${componentName}.${name}${options.snapshotExtension}`
+          );
+
+          // Get rid of random id's in the ouput
+          replaceUseId(document);
+
+          document.body.removeAttribute('style');
+
+          expect(document.body).toMatchFileSnapshot(snapshotPath);
         });
       });
     });

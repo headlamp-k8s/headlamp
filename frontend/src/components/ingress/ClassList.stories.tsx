@@ -1,17 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { KubeObject } from '../../lib/k8s/cluster';
-import IngressClass from '../../lib/k8s/ingressClass';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import ListView from './ClassList';
 import { RESOURCE_DEFAULT_INGRESS_CLASS, RESOURCE_INGRESS_CLASS } from './storyHelper';
-
-IngressClass.useList = () => {
-  const objList = [RESOURCE_INGRESS_CLASS, RESOURCE_DEFAULT_INGRESS_CLASS].map(
-    (data: KubeObject) => new IngressClass(data)
-  );
-
-  return [objList, null, () => {}, () => {}] as any;
-};
 
 export default {
   title: 'IngressClass/ListView',
@@ -26,6 +17,21 @@ export default {
       );
     },
   ],
+  parameters: {
+    msw: {
+      handlers: {
+        story: [
+          http.get('http://localhost:4466/apis/networking.k8s.io/v1/ingressclasses', () =>
+            HttpResponse.json({
+              kind: 'IngressClassList',
+              metadata: {},
+              items: [RESOURCE_INGRESS_CLASS, RESOURCE_DEFAULT_INGRESS_CLASS],
+            })
+          ),
+        ],
+      },
+    },
+  },
 } as Meta;
 
 const Template: StoryFn = () => {

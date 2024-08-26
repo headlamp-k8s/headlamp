@@ -66,6 +66,11 @@ export const BASE_PV: KubePersistentVolume = {
     accessModes: ['ReadWriteOnce'],
     storageClassName: 'default',
     volumeMode: 'Filesystem',
+    resources: {
+      requests: {
+        storage: '',
+      },
+    },
   },
   status: {
     message: 'test',

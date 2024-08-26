@@ -1,11 +1,13 @@
-<DocumentFragment>
-  <div
-    class="MuiBox-root css-19midj6"
-  >
-    <p
-      class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter css-9ldkza-MuiTypography-root"
+<body>
+  <div>
+    <div
+      class="MuiBox-root css-19midj6"
     >
-      Error getting custom resource nonexistentcustomresource: No mock custom resource for you
-    </p>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter css-9ldkza-MuiTypography-root"
+      >
+        Error getting custom resource nonexistentcustomresource: No mock custom resource for you
+      </p>
+    </div>
   </div>
-</DocumentFragment>
+</body>

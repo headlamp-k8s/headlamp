@@ -1,44 +1,46 @@
-<DocumentFragment>
-  <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
-  >
+<body>
+  <div>
     <div
-      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1qm9nul-MuiGrid-root"
     >
       <div
-        class="MuiBox-root css-70qvj9"
-      >
-        <h3
-          class="MuiTypography-root MuiTypography-h3 MuiTypography-noWrap css-omosr2-MuiTypography-root"
-        >
-          This one has actions
-        </h3>
-        <div
-          class="MuiBox-root css-ldp2l3"
-        />
-      </div>
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-    >
-      <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <div
-          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          class="MuiBox-root css-70qvj9"
         >
-          <button>
-            Edit
-          </button>
+          <h3
+            class="MuiTypography-root MuiTypography-h3 MuiTypography-noWrap css-omosr2-MuiTypography-root"
+          >
+            This one has actions
+          </h3>
+          <div
+            class="MuiBox-root css-ldp2l3"
+          />
         </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
         <div
-          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
         >
-          <button>
-            Delete
-          </button>
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button>
+              Edit
+            </button>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button>
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</DocumentFragment>
+</body>

@@ -58,6 +58,7 @@ const imgPullBackOff = {
   metadata: {
     ...basePod.metadata,
     name: 'imagepullbackoff',
+    uid: '124',
   },
   spec: {
     ...basePod.spec,
@@ -136,6 +137,7 @@ const successful = {
   metadata: {
     ...basePod.metadata,
     name: 'successful',
+    uid: '125',
   },
   spec: {
     ...basePod.spec,
@@ -213,6 +215,7 @@ const initializing = {
   metadata: {
     ...basePod.metadata,
     name: 'initializing',
+    uid: '125',
   },
   spec: {
     ...basePod.spec,
@@ -333,6 +336,7 @@ const livenessFailed = {
   metadata: {
     ...basePod.metadata,
     name: 'liveness-http',
+    uid: '126',
   },
   spec: {
     ...basePod.spec,
@@ -436,6 +440,7 @@ const errorTerminated = {
   metadata: {
     ...basePod.metadata,
     name: 'terminated',
+    uid: '127',
   },
   spec: {
     ...basePod.spec,
@@ -513,6 +518,7 @@ const running = {
   metadata: {
     ...basePod.metadata,
     name: 'running',
+    uid: '128',
   },
   spec: {
     ...basePod.spec,
@@ -586,6 +592,7 @@ const nominatedNode = {
   metadata: {
     ...basePod.metadata,
     name: 'nominated-node',
+    uid: '129',
   },
   spec: {
     ...basePod.spec,
@@ -660,6 +667,7 @@ const readinessGate = {
   metadata: {
     ...basePod.metadata,
     name: 'readiness-gate',
+    uid: '130',
   },
   spec: {
     ...basePod.spec,

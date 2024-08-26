@@ -1,5 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
-import Namespace, { KubeNamespace } from '../../lib/k8s/namespace';
+import { http, HttpResponse } from 'msw';
+import { KubeNamespace } from '../../lib/k8s/namespace';
 import { TestContext } from '../../test';
 import NamespaceDetails from './Details';
 
@@ -19,10 +20,6 @@ const createObj = (name: string) =>
       phase: 'Active',
     },
   } as KubeNamespace);
-
-Namespace.useGet = name => {
-  return [new Namespace(createObj(name)), null, () => {}, () => {}] as any;
-};
 
 export default {
   title: 'Namespace/DetailsView',
@@ -52,4 +49,27 @@ const Template: StoryFn<MockerStory> = args => {
 export const Active = Template.bind({});
 Active.args = {
   namespace: 'my-namespace',
+};
+Active.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/api/v1/namespaces/my-namespace', () =>
+          HttpResponse.json(createObj('my-namespaces'))
+        ),
+        http.get('http://localhost:4466/api/v1/namespaces/my-namespaces/resourcequotas', () =>
+          HttpResponse.json({ kind: 'List', items: [], metadata: {} })
+        ),
+        http.get('http://localhost:4466/api/v1/namespaces/my-namespaces/limitranges', () =>
+          HttpResponse.json({ kind: 'List', items: [], metadata: {} })
+        ),
+        http.get('http://localhost:4466/api/v1/namespaces/my-namespaces/pods', () =>
+          HttpResponse.json({ kind: 'List', items: [], metadata: {} })
+        ),
+        http.get('http://localhost:4466/api/v1/resourcequotas', () => HttpResponse.error()),
+        http.get('http://localhost:4466/api/v1/limitranges', () => HttpResponse.error()),
+        http.get('http://localhost:4466/api/v1/pods', () => HttpResponse.error()),
+      ],
+    },
+  },
 };

@@ -1,81 +1,72 @@
-import React from 'react';
 import themesConf from '../src/lib/themes';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import { initialize, mswDecorator } from 'msw-storybook-addon';
-import { rest } from 'msw';
+import { ThemeProvider } from '@mui/material/styles';
+import { initialize, mswLoader } from 'msw-storybook-addon';
+import '../src/index.css';
+import { Title, Subtitle, Description, Primary, Controls } from '@storybook/blocks';
+import { baseMocks } from './baseMocks';
 
 // https://github.com/mswjs/msw-storybook-addon
-initialize();
+initialize({
+  onUnhandledRequest: 'warn',
+  waitUntilReady: true,
+});
 
-const darkTheme = themesConf['dark'];
-const lightTheme = themesConf['light'];
-
-const withThemeProvider = (Story, context) => {
-  const backgroundColor = context.globals.backgrounds ? context.globals.backgrounds.value : 'light';
-  const theme = backgroundColor !== 'dark' ? lightTheme : darkTheme;
+const withThemeProvider = (Story: any, context: any) => {
+  const theme = themesConf[context.globals.backgrounds?.value === '#1f1f1f' ? 'dark' : 'light'];
 
   const ourThemeProvider = (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <Story {...context} />
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <ThemeProvider theme={theme}>
+      <Story {...context} />
+    </ThemeProvider>
   );
   return ourThemeProvider;
 };
-export const decorators = [withThemeProvider, mswDecorator];
-
-export const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Global theme for components',
-    defaultValue: 'light',
-    toolbar: {
-      icon: 'circlehollow',
-      items: ['light', 'dark'],
-    },
-  },
-};
+export const decorators = [withThemeProvider];
 
 export const parameters = {
   backgrounds: {
     values: [
-      { name: 'light', value: 'light' },
-      { name: 'dark', value: 'dark' },
+      { name: 'light', value: '#FFF' },
+      { name: 'dark', value: '#1f1f1f' },
     ],
   },
-  actions: { argTypesRegex: '^on[A-Z].*' },
+
+  docs: {
+    toc: { disable: true },
+    // Customize docs page to exclude display of all stories
+    // Becasue it would cause stories override each others' mocks
+    page: () => (
+      <>
+        <Title />
+        <Subtitle />
+        <Description />
+        <Primary />
+        <Controls />
+      </>
+    ),
+  },
 
   // https://github.com/mswjs/msw-storybook-addon#composing-request-handlers
   msw: {
-    handlers: [
-      rest.get('https://api.iconify.design/mdi.json', (_req, res, ctx) => {
-        return res(ctx.json({}));
-      }),
-      rest.get('http://localhost/api/v1/namespaces', (_req, res, ctx) => {
-        return res(ctx.json({}));
-      }),
-      rest.get('http://localhost/api/v1/events', (_req, res, ctx) => {
-        return res(ctx.json({}));
-      }),
-      rest.post(
-        'http://localhost/apis/authorization.k8s.io/v1/selfsubjectaccessreviews',
-        (_req, res, ctx) => {
-          return res(ctx.json({ status: 200 }));
-        }
-      ),
-      rest.get('http://localhost:4466/api/v1/namespaces', (_req, res, ctx) => {
-        return res(ctx.json({}));
-      }),
-      rest.get('http://localhost:4466/api/v1/events', (_req, res, ctx) => {
-        return res(ctx.json({}));
-      }),
-      rest.post(
-        'http://localhost:4466/apis/authorization.k8s.io/v1/selfsubjectaccessreviews',
-        (_req, res, ctx) => {
-          return res(ctx.json({ status: 200 }));
-        }
-      ),
-    ],
+    handlers: {
+      /**
+       * If you wan't to override or disable them in a particular story
+       * set base to null in msw configuration
+       *
+       * parameters: {
+       *   msw: {
+       *     handlers: {
+       *       base: null,
+       *       story: [yourMocks]
+       *     }
+       *   }
+       * }
+       */
+      base: baseMocks,
+    },
   },
 };
+
+export const loaders = [mswLoader];
+
+export const tags = ['autodocs'];

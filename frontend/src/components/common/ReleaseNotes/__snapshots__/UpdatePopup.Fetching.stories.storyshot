@@ -1,35 +1,37 @@
-<DocumentFragment>
-  <div
-    class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomRight css-pvolpf-MuiSnackbar-root"
-    role="presentation"
-  >
+<body>
+  <div>
     <div
-      aria-describedby="updatePopup"
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-1rl5bq8-MuiPaper-root-MuiSnackbarContent-root"
-      direction="up"
-      role="alert"
-      style="opacity: 1; transform: scale(1, 1); transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+      class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomRight css-pvolpf-MuiSnackbar-root"
+      role="presentation"
     >
       <div
-        class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
+        aria-describedby="updatePopup"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation6 MuiSnackbarContent-root css-1rl5bq8-MuiPaper-root-MuiSnackbarContent-root"
+        direction="up"
+        role="alert"
+        style="opacity: 1; transform: none; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
       >
-        Fetching release information…
-      </div>
-      <div
-        class="MuiSnackbarContent-action css-1kr9x0n-MuiSnackbarContent-action"
-      >
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
-          style="color: rgb(255, 242, 0);"
-          tabindex="0"
-          type="button"
+        <div
+          class="MuiSnackbarContent-message css-1exqwzz-MuiSnackbarContent-message"
         >
-          Skip
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </button>
+          Fetching release information…
+        </div>
+        <div
+          class="MuiSnackbarContent-action css-1kr9x0n-MuiSnackbarContent-action"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
+            style="color: rgb(255, 242, 0);"
+            tabindex="0"
+            type="button"
+          >
+            Skip
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</DocumentFragment>
+</body>

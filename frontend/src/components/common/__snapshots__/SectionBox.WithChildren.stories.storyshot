@@ -1,13 +1,15 @@
-<DocumentFragment>
-  <div
-    class="MuiBox-root css-j1fy4m"
-  >
+<body>
+  <div>
     <div
-      class="MuiBox-root css-1txv3mw"
+      class="MuiBox-root css-j1fy4m"
     >
-      <p>
-        A child paragraph.
-      </p>
+      <div
+        class="MuiBox-root css-1txv3mw"
+      >
+        <p>
+          A child paragraph.
+        </p>
+      </div>
     </div>
   </div>
-</DocumentFragment>
+</body>
