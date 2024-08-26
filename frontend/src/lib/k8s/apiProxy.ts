@@ -208,7 +208,7 @@ async function refreshToken(token: string | null): Promise<void> {
   const decodedToken: any = decodeToken(token);
 
   // return if the token doesn't have an expiry time
-  if (!decodedToken.exp) {
+  if (!decodedToken || !decodedToken.exp) {
     return;
   }
   // convert expiry seconds to date object

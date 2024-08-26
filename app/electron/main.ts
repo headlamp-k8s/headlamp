@@ -453,6 +453,42 @@ class PluginManagerEventListeners {
   }
 }
 
+function getShellEnv(): NodeJS.ProcessEnv {
+  if (process.platform === 'win32') {
+    return process.env;
+  }
+
+  let shell = process.env.SHELL || '/bin/sh';
+  if (process.platform === 'darwin') {
+    try {
+      shell = userInfo().shell || '/bin/zsh';
+    } catch (error) {
+      shell = '/bin/zsh';
+    }
+  }
+
+  try {
+    const env = { ...process.env, DISABLE_AUTO_UPDATE: 'true' };
+    const result = execSync(`${shell} -ilc 'env'`, {
+      encoding: 'utf8',
+      timeout: 10000,
+      env,
+    });
+
+    const envVars = result.split('\n').reduce((acc, line) => {
+      const [key, value] = line.split('=', 2);
+      if (key && value) acc[key.trim()] = value.trim();
+      return acc;
+    }, {} as NodeJS.ProcessEnv);
+
+    console.log('Shell environment variables:', envVars);
+    return { ...process.env, ...envVars };
+  } catch (error) {
+    console.error('Failed to get shell environment:', error);
+    return process.env;
+  }
+}
+
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = isDev
     ? path.resolve('../backend/headlamp-server')
@@ -488,11 +524,14 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   serverArgs = serverArgs.concat(flags);
   console.log('arguments passed to backend server', serverArgs);
 
-  // We run detached but not in shell, otherwise it's hard to make sure the
-  // server process gets killed. When changing these options, please make sure
-  // to test quitting the app in the different platforms and making sure the
-  // server process has been correctly quit.
-  const options = { detached: true };
+  const shellEnv = getShellEnv();
+  const options = {
+    detached: true,
+    env: shellEnv,
+    shell: true,
+  };
+
+  console.log('Server process options:', options);
 
   return spawn(serverFilePath, serverArgs, options);
 }
