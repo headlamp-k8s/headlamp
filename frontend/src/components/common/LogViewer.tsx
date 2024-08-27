@@ -254,7 +254,7 @@ export function SearchPopover(props: SearchPopoverProps) {
   const [regexChecked, setRegexChecked] = React.useState<boolean>(false);
   const { t } = useTranslation(['translation']);
   const focusedRef = React.useCallback(
-    node => {
+    (node: HTMLInputElement) => {
       if (open && !!node) {
         node.focus();
         node.select();

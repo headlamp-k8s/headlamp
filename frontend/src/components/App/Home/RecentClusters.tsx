@@ -43,7 +43,7 @@ export interface RecentClustersProps {
 export default function RecentClusters(props: RecentClustersProps) {
   const { clusters } = props;
   const history = useHistory();
-  const focusedRef = React.useCallback(node => {
+  const focusedRef = React.useCallback((node: HTMLElement) => {
     if (node !== null) {
       node.focus();
     }
