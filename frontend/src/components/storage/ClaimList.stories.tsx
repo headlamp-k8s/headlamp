@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import _ from 'lodash';
 import PersistentVolumeClaim, {
   KubePersistentVolumeClaim,
@@ -45,7 +45,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <ListView />;
 };
 

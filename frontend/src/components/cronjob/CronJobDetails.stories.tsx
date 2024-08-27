@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
@@ -33,7 +33,7 @@ interface MockerStory {
   cronJobName: string;
 }
 
-const Template: Story<MockerStory> = args => {
+const Template: StoryFn<MockerStory> = args => {
   const { useGet, useList, cronJobName } = args;
 
   if (!!useGet) {

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObject } from '../../lib/k8s/cluster';
 import IngressClass from '../../lib/k8s/ingressClass';
 import { TestContext } from '../../test';
@@ -28,7 +28,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <ListView />;
 };
 

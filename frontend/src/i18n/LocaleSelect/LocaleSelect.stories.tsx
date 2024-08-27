@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import LocaleSelect, { LocaleSelectProps } from './LocaleSelect';
 
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<LocaleSelectProps> = args => <LocaleSelect {...args} />;
+const Template: StoryFn<LocaleSelectProps> = args => <LocaleSelect {...args} />;
 
 export const Initial = Template.bind({});
 Initial.args = {};

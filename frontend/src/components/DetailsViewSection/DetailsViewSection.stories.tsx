@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -35,7 +35,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<DetailsViewSectionProps> = args => {
+const Template: StoryFn<DetailsViewSectionProps> = args => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(

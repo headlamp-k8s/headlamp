@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
 import { TestContext } from '../../test';
@@ -81,7 +81,7 @@ interface MockerStory {
   useList?: KubeObjectClass['useList'];
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   if (!!args.useGet) {
     Endpoints.useGet = args.useGet;
   }

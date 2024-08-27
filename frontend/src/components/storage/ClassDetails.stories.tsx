@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import StorageClass, { KubeStorageClass } from '../../lib/k8s/storageClass';
 import { TestContext } from '../../test';
 import Details from './ClaimDetails';
@@ -23,7 +23,7 @@ interface MockerStory {
   json?: KubeStorageClass;
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   const { json } = args;
   if (!!json) {
     StorageClass.useGet = () => [new StorageClass(json), null, () => {}, () => {}] as any;
