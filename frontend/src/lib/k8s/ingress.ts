@@ -92,31 +92,38 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
     const rules: IngressRule[] = [];
 
     this.spec!.rules?.forEach(({ http, host }) => {
-      const paths = http.paths.map(({ backend, path }) => {
-        if (!!(backend as LegacyIngressBackend).serviceName) {
-          return {
-            path,
-            backend: {
-              service: {
-                name: (backend as LegacyIngressBackend).serviceName,
-                port: {
-                  number: parseInt((backend as LegacyIngressBackend).servicePort, 10),
+      if (http) {
+        const paths = http.paths.map(({ backend, path }) => {
+          if (!!(backend as LegacyIngressBackend).serviceName) {
+            return {
+              path,
+              backend: {
+                service: {
+                  name: (backend as LegacyIngressBackend).serviceName,
+                  port: {
+                    number: parseInt((backend as LegacyIngressBackend).servicePort, 10),
+                  },
                 },
               },
-            },
-          };
-        } else {
-          return {
-            path,
-            backend: backend as IngressBackend,
-          };
-        }
-      });
+            };
+          } else {
+            return {
+              path,
+              backend: backend as IngressBackend,
+            };
+          }
+        });
 
-      rules.push({
-        host,
-        http: { paths },
-      });
+        rules.push({
+          host,
+          http: { paths },
+        });
+      } else {
+        rules.push({
+          host,
+          http: { paths: [] },
+        });
+      }
     });
 
     this.cachedRules = rules;

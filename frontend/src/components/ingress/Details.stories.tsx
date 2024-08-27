@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import Ingress, { KubeIngress } from '../../lib/k8s/ingress';
 import { TestContext } from '../../test';
 import Details from './Details';
-import { PORT_INGRESS, RESOURCE_INGRESS } from './storyHelper';
+import { PORT_INGRESS, RESOURCE_INGRESS, WILDCARD_TLS_INGRESS } from './storyHelper';
 
 export default {
   title: 'Ingress/DetailsView',
@@ -39,4 +39,9 @@ WithTLS.args = {
 export const WithResource = Template.bind({});
 WithResource.args = {
   ingressJson: RESOURCE_INGRESS,
+};
+
+export const WithWildcardTLS = Template.bind({});
+WithWildcardTLS.args = {
+  ingressJson: WILDCARD_TLS_INGRESS,
 };

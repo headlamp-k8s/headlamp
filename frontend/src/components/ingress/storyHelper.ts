@@ -93,6 +93,28 @@ export const RESOURCE_INGRESS = {
   },
 };
 
+export const WILDCARD_TLS_INGRESS = {
+  apiVersion: 'networking.k8s.io/v1',
+  kind: 'Ingress',
+  metadata: {
+    creationTimestamp: '2023-07-19T09:48:42Z',
+    generation: 1,
+    name: 'wildcard-tls-example-ingress',
+    namespace: 'default',
+    resourceVersion: '1234',
+    uid: 'abc1234',
+  },
+  spec: {
+    rules: [{ host: '*.one.domain.tld' }, { host: '*.two.domain.tld' }],
+    tls: [
+      {
+        hosts: ['*.one.domain.tld', '*.two.domain.tld'],
+        secretName: 'wildcard-cert',
+      },
+    ],
+  },
+};
+
 export const RESOURCE_INGRESS_CLASS = {
   apiVersion: 'networking.k8s.io/v1',
   kind: 'IngressClass',
