@@ -261,6 +261,9 @@ func LoadContextsFromAPIConfig(config *api.Config, skipProxySetup bool) ([]Conte
 		// Note: nil authInfo is valid as authInfo can be provided by token.
 		authInfo := config.AuthInfos[context.AuthInfo]
 
+		// Make contextName DNS friendly.
+		contextName = makeDNSFriendly(contextName)
+
 		context := Context{
 			Name:        contextName,
 			KubeContext: context,
@@ -407,4 +410,12 @@ func LoadAndStoreKubeConfigs(kubeConfigStore ContextStore, kubeConfigs string, s
 	}
 
 	return nil
+}
+
+// makeDNSFriendly converts a string to a DNS-friendly format.
+func makeDNSFriendly(name string) string {
+	name = strings.ReplaceAll(name, "/", "--")
+	name = strings.ReplaceAll(name, " ", "__")
+
+	return name
 }
