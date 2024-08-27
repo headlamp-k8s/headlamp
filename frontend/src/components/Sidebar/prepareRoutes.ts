@@ -68,16 +68,6 @@ function prepareRoutes(
           name: 'nodes',
           label: t('glossary|Nodes'),
         },
-        {
-          name: 'crds',
-          label: t('glossary|Custom Resources'),
-          subList: [
-            {
-              name: 'crs',
-              label: t('glossary|CR Instances'),
-            },
-          ],
-        },
       ],
     },
     {
@@ -237,6 +227,16 @@ function prepareRoutes(
         {
           name: 'validatingWebhookConfigurations',
           label: t('glossary|Validating Webhook Configurations'),
+        },
+      ],
+    },
+    {
+      name: 'crds',
+      label: t('glossary|Custom Resources'),
+      subList: [
+        {
+          name: 'crs',
+          label: t('glossary|CR Instances'),
         },
       ],
     },
