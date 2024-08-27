@@ -176,12 +176,19 @@ function KubeConfigLoader() {
           ...new Uint8Array(reader.result as ArrayBuffer),
         ]);
         const doc = yaml.load(data) as kubeconfig;
-        if (!doc.clusters || !doc.contexts) {
-          throw new Error('Invalid kubeconfig file');
+        if (!doc.clusters) {
+          throw new Error(t('translation|No clusters found!'));
+        }
+        if (!doc.contexts) {
+          throw new Error(t('translation|No contexts found!'));
         }
         setFileContent(doc);
       } catch (err) {
-        setError(t('translation|Load a valid kubeconfig'));
+        setError(
+          t(`translation|Invalid kubeconfig file: {{ errorMessage }}`, {
+            errorMessage: (err as Error).message,
+          })
+        );
         return;
       }
     };
