@@ -4,6 +4,7 @@ import { KubeObjectIface, KubeObjectInterface } from '../lib/k8s/cluster';
 interface K8sResourceListGeneratorOptions<T extends KubeObjectInterface> {
   numResults?: number;
   instantiateAs?: KubeObjectIface<T>;
+  uidPrefix?: string;
 }
 
 export function generateK8sResourceList<T extends KubeObjectInterface = KubeObjectInterface>(
@@ -39,7 +40,10 @@ export function generateK8sResourceList<T extends KubeObjectInterface = KubeObje
 
     json.metadata.resourceVersion = i.toString();
     json.metadata.selfLink = `/${json.kind.toLowerCase()}/${json.metadata.name}`;
-    json.metadata.uid = 'abcde-' + i;
+
+    const prefix = options.uidPrefix ?? 'abcde-';
+
+    json.metadata.uid = prefix + i;
 
     list.push(!!instantiateAs ? new instantiateAs(json as T) : json);
   }

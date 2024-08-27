@@ -1,7 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import PersistentVolumeClaim, {
-  KubePersistentVolumeClaim,
-} from '../../lib/k8s/persistentVolumeClaim';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import Details from './ClaimDetails';
 import { BASE_PVC } from './storyHelper';
@@ -13,7 +11,7 @@ export default {
   decorators: [
     Story => {
       return (
-        <TestContext>
+        <TestContext routerMap={{ name: 'my-pvc' }}>
           <Story />
         </TestContext>
       );
@@ -21,20 +19,30 @@ export default {
   ],
 } as Meta;
 
-interface MockerStory {
-  json?: KubePersistentVolumeClaim;
-}
-
-const Template: StoryFn = (args: MockerStory) => {
-  const { json } = args;
-  if (!!json) {
-    PersistentVolumeClaim.useGet = () =>
-      [new PersistentVolumeClaim(json), null, () => {}, () => {}] as any;
-  }
+const Template: StoryFn = () => {
   return <Details />;
 };
 
 export const Base = Template.bind({});
 Base.args = {
   json: BASE_PVC,
+};
+Base.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/api/v1/persistentvolumeclaims/my-pvc', () =>
+          HttpResponse.json(BASE_PVC)
+        ),
+        http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
+          HttpResponse.json({
+            kind: 'EventList',
+            items: [],
+            metadata: {},
+          })
+        ),
+        http.get('http://localhost:4466/api/v1/persistentvolumeclaims', () => HttpResponse.error()),
+      ],
+    },
+  },
 };

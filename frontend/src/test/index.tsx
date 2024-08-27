@@ -3,28 +3,19 @@ import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { KubeObject } from '../lib/k8s/cluster';
-import Event from '../lib/k8s/event';
 import defaultStore from '../redux/stores/store';
 
 export type TestContextProps = PropsWithChildren<{
   store?: ReturnType<typeof configureStore>;
   routerMap?: Record<string, string>;
   urlPrefix?: string;
-  withObjectEvents?: boolean;
   urlSearchParams?: {
     [key: string]: string;
   };
 }>;
 
 export function TestContext(props: TestContextProps) {
-  const {
-    store,
-    routerMap,
-    urlPrefix = '',
-    urlSearchParams,
-    withObjectEvents = true,
-    children,
-  } = props;
+  const { store, routerMap, urlPrefix = '', urlSearchParams, children } = props;
   let url = '';
   let routePath = '';
 
@@ -42,24 +33,6 @@ export function TestContext(props: TestContextProps) {
 
   if (!!urlSearchParams) {
     url += '?' + new URLSearchParams(urlSearchParams).toString();
-  }
-
-  if (withObjectEvents) {
-    // override Event.objectEvents to return phony events array
-    Event.objectEvents = () =>
-      Promise.resolve([
-        {
-          type: 'Normal',
-          reason: 'Created',
-          message: 'Created',
-          source: {
-            component: 'kubelet',
-          },
-          firstTimestamp: '2021-03-01T00:00:00Z',
-          lastTimestamp: '2021-03-01T00:00:00Z',
-          count: 1,
-        },
-      ]);
   }
 
   return (

@@ -1,16 +1,18 @@
-<DocumentFragment>
-  <div
-    class="MuiBox-root css-1v5z18m"
-  >
+<body>
+  <div>
     <div
-      class="MuiBox-root css-k008qs"
+      class="MuiBox-root css-1v5z18m"
     >
-      <label
-        id="my-label2"
-        style="word-break: break-all; white-space: normal;"
+      <div
+        class="MuiBox-root css-k008qs"
       >
-        Short text
-      </label>
+        <label
+          id="my-label2"
+          style="word-break: break-all; white-space: normal;"
+        >
+          Short text
+        </label>
+      </div>
     </div>
   </div>
-</DocumentFragment>
+</body>

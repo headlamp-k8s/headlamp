@@ -24,18 +24,10 @@ const Template: StoryFn<PureAlertNotificationProps> = args => <PureAlertNotifica
 
 export const Error = Template.bind({});
 Error.args = {
-  checkerFunction: () => {
-    return new Promise(function (resolve, reject) {
-      reject('Offline');
-    });
-  },
+  checkerFunction: () => Promise.reject('offline'),
 };
 
 export const NoError = Template.bind({});
 NoError.args = {
-  checkerFunction: () => {
-    return new Promise(function (resolve) {
-      resolve({ statusText: 'OK' });
-    });
-  },
+  checkerFunction: () => Promise.resolve({ statusText: 'OK' }),
 };

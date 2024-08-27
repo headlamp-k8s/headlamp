@@ -1,15 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { KubeObject } from '../../lib/k8s/cluster';
-import StorageClass from '../../lib/k8s/storageClass';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import ListView from './ClassList';
 import { BASE_SC } from './storyHelper';
-
-StorageClass.useList = () => {
-  const objList = [BASE_SC].map((data: KubeObject) => new StorageClass(data));
-
-  return [objList, null, () => {}, () => {}] as any;
-};
 
 export default {
   title: 'StorageClass/ListView',
@@ -31,3 +24,18 @@ const Template: StoryFn = () => {
 };
 
 export const Items = Template.bind({});
+Items.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/apis/storage.k8s.io/v1/storageclasses', () =>
+          HttpResponse.json({
+            kind: 'StorageClassList',
+            items: [BASE_SC],
+            metadata: {},
+          })
+        ),
+      ],
+    },
+  },
+};

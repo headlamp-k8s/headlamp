@@ -412,7 +412,7 @@ export function registerResourceTableColumnsProcessor(
 }
 
 function isProcessor(
-  headerAction: AppBarActionType | AppBarActionsProcessor | AppBarActionProcessorType
+  headerAction: AppBarActionType | AppBarAction | AppBarActionsProcessor | AppBarActionProcessorType
 ): boolean {
   return !!(
     headerAction &&

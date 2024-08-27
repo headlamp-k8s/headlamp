@@ -1,9 +1,10 @@
-import { Component, ComponentType, isValidElement, ReactElement } from 'react';
+import { Component, ComponentType, isValidElement, ReactElement, ReactNode } from 'react';
 import { eventAction, HeadlampEventType } from '../../../redux/headlampEventSlice';
 import store from '../../../redux/stores/store';
 
 export interface ErrorBoundaryProps {
   fallback?: ComponentType<{ error: Error }> | ReactElement | null;
+  children: ReactNode;
 }
 
 interface State {

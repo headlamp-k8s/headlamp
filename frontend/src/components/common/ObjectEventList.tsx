@@ -22,8 +22,12 @@ export default function ObjectEventList(props: ObjectEventListProps) {
   }, [events]);
 
   async function fetchEvents() {
-    const events = await Event.objectEvents(props.object);
-    setEvents(events.map((e: KubeEvent) => new Event(e)));
+    try {
+      const events = await Event.objectEvents(props.object);
+      setEvents(events.map((e: KubeEvent) => new Event(e)));
+    } catch (e) {
+      console.error('Failed to fetch events for object:', props.object, e);
+    }
   }
   const { t } = useTranslation(['translation', 'glossary']);
 

@@ -1,7 +1,9 @@
-<DocumentFragment>
-  <textarea
-    aria-label="yaml Code"
-    class="css-oj69rz"
-    spellcheck="false"
-  />
-</DocumentFragment>
+<body>
+  <div>
+    <textarea
+      aria-label="yaml Code"
+      class="css-oj69rz"
+      spellcheck="false"
+    />
+  </div>
+</body>

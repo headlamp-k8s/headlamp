@@ -47,7 +47,7 @@ if (import.meta.env.UNDER_TEST !== 'true') {
   BrokenFallback = BrokenFallbackTemplate.bind({});
   BrokenFallback.args = {
     fallback: ({ error }: { error: Error }) => {
-      return <div>This is a fallback. Error msg: "{error}"</div>;
+      return <div>This is a fallback. Error msg: "{error.toString()}"</div>;
     },
   };
 

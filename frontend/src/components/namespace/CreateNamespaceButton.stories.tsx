@@ -8,6 +8,11 @@ import CreateNamespaceButton from './CreateNamespaceButton';
 const meta: Meta<typeof CreateNamespaceButton> = {
   title: 'Namespace/CreateNamespaceButton',
   component: CreateNamespaceButton,
+  parameters: {
+    storyshots: {
+      disable: true,
+    },
+  },
   decorators: [
     Story => {
       return (
@@ -20,9 +25,8 @@ const meta: Meta<typeof CreateNamespaceButton> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof CreateNamespaceButton>;
 
-export const OkayName: Story = {
+export const OkayName: StoryObj = {
   play: async () => {
     await userEvent.click(screen.getByLabelText('Create'));
 
@@ -38,7 +42,7 @@ export const OkayName: Story = {
   },
 };
 
-export const EmptyName: Story = {
+export const EmptyName: StoryObj = {
   play: async () => {
     await userEvent.click(screen.getByLabelText('Create'));
 
@@ -56,7 +60,7 @@ export const EmptyName: Story = {
   },
 };
 
-export const NotValidName: Story = {
+export const NotValidName: StoryObj = {
   play: async () => {
     await userEvent.click(screen.getByLabelText('Create'));
 
@@ -76,7 +80,7 @@ export const NotValidName: Story = {
   },
 };
 
-export const NotValidNameLong: Story = {
+export const NotValidNameLong: StoryObj = {
   play: async () => {
     const longName = 'w'.repeat(64);
     await userEvent.click(screen.getByLabelText('Create'));

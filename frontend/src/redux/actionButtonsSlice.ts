@@ -114,7 +114,7 @@ export const actionButtonsSlice = createSlice({
 
       if (headerAction.id === undefined) {
         if (headerAction.action === undefined) {
-          headerAction = { id: '', action: headerAction };
+          headerAction = { id: '', action: headerAction as unknown as HeaderActionType };
         } else {
           headerAction = { id: '', action: headerAction.action };
         }

@@ -1,15 +1,17 @@
-<DocumentFragment>
-  <div
-    class="MuiBox-root css-0"
-    style="display: flex; margin-bottom: 5px;"
-  >
-    <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-      href="http://exampleurl.com/"
-      style="margin-right: 5px;"
+<body>
+  <div>
+    <div
+      class="MuiBox-root css-0"
+      style="display: flex; margin-bottom: 5px;"
     >
-      /
-    </a>
-    (Prefix)
+      <a
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+        href="http://exampleurl.com/"
+        style="margin-right: 5px;"
+      >
+        /
+      </a>
+      (Prefix)
+    </div>
   </div>
-</DocumentFragment>
+</body>

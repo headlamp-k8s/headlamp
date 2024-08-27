@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
-import StorageClass, { KubeStorageClass } from '../../lib/k8s/storageClass';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
-import Details from './ClaimDetails';
+import Details from './ClassDetails';
 import { BASE_SC } from './storyHelper';
 
 export default {
@@ -11,7 +11,7 @@ export default {
   decorators: [
     Story => {
       return (
-        <TestContext>
+        <TestContext routerMap={{ name: 'my-sc' }}>
           <Story />
         </TestContext>
       );
@@ -19,19 +19,22 @@ export default {
   ],
 } as Meta;
 
-interface MockerStory {
-  json?: KubeStorageClass;
-}
-
-const Template: StoryFn = (args: MockerStory) => {
-  const { json } = args;
-  if (!!json) {
-    StorageClass.useGet = () => [new StorageClass(json), null, () => {}, () => {}] as any;
-  }
+const Template: StoryFn = () => {
   return <Details />;
 };
 
 export const Base = Template.bind({});
-Base.args = {
-  json: BASE_SC,
+Base.parameters = {
+  msw: {
+    handlers: {
+      story: [
+        http.get('http://localhost:4466/apis/storage.k8s.io/v1/storageclasses/my-sc', () =>
+          HttpResponse.json(BASE_SC)
+        ),
+        http.get('http://localhost:4466/apis/storage.k8s.io/v1/storageclasses', () =>
+          HttpResponse.error()
+        ),
+      ],
+    },
+  },
 };

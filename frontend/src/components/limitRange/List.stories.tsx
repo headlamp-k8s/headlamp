@@ -1,15 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { KubeObject } from '../../lib/k8s/cluster';
-import { LimitRange } from '../../lib/k8s/limitRange';
+import { http, HttpResponse } from 'msw';
 import { TestContext } from '../../test';
 import { LimitRangeList } from './List';
 import { LIMIT_RANGE_DUMMY_DATA } from './storyHelper';
-
-LimitRange.useList = () => {
-  const objList = LIMIT_RANGE_DUMMY_DATA.map((data: KubeObject) => new LimitRange(data));
-
-  return [objList, null, () => {}, () => {}] as any;
-};
 
 export default {
   title: 'LimitRange/ListView',
@@ -24,6 +17,21 @@ export default {
       );
     },
   ],
+  parameters: {
+    msw: {
+      handlers: {
+        story: [
+          http.get('http://localhost:4466/api/v1/limitranges', () =>
+            HttpResponse.json({
+              kind: 'LimitRangeList',
+              metadata: {},
+              items: LIMIT_RANGE_DUMMY_DATA,
+            })
+          ),
+        ],
+      },
+    },
+  },
 } as Meta;
 
 const Template: StoryFn = () => {

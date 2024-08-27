@@ -1,37 +1,39 @@
-<DocumentFragment>
-  <div
-    aria-busy="true"
-    aria-live="polite"
-    class="MuiBox-root css-2esbmj"
-  >
-    <p
-      class="MuiTypography-root MuiTypography-body1 css-b7twky-MuiTypography-root"
-    >
-      CPU usage
-    </p>
+<body>
+  <div>
     <div
-      class="MuiBox-root css-5cned0"
+      aria-busy="true"
+      aria-live="polite"
+      class="MuiBox-root css-2esbmj"
     >
-      <span
-        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
-        role="progressbar"
-        style="width: 40px; height: 40px;"
-        title="Loading data for CPU usage"
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-b7twky-MuiTypography-root"
       >
-        <svg
-          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-          viewBox="22 22 44 44"
+        CPU usage
+      </p>
+      <div
+        class="MuiBox-root css-5cned0"
+      >
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+          title="Loading data for CPU usage"
         >
-          <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-            cx="44"
-            cy="44"
-            fill="none"
-            r="20.2"
-            stroke-width="3.6"
-          />
-        </svg>
-      </span>
+          <svg
+            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+      </div>
     </div>
   </div>
-</DocumentFragment>
+</body>

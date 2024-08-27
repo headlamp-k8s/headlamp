@@ -1,3 +1,4 @@
+/// <reference types="@testing-library/jest-dom" />
 import '@testing-library/jest-dom/vitest';
 import indexeddb from 'fake-indexeddb';
 
@@ -28,8 +29,6 @@ if (globalThis.window) {
     })),
   });
 }
-
-vi.mock('@mui/material/utils/useId', () => ({ default: vi.fn().mockReturnValue('mock-test-id') }));
 
 beforeEach(() => {
   // Clears the database and adds some testing data.
