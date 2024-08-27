@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import ShowHideLabel, { ShowHideLabelProps } from './ShowHideLabel';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<ShowHideLabelProps> = args => (
+const Template: StoryFn<ShowHideLabelProps> = args => (
   <Box width={300}>
     <ShowHideLabel {...args} />
   </Box>

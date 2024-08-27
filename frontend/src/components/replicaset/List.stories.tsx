@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import { TestContext } from '../../test';
 import List from './List';
@@ -236,7 +236,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <Container maxWidth="xl">
       <List />

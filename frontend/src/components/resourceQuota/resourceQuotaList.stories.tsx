@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import ResourceQuota, { KubeResourceQuota } from '../../lib/k8s/resourceQuota';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
@@ -57,7 +57,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <ResourceQuotaList />;
 };
 

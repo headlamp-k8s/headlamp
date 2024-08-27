@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import NameValueTable, { NameValueTableProps } from './NameValueTable';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   argTypes: { onTabChanged: { action: 'tab changed' } },
 } as Meta;
 
-const Template: Story<NameValueTableProps> = args => <NameValueTable {...args} />;
+const Template: StoryFn<NameValueTableProps> = args => <NameValueTable {...args} />;
 
 export const WithChildren = Template.bind({});
 WithChildren.args = {

@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -20,7 +20,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<SidebarItemProps> = args => {
+const Template: StoryFn<SidebarItemProps> = args => {
   return (
     <Provider store={store}>
       <Grid item style={{ backgroundColor: 'rgba(0, 0, 0, 0.87)' }}>

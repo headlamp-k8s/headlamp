@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import NotFoundImage from '../../../assets/headlamp-404.svg';
 import ErrorComponent, { ErrorComponentProps } from '.';
@@ -9,7 +9,7 @@ export default {
   title: 'common/GenericError',
   component: ErrorComponent,
 } as Meta;
-const Template: Story<ErrorComponentProps> = args => <ErrorComponent {...args} />;
+const Template: StoryFn<ErrorComponentProps> = args => <ErrorComponent {...args} />;
 
 export const Default = Template.bind({});
 

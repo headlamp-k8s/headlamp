@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { TestContext } from '../../test';
@@ -125,7 +125,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<VolumeSectionProps> = args => {
+const Template: StoryFn<VolumeSectionProps> = args => {
   return (
     <TestContext>
       <VolumeSection {...args} />

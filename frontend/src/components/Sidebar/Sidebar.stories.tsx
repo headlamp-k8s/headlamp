@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { SnackbarProvider } from 'notistack';
 import { initialState as CONFIG_INITIAL_STATE } from '../../redux/configSlice';
 import { initialState as FILTER_INITIAL_STATE } from '../../redux/filterSlice';
@@ -18,7 +18,7 @@ export default {
 
 type StoryProps = Partial<SidebarState>;
 
-const Template: Story<StoryProps> = args => {
+const Template: StoryFn<StoryProps> = args => {
   const sidebarStore = configureStore({
     reducer: (
       state = {

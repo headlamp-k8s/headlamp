@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import Tabs, { TabsProps } from './Tabs';
 
@@ -8,7 +8,7 @@ export default {
   argTypes: { onTabChanged: { action: 'tab changed' } },
 } as Meta;
 
-const Template: Story<TabsProps> = args => <Tabs {...args} />;
+const Template: StoryFn<TabsProps> = args => <Tabs {...args} />;
 
 export const BasicTabs = Template.bind({});
 BasicTabs.args = {

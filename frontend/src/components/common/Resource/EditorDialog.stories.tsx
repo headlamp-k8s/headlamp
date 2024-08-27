@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { EditorDialog, EditorDialogProps } from '..';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<EditorDialogProps> = args => {
+const Template: StoryFn<EditorDialogProps> = args => {
   return (
     <EditorDialog
       {...args}

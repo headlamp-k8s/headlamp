@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import IconButton from '@mui/material/IconButton';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import i18next from 'i18next';
 import TooltipLight, { TooltipLightProps } from './TooltipLight';
 
@@ -9,7 +9,7 @@ export default {
   component: TooltipLight,
 } as Meta;
 
-const Template: Story<TooltipLightProps> = args => <TooltipLight {...args} />;
+const Template: StoryFn<TooltipLightProps> = args => <TooltipLight {...args} />;
 
 export const Add = Template.bind({});
 Add.args = {

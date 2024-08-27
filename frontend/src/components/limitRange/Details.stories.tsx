@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { LimitRange } from '../../lib/k8s/limitRange';
 import { TestContext } from '../../test';
 import { LimitRangeDetails } from './Details';
@@ -22,7 +22,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <LimitRangeDetails />;
 };
 
