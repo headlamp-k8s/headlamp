@@ -1065,7 +1065,7 @@ function startElecron() {
       console.info('Plugins are loaded. Loading full menu.');
       setMenu(mainWindow, currentMenu);
 
-      if (pathInfoDebug) {
+      if (pathInfoDebug && mainWindow) {
         dialog.showMessageBoxSync(mainWindow, {
           type: 'info',
           title: 'Path debug info',
