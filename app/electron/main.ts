@@ -21,6 +21,7 @@ import { platform } from 'os';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 import i18n from './i18next.config';
 import { PluginManager } from './plugin-management';
 import windowSize from './windowSize';
@@ -102,25 +103,27 @@ function addPathFromShellToEnvOnMac() {
 }
 addPathFromShellToEnvOnMac();
 
-const args = yargs
-  .command('$0 [kubeconfig]', '', yargs => {
-    yargs
-      .option('headless', {
-        describe: 'Open Headlamp in the default web browser instead of its app window',
-      })
-      .option('disable-gpu', {
-        describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
-        type: 'boolean',
-      })
-      .positional('kubeconfig', {
-        describe:
-          'Path to the kube config file (uses the default kube config location if not specified)',
-        type: 'string',
-      });
+const args = yargs(hideBin(process.argv))
+  .options({
+    headless: {
+      describe: 'Open Headlamp in the default web browser instead of its app window',
+      type: 'boolean',
+    },
+    'disable-gpu': {
+      describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
+      type: 'boolean',
+    },
   })
-  .help().argv;
-const isHeadlessMode = args.headless;
-let disableGPU = args['disable-gpu'];
+  .positional('kubeconfig', {
+    describe:
+      'Path to the kube config file (uses the default kube config location if not specified)',
+    type: 'string',
+  })
+  .help()
+  .parseSync();
+
+const isHeadlessMode = args.headless === true;
+let disableGPU = args['disable-gpu'] === true;
 const defaultPort = 4466;
 
 const useExternalServer = process.env.EXTERNAL_SERVER || false;
