@@ -22,7 +22,7 @@
     "kubernetes-debugging",
     "plugins"
   ],
-  "prettier": "@kinvolk/eslint-config/prettier-config",
+  "prettier": "@headlamp-k8s/eslint-config/prettier-config",
   "eslintConfig": {
     "extends": [
       "@kinvolk",

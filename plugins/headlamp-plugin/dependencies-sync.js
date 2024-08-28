@@ -53,6 +53,7 @@ const dependenciesFrontDoesNotHave = new Set([
   '@types/webpack-env',
   'monaco-editor-webpack-plugin',
   'webpack',
+  'table',
 ]);
 
 // Dependencies from frontend/package.json that aren't wanted by headlamp-plugin.
@@ -76,6 +77,7 @@ const dependenciesToNotCopy = [
   'vitest-websocket-mock',
   'jsdom',
   'glob',
+  '@axe-core/react',
 ];
 
 const yargs = require('yargs/yargs');
