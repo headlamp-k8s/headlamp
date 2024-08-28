@@ -458,7 +458,7 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     ? path.resolve('../backend/headlamp-server')
     : path.join(process.resourcesPath, './headlamp-server');
 
-  let serverArgs = [];
+  let serverArgs: string[] = [];
   if (!!args.kubeconfig) {
     serverArgs = serverArgs.concat(['--kubeconfig', args.kubeconfig]);
   }
