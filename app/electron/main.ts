@@ -1250,7 +1250,7 @@ function startElecron() {
     process.platform === 'linux' &&
     ['arm', 'arm64'].includes(process.arch)
   ) {
-    consolg.info(
+    console.info(
       'Disabling GPU hardware acceleration. Reason: known graphical issues in Linux on ARM (use --disable-gpu=false to force it if needed).'
     );
     disableGPU = true;
