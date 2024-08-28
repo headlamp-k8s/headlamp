@@ -21,6 +21,7 @@ import { platform } from 'os';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 import i18n from './i18next.config';
 import { PluginManager } from './plugin-management';
 import windowSize from './windowSize';
@@ -102,25 +103,27 @@ function addPathFromShellToEnvOnMac() {
 }
 addPathFromShellToEnvOnMac();
 
-const args = yargs
-  .command('$0 [kubeconfig]', '', yargs => {
-    yargs
-      .option('headless', {
-        describe: 'Open Headlamp in the default web browser instead of its app window',
-      })
-      .option('disable-gpu', {
-        describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
-        type: 'boolean',
-      })
-      .positional('kubeconfig', {
-        describe:
-          'Path to the kube config file (uses the default kube config location if not specified)',
-        type: 'string',
-      });
+const args = yargs(hideBin(process.argv))
+  .options({
+    headless: {
+      describe: 'Open Headlamp in the default web browser instead of its app window',
+      type: 'boolean',
+    },
+    'disable-gpu': {
+      describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
+      type: 'boolean',
+    },
   })
-  .help().argv;
-const isHeadlessMode = args.headless;
-let disableGPU = args['disable-gpu'];
+  .positional('kubeconfig', {
+    describe:
+      'Path to the kube config file (uses the default kube config location if not specified)',
+    type: 'string',
+  })
+  .help()
+  .parseSync();
+
+const isHeadlessMode = args.headless === true;
+let disableGPU = args['disable-gpu'] === true;
 const defaultPort = 4466;
 
 const useExternalServer = process.env.EXTERNAL_SERVER || false;
@@ -458,7 +461,7 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     ? path.resolve('../backend/headlamp-server')
     : path.join(process.resourcesPath, './headlamp-server');
 
-  let serverArgs = [];
+  let serverArgs: string[] = [];
   if (!!args.kubeconfig) {
     serverArgs = serverArgs.concat(['--kubeconfig', args.kubeconfig]);
   }
@@ -1065,7 +1068,7 @@ function startElecron() {
       console.info('Plugins are loaded. Loading full menu.');
       setMenu(mainWindow, currentMenu);
 
-      if (pathInfoDebug) {
+      if (pathInfoDebug && mainWindow) {
         dialog.showMessageBoxSync(mainWindow, {
           type: 'info',
           title: 'Path debug info',
@@ -1250,7 +1253,7 @@ function startElecron() {
     process.platform === 'linux' &&
     ['arm', 'arm64'].includes(process.arch)
   ) {
-    consolg.info(
+    console.info(
       'Disabling GPU hardware acceleration. Reason: known graphical issues in Linux on ARM (use --disable-gpu=false to force it if needed).'
     );
     disableGPU = true;
