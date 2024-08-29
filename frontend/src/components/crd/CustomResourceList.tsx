@@ -143,6 +143,19 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
 
           return value;
         },
+        render: (resource: KubeObject) => {
+          const value = getValueWithJSONPath(resource, colSpec.jsonPath);
+          const namespace = resource.metadata.namespace;
+          if (colSpec.name.toLowerCase().includes('secret') && value) {
+            return (
+              <Link routeName={'Secret'} params={{ namespace: namespace, name: value }}>
+                {value}
+              </Link>
+            );
+          } else {
+            return <span>{getValueWithJSONPath(resource, colSpec.jsonPath)}</span>;
+          }
+        },
       });
     }
 
