@@ -252,7 +252,7 @@ const darkTheme = createTheme({
     },
     error: {
       main: red['800'],
-      light: 'rgba(244, 67, 54, 0.2)',
+      light: red['300'],
     },
     home: {
       status: {
