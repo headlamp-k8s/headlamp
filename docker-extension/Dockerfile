@@ -1,4 +1,4 @@
-FROM ghcr.io/headlamp-k8s/headlamp:v0.23.1@sha256:dd9e2ad6ae6d23761372bc9cc0dbcb47aacd6a31986827b43ac207cecb25c39f as headlamp
+FROM ghcr.io/headlamp-k8s/headlamp:v0.25.0@sha256:899d106eeb55b0afc4ee6e51c03bc4418de0bd0e79c39744d4d0d751aae6a971 as headlamp
 
 FROM scratch
 
