@@ -102,15 +102,6 @@ const WideButton = styled(Button)({
   maxWidth: '300px',
 });
 
-const BlackButton = styled(WideButton)(({ theme }) => ({
-  backgroundColor: theme.palette.sidebarBg,
-  color: theme.palette.primaryColor,
-  '&:hover': {
-    opacity: '0.8',
-    backgroundColor: theme.palette.sidebarBg,
-  },
-}));
-
 const enum Step {
   LoadKubeConfig,
   SelectClusters,
@@ -300,7 +291,7 @@ function KubeConfigLoader() {
                     alignItems="stretch"
                   >
                     <Grid item>
-                      <BlackButton
+                      <WideButton
                         variant="contained"
                         color="primary"
                         onClick={() => {
@@ -309,7 +300,7 @@ function KubeConfigLoader() {
                         disabled={selectedClusters.length === 0}
                       >
                         {t('translation|Next')}
-                      </BlackButton>
+                      </WideButton>
                     </Grid>
                     <Grid item>
                       <WideButton
@@ -348,9 +339,9 @@ function KubeConfigLoader() {
             <Box style={{ padding: '32px' }}>
               <Typography>{t('translation|Clusters successfully set up!')}</Typography>
             </Box>
-            <BlackButton variant="contained" onClick={() => history.replace('/')}>
+            <WideButton variant="contained" onClick={() => history.replace('/')}>
               {t('translation|Finish')}
-            </BlackButton>
+            </WideButton>
           </Box>
         );
     }
