@@ -1,4 +1,4 @@
-import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
+import { ChildProcessWithoutNullStreams, exec, execSync, spawn } from 'child_process';
 import { randomBytes } from 'crypto';
 import dotenv from 'dotenv';
 import {
@@ -14,9 +14,10 @@ import {
 } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import find_process from 'find-process';
-import { spawnSync } from 'node:child_process';
+import * as fsPromises from 'fs/promises';
 import fs from 'node:fs';
 import { userInfo } from 'node:os';
+import { promisify } from 'node:util';
 import { platform } from 'os';
 import path from 'path';
 import url from 'url';
@@ -57,51 +58,6 @@ const startUrl = (
   // we use startUrl to determine if it's an internal or external URL. So it's easier to
   // convert everything to forward slashes.
   .replace(/\\/g, '/');
-
-/**
- * On MacOS apps do not get the same environment variables as the terminal.
- *
- * However we want the same PATH as the shell to run the users terminal programs.
- */
-function addPathFromShellToEnvOnMac() {
-  if (process.platform !== 'darwin') {
-    // only necessary on MacOS
-    return;
-  }
-  if (process.env.TERM_PROGRAM) {
-    // if we are running in a terminal then we already have the correct PATH
-    return;
-  }
-
-  let defaultShell;
-  try {
-    defaultShell = userInfo().shell || '/bin/zsh';
-  } catch (error) {
-    defaultShell = '/bin/zsh';
-  }
-
-  // login interactive shell
-  // f option is to prevent menu on zshell when user has no config.
-  // DISABLE_AUTO_UPDATE is to prevent the shell from updating.
-  const env = { ...process.env, DISABLE_AUTO_UPDATE: 'true' };
-  const result = spawnSync(defaultShell, ['--login', '-fic', 'echo $PATH'], {
-    env: env,
-    encoding: 'utf-8',
-    timeout: 8000, // in case it's stuck
-  });
-
-  if (result.status === 0) {
-    const path = result.stdout.toString();
-    pathInfo = {
-      previousPath: process.env.PATH,
-      newPath: path,
-    };
-    process.env.PATH = path;
-  } else {
-    console.error('Failed to get shell PATH, just using process.env.PATH');
-  }
-}
-addPathFromShellToEnvOnMac();
 
 const args = yargs(hideBin(process.argv))
   .options({
@@ -456,7 +412,102 @@ class PluginManagerEventListeners {
   }
 }
 
-function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
+/**
+ * Returns the user's preferred shell or a fallback shell.
+ * @returns A promise that resolves to the shell path.
+ */
+async function getShell(): Promise<string> {
+  // Fallback chain
+  const shells = ['/bin/zsh', '/bin/bash', '/bin/sh'];
+  let userShell = '';
+
+  try {
+    userShell = userInfo().shell || process.env.SHELL || '';
+    if (userShell) shells.unshift(userShell);
+  } catch (error) {
+    console.error('Failed to get user shell:', error);
+  }
+
+  for (const shell of shells) {
+    try {
+      await fsPromises.stat(shell);
+      return shell;
+    } catch (error) {
+      console.error(`Shell not found: ${shell}, error: ${error}`);
+    }
+  }
+
+  console.error('No valid shell found, defaulting to /bin/sh');
+  return '/bin/sh';
+}
+
+/**
+ * Retrieves the environment variables from the user's shell.
+ * @returns A promise that resolves to the shell environment.
+ */
+async function getShellEnv(): Promise<NodeJS.ProcessEnv> {
+  const execPromisify = promisify(exec);
+  const shell = await getShell();
+  const isWindows = process.platform === 'win32';
+
+  // For Windows, just return the current environment
+  if (isWindows) {
+    return { ...process.env };
+  }
+
+  // For Unix-like systems
+  const isZsh = shell.includes('zsh');
+  // interactive is supported only on zsh
+  const shellArgs = isZsh ? ['--login', '--interactive', '-c'] : ['--login', '-c'];
+
+  try {
+    const env = { ...process.env, DISABLE_AUTO_UPDATE: 'true' };
+    let stdout: string;
+    let isEnvNull = false;
+
+    try {
+      // Try env -0 first
+      const command = 'env -0';
+      ({ stdout } = await execPromisify(`${shell} ${shellArgs.join(' ')} '${command}'`, {
+        encoding: 'utf8',
+        timeout: 10000,
+        env,
+      }));
+      isEnvNull = true;
+    } catch (error) {
+      // If env -0 fails, fall back to env
+      console.log('env -0 failed, falling back to env');
+      const command = 'env';
+      ({ stdout } = await execPromisify(`${shell} ${shellArgs.join(' ')} '${command}'`, {
+        encoding: 'utf8',
+        timeout: 10000,
+        env,
+      }));
+    }
+
+    const processLines = (separator: string) => {
+      return stdout.split(separator).reduce((acc, line) => {
+        const firstEqualIndex = line.indexOf('=');
+        if (firstEqualIndex > 0) {
+          const key = line.slice(0, firstEqualIndex);
+          const value = line.slice(firstEqualIndex + 1);
+          acc[key] = value;
+        }
+        return acc;
+      }, {} as NodeJS.ProcessEnv);
+    };
+
+    const envVars = isEnvNull ? processLines('\0') : processLines('\n');
+
+    const mergedEnv = { ...process.env, ...envVars };
+    return mergedEnv;
+  } catch (error) {
+    console.error('Failed to get shell environment:', error);
+    return process.env;
+  }
+}
+
+async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNullStreams> {
   const serverFilePath = isDev
     ? path.resolve('../backend/headlamp-server')
     : path.join(process.resourcesPath, './headlamp-server');
@@ -491,11 +542,20 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   serverArgs = serverArgs.concat(flags);
   console.log('arguments passed to backend server', serverArgs);
 
-  // We run detached but not in shell, otherwise it's hard to make sure the
-  // server process gets killed. When changing these options, please make sure
-  // to test quitting the app in the different platforms and making sure the
-  // server process has been correctly quit.
-  const options = { detached: true };
+  let extendedEnv;
+  try {
+    extendedEnv = await getShellEnv();
+  } catch (error) {
+    console.error('Failed to get shell environment, using default:', error);
+    extendedEnv = process.env;
+  }
+
+  const options = {
+    detached: true,
+    env: {
+      ...extendedEnv,
+    },
+  };
 
   return spawn(serverFilePath, serverArgs, options);
 }
@@ -1238,7 +1298,7 @@ function startElecron() {
         return;
       }
 
-      serverProcess = startServer();
+      serverProcess = await startServer();
       attachServerEventHandlers(serverProcess);
     }
 
