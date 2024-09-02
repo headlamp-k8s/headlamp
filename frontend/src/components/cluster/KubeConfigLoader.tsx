@@ -10,6 +10,7 @@ import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useClustersConf } from '../../lib/k8s';
 import { setCluster } from '../../lib/k8s/apiProxy';
 import { setStatelessConfig } from '../../redux/configSlice';
 import { DialogTitle } from '../common/Dialog';
@@ -105,6 +106,7 @@ const WideButton = styled(Button)({
 const enum Step {
   LoadKubeConfig,
   SelectClusters,
+  ValidateKubeConfig,
   ConfigureClusters,
   Success,
 }
@@ -120,6 +122,7 @@ function KubeConfigLoader() {
     currentContext: '',
   });
   const [selectedClusters, setSelectedClusters] = useState<string[]>([]);
+  const configuredClusters = useClustersConf(); // Get already configured clusters
 
   useEffect(() => {
     if (fileContent.contexts.length > 0) {
@@ -130,9 +133,27 @@ function KubeConfigLoader() {
   }, [fileContent]);
 
   useEffect(() => {
+    if (state === Step.ValidateKubeConfig) {
+      const alreadyConfiguredClusters = selectedClusters.filter(
+        clusterName => configuredClusters && configuredClusters[clusterName]
+      );
+
+      if (alreadyConfiguredClusters.length > 0) {
+        setError(
+          t(
+            'translation|Duplicate cluster: {{ clusterNames }} in the list. Please edit the context name.',
+            {
+              clusterNames: alreadyConfiguredClusters.join(', '),
+            }
+          )
+        );
+        setState(Step.SelectClusters);
+      } else {
+        setState(Step.ConfigureClusters);
+      }
+    }
     if (state === Step.ConfigureClusters) {
       function loadClusters() {
-        //@todo: We need to check if the cluster is already configured.
         const selectedClusterConfig = configWithSelectedClusters(fileContent, selectedClusters);
         setCluster({ kubeconfig: btoa(yaml.dump(selectedClusterConfig)) })
           .then(res => {
@@ -295,7 +316,7 @@ function KubeConfigLoader() {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                          setState(Step.ConfigureClusters);
+                          setState(Step.ValidateKubeConfig);
                         }}
                         disabled={selectedClusters.length === 0}
                       >
@@ -316,6 +337,13 @@ function KubeConfigLoader() {
                 </Box>
               </>
             ) : null}
+          </Box>
+        );
+      case Step.ValidateKubeConfig:
+        return (
+          <Box style={{ textAlign: 'center' }}>
+            <Typography>{t('translation|Validating selected clusters')}</Typography>
+            <Loader title={t('translation|Validating selected clusters')} />
           </Box>
         );
       case Step.ConfigureClusters:

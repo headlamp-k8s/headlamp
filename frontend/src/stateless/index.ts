@@ -247,8 +247,8 @@ export function findKubeconfigByClusterName(clusterName: string): Promise<string
                   ?.extension.customName === clusterName
             );
 
-            const matchingKubeconfig = parsedKubeconfig.clusters.find(
-              cluster => cluster.name === clusterName
+            const matchingKubeconfig = parsedKubeconfig.contexts.find(
+              context => context.name === clusterName
             );
 
             if (matchingKubeconfig || matchingContext) {
@@ -437,9 +437,12 @@ export async function deleteClusterKubeconfig(clusterName: string): Promise<stri
             const kubeconfig = kubeconfigObject.kubeconfig;
 
             const parsedKubeconfig = jsyaml.load(atob(kubeconfig)) as KubeconfigObject;
-
-            const matchingKubeconfig = parsedKubeconfig.clusters.find(
-              cluster => cluster.name === clusterName
+            // Find the context with the matching cluster name or custom name in headlamp_info
+            const matchingKubeconfig = parsedKubeconfig.contexts.find(
+              context =>
+                context.name === clusterName ||
+                context.context.extensions?.find(extension => extension.name === 'headlamp_info')
+                  ?.extension.customName === clusterName
             );
 
             if (matchingKubeconfig) {
@@ -489,11 +492,10 @@ export function updateStatelessClusterKubeconfig(
       const request = indexedDB.open('kubeconfigs', 1) as any;
       // Parse the kubeconfig from base64
       const parsedKubeconfig = jsyaml.load(atob(kubeconfig)) as KubeconfigObject;
-
       // Find the context with the matching cluster name or custom name in headlamp_info
       const matchingContext = parsedKubeconfig.contexts.find(
         context =>
-          context.context.cluster === clusterName ||
+          context.name === clusterName ||
           context.context.extensions?.find(extension => extension.name === 'headlamp_info')
             ?.extension.customName === clusterName
       );
@@ -502,7 +504,7 @@ export function updateStatelessClusterKubeconfig(
         const extensions = matchingContext.context.extensions || [];
         const headlampExtension = extensions.find(extension => extension.name === 'headlamp_info');
 
-        if (matchingContext.context.cluster === clusterName) {
+        if (matchingContext.name === clusterName) {
           // Push the new extension if the cluster name matches
           extensions.push({
             extension: {
