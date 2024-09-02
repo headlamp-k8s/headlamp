@@ -109,6 +109,11 @@
     "vitest": "^2.0.5",
     "cheerio": "1.0.0-rc.12"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-arm64": "*",
+    "@rollup/rollup-linux-x64-gnu": "*",
+    "@rollup/rollup-win32-x64-msvc": "*"
+  },
   "scripts": {
     "prestart": "npm run make-version",
     "start": "cross-env REACT_APP_HEADLAMP_BACKEND_TOKEN=headlamp vite",
