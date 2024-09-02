@@ -34,6 +34,7 @@
     "@mui/lab": "^5.0.0-alpha.152",
     "@mui/material": "^5.15.14",
     "@mui/system": "^5.15.14",
+    "@mui/x-date-pickers": "^7.15.0",
     "@mui/x-tree-view": "^6.17.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@remix-run/router": "1.0.1",
