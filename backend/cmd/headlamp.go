@@ -1475,6 +1475,8 @@ func (c *HeadlampConfig) renameCluster(w http.ResponseWriter, r *http.Request) {
 	if reqBody.Stateless {
 		// For stateless clusters we just need to remove cluster from cache
 		c.handleStatelessClusterRename(w, r, clusterName)
+
+		return
 	}
 
 	// Get path of kubeconfig from source
