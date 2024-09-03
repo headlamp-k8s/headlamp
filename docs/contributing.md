@@ -20,6 +20,15 @@ which promotes good and consistent contribution practices across Kinvolk's
 projects. Before start contributing, and in addition to this section, please
 read those guidelines.
 
+## Community Monthly Call
+
+We are starting a monthly call to discuss the project, the roadmap, and the community.
+
+This first call will be held on Wednesday, September 25th, 2024 at [6:00 PM CEST](https://www.timeanddate.com/worldclock/converter.html?iso=20240925T160000&p1=37&p2=179&p3=224&p4=136&p5=33&p6=176).
+Please mark it on your calendar via this [event](https://calendar.app.google/xKZQJ6hEs5YNYHtaA).
+
+Details on the meeting link will be added to the calendar event soon.
+
 ## Filing an issue or feature request
 
 Please use the [project's issue tracker](https://github.com/headlamp-k8s/headlamp/issues) for filing any bugs you find or features
