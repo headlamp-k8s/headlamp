@@ -10,7 +10,7 @@ on:
       - main
       - rc-*
       - testing-rc-*
-    
+
 permissions:
   contents: read
 
@@ -21,7 +21,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      issues: write # needed for commenting on PRs for coverage changes
+      contents: read
+      pull-requests: write # needed for commenting on PRs for coverage changes
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -137,7 +138,7 @@ jobs:
           if [[ "${{github.event.pull_request.head.repo.full_name}}" == "${{github.repository}}" ]]; then
             # Forks (like dependabot ones) do not have permission to comment on the PR,
             #   so do not fail the action if this fails.
-            gh issue comment ${{github.event.number}} --body "${comment}" || true            
+            gh pr comment ${{github.event.number}} --body "${comment}" || true
           else
             echo "Pull request raised from a fork. Skipping comment."
           fi
