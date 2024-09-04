@@ -43,9 +43,11 @@ export function useSidebarInfo() {
   const temporarySideBarOpen =
     isSidebarOpen === true && isTemporary && isSidebarOpenUserSelected === true;
 
-  // The large sidebar does not open in medium view (600-960px).
+  // Default to closed state, open if user has explicitly opened it
   const isOpen =
-    (isSidebarOpen === true && !isNarrowOnly) || (isSidebarOpen === true && temporarySideBarOpen);
+    ((isSidebarOpen === true && !isNarrowOnly) ||
+      (isSidebarOpen === true && temporarySideBarOpen)) &&
+    isSidebarOpenUserSelected === true;
 
   return {
     isCollapsed: !temporarySideBarOpen && !isNarrowOnly,
