@@ -8,6 +8,7 @@ import * as ReactMonacoEditor from '@monaco-editor/react';
 import * as MuiLab from '@mui/lab';
 import * as MuiMaterial from '@mui/material';
 import * as MuiMaterialStyles from '@mui/material/styles';
+import { styled } from '@mui/system';
 import * as Lodash from 'lodash';
 import * as MonacoEditor from 'monaco-editor';
 import * as Notistack from 'notistack';
@@ -52,6 +53,13 @@ window.pluginLib = {
   MuiMaterial: {
     ...MuiMaterial,
     styles: MuiMaterialStyles,
+  },
+  /**
+   * @mui/styles is not compatible with React.StrictMode or React 18, and it will not be updated.
+   * Workaround is using styled function from @mui/system
+   */
+  MuiStyles: {
+    makeStyles: styled,
   },
   MuiLab,
   React,
