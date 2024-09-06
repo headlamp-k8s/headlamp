@@ -25,18 +25,18 @@
 import { OpPatch } from 'json-patch';
 import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
-import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
-import store from '../../redux/stores/store';
+import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../../helpers';
+import store from '../../../redux/stores/store';
 import {
   deleteClusterKubeconfig,
   findKubeconfigByClusterName,
   getUserIdFromLocalStorage,
   storeStatelessClusterKubeconfig,
-} from '../../stateless/';
-import { getToken, logout, setToken } from '../auth';
-import { getCluster } from '../util';
-import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
-import { KubeToken } from './token';
+} from '../../../stateless';
+import { getToken, logout, setToken } from '../../auth';
+import { getCluster } from '../../util';
+import { KubeMetadata, KubeMetrics, KubeObjectInterface } from '../cluster';
+import { KubeToken } from '../token';
 
 // Uncomment the following lines to enable verbose debug logging in this module.
 // import { debugVerbose } from '../../helpers';
