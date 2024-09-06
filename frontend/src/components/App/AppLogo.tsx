@@ -1,4 +1,4 @@
-import { SvgIcon, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
@@ -29,24 +29,18 @@ export type AppLogoType =
   | null;
 
 export default function OriginalAppLogo(props: AppLogoProps) {
-  const { sx, className, logoType, themeName } = props;
+  const { logoType, themeName } = props;
 
-  return (
-    <SvgIcon
-      sx={sx}
-      className={className}
-      component={
-        logoType === 'large'
-          ? themeName === 'dark'
-            ? LogoWithTextLight
-            : LogoWithTextDark
-          : themeName === 'dark'
-          ? LogoLight
-          : LogoDark
-      }
-      viewBox="0 0 auto 32"
-    />
-  );
+  const Component =
+    logoType === 'large'
+      ? themeName === 'dark'
+        ? LogoWithTextLight
+        : LogoWithTextDark
+      : themeName === 'dark'
+      ? LogoLight
+      : LogoDark;
+
+  return <Component style={{ width: 'auto', height: '32px' }} />;
 }
 
 export function AppLogo(props: AppLogoProps) {
@@ -75,10 +69,6 @@ export function AppLogo(props: AppLogoProps) {
       )}
     </ErrorBoundary>
   ) : (
-    <OriginalAppLogo
-      logoType={logoType}
-      themeName={themeName}
-      sx={{ height: '32px', width: 'auto' }}
-    />
+    <OriginalAppLogo logoType={logoType} themeName={themeName} />
   );
 }
