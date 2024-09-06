@@ -31,7 +31,7 @@
         role="dialog"
       >
         <h2
-          class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-pn1b2i-MuiTypography-root-MuiDialogTitle-root"
+          class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-wlr4ab-MuiTypography-root-MuiDialogTitle-root"
           id="authtoken-dialog-title"
           style="display: flex;"
         >
@@ -71,7 +71,7 @@
           </div>
         </h2>
         <div
-          class="MuiDialogContent-root css-pb2b3-MuiDialogContent-root"
+          class="MuiDialogContent-root MuiDialogContent-dividers css-10qwcju-MuiDialogContent-root"
         >
           <h2
             class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-8yphvn-MuiTypography-root-MuiDialogTitle-root"
