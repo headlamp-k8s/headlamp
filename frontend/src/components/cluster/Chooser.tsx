@@ -294,7 +294,6 @@ export function ClusterDialog(props: ClusterDialogProps) {
     >
       <DialogTitle
         sx={{
-          background: theme.palette.common.black,
           textAlign: 'center',
           alignItems: 'center',
           display: 'flex',
@@ -309,10 +308,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
               }}
               size="small"
             >
-              <InlineIcon
-                icon={'mdi:information-outline'}
-                color={theme.palette.primary.contrastText}
-              />
+              <InlineIcon icon={'mdi:information-outline'} />
             </IconButton>
           ),
         ]}
@@ -323,10 +319,10 @@ export function ClusterDialog(props: ClusterDialogProps) {
             height: '32px',
             width: 'auto',
           }}
-          themeName="dark"
         />
       </DialogTitle>
       <DialogContent
+        dividers
         sx={{
           [theme.breakpoints.up('sm')]: {
             minWidth: 500,
