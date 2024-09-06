@@ -3,15 +3,15 @@ title: Contributing to Internationalization
 sidebar_label: Contributing
 ---
 
-This section introduces some concepts for contributing translations, and is
+This section introduces some concepts for contributing translations and is
 especially important when submitting a new language.
 
-**Important:** If you are adding a new language, keep in mind that while all
-the specific Kubernetes components' names are translatable, it doesn't mean
-that all of them should have a corresponding name in your language. Please,
-refer to the [Kubernetes localized docs](https://kubernetes.io/docs/home/) in
-your language (if they exist) in order to understand which components should
-be translated and which should be left in the original form.
+**Important:** If you add a new language, keep in mind that while all
+the specific Kubernetes components' names are translatable, not all of them
+will have a corresponding name in your language. Please refer to the
+[Kubernetes localized docs](https://kubernetes.io/docs/home/) in your
+language (if they exist) to understand which components should
+be translated and which should be left in their original form.
 
 ## Namespaces
 
@@ -32,7 +32,7 @@ In order to better express context for a translation, we use the [i18next contex
 return t("translation|Desired", { context: "pods" });
 ```
 
-In the example above, we give the extra context of "pods" for the word "Desired", meaning it refers to the concept of pod, and precisely more than one (in case the target language of
+In the example above, we give the extra context of "pods" for the word "Desired". It refers to the concept of pod, and precisely more than one (in case the target language of
 the translation distinguishes between plural and singular for this word).
 
 In the translated files, the context will show up in the respective key as:
@@ -49,19 +49,19 @@ And should be translated without that context suffix. For example, for Spanish:
 
 #### Technical Jargon words
 
-For some technical/jargon terms there often isn't a good translation for
+For some technical/jargon terms, there often isn't a good translation for
 them. To find these ones, it can be good to look at existing documentation
 like the k8s docs.
 
 The word "Pods" is a good example of a technical word that is used in Spanish.
 Maybe it could directly translate to "Vainas", but "Pods" is used instead.
 
-- https://kubernetes.io/es/docs/concepts/workloads/pods/pod/
-- https://kubernetes.io/docs/concepts/workloads/pods/pod/
+- <https://kubernetes.io/es/docs/concepts/workloads/pods/pod/>
+- <https://kubernetes.io/docs/concepts/workloads/pods/pod/>
 
 ## Number formatting
 
-Numbers are formatted in a locale specific way. For example in 'en'
+Numbers are formatted in a locale-specific way. For example in 'en'
 they are formatted like `1,000,000` but with 'de' they are formatted
 like `1.000.000`.
 
@@ -86,7 +86,7 @@ Here's an example of using date formatting:
     });
 ```
 
-## Adding a new language.
+## Adding a new language
 
 Create a folder using the locale code in:
 `frontend/src/i18n/locales/` and `app/electron/locales`
@@ -98,8 +98,8 @@ Integrated components may need to be adjusted (MaterialUI/Monaco etc).
 
 ## Translating missing strings
 
-Since technical development happens more frequently than translations, chances
-are that developers introduce new strings that need to be translated, and will
+Technical development happens more frequently than translations. Thus, chances
+are that developers introduce new strings that need to be translated and will
 be stored as empty strings (defaulting to English) in the translation files.
 
 In order to more easily spot and translate the missing strings, we have two CLI
@@ -122,7 +122,7 @@ tools:
 
 ## Material UI
 
-Some Material UI components are localized, and are configured
+Some Material UI components are localized and are configured
 via a theme provider.
 
 See the Material UI
@@ -131,7 +131,7 @@ and also `frontend/src/i18n/ThemeProviderNexti18n.tsx` where integration is done
 
 ## Storybook integration
 
-TODO: not implmented. There's no working addons that let you set a language easily.
+TODO: not implemented. There's no working addons that let you set a language easily.
 
 ## Monaco editor integration
 

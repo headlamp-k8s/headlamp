@@ -5,8 +5,8 @@ sidebar_position: 1
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
-Headlamp was created to be a Kubernetes web UI that has the traditional functionality of other
-web UIs/dashboards available (i.e. to list and view resources) as well as other features.
+Headlamp was created to blend the traditional feature set of other web UIs/dashboards
+(i.e., to list and view resources) with added functionality.
 
 Headlamp can be used [in-cluster](./installation/in-cluster), where it's accessed through a web browser,
 or as a [desktop application](./installation/desktop) (using the information defined in the user's
@@ -22,4 +22,3 @@ in the Kubernetes Slack.
 ## Frequently Asked Questions
 
 For more information about Headlamp, see the [Headlamp FAQ](./faq.md).
-    

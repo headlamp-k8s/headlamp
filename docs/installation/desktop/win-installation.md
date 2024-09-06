@@ -4,12 +4,12 @@ sidebar_label: Windows
 sidebar_position: 3
 ---
 
-Headlamp is available for Windows as a direct download from its [releases page](https://github.com/headlamp-k8s/headlamp/releases) on Github (.exe file) and from package registries
+Headlamp is available for Windows as a direct download from its [releases page](https://github.com/headlamp-k8s/headlamp/releases) on GitHub (.exe file) and from package registries
 like [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and [Chocolatey](https://chocolatey.org/).
 
 ## Install via Winget
 
-To install Headlamp from the Winget registry. Simply run the following command:
+To install Headlamp from the Winget registry, simply run the following command:
 
 ```powershell
 winget install headlamp

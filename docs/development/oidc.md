@@ -3,7 +3,7 @@ title: Testing OIDC
 sidebar_position: 4
 ---
 
-OIDC (OpenID Connect) is a protocol that allows web applications to authenticate users through an identity provider and obtain basic profile information about the user.
+OIDC (OpenID Connect) is a protocol that allows web applications to authenticate users through an identity provider. It also obtains basic profile information about the user.
 
 ## Testing OIDC with Kubernetes API Server
 
@@ -16,7 +16,7 @@ This guide will walk you through the process of testing OIDC on a Minikube clust
 
 ### Start Minikube
 
-- Start Minikube without enabling OIDC: `minikube start`. This is done to avoid RBAC (Role-Based Access Control) issues during startup. However, we can enable OIDC once the cluster is running.
+- Start Minikube without enabling OIDC: `minikube start`. This is done to avoid RBAC (Role-Based Access Control) issues during startup. But, we can enable OIDC once the cluster is running.
 
 ### SSH into Minikube
 

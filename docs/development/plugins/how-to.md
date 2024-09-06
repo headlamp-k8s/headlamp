@@ -2,20 +2,20 @@
 title: How to create a Plugin
 ---
 
-This section will walk you through a basic plugin development.
+This section will walk you through basic plugin development.
 
 ## Types
 
-If you are using Typescript for developing the plugin, the
-`@kinvolk/headlamp-plugin` package does ship some type declarations in
-`@kinvolk/headlamp-plugin/types`. Please notice that the whole external
-plugin mechanics are still in an early development phase and thus only the
-actual type declarations (and not the corresponding code) is shipped in this
+If you are using TypeScript to develop the plugin, the
+`@kinvolk/headlamp-plugin` package ships some type declarations in
+`@kinvolk/headlamp-plugin/types`. Please note that the whole external
+plugin mechanics are still in an early development phase. Thus, only the
+actual type declarations (and not the corresponding code) are shipped in this
 package.
 
 ## Hello Kubernetes
 
-The following example will show a basic plugin declaration and registration
+The following example will show basic plugin declaration and registration
 in a file that should match the `src/index.tsx` structure explained in the
 [building](./building) section.
 

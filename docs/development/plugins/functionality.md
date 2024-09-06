@@ -3,7 +3,7 @@ title: Plugins Functionality
 sidebar_label: Functionality
 ---
 
-Headlamp's plugins exist for changing or adding functionality related to
+Headlamp's plugins exist to change or add functionality related to
 the user interface and experience.
 
 ## Plugins Lib
@@ -17,14 +17,14 @@ The main ones are:
 - K8s: Kubernetes related functionality
 - Headlamp: To register plugins
 - CommonComponents: React components commonly used in the Headlamp UI
-- Notification: This module contains two exported members one is Notification, a class which can be used to prepare notifications that are accepted by headlamp and the other one is setNotificationsInStore it is a dispatcher function which accepts a notification object prepared from the Notification class and when called it brings the notifications from plugin land to headlamp ecosystem so that headlamp can parse the notification and display it.
+- Notification: This module contains two exported members. The first is Notification, a class that can be used to prepare notifications accepted by headlamp. The second is setNotificationsInStore. It's a dispatcher function that accepts a notification object from the Notification class. When called, it brings the notifications from plugin land to the Headlamp ecosystem so that Headlamp can parse the notification and display it.
 - Router: To get or generate routes
 
 ### Shared Modules
 
-Headlamp ships many of the common npm modules that should be shared by both
-the plugins and Headlamp itself, and includes the config files for editors
-like VS Code to find them.
+Headlamp ships many common npm modules shared by both the plugins and
+Headlamp itself and includes the config files for editors like VS Code
+to find them.
 
 These are:
 
@@ -38,14 +38,14 @@ These are:
 - recharts
 
 Thus, plugins only need to install dependencies that are not yet provided by Headlamp.
-Yet, if any dependencies already covered by Headlamp are installed by the plugins, you
-just need to make sure they are the same version that Headlamp supports, as these will
-not be bundled when [building the plugin](./building.md).
+If any dependencies already covered by Headlamp are installed by the plugins, ensure
+that they are the same version that Headlamp supports. These will not be bundled when
+[building the plugin](./building.md).
 Particularly, the mentioned modules will be replaced by their version that's included
-in a global objects called `pluginLib`.
+in a global object called `pluginLib`.
 
-Older plugin development guides still asked developers to use e.g. React in the following
-way `const React: window.pluginLib.React`, but this is no longer needed.
+Older plugin development guides still asked developers to use, e.g., React, in the following
+way: `const React: window.pluginLib.React`. But, this is no longer needed.
 
 ## Functionality
 
@@ -168,7 +168,7 @@ React to Headlamp events with [registerHeadlampEventCallback](../api/plugin/regi
 
 ### Plugin Settings
 
-The plugins can have user configurable settings that can be used to change the behavior of the plugin. The plugin settings can be created using [registerPluginSettings](../api/plugin/registry/functions/registerpluginsettings).
+The plugins can have user-configurable settings that can be used to change the behavior of the plugin. The plugin settings can be created using [registerPluginSettings](../api/plugin/registry/functions/registerpluginsettings).
 
 - Example plugin shows [How to create plugin settings and use them](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/change-logo)
 

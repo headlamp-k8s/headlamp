@@ -7,7 +7,7 @@ Headlamp supports OIDC for cluster users to effortlessly log in using a "Sign in
 
 ![screenshot the login dialog for a cluster](./oidc_button.png)
 
-For OIDC to be used, Headlamp needs to know how to configure it, so you have to provide the different OIDC-related arguments to Headlamp from your OIDC provider. Those are:
+To use OIDC, Headlamp needs to know how to configure it, so you have to provide the following OIDC-related arguments to Headlamp from your OIDC provider:
 
 - the client ID: `-oidc-client-id` or env var `HEADLAMP_CONFIG_OIDC_CLIENT_ID`
 - the client secret: `-oidc-client-secret` or env var `HEADLAMP_CONFIG_OIDC_CLIENT_SECRET`
@@ -50,4 +50,4 @@ then you have to:
 - Set `-oidc-idp-issuer-url` as Dex's URL (same as in `--oidc-issuer-url` in the Kubernetes APIServer)
 - Set `-oidc-scopes` if needed, e.g. `-oidc-scopes=profile,email,groups`
 
-**Note** If you already have another static client configured for Kubernetes to be used by the [apiserver's OIDC](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#configuring-the-api-server) (OpenID Connect) configuration, it is important to ensure that a **single static client ID** i.e `-oidc-client-id` is used for both Dex and Headlamp. Additionally, the **redirectURIs** need to be specified for each client.
+**Note** If you already have another static client configured for Kubernetes for the [apiserver's OIDC](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#configuring-the-api-server) (OpenID Connect) configuration, use a **single static client ID** i.e `-oidc-client-id` for both Dex and Headlamp. Additionally, the **redirectURIs** need to be specified for each client.

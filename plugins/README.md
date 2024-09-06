@@ -30,7 +30,7 @@ Folder                                         | Description
 [examples/cluster-chooser](examples/cluster-chooser)   | Override default chooser button.
 [examples/details-view](examples/details-view)         | Custom sections and actions for detail views.
 [examples/dynamic-clusters](examples/dynamic-clusters) | Update cluster configuration dynamically.
-[examples/pod-counter](examples/pod-counter)   | Display number of Pods in title bar.
+[examples/pod-counter](examples/pod-counter)   | Display number of Pods in the title bar.
 [examples/sidebar](examples/sidebar)           | Change the side bar menu.
 [examples/tables](examples/tables)             | Override the tables in list views.
 headlamp-plugin               | headlamp-plugin script which plugins use.

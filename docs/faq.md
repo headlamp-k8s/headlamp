@@ -7,11 +7,11 @@ sidebar_position: 5
 
 ### What is Headlamp and who is it for?
 
-Headlamp is a graphical user interface specifically tailored for simplifying the management of Kubernetes clusters.
+Headlamp is a graphical user interface specifically tailored to simplify the management of Kubernetes clusters.
 
 ### What Kubernetes flavors or vendors does Headlamp support?
 
-Headlamp is designed to be vendor-agnostic, supporting a variety of Kubernetes flavors. For a comprehensive list of compatible platforms please refer to our [platforms section in the documentation](./platforms.md).
+Headlamp is designed to be vendor-agnostic, supporting a variety of Kubernetes flavors. For a full list of compatible platforms, please refer to our [platforms section in the documentation](./platforms.md).
 
 ### Is Headlamp a desktop or web application?
 
@@ -19,7 +19,7 @@ Headlamp is available both as a desktop application and a web application. The d
 
 ### Is there any cost involved in using Headlamp?
 
-Headlamp a 100% open source project, under the Apache 2.0 License. It is thus available at no charge, and users are encouraged to modify and redistribute it in accordance with the license terms.
+Headlamp is a 100% open source project, under the Apache 2.0 License. It is thus available at no charge, and users are encouraged to modify and redistribute it in accordance with the license terms.
 
 ### Can I use Headlamp for commercial purposes?
 
@@ -35,15 +35,15 @@ You can find the list of Headlamp's maintainers in its [MAINTAINERS.md](https://
 
 ### What capabilities / credentials does Headlamp require to access my Kubernetes cluster?
 
-Headlamp doesn't require access to the cluster in itself. It instead relies to RBAC when connecting to the Kubernetes API server, meaning that it's the users that are required the credentials to access the cluster (via a service token or client certificate). Headlamp may store the token in the browser's local storage, but never in its backend/server.
+Headlamp doesn't require access to the cluster itself; it instead relies on RBAC to connect to the Kubernetes API server. This means that it's the user(s) who must have the required credentials to access the cluster (via a service token or client certificate). Headlamp may store the token in the browser's local storage, but never in its backend/server.
 
 ### Is Headlamp customizable?
 
-Yes, Headlamp is highly customizable, thanks to its robust plugin system. This system allows for the extension of Headlamp's core functionalities, catering to specific use cases and workflows. For more information on creating and managing plugins, visit our [plugins page](./development/plugins/building.md).
+Yes, Headlamp is highly customizable, thanks to its robust plugin system. This system extends Headlamp's core functionalities, catering to specific use cases and workflows. For more information on creating and managing plugins, visit our [plugins page](./development/plugins/building.md).
 
 ### How often is Headlamp updated?
 
-Headlamp tries to have a new features version released every month. Sometimes, there may be delays for a couple of weeks. Bug fix versions can be released in between feature versions, whenever appropriate (releases fixing critical bugs are often released quickly after a fix is added).
+Headlamp tries to have a new feature version released every month. Sometimes, there may be delays of a couple of weeks. Bug fix versions can also be released between feature versions, whenever appropriate. These are often released quickly after a fix is added.
 
 ---
 
@@ -55,7 +55,7 @@ To install Headlamp, follow the detailed instructions provided in the [official 
 
 ### Can I install Headlamp in my Kubernetes cluster?
 
-Absolutely, Headlamp can be deployed directly within your Kubernetes cluster. Detailed instructions for in-cluster installation can be found in the [in-cluster installation guide](./installation/in-cluster/index.md).
+Absolutely! Headlamp can be deployed directly within your Kubernetes cluster. Detailed instructions for in-cluster installation can be found in the [in-cluster installation guide](./installation/in-cluster/index.md).
 
 ---
 
@@ -71,7 +71,7 @@ Yes, Headlamp enables direct management of Kubernetes resources through its user
 
 ### Headlamp is not showing delete/edit/scale buttons in a resource, why is that?
 
-Headlamp shows controls based on the user's role (RBAC), so if the user has e.g. no permissions to delete a resource, the delete button is not shown.
+Headlamp shows controls based on the user's role (RBAC), so if the user has, e.g., no permissions to delete a resource, the delete button is not shown.
 
 ### I cannot access any section in my cluster, it keeps saying Access Denied.
 
@@ -83,7 +83,7 @@ To add or remove plugins in Headlamp, you can follow the plugin management instr
 
 ### Is there a way to contribute to the development of Headlamp features?
 
-Absolutely! As an open-source project, Headlamp thrives on community contributions. You can contribute in various ways, including submitting pull requests, creating plugins, reporting issues, and suggesting new features. For more details on how to get involved, visit our [contribution section](./contributing.md).
+Absolutely! As an open source project, Headlamp thrives on community contributions. You can contribute in various ways, including submitting pull requests, creating plugins, reporting issues, and suggesting new features. For more details on how to get involved, visit our [contribution section](./contributing.md).
 
 ### How can I get help or assistance for Headlamp?
 

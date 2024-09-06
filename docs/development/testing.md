@@ -24,7 +24,7 @@ Steps:
 
 ### Kwok for low resource usage load testing of Headlamp
 
-> [KWOK](https://github.com/kubernetes-sigs/kwok) is a toolkit that enables setting up a cluster of thousands of Nodes in seconds. Under the scene, all Nodes are simulated to behave like real ones, so the overall approach employs a pretty low resource footprint that you can easily play around on your laptop.
+> [KWOK](https://github.com/kubernetes-sigs/kwok) is a toolkit that enables setting up a cluster of thousands of Nodes in seconds. All Nodes are simulated to behave like real ones, which creates a pretty low resource footprint that you can easily play around with on your machine.
 
 - [KWOK installation](https://kwok.sigs.k8s.io/docs/user/installation/)
 
@@ -45,7 +45,7 @@ kubectl config get-contexts
 
 #### Generating Initial Data
 
-This will create 900 nodes, 9000 pods, and 1000 events as fast as possible. Then it will create 1 event per second up to a total of 9000 events. Also one per second: 100 new nodes, and 1000 new pods. Finally it will create 15 clusters.
+This will create 900 nodes, 9000 pods, and 1000 events as fast as possible. Then it will create 1 event per second up to a total of 9000 events. Also one per second: 100 new nodes and 1000 new pods. Finally, it will create 15 clusters.
 
 ```bash
 cd load-tests
@@ -71,7 +71,7 @@ node scripts/create-events.js 9000 1 & node scripts/create-nodes.js 100 1 & node
 
 #### Cleaning up clusters
 
-Kwok clusters can take up a lot of resources even doing nothing,
+Kwok clusters can take up a lot of resources even when doing nothing,
 due to the Kubernetes API server using resources even when idle.
 
 So when you're done, you can delete them like this.

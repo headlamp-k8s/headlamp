@@ -3,7 +3,7 @@ title: In-cluster
 sidebar_position: 1
 ---
 
-A common use-case for any Kubernetes web UI is to deploy it in-cluster and
+A common use case for any Kubernetes web UI is to deploy it in-cluster and
 set up an ingress server for having it available to users.
 
 ## Using Helm
@@ -19,7 +19,7 @@ helm repo add headlamp https://headlamp-k8s.github.io/headlamp/
 helm install my-headlamp headlamp/headlamp --namespace kube-system
 ```
 
-As usual it is possible to configure the helm release via the [values file](https://github.com/headlamp-k8s/headlamp/blob/main/charts/headlamp/values.yaml) or setting your preferred values directly.
+As usual, it is possible to configure the helm release via the [values file](https://github.com/headlamp-k8s/headlamp/blob/main/charts/headlamp/values.yaml) or setting your preferred values directly.
 
 ```bash
 # install headlamp with your own values.yaml
@@ -47,10 +47,10 @@ kubectl apply -f https://raw.githubusercontent.com/kinvolk/headlamp/main/kuberne
 
 With the instructions in the previous section, the Headlamp service should be
 running, but you still need the
-ingress server as mentioned. We provide an example sample ingress yaml file
+ingress server as mentioned. We provide a sample ingress YAML file
 for this purpose, but you have to manually replace the **URL** placeholder
-with the desired URL (the ingress file also assumes that you have contour
-and a cert-manager set up, but if you don't then you'll just not have TLS).
+with the desired URL. The ingress file also assumes that you have Contour
+and a cert-manager set up, but if you don't, then you'll just not have TLS.
 
 Assuming your URL is `headlamp.mydeployment.io`, getting the sample ingress
 file and changing the URL can quickly be done by:

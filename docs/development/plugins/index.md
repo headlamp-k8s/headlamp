@@ -3,7 +3,7 @@ title: Plugins
 sidebar_position: 6
 ---
 
-Plugins are one of the key features of Headlamp. They allow you to change how and what information is displayed, as well as other functionality. The ultimate goal of the plugins system is to allow vendors to build and deploy Headlamp with extra functionality without having to maintain a fork of the project.
+Plugins are one of the key features of Headlamp. They allow you to change how and what information is displayed and may serve various use cases. The plugins system aims to allow vendors to add features to Headlamp without having to maintain a fork of the project.
 
 ## Using plugins
 
@@ -32,9 +32,9 @@ for more details.
 
 ## Developing Plugins
 
-Plugins are supposed to be built and shipped out-of-tree, i.e. instead of managing the plugins'
-code within the Headlamp project or a Headlamp fork (which would require
-always rebuilding/maintaining Headlamp when changing a plugin), they're
-supposed to be built outside of the project and loaded by Headlamp.
+Plugins are meant to be build and shipped out-of-tree (i.e., outside of the project and loaded by
+Headlamp). This is opposed to managing the plugins' code within the Headlamp
+project or within a Headlamp fork. Such a setup would require always
+rebuilding/maintaining Headlamp when changing a plugin.
 
 Learn [how to create a Headlamp plugin](./building.md).

@@ -8,7 +8,7 @@ This is a quickstart guide for building and running Headlamp for development.
 Please make sure you read the [Contribution Guidelines](../contributing.md) as well
 before starting to contribute to the project.
 
-See [platforms](../platforms.md) to find out which browsers, OS and flavours of Kubernetes we support.
+See [platforms](../platforms.md) to find out which browsers, OS and flavors of Kubernetes we support.
 
 ## Dependencies to get started
 
@@ -86,7 +86,7 @@ make app-win
 For Windows, by default it will produce an installer using [NSIS (Nullsoft Scriptable Install System)](https://sourceforge.net/projects/nsis/).
 
 If you prefer an `.msi` installer, then be sure to install the [WiX Toolset](https://wixtoolset.org/) and have its `light.exe` and `candle.exe` in the Windows path.
-E.g. if you are using WiX Toolset version 3.11, this can be done by running the following command,
+E.g., if you are using WiX Toolset version 3.11, this can be done by running the following command,
 before the one above:
 
 ```bash
@@ -136,7 +136,7 @@ IMAGE_BASE=debian:latest make image
 
 If no IMAGE_BASE is specified, then a default image is used (see Dockerfile for exact default image used).
 
-This is useful if there are requirements on what base images can be used in an environment.
+This is useful if there are requirements on which base images can be used in an environment.
 
 So far Debian variants (including Ubuntu), and Alpine Linux are supported.
 If you have other requirements, please get in touch.
@@ -163,19 +163,19 @@ Successfully tagged headlamp-k8s/headlamp:development
 $ docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,source="/home/rene/.minikube",target=$HOME/.minikube --mount type=bind,source="$HOME/.kube",target=/root/.kube headlamp-k8s/headlamp:development /headlamp/headlamp-server -html-static-dir /headlamp/frontend -plugins-dir=/headlamp/plugins
 ```
 
-Then go to https://localhost:4466 in your browser.
+Then go to <https://localhost:4466> in your browser.
 
 ### Minikube "in-cluster"
 
-These instructions are for if you want to use Headlamp running "in-cluster",
+These instructions are for if you want to run Headlamp "in-cluster",
 and test it locally on minikube with a local container image.
 
-We assume you've already setup a minikube
+We assume you've already set up minikube
 (probably with `minikube start --driver=docker`).
 
 #### Container image in the minikube docker environment
 
-First we have to make the container image in the minikube docker environment.
+First, we have to make the container image in the minikube docker environment.
 This is needed because minikube looks for container images in there, not
 ones made in the local docker environment.
 
@@ -184,7 +184,7 @@ eval $(minikube docker-env)
 DOCKER_IMAGE_VERSION=development make image
 ```
 
-#### Create a deployment yaml.
+#### Create a deployment yaml
 
 ```bash
 kubectl create deployment headlamp -n kube-system --image=headlamp-k8s/headlamp:development -o yaml --dry-run -- /headlamp/headlamp-server -html-static-dir /headlamp/frontend -in-cluster -plugins-dir=/headlamp/plugins > minikube-headlamp.yaml
@@ -252,22 +252,22 @@ Go to the URL printed by minikube in your browser, and get your token to login.
 
 ### Shipping plugins in the Docker image
 
-Since the Headlamp server has an option (`-plugins-dir`) for indicating where to find any plugins,
-a deployment of Headlamp using the Docker image can mount a plugins folder
+The Headlamp server has an option (`-plugins-dir`) for indicating where to find any plugins.
+Thus, a deployment of Headlamp using the Docker image can mount a plugins folder
 and point to it by using the mentioned option.
 
 An alternative is to build an image that ships some plugins in it. For that,
-just create a ".plugins" folder in the Headlamp project directory as the Dockerfile
+just create a ".plugins" folder in the Headlamp project directory, as the Dockerfile
 will include it and point to it by default.
 
 ## Special Build Options
 
-Here are some options that can be used when building Headlamp, to change its default behavior.
+Here are some options that can be used when building Headlamp to change its default behavior.
 
 ### Update Checks
 
-When in the **desktop app**, by default, Headlamp will check for new versions from its Github page and warn the user about it,
-as well as showing the release notes after updating to a new version.
+In the **desktop app**, by default, Headlamp will check for new versions from its GitHub page and warn the user about it.
+It will also show the release notes after updating to a new version.
 
 This behavior can be turned off by adding the following to a `.env` file in the `app/` folder:
 

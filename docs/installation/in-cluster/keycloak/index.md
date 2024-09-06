@@ -9,7 +9,7 @@ Note: This tutorial assumes that you have Keycloak hosted on a remote server. If
 
 ## Creating a Keycloak Client
 
-To enable OIDC authentication in your Minikube cluster, you'll need to create a Keycloak client.Before proceeding, follow the [getting started guide](https://www.keycloak.org/guides#getting-started) to set up your Keycloak instance. When creating a user in Keycloak, don't forget to also set the email address.Follow these steps to configure the client in your Keycloak admin panel:
+To enable OIDC authentication in your Minikube cluster, you'll need to create a Keycloak client. Before proceeding, follow the [getting started guide](https://www.keycloak.org/guides#getting-started) to set up your Keycloak instance. When creating a user in Keycloak, don't forget to also set the email address. Follow these steps to configure the client in your Keycloak admin panel:
 
 1. Start by accessing your Keycloak admin panel.
    > \<YOUR-KEYCLOAK-URL\>/admin
@@ -25,7 +25,7 @@ To enable OIDC authentication in your Minikube cluster, you'll need to create a 
 4. In the "Capability Config" step, enable "Client authentication" and proceed to the next step.
    ![Keycloak Create Client](./keycloak-create-client2.jpeg)
 
-5. Add "http://localhost:8000/\*" to the "Valid redirect URIs" and save your settings.
+5. Add "<http://localhost:8000/\>*" to the "Valid redirect URIs" and save your settings.
    ![Keycloak Create Client](./keycloak-create-client3.jpeg)
 
 ## Setting up Minikube with the Keycloak OIDC Configuration
@@ -171,7 +171,7 @@ This will install Headlamp in the headlamp namespace with the OIDC configuration
 kubectl port-forward svc/headlamp-oidc 4466:80 -n headlamp
 ```
 
-5. Open your web browser and go to http://localhost:4466. Click on "sign-in." After completing the login flow successfully, you'll gain access to your Kubernetes cluster using Headlamp.
+5. Open your web browser and go to <http://localhost:4466>. Click on "sign-in." After completing the login flow successfully, you'll gain access to your Kubernetes cluster using Headlamp.
 
 ![Headlamp access](./headlamp-access1.jpg)
 ![Headlamp access](./headlamp-access2.jpg)
@@ -179,6 +179,6 @@ kubectl port-forward svc/headlamp-oidc 4466:80 -n headlamp
 
 ## Conclusion
 
-In this tutorial, we've explored the process of setting up Headlamp within a Kubernetes cluster, integrating it with OIDC (OpenID Connect) authentication provided by Keycloak. By following the steps outlined in this guide, you've successfully configured Headlamp to enhance your Kubernetes cluster management.
+In this tutorial, we've set up Headlamp within a Kubernetes cluster and integrated it with OIDC (OpenID Connect) authentication provided by Keycloak. By following the steps outlined in this guide, you've successfully configured Headlamp to enhance your Kubernetes cluster management.
 
-This setup allows you to benefit from Headlamp's user-friendly interface and advanced features, all while ensuring a secure and streamlined authentication through Keycloak. With the power of OIDC, you can easily and safely access and manage your Kubernetes resources.
+This setup allows you to enjoy Headlamp's user-friendly interface and advanced features. You can also be assured of secure and streamlined authentication through Dex. With the power of OIDC, you can easily and safely access and manage your Kubernetes resources.

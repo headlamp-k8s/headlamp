@@ -31,22 +31,23 @@ We will start by creating a Cognito user pool. This tutorial uses the AWS portal
 9. You can either chose sending email from Amazon SES or with Cognito, These emails are for MFA, account recovery, sign up, sign in workflows. For this tutorial we will use sending emails through Cognito.
    ![congigure-message-delivery](./cognito/configure-message-delivery.png)
 10. Click next to go to the Integrate your app view
-11. There are few things you have to take care of here,
+11. There are a few things you have to take care of here,
     - You can either use the hosted UI or create your own UI for the authentication workflows (We are using the Cognito hosted UI).
-    - You can also configure the domain name for the hosted UI (Also remember this is the issuer URL as well which we will later use to setup EKS with). We are using Cognito domain for this tutorial but you can chose your own custom domain as well.
-    - You can also configure the callback URLs for the auth flow. For this tutorial we are setting it to be
-      http://localhost:8000/oidc-callback as we will be running headlamp on this port but you can chose your own callback host as well based on your needs make sure to append /oidc-callback to the host since this is where headlamp expect the redirect from auth to occur.
-    - Client Secret - We want to generate a client secret as our headlamp app needs it to start the auth dance, So select Generate a client secret client secret column.
-    - You can also configure the scopes and claims for the tokens. For this tutorial make sure openid, profile, email scopes are selected, other scopes are optional.
+    - You can also configure the domain name for the hosted UI (Also remember this is the issuer URL as well, which we will later use to set up EKS with). We are using the Cognito domain for this tutorial, but you can choose your own custom domain as well.
+    - You can also configure the callback URLs for the auth flow. For this tutorial, we are setting it to be
+      <http://localhost:8000/oidc-callback> as we will be running headlamp on this port. Or, you can choose your own callback host as well based on your needs. Make sure to append /oidc-callback to the host since this is where Headlamp expects the redirect from auth to occur.
+    - Client Secret - We want to generate a client secret as our Headlamp app needs it to start the auth dance, so select Generate a client secret client secret column.
+    - You can also configure the scopes and claims for the tokens. For this tutorial, make sure the openid, profile, and email scopes are selected; other scopes are optional.
 
 ![Part one of three of a long form Cognito uses for App Configuration](./cognito/integrate-your-app1.png)
 ![Second part of Integrating App Cognito Form](./cognito/integrate-your-app2.png)
 ![Final part of Integrating App Cognito Form](./cognito/integrate-your-app3.png)
-In the above configurations make sure The Oauth 2.0 grant type is set to Authorization code grant. 12. Click next and you will be taken to the Review and Create view where you can review all the settings and create the user pool.
+In the above configurations make sure the Oauth 2.0 grant type is set to Authorization code grant.
+12. Click next and you will be taken to the Review and Create view where you can review all the settings and create the user pool.
 
 ## Setting up EKS cluster
 
-We will first start by creating an EKS cluster. For this tutorial we will use the aws console to create the cluster but you can use the eksctl or aws CLI as well.
+We will first start by creating an EKS cluster. For this tutorial we will use the AWS console to create the cluster but you can use the eksctl or AWS CLI as well.
 
 1. Go to the AWS console and navigate to the EKS service.
    ![EKS](./cluster/elastic_kubernetes_cluster.png)
@@ -80,12 +81,12 @@ After creating the EKS cluster, we need to configure the OIDC provider for the c
 
 ## Fetching EKS cluster locally to deploy Headlamp on it
 
-Make Sure you have the aws cli installed and setup with the necessary permissions to interact with the EKS cluster.
+Make Sure you have the AWS CLI installed and setup with the necessary permissions to interact with the EKS cluster.
 
-1. Installation steps for aws cli can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-2. Signin to the aws cli can be done by following the steps [here](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html)
+1. Installation steps for AWS CLI can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+2. Signin to the AWS CLI can be done by following the steps [here](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html)
 
-After setting up the aws cli, you can fetch the kubeconfig for the EKS cluster by running the following command
+After setting up the AWS CLI, you can fetch the kubeconfig for the EKS cluster by running the following command
 
 ```bash
 aws eks --region <YOUR_REGION_HERE> update-kubeconfig --name <YOUR_CLUSTER_NAME_HERE>
@@ -149,13 +150,13 @@ This will install Headlamp in the headlamp namespace with the OIDC configuration
 
 7. After a successful installation, you can access Headlamp by port-forwarding to the pod:
 
-Make sure the portforwarding is done to a port that you also set as the callback URL in the Cognito user pool configuration. So in our case if the callback URL is http://localhost:8000/oidc-callback then we should port forward to 8000.
+Make sure the portforwarding is done to a port that you also set as the callback URL in the Cognito user pool configuration. So in our case if the callback URL is <http://localhost:8000/oidc-callback> then we should port forward to 8000.
 
 ```shell
 kubectl port-forward svc/headlamp-oidc 8000:80 -n headlamp
 ```
 
-8. Open your web browser and go to http://localhost:8000. Click on "sign-in." After completing the login flow successfully, you'll gain access to your Kubernetes cluster using Headlamp.
+8. Open your web browser and go to <http://localhost:8000>. Click on "sign-in." After completing the login flow successfully, you'll gain access to your Kubernetes cluster using Headlamp.
    ![Headlamp Login](./headlamp_auth_screen.png)
    ![Cognito Login](./cognito_auth.png)
    ![Headlamp Dashboard](./headlamp_dashboard.png)
