@@ -14,6 +14,7 @@ import (
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"k8s.io/apimachinery/pkg/runtime"
 )
 
 //nolint:funlen
@@ -153,6 +154,53 @@ func TestStatelessClusterApiRequest(t *testing.T) {
 			// Assert the response as needed
 			assert.NotNil(t, cluster)
 			assert.Equal(t, tc.name, cluster.Name)
+		})
+	}
+}
+
+func TestMarshalCustomObject(t *testing.T) {
+	// Create a mock runtime.Unknown object
+	mockInfo := &runtime.Unknown{
+		Raw: []byte(`{"customName": "test-cluster", "otherField": "value"}`),
+	}
+
+	result, err := MarshalCustomObject(mockInfo, "test-context")
+	assert.NoError(t, err)
+	assert.Equal(t, "test-cluster", result.CustomName)
+}
+
+func TestWebsocketConnContextKey(t *testing.T) {
+	testCases := []struct {
+		name           string
+		protocols      string
+		clusterName    string
+		expectedKey    string
+		expectedHeader string
+	}{
+		{
+			name:           "With authorization protocol",
+			protocols:      "base64url.headlamp.authorization.k8s.io.user123, v4.channel.k8s.io",
+			clusterName:    "test-cluster",
+			expectedKey:    "test-clusteruser123",
+			expectedHeader: "v4.channel.k8s.io",
+		},
+		{
+			name:           "Without authorization protocol",
+			protocols:      "v4.channel.k8s.io",
+			clusterName:    "test-cluster",
+			expectedKey:    "test-cluster",
+			expectedHeader: "v4.channel.k8s.io",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			req := httptest.NewRequest("GET", "/", nil)
+			req.Header.Set("Sec-Websocket-Protocol", tc.protocols)
+
+			key := websocketConnContextKey(req, tc.clusterName)
+			assert.Equal(t, tc.expectedKey, key)
+			assert.Equal(t, tc.expectedHeader, req.Header.Get("Sec-Websocket-Protocol"))
 		})
 	}
 }
