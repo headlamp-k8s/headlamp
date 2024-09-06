@@ -15,9 +15,9 @@ Please refer to the Kinvolk [Code of Conduct](https://github.com/kinvolk/contrib
 
 ## Development practices
 
-The Headlamp project follows the [Kinvolk Contribution Guidelines](https://github.com/kinvolk/contribution)
+The Headlamp project follows the [Kinvolk Contribution Guidelines](https://github.com/kinvolk/contribution),
 which promotes good and consistent contribution practices across Kinvolk's
-projects. Before start contributing, and in addition to this section, please
+projects. Before starting to contribute, and in addition to this section, please
 read those guidelines.
 
 ## Community Monthly Call
@@ -37,7 +37,7 @@ you think are useful.
 ### Security issues
 
 For filing security issues that are sensitive and should not be public, please
-send an email to security@headlamp.dev .
+send an email to <security@headlamp.dev> .
 
 ## Translations
 
@@ -47,7 +47,7 @@ dedicated [i18n docs](./development/).
 ### Complex contributions
 
 If you have a complex contribution in mind (meaning changes in the architecture
-or a lot of LOC changed), it is advisable to first file a Github issue and
+or a lot of LOC changed), it is advisable to first file a GitHub issue and
 discuss the implementation with the project's maintainers.
 
 ## Coding style
@@ -74,13 +74,13 @@ the CI checks are passing for your PR.
 
 ## Commit guidelines
 
-For the general guidelines on making PRs/commits easier to review, please check
+For general guidelines on making PRs/commits easier to review, please check
 out Kinvolk's
 [contribution guidelines on git](https://github.com/kinvolk/contribution/tree/master/topics/git.md).
 
 ## Testing
 
-The frontend is tested via Storybook related snapshots. So new components should have
+The frontend is tested via Storybook-related snapshots. So new components should have
 an associated story when possible.
 
 For running the frontend tests, use the following command:

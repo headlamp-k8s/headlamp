@@ -24,7 +24,7 @@ Note, it runs the development servers for the backend and the frontend as well. 
 - `npm run build`: Copies in all the files and compiles the code. Builds into an unpacked folder in dist/. Useful for testing.
 - `npm run compile-electron`: Compiles the TypeScript code in electron/ folder into JavaScript.
 - `npm run copy-icons`: Copies the icons from the frontend/ folders into build/icons.
-- `npm run copy-plugins`: Is used to bundle plugins in the .plugins folder into the built app.
+- `npm run copy-plugins`: Used to bundle plugins in the .plugins folder into the built app.
 - `npm run dev`: Uses the built code in ../frontend from `npm run build` in that folder.
 - `npm run dev-only-app`: Uses the development front end server.
 - `npm run i18n`: Extract the translations discovered in the electron/ folder source code.

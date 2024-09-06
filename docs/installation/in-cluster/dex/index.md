@@ -7,7 +7,7 @@ In this tutorial, we'll walk through the process of configuring Headlamp within 
 
 ## Configuring Dex
 
-To enable OIDC authentication in your Minikube cluster, you'll need to configure Dex. Before proceeding, follow the [getting started guide](https://dexidp.io/docs/getting-started/) to set up your Dex instance.Follow these steps to configure Dex:
+To enable OIDC authentication in your Minikube cluster, you'll need to configure Dex. Before proceeding, follow the [getting started guide](https://dexidp.io/docs/getting-started/) to set up your Dex instance. Follow these steps to configure Dex:
 
 1. Create a Dex configuration file. The following example demonstrates a basic configuration file for Dex, containing a
    static client, connector, and static password.
@@ -182,7 +182,7 @@ This will install Headlamp in the headlamp namespace with the OIDC configuration
 kubectl port-forward svc/headlamp-oidc 4466:80 -n headlamp
 ```
 
-5. Open your web browser and go to http://localhost:4466. Click on "sign-in." After completing the login flow successfully, you'll gain access to your Kubernetes cluster using Headlamp.
+5. Open your web browser and go to <http://localhost:4466>. Click on "sign-in." After completing the login flow successfully, you'll gain access to your Kubernetes cluster using Headlamp.
 
 ![Headlamp access](./headlamp-access1.jpg)
 ![Headlamp access](./headlamp-access2.jpg)
@@ -191,6 +191,6 @@ kubectl port-forward svc/headlamp-oidc 4466:80 -n headlamp
 
 ## Conclusion
 
-In this tutorial, we've explore the process of setting up Headlamp within a Kubernetes cluster, integrating it with OIDC (OpenID Connect) authentication provided by Dex. By following the steps outlined in this guide, you've successfully configured Headlamp to enhance your Kubernetes cluster management.
+In this tutorial, we've set up Headlamp within a Kubernetes cluster and integrated it with OIDC (OpenID Connect) authentication provided by Dex. By following the steps outlined in this guide, you've successfully configured Headlamp to enhance your Kubernetes cluster management.
 
-This setup allows you to benefit from Headlamp's user-friendly interface and advanced features, all while ensuring a secure and streamlined authentication through Dex. With the power of OIDC, you can easily and safely access and manage your Kubernetes resources.
+This setup allows you to enjoy Headlamp's user-friendly interface and advanced features. You can also be assured of secure and streamlined authentication through Dex. With the power of OIDC, you can easily and safely access and manage your Kubernetes resources.

@@ -4,7 +4,7 @@ sidebar_label: Base URL
 sidebar_position: 3
 ---
 
-Normally Headlamp runs at the root of the domain. Hower you can also ask
+Normally Headlamp runs at the root of the domain. However, you can also ask
 to run it at a base-url like "/headlamp" for example.
 
 - default at the root of the domain: `https://headlamp.example.com/`.
@@ -25,7 +25,7 @@ If in doubt, host Headlamp on a separate origin (domain or port, don't use the `
 PUBLIC_URL="/headlamp" make run-frontend
 ```
 
-Then go to http://localhost:3000/headlamp/ in your browser.
+Then go to <http://localhost:3000/headlamp/> in your browser.
 
 ### Static build mode
 
@@ -34,7 +34,7 @@ cd frontend && npm install && npm run build && cd ..
 ./backend/headlamp-server -dev -base-url /headlamp -html-static-dir frontend/build
 ```
 
-Then go to http://localhost:4466/headlamp/ in your browser.
+Then go to <http://localhost:4466/headlamp/> in your browser.
 
 ### Docker mode
 

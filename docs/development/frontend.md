@@ -36,7 +36,7 @@ make docs
 ```
 
 The API output markdown is generated in docs/development/api and is not
-committed to git, but is shown on the website at
+committed to Git, but is shown on the website at
 [headlamp/latest/development/api](https://headlamp.dev/docs/latest/development/api/)
 
 ## Storybook
@@ -50,7 +50,7 @@ make storybook
 ```
 
 If you are adding new stories, please wrap your story components with the `TestContext` helper
-component as it sets up the store, memory router, and other utilities that may be needed for
+component. This sets up the store, memory router, and other utilities that may be needed for
 current or future stories:
 
 ```jsx

@@ -3,7 +3,7 @@ title: Building and Shipping Plugins
 sidebar_label: Building & Shipping
 ---
 
-This section explains how to start developing a Headlamp plugin, and how
+This section explains how to start developing a Headlamp plugin and how
 to ship it once finished.
 
 ## Creating a new plugin
@@ -26,7 +26,7 @@ Using the above commands means that Headlamp will **automatically reload**
 whenever to make a change to the plugin.
 
 ℹ️ This automatic reload does not happen when running in-cluster,
-even if the plugins folder is changed. i.e. if you want to serve
+even if the plugins folder is changed. I.e., if you want to serve
 updated plugins, you need to restart the server.
 
 ## Code Formatting, Linting, and Type Checking
@@ -89,8 +89,8 @@ npx @kinvolk/headlamp-plugin build myplugins
 
 ## Shipping and Deploying Plugins
 
-Once a plugin is ready to be shipped (built for production) it needs to
-be placed in a "plugins directory", for Headlamp to load them.
+Once a plugin is ready to be shipped (built for production), it needs to
+be placed in a "plugins directory" for Headlamp to load it.
 
 For example, if we have built 3 plugins called MyPlugin1, MyPlugin2, and
 MyPlugin3, they should be added to a directory in the following structure:
@@ -105,7 +105,7 @@ MyPlugin3, they should be added to a directory in the following structure:
     main.js
 ```
 
-If our plugins are places in `myplugins`, we can conveniently create that
+If our plugins are placed in `myplugins`, we can conveniently create that
 folder with the following command:
 
 ```bash
@@ -130,7 +130,7 @@ the `-plugin-dir` option should point to the directory:
 ### Using plugins on the desktop version
 
 The Headlamp desktop app will look for the plugins directory (in the format
-mentioned above) either under the user's Headlamp configuration folder,
+mentioned above). This will be either under the user's Headlamp configuration folder
 or within the current folder as `.plugins` if the former doesn't exist.
 
 ### Bundling plugins with desktop version
@@ -162,7 +162,7 @@ for more information on building a container image with your plugins.
 
 What is a storybook story?
 
-From https://storybook.js.org/docs/web-components/get-started/introduction
+From <https://storybook.js.org/docs/web-components/get-started/introduction>
 
 > Storybook is a tool for UI development. It makes development faster and
 > easier by isolating components. This allows you to work on one component
@@ -183,14 +183,14 @@ $ npm run storybook
 Your browser should open and show you a Message component with three
 different states the component can be in.
 
-Notices that there is a Message.stories.tsx to go along with the Message.tsx
+Note that there is a Message.stories.tsx to go along with the Message.tsx
 which has the `<Message>` component defined within it. See that file for an
 example of how to write a story.
 
 ### Snapshot testing
 
 Another benefit of writing storybook stories is that they can act as
-unit tests for regression testing. With storyshots it will save snapshots
+unit tests for regression testing. Storyshots will save snapshots
 of html for the different states that a component can be in. See the
 [Snapshot tests](https://storybook.js.org/docs/react/writing-tests/snapshot-testing)
 guide in the storybook documentation for more information.
@@ -243,16 +243,16 @@ jobs:
       - run: npx @kinvolk/headlamp-plugin build .
 ```
 
-Please see the github documentation for further details on workflows and actions.
+Please see the GitHub documentation for further details on workflows and actions.
 
 ## Upgrading package
 
-There's a command which handles much of upgrading plugins to the latest headlamp-plugin version. This upgrade command also audits packages, formats code, lints and type checks.
+There's a command that handles much of the upgrading of plugins to the latest headlamp-plugin version. This upgrade command also audits packages, formats code, lints, and type checks.
 
-Additionally this handles some code changes needed for plugins. For example, it handles running the material-ui 4 to mui 5 'codemod' code changes, and creates missing configuration added in different versions of headlamp-plugin.
+Additionally, this handles some code changes needed for plugins. For example, it handles running the material-ui 4 to mui 5 'codemod' code changes and creates missing configuration added in different versions of headlamp-plugin.
 
 Testing is necessary after running the upgrade command.
-Of course make sure you have a backup of your plugin folder before running it.
+Of course, make sure you have a backup of your plugin folder before running it.
 
 ```bash
 npx @kinvolk/headlamp-plugin upgrade --headlamp-plugin-version=latest your-plugin-folder

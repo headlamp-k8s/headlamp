@@ -4,8 +4,8 @@
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
-Headlamp was created to be a Kubernetes web UI that has the traditional functionality of other
-web UIs/dashboards available (i.e. to list and view resources) as well as other features.
+Headlamp was created to blend the traditional feature set of other web UIs/dashboards
+(i.e., to list and view resources) with added functionality.
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/videos/headlamp_quick_run.gif" width="80%">
@@ -13,7 +13,7 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 
 ## Features
 
-- Vendor independent / generic Kubernetes UI
+- Vendor-independent / generic Kubernetes UI
 - Works in-cluster, or locally as a desktop app
 - Multi-cluster
 - Extensible through plugins
@@ -44,8 +44,8 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 
 If you want to deploy Headlamp in your cluster, check out the instructions on running it [in-cluster](https://headlamp.dev/docs/latest/installation/in-cluster/).
 
-If you have a kube config already, you can quickly try Headlamp locally as a
-[desktop application](https://headlamp.dev/docs/latest/installation/desktop/),
+If you have a kubeconfig already, you can quickly try Headlamp locally as a
+[desktop application](https://headlamp.dev/docs/latest/installation/desktop/)
 for [Linux](https://headlamp.dev/docs/latest/installation/desktop/linux-installation),
 [Mac](https://headlamp.dev/docs/latest/installation/desktop/mac-installation),
 or [Windows](https://headlamp.dev/docs/latest/installation/desktop/win-installation).
@@ -55,7 +55,7 @@ in the default path so Headlamp can use it.
 ### Accessing
 
 Headlamp uses [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac) for checking
-whether and how users can access resources. If you try Headlamp with a token that has very limited
+users' access to resources. If you try Headlamp with a token that has very limited
 permissions, you may not be able to view your cluster resources correctly.
 
 See the documentation on [how to easily get a Service Account token](https://headlamp.dev/docs/latest/installation#create-a-service-account-token) for your cluster.
@@ -63,9 +63,8 @@ See the documentation on [how to easily get a Service Account token](https://hea
 ## Tested platforms
 
 We maintain a list of the [Kubernetes platforms](./docs/platforms.md) we have
-tested Headlamp with, and invite you to add any missing platform you have
-tested, or comments if there are regressions in already filed platforms that
-should be consider.
+tested Headlamp with. We invite you to add any missing platforms you have
+tested, or comment if there are any regressions in the existing ones.
 
 ## Extensions / Plugins
 
@@ -82,7 +81,7 @@ in the Kubernetes Slack.
 ## Roadmap / Release Planning
 
 If you are interested in the direction of the project, we maintain a
-[Roadmap](https://github.com/orgs/headlamp-k8s/projects/1/views/1) for it, with the
+[Roadmap](https://github.com/orgs/headlamp-k8s/projects/1/views/1). It has the
 biggest changes planned so far, as well as a [board](https://github.com/orgs/headlamp-k8s/projects/1/) tracking each release.
 
 ## License

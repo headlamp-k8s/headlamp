@@ -3,8 +3,8 @@ title: Desktop App
 sidebar_position: 2
 ---
 
-Headlamp can be run as a desktop application, for users who don't want to
-deploy it in cluster, or those who want to manage unrelated clusters locally.
+Headlamp can be run as a desktop application for users who do not want to
+deploy it in-cluster or those who want to manage unrelated clusters locally.
 
 There are desktop apps for [Linux](./linux-installation.md), [Mac](./mac-installation.md), and [Windows](./win-installation.md).
 
@@ -16,7 +16,7 @@ import DocCardList from '@theme/DocCardList';
 
 ## Use a non-default kube config file
 
-If you wish to use a non-default kube config file, then you can do it by
+If you wish to use a non-default kubeconfig file, then you can do it by
 providing it as an argument to Headlamp, e.g.:
 
 ```bash
@@ -31,7 +31,7 @@ KUBECONFIG=/my/different/kubeconfig /path/to/headlamp
 
 ### Use several kube config files
 
-If you need to use more than one kube config file at the same time, you can list
+If you need to use more than one kubeconfig file at the same time, you can list
 each config file path with a separator.
 
 import Tabs from '@theme/Tabs';
@@ -54,14 +54,14 @@ import TabItem from '@theme/TabItem';
 
 ## Access using OIDC
 
-OIDC has a feature makes more sense when
-[running Headlamp in a cluster](../in-cluster) as it will allow cluster operators to just
-give users a URL that they can use for logging in and access Headlamp.
-However, if you have your kube config set to use OIDC for the authentication (because you already
-authenticated and produced a kube config with that data), Headlamp will read those settings and
-try to use them for offering the effortless login to the cluster.
+OIDC has a useful feature for
+[running Headlamp in a cluster](../in-cluster). It allows cluster operators to just
+give users a URL that they can use to log in and access Headlamp.
+If your kubeconfig is set to use OIDC for authentication (you have already
+authenticated and produced a kubeconfig), Headlamp will read those settings. It
+will then try to use them to offer effortless login to the cluster.
 
-Still, the kube config OIDC settings will not provide a OIDC callback URL, so make sure that your OIDC configuration for your cluster include Headlamp's OIDC callback in its redirect URIs. i.e. say you're using
+Still, the kube config OIDC settings will not provide a OIDC callback URL. Make sure that your OIDC configuration for your cluster includes Headlamp's OIDC callback in its redirect URIs. I.e., say you're using
 Dex for the OIDC connection and you have it already configured in your
-kube config, then be sure to add the `/oidc-callback` endpoint with Headlamp's the local address
+kubeconfig. Then, be sure to add the `/oidc-callback` endpoint with Headlamp's local address
 to Dex's `staticClient.redirectURIs`: `http://localhost:6644/oidc-callback`.

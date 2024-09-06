@@ -5,12 +5,12 @@ sidebar_position: 3
 
 ## Tested Kubernetes Platforms
 
-This section shows the different platforms where Headlamp has been tested (in-cluster) or is intended to be tested, and useful observations about it.
+This section shows the platforms where Headlamp has been tested (in-cluster) or is to be tested, and useful observations about it.
 If you have tested Headlamp on a different flavor or Kubernetes, please file a PR or [issue](https://github.com/headlamp-k8s/headlamp/issues/new/choose) to add your remarks to the list.
 
-The "works" column refers to the overall Kubernetes related functionality when running in the respective platform; it may have 3 different values:
+The "works" column refers to the overall Kubernetes-related functionality when running on the respective platform; it may have 3 different values:
 
-- ✔️ : Has been tried and works fine to the extent of what has been tested
+- ✔️ : Has been tried and works well to the extent of what has been tested
 - ❌ : Has been tried and didn't work or had issues that prevented a regular use of it
 - ❔: Hasn't been tried/reported yet
 
@@ -27,7 +27,7 @@ The "works" column refers to the overall Kubernetes related functionality when r
 
 ## Tested Browsers
 
-We mostly test with 'modern browsers' defined as the latest version and two older versions. But we try to make Headlamp work with web standards, so it's quite likely other standards conforming browsers will also work.
+We mostly test with 'modern browsers' defined as the latest version and two older versions. But we try to make Headlamp work with web standards, so it's quite likely other standards-conforming browsers will also work.
 
 | Platform             | Works | Comments |
 | -------------------- | :---: | -------- |

@@ -9,10 +9,10 @@ react-i18next libraries.
 
 ## Default language, and locales
 
-We started with an international English, and that will be the fallback language.
+We started with an international English and that will be the fallback language.
 
-Now we're starting with locales familiar, and will accept
-translations through github.
+Now we're starting with locales familiar to us and will accept
+translations through GitHub.
 
 ## Browser based language detection
 
@@ -20,7 +20,7 @@ We use
 [i18next-browser-languagedetector](https://github.com/i18next/i18next-browser-languageDetector#readme)
 
 This can select the browser language through various means like through
-cookies, the html language tag and other ways.
+cookies or the html language tag.
 
 One way to change the locale is to use `?lng=en` in the URL.
 
