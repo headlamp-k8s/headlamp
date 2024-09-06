@@ -1,6 +1,7 @@
 {
   "Kubernetes Version": "Versión de Kubernetes",
   "Cluster": "Cluster",
+  "Cluster selector": "",
   "Git Commit": "Commit de Git",
   "Memory": "Memoria",
   "CPU": "CPU",
