@@ -82,6 +82,16 @@ export default function Overview() {
     CronJob,
   ];
 
+  const workloadLabel = {
+    [Pod.className]: t('glossary|Pods'),
+    [Deployment.className]: t('glossary|Deployments'),
+    [StatefulSet.className]: t('glossary|Stateful Sets'),
+    [DaemonSet.className]: t('glossary|Daemon Sets'),
+    [ReplicaSet.className]: t('glossary|Replica Sets'),
+    [Job.className]: t('glossary|Jobs'),
+    [CronJob.className]: t('glossary|Cron Jobs'),
+  };
+
   workloads.forEach((workloadClass: KubeObject) => {
     workloadClass.useApiList(
       (items: InstanceType<typeof workloadClass>[]) => {
@@ -94,9 +104,8 @@ export default function Overview() {
     );
   });
 
-  function ChartLink(workload: KubeObject) {
-    const linkName = workload.pluralName;
-    return <Link routeName={linkName}>{linkName}</Link>;
+  function ChartLink({ workload }: { workload: KubeObject }) {
+    return <Link routeName={workload.pluralName}>{workloadLabel[workload.className]}</Link>;
   }
 
   return (
@@ -107,8 +116,7 @@ export default function Overview() {
             <Grid item lg={3} md={4} xs={6} key={workload.className}>
               <WorkloadCircleChart
                 workloadData={workloadsData[workload.className] || null}
-                // @todo: Use a plural from from the class itself when we have it
-                title={ChartLink(workload)}
+                title={<ChartLink workload={workload} />}
                 partialLabel={t('translation|Failed')}
                 totalLabel={t('translation|Running')}
               />
