@@ -3,13 +3,12 @@
     aria-hidden="true"
   />
   <div
-    class="MuiModal-root css-79ws1d-MuiModal-root"
+    class="MuiDialog-root MuiModal-root css-zw3mfo-MuiModal-root-MuiDialog-root"
     role="presentation"
-    style="display: flex; align-items: center; justify-content: center; z-index: 10000;"
   >
     <div
       aria-hidden="true"
-      class="MuiBackdrop-root MuiModal-backdrop css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop"
+      class="MuiBackdrop-root MuiModal-backdrop css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop"
       style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
     />
     <div
@@ -17,44 +16,70 @@
       tabindex="0"
     />
     <div
-      class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded css-172kgz0-MuiPaper-root"
-      style="padding: 1rem; max-height: 80%; min-width: 50%; min-height: 50%; overflow: auto; max-width: 80%;"
+      class="MuiDialog-container MuiDialog-scrollPaper css-hz1bth-MuiDialog-container"
+      role="presentation"
+      style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
       tabindex="-1"
     >
       <div
-        class="MuiBox-root css-1l4w6pd"
+        aria-labelledby=":mock-test-id:"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthXl css-1dg5kez-MuiPaper-root-MuiDialog-paper"
+        role="dialog"
       >
-        <div
-          class="MuiBox-root css-dqm0it"
+        <h2
+          class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-8yphvn-MuiTypography-root-MuiDialogTitle-root"
+          id=":mock-test-id:"
+          style="display: flex;"
         >
-          <h4
-            class="MuiTypography-root MuiTypography-h4 css-1nsdt9j-MuiTypography-root"
+          <div
+            class="MuiGrid-root MuiGrid-container css-9cyib4-MuiGrid-root"
           >
-            Release Notes (1.9.9)
-          </h4>
-        </div>
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1gp6czg-MuiButtonBase-root-MuiButton-root"
-          tabindex="0"
-          type="button"
+            <div
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            >
+              <h1
+                class="MuiTypography-root MuiTypography-h1 css-1kazmbo-MuiTypography-root"
+                style="font-size: 1.25rem; font-weight: 500; line-height: 1.6;"
+              >
+                Release Notes (1.9.9)
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            >
+              <div
+                class="MuiBox-root css-0"
+              >
+                <button
+                  aria-label="Close"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </h2>
+        <div
+          class="MuiDialogContent-root MuiDialogContent-dividers css-1t4vnk2-MuiDialogContent-root"
         >
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </button>
-      </div>
-      <div
-        class="markdown-body MuiBox-root css-1yuhvjn"
-        style="color: rgba(0, 0, 0, 0.87); font-family: inherit;"
-      >
-        <h3>
-          Hello
-        </h3>
-        
+          <div
+            class="MuiBox-root css-fm9d3m"
+          >
+            <h3>
+              Hello
+            </h3>
+            
 
-        <p>
-          world
-        </p>
+            <p>
+              world
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <div
