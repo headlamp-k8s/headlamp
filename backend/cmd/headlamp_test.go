@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -10,11 +11,13 @@ import (
 	"net/http/httptest"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/gorilla/mux"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
@@ -659,5 +662,366 @@ func TestRenameCluster(t *testing.T) {
 		r, err = getResponseFromRestrictedEndpoint(handler, "PUT", "/cluster/minikubetest", tc.clusterReq)
 		require.NoError(t, err)
 		assert.Equal(t, tc.expectedState, r.Code)
+	}
+}
+
+func TestFileExists(t *testing.T) {
+	// Test for existing file
+	assert.True(t, fileExists("./headlamp_testdata/kubeconfig"),
+		"fileExists() should return true for existing file")
+
+	// Test for non-existent file
+	assert.False(t, fileExists("./headlamp_testdata/nonexistent"),
+		"fileExists() should return false for non-existent file")
+
+	// Test for directory
+	assert.False(t, fileExists("./headlamp_testdata"),
+		"fileExists() should return false for directory")
+}
+
+func TestCopyReplace(t *testing.T) {
+	// Create temporary source and destination files
+	srcFile, err := os.CreateTemp("", "src_file_*")
+	require.NoError(t, err)
+
+	defer os.Remove(srcFile.Name())
+
+	dstFile, err := os.CreateTemp("", "dst_file_*")
+	require.NoError(t, err)
+
+	defer os.Remove(dstFile.Name())
+
+	// Write test content to source file
+	_, err = srcFile.WriteString("Hello, World! This is a test.")
+	require.NoError(t, err)
+
+	srcFile.Close()
+
+	// Test successful copy and replace
+	copyReplace(srcFile.Name(), dstFile.Name(),
+		[]byte("Hello"), []byte("Hi"),
+		[]byte("test"), []byte("example"))
+
+	dstContent, err := os.ReadFile(dstFile.Name())
+	require.NoError(t, err)
+
+	assert.Equal(t, "Hi, World! This is a example.", string(dstContent), "copyReplace() should correctly replace content")
+}
+
+//nolint:funlen
+func TestBaseURLReplace(t *testing.T) {
+	// Create a temporary directory for testing
+	tempDir, err := os.MkdirTemp("", "baseurl_test")
+	require.NoError(t, err)
+
+	defer os.RemoveAll(tempDir)
+
+	// Create a sample index.html file
+	indexContent := []byte(`<!DOCTYPE html>
+<html>
+<head>
+    <script>var headlampBaseUrl = './';</script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <img src="./image.png">
+</body>
+</html>`)
+	err = os.WriteFile(
+		filepath.Join(tempDir,
+			"index.html"),
+		indexContent,
+		0o600)
+
+	require.NoError(t, err)
+
+	// Test cases
+	testCases := []struct {
+		name           string
+		baseURL        string
+		expectedOutput string
+	}{
+		{
+			name:    "Empty base URL",
+			baseURL: "",
+			expectedOutput: `<!DOCTYPE html>
+<html>
+<head>
+    <script>var headlampBaseUrl = '/';</script>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <img src="/image.png">
+</body>
+</html>`,
+		},
+		{
+			name:    "Custom base URL",
+			baseURL: "/custom",
+			expectedOutput: `<!DOCTYPE html>
+<html>
+<head>
+    <script>var headlampBaseUrl = '/custom';</script>
+    <link rel="stylesheet" href="/custom/styles.css">
+</head>
+<body>
+    <img src="/custom/image.png">
+</body>
+</html>`,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			baseURLReplace(tempDir, tc.baseURL)
+
+			// Read the modified index.html
+			modifiedContent, err := os.ReadFile(filepath.Join(tempDir, "index.html"))
+			require.NoError(t, err)
+
+			assert.Equal(t, tc.expectedOutput, string(modifiedContent))
+		})
+	}
+}
+
+func TestGetOidcCallbackURL(t *testing.T) {
+	tests := []struct {
+		name           string
+		request        *http.Request
+		config         *HeadlampConfig
+		expectedResult string
+	}{
+		{
+			name: "HTTPS request with no base URL",
+			request: &http.Request{
+				URL:  &url.URL{Scheme: "https"},
+				Host: "example.com",
+				TLS:  &tls.ConnectionState{},
+			},
+			config:         &HeadlampConfig{baseURL: ""},
+			expectedResult: "https://example.com/oidc-callback",
+		},
+		{
+			name: "HTTP request with base URL",
+			request: &http.Request{
+				URL:  &url.URL{Scheme: "http"},
+				Host: "example.com",
+			},
+			config:         &HeadlampConfig{baseURL: "/headlamp"},
+			expectedResult: "http://example.com/headlamp/oidc-callback",
+		},
+		{
+			name: "Request with X-Forwarded-Proto header",
+			request: &http.Request{
+				URL:    &url.URL{},
+				Host:   "example.com",
+				Header: http.Header{"X-Forwarded-Proto": []string{"https"}},
+			},
+			config:         &HeadlampConfig{baseURL: ""},
+			expectedResult: "https://example.com/oidc-callback",
+		},
+		{
+			name: "Localhost request",
+			request: &http.Request{
+				URL:  &url.URL{},
+				Host: "localhost:8080",
+			},
+			config:         &HeadlampConfig{baseURL: ""},
+			expectedResult: "http://localhost:8080/oidc-callback",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := getOidcCallbackURL(tt.request, tt.config)
+			if result != tt.expectedResult {
+				t.Errorf("getOidcCallbackURL() = %v, want %v", result, tt.expectedResult)
+			}
+		})
+	}
+}
+
+func TestParseClusterAndToken(t *testing.T) {
+	ctx := context.Background()
+	req, err := http.NewRequestWithContext(ctx, "GET", "/clusters/test-cluster/api", nil)
+	require.NoError(t, err)
+	req.Header.Set("Authorization", "Bearer test-token")
+
+	cluster, token := parseClusterAndToken(req)
+	assert.Equal(t, "test-cluster", cluster)
+	assert.Equal(t, "test-token", token)
+}
+
+func TestIsTokenAboutToExpire(t *testing.T) {
+	// Token that expires in 4 minutes
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTIzNjE2MDB9.7vl9iBWGDQdXUTbEsqFHiHoaNWxKn4UwLhO9QDhXrpM" //nolint:gosec,lll
+
+	result := isTokenAboutToExpire(token)
+	assert.True(t, result)
+}
+
+func TestOIDCTokenRefreshMiddleware(t *testing.T) {
+	config := &HeadlampConfig{
+		cache: cache.New[interface{}](),
+	}
+
+	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
+	middleware := config.OIDCTokenRefreshMiddleware(handler)
+
+	// Test case: non-cluster request
+	req := httptest.NewRequest("GET", "/non-cluster", nil)
+	rec := httptest.NewRecorder()
+	middleware.ServeHTTP(rec, req)
+	assert.Equal(t, http.StatusOK, rec.Code)
+
+	// Test case: cluster request without token
+	req = httptest.NewRequest("GET", "/clusters/test-cluster", nil)
+	rec = httptest.NewRecorder()
+	middleware.ServeHTTP(rec, req)
+	assert.Equal(t, http.StatusOK, rec.Code)
+}
+
+func TestStartHeadlampServer(t *testing.T) {
+	// Create a temporary directory for plugins
+	tempDir, err := os.MkdirTemp("", "headlamp-test")
+	require.NoError(t, err)
+
+	defer os.RemoveAll(tempDir)
+
+	config := &HeadlampConfig{
+		port:            8080,
+		cache:           cache.New[interface{}](),
+		kubeConfigStore: kubeconfig.NewContextStore(),
+		pluginDir:       tempDir,
+	}
+
+	// Use a channel to signal when the server is ready
+	ready := make(chan struct{})
+
+	// Use a goroutine to start the server
+	go func() {
+		// Signal that the server is about to start
+		close(ready)
+		StartHeadlampServer(config)
+	}()
+
+	// Wait for the server to be ready
+	<-ready
+
+	// Give the server a moment to start
+	time.Sleep(100 * time.Millisecond)
+
+	// Try to connect to the server
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(ctx, "GET", "http://localhost:8080/config", nil)
+	if err != nil {
+		t.Fatalf("Failed to create request: %v", err)
+	}
+
+	client := &http.Client{}
+
+	resp, err := client.Do(req)
+	if err == nil {
+		defer resp.Body.Close()
+	}
+
+	assert.NoError(t, err, "Server should be running and accepting connections")
+
+	// If the server started successfully, we should get a response
+	if resp != nil {
+		assert.Equal(t, http.StatusOK, resp.StatusCode, "Server should return OK status")
+	}
+}
+
+//nolint:funlen
+func TestHandleClusterHelm(t *testing.T) {
+	// Set up test environment
+	os.Setenv("HEADLAMP_BACKEND_TOKEN", "test-token")
+	defer os.Unsetenv("HEADLAMP_BACKEND_TOKEN")
+
+	config := &HeadlampConfig{
+		cache:           cache.New[interface{}](),
+		kubeConfigStore: kubeconfig.NewContextStore(),
+	}
+
+	// Add a mock context to the kubeConfigStore
+	mockContext := &kubeconfig.Context{
+		Name: "test-cluster",
+		Cluster: &api.Cluster{
+			Server: "https://test-cluster.example.com",
+		},
+		AuthInfo: &api.AuthInfo{
+			Token: "test-token",
+		},
+	}
+
+	err := config.kubeConfigStore.AddContext(mockContext)
+	require.NoError(t, err, "Failed to add mock context to kubeConfigStore")
+
+	router := mux.NewRouter()
+	handleClusterHelm(config, router)
+
+	// Test cases for failed cases
+	testCases := []struct {
+		name           string
+		method         string
+		path           string
+		token          string
+		expectedStatus int
+	}{
+		{
+			"List Releases - Valid Token",
+			"GET",
+			"/clusters/test-cluster/helm/releases/list",
+			"test-token", http.StatusInternalServerError,
+		},
+		{
+			"Install Release - Valid Token",
+			"POST",
+			"/clusters/test-cluster/helm/release/install",
+			"test-token",
+			http.StatusBadRequest,
+		},
+		{
+			"Get Release History - Valid Token",
+			"GET",
+			"/clusters/test-cluster/helm/release/history",
+			"test-token",
+			http.StatusInternalServerError,
+		},
+		{
+			"List Releases - Invalid Token",
+			"GET",
+			"/clusters/test-cluster/helm/releases/list",
+			"invalid-token",
+			http.StatusForbidden,
+		},
+		{
+			"Install Release - No Token",
+			"POST",
+			"/clusters/test-cluster/helm/release/install",
+			"",
+			http.StatusForbidden,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			req := httptest.NewRequest(tc.method, tc.path, nil)
+			if tc.token != "" {
+				req.Header.Set("X-HEADLAMP_BACKEND-TOKEN", tc.token)
+			}
+
+			w := httptest.NewRecorder()
+
+			router.ServeHTTP(w, req)
+
+			assert.Equal(t, tc.expectedStatus, w.Code)
+		})
 	}
 }
