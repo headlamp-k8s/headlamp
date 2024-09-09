@@ -2,6 +2,7 @@ package plugins
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io/fs"
 	"net/http"
@@ -77,8 +78,8 @@ func periodicallyWatchSubfolders(watcher *fsnotify.Watcher, path string, interva
 	}
 }
 
-// GeneratePluginPaths takes the staticPluginDir and pluginDir and returns a list of plugin paths.
-func GeneratePluginPaths(staticPluginDir string, pluginDir string) ([]string, error) {
+// generateSeparatePluginPaths takes the staticPluginDir and pluginDir and returns separate lists of plugin paths.
+func generateSeparatePluginPaths(staticPluginDir, pluginDir string) ([]string, []string, error) {
 	var pluginListURLStatic []string
 
 	if staticPluginDir != "" {
@@ -86,11 +87,21 @@ func GeneratePluginPaths(staticPluginDir string, pluginDir string) ([]string, er
 
 		pluginListURLStatic, err = pluginBasePathListForDir(staticPluginDir, "static-plugins")
 		if err != nil {
-			return nil, err
+			return nil, nil, err
 		}
 	}
 
 	pluginListURL, err := pluginBasePathListForDir(pluginDir, "plugins")
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return pluginListURLStatic, pluginListURL, nil
+}
+
+// GeneratePluginPaths generates a concatenated list of plugin paths from the staticPluginDir and pluginDir.
+func GeneratePluginPaths(staticPluginDir, pluginDir string) ([]string, error) {
+	pluginListURLStatic, pluginListURL, err := generateSeparatePluginPaths(staticPluginDir, pluginDir)
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +112,59 @@ func GeneratePluginPaths(staticPluginDir string, pluginDir string) ([]string, er
 	}
 
 	return pluginListURL, nil
+}
+
+// ListPlugins lists the plugins in the static and user-added plugin directories.
+func ListPlugins(staticPluginDir, pluginDir string) error {
+	staticPlugins, userPlugins, err := generateSeparatePluginPaths(staticPluginDir, pluginDir)
+	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "listing plugins")
+		return fmt.Errorf("listing plugins: %w", err)
+	}
+
+	getPluginName := func(pluginDir string) string {
+		packageJSONPath := filepath.Join(pluginDir, "package.json")
+
+		content, err := os.ReadFile(packageJSONPath)
+		if err != nil {
+			// If there's an error reading package.json, just return the folder name as fallback.
+			return filepath.Base(pluginDir)
+		}
+
+		var packageData struct {
+			Name string `json:"name"`
+		}
+
+		// Parse the JSON and extract the name. If it fails, return the folder name.
+		if err := json.Unmarshal(content, &packageData); err != nil || packageData.Name == "" {
+			return strings.TrimPrefix(filepath.Base(pluginDir), "plugins/")
+		}
+
+		return packageData.Name
+	}
+
+	if len(staticPlugins) > 0 {
+		fmt.Printf("Static Plugins (%s):\n", staticPluginDir)
+
+		for _, plugin := range staticPlugins {
+			fmt.Println(" -", getPluginName(plugin))
+		}
+	} else {
+		fmt.Println("No static plugins found.")
+	}
+
+	if len(userPlugins) > 0 {
+		fmt.Printf("\nUser-added Plugins (%s):\n", pluginDir)
+
+		for _, plugin := range userPlugins {
+			pluginName := getPluginName(filepath.Join(pluginDir, plugin))
+			fmt.Println(" -", pluginName)
+		}
+	} else {
+		fmt.Printf("No user-added plugins found.")
+	}
+
+	return nil
 }
 
 // pluginBasePathListForDir returns a list of valid plugin paths for the given directory.

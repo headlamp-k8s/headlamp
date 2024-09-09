@@ -8,9 +8,24 @@ import (
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/plugins"
 )
 
 func main() {
+	if len(os.Args) == 2 && os.Args[1] == "list-plugins" {
+		conf, err := config.Parse(os.Args[2:])
+		if err != nil {
+			logger.Log(logger.LevelError, nil, err, "fetching config:%v")
+			os.Exit(1)
+		}
+
+		if err := plugins.ListPlugins(conf.StaticDir, conf.PluginsDir); err != nil {
+			logger.Log(logger.LevelError, nil, err, "listing plugins")
+		}
+
+		return
+	}
+
 	conf, err := config.Parse(os.Args)
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "fetching config:%v")

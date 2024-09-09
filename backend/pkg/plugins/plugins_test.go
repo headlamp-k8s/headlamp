@@ -2,6 +2,7 @@ package plugins_test
 
 import (
 	"context"
+	"io"
 	"net/http/httptest"
 	"os"
 	"path"
@@ -176,6 +177,107 @@ func TestGeneratePluginPaths(t *testing.T) { //nolint:funlen
 	// clean up
 	err = os.RemoveAll(testDirName)
 	require.NoError(t, err)
+}
+
+// Helper function for capturing output.
+func captureOutput(f func()) (string, error) {
+	r, w, err := os.Pipe()
+	if err != nil {
+		return "", err
+	}
+
+	originalStdout := os.Stdout
+	os.Stdout = w
+
+	f()
+
+	err = w.Close()
+	if err != nil {
+		return "", err
+	}
+
+	os.Stdout = originalStdout
+
+	outputBytes, err := io.ReadAll(r)
+	if err != nil {
+		return "", err
+	}
+
+	return string(outputBytes), nil
+}
+
+// Helper function for creating a plugin.
+func createPlugin(t *testing.T, baseDir string, pluginName string) string {
+	pluginDir := path.Join(baseDir, pluginName)
+	err := os.Mkdir(pluginDir, 0o755)
+	require.NoError(t, err)
+
+	// create main.js
+	mainJsPath := path.Join(pluginDir, "main.js")
+	_, err = os.Create(mainJsPath)
+	require.NoError(t, err)
+
+	// create package.json
+	packageJSONPath := path.Join(pluginDir, "package.json")
+	_, err = os.Create(packageJSONPath)
+	require.NoError(t, err)
+
+	return pluginDir
+}
+
+func TestListPlugins(t *testing.T) {
+	// Create a temporary directory if it doesn't exist
+	_, err := os.Stat("/tmp/")
+	if os.IsNotExist(err) {
+		err = os.Mkdir("/tmp/", 0o755)
+		require.NoError(t, err)
+	}
+
+	// create a static plugin directory in /tmp
+	staticPluginDir := path.Join("/tmp", uuid.NewString())
+	err = os.Mkdir(staticPluginDir, 0o755)
+	require.NoError(t, err)
+
+	createPlugin(t, staticPluginDir, "static-plugin-1")
+
+	// create a user plugin directory in /tmp
+	pluginDir := path.Join("/tmp", uuid.NewString())
+	err = os.Mkdir(pluginDir, 0o755)
+	require.NoError(t, err)
+
+	plugin1Dir := createPlugin(t, pluginDir, "user-plugin-1")
+
+	// capture the output of the ListPlugins function
+	output, err := captureOutput(func() {
+		err := plugins.ListPlugins(staticPluginDir, pluginDir)
+		require.NoError(t, err)
+	})
+	require.NoError(t, err)
+
+	require.Contains(t, output, "Static Plugins")
+	require.Contains(t, output, "static-plugin-1")
+	require.Contains(t, output, "User-added Plugins")
+	require.Contains(t, output, "user-plugin-1")
+
+	// test missing package.json
+	os.Remove(path.Join(plugin1Dir, "package.json"))
+
+	output, err = captureOutput(func() {
+		err := plugins.ListPlugins(staticPluginDir, pluginDir)
+		require.NoError(t, err)
+	})
+	require.NoError(t, err)
+	require.Contains(t, output, "user-plugin-1") // should use folder name
+
+	// test invalid package.json
+	err = os.WriteFile(path.Join(plugin1Dir, "package.json"), []byte("invalid json"), 0o600)
+	require.NoError(t, err)
+	output, err = captureOutput(func() {
+		err := plugins.ListPlugins(staticPluginDir, pluginDir)
+		require.NoError(t, err)
+	})
+	require.NoError(t, err)
+	require.Contains(t, output, "user-plugin-1") // should use folder name
 }
 
 func TestHandlePluginEvents(t *testing.T) { //nolint:funlen
