@@ -11,6 +11,7 @@ import {
   startPortForward,
   stopOrDeletePortForward,
 } from '../../../lib/k8s/apiProxy';
+import { PortForward as PortForwardState } from '../../../lib/k8s/apiProxy/portForward';
 import { KubeContainer, KubeObject } from '../../../lib/k8s/cluster';
 import Pod from '../../../lib/k8s/pod';
 import Service from '../../../lib/k8s/service';
@@ -20,14 +21,6 @@ import ActionButton from '../ActionButton';
 interface PortForwardProps {
   containerPort: number | string;
   resource?: KubeObject;
-}
-
-export interface PortForwardState {
-  id: string;
-  namespace: string;
-  cluster: string;
-  port: string;
-  status: string;
 }
 
 export const PORT_FORWARDS_STORAGE_KEY = 'portforwards';
