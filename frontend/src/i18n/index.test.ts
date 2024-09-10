@@ -26,7 +26,8 @@ async function checkKeys() {
    * Allowlist function scans the json and return if the word is within the allowlist
    */
   function allowlistScan(word: string, lang: string) {
-    return allowlist[lang].some((item: any) => item.wordKey === word);
+    const allowListLang: any[] = allowlist[lang];
+    return allowListLang.some((item: any) => item.wordKey === word);
   }
 
   /*
@@ -42,7 +43,7 @@ async function checkKeys() {
      * fileInfo is used to get the language and file name
      */
     const fileInfo = path.parse(file);
-    const language = fileInfo.dir.split('/').pop();
+    const language = path.basename(fileInfo.dir);
     const fileName = fileInfo.base;
 
     /*
