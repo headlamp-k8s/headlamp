@@ -365,21 +365,23 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
 
-	// load kubeConfig clusters
-	err := kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPath, kubeconfig.KubeConfig)
-	if err != nil {
-		logger.Log(logger.LevelError, nil, err, "loading kubeconfig")
-	}
+	if !config.useInCluster {
+		// load kubeConfig clusters
+		err := kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPath, kubeconfig.KubeConfig)
+		if err != nil {
+			logger.Log(logger.LevelError, nil, err, "loading kubeconfig")
+		}
 
-	// load dynamic clusters
-	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
-	if err != nil {
-		logger.Log(logger.LevelError, nil, err, "getting default kubeconfig persistence file")
-	}
+		// load dynamic clusters
+		kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
+		if err != nil {
+			logger.Log(logger.LevelError, nil, err, "getting default kubeconfig persistence file")
+		}
 
-	err = kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPersistenceFile, kubeconfig.DynamicCluster)
-	if err != nil {
-		logger.Log(logger.LevelError, nil, err, "loading dynamic kubeconfig")
+		err = kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPersistenceFile, kubeconfig.DynamicCluster)
+		if err != nil {
+			logger.Log(logger.LevelError, nil, err, "loading dynamic kubeconfig")
+		}
 	}
 
 	addPluginRoutes(config, r)
