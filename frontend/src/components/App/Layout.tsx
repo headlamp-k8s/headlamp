@@ -15,7 +15,7 @@ import { setConfig } from '../../redux/configSlice';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
-import { fetchStatelessClusterKubeConfigs, processClusterComparison } from '../../stateless/';
+import { fetchStatelessClusterKubeConfigs, isEqualClusterConfigs } from '../../stateless/';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
@@ -55,6 +55,44 @@ function ClusterNotFoundPopup() {
 }
 const Div = styled('div')``;
 const Main = styled('main')``;
+
+/**
+ * Merges the new cluster with the current cluster.
+ * Stateless clusters are merged with the current cluster.
+ * It also preserves the useToken property.
+ * @param newConfig - The new cluster config.
+ * @param currentClusters - The current cluster config.
+ * @param statelessClusters - The stateless cluster config.
+ * @returns The merged cluster config.
+ */
+function mergeClusterConfigs(
+  newClusters: Record<string, any>,
+  currentClusters: Record<string, any>,
+  statelessClusters: Record<string, any> | null
+): Record<string, any> {
+  const mergedClusters = { ...newClusters };
+
+  // Merge stateless clusters
+  if (statelessClusters) {
+    Object.entries(statelessClusters).forEach(([key, cluster]) => {
+      if (!mergedClusters[key]) {
+        mergedClusters[key] = cluster;
+      }
+    });
+  }
+
+  // Preserve useToken property
+  Object.entries(mergedClusters).forEach(([key, cluster]) => {
+    if (currentClusters[key]?.useToken !== undefined) {
+      mergedClusters[key] = {
+        ...cluster,
+        useToken: currentClusters[key].useToken,
+      };
+    }
+  });
+
+  return mergedClusters;
+}
 
 export default function Layout({}: LayoutProps) {
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
@@ -109,17 +147,22 @@ export default function Layout({}: LayoutProps) {
         if (clusters === null) {
           dispatch(setConfig(configToStore));
         } else {
-          const isConfigDifferent = processClusterComparison(clusters, clustersToConfig, false);
+          // Check if the config is different
+          const configDifferent = isEqualClusterConfigs(clusters, clustersToConfig);
 
-          if (
-            isConfigDifferent ||
-            Object.keys(clustersToConfig).length !== Object.keys(clusters).length
-          ) {
-            if (statelessClusters !== null) {
-              processClusterComparison(clusters, statelessClusters, true);
-            }
-
-            dispatch(setConfig(configToStore));
+          if (configDifferent) {
+            // Merge the new config with the current config
+            const mergedClusters = mergeClusterConfigs(
+              configToStore.clusters,
+              clusters,
+              statelessClusters
+            );
+            dispatch(
+              setConfig({
+                ...configToStore,
+                clusters: mergedClusters,
+              })
+            );
           }
         }
 
