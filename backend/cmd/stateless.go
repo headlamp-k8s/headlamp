@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"regexp"
 	"strings"
@@ -75,17 +76,22 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 	// unique key for the context
 	key = clusterName + userID
 
-	contexts, err := kubeconfig.LoadContextsFromBase64String(kubeConfig, kubeconfig.DynamicCluster)
-	if err != nil {
-		logger.Log(logger.LevelError, nil, err, "loading contexts from kubeconfig")
+	contexts, errs := kubeconfig.LoadContextsFromBase64String(kubeConfig, kubeconfig.DynamicCluster)
+	if len(errs) > 0 {
+		// Log all errors
+		for _, err := range errs {
+			logger.Log(logger.LevelError, nil, err, "loading contexts from kubeconfig")
+		}
 
-		return "", err
+		// If no contexts were loaded, return an error
+		if len(contexts) == 0 {
+			return "", fmt.Errorf("failed to load any valid contexts from kubeconfig")
+		}
 	}
 
 	if len(contexts) == 0 {
-		logger.Log(logger.LevelError, nil, nil, "getting contexts from kubeconfig")
-
-		return "", err
+		logger.Log(logger.LevelError, nil, nil, "no contexts found in kubeconfig")
+		return "", fmt.Errorf("no contexts found in kubeconfig")
 	}
 
 	for _, context := range contexts {

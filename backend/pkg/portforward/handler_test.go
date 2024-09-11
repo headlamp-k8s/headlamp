@@ -51,12 +51,12 @@ func TestStartPortForward(t *testing.T) {
 
 	// load kubeconfig
 	kubeConfigPath := getDefaultKubeConfigPath(t)
-	kContexts, err := kubeconfig.LoadContextsFromFile(kubeConfigPath, kubeconfig.KubeConfig)
-	require.NoError(t, err)
+	kContexts, errs := kubeconfig.LoadContextsFromFile(kubeConfigPath, kubeconfig.KubeConfig)
+	require.Empty(t, errs)
 	require.NotEmpty(t, kContexts)
 
 	kc := kContexts[0]
-	err = kubeConfigStore.AddContext(&kc)
+	err := kubeConfigStore.AddContext(&kc)
 	require.NoError(t, err)
 
 	// find a pod to portforward to
@@ -66,7 +66,7 @@ func TestStartPortForward(t *testing.T) {
 
 	podList, err := clientSet.CoreV1().Pods("headlamp").List(context.Background(), metav1.ListOptions{})
 	require.NoError(t, err)
-	require.NotEmpty(t, podList)
+	require.NotEmpty(t, podList.Items)
 
 	podName := ""
 	targetPort := ""
@@ -75,6 +75,8 @@ func TestStartPortForward(t *testing.T) {
 		if len(pod.Spec.Containers) > 0 && len(pod.Spec.Containers[0].Ports) > 0 {
 			podName = pod.Name
 			targetPort = fmt.Sprint(pod.Spec.Containers[0].Ports[0].ContainerPort)
+
+			break
 		}
 	}
 
@@ -82,7 +84,10 @@ func TestStartPortForward(t *testing.T) {
 	require.NotEmpty(t, targetPort)
 
 	// start portforward
-	req := &http.Request{}
+	req := &http.Request{
+		Header: make(http.Header),
+	}
+
 	resp := httptest.NewRecorder()
 
 	const minikubeName = "minikube"
@@ -99,6 +104,7 @@ func TestStartPortForward(t *testing.T) {
 	require.NoError(t, err)
 
 	req.Body = io.NopCloser(bytes.NewReader(jsonReq))
+	req.Header.Set("Content-Type", "application/json")
 
 	portforward.StartPortForward(kubeConfigStore, ch, resp, req)
 
@@ -123,11 +129,11 @@ func TestStartPortForward(t *testing.T) {
 	time.Sleep(7 * time.Second)
 
 	// check if portforward is running
-	req, err = http.NewRequestWithContext(context.Background(), "GET",
+	pfReq, err := http.NewRequestWithContext(context.Background(), "GET",
 		fmt.Sprintf("http://localhost:%s/config", port), nil)
 	require.NoError(t, err)
 
-	pfResp, err := http.DefaultClient.Do(req)
+	pfResp, err := http.DefaultClient.Do(pfReq)
 	require.NoError(t, err)
 
 	defer pfResp.Body.Close()
@@ -141,27 +147,31 @@ func TestStartPortForward(t *testing.T) {
 	assert.Contains(t, string(pfRespData), "incluster")
 
 	// stop portforward
-	req = &http.Request{}
-	resp = httptest.NewRecorder()
+	stopReq := &http.Request{
+		Header: make(http.Header),
+	}
+
+	stopResp := httptest.NewRecorder()
 
 	// create stop request
-	reqPayload = map[string]interface{}{
+	stopReqPayload := map[string]interface{}{
 		"cluster":      minikubeName,
 		"id":           pfRespPayload["id"],
 		"stopOrDelete": true,
 	}
 
-	jsonReq, err = json.Marshal(reqPayload)
+	jsonStopReq, err := json.Marshal(stopReqPayload)
 	require.NoError(t, err)
 
-	req.Body = io.NopCloser(bytes.NewReader(jsonReq))
+	stopReq.Body = io.NopCloser(bytes.NewReader(jsonStopReq))
+	stopReq.Header.Set("Content-Type", "application/json")
 
-	portforward.StopOrDeletePortForward(ch, resp, req)
+	portforward.StopOrDeletePortForward(ch, stopResp, stopReq)
 
-	res = resp.Result()
-	defer res.Body.Close()
+	stopRes := stopResp.Result()
+	defer stopRes.Body.Close()
 
-	stopRespBody, err := io.ReadAll(res.Body)
+	stopRespBody, err := io.ReadAll(stopRes.Body)
 	require.NoError(t, err)
 
 	require.Contains(t, string(stopRespBody), "stopped")
@@ -176,76 +186,88 @@ func TestStartPortForward(t *testing.T) {
 	assert.Contains(t, string(chData), "Stopped")
 
 	// list portforwards
-	req = &http.Request{}
-	resp = httptest.NewRecorder()
-	req.URL = &url.URL{}
-	req.URL.RawQuery = "cluster=minikube"
+	listReq := &http.Request{
+		Header: make(http.Header),
+	}
 
-	portforward.GetPortForwards(ch, resp, req)
+	listResp := httptest.NewRecorder()
 
-	res = resp.Result()
-	defer res.Body.Close()
+	listReq.URL = &url.URL{}
+	listReq.URL.RawQuery = "cluster=minikube"
 
-	require.Equal(t, http.StatusOK, res.StatusCode)
+	portforward.GetPortForwards(ch, listResp, listReq)
 
-	data, err = io.ReadAll(res.Body)
+	listRes := listResp.Result()
+	defer listRes.Body.Close()
+
+	require.Equal(t, http.StatusOK, listRes.StatusCode)
+
+	listData, err := io.ReadAll(listRes.Body)
 	require.NoError(t, err)
-	require.NotEmpty(t, data)
+	require.NotEmpty(t, listData)
 
 	var pfListRespPayload []map[string]interface{}
-	err = json.Unmarshal(data, &pfListRespPayload)
+	err = json.Unmarshal(listData, &pfListRespPayload)
 	require.NoError(t, err)
 
 	assert.NotEmpty(t, pfListRespPayload)
 	assert.Contains(t, pfListRespPayload[0]["id"], pfRespPayload["id"])
 	assert.Contains(t, pfListRespPayload[0]["status"], "Stopped")
-	assert.Equal(t, "[", string(string(data)[0]))
+	assert.Equal(t, "[", string(listData[0]))
 
 	// test fetching a portforward by id
-	req = &http.Request{}
-	resp = httptest.NewRecorder()
-	req.URL = &url.URL{}
-	req.URL.RawQuery = "cluster=minikube&id=" + pfRespPayload["id"].(string)
+	getReq := &http.Request{
+		Header: make(http.Header),
+	}
 
-	portforward.GetPortForwardByID(ch, resp, req)
+	getResp := httptest.NewRecorder()
 
-	res = resp.Result()
-	defer res.Body.Close()
+	getReq.URL = &url.URL{}
+	getReq.URL.RawQuery = "cluster=minikube&id=" + pfRespPayload["id"].(string)
 
-	require.Equal(t, http.StatusOK, res.StatusCode)
+	portforward.GetPortForwardByID(ch, getResp, getReq)
 
-	data, err = io.ReadAll(res.Body)
+	getRes := getResp.Result()
+	defer getRes.Body.Close()
+
+	require.Equal(t, http.StatusOK, getRes.StatusCode)
+
+	getData, err := io.ReadAll(getRes.Body)
 	require.NoError(t, err)
 
 	var pfRespPayloadByID map[string]interface{}
-	err = json.Unmarshal(data, &pfRespPayloadByID)
+	err = json.Unmarshal(getData, &pfRespPayloadByID)
 	require.NoError(t, err)
 
 	assert.NotEmpty(t, pfRespPayloadByID)
 	assert.Contains(t, pfRespPayloadByID["id"], pfRespPayload["id"])
 
 	// delete portforward
-	req = &http.Request{}
-	resp = httptest.NewRecorder()
+	deleteReq := &http.Request{
+		Header: make(http.Header),
+	}
+
+	deleteResp := httptest.NewRecorder()
 
 	// create delete request
-	reqPayload = map[string]interface{}{
+	deleteReqPayload := map[string]interface{}{
 		"cluster":      minikubeName,
 		"id":           pfRespPayload["id"],
 		"stopOrDelete": false,
 	}
 
-	jsonReq, err = json.Marshal(reqPayload)
+	jsonDeleteReq, err := json.Marshal(deleteReqPayload)
 	require.NoError(t, err)
 
-	req.Body = io.NopCloser(bytes.NewReader(jsonReq))
+	deleteReq.Body = io.NopCloser(bytes.NewReader(jsonDeleteReq))
+	deleteReq.Header.Set("Content-Type", "application/json")
 
-	portforward.StopOrDeletePortForward(ch, resp, req)
+	portforward.StopOrDeletePortForward(ch, deleteResp, deleteReq)
 
-	res = resp.Result()
-	defer res.Body.Close()
+	deleteRes := deleteResp.Result()
+	defer deleteRes.Body.Close()
 
-	deleteRespBody, err := io.ReadAll(res.Body)
+	deleteRespBody, err := io.ReadAll(deleteRes.Body)
 	require.NoError(t, err)
 
 	require.Contains(t, string(deleteRespBody), "stopped")

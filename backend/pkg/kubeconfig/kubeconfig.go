@@ -7,10 +7,11 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-	"path/filepath"
+	"os"
 	"runtime"
 	"strings"
 
+	"gopkg.in/yaml.v2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	k8sruntime "k8s.io/apimachinery/pkg/runtime"
 
@@ -73,6 +74,50 @@ func (o *CustomObject) DeepCopy() *CustomObject {
 	copied.CustomName = o.CustomName
 
 	return copied
+}
+
+// ContextError is an error that occurs in a context.
+type ContextError struct {
+	ContextName string
+	Reason      string
+}
+
+// Error returns a string representation of the error.
+func (e ContextError) Error() string {
+	return fmt.Sprintf("Error in context '%s': %s", e.ContextName, e.Reason)
+}
+
+// ClusterError is an error that occurs in a cluster.
+type ClusterError struct {
+	ClusterName string
+	Reason      string
+}
+
+// Error returns a string representation of the error.
+func (e ClusterError) Error() string {
+	return fmt.Sprintf("Error in cluster '%s': %s", e.ClusterName, e.Reason)
+}
+
+// UserError is an error that occurs in a user.
+type UserError struct {
+	UserName string
+	Reason   string
+}
+
+// Error returns a string representation of the error.
+func (e UserError) Error() string {
+	return fmt.Sprintf("Error in user '%s': %s", e.UserName, e.Reason)
+}
+
+// DataError is an error that occurs in data.
+type DataError struct {
+	Field  string
+	Reason string
+}
+
+// Error returns a string representation of the error.
+func (e DataError) Error() string {
+	return fmt.Sprintf("Error in field '%s': %s", e.Field, e.Reason)
 }
 
 // ClientConfig returns a clientcmd.ClientConfig for the context.
@@ -213,37 +258,357 @@ func (c *Context) AuthType() string {
 	return ""
 }
 
-// LoadContextsFromFile loads contexts from the given kubeconfig file.
-func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, error) {
-	// If the file path is relative make it absolute.
-	if !filepath.IsAbs(kubeConfigPath) {
-		absPath, err := filepath.Abs(kubeConfigPath)
+// LoadContextsFromFile loads contexts from a kubeconfig file.
+// It reads the kubeconfig file from the given path and loads the contexts from the file.
+// It returns an error if the file cannot be read.
+// It will return valid contexts and errors if there are any errors in the file.
+func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, []error) {
+	data, err := os.ReadFile(kubeConfigPath)
+	if err != nil {
+		return nil, []error{fmt.Errorf("error reading kubeconfig file: %v", err)}
+	}
+
+	return loadContextsFromData(data, source)
+}
+
+// LoadContextsFromBase64String loads contexts from a base64 encoded kubeconfig string.
+// It decodes the base64 encoded kubeconfig string and loads the contexts from the decoded string.
+// It returns an error if the base64 decoding fails.
+// It will return valid contexts and errors if there are any errors in the file.
+func LoadContextsFromBase64String(kubeConfig string, source int) ([]Context, []error) {
+	kubeConfigByte, err := base64.StdEncoding.DecodeString(kubeConfig)
+	if err != nil {
+		return nil, []error{fmt.Errorf("error decoding base64 kubeconfig: %v", err)}
+	}
+
+	return loadContextsFromData(kubeConfigByte, source)
+}
+
+// loadContextsFromData is a helper function that loads contexts from a byte slice.
+// It parses the byte slice as a YAML file and validates the parsed data.
+// It then creates contexts from the parsed data and returns them.
+// It returns any errors that occurred during parsing or validation.
+func loadContextsFromData(data []byte, source int) ([]Context, []error) {
+	var contexts []Context //nolint:prealloc
+
+	var errs []error
+
+	// Parse and validate the config.
+	rawConfig, _, err := parseAndValidateConfig(data)
+	if err != nil {
+		// Log the error but continue processing
+		errs = append(errs, fmt.Errorf("error parsing config: %v", err))
+	}
+
+	// Extract contexts, clusters, and users from the raw config.
+	rawContexts, _ := rawConfig["contexts"].([]interface{})
+	rawClusters, _ := rawConfig["clusters"].([]interface{})
+	rawUsers, _ := rawConfig["users"].([]interface{})
+
+	// Create contexts from the parsed data.
+	for _, rawContext := range rawContexts {
+		context, err := createContext(rawContext, rawClusters, rawUsers, source)
 		if err != nil {
-			return nil, err
+			errs = append(errs, err)
+			continue
 		}
 
-		kubeConfigPath = absPath
+		contexts = append(contexts, context)
 	}
 
-	config, err := clientcmd.LoadFromFile(kubeConfigPath)
+	// Return the contexts and any errors that occurred.
+	return contexts, errs
+}
+
+// parseAndValidateConfig parses and validates a kubeconfig file.
+// It returns the raw config, the parsed config, and any errors that occurred.
+// It returns an error if the file cannot be parsed.
+// It returns a valid config if the file is parsed and validated.
+// It returns any errors that occurred during parsing or validation.
+func parseAndValidateConfig(data []byte) (map[string]interface{}, *api.Config, error) {
+	var rawConfig map[string]interface{}
+
+	err := yaml.Unmarshal(data, &rawConfig)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	contexts, errs := LoadContextsFromAPIConfig(config, false)
-	if errs == nil {
-		return nil, errors.Join(errs...)
+	config, err := clientcmd.Load(data)
+	if err != nil {
+		return rawConfig, nil, err
 	}
 
-	contextsWithSource := make([]Context, 0, len(contexts))
-
-	for _, context := range contexts {
-		context := context
-		context.Source = source
-		contextsWithSource = append(contextsWithSource, context)
+	if err := clientcmd.Validate(*config); err != nil {
+		return rawConfig, config, err
 	}
 
-	return contextsWithSource, nil
+	return rawConfig, config, nil
+}
+
+// createContext creates a context from the given raw context, clusters, and users.
+// It returns the created context and any errors that occurred.
+// It returns an error if the context cannot be created.
+// It returns a valid context if the context is created.
+// It returns any errors that occurred during context creation.
+func createContext(rawContext interface{}, rawClusters, rawUsers []interface{}, source int) (Context, error) {
+	contextMap, ok := rawContext.(map[interface{}]interface{})
+	if !ok {
+		return Context{}, ContextError{ContextName: "unknown", Reason: "invalid context format"}
+	}
+
+	name, _ := contextMap["name"].(string)
+	contextData, _ := contextMap["context"].(map[interface{}]interface{})
+	clusterName, _ := contextData["cluster"].(string)
+	userName, _ := contextData["user"].(string)
+
+	cluster, err := findCluster(rawClusters, clusterName)
+	if err != nil {
+		return Context{}, ContextError{ContextName: name, Reason: err.Error()}
+	}
+
+	authInfo, err := findAuthInfo(rawUsers, userName)
+	if err != nil {
+		return Context{}, ContextError{ContextName: name, Reason: err.Error()}
+	}
+
+	friendlyName := makeDNSFriendly(name)
+	kubeContext := createKubeContext(contextData)
+
+	newContext := Context{
+		Name:        friendlyName,
+		KubeContext: kubeContext,
+		Cluster:     cluster,
+		AuthInfo:    authInfo,
+		Source:      source,
+	}
+
+	err = newContext.SetupProxy()
+	if err != nil {
+		return Context{}, ContextError{ContextName: name, Reason: fmt.Sprintf("couldn't setup proxy: %v", err)}
+	}
+
+	return newContext, nil
+}
+
+// findCluster finds a cluster in the given raw clusters.
+// It returns the found cluster and any errors that occurred.
+// It returns an error if the cluster cannot be found.
+// It returns a valid cluster if the cluster is found.
+// It returns any errors that occurred during cluster search.
+func findCluster(rawClusters []interface{}, clusterName string) (*api.Cluster, error) {
+	for _, rawCluster := range rawClusters {
+		clusterMap, ok := rawCluster.(map[interface{}]interface{})
+		if !ok || clusterMap["name"] != clusterName {
+			continue
+		}
+
+		cluster := &api.Cluster{}
+		clusterData, _ := clusterMap["cluster"].(map[interface{}]interface{})
+
+		for key, value := range clusterData {
+			strKey, ok := key.(string)
+			if !ok {
+				return nil, ClusterError{ClusterName: clusterName, Reason: fmt.Sprintf("invalid key type for field '%v'", key)}
+			}
+
+			switch strKey {
+			case "certificate-authority-data":
+				if data, ok := value.(string); ok {
+					decoded, err := base64.StdEncoding.DecodeString(data)
+					if err != nil {
+						return nil, DataError{Field: "certificate-authority-data", Reason: "invalid base64 encoding"}
+					}
+
+					cluster.CertificateAuthorityData = decoded
+				} else {
+					return nil, DataError{Field: "certificate-authority-data", Reason: "expected string, got different type"}
+				}
+			case "extensions":
+				cluster.Extensions = createExtensions(value)
+			default:
+				err := SetClusterField(cluster, strKey, value)
+				if err != nil {
+					return nil, ClusterError{ClusterName: clusterName, Reason: err.Error()}
+				}
+			}
+		}
+
+		return cluster, nil
+	}
+
+	return nil, ClusterError{ClusterName: clusterName, Reason: "cluster not found"}
+}
+
+// findAuthInfo finds an auth info in the given raw users.
+// It returns the found auth info and any errors that occurred.
+// It returns an error if the auth info cannot be found.
+// It returns a valid auth info if the auth info is found.
+// It returns any errors that occurred during auth info search.
+func findAuthInfo(rawUsers []interface{}, userName string) (*api.AuthInfo, error) {
+	for _, rawUser := range rawUsers {
+		userMap, ok := rawUser.(map[interface{}]interface{})
+		if !ok || userMap["name"] != userName {
+			continue
+		}
+
+		authInfo := &api.AuthInfo{}
+		userData, _ := userMap["user"].(map[interface{}]interface{})
+
+		for key, value := range userData {
+			strKey, ok := key.(string)
+			if !ok {
+				return nil, UserError{UserName: userName, Reason: fmt.Sprintf("invalid key type for field '%v'", key)}
+			}
+
+			err := SetAuthInfoField(authInfo, strKey, value)
+			if err != nil {
+				return nil, UserError{UserName: userName, Reason: err.Error()}
+			}
+		}
+
+		return authInfo, nil
+	}
+
+	return nil, UserError{UserName: userName, Reason: "user not found"}
+}
+
+// createAuthProvider creates an auth provider from the given value.
+// It returns the created auth provider and any errors that occurred.
+// It returns an error if the auth provider cannot be created.
+// It returns a valid auth provider if the auth provider is created.
+// It returns any errors that occurred during auth provider creation.
+func createAuthProvider(value interface{}) *api.AuthProviderConfig {
+	provider, ok := value.(map[interface{}]interface{})
+	if !ok {
+		return nil
+	}
+
+	authProvider := &api.AuthProviderConfig{}
+	authProvider.Name, _ = provider["name"].(string)
+
+	if config, ok := provider["config"].(map[interface{}]interface{}); ok {
+		authProvider.Config = make(map[string]string)
+
+		for k, v := range config {
+			if key, ok := k.(string); ok {
+				if val, ok := v.(string); ok {
+					authProvider.Config[key] = val
+				}
+			}
+		}
+	}
+
+	return authProvider
+}
+
+// createExecConfig creates an exec config from the given value.
+// It returns the created exec config and any errors that occurred.
+// It returns a valid exec config if the exec config is created.
+// It returns nil if the exec config cannot be created.
+func createExecConfig(value interface{}) *api.ExecConfig {
+	execData, ok := value.(map[interface{}]interface{})
+	if !ok {
+		return nil
+	}
+
+	execConfig := &api.ExecConfig{}
+	execConfig.Command, _ = execData["command"].(string)
+
+	if args, ok := execData["args"].([]interface{}); ok {
+		execConfig.Args = make([]string, len(args))
+		for i, arg := range args {
+			execConfig.Args[i], _ = arg.(string)
+		}
+	}
+
+	if env, ok := execData["env"].([]interface{}); ok {
+		execConfig.Env = make([]api.ExecEnvVar, len(env))
+
+		for i, e := range env {
+			if envMap, ok := e.(map[interface{}]interface{}); ok {
+				execConfig.Env[i].Name, _ = envMap["name"].(string)
+				execConfig.Env[i].Value, _ = envMap["value"].(string)
+			}
+		}
+	}
+
+	return execConfig
+}
+
+// createExtensions creates extensions from the given value.
+func createExtensions(value interface{}) map[string]k8sruntime.Object {
+	extensions, ok := value.(map[interface{}]interface{})
+	if !ok {
+		return nil
+	}
+
+	result := make(map[string]k8sruntime.Object)
+
+	for k, v := range extensions {
+		if key, ok := k.(string); ok {
+			if obj, ok := v.(k8sruntime.Object); ok {
+				result[key] = obj
+			} else {
+				result[key] = &CustomObject{
+					TypeMeta: metav1.TypeMeta{
+						Kind:       "CustomObject",
+						APIVersion: "v1",
+					},
+					ObjectMeta: metav1.ObjectMeta{
+						Name: key,
+					},
+					CustomName: key,
+				}
+			}
+		}
+	}
+
+	return result
+}
+
+// createKubeContext creates a kube context from the given context data.
+func createKubeContext(contextData map[interface{}]interface{}) *api.Context {
+	kubeContext := &api.Context{}
+
+	if cluster, ok := contextData["cluster"].(string); ok {
+		kubeContext.Cluster = cluster
+	}
+
+	if namespace, ok := contextData["namespace"].(string); ok {
+		kubeContext.Namespace = namespace
+	}
+
+	if user, ok := contextData["user"].(string); ok {
+		kubeContext.AuthInfo = user
+	}
+
+	// Handle extensions if present
+	if extensions, ok := contextData["extensions"].(map[interface{}]interface{}); ok {
+		kubeContext.Extensions = make(map[string]k8sruntime.Object)
+
+		for k, v := range extensions {
+			if key, ok := k.(string); ok {
+				if obj, ok := v.(k8sruntime.Object); ok {
+					kubeContext.Extensions[key] = obj
+				} else {
+					// If the extension is not already a runtime.Object,
+					// wrap it in a CustomObject
+					kubeContext.Extensions[key] = &CustomObject{
+						TypeMeta: metav1.TypeMeta{
+							Kind:       "CustomObject",
+							APIVersion: "v1",
+						},
+						ObjectMeta: metav1.ObjectMeta{
+							Name: key,
+						},
+						CustomName: key,
+					}
+				}
+			}
+		}
+	}
+
+	return kubeContext
 }
 
 // LoadContextsFromAPIConfig loads contexts from the given api.Config.
@@ -297,45 +662,13 @@ func LoadContextsFromMultipleFiles(kubeConfigs string, source int) ([]Context, e
 
 		kubeConfigContexts, err := LoadContextsFromFile(kubeConfigPath, source)
 		if err != nil {
-			errs = append(errs, err)
+			errs = append(errs, err...)
 		}
 
 		contexts = append(contexts, kubeConfigContexts...)
 	}
 
 	return contexts, errors.Join(errs...)
-}
-
-// LoadContextsFromBase64String loads contexts from the given kubeconfig string.
-func LoadContextsFromBase64String(kubeConfig string, source int) ([]Context, error) {
-	var contexts []Context
-
-	var errs []error
-
-	kubeConfigByte, err := base64.StdEncoding.DecodeString(kubeConfig)
-	if err != nil {
-		return nil, err
-	}
-
-	config, err := clientcmd.Load(kubeConfigByte)
-	if err != nil {
-		return nil, err
-	}
-
-	contexts, errs = LoadContextsFromAPIConfig(config, true)
-	if errs == nil {
-		return nil, errors.Join(errs...)
-	}
-
-	contextsWithSource := make([]Context, 0, len(contexts))
-
-	for _, context := range contexts {
-		context := context
-		context.Source = source
-		contextsWithSource = append(contextsWithSource, context)
-	}
-
-	return contextsWithSource, nil
 }
 
 func splitKubeConfigPath(path string) []string {
@@ -418,4 +751,214 @@ func makeDNSFriendly(name string) string {
 	name = strings.ReplaceAll(name, " ", "__")
 
 	return name
+}
+
+// SetClusterField sets a cluster field in the given cluster.
+// It returns an error if the field cannot be set.
+func SetClusterField(cluster *api.Cluster, fieldName string, value interface{}) error {
+	switch fieldName {
+	case "server", "certificate-authority", "proxy-url", "tls-server-name":
+		return setClusterStringField(cluster, fieldName, value)
+	case "insecure-skip-tls-verify", "disable-compression":
+		return setClusterBoolField(cluster, fieldName, value)
+	case "certificate-authority-data":
+		return setClusterBase64Data(cluster, fieldName, value)
+	case "extensions":
+		return setClusterExtensions(cluster, value)
+	default:
+		return DataError{Field: fieldName, Reason: "unknown field for cluster"}
+	}
+}
+
+// setClusterStringField sets a string field in the given cluster.
+func setClusterStringField(cluster *api.Cluster, fieldName string, value interface{}) error {
+	strValue, ok := value.(string)
+	if !ok {
+		return DataError{Field: fieldName, Reason: "expected string, got different type"}
+	}
+
+	switch fieldName {
+	case "server":
+		cluster.Server = strValue
+	case "certificate-authority":
+		cluster.CertificateAuthority = strValue
+	case "proxy-url":
+		cluster.ProxyURL = strValue
+	case "tls-server-name":
+		cluster.TLSServerName = strValue
+	default:
+		return DataError{Field: fieldName, Reason: "unknown string field for cluster"}
+	}
+
+	return nil
+}
+
+// setClusterBoolField sets a boolean field in the given cluster.
+func setClusterBoolField(cluster *api.Cluster, fieldName string, value interface{}) error {
+	boolValue, ok := value.(bool)
+	if !ok {
+		return DataError{Field: fieldName, Reason: "expected bool, got different type"}
+	}
+
+	switch fieldName {
+	case "insecure-skip-tls-verify":
+		cluster.InsecureSkipTLSVerify = boolValue
+	case "disable-compression":
+		cluster.DisableCompression = boolValue
+	default:
+		return DataError{Field: fieldName, Reason: "unknown string field for cluster"}
+	}
+
+	return nil
+}
+
+// setClusterBase64Data sets a base64 encoded data field in the given cluster.
+func setClusterBase64Data(cluster *api.Cluster, fieldName string, value interface{}) error {
+	data, ok := value.(string)
+	if !ok {
+		return DataError{Field: fieldName, Reason: "expected string, got different type"}
+	}
+
+	decoded, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return DataError{Field: fieldName, Reason: "invalid base64 encoding"}
+	}
+
+	cluster.CertificateAuthorityData = decoded
+
+	return nil
+}
+
+// setClusterExtensions sets the extensions field in the given cluster.
+func setClusterExtensions(cluster *api.Cluster, value interface{}) error {
+	extensions := createExtensions(value)
+	if extensions == nil {
+		return DataError{Field: "extensions", Reason: "invalid extensions data"}
+	}
+
+	cluster.Extensions = extensions
+
+	return nil
+}
+
+// SetAuthInfoField sets an auth info field in the given auth info.
+// It returns an error if the field cannot be set.
+func SetAuthInfoField(authInfo *api.AuthInfo, fieldName string, value interface{}) error {
+	switch fieldName {
+	case "client-certificate-data", "client-key-data":
+		return setBase64Data(authInfo, fieldName, value)
+	case "client-certificate", "client-key", "token", "tokenFile", "impersonate", "username", "password":
+		return setStringField(authInfo, fieldName, value)
+	case "impersonate-groups":
+		return setStringSliceField(authInfo, fieldName, value)
+	case "impersonate-user-extra":
+		return setMapStringStringSliceField(authInfo, fieldName, value)
+	case "exec":
+		return setExecField(authInfo, value)
+	case "auth-provider":
+		return setAuthProviderField(authInfo, value)
+	default:
+		return DataError{Field: fieldName, Reason: "unknown field for auth info"}
+	}
+}
+
+// setBase64Data sets a base64 data field in the given auth info.
+func setBase64Data(authInfo *api.AuthInfo, fieldName string, value interface{}) error {
+	data, ok := value.(string)
+	if !ok {
+		return DataError{Field: fieldName, Reason: "expected string, got different type"}
+	}
+
+	decoded, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return DataError{Field: fieldName, Reason: "invalid base64 encoding"}
+	}
+
+	switch fieldName {
+	case "client-certificate-data":
+		authInfo.ClientCertificateData = decoded
+	case "client-key-data":
+		authInfo.ClientKeyData = decoded
+	default:
+		return DataError{Field: fieldName, Reason: "unknown base64 field for auth info"}
+	}
+
+	return nil
+}
+
+// setStringField sets a string field in the given auth info.
+func setStringField(authInfo *api.AuthInfo, fieldName string, value interface{}) error {
+	strValue, ok := value.(string)
+	if !ok {
+		return DataError{Field: fieldName, Reason: "expected string, got different type"}
+	}
+
+	switch fieldName {
+	case "client-certificate":
+		authInfo.ClientCertificate = strValue
+	case "client-key":
+		authInfo.ClientKey = strValue
+	case "token":
+		authInfo.Token = strValue
+	case "tokenFile":
+		authInfo.TokenFile = strValue
+	case "impersonate":
+		authInfo.Impersonate = strValue
+	case "username":
+		authInfo.Username = strValue
+	case "password":
+		authInfo.Password = strValue
+	default:
+		return DataError{Field: fieldName, Reason: "unknown string field for auth info"}
+	}
+
+	return nil
+}
+
+// setStringSliceField sets an impersonate groups field in the given auth info.
+func setStringSliceField(authInfo *api.AuthInfo, fieldName string, value interface{}) error {
+	sliceValue, ok := value.([]string)
+	if !ok {
+		return DataError{Field: fieldName, Reason: "expected []string, got different type"}
+	}
+
+	authInfo.ImpersonateGroups = sliceValue
+
+	return nil
+}
+
+// setMapStringStringSliceField sets an impersonate user extra field in the given auth info.
+func setMapStringStringSliceField(authInfo *api.AuthInfo, fieldName string, value interface{}) error {
+	mapValue, ok := value.(map[string][]string)
+	if !ok {
+		return DataError{Field: fieldName, Reason: "expected map[string][]string, got different type"}
+	}
+
+	authInfo.ImpersonateUserExtra = mapValue
+
+	return nil
+}
+
+// setExecField sets an exec field in the given auth info.
+func setExecField(authInfo *api.AuthInfo, value interface{}) error {
+	execConfig, ok := value.(map[interface{}]interface{})
+	if !ok {
+		return DataError{Field: "exec", Reason: "invalid exec configuration"}
+	}
+
+	authInfo.Exec = createExecConfig(execConfig)
+
+	return nil
+}
+
+// setAuthProviderField sets an auth provider field in the given auth info.
+func setAuthProviderField(authInfo *api.AuthInfo, value interface{}) error {
+	providerConfig, ok := value.(map[interface{}]interface{})
+	if !ok {
+		return DataError{Field: "auth-provider", Reason: "invalid auth provider configuration"}
+	}
+
+	authInfo.AuthProvider = createAuthProvider(providerConfig)
+
+	return nil
 }
