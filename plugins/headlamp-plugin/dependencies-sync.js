@@ -54,6 +54,7 @@ const dependenciesFrontDoesNotHave = new Set([
   'monaco-editor-webpack-plugin',
   'webpack',
   'table',
+  'tar',
 ]);
 
 // Dependencies from frontend/package.json that aren't wanted by headlamp-plugin.
