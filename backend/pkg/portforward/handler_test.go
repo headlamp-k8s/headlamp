@@ -51,12 +51,13 @@ func TestStartPortForward(t *testing.T) {
 
 	// load kubeconfig
 	kubeConfigPath := getDefaultKubeConfigPath(t)
-	kContexts, errs := kubeconfig.LoadContextsFromFile(kubeConfigPath, kubeconfig.KubeConfig)
-	require.Empty(t, errs)
+	kContexts, contextErrors, err := kubeconfig.LoadContextsFromFile(kubeConfigPath, kubeconfig.KubeConfig)
+	require.NoError(t, err)
+	require.Empty(t, contextErrors)
 	require.NotEmpty(t, kContexts)
 
 	kc := kContexts[0]
-	err := kubeConfigStore.AddContext(&kc)
+	err = kubeConfigStore.AddContext(&kc)
 	require.NoError(t, err)
 
 	// find a pod to portforward to

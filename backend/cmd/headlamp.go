@@ -256,8 +256,8 @@ func defaultKubeConfigPersistenceFile() (string, error) {
 }
 
 // addPluginRoutes adds plugin routes to a router.
-// It serves plugin list base paths as json at “/plugins”.
-// It serves plugin static files at “/plugins/” and “/static-plugins/”.
+// It serves plugin list base paths as json at "plugins".
+// It serves plugin static files at "plugins/" and "static-plugins/".
 // It disables caching and reloads plugin list base paths if not in-cluster.
 func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
 	// Delete plugin route
@@ -1013,6 +1013,14 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 			return
 		}
 
+		if kContext.Error != "" {
+			logger.Log(logger.LevelError, map[string]string{"key": contextKey},
+				errors.New(kContext.Error), "context has error")
+			http.Error(w, kContext.Error, http.StatusBadRequest)
+
+			return
+		}
+
 		clusterURL, err := url.Parse(kContext.Cluster.Server)
 		if err != nil {
 			logger.Log(logger.LevelError, map[string]string{"ClusterURL": kContext.Cluster.Server},
@@ -1061,6 +1069,15 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 
 	for _, context := range contexts {
 		context := context
+
+		if context.Error != "" {
+			clusters = append(clusters, Cluster{
+				Name:  context.Name,
+				Error: context.Error,
+			})
+
+			continue
+		}
 
 		// Dynamic clusters should not be visible to other users.
 		if context.Internal {
@@ -1138,43 +1155,33 @@ func parseCustomNameClusters(contexts []kubeconfig.Context) ([]Cluster, []error)
 
 // parseClusterFromKubeConfig parses the kubeconfig and returns a list of contexts and errors.
 func parseClusterFromKubeConfig(kubeConfigs []string) ([]Cluster, []error) {
-	clusters := []Cluster{}
+	var clusters []Cluster
 
 	var setupErrors []error
 
 	for _, kubeConfig := range kubeConfigs {
-		var contexts []kubeconfig.Context
-
-		kubeConfigByte, err := base64.StdEncoding.DecodeString(kubeConfig)
+		contexts, contextLoadErrors, err := kubeconfig.LoadContextsFromBase64String(kubeConfig, kubeconfig.DynamicCluster)
 		if err != nil {
-			logger.Log(logger.LevelError, nil, err, "decoding kubeconfig")
-
 			setupErrors = append(setupErrors, err)
-
 			continue
 		}
 
-		config, err := clientcmd.Load(kubeConfigByte)
-		if err != nil {
-			logger.Log(logger.LevelError, nil, err, "loading kubeconfig")
-
-			setupErrors = append(setupErrors, err)
-
-			continue
+		if len(contextLoadErrors) > 0 {
+			for _, contextError := range contextLoadErrors {
+				setupErrors = append(setupErrors, contextError.Error)
+			}
 		}
 
-		contexts, errs := kubeconfig.LoadContextsFromAPIConfig(config, true)
-		if len(errs) > 0 {
-			setupErrors = append(setupErrors, errs...)
-			continue
+		parsedClusters, parseErrs := parseCustomNameClusters(contexts)
+		if len(parseErrs) > 0 {
+			setupErrors = append(setupErrors, parseErrs...)
 		}
 
-		clusters, setupErrors = parseCustomNameClusters(contexts)
+		clusters = append(clusters, parsedClusters...)
 	}
 
 	if len(setupErrors) > 0 {
 		logger.Log(logger.LevelError, nil, setupErrors, "setting up contexts from kubeconfig")
-
 		return nil, setupErrors
 	}
 
@@ -1191,105 +1198,29 @@ func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//nolint:funlen,nestif
+// addCluster adds cluster to store and updates the kubeconfig file.
 func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 	if err := checkHeadlampBackendToken(w, r); err != nil {
 		logger.Log(logger.LevelError, nil, err, "invalid token")
-
 		return
 	}
 
-	clusterReq := ClusterReq{}
-	if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
-		logger.Log(logger.LevelError, nil, err, "decoding cluster info")
-		http.Error(w, "decoding cluster info", http.StatusBadRequest)
-
+	clusterReq, err := decodeClusterRequest(r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	if (clusterReq.KubeConfig == nil) && (clusterReq.Name == nil || clusterReq.Server == nil) {
-		logger.Log(logger.LevelError, nil, errors.New("creating cluster with invalid info"),
-			"please provide a 'name' and 'server' fields at least")
-		http.Error(w, "creating cluster with invalid info; please provide a 'name' and 'server' fields at least.",
-			http.StatusBadRequest)
-
-		return
-	}
-
-	var contexts []kubeconfig.Context
-
-	var setupErrors []error
-
-	if clusterReq.KubeConfig != nil {
-		kubeConfigByte, err := base64.StdEncoding.DecodeString(*clusterReq.KubeConfig)
-		if err != nil {
-			logger.Log(logger.LevelError, nil, err, "decoding kubeconfig")
-			http.Error(w, "decoding kubeconfig", http.StatusBadRequest)
-
-			return
-		}
-
-		config, err := clientcmd.Load(kubeConfigByte)
-		if err != nil {
-			logger.Log(logger.LevelError, nil, err, "loading kubeconfig")
-			http.Error(w, "loading kubeconfig", http.StatusBadRequest)
-
-			return
-		}
-
-		kubeConfigPersistenceDir, err := defaultKubeConfigPersistenceDir()
-		if err != nil {
-			logger.Log(logger.LevelError, nil, err, "getting default kubeconfig persistence dir")
-			http.Error(w, "getting default kubeconfig persistence dir", http.StatusInternalServerError)
-
-			return
-		}
-
-		err = kubeconfig.WriteToFile(*config, kubeConfigPersistenceDir)
-		if err != nil {
-			logger.Log(logger.LevelError, nil, err, "writing kubeconfig")
-			http.Error(w, "writing kubeconfig", http.StatusBadRequest)
-
-			return
-		}
-
-		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(config, false)
-	} else {
-		conf := &api.Config{
-			Clusters: map[string]*api.Cluster{
-				*clusterReq.Name: {
-					Server:                   *clusterReq.Server,
-					InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
-					CertificateAuthorityData: clusterReq.CertificateAuthorityData,
-				},
-			},
-			Contexts: map[string]*api.Context{
-				*clusterReq.Name: {
-					Cluster: *clusterReq.Name,
-				},
-			},
-		}
-
-		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(conf, false)
-	}
+	contexts, setupErrors := c.processClusterRequest(clusterReq)
 
 	if len(contexts) == 0 {
-		logger.Log(logger.LevelError, nil, errors.New("no contexts found in kubeconfig"),
-			"getting contexts from kubeconfig")
+		logger.Log(logger.LevelError, nil, errors.New("no contexts found in kubeconfig"), "getting contexts from kubeconfig")
 		http.Error(w, "getting contexts from kubeconfig", http.StatusBadRequest)
 
 		return
 	}
 
-	for _, context := range contexts {
-		context := context
-		context.Source = kubeconfig.DynamicCluster
-
-		err := c.kubeConfigStore.AddContext(&context)
-		if err != nil {
-			setupErrors = append(setupErrors, err)
-		}
-	}
+	setupErrors = c.addContextsToStore(contexts, setupErrors)
 
 	if len(setupErrors) > 0 {
 		logger.Log(logger.LevelError, nil, setupErrors, "setting up contexts from kubeconfig")
@@ -1302,6 +1233,115 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 	c.getConfig(w, r)
 }
 
+// decodeClusterRequest decodes the cluster request from the request body.
+func decodeClusterRequest(r *http.Request) (ClusterReq, error) {
+	var clusterReq ClusterReq
+	if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
+		logger.Log(logger.LevelError, nil, err, "decoding cluster info")
+		return ClusterReq{}, fmt.Errorf("decoding cluster info: %w", err)
+	}
+
+	if (clusterReq.KubeConfig == nil) && (clusterReq.Name == nil || clusterReq.Server == nil) {
+		return ClusterReq{}, errors.New("please provide a 'name' and 'server' fields at least")
+	}
+
+	return clusterReq, nil
+}
+
+// processClusterRequest processes the cluster request.
+func (c *HeadlampConfig) processClusterRequest(clusterReq ClusterReq) ([]kubeconfig.Context, []error) {
+	if clusterReq.KubeConfig != nil {
+		return c.processKubeConfig(clusterReq)
+	}
+
+	return c.processManualConfig(clusterReq)
+}
+
+// processKubeConfig processes the kubeconfig request.
+func (c *HeadlampConfig) processKubeConfig(clusterReq ClusterReq) ([]kubeconfig.Context, []error) {
+	contexts, contextLoadErrors, err := kubeconfig.LoadContextsFromBase64String(
+		*clusterReq.KubeConfig,
+		kubeconfig.DynamicCluster,
+	)
+	setupErrors := c.handleLoadErrors(err, contextLoadErrors)
+
+	if len(contextLoadErrors) == 0 {
+		if err := c.writeKubeConfig(*clusterReq.KubeConfig); err != nil {
+			setupErrors = append(setupErrors, err)
+		}
+	}
+
+	return contexts, setupErrors
+}
+
+// processManualConfig processes the manual config request.
+func (c *HeadlampConfig) processManualConfig(clusterReq ClusterReq) ([]kubeconfig.Context, []error) {
+	conf := &api.Config{
+		Clusters: map[string]*api.Cluster{
+			*clusterReq.Name: {
+				Server:                   *clusterReq.Server,
+				InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
+				CertificateAuthorityData: clusterReq.CertificateAuthorityData,
+			},
+		},
+		Contexts: map[string]*api.Context{
+			*clusterReq.Name: {
+				Cluster: *clusterReq.Name,
+			},
+		},
+	}
+
+	return kubeconfig.LoadContextsFromAPIConfig(conf, false)
+}
+
+// handleLoadErrors handles the load errors.
+func (c *HeadlampConfig) handleLoadErrors(err error, contextLoadErrors []kubeconfig.ContextLoadError) []error {
+	var setupErrors []error //nolint:prealloc
+
+	if err != nil {
+		setupErrors = append(setupErrors, err)
+	}
+
+	for _, contextError := range contextLoadErrors {
+		setupErrors = append(setupErrors, contextError.Error)
+	}
+
+	return setupErrors
+}
+
+// writeKubeConfig writes the kubeconfig to the kubeconfig file.
+func (c *HeadlampConfig) writeKubeConfig(kubeConfigBase64 string) error {
+	kubeConfigByte, err := base64.StdEncoding.DecodeString(kubeConfigBase64)
+	if err != nil {
+		return fmt.Errorf("decoding kubeconfig: %w", err)
+	}
+
+	config, err := clientcmd.Load(kubeConfigByte)
+	if err != nil {
+		return fmt.Errorf("loading kubeconfig: %w", err)
+	}
+
+	kubeConfigPersistenceDir, err := defaultKubeConfigPersistenceDir()
+	if err != nil {
+		return fmt.Errorf("getting default kubeconfig persistence dir: %w", err)
+	}
+
+	return kubeconfig.WriteToFile(*config, kubeConfigPersistenceDir)
+}
+
+// addContextsToStore adds the contexts to the store.
+func (c *HeadlampConfig) addContextsToStore(contexts []kubeconfig.Context, setupErrors []error) []error {
+	for i := range contexts {
+		contexts[i].Source = kubeconfig.DynamicCluster
+		if err := c.kubeConfigStore.AddContext(&contexts[i]); err != nil {
+			setupErrors = append(setupErrors, err)
+		}
+	}
+
+	return setupErrors
+}
+
+// deleteCluster deletes the cluster from the store and updates the kubeconfig file.
 func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 	if err := checkHeadlampBackendToken(w, r); err != nil {
 		logger.Log(logger.LevelError, nil, err, "invalid token")
