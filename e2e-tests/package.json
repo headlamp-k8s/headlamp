@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "playwright-test-web": "cross-env PLAYWRIGHT_TEST_MODE=web npx playwright test --ui",
+    "playwright-test-electron": "cross-env PLAYWRIGHT_TEST_MODE=electron npx playwright test --workers=1",
+    "playwright-test-incluster": "cross-env PLAYWRIGHT_TEST_MODE=incluster npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.42.1",
-    "@types/node": "^20.12.2"
+    "@types/node": "^20.12.2",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
     "yaml": "^2.3.4"

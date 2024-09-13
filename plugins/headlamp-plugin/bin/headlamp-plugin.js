@@ -63,7 +63,7 @@ function create(name, link) {
         .split('$${name}')
         .join(name)
         .split('$${headlamp-plugin-version}')
-        .join(headlampPluginPkg.version),
+        .join(headlampPluginPkg.version)
     );
   }
 
@@ -89,7 +89,7 @@ function create(name, link) {
     });
   } catch (e) {
     console.error(
-      `Problem running npm install inside of "${dstFolder}" abs: "${resolve(dstFolder)}"`,
+      `Problem running npm install inside of "${dstFolder}" abs: "${resolve(dstFolder)}"`
     );
     return 3;
   }
@@ -390,8 +390,8 @@ function start() {
           const url = `https://github.com/headlamp-k8s/headlamp/releases`;
           console.warn(
             '    @kinvolk/headlamp-plugin is out of date. Run the following command to upgrade \n' +
-            `    See release notes here: ${url}` +
-            '    npx @kinvolk/headlamp-plugin upgrade'
+              `    See release notes here: ${url}` +
+              '    npx @kinvolk/headlamp-plugin upgrade'
           );
           return;
         }
@@ -490,7 +490,7 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
       '..',
       '..',
       '..',
-      nodeModulesBinCmd,
+      nodeModulesBinCmd
     );
 
     if (fs.existsSync(nodeModulesBinCmd)) {
@@ -502,8 +502,8 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
     } else {
       console.warn(
         `"${scriptCmd}" not found in "${resolve(nodeModulesBinCmd)}" or "${resolve(
-          upNodeModulesBinCmd,
-        )}" or "${resolve(npxBinCmd)}".`,
+          upNodeModulesBinCmd
+        )}" or "${resolve(npxBinCmd)}".`
       );
     }
 
@@ -549,7 +549,7 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
       };
     });
     const failedErrorFolders = errorFolders.filter(
-      errFolder => errFolder.error !== runOnPackageReturn.success,
+      errFolder => errFolder.error !== runOnPackageReturn.success
     );
 
     if (failedErrorFolders.length === 0) {
@@ -570,14 +570,14 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
     const folderErr = runOnFolderOfPackages(packageFolder);
     if (folderErr.error === runOnPackageReturn.notThere) {
       console.error(
-        `"${resolve(packageFolder)}" does not contain a package or packages. Not ${scriptName}-ing.`,
+        `"${resolve(packageFolder)}" does not contain a package or packages. Not ${scriptName}-ing.`
       );
       return 1; // failed
     } else if (folderErr.error === runOnPackageReturn.issue) {
       console.error(
         `Some in "${resolve(packageFolder)}" failed. Failed folders: ${folderErr.failedFolders.join(
-          ', ',
-        )}`,
+          ', '
+        )}`
       );
       return 1; // failed
     }
@@ -798,7 +798,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
     const templateFolder = path.resolve(__dirname, '..', 'template');
     const packageJsonPath = path.join('.', 'package.json');
     const templatePackageJson = JSON.parse(
-      fs.readFileSync(path.join(templateFolder, 'package.json'), 'utf8'),
+      fs.readFileSync(path.join(templateFolder, 'package.json'), 'utf8')
     );
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
     let configChanged = false;
@@ -819,8 +819,8 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
           configChanged = true;
           console.log(
             `Updated package.json field ${keyName}.${key}: ${JSON.stringify(
-              packageJson[keyName][key],
-            )}`,
+              packageJson[keyName][key]
+            )}`
           );
         }
       });
@@ -976,7 +976,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
     for (const folder of packageFolders) {
       if (failed) {
         console.error(
-          `Skipping "${folder.name}", because "${failed}" did not upgrade successfully.`,
+          `Skipping "${folder.name}", because "${failed}" did not upgrade successfully.`
         );
         continue;
       }
@@ -1026,8 +1026,9 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
  * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
  */
 function lint(packageFolder, fix) {
-  const script = `eslint --cache -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/${fix ? ' --fix' : ''
-    }`;
+  const script = `eslint --cache -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/${
+    fix ? ' --fix' : ''
+  }`;
   return runScriptOnPackages(packageFolder, 'lint', script, {});
 }
 
@@ -1056,11 +1057,11 @@ function storybook(packageFolder) {
         stdio: 'inherit',
         cwd: packageFolder,
         encoding: 'utf8',
-      },
+      }
     );
   } catch (e) {
     console.error(
-      `Problem running storybook dev inside of "${packageFolder}" abs: "${resolve(packageFolder)}"`,
+      `Problem running storybook dev inside of "${packageFolder}" abs: "${resolve(packageFolder)}"`
     );
     return 1;
   }
@@ -1106,7 +1107,7 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = build(argv.package);
-    },
+    }
   )
   .command('start', 'Watch for changes and build plugin.', {}, () => {
     process.exitCode = start();
@@ -1128,12 +1129,12 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = create(argv.name, argv.link);
-    },
+    }
   )
   .command(
     'extract <pluginPackages> <outputPlugins>',
     'Copies folders of packages from pluginPackages/packageName/dist/main.js ' +
-    'to outputPlugins/packageName/main.js.',
+      'to outputPlugins/packageName/main.js.',
     yargs => {
       yargs.positional('pluginPackages', {
         describe:
@@ -1187,7 +1188,7 @@ yargs(process.argv.slice(2))
   .command(
     'format [package]',
     'format the plugin code with prettier. <package> defaults to current working directory.' +
-    ' Can also be a folder of packages.',
+      ' Can also be a folder of packages.',
     yargs => {
       yargs
         .positional('package', {
@@ -1202,13 +1203,13 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = format(argv.package, argv.check);
-    },
+    }
   )
   .command(
     'lint [package]',
     'Lint the plugin for coding issues with eslint. ' +
-    '<package> defaults to current working directory.' +
-    ' Can also be a folder of packages.',
+      '<package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
     yargs => {
       yargs
         .positional('package', {
@@ -1223,13 +1224,13 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = lint(argv.package, argv.fix);
-    },
+    }
   )
   .command(
     'tsc [package]',
     'Type check the plugin for coding issues with tsc. ' +
-    '<package> defaults to current working directory.' +
-    ' Can also be a folder of packages.',
+      '<package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to type check',
@@ -1239,7 +1240,7 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = tsc(argv.package);
-    },
+    }
   )
   .command(
     'storybook [package]',
@@ -1253,12 +1254,12 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = storybook(argv.package);
-    },
+    }
   )
   .command(
     'storybook-build [package]',
     'Build static storybook. <package> defaults to current working directory.' +
-    ' Can also be a folder of packages.',
+      ' Can also be a folder of packages.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to build storybook for',
@@ -1268,13 +1269,13 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = storybook_build(argv.package);
-    },
+    }
   )
   .command(
     'upgrade [package]',
     'Upgrade the plugin to latest headlamp-plugin; ' +
-    'upgrades headlamp-plugin and audits packages, formats, lints, type checks.' +
-    '<package> defaults to current working directory. Can also be a folder of packages.',
+      'upgrades headlamp-plugin and audits packages, formats, lints, type checks.' +
+      '<package> defaults to current working directory. Can also be a folder of packages.',
     yargs => {
       yargs
         .positional('package', {
@@ -1294,7 +1295,7 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = upgrade(argv.package, argv.skipPackageUpdates, argv.headlampPluginVersion);
-    },
+    }
   )
   .command(
     'test [package]',
@@ -1308,7 +1309,7 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = test(argv.package);
-    },
+    }
   )
   .command(
     'install <URL>',
@@ -1338,17 +1339,17 @@ yargs(process.argv.slice(2))
       const progressCallback = quiet
         ? null
         : data => {
-          if (data.type === 'error' || data.type === 'success') {
-            console.error(data.type, ':', data.message);
-          }
-        }; // Use console.log for logs if not in quiet mode
+            if (data.type === 'error' || data.type === 'success') {
+              console.error(data.type, ':', data.message);
+            }
+          }; // Use console.log for logs if not in quiet mode
       try {
         await PluginManager.install(URL, folderName, headlampVersion, progressCallback);
       } catch (e) {
         console.error(e.message);
         process.exit(1); // Exit with error status
       }
-    },
+    }
   )
   .command(
     'update <pluginName>',
@@ -1378,17 +1379,17 @@ yargs(process.argv.slice(2))
       const progressCallback = quiet
         ? null
         : data => {
-          if (data.type === 'error' || data.type === 'success') {
-            console.error(data.type, ':', data.message);
-          }
-        }; // Use console.log for logs if not in quiet mode
+            if (data.type === 'error' || data.type === 'success') {
+              console.error(data.type, ':', data.message);
+            }
+          }; // Use console.log for logs if not in quiet mode
       try {
         await PluginManager.update(pluginName, folderName, headlampVersion, progressCallback);
       } catch (e) {
         console.error(e.message);
         process.exit(1); // Exit with error status
       }
-    },
+    }
   )
   .command(
     'uninstall <pluginName>',
@@ -1414,17 +1415,17 @@ yargs(process.argv.slice(2))
       const progressCallback = quiet
         ? null
         : data => {
-          if (data.type === 'error' || data.type === 'success') {
-            console.error(data.type, ':', data.message);
-          }
-        }; // Use console.log for logs if not in quiet mode
+            if (data.type === 'error' || data.type === 'success') {
+              console.error(data.type, ':', data.message);
+            }
+          }; // Use console.log for logs if not in quiet mode
       try {
         await PluginManager.uninstall(pluginName, folderName, progressCallback);
       } catch (e) {
         console.error(e.message);
         process.exit(1); // Exit with error status
       }
-    },
+    }
   )
   .command(
     'list',
@@ -1467,7 +1468,7 @@ yargs(process.argv.slice(2))
         console.error(e.message);
         process.exit(1); // Exit with error status
       }
-    },
+    }
   )
   .demandCommand(1, '')
   .strict()
