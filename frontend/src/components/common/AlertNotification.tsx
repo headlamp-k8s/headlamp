@@ -1,11 +1,10 @@
-import { Box, Button } from '@mui/material';
+import { Alert, Button, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
 import { testClusterHealth } from '../../lib/k8s/apiProxy';
 import { getRoute, getRoutePath } from '../../lib/router';
 import { getCluster } from '../../lib/util';
-import { useSidebarInfo } from '../Sidebar';
 
 // in ms
 const NETWORK_STATUS_CHECK_TIME = 5000;
@@ -20,7 +19,6 @@ export interface PureAlertNotificationProps {
 const ROUTES_WITHOUT_ALERT = ['login', 'token', 'settingsCluster'];
 
 export function PureAlertNotification({ checkerFunction }: PureAlertNotificationProps) {
-  const { width: sidebarWidth } = useSidebarInfo();
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
   const [error, setError] = React.useState<null | string | boolean>(null);
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
@@ -99,32 +97,33 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
   }
 
   return (
-    <Box
+    <Alert
+      variant="filled"
+      severity="error"
       sx={theme => ({
         color: theme.palette.common.white,
+        background: theme.palette.error.main,
         textAlign: 'center',
         display: 'flex',
-        paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(0.5),
+        paddingTop: theme.spacing(0.5),
+        paddingBottom: theme.spacing(1),
+        paddingRight: theme.spacing(3),
         justifyContent: 'center',
         position: 'fixed',
         zIndex: theme.zIndex.snackbar + 1,
-        width: '100%',
         top: '0',
-        height: '3.8vh',
+        alignItems: 'center',
+        left: '50%',
+        width: 'auto',
+        transform: 'translateX(-50%)',
       })}
-      bgcolor="error.main"
-      paddingRight={sidebarWidth}
-    >
-      <Box>
-        {t('Something went wrong.')}
+      action={
         <Button
           sx={theme => ({
             color: theme.palette.error.main,
             borderColor: theme.palette.error.main,
             background: theme.palette.common.white,
-            lineHeight: '1',
-            marginLeft: theme.spacing(1),
+            lineHeight: theme.typography.body2.lineHeight,
             '&:hover': {
               color: theme.palette.common.white,
               borderColor: theme.palette.common.white,
@@ -136,8 +135,19 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
         >
           {t('translation|Try Again')}
         </Button>
-      </Box>
-    </Box>
+      }
+    >
+      <Typography
+        variant="body2"
+        sx={theme => ({
+          paddingTop: theme.spacing(0.5),
+          fontWeight: 'bold',
+          fontSize: '16px',
+        })}
+      >
+        {t('translation|Lost connection to the cluster.')}
+      </Typography>
+    </Alert>
   );
 }
 

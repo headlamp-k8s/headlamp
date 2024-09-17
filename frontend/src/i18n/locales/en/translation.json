@@ -136,7 +136,7 @@
   "Reason": "Reason",
   "Last Seen": "Last Seen",
   "Offline": "Offline",
-  "Something went wrong.": "Something went wrong.",
+  "Lost connection to the cluster.": "Lost connection to the cluster.",
   "No": "No",
   "Yes": "Yes",
   "Toggle fullscreen": "Toggle fullscreen",

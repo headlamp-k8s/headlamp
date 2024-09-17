@@ -136,7 +136,7 @@
   "Reason": "Ereignis",
   "Last Seen": "Zuletzt gesehen",
   "Offline": "Offline",
-  "Something went wrong.": "Etwas ist schief gelaufen.",
+  "Lost connection to the cluster.": "",
   "No": "Nein",
   "Yes": "Ja",
   "Toggle fullscreen": "Vollbild ein/aus",
