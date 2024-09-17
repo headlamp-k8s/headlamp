@@ -6,12 +6,12 @@ import MuiLink from '@mui/material/Link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
+import { PortForward as PortForwardState } from '../../../lib/k8s/api/v1/portForward';
 import {
   listPortForward,
   startPortForward,
   stopOrDeletePortForward,
 } from '../../../lib/k8s/apiProxy';
-import { PortForward as PortForwardState } from '../../../lib/k8s/apiProxy/portForward';
 import { KubeContainer, KubeObject } from '../../../lib/k8s/cluster';
 import Pod from '../../../lib/k8s/pod';
 import Service from '../../../lib/k8s/service';

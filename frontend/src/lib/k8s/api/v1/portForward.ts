@@ -1,5 +1,5 @@
-import helpers from '../../../helpers';
-import { getToken } from '../../auth';
+import helpers from '../../../../helpers';
+import { getToken } from '../../../auth';
 import { JSON_HEADERS } from './constants';
 
 // @todo: the return type is missing for the following functions.
