@@ -58,17 +58,17 @@ backend:
 .PHONY: backend-embed
 backend-embed: frontend
 	@echo "Preparing static files for embedding..."
-	@if [ -d backend/static ]; then rm -rf backend/static; fi
-	@mkdir -p backend/static
+	@if [ -d backend/cmd/static ]; then rm -rf backend/cmd/static; fi
+	@mkdir -p backend/cmd/static
 ifeq ($(OS),Windows_NT)
 	@echo "Copying frontend dist to backend/static..."
 	# /E: Copies directories and subdirectories, including empty ones
 	# /I: Assumes destination is a directory if copying multiple files
 	# /Y: Suppresses prompting to confirm overwriting existing files	
-	@xcopy /E /I /Y frontend\build backend\static
+	@xcopy /E /I /Y frontend\build backend\cmd\static
 else
-	@echo "Creating symlink from frontend dist to backend/static..."
-	@ln -sf $(CURDIR)/frontend/build/* $(CURDIR)/backend/static/
+	@echo "Copying frontend dist to backend/static..."
+	@cp -R frontend/build/* backend/cmd/static/
 endif
 	@echo "Building backend with embedded static files..."
 	cd backend && go build -tags embed -o ./headlamp-server${SERVER_EXE_EXT} ./cmd
