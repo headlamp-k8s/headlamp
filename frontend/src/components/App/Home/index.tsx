@@ -167,7 +167,7 @@ export default function Home() {
     return null;
   }
 
-  return <HomeComponent clusters={clusters} />;
+  return <HomeComponent clusters={clusters} key={Object.keys(clusters).join('')} />;
 }
 
 interface HomeComponentProps {

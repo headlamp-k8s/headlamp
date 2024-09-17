@@ -6,7 +6,7 @@
       <p
         class="MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter css-9ldkza-MuiTypography-root"
       >
-        Error getting custom resource definition error.crd.io: No mock CRD for you
+        Error getting custom resource definition error.crd.io: Unreachable
       </p>
     </div>
   </div>

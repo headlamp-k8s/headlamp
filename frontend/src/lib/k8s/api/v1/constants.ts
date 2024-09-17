@@ -1,4 +1,4 @@
-import helpers from '../../../helpers';
+import helpers from '../../../../helpers';
 
 export const BASE_HTTP_URL = helpers.getAppUrl();
 export const CLUSTERS_PREFIX = 'clusters';

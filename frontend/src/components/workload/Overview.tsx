@@ -1,9 +1,7 @@
 import Grid from '@mui/material/Grid';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { useCluster } from '../../lib/k8s';
-import { ApiError } from '../../lib/k8s/apiProxy';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
@@ -24,21 +22,29 @@ interface WorkloadDict {
 }
 
 export default function Overview() {
-  const [workloadsData, setWorkloadsData] = React.useState<WorkloadDict>({});
+  const [pods] = Pod.useList();
+  const [deployments] = Deployment.useList();
+  const [statefulSets] = StatefulSet.useList();
+  const [daemonSets] = DaemonSet.useList();
+  const [replicaSets] = ReplicaSet.useList();
+  const [jobs] = Job.useList();
+  const [cronJobs] = CronJob.useList();
+
+  const workloadsData: WorkloadDict = useMemo(
+    () => ({
+      Pod: pods ?? [],
+      Deployment: deployments ?? [],
+      StatefulSet: statefulSets ?? [],
+      DaemonSet: daemonSets ?? [],
+      ReplicaSet: replicaSets ?? [],
+      Job: jobs ?? [],
+      CronJob: cronJobs ?? [],
+    }),
+    [pods, deployments, statefulSets, daemonSets, replicaSets, jobs, cronJobs]
+  );
+
   const location = useLocation();
   const { t } = useTranslation('glossary');
-  const cluster = useCluster();
-
-  React.useEffect(() => {
-    setWorkloadsData({});
-  }, [cluster]);
-
-  function setWorkloads(newWorkloads: WorkloadDict) {
-    setWorkloadsData(workloads => ({
-      ...workloads,
-      ...newWorkloads,
-    }));
-  }
 
   function getPods(item: Workload) {
     return `${getReadyReplicas(item)}/${getTotalReplicas(item)}`;
@@ -57,11 +63,6 @@ export default function Overview() {
   const jointItems = React.useMemo(() => {
     let joint: Workload[] = [];
 
-    // Return null if no items are yet loaded, so we show the spinner in the table.
-    if (Object.keys(workloadsData).length === 0) {
-      return null;
-    }
-
     // Get all items except the pods since those shouldn't be shown in the table (only the chart).
     for (const [key, items] of Object.entries(workloadsData)) {
       if (key === 'Pod') {
@@ -69,6 +70,14 @@ export default function Overview() {
       }
       joint = joint.concat(items);
     }
+
+    joint = joint.filter(Boolean);
+
+    // Return null if no items are yet loaded, so we show the spinner in the table.
+    if (joint.length === 0) {
+      return null;
+    }
+
     return joint;
   }, [workloadsData]);
 
@@ -91,18 +100,6 @@ export default function Overview() {
     [Job.className]: t('glossary|Jobs'),
     [CronJob.className]: t('glossary|Cron Jobs'),
   };
-
-  workloads.forEach((workloadClass: KubeObject) => {
-    workloadClass.useApiList(
-      (items: InstanceType<typeof workloadClass>[]) => {
-        setWorkloads({ [workloadClass.className]: items });
-      },
-      (err: ApiError) => {
-        console.error(`Workloads list: Failed to get list for ${workloadClass.className}: ${err}`);
-        setWorkloads({ [workloadClass.className]: [] });
-      }
-    );
-  });
 
   function ChartLink({ workload }: { workload: KubeObject }) {
     return <Link routeName={workload.pluralName}>{workloadLabel[workload.className]}</Link>;

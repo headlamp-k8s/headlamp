@@ -93,7 +93,7 @@ export default function ServiceDetails() {
                   <Empty color="error">{endpointsError.toString()}</Empty>
                 ) : (
                   <SimpleTable
-                    data={getOwnedEndpoints(item)}
+                    data={getOwnedEndpoints(item) ?? null}
                     columns={[
                       {
                         label: t('translation|Name'),

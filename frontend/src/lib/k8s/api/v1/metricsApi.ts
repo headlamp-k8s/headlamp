@@ -1,6 +1,6 @@
-import { isDebugVerbose } from '../../../helpers';
-import { getCluster } from '../../cluster';
-import { KubeMetrics } from '../cluster';
+import { isDebugVerbose } from '../../../../helpers';
+import { getCluster } from '../../../cluster';
+import { KubeMetrics } from '../../cluster';
 import { ApiError, clusterRequest } from './clusterRequests';
 
 /**

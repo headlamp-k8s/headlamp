@@ -4,6 +4,7 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import '../src/index.css';
 import { Title, Subtitle, Description, Primary, Controls } from '@storybook/blocks';
 import { baseMocks } from './baseMocks';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // https://github.com/mswjs/msw-storybook-addon
 initialize({
@@ -11,13 +12,26 @@ initialize({
   waitUntilReady: true,
 });
 
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: 'always',
+      staleTime: 0,
+      retry: false,
+      gcTime: 0,
+    },
+  },
+});
+
 const withThemeProvider = (Story: any, context: any) => {
   const theme = themesConf[context.globals.backgrounds?.value === '#1f1f1f' ? 'dark' : 'light'];
 
   const ourThemeProvider = (
-    <ThemeProvider theme={theme}>
-      <Story {...context} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <Story {...context} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
   return ourThemeProvider;
 };

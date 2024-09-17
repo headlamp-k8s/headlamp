@@ -1,12 +1,12 @@
-import helpers, { getHeadlampAPIHeaders } from '../../../helpers';
-import { ConfigState } from '../../../redux/configSlice';
-import store from '../../../redux/stores/store';
+import helpers, { getHeadlampAPIHeaders } from '../../../../helpers';
+import { ConfigState } from '../../../../redux/configSlice';
+import store from '../../../../redux/stores/store';
 import {
   deleteClusterKubeconfig,
   findKubeconfigByClusterName,
   storeStatelessClusterKubeconfig,
-} from '../../../stateless';
-import { getCluster } from '../../util';
+} from '../../../../stateless';
+import { getCluster } from '../../../util';
 import { ClusterRequest, clusterRequest, post, request } from './clusterRequests';
 import { JSON_HEADERS } from './constants';
 

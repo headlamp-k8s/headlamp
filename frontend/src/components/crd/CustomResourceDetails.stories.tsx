@@ -1,12 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
-import { ResourceClasses } from '../../lib/k8s';
 import { TestContext } from '../../test';
 import { CustomResourceDetails, CustomResourceDetailsProps } from './CustomResourceDetails';
-import { CRMockClass } from './storyHelper';
-
-// So we can test with a mocked CR.
-ResourceClasses['mycustomresources'] = CRMockClass;
+import { mockCRD, mockCRList } from './storyHelper';
 
 export default {
   title: 'crd/CustomResourceDetails',
@@ -18,19 +14,7 @@ export default {
         storyBase: [
           http.get(
             'http://localhost:4466/apis/my.phonyresources.io/v1/namespaces/mynamespace/mycustomresources/mycustomresource',
-            () =>
-              HttpResponse.json({
-                kind: 'MyCustomResource',
-                apiVersion: 'my.phonyresources.io/v1',
-                metadata: {
-                  name: 'mycustomresource',
-                  uid: 'phony2',
-                  creationTimestamp: new Date('2021-12-15T14:57:13Z').toString(),
-                  resourceVersion: '1',
-                  namespace: 'mynamespace',
-                  selfLink: '1',
-                },
-              })
+            () => HttpResponse.json(mockCRList[0])
           ),
           http.get('http://localhost:4466/apis/my.phonyresources.io/v1/mycustomresources', () =>
             HttpResponse.json({})
@@ -45,10 +29,14 @@ export default {
           ),
           http.get(
             'http://localhost:4466/apis/apiextensions.k8s.io/v1/customresourcedefinitions/mydefinition.phonyresources.io',
-            () => HttpResponse.error()
+            () => HttpResponse.json(mockCRD)
           ),
           http.get('http://localhost:4466/api/v1/namespaces/mynamespace/events', () =>
             HttpResponse.error()
+          ),
+          http.get(
+            'http://localhost:4466/apis/apiextensions.k8s.io/v1/customresourcedefinitions/loadingcrd',
+            () => HttpResponse.json(null)
           ),
         ],
       },
@@ -72,13 +60,6 @@ NoError.args = {
   crName: 'mycustomresource',
   crd: 'mydefinition.phonyresources.io',
   namespace: 'mynamespace',
-};
-
-export const LoadingCRD = Template.bind({});
-LoadingCRD.args = {
-  crName: 'loadingcr',
-  crd: 'loadingcrd',
-  namespace: '-',
 };
 
 export const ErrorGettingCRD = Template.bind({});

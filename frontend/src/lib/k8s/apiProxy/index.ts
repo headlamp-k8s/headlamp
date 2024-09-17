@@ -21,7 +21,7 @@
 // import { debugVerbose } from '../../helpers';
 // debugVerbose('k8s/apiProxy');
 
-export type { QueryParameters } from './queryParameters';
+export type { QueryParameters } from '../api/v1/queryParameters';
 
 // Basic cluster API functions
 export {
@@ -35,7 +35,7 @@ export {
   type ClusterRequest,
   type ClusterRequestParams,
   type RequestParams,
-} from './clusterRequests';
+} from '../api/v1/clusterRequests';
 
 // Streaming API functions
 export {
@@ -47,7 +47,7 @@ export {
   type StreamResultsParams,
   type StreamResultsCb,
   type StreamErrCb,
-} from './streamingApi';
+} from '../api/v1/streamingApi';
 
 // API factory functions
 export {
@@ -56,10 +56,10 @@ export {
   type ApiInfo,
   type ApiClient,
   type ApiWithNamespaceClient,
-} from './factories';
+} from '../api/v1/factories';
 
 // Port forward functions
-export { listPortForward, startPortForward, stopOrDeletePortForward } from './portForward';
+export { listPortForward, startPortForward, stopOrDeletePortForward } from '../api/v1/portForward';
 
 export {
   deleteCluster,
@@ -68,10 +68,10 @@ export {
   testClusterHealth,
   parseKubeConfig,
   renameCluster,
-} from './clusterApi';
-export { metrics } from './metricsApi';
-export { deletePlugin } from './pluginsApi';
+} from '../api/v1/clusterApi';
+export { metrics } from '../api/v1/metricsApi';
+export { deletePlugin } from '../api/v1/pluginsApi';
 
-export { drainNodeStatus, drainNode } from './drainNode';
+export { drainNodeStatus, drainNode } from '../api/v1/drainNode';
 
-export { apply } from './apply';
+export { apply } from '../api/v1/apply';

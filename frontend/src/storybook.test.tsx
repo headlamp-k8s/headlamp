@@ -103,7 +103,7 @@ describe('Storybook Tests', () => {
       return;
     }
 
-    describe(title, async () => {
+    describe(title, () => {
       const stories = Object.entries(compose(storyFile)).map(([name, story]) => ({
         name,
         story,
@@ -130,6 +130,9 @@ describe('Storybook Tests', () => {
           worker.events.on('request:start', onStart);
           worker.events.on('request:end', onEnd);
 
+          act(() => {
+            previewAnnotations.queryClient.clear();
+          });
           await act(async () => {
             await story.run();
           });
@@ -148,6 +151,12 @@ describe('Storybook Tests', () => {
           await waitFor(() => {
             if (requestsSent !== requestsEnded) {
               throw new Error('waiting');
+            }
+          });
+
+          await waitFor(() => {
+            if (previewAnnotations.queryClient.isFetching()) {
+              throw new Error('The react-query is still fetching');
             }
           });
 

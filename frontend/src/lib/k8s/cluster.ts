@@ -4,8 +4,9 @@ import { cloneDeep, unset } from 'lodash';
 import React from 'react';
 import helpers from '../../helpers';
 import { createRouteURL } from '../router';
-import { getCluster, timeAgo, useErrorState } from '../util';
-import { useCluster, useConnectApi } from '.';
+import { getCluster, timeAgo } from '../util';
+import { useConnectApi } from '.';
+import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
@@ -323,13 +324,15 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
     namespace?: string,
     onError?: (err: ApiError) => void
   ) => void;
-  useList: (
-    opts?: ApiListOptions
-  ) => [any[], ApiError | null, (items: any[]) => void, (err: ApiError | null) => void];
+  useList(options?: ApiListOptions): ReturnType<typeof useKubeObjectList>;
   useGet: (
     name: string,
-    namespace?: string
-  ) => [any, ApiError | null, (item: any) => void, (err: ApiError | null) => void];
+    namespace?: string,
+    opts?: {
+      queryParams?: QueryParameters;
+      cluster?: string;
+    }
+  ) => ReturnType<typeof useKubeObject>;
   getErrorMessage: (err?: ApiError | null) => string | null;
   new (json: T): any;
   className: string;
@@ -583,32 +586,38 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       useConnectApi(...listCalls);
     }
 
-    static useList<U extends KubeObject>(
-      opts?: ApiListOptions
-    ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
-      const [objList, setObjList] = React.useState<U[] | null>(null);
-      const [error, setError] = useErrorState(setObjList);
-      const currentCluster = useCluster();
-      const cluster = opts?.cluster || currentCluster;
+    static useList<U extends KubeObjectClass>(
+      this: U,
+      {
+        cluster,
+        namespace,
+        ...queryParams
+      }: { cluster?: string; namespace?: string } & QueryParameters = {}
+    ) {
+      return useKubeObjectList({
+        queryParams: queryParams,
+        kubeObjectClass: this,
+        cluster: cluster,
+        namespace: namespace,
+      });
+    }
 
-      // Reset the list and error when the cluster changes.
-      React.useEffect(() => {
-        setObjList(null);
-        setError(null);
-      }, [cluster]);
-
-      function setList(items: U[] | null) {
-        setObjList(items);
-        if (items !== null) {
-          setError(null);
-        }
+    static useGet<U extends KubeObjectClass>(
+      this: U,
+      name: string,
+      namespace?: string,
+      opts?: {
+        queryParams?: QueryParameters;
+        cluster?: string;
       }
-
-      this.useApiList(setList, setError, opts);
-
-      // Return getters and then the setters as the getters are more likely to be used with
-      // this function.
-      return [objList, error, setObjList, setError];
+    ) {
+      return useKubeObject({
+        kubeObjectClass: this,
+        name: name,
+        namespace: namespace,
+        cluster: opts?.cluster,
+        queryParams: opts?.queryParams,
+      });
     }
 
     static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
@@ -653,47 +662,6 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       // the exact signature as get callbacks.
       const getCallback = onGet as (item: U) => void;
       useConnectApi(this.apiGet(getCallback, name, namespace, onError, opts));
-    }
-
-    static useGet<U extends KubeObject>(
-      name: string,
-      namespace?: string,
-      opts?: {
-        queryParams?: QueryParameters;
-        cluster?: string;
-      }
-    ): [U | null, ApiError | null, (items: U) => void, (err: ApiError | null) => void] {
-      const [obj, setObj] = React.useState<U | null>(null);
-      const [error, setError] = useErrorState(setObj);
-
-      function onGet(item: U | null) {
-        // Only set the object if we have we have a different one.
-        if (!!obj && !!item && obj.metadata.resourceVersion === item.metadata.resourceVersion) {
-          return;
-        }
-
-        setObj(item);
-        if (item !== null) {
-          setError(null);
-        }
-      }
-
-      function onError(err: ApiError | null) {
-        if (
-          error === err ||
-          (!!error && !!err && error.message === err.message && error.status === err.status)
-        ) {
-          return;
-        }
-
-        setError(err);
-      }
-
-      this.useApiGet(onGet, name, namespace, onError, opts);
-
-      // Return getters and then the setters as the getters are more likely to be used with
-      // this function.
-      return [obj, error, setObj, setError];
     }
 
     private _class() {
