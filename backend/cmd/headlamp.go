@@ -89,6 +89,10 @@ type OauthConfig struct {
 }
 
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if strings.Contains(r.URL.Path, "..") {
+		http.Error(w, "Contains unexpected '..'", http.StatusBadRequest)
+	}
+
 	// Clean the path to prevent directory traversal
 	path := filepath.Clean(r.URL.Path)
 	path = strings.TrimPrefix(path, h.baseURL)
