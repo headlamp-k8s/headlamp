@@ -183,7 +183,9 @@ func startPortForward(kContext *kubeconfig.Context, cache cache.Cache[interface{
 		return fmt.Errorf("failed to create portforward request: %v", err)
 	}
 
-	rConf.BearerToken = token
+	if token != "" {
+		rConf.BearerToken = token
+	}
 
 	roundTripper, upgrader, err := spdy.RoundTripperFor(rConf)
 	if err != nil {
