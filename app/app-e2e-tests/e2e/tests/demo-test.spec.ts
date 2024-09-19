@@ -23,6 +23,15 @@ test.beforeAll(async () => {
   page = await electronApp.firstWindow();
 });
 
+test('print a', async () => {
+  console.log('app path');
+  console.log(appPath);
+
+  console.log('other path');
+
+  console.log(page);
+});
+
 // test.afterAll(async () => {
 //   // Close the Electron app.
 //   await electronApp.close();

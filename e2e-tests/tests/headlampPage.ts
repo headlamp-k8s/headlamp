@@ -59,8 +59,15 @@ export class HeadlampPage {
 
   // note: must have minikube started before running these
   async startFromMainPage() {
-    await this.page.goto('/');
+    // IF STARTING IN APP MODE IT GOES TO MAIN PAGE NOT OVERVIEW
+
+    // to do: working in cluster mode
+
     await this.page.waitForLoadState('load');
+
+    if (process.env.PLAYWRIGHT_TEST_MODE === 'web') {
+      await this.page.goto('/');
+    }
 
     console.log('MAIN PAGE');
 
@@ -70,7 +77,7 @@ export class HeadlampPage {
     if (!currentURL.includes('c/minikube')) {
       console.log('MORE THAN ONE CLUSTER');
 
-      await this.page.waitForSelector('link:has-text("minikube")');
+      await this.page.waitForSelector('a:has-text("minikube")');
       await this.page.getByRole('link', { name: 'minikube' }).click();
       await this.page.waitForLoadState('load');
     }

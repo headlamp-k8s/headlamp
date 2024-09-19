@@ -10,9 +10,15 @@ const electronPath = path.resolve(__dirname, `../../app/node_modules/.bin/${elec
 const electron = _electron;
 const appPath = path.resolve(__dirname, '../../app');
 let electronApp;
-let page: Page;
+let electronPage: Page;
 
 if (process.env.PLAYWRIGHT_TEST_MODE === 'app') {
+  console.log('app path');
+  console.log(appPath);
+
+  console.log('other path');
+  console.log(electronPath);
+
   test.beforeAll(async () => {
     electronApp = await electron.launch({
       cwd: appPath,
@@ -25,21 +31,18 @@ if (process.env.PLAYWRIGHT_TEST_MODE === 'app') {
       },
     });
 
-    page = await electronApp.firstWindow();
+    electronPage = await electronApp.firstWindow();
+  });
+
+  test.beforeEach(async ({ page }) => {
+    if (process.env.PLAYWRIGHT_TEST_MODE === 'app') {
+      page.close();
+    }
   });
 }
 
-test('print a', () => {
-  console.log('app path');
-  console.log(appPath);
-
-  console.log('other path');
-  console.log(electronPath);
-
-  console.log(page);
-});
-
-test('create a namespace with the minimal editor then delete it', async ({ page }) => {
+test('create a namespace with the minimal editor then delete it', async ({ page: browserPage }) => {
+  const page = process.env.PLAYWRIGHT_TEST_MODE === 'app' ? electronPage : browserPage;
   const name = 'testing-e2e';
   const headlampPage = new HeadlampPage(page);
   // If we are running in cluster, we need to authenticate
