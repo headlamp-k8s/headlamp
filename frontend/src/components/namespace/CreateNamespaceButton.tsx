@@ -143,7 +143,6 @@ export default function CreateNamespaceButton() {
         </DialogContent>
         <DialogActions>
           <Button
-            aria-label="Cancel"
             onClick={() => {
               setNamespaceDialogOpen(false);
             }}
@@ -151,7 +150,6 @@ export default function CreateNamespaceButton() {
             {t('translation|Cancel')}
           </Button>
           <Button
-            aria-label="Create"
             disabled={!isValidNamespaceName}
             onClick={() => {
               createNewNamespace();
