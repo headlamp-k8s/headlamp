@@ -2,7 +2,6 @@ import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
 import { Button, InputLabel } from '@mui/material';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Grid, { GridProps, GridSize } from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input, { InputProps } from '@mui/material/Input';
@@ -643,8 +642,8 @@ export interface ContainerInfoProps {
 export function ContainerInfo(props: ContainerInfoProps) {
   const { container, status, resource } = props;
   const { t } = useTranslation(['glossary', 'translation']);
-  const [maxPortsToShow, setMaxPortsToShow] = React.useState(5);
-  const portsToShow = container.ports?.slice(0, 5 * maxPortsToShow);
+  const maxNumPortsByDefault = 8;
+  const [showAllPorts, setShowAllPorts] = React.useState(false);
   const [startedDate, finishDate, lastStateStartedDate, lastStateFinishDate] = React.useMemo(() => {
     function getStartedDate(state?: KubeContainerStatus['state']) {
       let startedDate = state?.running?.startedAt || state?.terminated?.startedAt || '';
@@ -669,6 +668,18 @@ export function ContainerInfo(props: ContainerInfoProps) {
       getFinishDate(status?.lastState),
     ];
   }, [status]);
+
+  const [portsToShow, needsExpandButton] = React.useMemo(() => {
+    const needsExpandButton = (container.ports?.length ?? 0) > maxNumPortsByDefault;
+    let ports: KubeContainer['ports'] = [];
+    if (needsExpandButton && !showAllPorts) {
+      ports = container.ports?.slice(0, maxNumPortsByDefault);
+    } else {
+      ports = container.ports;
+    }
+
+    return [ports ?? [], needsExpandButton];
+  }, [container.ports, showAllPorts]);
 
   function ContainerStatusLabel(props: {
     state?: KubeContainerStatus['state'] | null;
@@ -903,12 +914,12 @@ export function ContainerInfo(props: ContainerInfoProps) {
       {
         name: t('Ports'),
         value: (
-          <Grid container>
+          <Grid container justifyContent="flex-start">
             {portsToShow?.map(({ containerPort, protocol }, index) => (
               <>
-                <Grid item md={4} key={`port_line_${index}`}>
-                  <Box display="flex" alignItems={'center'}>
-                    <Box px={0.5} minWidth={120}>
+                <Grid item key={`port_line_${index}`}>
+                  <Box display="flex" alignItems={'center'} my={2} mr={3} minWidth={150}>
+                    <Box px={0.5}>
                       <ValueLabel>{`${protocol}:`}</ValueLabel>
                       <ValueLabel>{containerPort}</ValueLabel>
                     </Box>
@@ -917,27 +928,25 @@ export function ContainerInfo(props: ContainerInfoProps) {
                     )}
                   </Box>
                 </Grid>
-                {index !== 0 && index % 2 === 0 && index < portsToShow!.length - 1 && (
-                  <Grid item xs={12}>
-                    <Box mt={2} mb={2}>
-                      <Divider />
-                    </Box>
-                  </Grid>
-                )}
               </>
             ))}
-            {container.ports?.length! > 5 &&
-              portsToShow &&
-              container.ports &&
-              portsToShow.length < container.ports.length && (
-                <Grid item xs={12}>
-                  <Box display="flex" mt={2}>
-                    <Button onClick={() => setMaxPortsToShow(prev => prev * 2)}>
-                      {t('translation|Show More')}
+            {needsExpandButton && (
+              <Grid item xs={12}>
+                <Box display="flex" mt={2}>
+                  {!showAllPorts ? (
+                    <Button onClick={() => setShowAllPorts(true)}>
+                      {t('translation|Show All (+{{ totalPorts }})', {
+                        totalPorts: (container.ports?.length ?? 0) - maxNumPortsByDefault,
+                      })}
                     </Button>
-                  </Box>
-                </Grid>
-              )}
+                  ) : (
+                    <Button onClick={() => setShowAllPorts(false)}>
+                      {t('translation|Show Less')}
+                    </Button>
+                  )}
+                </Box>
+              </Grid>
+            )}
           </Grid>
         ),
         hide: _.isEmpty(container.ports),

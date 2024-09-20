@@ -1599,6 +1599,97 @@
                     </p>
                   </td>
                 </tr>
+                <tr
+                  class="MuiTableRow-root css-n8542r-MuiTableRow-root"
+                  data-index="8"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
+                    data-index="0"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="/"
+                    >
+                      manyports
+                    </a>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-adap2x-MuiTableCell-root"
+                    data-index="1"
+                  >
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="/"
+                    >
+                      default
+                    </a>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ia5azj-MuiTableCell-root"
+                    data-index="2"
+                  >
+                    0
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-l8pc90-MuiTableCell-root"
+                    data-index="3"
+                  >
+                    1/1
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-vmbuil-MuiTableCell-root"
+                    data-index="4"
+                  >
+                    <div
+                      aria-label=""
+                      class="MuiBox-root css-6n7j50"
+                      data-mui-internal-clone-element="true"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                        style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                      >
+                        Running
+                      </span>
+                    </div>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-113h9jm-MuiTableCell-root"
+                    data-index="5"
+                  >
+                    0.0.0.2
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-19qh9pa-MuiTableCell-root"
+                    data-index="6"
+                  >
+                    <span
+                      aria-label="my-node"
+                      class=""
+                      data-mui-internal-clone-element="true"
+                    >
+                      <a
+                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                        href="/"
+                      >
+                        my-node
+                      </a>
+                    </span>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
+                    data-index="7"
+                  >
+                    <p
+                      aria-label="2022-01-01T00:00:00.000Z"
+                      class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
+                      data-mui-internal-clone-element="true"
+                    >
+                      3mo
+                    </p>
+                  </td>
+                </tr>
               </tbody>
               <tfoot
                 class="MuiTableFooter-root css-4ar9ic-MuiTableFooter-root"
@@ -1663,7 +1754,7 @@
                   <span
                     class="MuiTypography-root MuiTypography-body2 MuiTypography-alignCenter css-htm6yz-MuiTypography-root"
                   >
-                    1-8 of 8
+                    1-9 of 9
                   </span>
                   <div
                     class="MuiBox-root css-192dx0w"
