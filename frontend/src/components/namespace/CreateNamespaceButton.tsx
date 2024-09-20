@@ -99,7 +99,7 @@ export default function CreateNamespaceButton() {
     <AuthVisible item={Namespace} authVerb="create">
       <ActionButton
         color="primary"
-        description={t('translation|Create')}
+        description={t('translation|Create Namespace')}
         icon={'mdi:plus-circle'}
         onClick={() => {
           setNamespaceDialogOpen(true);
