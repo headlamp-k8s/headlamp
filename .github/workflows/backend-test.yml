@@ -89,7 +89,13 @@ jobs:
           base_coverage=$(go tool cover -func=base_coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
           echo "Base branch code coverage: $base_coverage"
           echo "base_coverage=$base_coverage" >> $GITHUB_ENV
+          cp base_coverage.out coverage.txt
         shell: bash
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Compare code coverage
         if: ${{ github.event_name }} == 'pull_request'
