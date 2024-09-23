@@ -10,4 +10,5 @@ If you would like your organization to be added to this list, please open a PR w
 
 | Organization                                 | Description                                          |
 | -------------------------------------------- | ---------------------------------------------------- |
+| [EPAM Systems, Inc.](https://epam.com/)      | EPAM leverages Headlamp for their [edp-headlamp](https://github.com/epam/edp-headlamp) project, integrating it within their [KubeRocketCI](https://docs.kuberocketci.io/) open-source solution to enhance the user interface and experience for managing Platform using Kubernetes-native approach. |
 | [Virginia Tech](https://vt.edu/)             | Virginia Tech deploys Headlamp as a UI for their [IT Common Platform](https://docs.platform.it.vt.edu/) service, running essential university functions and managing 6 clusters. They also develop a number of [Headlamp plugins](https://code.vt.edu/it-common-platform/platform-support/headlamp-plugins) to deliver extra functionality on top of the base UI. |
