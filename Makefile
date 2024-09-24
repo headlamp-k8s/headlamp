@@ -59,6 +59,16 @@ backend:
 backend-test:
 	cd backend && go test -v -p 1 ./...
 
+.PHONY: backend-coverage
+backend-coverage:
+	cd backend && go test -v -p 1 -coverprofile=coverage.out ./...
+	cd backend && go tool cover -func=coverage.out
+
+.PHONY: backend-coverage-html
+backend-coverage-html:
+	cd backend && go test -v -p 1 -coverprofile=coverage.out ./...
+	cd backend && go tool cover -html=coverage.out
+
 .PHONY: backend-format
 backend-format:
 	cd backend && go fmt ./cmd/ ./pkg/**
