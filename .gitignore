@@ -1,6 +1,7 @@
 backend/headlamp-server
 backend/headlamp-server.exe
 backend/tools
+backend/coverage.out
 app/electron/src/*
 docs/development/storybook/
 .plugins

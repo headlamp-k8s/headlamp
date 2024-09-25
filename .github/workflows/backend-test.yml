@@ -64,12 +64,24 @@ jobs:
           set -x
           cd backend
           go test ./... -coverprofile=coverage.out -covermode=atomic -coverpkg=./...
+          go tool cover -html=coverage.out -o backend_coverage.html
+          testcoverage_full=$(go tool cover -func=coverage.out)
           testcoverage=$(go tool cover -func=coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
+          testcoverage_full_base64=$(echo "$testcoverage_full" | base64 -w 0)
           echo "Code coverage: $testcoverage"
+          echo "$testcoverage_full"
           echo "coverage=$testcoverage" >> $GITHUB_ENV
+          echo "testcoverage_full_base64=$testcoverage_full_base64" >> $GITHUB_ENV
           echo "cleaning up..."
           rm ~/.config/Headlamp/kubeconfigs/config
         shell: bash
+
+      - name: Upload coverage report as artifact
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage-report
+          path: ./backend/backend_coverage.html
 
       - name: Get base branch code coverage
         if: ${{ github.event_name }} == 'pull_request'
@@ -125,8 +137,13 @@ jobs:
             exit 0
           fi
           testcoverage="${{ env.coverage }}"
+          testcoverage_full_base64="${{ env.testcoverage_full_base64 }}"
+          testcoverage_full=$(echo "$testcoverage_full_base64" | base64 --decode)
+
           base_coverage="${{ env.base_coverage }}"
           coverage_diff="${{ env.coverage_diff }}"
+          artifact_url=${{ steps.upload-artifact.outputs.artifact-url }}
+
           if (( $(echo "$coverage_diff < 0" | bc -l) )); then
             emoji="😞" # Decreased coverage
           else
@@ -135,6 +152,24 @@ jobs:
 
           comment="Backend Code coverage changed from $base_coverage% to $testcoverage%. Change: $coverage_diff% $emoji."
           echo "$comment"
+
+          # Add the full coverage report as a collapsible section
+          comment="${comment}
+
+          <details>
+            <summary>Coverage report</summary>
+
+          \`\`\`
+          $testcoverage_full
+          \`\`\`
+
+          </details>
+
+          [Html coverage report download]($artifact_url)
+          "
+
+          echo "$comment"
+
           if [[ "${{github.event.pull_request.head.repo.full_name}}" == "${{github.repository}}" ]]; then
             # Forks (like dependabot ones) do not have permission to comment on the PR,
             #   so do not fail the action if this fails.
