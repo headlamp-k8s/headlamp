@@ -98,8 +98,9 @@ export default function CreateNamespaceButton() {
   return (
     <AuthVisible item={Namespace} authVerb="create">
       <ActionButton
+        data-testid="create-namespace-button"
         color="primary"
-        description={t('translation|Create')}
+        description={t('translation|Create Namespace')}
         icon={'mdi:plus-circle'}
         onClick={() => {
           setNamespaceDialogOpen(true);
@@ -143,7 +144,7 @@ export default function CreateNamespaceButton() {
         </DialogContent>
         <DialogActions>
           <Button
-            aria-label="Cancel"
+            data-testid="create-namespace-dialog-cancel-button"
             onClick={() => {
               setNamespaceDialogOpen(false);
             }}
@@ -151,7 +152,7 @@ export default function CreateNamespaceButton() {
             {t('translation|Cancel')}
           </Button>
           <Button
-            aria-label="Create"
+            data-testid="create-namespace-dialog-create-button"
             disabled={!isValidNamespaceName}
             onClick={() => {
               createNewNamespace();
