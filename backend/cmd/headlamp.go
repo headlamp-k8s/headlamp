@@ -781,7 +781,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	}
 
 	// On dev mode we're loose about where connections come from
-	if config.devMode {
+	if config.devMode || useEmbeddedFiles {
 		headers := handlers.AllowedHeaders([]string{
 			"X-HEADLAMP_BACKEND-TOKEN", "X-Requested-With", "Content-Type",
 			"Authorization", "Forward-To",
