@@ -830,7 +830,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
     replaceNestedKeys('scripts', ['tsc', 'storybook', 'test', 'storybook-build']);
 
     // replace top level keys
-    const checkKeys = ['eslintConfig', 'prettier'];
+    const checkKeys = ['eslintConfig', 'prettier', 'overrides'];
     checkKeys.forEach(key => {
       if (JSON.stringify(packageJson[key]) !== JSON.stringify(templatePackageJson[key])) {
         packageJson[key] = templatePackageJson[key];
