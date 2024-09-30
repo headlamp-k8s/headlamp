@@ -1,21 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 import eventCallbackReducer, { addEventCallback, eventAction } from './headlampEventSlice';
 import { listenerMiddleware } from './headlampEventSlice';
 
+function getStore() {
+  return configureStore({
+    reducer: {
+      eventCallbackReducer,
+    },
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).prepend(listenerMiddleware.middleware),
+  });
+}
+
 describe('eventsSlice', () => {
-  let store: ToolkitStore;
+  let store = getStore();
 
   beforeEach(() => {
-    store = configureStore({
-      reducer: {
-        eventCallbackReducer,
-      },
-      middleware: getDefaultMiddleware =>
-        getDefaultMiddleware({
-          serializableCheck: false,
-        }).prepend(listenerMiddleware.middleware),
-    });
+    store = getStore();
   });
 
   describe('addEventCallback', () => {

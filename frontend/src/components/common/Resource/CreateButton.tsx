@@ -13,6 +13,7 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
+import { AppDispatch } from '../../../redux/stores/store';
 import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
 
@@ -22,7 +23,8 @@ interface CreateButtonProps {
 
 export default function CreateButton(props: CreateButtonProps) {
   const { isNarrow } = props;
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const location = useLocation();

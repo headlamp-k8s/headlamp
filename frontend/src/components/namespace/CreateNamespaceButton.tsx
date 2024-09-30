@@ -14,6 +14,7 @@ import { getCluster } from '../../lib/cluster';
 import Namespace from '../../lib/k8s/namespace';
 import { clusterAction } from '../../redux/clusterActionSlice';
 import { EventStatus, HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
+import { AppDispatch } from '../../redux/stores/store';
 import { ActionButton, AuthVisible } from '../common';
 
 export default function CreateNamespaceButton() {
@@ -23,7 +24,7 @@ export default function CreateNamespaceButton() {
   const [nameHelperMessage, setNameHelperMessage] = useState('');
   const [namespaceDialogOpen, setNamespaceDialogOpen] = useState(false);
   const dispatchCreateEvent = useEventCallback(HeadlampEventType.CREATE_RESOURCE);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   function createNewNamespace() {
     const clusterData = getCluster();
