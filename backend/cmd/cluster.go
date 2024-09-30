@@ -9,6 +9,7 @@ type Cluster struct {
 	Server   string                 `json:"server,omitempty"`
 	AuthType string                 `json:"auth_type"`
 	Metadata map[string]interface{} `json:"meta_data"`
+	Error    string                 `json:"error,omitempty"`
 }
 
 type ClusterReq struct {

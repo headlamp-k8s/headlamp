@@ -10,9 +10,10 @@ import (
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
+	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"k8s.io/client-go/tools/clientcmd/api"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 const kubeConfigFilePath = "./test_data/kubeconfig1"
@@ -49,34 +50,38 @@ func TestLoadContextsFromKubeConfigFile(t *testing.T) {
 	t.Run("valid_file", func(t *testing.T) {
 		kubeConfigFile := kubeConfigFilePath
 
-		contexts, errs := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
-		require.Empty(t, errs, "Expected no errors for valid file")
+		contexts, contextErrors, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
+		require.NoError(t, err, "Expected no error for valid file")
+		require.Empty(t, contextErrors, "Expected no context errors for valid file")
 		require.Equal(t, 2, len(contexts), "Expected 2 contexts from valid file")
 	})
 
 	t.Run("invalid_file", func(t *testing.T) {
 		kubeConfigFile := "invalid_kubeconfig"
 
-		contexts, errs := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
-		require.NotEmpty(t, errs, "Expected errors for invalid file")
+		contexts, contextErrors, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
+		require.Error(t, err, "Expected error for invalid file")
+		require.Empty(t, contextErrors, "Expected no context errors for invalid file")
 		require.Empty(t, contexts, "Expected no contexts from invalid file")
 	})
 
 	t.Run("autherror", func(t *testing.T) {
 		kubeConfigFile := "./test_data/kubeconfig_autherr"
 
-		contexts, errs := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
-		require.NotEmpty(t, errs, "Expected errors for invalid auth file")
-		require.Empty(t, contexts, "Expected no contexts from invalid auth file")
+		contexts, contextErrors, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
+		require.NoError(t, err, "Expected no error for auth error file")
+		require.NotEmpty(t, contextErrors, "Expected context errors for invalid auth file")
+		require.Equal(t, contextErrors[0].ContextName, "invalid-context")
+		require.Equal(t, 2, len(contexts), "Expected 1 context from invalid auth file")
 	})
 
 	t.Run("partially_valid_contexts", func(t *testing.T) {
 		kubeConfigFile := "./test_data/kubeconfig_partialcontextvalid"
 
-		contexts, errs := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
-		require.NotEmpty(t, errs, "Expected some errors for partially valid file")
-		require.NotEmpty(t, contexts, "Expected some valid contexts from partially valid file")
-		require.Equal(t, 1, len(contexts), "Expected one context from the partially valid file")
+		contexts, contextErrors, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
+		require.NoError(t, err, "Expected no error for partially valid file")
+		require.NotEmpty(t, contextErrors, "Expected some context errors for partially valid file")
+		require.Equal(t, 3, len(contexts), "Expected 3 contexts from the partially valid file")
 		require.Equal(t, "valid-context", contexts[0].Name, "Expected context name to be 'valid-context'")
 	})
 }
@@ -118,16 +123,15 @@ func TestContext(t *testing.T) {
 
 func TestLoadContextsFromBase64String(t *testing.T) {
 	t.Run("valid_base64", func(t *testing.T) {
-		// Read the content of the kubeconfig file
 		kubeConfigFile := kubeConfigFilePath
 		kubeConfigContent, err := os.ReadFile(kubeConfigFile)
 		require.NoError(t, err)
 
-		// Encode the content using base64 encoding
 		base64String := base64.StdEncoding.EncodeToString(kubeConfigContent)
 
-		contexts, errs := kubeconfig.LoadContextsFromBase64String(base64String, kubeconfig.DynamicCluster)
-		require.Empty(t, errs, "Expected no errors for valid base64")
+		contexts, contextErrors, err := kubeconfig.LoadContextsFromBase64String(base64String, kubeconfig.DynamicCluster)
+		require.NoError(t, err, "Expected no error for valid base64")
+		require.Empty(t, contextErrors, "Expected no context errors for valid base64")
 		require.Equal(t, 2, len(contexts), "Expected 2 contexts from valid base64")
 		assert.Equal(t, kubeconfig.DynamicCluster, contexts[0].Source)
 	})
@@ -136,13 +140,13 @@ func TestLoadContextsFromBase64String(t *testing.T) {
 		invalidBase64String := "invalid_base64"
 		source := 2
 
-		contexts, errs := kubeconfig.LoadContextsFromBase64String(invalidBase64String, source)
-		require.NotEmpty(t, errs, "Expected errors for invalid base64")
+		contexts, contextErrors, err := kubeconfig.LoadContextsFromBase64String(invalidBase64String, source)
+		require.Error(t, err, "Expected error for invalid base64")
+		require.Empty(t, contextErrors, "Expected no context errors for invalid base64")
 		require.Empty(t, contexts, "Expected no contexts from invalid base64")
 	})
 
 	t.Run("partially_valid_base64", func(t *testing.T) {
-		// Create a partially valid kubeconfig content
 		partiallyValidContent := `
 apiVersion: v1
 kind: Config
@@ -166,149 +170,345 @@ users:
 `
 		base64String := base64.StdEncoding.EncodeToString([]byte(partiallyValidContent))
 
-		contexts, errs := kubeconfig.LoadContextsFromBase64String(base64String, kubeconfig.DynamicCluster)
-		require.NotEmpty(t, errs, "Expected some errors for partially valid base64")
-		require.NotEmpty(t, contexts, "Expected some valid contexts from partially valid base64")
-		require.Equal(t, 1, len(contexts), "Expected one valid context from partially valid base64")
+		contexts, contextErrors, err := kubeconfig.LoadContextsFromBase64String(base64String, kubeconfig.DynamicCluster)
+		require.NoError(t, err, "Expected no error for partially valid base64")
+		require.NotEmpty(t, contextErrors, "Expected some context errors for partially valid base64")
+		require.Equal(t, 2, len(contexts), "Expected 2 valid contexts from partially valid base64")
 		assert.Equal(t, "valid-context", contexts[0].Name, "Expected context name to be 'valid-context'")
 	})
 }
 
-func TestSetClusterField(t *testing.T) {
-	cluster := &api.Cluster{}
+func TestUnmarshalKubeconfig(t *testing.T) {
+	tests := []struct {
+		name    string
+		input   []byte
+		want    map[string]interface{}
+		wantErr bool
+	}{
+		{
+			name: "Valid YAML",
+			input: []byte(`apiVersion: v1
+kind: Config
+contexts:
+- name: test-context
+  context:
+    cluster: test-cluster
+    user: test-user`),
+			want: map[string]interface{}{
+				"apiVersion": "v1",
+				"kind":       "Config",
+				"contexts": []interface{}{
+					map[interface{}]interface{}{
+						"name": "test-context",
+						"context": map[interface{}]interface{}{
+							"cluster": "test-cluster",
+							"user":    "test-user",
+						},
+					},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name:    "Invalid YAML",
+			input:   []byte(`invalid: yaml: content`),
+			want:    nil,
+			wantErr: true,
+		},
+	}
 
-	t.Run("set insecure-skip-tls-verify", func(t *testing.T) {
-		err := kubeconfig.SetClusterField(cluster, "insecure-skip-tls-verify", true)
-		if err != nil {
-			t.Fatalf("Expected no error, got %v", err)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := kubeconfig.UnmarshalKubeconfig(tt.input)
+			if tt.wantErr {
+				assert.Error(t, err)
+			} else {
+				assert.NoError(t, err)
+				assert.Equal(t, tt.want, got)
+			}
+		})
+	}
+}
 
-		if !cluster.InsecureSkipTLSVerify {
-			t.Error("Expected InsecureSkipTLSVerify to be true")
+func TestGetContextsFromKubeconfig(t *testing.T) {
+	tests := []struct {
+		name       string
+		kubeconfig map[string]interface{}
+		want       []interface{}
+		wantErr    bool
+	}{
+		{
+			name: "Valid contexts",
+			kubeconfig: map[string]interface{}{
+				"contexts": []interface{}{
+					map[string]interface{}{
+						"name": "context1",
+					},
+					map[string]interface{}{
+						"name": "context2",
+					},
+				},
+			},
+			want: []interface{}{
+				map[string]interface{}{
+					"name": "context1",
+				},
+				map[string]interface{}{
+					"name": "context2",
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "Missing contexts",
+			kubeconfig: map[string]interface{}{
+				"clusters": []interface{}{},
+			},
+			want:    nil,
+			wantErr: true,
+		},
+		{
+			name: "Invalid contexts type",
+			kubeconfig: map[string]interface{}{
+				"contexts": "invalid",
+			},
+			want:    nil,
+			wantErr: true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := kubeconfig.GetContextsFromKubeconfig(tt.kubeconfig)
+			if tt.wantErr {
+				assert.Error(t, err)
+				assert.Nil(t, got)
+			} else {
+				assert.NoError(t, err)
+				assert.Equal(t, tt.want, got)
+			}
+		})
+	}
+}
+
+func TestErrorTypes(t *testing.T) {
+	t.Run("ContextError", func(t *testing.T) {
+		err := kubeconfig.ContextError{
+			ContextName: "test-context",
+			Reason:      "test reason",
 		}
+		assert.Equal(t, "Error in context 'test-context': test reason", err.Error())
 	})
 
-	t.Run("set disable-compression", func(t *testing.T) {
-		err := kubeconfig.SetClusterField(cluster, "disable-compression", true)
-		if err != nil {
-			t.Fatalf("Expected no error, got %v", err)
+	t.Run("ClusterError", func(t *testing.T) {
+		err := kubeconfig.ClusterError{
+			ClusterName: "test-cluster",
+			Reason:      "test reason",
 		}
-
-		if !cluster.DisableCompression {
-			t.Error("Expected DisableCompression to be true")
-		}
+		assert.Equal(t, "Error in cluster 'test-cluster': test reason", err.Error())
 	})
 
-	t.Run("invalid bool value", func(t *testing.T) {
-		err := kubeconfig.SetClusterField(cluster, "insecure-skip-tls-verify", "not a bool")
-		if err == nil {
-			t.Fatal("Expected an error, got nil")
+	t.Run("UserError", func(t *testing.T) {
+		err := kubeconfig.UserError{
+			UserName: "test-user",
+			Reason:   "test reason",
 		}
+		assert.Equal(t, "Error in user 'test-user': test reason", err.Error())
 	})
 
-	t.Run("set certificate-authority-data", func(t *testing.T) {
-		validBase64 := base64.StdEncoding.EncodeToString([]byte("test data"))
-
-		err := kubeconfig.SetClusterField(cluster, "certificate-authority-data", validBase64)
-		if err != nil {
-			t.Fatalf("Expected no error, got %v", err)
+	t.Run("DataError", func(t *testing.T) {
+		err := kubeconfig.DataError{
+			Field:  "test-field",
+			Reason: "test reason",
 		}
-
-		if string(cluster.CertificateAuthorityData) != "test data" {
-			t.Errorf("Expected 'test data', got '%s'", string(cluster.CertificateAuthorityData))
-		}
+		assert.Equal(t, "Error in field 'test-field': test reason", err.Error())
 	})
 
-	t.Run("invalid base64 data", func(t *testing.T) {
-		err := kubeconfig.SetClusterField(cluster, "certificate-authority-data", "not base64")
-		if err == nil {
-			t.Fatal("Expected an error, got nil")
+	t.Run("Base64Error", func(t *testing.T) {
+		err := kubeconfig.Base64Error{
+			ContextName: "test-context",
+			ClusterName: "test-cluster",
+			UserName:    "test-user",
+			Errors: []error{
+				kubeconfig.UserError{UserName: "test-user", Reason: "invalid base64"},
+				kubeconfig.ClusterError{ClusterName: "test-cluster", Reason: "invalid base64"},
+			},
 		}
+		expected := "Base64 decoding errors in context 'test-context', cluster 'test-cluster', user 'test-user':\n" +
+			"Error in user 'test-user': invalid base64\n" +
+			"Error in cluster 'test-cluster': invalid base64"
+		assert.Equal(t, expected, err.Error())
+	})
+}
+
+func TestCustomObjectDeepCopy(t *testing.T) {
+	original := &kubeconfig.CustomObject{
+		TypeMeta: metav1.TypeMeta{
+			Kind:       "CustomObject",
+			APIVersion: "v1",
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			Name: "test-object",
+		},
+		CustomName: "test-custom-name",
+	}
+
+	t.Run("DeepCopyObject", func(t *testing.T) {
+		copied := original.DeepCopyObject()
+		assert.Equal(t, original, copied)
+		assert.NotSame(t, original, copied)
 	})
 
-	t.Run("invalid extensions", func(t *testing.T) {
-		err := kubeconfig.SetClusterField(cluster, "extensions", "not a map")
-		if err == nil {
-			t.Fatal("Expected an error, got nil")
-		}
+	t.Run("DeepCopy", func(t *testing.T) {
+		copied := original.DeepCopy()
+		assert.Equal(t, original, copied)
+		assert.NotSame(t, original, copied)
+		assert.Equal(t, original.CustomName, copied.CustomName)
+	})
+
+	t.Run("DeepCopy with nil", func(t *testing.T) {
+		var nilObj *kubeconfig.CustomObject
+		copied := nilObj.DeepCopy()
+		assert.Nil(t, copied)
 	})
 }
 
 //nolint:funlen
-func TestSetAuthInfoField(t *testing.T) {
-	authInfo := &api.AuthInfo{}
-
-	t.Run("set client-certificate-data", func(t *testing.T) {
-		validBase64 := base64.StdEncoding.EncodeToString([]byte("test cert"))
-
-		err := kubeconfig.SetAuthInfoField(authInfo, "client-certificate-data", validBase64)
-		if err != nil {
-			t.Fatalf("Expected no error, got %v", err)
-		}
-
-		if string(authInfo.ClientCertificateData) != "test cert" {
-			t.Errorf("Expected 'test cert', got '%s'", string(authInfo.ClientCertificateData))
-		}
-	})
-
-	t.Run("set impersonate-groups", func(t *testing.T) {
-		groups := []string{"group1", "group2"}
-
-		err := kubeconfig.SetAuthInfoField(authInfo, "impersonate-groups", groups)
-		if err != nil {
-			t.Fatalf("Expected no error, got %v", err)
-		}
-
-		if len(authInfo.ImpersonateGroups) != 2 ||
-			authInfo.ImpersonateGroups[0] != "group1" ||
-			authInfo.ImpersonateGroups[1] != "group2" {
-			t.Errorf("Expected [group1 group2], got %v", authInfo.ImpersonateGroups)
-		}
-	})
-
-	t.Run("set impersonate-user-extra", func(t *testing.T) {
-		extra := map[string][]string{
-			"key1": {"value1", "value2"},
-			"key2": {"value3"},
-		}
-
-		err := kubeconfig.SetAuthInfoField(authInfo, "impersonate-user-extra", extra)
-		if err != nil {
-			t.Fatalf("Expected no error, got %v", err)
-		}
-
-		if len(authInfo.ImpersonateUserExtra) != 2 ||
-			len(authInfo.ImpersonateUserExtra["key1"]) != 2 ||
-			authInfo.ImpersonateUserExtra["key2"][0] != "value3" {
-			t.Errorf("Expected map[key1:[value1 value2] key2:[value3]], got %v", authInfo.ImpersonateUserExtra)
-		}
-	})
-
-	t.Run("set auth-provider", func(t *testing.T) {
-		provider := map[interface{}]interface{}{
-			"name": "oidc",
-			"config": map[interface{}]interface{}{
-				"client-id":     "my-client",
-				"client-secret": "my-secret",
+func TestHandleConfigLoadError(t *testing.T) {
+	testKubeconfig := map[string]interface{}{
+		"clusters": []interface{}{
+			map[interface{}]interface{}{
+				"name": "test-cluster",
+				"cluster": map[interface{}]interface{}{
+					"certificate-authority-data": "invalid-base64",
+				},
 			},
-		}
+		},
+		"users": []interface{}{
+			map[interface{}]interface{}{
+				"name": "test-user",
+				"user": map[interface{}]interface{}{
+					"client-certificate-data": "invalid-base64",
+					"client-key-data":         "invalid-base64",
+				},
+			},
+		},
+	}
 
-		err := kubeconfig.SetAuthInfoField(authInfo, "auth-provider", provider)
-		if err != nil {
-			t.Fatalf("Expected no error, got %v", err)
-		}
+	tests := []struct {
+		name        string
+		err         error
+		contextName string
+		clusterName string
+		userName    string
+		kubeconfig  map[string]interface{}
+		want        error
+	}{
+		{
+			name:        "illegal base64",
+			err:         errors.New("illegal base64 data"),
+			contextName: "test-context",
+			clusterName: "test-cluster",
+			userName:    "test-user",
+			kubeconfig:  testKubeconfig,
+			want: kubeconfig.Base64Error{
+				ContextName: "test-context",
+				ClusterName: "test-cluster",
+				UserName:    "test-user",
+				Errors: []error{
+					kubeconfig.UserError{
+						UserName: "test-user",
+						Reason:   "Invalid base64 encoding in client-certificate-data. Please ensure it's correctly encoded.",
+					},
+					kubeconfig.UserError{
+						UserName: "test-user",
+						Reason:   "Invalid base64 encoding in client-key-data. Please ensure it's correctly encoded.",
+					},
+					kubeconfig.ClusterError{
+						ClusterName: "test-cluster",
+						Reason:      "Invalid base64 encoding in certificate-authority-data. Please ensure it's correctly encoded.",
+					},
+				},
+			},
+		},
+		{
+			name:        "no server found",
+			err:         errors.New("no server found"),
+			contextName: "test-context",
+			clusterName: "test-cluster",
+			userName:    "test-user",
+			kubeconfig:  testKubeconfig,
+			want: kubeconfig.ClusterError{
+				ClusterName: "test-cluster",
+				Reason:      "No server URL specified. Please check the cluster configuration.",
+			},
+		},
+		{
+			name:        "unable to read client-cert",
+			err:         errors.New("unable to read client-cert"),
+			contextName: "test-context",
+			clusterName: "test-cluster",
+			userName:    "test-user",
+			kubeconfig:  testKubeconfig,
+			want: kubeconfig.UserError{
+				UserName: "test-user",
+				Reason:   "Unable to read client certificate. Please ensure the certificate file exists and is readable.",
+			},
+		},
+		{
+			name:        "unable to read client-key",
+			err:         errors.New("unable to read client-key"),
+			contextName: "test-context",
+			clusterName: "test-cluster",
+			userName:    "test-user",
+			kubeconfig:  testKubeconfig,
+			want: kubeconfig.UserError{
+				UserName: "test-user",
+				Reason:   "Unable to read client key. Please ensure the key file exists and is readable.",
+			},
+		},
+		{
+			name:        "unable to read certificate-authority",
+			err:         errors.New("unable to read certificate-authority"),
+			contextName: "test-context",
+			clusterName: "test-cluster",
+			userName:    "test-user",
+			kubeconfig:  testKubeconfig,
+			want: kubeconfig.ClusterError{
+				ClusterName: "test-cluster",
+				Reason:      "Unable to read certificate authority. Please ensure the CA file exists and is readable.",
+			},
+		},
+		{
+			name:        "unable to read token",
+			err:         errors.New("unable to read token"),
+			contextName: "test-context",
+			clusterName: "test-cluster",
+			userName:    "test-user",
+			kubeconfig:  testKubeconfig,
+			want: kubeconfig.UserError{
+				UserName: "test-user",
+				Reason:   "Unable to read token. Please ensure the token file exists and is readable.",
+			},
+		},
+		{
+			name:        "default error",
+			err:         errors.New("some other error"),
+			contextName: "test-context",
+			clusterName: "test-cluster",
+			userName:    "test-user",
+			kubeconfig:  testKubeconfig,
+			want: kubeconfig.ContextError{
+				ContextName: "test-context",
+				Reason:      "Error loading config: some other error",
+			},
+		},
+	}
 
-		if authInfo.AuthProvider == nil ||
-			authInfo.AuthProvider.Name != "oidc" ||
-			authInfo.AuthProvider.Config["client-id"] != "my-client" {
-			t.Errorf("Expected OIDC auth provider, got %v", authInfo.AuthProvider)
-		}
-	})
-
-	t.Run("invalid field", func(t *testing.T) {
-		err := kubeconfig.SetAuthInfoField(authInfo, "invalid-field", "some value")
-		if err == nil {
-			t.Fatal("Expected an error, got nil")
-		}
-	})
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := kubeconfig.HandleConfigLoadError(tt.err, tt.contextName, tt.clusterName, tt.userName, tt.kubeconfig)
+			assert.Equal(t, tt.want, got)
+		})
+	}
 }
