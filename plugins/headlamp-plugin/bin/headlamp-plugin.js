@@ -765,7 +765,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
       .map(dirent => path.join('src', dirent.name))
       .filter(path => fs.readFileSync(path, 'utf8').includes('@material-ui'));
 
-    if (hasMaterialUI) {
+    if (hasMaterialUI.length > 0) {
       console.log('Found files with "@material-ui". Upgrading material-ui v4 to mui v5...');
       const cmd = 'npx @mui/codemod v5.0.0/preset-safe src';
       if (runCmd(cmd, '.')) {
