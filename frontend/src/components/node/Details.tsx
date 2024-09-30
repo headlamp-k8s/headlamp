@@ -14,6 +14,7 @@ import Node from '../../lib/k8s/node';
 import { getCluster, timeAgo } from '../../lib/util';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { clusterAction } from '../../redux/clusterActionSlice';
+import { AppDispatch } from '../../redux/stores/store';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { ActionButton, ConfirmDialog, StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
@@ -37,7 +38,7 @@ function NodeConditionsLabel(props: { node: Node }) {
 export default function NodeDetails() {
   const { name } = useParams<{ name: string }>();
   const { t } = useTranslation(['glossary']);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
   const [nodeMetrics, metricsError] = Node.useMetrics();

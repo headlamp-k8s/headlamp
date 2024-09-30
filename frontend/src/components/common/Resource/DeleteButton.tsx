@@ -9,6 +9,7 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
+import { AppDispatch } from '../../../redux/stores/store';
 import ActionButton from '../ActionButton';
 import { ConfirmDialog } from '../Dialog';
 import AuthVisible from './AuthVisible';
@@ -19,7 +20,8 @@ interface DeleteButtonProps {
 }
 
 export default function DeleteButton(props: DeleteButtonProps) {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+
   const { item, options } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
   const location = useLocation();

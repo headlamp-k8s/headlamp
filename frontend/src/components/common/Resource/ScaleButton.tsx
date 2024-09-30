@@ -22,6 +22,7 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
+import { AppDispatch } from '../../../redux/stores/store';
 import { LightTooltip } from '../Tooltip';
 import AuthVisible from './AuthVisible';
 
@@ -31,7 +32,8 @@ interface ScaleButtonProps {
 }
 
 export default function ScaleButton(props: ScaleButtonProps) {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const location = useLocation();
