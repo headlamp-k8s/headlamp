@@ -19,6 +19,7 @@ import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
 import { clusterAction } from '../../redux/clusterActionSlice';
+import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { ActionButton } from '../common';
 import { DetailsGrid } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
@@ -142,6 +143,7 @@ export default function CronJobDetails() {
   const [isCheckingCronSuspendStatus, setIsCheckingCronSuspendStatus] = useState(true);
   const [openJobDialog, setOpenJobDialog] = useState(false);
   const dispatch = useDispatch();
+  const dispatchHeadlampEvent = useEventCallback();
 
   useEffect(() => {
     if (cronJob) {
@@ -167,6 +169,17 @@ export default function CronJobDetails() {
   }
 
   const ownedJobs = filterOwnedJobs(jobs);
+
+  dispatchHeadlampEvent({
+    type: HeadlampEventType.DETAILS_VIEW_OWNED_RESOURCES,
+    data: {
+      resource: {
+        ['JOB']: ownedJobs,
+      },
+      owner: cronJob,
+      error: jobsError,
+    },
+  });
 
   function applyFunc(newItem: KubeObjectInterface) {
     if (newItem.kind === 'CronJob') {
