@@ -1,9 +1,7 @@
-/// <reference types="vitest" />
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgr from 'vite-plugin-svgr';
-import { coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig({
   define: {
@@ -38,33 +36,6 @@ export default defineConfig({
       include: ['process', 'buffer', 'stream'],
     }),
   ],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    env: {
-      UNDER_TEST: 'true',
-    },
-    alias: [
-      {
-        find: /^monaco-editor$/,
-        replacement: __dirname + '/node_modules/monaco-editor/esm/vs/editor/editor.api',
-      },
-    ],
-
-    coverage: {
-      provider: 'istanbul',
-      reporter: [['text', { maxCols: 200 }]],
-      exclude: [
-        ...coverageConfigDefaults.exclude,
-        'node_modules/**',
-        'build/**',
-        'src/**/*.stories*.{js,jsx,ts,tsx}',
-      ],
-      include: ['src/**/*.{js,jsx,ts,tsx}'],
-    },
-    restoreMocks: false,
-    setupFiles: ['./src/setupTests.ts'],
-  },
   build: {
     outDir: 'build',
     commonjsOptions: {
