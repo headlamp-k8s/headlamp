@@ -108,7 +108,7 @@
   "overrides": {
     "domain-browser": "npm:dry-uninstall",
     "typescript": "5.5.4",
-    "vitest": "^2.0.5",
+    "vitest": "^2.1.1",
     "cheerio": "1.0.0-rc.12"
   },
   "optionalDependencies": {
@@ -222,7 +222,7 @@
     "typedoc": "^0.26.5",
     "typedoc-plugin-markdown": "^4.2.3",
     "typedoc-plugin-rename-defaults": "^0.7.1",
-    "vitest": "^2.0.5",
+    "vitest": "^2.1.1",
     "vitest-canvas-mock": "^0.3.3",
     "vitest-websocket-mock": "^0.3.0",
     "vm-browserify": "^1.1.2"
