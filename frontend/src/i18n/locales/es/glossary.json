@@ -199,7 +199,7 @@
   "Uncapped Target": "",
   "Vertical Pod Autoscalers": "",
   "Checking if Vertical Pod Autoscaler is enabled…": "",
-  "Vertical Pod Autoscaler is not enabled.&nbsp;<1>Learn More</1>": "",
+  "Vertical Pod Autoscaler is not enabled. <1>Learn More</1>": "",
   "API Version": "Versión de API",
   "Webhooks": "Webhooks",
   "Client Config: Ca Bundle": "Config. del Cliente: Ca Bundle",
