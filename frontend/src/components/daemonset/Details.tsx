@@ -11,11 +11,12 @@ import {
 
 interface TolerationsSection {
   resource: DaemonSet;
-  t: (...args: any[]) => string;
+  t?: (...args: any[]) => string;
 }
 
 function TolerationsSection(props: TolerationsSection) {
-  const { resource, t } = props;
+  const { resource } = props;
+  const { t } = useTranslation(['glossary', 'translation']);
 
   if (!resource) {
     return null;
@@ -97,7 +98,7 @@ export default function DaemonSetDetails() {
         },
         {
           id: 'headlamp.daemonset-tolerations',
-          section: <TolerationsSection resource={item} t={t} />,
+          section: <TolerationsSection resource={item} />,
         },
         {
           id: 'headlamp.daemonset-containers',
