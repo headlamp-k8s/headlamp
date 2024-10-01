@@ -21,6 +21,7 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
+import { AppDispatch } from '../../../redux/stores/store';
 import AuthVisible from './AuthVisible';
 
 interface RestartButtonProps {
@@ -31,7 +32,7 @@ export function RestartButton(props: RestartButtonProps) {
   const { item } = props;
   const { t } = useTranslation();
   const [openDialog, setOpenDialog] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   function applyFunc() {
     try {

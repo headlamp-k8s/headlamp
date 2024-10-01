@@ -9,6 +9,7 @@ import {
   HeadlampEventType,
   useEventCallback,
 } from '../../../redux/headlampEventSlice';
+import { AppDispatch } from '../../../redux/stores/store';
 import ActionButton from '../ActionButton';
 import AuthVisible from './AuthVisible';
 import EditorDialog from './EditorDialog';
@@ -20,7 +21,7 @@ interface EditButtonProps {
 }
 
 export default function EditButton(props: EditButtonProps) {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const [isReadOnly, setIsReadOnly] = React.useState(false);

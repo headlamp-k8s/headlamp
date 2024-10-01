@@ -1,6 +1,4 @@
-import { AnyAction } from 'redux';
-import configureStore from 'redux-mock-store';
-import thunk, { ThunkDispatch } from 'redux-thunk';
+import { configureStore, Middleware } from '@reduxjs/toolkit';
 import clusterActionSliceReducer, {
   CallbackAction,
   cancelClusterAction,
@@ -8,21 +6,43 @@ import clusterActionSliceReducer, {
   executeClusterAction,
   updateClusterAction,
 } from './clusterActionSlice';
-import { RootState } from './stores/store';
-
-const middlewares = [thunk];
-
-type DispatchType = ThunkDispatch<RootState, undefined, AnyAction>;
-const mockStore = configureStore<RootState, DispatchType>(middlewares);
 
 vi.setConfig({ testTimeout: 10000 });
 
+function getStore() {
+  const createActionTracker = () => {
+    const actions: any[] = [];
+
+    const middleware: Middleware = () => next => action => {
+      actions.push(action);
+      return next(action);
+    };
+
+    const getActions = () => actions;
+
+    return { middleware, getActions };
+  };
+  const { middleware: actionTracker, getActions } = createActionTracker();
+
+  const store = configureStore({
+    reducer: {
+      clusterAction: clusterActionSliceReducer,
+    },
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(actionTracker),
+  });
+
+  const customStore = store as typeof store & { getActions: () => any[] };
+  customStore.getActions = getActions;
+
+  return customStore;
+}
+
 describe('clusterActionSlice', () => {
-  let store: ReturnType<typeof mockStore>;
+  let store = getStore();
 
   beforeEach(() => {
     // Reset the store after each test
-    store = mockStore();
+    store = getStore();
   });
 
   describe('executeClusterAction', () => {

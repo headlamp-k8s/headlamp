@@ -19,6 +19,7 @@ import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
 import { clusterAction } from '../../redux/clusterActionSlice';
+import { AppDispatch } from '../../redux/stores/store';
 import { ActionButton } from '../common';
 import { DetailsGrid } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
@@ -34,7 +35,8 @@ function SpawnJobDialog(props: {
   const { cronJob, openJobDialog, setOpenJobDialog, applyFunc } = props;
   const { namespace } = useParams<{ namespace: string }>();
   const { t } = useTranslation(['translation']);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+
   // method to generate a unique string
   const uniqueString = () => {
     const timestamp = Date.now().toString(36);
@@ -141,7 +143,7 @@ export default function CronJobDetails() {
   const [isCronSuspended, setIsCronSuspended] = useState(false);
   const [isCheckingCronSuspendStatus, setIsCheckingCronSuspendStatus] = useState(true);
   const [openJobDialog, setOpenJobDialog] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     if (cronJob) {
@@ -168,15 +170,17 @@ export default function CronJobDetails() {
 
   const ownedJobs = filterOwnedJobs(jobs);
 
-  function applyFunc(newItem: KubeObjectInterface) {
+  function applyFunc(newItem: KubeObjectInterface): Promise<KubeObjectInterface> {
     if (newItem.kind === 'CronJob') {
       setIsCheckingCronSuspendStatus(true);
     } else if (newItem.kind === 'Job') {
       setOpenJobDialog(false);
     }
-    return apply(newItem).finally(() => {
+    const result = apply(newItem).finally(() => {
       setIsCheckingCronSuspendStatus(false);
-    });
+    }) as unknown;
+
+    return result as Promise<KubeObjectInterface>;
   }
 
   function PauseResumeAction() {
