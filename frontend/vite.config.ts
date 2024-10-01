@@ -22,6 +22,9 @@ export default defineConfig({
     cors: true,
   },
   plugins: [
+    nodePolyfills({
+      include: ['process', 'buffer', 'stream'],
+    }),
     svgr({
       svgrOptions: {
         prettier: false,
@@ -34,9 +37,6 @@ export default defineConfig({
       },
     }),
     react(),
-    nodePolyfills({
-      include: ['process', 'buffer', 'stream'],
-    }),
   ],
   test: {
     globals: true,
