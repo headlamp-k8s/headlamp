@@ -208,7 +208,6 @@
     "@types/nock": "^11.1.0",
     "@types/redux-mock-store": "^1.0.4",
     "@vitest/coverage-istanbul": "^2.0.5",
-    "fetch-mock": "^9.11.0",
     "http-proxy-middleware": "^2.0.1",
     "husky": "^4.3.8",
     "i18next-parser": "^7.9.0",
