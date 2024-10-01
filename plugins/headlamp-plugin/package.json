@@ -119,7 +119,7 @@
     "msw": "2.3.5",
     "msw-storybook-addon": "2.0.3",
     "nock": "^14.0.0-beta.6",
-    "notistack": "^2.0.8",
+    "notistack": "^3.0.1",
     "openapi-types": "^9.3.0",
     "patch-package": "^6.4.7",
     "postcss": "^8.4.5",
