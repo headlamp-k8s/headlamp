@@ -64,6 +64,8 @@ function create(name, link) {
         .join(name)
         .split('$${headlamp-plugin-version}')
         .join(headlampPluginPkg.version)
+        .split('$${eslint-config-version}')
+        .join(headlampPluginPkg.dependencies['@headlamp-k8s/eslint-config'])
     );
   }
 
@@ -763,7 +765,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
       .map(dirent => path.join('src', dirent.name))
       .filter(path => fs.readFileSync(path, 'utf8').includes('@material-ui'));
 
-    if (hasMaterialUI) {
+    if (hasMaterialUI.length > 0) {
       console.log('Found files with "@material-ui". Upgrading material-ui v4 to mui v5...');
       const cmd = 'npx @mui/codemod v5.0.0/preset-safe src';
       if (runCmd(cmd, '.')) {
@@ -830,7 +832,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
     replaceNestedKeys('scripts', ['tsc', 'storybook', 'test', 'storybook-build']);
 
     // replace top level keys
-    const checkKeys = ['eslintConfig', 'prettier'];
+    const checkKeys = ['eslintConfig', 'prettier', 'overrides'];
     checkKeys.forEach(key => {
       if (JSON.stringify(packageJson[key]) !== JSON.stringify(templatePackageJson[key])) {
         packageJson[key] = templatePackageJson[key];
@@ -907,6 +909,36 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
   }
 
   /**
+   * Upgrades "@headlamp-k8s/eslint-config" dependency to latest or given version.
+   *
+   * @returns true unless there is a problem with the upgrade.
+   */
+  function upgradeEslintConfig() {
+    const theTag = 'latest';
+    const packageJsonPath = path.join('.', 'package.json');
+    let packageJson = {};
+    try {
+      packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    } catch (e) {
+      console.error(`Error: Failed to read package.json from "${packageJsonPath}".`);
+      return false;
+    }
+    const oldVersion = packageJson.devDependencies['@headlamp-k8s/eslint-config'];
+    if (
+      oldVersion === undefined ||
+      '@headlamp-k8s/eslint-config' in getNpmOutdated() ||
+      !fs.existsSync('node_modules')
+    ) {
+      const cmd = `npm install -D @headlamp-k8s/eslint-config@${theTag} --save`;
+      if (runCmd(cmd, '.')) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
    * Upgrade a single package in a folder.
    *
    * @param {string} folder - where the package is.
@@ -933,6 +965,10 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
       if (!failed && !upgradeHeadlampPlugin()) {
         failed = true;
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
+      }
+      if (!failed && !upgradeEslintConfig()) {
+        failed = true;
+        reason = 'upgrading @headlamp-k8s/eslint-config failed.';
       }
       if (!failed && !upgradeMui()) {
         failed = true;
