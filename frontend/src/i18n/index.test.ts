@@ -1,6 +1,6 @@
 import { error } from 'console';
 import fs from 'fs';
-import * as glob from 'glob';
+import * as filesFilter from '../filesFilter/filesFilter';
 
 const path = require('node:path');
 const allowlist = require('./allowlist.json');
@@ -14,11 +14,11 @@ const allowlist = require('./allowlist.json');
  * - Finally it will check for duplicates in each language and fail if any are found
  */
 async function checkKeys() {
-  const files = glob.sync('./**/i18n/locales/*/*.json', {
+  const files = filesFilter.sync('^.*\\/i18n\\/locales\\/[^\\/]+\\/[^\\/]+\\.json$', {
     ignore: [
-      '**/node_modules/**',
-      './**/i18n/locales/*/*_old.json',
-      './**/i18n/locales/*/*_empty.json',
+      /node_modules/,
+      /^.*\/i18n\/locales\/[^\/]+\/[^\/]+_old\.json$/,
+      /^.*\/i18n\/locales\/[^\/]+\/[^\/]+_empty\.json$/,
     ],
   });
 
