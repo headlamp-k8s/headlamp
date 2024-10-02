@@ -55,6 +55,7 @@ const dependenciesFrontDoesNotHave = new Set([
   'webpack',
   'table',
   'tar',
+  'patch-package',
 ]);
 
 // Dependencies from frontend/package.json that aren't wanted by headlamp-plugin.

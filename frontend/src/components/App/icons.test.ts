@@ -1,6 +1,6 @@
 import { error } from 'console';
 import fs from 'fs';
-import * as glob from 'glob';
+import * as filesFilter from '../../filesFilter/filesFilter';
 import mdiIcons from './icons';
 
 // the usedIcons array is used to check that all icons are used in the frontend
@@ -9,7 +9,7 @@ const usedIcons = Object.keys(mdiIcons.icons).map(icon => `${mdiIcons.prefix}:${
 const usedAliases = Object.keys(mdiIcons.aliases).map(alias => `${mdiIcons.prefix}:${alias}`);
 
 const checkIcons = async () => {
-  const files = glob.sync('./**/*.tsx', { ignore: './node_modules/**' });
+  const files = filesFilter.sync('^.*\\.tsx$', { ignore: /node_modules/ });
 
   const unusedIcons = [];
 
