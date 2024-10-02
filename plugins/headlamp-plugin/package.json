@@ -128,7 +128,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
-    "react-hotkeys-hook": "^4.4.1",
+    "react-hotkeys-hook": "^4.5.1",
     "react-i18next": "^15.0.2",
     "react-jwt": "^1.1.6",
     "react-markdown": "^8.0.0",
