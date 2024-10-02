@@ -1,4 +1,3 @@
-import 'github-markdown-css';
 import { Icon } from '@iconify/react';
 import { Box, Dialog, DialogContent, IconButton, Link } from '@mui/material';
 import React from 'react';
