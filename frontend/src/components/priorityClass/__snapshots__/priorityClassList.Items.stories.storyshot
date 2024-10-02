@@ -167,8 +167,10 @@
                   class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
                 >
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="0"
                     scope="col"
                   >
@@ -244,8 +246,10 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-fo0i4f-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="1"
                     scope="col"
                   >
@@ -321,8 +325,10 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-11j1kk8-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="2"
                     scope="col"
                   >
@@ -398,9 +404,12 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="ascending"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="3"
+                    data-sort="asc"
                     scope="col"
                   >
                     <div

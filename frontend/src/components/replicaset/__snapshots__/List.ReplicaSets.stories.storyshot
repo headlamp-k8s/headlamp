@@ -247,8 +247,10 @@
                     class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
                   >
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="0"
                       scope="col"
                     >
@@ -324,8 +326,10 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-y0j8gz-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="1"
                       scope="col"
                     >
@@ -401,8 +405,10 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-bok8gx-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="2"
                       scope="col"
                     >
@@ -478,8 +484,10 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1d0slvx-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="3"
                       scope="col"
                     >
@@ -555,8 +563,10 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1kcdxjr-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="4"
                       scope="col"
                     >
@@ -632,8 +642,10 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-16fxf6s-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="5"
                       scope="col"
                     >
@@ -709,8 +721,10 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-mha81v-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="6"
                       scope="col"
                     >
@@ -786,8 +800,10 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="none"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-oqhinv-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="7"
                       scope="col"
                     >
@@ -863,9 +879,12 @@
                       </div>
                     </th>
                     <th
+                      aria-sort="ascending"
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
                       colspan="1"
+                      data-can-sort="true"
                       data-index="8"
+                      data-sort="asc"
                       scope="col"
                     >
                       <div

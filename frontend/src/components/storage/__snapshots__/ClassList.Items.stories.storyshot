@@ -167,8 +167,10 @@
                   class="MuiTableRow-root MuiTableRow-head css-1r1zsaz-MuiTableRow-root"
                 >
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-txlc13-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="0"
                     scope="col"
                   >
@@ -244,8 +246,10 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-16qna8w-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="1"
                     scope="col"
                   >
@@ -321,8 +325,10 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-th7ic1-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="2"
                     scope="col"
                   >
@@ -398,8 +404,10 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1via7jv-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="3"
                     scope="col"
                   >
@@ -475,8 +483,10 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="none"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1i55zz3-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="4"
                     scope="col"
                   >
@@ -552,9 +562,12 @@
                     </div>
                   </th>
                   <th
+                    aria-sort="ascending"
                     class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-148gq9i-MuiTableCell-root"
                     colspan="1"
+                    data-can-sort="true"
                     data-index="5"
+                    data-sort="asc"
                     scope="col"
                   >
                     <div
