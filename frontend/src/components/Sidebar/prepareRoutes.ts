@@ -244,6 +244,12 @@ function prepareRoutes(
       name: 'crds',
       label: t('glossary|Custom Resources'),
       icon: 'mdi:puzzle',
+      subList: [
+        {
+          name: 'crs',
+          label: t('translation|Instances'),
+        },
+      ],
     },
   ];
 
