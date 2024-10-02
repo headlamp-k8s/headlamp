@@ -69,7 +69,7 @@
     "lodash": "^4.17.21",
     "material-react-table": "^2.13.0",
     "monaco-editor": "^0.25.2",
-    "notistack": "^2.0.8",
+    "notistack": "^3.0.1",
     "openapi-types": "^9.3.0",
     "postcss": "^8.4.5",
     "postcss-flexbugs-fixes": "^5.0.2",

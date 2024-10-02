@@ -1,47 +1,44 @@
 <body>
   <div>
     <div
-      class="SnackbarContainer-bottom SnackbarContainer-left SnackbarContainer-root css-uwcd5u"
+      class="notistack-SnackbarContainer go1453831412 go4027089540 go1141946668"
     >
       <div
-        class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
-        style="min-height: 0px;"
+        class="go1475592160 go1671063245"
+        style="pointer-events: all; overflow: visible; min-height: 0px; transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
       >
         <div
-          class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+          class="notistack-CollapseWrapper"
+          style="display: flex; width: 100%;"
         >
           <div
-            class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+            class="notistack-Snackbar go3963613292"
           >
             <div
-              class="SnackbarItem-wrappedRoot css-1erfie"
+              aria-describedby="notistack-snackbar"
+              class="go1888806478 notistack-MuiContent notistack-MuiContent-default go167266335 go3844575157"
+              role="alert"
+              style="webkit-transform: none; transform: none; webkit-transition: -webkit-transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms; transition: transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;"
             >
               <div
-                aria-describedby="notistack-snackbar"
-                class="SnackbarContent-root SnackbarItem-contentRoot css-hped4j"
-                role="alert"
-                style="webkit-transform: none; transform: none; webkit-transition: -webkit-transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms; transition: transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;"
+                class="go946087465"
+                id="notistack-snackbar"
               >
-                <div
-                  class="SnackbarItem-message"
-                  id="notistack-snackbar"
+                Some message
+              </div>
+              <div
+                class="go703367398"
+              >
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorSecondary MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorSecondary css-u3zvl7-MuiButtonBase-root-MuiButton-root"
+                  tabindex="0"
+                  type="button"
                 >
-                  Some message
-                </div>
-                <div
-                  class="SnackbarItem-action"
-                >
-                  <button
-                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorSecondary MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorSecondary css-u3zvl7-MuiButtonBase-root-MuiButton-root"
-                    tabindex="0"
-                    type="button"
-                  >
-                    Meow
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                  Meow
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </div>
             </div>
           </div>
