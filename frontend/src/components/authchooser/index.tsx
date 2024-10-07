@@ -297,7 +297,7 @@ export function PureAuthChooser({
                         errorMessage: error!.message,
                       })}
                 </Empty>
-                <Link routeName="settingsCluster" params={{ clusterID: clusterName }}>
+                <Link routeName="settingsClusterHomeContext">
                   {t('translation|Cluster settings')}
                 </Link>
               </Box>
