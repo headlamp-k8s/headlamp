@@ -1,4 +1,4 @@
-import 'xterm/css/xterm.css';
+import '@xterm/xterm/css/xterm.css';
 import { Box } from '@mui/material';
 import { DialogProps } from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -6,11 +6,11 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { FitAddon } from '@xterm/addon-fit';
+import { Terminal as XTerminal } from '@xterm/xterm';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Terminal as XTerminal } from 'xterm';
-import { FitAddon } from 'xterm-addon-fit';
 import Pod from '../../lib/k8s/pod';
 import { Dialog } from './Dialog';
 

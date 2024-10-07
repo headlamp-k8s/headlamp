@@ -43,6 +43,9 @@
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/addon-search": "^0.15.0",
+    "@xterm/xterm": "^5.5.0",
     "base64-arraybuffer": "^1.0.2",
     "buffer": "^6.0.3",
     "console-browserify": "^1.2.0",
@@ -92,10 +95,7 @@
     "util": "^0.12.4",
     "vite": "^5.2.11",
     "vite-plugin-node-polyfills": "^0.22.0",
-    "vite-plugin-svgr": "^4.2.0",
-    "xterm": "^4.19.0",
-    "xterm-addon-fit": "^0.5.0",
-    "xterm-addon-search": "^0.9.0"
+    "vite-plugin-svgr": "^4.2.0"
   },
   "overrides": {
     "domain-browser": "npm:dry-uninstall",
