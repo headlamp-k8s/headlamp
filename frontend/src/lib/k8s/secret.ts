@@ -7,7 +7,11 @@ export interface KubeSecret extends KubeObjectInterface {
 }
 
 class Secret extends KubeObject<KubeSecret> {
-  static objectName = 'Secret';
+  static kind = 'Secret';
+  static apiName = 'secrets';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'secrets');
 
   get data() {

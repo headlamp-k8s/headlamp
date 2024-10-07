@@ -12,7 +12,11 @@ export interface KubeRole extends KubeObjectInterface {
 }
 
 class Role extends KubeObject<KubeRole> {
-  static objectName = 'role';
+  static kind = 'Role';
+  static apiName = 'roles';
+  static apiVersion = 'rbac.authorization.k8s.io/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('rbac.authorization.k8s.io', 'v1', 'roles');
 
   get rules() {

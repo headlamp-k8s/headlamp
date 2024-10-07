@@ -9,7 +9,11 @@ export interface KubeIngressClass extends KubeObjectInterface {
 }
 
 class IngressClass extends KubeObject<KubeIngressClass> {
-  static objectName = 'ingressClass';
+  static kind = 'IngressClass';
+  static apiName = 'ingressclasses';
+  static apiVersion = 'networking.k8s.io/v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory(['networking.k8s.io', 'v1', 'ingressclasses']);
 
   get spec(): KubeIngressClass['spec'] {

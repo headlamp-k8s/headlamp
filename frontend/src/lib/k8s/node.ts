@@ -53,7 +53,11 @@ export interface KubeNode extends KubeObjectInterface {
 }
 
 class Node extends KubeObject<KubeNode> {
-  static objectName = 'node';
+  static kind = 'Node';
+  static apiName = 'nodes';
+  static apiVersion = 'v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory('', 'v1', 'nodes');
 
   get status(): KubeNode['status'] {
