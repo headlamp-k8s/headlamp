@@ -5,7 +5,7 @@ import { generateK8sResourceList } from '../../test/mocker';
 import List from './List';
 import { jobs } from './storyHelper';
 
-const jobList = generateK8sResourceList(jobs[0], { numResults: 3 });
+const jobList = generateK8sResourceList(jobs[0], { numResults: 4 });
 
 const failedJob = jobList[1];
 failedJob.status = {
@@ -26,6 +26,25 @@ suspendedJob.status = {
   conditions: [
     {
       type: 'Suspended',
+      status: 'True',
+      lastProbeTime: '2023-07-28T08:01:00Z',
+      lastTransitionTime: '2023-07-28T08:01:00Z',
+    },
+  ],
+};
+
+const successCriteriaMetJob = jobList[3];
+successCriteriaMetJob.status = {
+  ...successCriteriaMetJob.status,
+  conditions: [
+    {
+      type: 'SuccessCriteriaMet',
+      status: 'True',
+      lastProbeTime: '2023-07-28T08:01:00Z',
+      lastTransitionTime: '2023-07-28T08:01:00Z',
+    },
+    {
+      type: 'Complete',
       status: 'True',
       lastProbeTime: '2023-07-28T08:01:00Z',
       lastTransitionTime: '2023-07-28T08:01:00Z',
