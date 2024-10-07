@@ -277,7 +277,7 @@
         },
         "clusterRoleName": {
           "type": "string",
-          "description": "The name of the Cluster Role from you cluster"
+          "description": "The name of the ClusterRole to create in the cluster"
         },
         "annotations": {
           "type": "object",
