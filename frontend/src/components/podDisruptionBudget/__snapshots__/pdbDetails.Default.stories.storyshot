@@ -249,7 +249,7 @@
                     class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
                   >
                     <span
-                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                       style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                     >
                       k8s-app: kube-dns
@@ -264,7 +264,7 @@
                     class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                   >
                     <span
-                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                       style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                     >
                       Allowed disruptions
@@ -273,7 +273,7 @@
                     </span>
                     <br />
                     <span
-                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                       style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                     >
                       Current
@@ -282,7 +282,7 @@
                     </span>
                     <br />
                     <span
-                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                       style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                     >
                       Desired
@@ -291,7 +291,7 @@
                     </span>
                     <br />
                     <span
-                      class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                      class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                       style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                     >
                       Total

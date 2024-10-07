@@ -224,7 +224,7 @@
                       data-mui-internal-clone-element="true"
                     >
                       <span
-                        class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                         style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                       >
                         Running
@@ -537,7 +537,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           Initialized
@@ -577,7 +577,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           Ready
@@ -617,7 +617,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           ContainersReady
@@ -657,7 +657,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           PodScheduled
@@ -755,7 +755,7 @@
                         class="MuiBox-root css-0"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                         >
                           Running
