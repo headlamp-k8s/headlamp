@@ -16,7 +16,11 @@ export interface KubePersistentVolume extends KubeObjectInterface {
 }
 
 class PersistentVolume extends KubeObject<KubePersistentVolume> {
-  static objectName = 'persistentVolume';
+  static kind = 'PersistentVolume';
+  static apiName = 'persistentvolumes';
+  static apiVersion = 'v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory('', 'v1', 'persistentvolumes');
 
   get spec() {

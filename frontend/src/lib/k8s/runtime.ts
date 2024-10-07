@@ -8,18 +8,14 @@ export interface KubeRuntimeClass extends KubeObjectInterface {
 }
 
 export class RuntimeClass extends KubeObject<KubeRuntimeClass> {
-  static objectName = 'RuntimeClass';
+  static kind = 'RuntimeClass';
+  static apiName = 'runtimeclasses';
+  static apiVersion = 'node.k8s.io/v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory('node.k8s.io', 'v1', 'runtimeclasses');
 
   get spec() {
     return this.jsonData.spec;
-  }
-
-  static get pluralName() {
-    return 'runtimeclasses';
-  }
-
-  static get listRoute() {
-    return this.pluralName;
   }
 }

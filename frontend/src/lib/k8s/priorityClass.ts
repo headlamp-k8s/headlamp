@@ -9,19 +9,15 @@ export interface KubePriorityClass extends KubeObjectInterface {
 }
 
 class PriorityClass extends KubeObject<KubePriorityClass> {
-  static objectName = 'priorityClass';
+  static kind = 'PriorityClass';
+  static apiName = 'priorityclasses';
+  static apiVersion = 'scheduling.k8s.io/v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory('scheduling.k8s.io', 'v1', 'priorityclasses');
 
-  static get pluralName(): string {
-    return 'priorityclasses';
-  }
-
-  static get listRoute() {
-    return 'priorityclasses';
-  }
-
-  get value(): number {
-    return this.jsonData.value;
+  get value(): string {
+    return String(this.jsonData!.value);
   }
 
   get globalDefault(): boolean | null {

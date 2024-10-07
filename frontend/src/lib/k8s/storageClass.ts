@@ -9,7 +9,11 @@ export interface KubeStorageClass extends KubeObjectInterface {
 }
 
 class StorageClass extends KubeObject<KubeStorageClass> {
-  static objectName = 'storageClass';
+  static kind = 'StorageClass';
+  static apiName = 'storageclasses';
+  static apiVersion = 'storage.k8s.io/v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory('storage.k8s.io', 'v1', 'storageclasses');
 
   get provisioner() {

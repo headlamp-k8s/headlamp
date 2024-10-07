@@ -542,10 +542,8 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
  * @param objectName The name of the object to create a KubeObject implementation for.
  */
 
-export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(objectName: string) {
-  class KubeObjectInternal extends KubeObject<T> {
-    static objectName = objectName;
-  }
+export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>() {
+  class KubeObjectInternal extends KubeObject<T> {}
   return KubeObjectInternal;
 }
 /**

@@ -69,7 +69,11 @@ export interface KubeIngress extends KubeObjectInterface {
 }
 
 class Ingress extends KubeObject<KubeIngress> {
-  static objectName = 'ingress';
+  static kind = 'Ingress';
+  static apiName = 'ingresses';
+  static apiVersion = ['networking.k8s.io/v1', 'extensions/v1beta1'];
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace(
     ['networking.k8s.io', 'v1', 'ingresses'],
     ['extensions', 'v1beta1', 'ingresses']
@@ -129,14 +133,6 @@ class Ingress extends KubeObject<KubeIngress> {
 
     this.cachedRules = rules;
     return rules;
-  }
-
-  static get listRoute() {
-    return 'ingresses';
-  }
-
-  static get pluralName() {
-    return 'ingresses';
   }
 }
 

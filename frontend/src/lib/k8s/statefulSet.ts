@@ -25,7 +25,11 @@ export interface KubeStatefulSet extends KubeObjectInterface {
 }
 
 class StatefulSet extends KubeObject<KubeStatefulSet> {
-  static objectName = 'StatefulSet';
+  static kind = 'StatefulSet';
+  static apiName = 'statefulsets';
+  static apiVersion = 'apps/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'statefulsets', true);
 
   get spec() {

@@ -25,7 +25,11 @@ export interface KubeValidatingWebhookConfiguration extends KubeObjectInterface 
 }
 
 class ValidatingWebhookConfiguration extends KubeObject<KubeValidatingWebhookConfiguration> {
-  static objectName = 'ValidatingWebhookConfiguration';
+  static kind = 'ValidatingWebhookConfiguration';
+  static apiName = 'validatingwebhookconfigurations';
+  static apiVersion = 'admissionregistration.k8s.io/v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory(
     'admissionregistration.k8s.io',
     'v1',

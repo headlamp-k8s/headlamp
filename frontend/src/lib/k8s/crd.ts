@@ -50,15 +50,19 @@ export interface KubeCRD extends KubeObjectInterface {
 }
 
 class CustomResourceDefinition extends KubeObject<KubeCRD> {
-  static objectName = 'crd';
+  static kind = 'CustomResourceDefinition';
+  static apiName = 'customresourcedefinitions';
+  static apiVersion = ['apiextensions.k8s.io/v1', 'apiextensions.k8s.io/v1beta1'];
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory(
     ['apiextensions.k8s.io', 'v1', 'customresourcedefinitions'],
     ['apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions']
   );
   static readOnlyFields = ['metadata.managedFields'];
 
-  static get className(): string {
-    return 'CustomResourceDefinition';
+  static get listRoute(): string {
+    return 'crds';
   }
 
   static get detailsRoute(): string {
@@ -163,7 +167,11 @@ export function makeCustomResourceClass(
 
   const apiFunc = !!objArgs.isNamespaced ? apiFactoryWithNamespace : apiFactory;
   return class CRClass extends KubeObject<any> {
-    static objectName = objArgs.singleName;
+    static kind = objArgs.singleName;
+    static apiName = crClassArgs.pluralName;
+    static apiVersion = apiInfoArgs.map(([group, version]) =>
+      group ? `${group}/${version}` : version
+    );
     static apiEndpoint = apiFunc(...apiInfoArgs);
   };
 }

@@ -7,7 +7,11 @@ export interface KubeConfigMap extends KubeObjectInterface {
 }
 
 class ConfigMap extends KubeObject<KubeConfigMap> {
-  static objectName = 'configMap';
+  static kind = 'ConfigMap';
+  static apiName = 'configmaps';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'configmaps');
 
   get data() {

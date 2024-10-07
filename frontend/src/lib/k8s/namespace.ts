@@ -10,7 +10,11 @@ export interface KubeNamespace extends KubeObjectInterface {
 }
 
 class Namespace extends KubeObject<KubeNamespace> {
-  static objectName = 'namespace';
+  static kind = 'Namespace';
+  static apiName = 'namespaces';
+  static apiVersion = 'v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory('', 'v1', 'namespaces');
 
   get status() {
