@@ -136,7 +136,7 @@ export function useKubeObject<T extends KubeObjectClass>({
     isFetching: query.isFetching,
     isSuccess: query.isSuccess,
     status: query.status,
-    *[Symbol.iterator]() {
+    *[Symbol.iterator](): ArrayIterator<ApiError | InstanceType<T> | null> {
       yield data;
       yield query.error;
     },
@@ -269,7 +269,7 @@ export function useKubeObjectList<T extends KubeObjectClass>({
     isFetching: query.isFetching,
     isSuccess: query.isSuccess,
     status: query.status,
-    *[Symbol.iterator]() {
+    *[Symbol.iterator](): ArrayIterator<ApiError | InstanceType<T>[] | null> {
       yield items;
       yield query.error;
     },
