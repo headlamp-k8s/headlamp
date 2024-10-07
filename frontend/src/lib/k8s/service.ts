@@ -39,7 +39,12 @@ export interface KubeService extends KubeObjectInterface {
   };
 }
 
-class Service extends makeKubeObject<KubeService>('service') {
+class Service extends makeKubeObject<KubeService>() {
+  static kind = 'Service';
+  static apiName = 'services';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'services');
 
   get spec(): KubeService['spec'] {

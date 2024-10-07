@@ -12,7 +12,12 @@ export interface KubeServiceAccount extends KubeObjectInterface {
   }[];
 }
 
-class ServiceAccount extends makeKubeObject<KubeServiceAccount>('serviceAccount') {
+class ServiceAccount extends makeKubeObject<KubeServiceAccount>() {
+  static kind = 'ServiceAccount';
+  static apiName = 'serviceaccounts';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'serviceaccounts');
 
   get secrets(): KubeServiceAccount['secrets'] {

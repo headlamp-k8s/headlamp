@@ -166,7 +166,12 @@ interface HPAMetrics {
   shortValue: string;
 }
 
-class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
+class HPA extends makeKubeObject<KubeHPA>() {
+  static kind = 'HorizontalPodAutoscaler';
+  static apiName = 'horizontalpodautoscalers';
+  static apiVersion = 'autoscaling/v2';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('autoscaling', 'v2', 'horizontalpodautoscalers');
 
   get spec(): HpaSpec {

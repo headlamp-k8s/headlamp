@@ -30,7 +30,12 @@ export interface KubeReplicaSet extends KubeObjectInterface {
   };
 }
 
-class ReplicaSet extends makeKubeObject<KubeReplicaSet>('ReplicaSet') {
+class ReplicaSet extends makeKubeObject<KubeReplicaSet>() {
+  static kind = 'ReplicaSet';
+  static apiName = 'replicasets';
+  static apiVersion = 'apps/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'replicasets', true);
 
   get spec(): KubeReplicaSet['spec'] {

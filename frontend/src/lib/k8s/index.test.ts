@@ -223,7 +223,8 @@ const namespacedClasses = [
   'CronJob',
   'DaemonSet',
   'Deployment',
-  'Endpoint',
+  'Endpoint', // included for backward compatibility
+  'Endpoints',
   'HorizontalPodAutoscaler',
   'Ingress',
   'Job',

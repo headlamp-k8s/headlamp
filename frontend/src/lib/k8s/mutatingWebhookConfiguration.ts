@@ -42,9 +42,12 @@ export interface KubeMutatingWebhookConfiguration extends KubeObjectInterface {
   }[];
 }
 
-class MutatingWebhookConfiguration extends makeKubeObject<KubeMutatingWebhookConfiguration>(
-  'MutatingWebhookConfiguration'
-) {
+class MutatingWebhookConfiguration extends makeKubeObject<KubeMutatingWebhookConfiguration>() {
+  static kind = 'MutatingWebhookConfiguration';
+  static apiName = 'mutatingwebhookconfigurations';
+  static apiVersion = 'admissionregistration.k8s.io/v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory(
     'admissionregistration.k8s.io',
     'v1',

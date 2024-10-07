@@ -86,7 +86,12 @@ type PodDetailedStatus = {
   lastRestartDate: Date;
 };
 
-class Pod extends makeKubeObject<KubePod>('Pod') {
+class Pod extends makeKubeObject<KubePod>() {
+  static kind = 'Pod';
+  static apiName = 'pods';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
   protected detailedStatusCache: Partial<{ resourceVersion: string; details: PodDetailedStatus }>;
 

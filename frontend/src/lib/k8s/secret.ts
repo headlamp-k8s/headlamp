@@ -6,7 +6,13 @@ export interface KubeSecret extends KubeObjectInterface {
   type: string;
 }
 
-class Secret extends makeKubeObject<KubeSecret>('secret') {
+class Secret extends makeKubeObject<KubeSecret>() {
+  static kind = 'Secret';
+  static apiName = 'secrets';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
+  static objectName = 'Secret';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'secrets');
 
   get data() {

@@ -26,7 +26,12 @@ export interface KubeDeployment extends KubeObjectInterface {
   };
 }
 
-class Deployment extends makeKubeObject<KubeDeployment>('Deployment') {
+class Deployment extends makeKubeObject<KubeDeployment>() {
+  static kind = 'Deployment';
+  static apiName = 'deployments';
+  static apiVersion = 'apps/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'deployments', true);
 
   get spec() {

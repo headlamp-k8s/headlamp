@@ -28,8 +28,23 @@ export interface KubeEndpoint extends KubeObjectInterface {
   subsets: KubeEndpointSubset[];
 }
 
-class Endpoints extends makeKubeObject<KubeEndpoint>('endpoint') {
+class Endpoints extends makeKubeObject<KubeEndpoint>() {
+  static kind = 'Endpoints';
+  static apiName = 'endpoints';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'endpoints');
+
+  // @todo Remove this when we can break backward compatibility.
+  static get detailsRoute() {
+    return 'Endpoint';
+  }
+
+  // @todo Remove this when we can break backward compatibility.
+  static get className() {
+    return 'Endpoint';
+  }
 
   get spec() {
     return this.jsonData!.spec;

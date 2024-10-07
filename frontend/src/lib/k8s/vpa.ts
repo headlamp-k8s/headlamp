@@ -76,7 +76,12 @@ export interface KubeVPA extends KubeObjectInterface {
   status: VpaStatus;
 }
 
-class VPA extends makeKubeObject<KubeVPA>('verticalPodAutoscaler') {
+class VPA extends makeKubeObject<KubeVPA>() {
+  static kind = 'VerticalPodAutoscaler';
+  static apiName = 'verticalpodautoscalers';
+  static apiVersion = 'autoscaling.k8s.io/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace(
     'autoscaling.k8s.io',
     'v1',

@@ -34,7 +34,12 @@ export interface KubeCronJob extends KubeObjectInterface {
   };
 }
 
-class CronJob extends makeKubeObject<KubeCronJob>('CronJob') {
+class CronJob extends makeKubeObject<KubeCronJob>() {
+  static kind = 'CronJob';
+  static apiName = 'cronjobs';
+  static apiVersion = ['batch/v1', 'batch/v1beta1'];
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace(
     ['batch', 'v1', 'cronjobs'],
     ['batch', 'v1beta1', 'cronjobs']

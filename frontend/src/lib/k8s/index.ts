@@ -85,6 +85,8 @@ classList.forEach(cls => {
   resourceClassesDict[className] = cls;
 });
 
+resourceClassesDict['Endpoints'] = Endpoints;
+
 export const ResourceClasses = resourceClassesDict;
 
 /** Hook for getting or fetching the clusters configuration.

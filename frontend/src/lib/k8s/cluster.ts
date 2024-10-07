@@ -362,14 +362,25 @@ type JsonPath<T> = T extends object
  *
  * @param objectName The name of the object to create a KubeObject implementation for.
  */
-export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
-  objectName: string
-): KubeObjectIface<T> {
+export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(): KubeObjectIface<T> {
   class KubeObject {
     static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
     jsonData: T | null = null;
-    public static readOnlyFields: JsonPath<T>[];
+    /** Readonly field defined as JSONPath paths */
+    static readOnlyFields: JsonPath<T>[] = [];
     private readonly _clusterName: string;
+
+    /** The kind of the object. Corresponding to the resource kind in Kubernetes. */
+    static readonly kind: string;
+
+    /** Name of the resource, plural, used in API */
+    static readonly apiName: string;
+
+    /** Group and version of the resource formatted as "GROUP/VERSION", e.g. "policy.k8s.io/v1". */
+    static readonly apiVersion: string | string[];
+
+    /** Whether the object is namespaced. */
+    static readonly isNamespaced: boolean;
 
     constructor(json: T) {
       this.jsonData = json;
@@ -377,7 +388,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     static get className(): string {
-      return objectName;
+      return this.kind;
     }
 
     get detailsRoute(): string {
@@ -385,13 +396,13 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     static get detailsRoute(): string {
-      return this.className;
+      return this.kind;
     }
 
     static get pluralName(): string {
       // This is a naive way to get the plural name of the object by default. It will
       // work in most cases, but for exceptions (like Ingress), we must override this.
-      return this.className.toLowerCase() + 's';
+      return this.apiName;
     }
 
     get pluralName(): string {
@@ -404,7 +415,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     static get listRoute(): string {
-      return this.detailsRoute + 's';
+      return this.apiName;
     }
 
     getDetailsLink() {
@@ -450,10 +461,6 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     get isNamespaced() {
       return this._class().isNamespaced;
-    }
-
-    static get isNamespaced() {
-      return this.apiEndpoint.isNamespaced;
     }
 
     getEditableObject() {

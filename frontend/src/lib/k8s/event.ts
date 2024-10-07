@@ -21,7 +21,13 @@ export interface KubeEvent {
   [otherProps: string]: any;
 }
 
-class Event extends makeKubeObject<KubeEvent>('Event') {
+class Event extends makeKubeObject<KubeEvent>() {
+  static kind = 'Event';
+  static apiName = 'events';
+  static apiVersion = 'v1';
+
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'events');
 
   // Max number of events to fetch from the API

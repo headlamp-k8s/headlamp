@@ -27,7 +27,12 @@ export interface KubeLimitRange extends KubeObjectInterface {
   spec: LimitRangeSpec;
 }
 
-export class LimitRange extends makeKubeObject<KubeLimitRange>('LimitRange') {
+export class LimitRange extends makeKubeObject<KubeLimitRange>() {
+  static kind = 'LimitRange';
+  static apiName = 'limitranges';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'limitranges');
 
   get spec() {

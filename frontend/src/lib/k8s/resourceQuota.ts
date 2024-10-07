@@ -30,7 +30,12 @@ export interface KubeResourceQuota extends KubeObjectInterface {
   status: status;
 }
 
-class ResourceQuota extends makeKubeObject<KubeResourceQuota>('resourceQuota') {
+class ResourceQuota extends makeKubeObject<KubeResourceQuota>() {
+  static kind = 'ResourceQuota';
+  static apiName = 'resourcequotas';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'resourcequotas');
 
   get spec(): spec {

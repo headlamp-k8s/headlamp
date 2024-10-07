@@ -35,7 +35,12 @@ export interface KubeNetworkPolicy extends KubeObjectInterface {
   policyTypes: string[];
 }
 
-class NetworkPolicy extends makeKubeObject<KubeNetworkPolicy>('NetworkPolicy') {
+class NetworkPolicy extends makeKubeObject<KubeNetworkPolicy>() {
+  static kind = 'NetworkPolicy';
+  static apiName = 'networkpolicies';
+  static apiVersion = 'networking.k8s.io/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('networking.k8s.io', 'v1', 'networkpolicies');
 
   static get pluralName() {

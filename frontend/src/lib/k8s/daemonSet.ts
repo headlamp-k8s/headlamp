@@ -28,7 +28,12 @@ export interface KubeDaemonSet extends KubeObjectInterface {
   };
 }
 
-class DaemonSet extends makeKubeObject<KubeDaemonSet>('DaemonSet') {
+class DaemonSet extends makeKubeObject<KubeDaemonSet>() {
+  static kind = 'DaemonSet';
+  static apiName = 'daemonsets';
+  static apiVersion = 'apps/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'daemonsets');
 
   get spec() {

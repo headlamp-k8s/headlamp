@@ -52,7 +52,12 @@ export interface KubeNode extends KubeObjectInterface {
   };
 }
 
-class Node extends makeKubeObject<KubeNode>('node') {
+class Node extends makeKubeObject<KubeNode>() {
+  static kind = 'Node';
+  static apiName = 'nodes';
+  static apiVersion = 'v1';
+  static isNamespaced = false;
+
   static apiEndpoint = apiFactory('', 'v1', 'nodes');
 
   get status(): KubeNode['status'] {

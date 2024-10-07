@@ -22,7 +22,12 @@ export interface KubeJob extends KubeObjectInterface {
   };
 }
 
-class Job extends makeKubeObject<KubeJob>('Job') {
+class Job extends makeKubeObject<KubeJob>() {
+  static kind = 'Job';
+  static apiName = 'jobs';
+  static apiVersion = 'batch/v1';
+  static isNamespaced = true;
+
   static apiEndpoint = apiFactoryWithNamespace('batch', 'v1', 'jobs');
 
   get spec() {
