@@ -200,7 +200,6 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/nock": "^11.1.0",
     "@vitest/coverage-istanbul": "^2.1.1",
-    "http-proxy-middleware": "^2.0.1",
     "husky": "^4.3.8",
     "i18next-parser": "^9.0.2",
     "jsdom": "^24.0.0",
