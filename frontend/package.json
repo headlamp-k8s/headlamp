@@ -205,7 +205,7 @@
     "i18next-parser": "^9.0.2",
     "jsdom": "^24.0.0",
     "lint-staged": "^10.5.4",
-    "msw": "2.3.5",
+    "msw": "2.4.9",
     "msw-storybook-addon": "2.0.3",
     "nock": "^14.0.0-beta.14",
     "prettier": "^2.7.1",
