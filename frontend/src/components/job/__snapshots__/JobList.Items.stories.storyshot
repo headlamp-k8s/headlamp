@@ -926,11 +926,6 @@
                         style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                       >
                         Complete
-                        <div
-                          aria-label="hidden"
-                          class="MuiBox-root css-p4lqkr"
-                          style="vertical-align: text-top;"
-                        />
                       </span>
                     </div>
                   </td>
@@ -1023,11 +1018,6 @@
                         style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                       >
                         Failed
-                        <div
-                          aria-label="hidden"
-                          class="MuiBox-root css-p4lqkr"
-                          style="vertical-align: text-top;"
-                        />
                       </span>
                     </div>
                   </td>
@@ -1120,11 +1110,6 @@
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         Suspended
-                        <div
-                          aria-label="hidden"
-                          class="MuiBox-root css-p4lqkr"
-                          style="vertical-align: text-top;"
-                        />
                       </span>
                     </div>
                   </td>

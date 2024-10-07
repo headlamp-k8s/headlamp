@@ -7,16 +7,10 @@ import { formatDuration } from '../../lib/util';
 import { LightTooltip, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
-export function makePodStatusLabel(job: Job) {
+export function makeJobStatusLabel(job: Job) {
   if (!job?.status?.conditions) {
     return null;
   }
-
-  const condition = job.status.conditions.find(
-    ({ status }: { status: string }) => status === 'True'
-  );
-
-  const tooltip = '';
 
   const conditionOptions = {
     Failed: {
@@ -33,6 +27,17 @@ export function makePodStatusLabel(job: Job) {
     },
   };
 
+  const condition = job.status.conditions.find(
+    ({ status, type }: { status: string; type: string }) =>
+      type in conditionOptions && status === 'True'
+  );
+
+  if (!condition) {
+    return null;
+  }
+
+  const tooltip = '';
+
   const conditionInfo = conditionOptions[(condition.type as 'Complete' | 'Failed') || 'Suspended'];
 
   return (
@@ -40,15 +45,7 @@ export function makePodStatusLabel(job: Job) {
       <Box display="inline">
         <StatusLabel status={conditionInfo.status as StatusLabelProps['status']}>
           {condition.type}
-          <Box
-            aria-label="hidden"
-            display="inline"
-            paddingTop={1}
-            paddingLeft={0.5}
-            style={{ verticalAlign: 'text-top' }}
-          >
-            <Icon icon={conditionInfo.icon} width="1.2rem" height="1.2rem" />
-          </Box>
+          <Icon aria-label="hidden" icon={conditionInfo.icon} width="1.2rem" height="1.2rem" />
         </StatusLabel>
       </Box>
     </LightTooltip>
@@ -107,7 +104,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
           getValue: job =>
             job.status?.conditions?.find(({ status }: { status: string }) => status === 'True') ??
             null,
-          render: job => makePodStatusLabel(job),
+          render: job => makeJobStatusLabel(job),
         },
         {
           id: 'duration',
