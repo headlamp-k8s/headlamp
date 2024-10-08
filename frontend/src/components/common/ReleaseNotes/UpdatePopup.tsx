@@ -22,9 +22,13 @@ export interface UpdatePopupProps {
   skipUpdateHandler: () => void;
 }
 
-function UpdatePopup(props: UpdatePopupProps) {
+function UpdatePopup({
+  releaseDownloadURL,
+  fetchingRelease,
+  releaseFetchFailed,
+  skipUpdateHandler,
+}: UpdatePopupProps) {
   const [show, setShow] = React.useState(true);
-  const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
   const { t } = useTranslation();
   const [closeSnackError, setCloseSnackError] = React.useState(false);
 
@@ -199,9 +203,5 @@ function UpdatePopup(props: UpdatePopupProps) {
     />
   );
 }
-
-UpdatePopup.defaultProps = {
-  open: true,
-};
 
 export default UpdatePopup;
