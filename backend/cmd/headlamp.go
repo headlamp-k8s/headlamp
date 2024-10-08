@@ -94,18 +94,26 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	absStaticPath, err := filepath.Abs(h.staticPath)
+	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "getting absolute static path")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+
+		return
+	}
+
 	// Clean the path to prevent directory traversal
 	path := filepath.Clean(r.URL.Path)
 	path = strings.TrimPrefix(path, h.baseURL)
 
 	// prepend the path with the path to the static directory
-	path = filepath.Join(h.staticPath, path)
+	path = filepath.Join(absStaticPath, path)
 
 	// check whether a file exists at the given path
-	_, err := os.Stat(path)
+	_, err = os.Stat(path)
 	if os.IsNotExist(err) {
 		// file does not exist, serve index.html
-		http.ServeFile(w, r, filepath.Join(h.staticPath, h.indexPath))
+		http.ServeFile(w, r, filepath.Join(absStaticPath, h.indexPath))
 		return
 	} else if err != nil {
 		// if we got an error (that wasn't that the file doesn't exist) stating the
