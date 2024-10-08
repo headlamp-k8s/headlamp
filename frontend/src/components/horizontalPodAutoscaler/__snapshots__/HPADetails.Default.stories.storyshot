@@ -407,7 +407,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           AbleToScale
@@ -453,7 +453,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           ScalingActive
@@ -499,7 +499,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           ScalingLimited

@@ -224,7 +224,7 @@
                       data-mui-internal-clone-element="true"
                     >
                       <span
-                        class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                        class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         ImagePullBackOff
@@ -537,7 +537,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           Initialized
@@ -577,7 +577,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           Ready
@@ -623,7 +623,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           ContainersReady
@@ -669,7 +669,7 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           PodScheduled
@@ -768,7 +768,7 @@
                       >
                         <span
                           aria-describedby="container-state-message-imagepullbackoff"
-                          class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                          class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                           style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                         >
                           Waiting (ImagePullBackOff)
@@ -815,7 +815,7 @@
                           >
                             <span
                               aria-describedby="container-state-message-imagepullbackoff"
-                              class="MuiTypography-root MuiTypography-body1 css-tzfmv0-MuiTypography-root"
+                              class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
                               style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                             >
                               Error (ImagePullBackOff)

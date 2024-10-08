@@ -90,9 +90,10 @@ export function StatusLabel(props: StatusLabelProps) {
         paddingRight: theme.spacing(1),
         paddingTop: theme.spacing(0.5),
         paddingBottom: theme.spacing(0.5),
-        display: 'inline-block',
-        textAlign: 'center',
-        alignItems: 'center',
+        display: 'inline-flex',
+        alignItems: 'normal',
+        gap: theme.spacing(0.5),
+        borderRadius: theme.spacing(0.5),
         ...sx,
       }}
       className={className}
