@@ -109,6 +109,14 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// prepend the path with the path to the static directory
 	path = filepath.Join(absStaticPath, path)
 
+	// This is defensive, for preventing using files outside of the staticPath
+	// if in the future we touch the code.
+	absPath, err := filepath.Abs(path)
+	if err != nil || !strings.HasPrefix(absPath, absStaticPath) {
+		http.Error(w, "Invalid file name (file to serve is outside of the static dir!)", http.StatusBadRequest)
+		return
+	}
+
 	// check whether a file exists at the given path
 	_, err = os.Stat(path)
 	if os.IsNotExist(err) {
