@@ -59,11 +59,11 @@ jobs:
       run: |
         echo "Extract pod-counter plugin into .plugins folder, which will be copied into image later by 'make image'."
         cd plugins/examples/pod-counter
-        npm install
+        npm ci
         npm run build
         cd ../../../
         cd plugins/headlamp-plugin
-        npm install
+        npm ci
         node bin/headlamp-plugin.js extract ../examples/pod-counter ../../.plugins/
         cd ../../
         ls -laR .plugins
