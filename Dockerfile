@@ -38,7 +38,7 @@ COPY app/package.json /headlamp/app/package.json
 # Keep npm install separated so source changes don't trigger install
 COPY frontend/package*.json /headlamp/frontend/
 WORKDIR /headlamp
-RUN cd ./frontend && npm install --only=prod
+RUN cd ./frontend && npm ci --only=prod
 
 FROM frontend-build as frontend
 COPY ./frontend /headlamp/frontend
