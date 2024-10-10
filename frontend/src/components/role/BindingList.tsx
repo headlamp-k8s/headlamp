@@ -2,14 +2,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
-import { useErrorState } from '../../lib/util';
+import { combineClusterListErrors, flattenClusterListItems, getClusterGroup } from '../../lib/util';
 import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
-interface RoleBindingDict {
-  [kind: string]: RoleBinding[] | null;
-}
+//@todo: multi, is this needed for anything?
+// interface RoleBindingDict {
+//   [kind: string]: RoleBinding[] | null;
+// }
 
 function RoleLink(props: { role: string; namespace?: string }) {
   const { role, namespace } = props;
@@ -30,23 +31,19 @@ function RoleLink(props: { role: string; namespace?: string }) {
 }
 
 export default function RoleBindingList() {
-  const [bindings, setBindings] = React.useState<RoleBindingDict | null>(null);
-  const [roleBindingError, onRoleBindingError] = useErrorState(setupRoleBindings);
-  const [clusterRoleBindingError, onClusterRoleBindingError] =
-    useErrorState(setupClusterRoleBindings);
+  const [roleBindings, roleBindingsError] = RoleBinding.useListPerCluster();
+  const [clusterRoleBindings, clusterRoleBindingsError] = ClusterRoleBinding.useListPerCluster();
+  const clusters = getClusterGroup();
+
+  const bindings = React.useMemo(() => {
+    return flattenClusterListItems(roleBindings, clusterRoleBindings);
+  }, [roleBindings, clusterRoleBindings]);
+
+  const bindingErrors = React.useMemo(() => {
+    return combineClusterListErrors(roleBindingsError, clusterRoleBindingsError);
+  }, [roleBindingsError, clusterRoleBindingsError]);
+
   const { t } = useTranslation(['glossary', 'translation']);
-
-  function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
-    setBindings(currentBindings => ({ ...currentBindings, [kind]: newBindings }));
-  }
-
-  function setupRoleBindings(newBindings: RoleBinding[] | null) {
-    setRoleBindings(newBindings, 'RoleBinding');
-  }
-
-  function setupClusterRoleBindings(newBindings: RoleBinding[] | null) {
-    setRoleBindings(newBindings, 'ClusterRoleBinding');
-  }
 
   function getJointItems() {
     if (!bindings) {
@@ -54,20 +51,16 @@ export default function RoleBindingList() {
     }
 
     let joint: RoleBinding[] = [];
-    let hasItems = false;
-    for (const items of Object.values(bindings as object)) {
-      if (items !== null) {
-        joint = joint.concat(items);
-        hasItems = true;
-      }
+    for (const items of Object.values(bindings)) {
+      joint = joint.concat(items);
     }
 
-    return hasItems ? joint : null;
+    return joint.length > 0 ? joint : null;
   }
 
   function getErrorMessage() {
-    if (getJointItems() === null) {
-      return RoleBinding.getErrorMessage(roleBindingError || clusterRoleBindingError);
+    if (Object.values(bindingErrors || {}).length === clusters.length && clusters.length > 1) {
+      return RoleBinding.getErrorMessage(Object.values(bindingErrors!)[0]);
     }
 
     return null;
@@ -93,13 +86,15 @@ export default function RoleBindingList() {
     };
   }
 
-  RoleBinding.useApiList(setupRoleBindings, onRoleBindingError);
-  ClusterRoleBinding.useApiList(setupClusterRoleBindings, onClusterRoleBindingError);
+  //@todo: multi, this is used below.
+  // const isMultiCluster = clusters.length > 1;
 
   return (
     <ResourceListView
       title={t('glossary|Role Bindings')}
       errorMessage={getErrorMessage()}
+      //@todo: multi add clusterErrors to ResourceListView
+      // clusterErrors={isMultiCluster ? bindingErrors : null}
       columns={[
         'type',
         'name',
@@ -179,6 +174,7 @@ export default function RoleBindingList() {
           ),
           sort: sortBindings('Service Accounts'),
         },
+        'cluster',
         'age',
       ]}
       data={getJointItems()}
