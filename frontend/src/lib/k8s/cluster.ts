@@ -1,10 +1,10 @@
 import { OpPatch } from 'json-patch';
 import { JSONPath } from 'jsonpath-plus';
-import { cloneDeep, unset } from 'lodash';
+import { cloneDeep, isEqual } from 'lodash';
 import React from 'react';
 import helpers from '../../helpers';
 import { createRouteURL } from '../router';
-import { getCluster, timeAgo } from '../util';
+import { getCluster, getClusterGroup, timeAgo } from '../util';
 import { useConnectApi } from '.';
 import { useCluster } from './';
 import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
@@ -531,65 +531,104 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onError?: (err: ApiError, cluster?: string) => void,
       opts?: ApiListOptions
     ) {
-      const [objs, setObjs] = React.useState<{ [key: string]: U[] }>({});
-      const listCallback = onList as (arg: U[]) => void;
+      const setObjs = React.useState<{ [key: string]: { [key: string]: U[] } }>({})[1];
+      // Keep a copy of the options so we can re-run the API call if the options change more
+      // efficiently.
+      const [apiListOpts, setApiListOpts] = React.useState<ApiListOptions | undefined>(opts);
 
-      function onObjs(namespace: string, objList: U[]) {
-        let newObjs: typeof objs = {};
+      const includeCluster = !!opts?.clusters;
+
+      function onObjs(cluster: string, namespace: string, objList: U[]) {
         // Set the objects so we have them for the next API response...
-        setObjs(previousObjs => {
-          newObjs = { ...previousObjs, [namespace || '']: objList };
-          return newObjs;
+        setObjs(clusters => {
+          const newClusters = { ...clusters };
+          const previousObjs = newClusters[cluster] || {};
+          const objsPerNamespace = { ...previousObjs, [namespace || '']: objList };
+          newClusters[cluster] = objsPerNamespace;
+
+          const allObjs: U[] = Object.values(objsPerNamespace).flat();
+
+          // @todo: This branch use of the list callback is not very clear, so we should
+          // find a way to make this more explicit.
+          // Also, the reason we call this function from inside the state setter is because
+          // it's the one moment where we have the new list of objects but also the cluster
+          // for which they were fetched.
+          if (includeCluster) {
+            onList(allObjs, cluster);
+          } else {
+            onList(allObjs);
+          }
+
+          return newClusters;
         });
-
-        let allObjs: U[] = [];
-        Object.values(newObjs).map(currentObjs => {
-          allObjs = allObjs.concat(currentObjs);
-        });
-
-        listCallback(allObjs);
       }
 
-      const listCalls = [];
-      const queryParams = cloneDeep(opts);
-      let namespaces: string[] = [];
-      unset(queryParams, 'namespace');
-
-      const cluster = opts?.clusters?.[0] || opts?.cluster;
-
-      if (!!opts?.namespace) {
-        if (typeof opts.namespace === 'string') {
-          namespaces = [opts.namespace];
-        } else if (Array.isArray(opts.namespace)) {
-          namespaces = opts.namespace as string[];
-        } else {
-          throw Error('namespace should be a string or array of strings');
+      React.useEffect(() => {
+        // Avoid triggering more API calls if the options haven't changed.
+        if (!isEqual(opts, apiListOpts)) {
+          setApiListOpts(opts);
         }
-      }
+      }, [opts]);
 
-      // If the request itself has no namespaces set, we check whether to apply the
-      // allowed namespaces.
-      if (namespaces.length === 0 && this.isNamespaced) {
-        namespaces = getAllowedNamespaces();
-      }
+      const onErrForCluster = (err: ApiError, cluster?: string) => {
+        onError && onError(err, cluster);
+      };
 
-      if (namespaces.length > 0) {
-        // If we have a namespace set, then we have to make an API call for each
-        // namespace and then set the objects once we have all of the responses.
-        for (const namespace of namespaces) {
-          listCalls.push(
-            this.apiList(objList => onObjs(namespace, objList as U[]), onError, {
-              namespace,
-              queryParams,
-              cluster,
-            })
-          );
+      const listCalls = React.useMemo(() => {
+        const apiCalls = [];
+        let namespaces: string[] = [];
+        const { namespace, clusters = getClusterGroup(['']), ...queryParams } = apiListOpts || {};
+
+        if (!!namespace) {
+          if (typeof namespace === 'string') {
+            namespaces = [namespace];
+          } else if (Array.isArray(namespace)) {
+            namespaces = namespace as string[];
+          } else {
+            throw Error('namespace should be a string or array of strings');
+          }
         }
-      } else {
-        // If we don't have a namespace set, then we only have one API call
-        // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError, { queryParams, cluster }));
-      }
+        for (const cluster of clusters) {
+          // If the request itself has no namespaces set, we check whether to apply the
+          // allowed namespaces.
+          if (namespaces.length === 0 && this.isNamespaced) {
+            namespaces = getAllowedNamespaces(cluster);
+          }
+
+          if (namespaces.length > 0) {
+            // If we have a namespace set, then we have to make an API call for each
+            // namespace and then set the objects once we have all of the responses.
+            for (const namespace of namespaces) {
+              apiCalls.push(
+                this.apiList(
+                  objList => onObjs(cluster, namespace, objList as U[]),
+                  (err: ApiError) => onErrForCluster(err, cluster),
+                  {
+                    namespace,
+                    queryParams,
+                    cluster,
+                  }
+                )
+              );
+            }
+          } else {
+            // If we don't have a namespace set, then we only have one API call
+            // response to set and we return it right away.
+            apiCalls.push(
+              this.apiList(
+                (objs: U[]) => onObjs(cluster, '', objs),
+                (err: ApiError) => onErrForCluster(err, cluster),
+                {
+                  queryParams,
+                  cluster,
+                }
+              )
+            );
+          }
+        }
+
+        return apiCalls;
+      }, [apiListOpts]);
 
       useConnectApi(...listCalls);
     }
