@@ -2,14 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
-import { useErrorState } from '../../lib/util';
+import { combineClusterListErrors, getClusterGroup } from '../../lib/util';
 import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
-
-interface RoleBindingDict {
-  [kind: string]: RoleBinding[] | null;
-}
 
 function RoleLink(props: { role: string; namespace?: string }) {
   const { role, namespace } = props;
@@ -30,44 +26,28 @@ function RoleLink(props: { role: string; namespace?: string }) {
 }
 
 export default function RoleBindingList() {
-  const [bindings, setBindings] = React.useState<RoleBindingDict | null>(null);
-  const [roleBindingError, onRoleBindingError] = useErrorState(setupRoleBindings);
-  const [clusterRoleBindingError, onClusterRoleBindingError] =
-    useErrorState(setupClusterRoleBindings);
   const { t } = useTranslation(['glossary', 'translation']);
+  const { items: roles, clusterErrors: rolesErrors } = RoleBinding.useList();
+  const { items: clusterRoles, clusterErrors: clusterRolesErrors } = ClusterRoleBinding.useList();
+  const clusters = getClusterGroup();
 
-  function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
-    setBindings(currentBindings => ({ ...currentBindings, [kind]: newBindings }));
-  }
+  const isMultiCluster = clusters.length > 1;
 
-  function setupRoleBindings(newBindings: RoleBinding[] | null) {
-    setRoleBindings(newBindings, 'RoleBinding');
-  }
-
-  function setupClusterRoleBindings(newBindings: RoleBinding[] | null) {
-    setRoleBindings(newBindings, 'ClusterRoleBinding');
-  }
-
-  function getJointItems() {
-    if (!bindings) {
+  const allRoles = React.useMemo(() => {
+    if (roles === null && clusterRoles === null) {
       return null;
     }
 
-    let joint: RoleBinding[] = [];
-    let hasItems = false;
-    for (const items of Object.values(bindings as object)) {
-      if (items !== null) {
-        joint = joint.concat(items);
-        hasItems = true;
-      }
-    }
+    return roles ? roles.concat(clusterRoles || []) : clusterRoles;
+  }, [roles, clusterRoles]);
 
-    return hasItems ? joint : null;
-  }
+  const allErrors = React.useMemo(() => {
+    return combineClusterListErrors(rolesErrors || null, clusterRolesErrors || null);
+  }, [rolesErrors, clusterRolesErrors]);
 
   function getErrorMessage() {
-    if (getJointItems() === null) {
-      return RoleBinding.getErrorMessage(roleBindingError || clusterRoleBindingError);
+    if (Object.values(allErrors || {}).length === clusters.length && clusters.length > 1) {
+      return RoleBinding.getErrorMessage(Object.values(allErrors!)[0]);
     }
 
     return null;
@@ -93,13 +73,11 @@ export default function RoleBindingList() {
     };
   }
 
-  RoleBinding.useApiList(setupRoleBindings, onRoleBindingError);
-  ClusterRoleBinding.useApiList(setupClusterRoleBindings, onClusterRoleBindingError);
-
   return (
     <ResourceListView
       title={t('glossary|Role Bindings')}
       errorMessage={getErrorMessage()}
+      clusterErrors={isMultiCluster ? allErrors : null}
       columns={[
         'type',
         'name',
@@ -116,6 +94,7 @@ export default function RoleBindingList() {
               t('translation|All namespaces')
             ),
         },
+        'cluster',
         {
           id: 'role',
           label: t('glossary|Role'),
@@ -181,7 +160,7 @@ export default function RoleBindingList() {
         },
         'age',
       ]}
-      data={getJointItems()}
+      data={allRoles}
       id="headlamp-rolebindings"
     />
   );
