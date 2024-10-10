@@ -4,11 +4,13 @@ import { MRT_FilterFns, MRT_Row, MRT_SortingFn } from 'material-react-table';
 import { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
+import { ApiError } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/cluster';
-import { useFilterFunc } from '../../../lib/util';
+import { getClusterGroup, useFilterFunc } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
+import { ClusterGroupErrorMessage } from '../../cluster/ClusterGroupErrorMessage';
 import { DateLabel } from '../Label';
 import Link from '../Link';
 import Table, { TableColumn } from '../Table';
@@ -94,6 +96,8 @@ export interface ResourceTableProps<RowItem> {
   errorMessage?: string | null;
   /** State of the Table (page, rows per page) is reflected in the url */
   reflectInURL?: string | boolean;
+  /** Any errors per cluster (useful when using the table a in a multi-cluster listing) */
+  clusterErrors?: { [cluster: string]: ApiError | null } | null;
 }
 
 export interface ResourceTableFromResourceClassProps<RowItem>
@@ -104,17 +108,26 @@ export interface ResourceTableFromResourceClassProps<RowItem>
 export default function ResourceTable<RowItem>(
   props: ResourceTableFromResourceClassProps<RowItem> | ResourceTableProps<RowItem>
 ) {
+  const { clusterErrors } = props;
+
   if (!!(props as ResourceTableFromResourceClassProps<RowItem>).resourceClass) {
     const { resourceClass, ...otherProps } = props as ResourceTableFromResourceClassProps<RowItem>;
     return <TableFromResourceClass resourceClass={resourceClass!} {...otherProps} />;
   }
 
-  return <ResourceTableContent {...(props as ResourceTableProps<RowItem>)} />;
+  return (
+    <>
+      <ClusterGroupErrorMessage clusterErrors={clusterErrors ? clusterErrors : undefined} />
+      <ResourceTableContent {...(props as ResourceTableProps<RowItem>)} />
+    </>
+  );
 }
 
 function TableFromResourceClass<RowItem>(props: ResourceTableFromResourceClassProps<RowItem>) {
   const { resourceClass, id, ...otherProps } = props;
-  const [items, error] = resourceClass.useList();
+  const isMultiCluster = getClusterGroup().length > 0;
+  const [items, error, , , errorsPerCluster] = resourceClass.useList();
+
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
@@ -133,6 +146,7 @@ function TableFromResourceClass<RowItem>(props: ResourceTableFromResourceClassPr
       id={id || `headlamp-${resourceClass.pluralName}`}
       {...otherProps}
       data={throttledItems}
+      clusterErrors={isMultiCluster ? errorsPerCluster : undefined}
     />
   );
 }
