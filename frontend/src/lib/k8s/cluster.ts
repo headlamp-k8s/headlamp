@@ -4,7 +4,7 @@ import { cloneDeep, unset } from 'lodash';
 import React from 'react';
 import helpers from '../../helpers';
 import { createRouteURL } from '../router';
-import { getCluster, timeAgo } from '../util';
+import { getCluster, getClusterGroup, timeAgo } from '../util';
 import { useConnectApi } from '.';
 import { useCluster } from './';
 import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
@@ -333,6 +333,15 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
     onError?: (err: ApiError, cluster?: string) => void
   ) => void;
   useList(options?: ApiListOptions): ReturnType<typeof useKubeObjectList>;
+  /**
+   * List resource items or errors for each cluster currently being viewed.
+   *
+   * @param opts The options to use for listing (allows to restrict clusters or namespaces).
+   * @returns An array with: an object corresponding clusters with resource items, an object corresponding clusters with errors (when items couldn't be fetched).
+   */
+  useListPerCluster: (
+    opts?: ApiListOptions
+  ) => [{ [clusterName: string]: any[] | null }, { [clusterName: string]: null | ApiError }];
   useGet: (
     name: string,
     namespace?: string,
@@ -594,6 +603,68 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       useConnectApi(...listCalls);
     }
 
+    static useListPerCluster<U extends KubeObject>(
+      opts?: ApiListOptions
+    ): [{ [clusterName: string]: U[] | null }, { [clusterName: string]: null | ApiError }] {
+      const clusters = opts?.clusters || getClusterGroup(['']);
+      const [objList, setObjList] = React.useState<{ [clusterName: string]: U[] | null }>(() => {
+        const clusterObjects: { [clusterName: string]: U[] | null } = {};
+        for (const cluster of clusters) {
+          clusterObjects[cluster] = null;
+        }
+        return clusterObjects;
+      });
+      const [error, setError] = React.useState<{ [clusterName: string]: null | ApiError }>(() => {
+        const clusterObjects: { [clusterName: string]: null | ApiError } = {};
+        for (const cluster of clusters) {
+          clusterObjects[cluster] = null;
+        }
+        return clusterObjects;
+      });
+
+      const createInstance = (item: T, cluster: string) => this.create(item, cluster) as U;
+
+      function setList(items: T[] | null, cluster: string) {
+        const objList =
+          items?.map((item: T) => {
+            const obj = createInstance(item, cluster);
+            return obj;
+          }) || null;
+        setListofObjs(cluster, objList);
+      }
+
+      function setListofObjs(cluster: string, objList: U[] | null) {
+        // Set the objects in the format clusterName->objectList.
+        setObjList(objsPerClusters => ({
+          ...objsPerClusters,
+          [cluster]: objList,
+        }));
+
+        // If there was a list of objects (even if empty) returned, then we
+        // ensure there is no error set for this cluster.
+        if (objList !== null) {
+          setError(errsPerCluster => {
+            const newErrors = { ...errsPerCluster };
+            delete newErrors[cluster];
+            return newErrors;
+          });
+        }
+      }
+
+      function setErr(cluster: string, err: ApiError | null) {
+        // Set the errors in the format clusterName->error.
+        setError(errsPerCluster => ({
+          ...errsPerCluster,
+          [cluster]: err,
+        }));
+      }
+
+      const apiOpts = { ...opts, clusters };
+      this.useApiList(setList, (err, cluster) => setErr(cluster || '', err), apiOpts);
+
+      return [objList, error];
+    }
+
     static useList<U extends KubeObjectClass>(
       this: U,
       { cluster, namespace, clusters, ...queryParams }: ApiListOptions & QueryParameters = {}
@@ -644,7 +715,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         cluster?: string;
       }
     ) {
-      const createInstance = (item: T) => this.create(item) as U;
+      const createInstance = (item: T) => this.create(item, opts?.cluster) as U;
       const args: any[] = [name, (obj: T) => onGet(createInstance(obj))];
 
       if (this.apiEndpoint.isNamespaced) {
