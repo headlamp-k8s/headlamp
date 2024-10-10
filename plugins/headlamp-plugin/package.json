@@ -73,6 +73,9 @@
     "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/addon-search": "^0.15.0",
+    "@xterm/xterm": "^5.5.0",
     "babel-loader": "^8.2.5",
     "base64-arraybuffer": "^1.0.2",
     "buffer": "^6.0.3",
@@ -153,9 +156,6 @@
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.0",
     "ws": "^8.16.0",
-    "xterm": "^4.19.0",
-    "xterm-addon-fit": "^0.5.0",
-    "xterm-addon-search": "^0.9.0",
     "yargs": "^16.2.0"
   },
   "overrides": {

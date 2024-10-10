@@ -91,6 +91,7 @@ describe('Storybook Tests', () => {
     vi.useFakeTimers();
   });
   afterEach(() => {
+    vi.useRealTimers();
     vi.restoreAllMocks();
   });
 

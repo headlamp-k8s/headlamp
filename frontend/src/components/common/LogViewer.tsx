@@ -1,11 +1,11 @@
 import { Box, Button, DialogContent, Grid, InputBase, Paper } from '@mui/material';
+import { FitAddon } from '@xterm/addon-fit';
+import { ISearchOptions, SearchAddon } from '@xterm/addon-search';
+import { Terminal as XTerminal } from '@xterm/xterm';
 import _ from 'lodash';
 import React, { useEffect } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useTranslation } from 'react-i18next';
-import { ITerminalOptions, Terminal as XTerminal } from 'xterm';
-import { FitAddon } from 'xterm-addon-fit';
-import { ISearchOptions, SearchAddon } from 'xterm-addon-search';
 import ActionButton from './ActionButton';
 import { Dialog, DialogProps } from './Dialog';
 
@@ -51,13 +51,6 @@ export function LogViewer(props: LogViewerProps) {
     setShowSearch(true);
   });
 
-  const XterminalReadonlyConfig: ITerminalOptions = {
-    cursorStyle: 'bar',
-    scrollback: 10000,
-    rows: 30, // initial rows before fit
-    lineHeight: 1.21,
-  };
-
   function downloadLog() {
     // Cuts off the last 5 digits of the timestamp to remove the milliseconds
     const time = new Date().toISOString().replace(/:/g, '-').slice(0, -5);
@@ -79,7 +72,12 @@ export function LogViewer(props: LogViewerProps) {
     fitAddonRef.current = new FitAddon();
     searchAddonRef.current = new SearchAddon();
 
-    xtermRef.current = new XTerminal(XterminalReadonlyConfig);
+    xtermRef.current = new XTerminal({
+      cursorStyle: 'bar',
+      scrollback: 10000,
+      rows: 30, // initial rows before fit
+      lineHeight: 1.21,
+    });
 
     if (!!outXtermRef) {
       outXtermRef.current = xtermRef.current;
