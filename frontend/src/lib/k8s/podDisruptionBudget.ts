@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubePDB extends KubeObjectInterface {
@@ -41,8 +40,6 @@ class PDB extends KubeObject<KubePDB> {
   static apiName = 'poddisruptionbudgets';
   static apiVersion = 'policy/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace(['policy', 'v1', 'poddisruptionbudgets']);
 
   get spec(): KubePDB['spec'] {
     return this.jsonData.spec;

@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeContainer, LabelSelector } from './cluster';
 import { KubeMetadata } from './KubeMetadata';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
@@ -27,8 +26,6 @@ class Deployment extends KubeObject<KubeDeployment> {
   static apiName = 'deployments';
   static apiVersion = 'apps/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'deployments', true);
 
   get spec() {
     return this.getValue('spec');

@@ -1,4 +1,3 @@
-import { apiFactory } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeStorageClass extends KubeObjectInterface {
@@ -13,8 +12,6 @@ class StorageClass extends KubeObject<KubeStorageClass> {
   static apiName = 'storageclasses';
   static apiVersion = 'storage.k8s.io/v1';
   static isNamespaced = false;
-
-  static apiEndpoint = apiFactory('storage.k8s.io', 'v1', 'storageclasses');
 
   get provisioner() {
     return this.jsonData.provisioner;

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ResourceClasses } from '.';
-import { ApiError, apiFactoryWithNamespace, QueryParameters } from './apiProxy';
+import { ApiError, QueryParameters } from './apiProxy';
 import { request } from './apiProxy';
 import { KubeMetadata } from './KubeMetadata';
 import { KubeObject } from './KubeObject';
@@ -29,8 +29,6 @@ class Event extends KubeObject<KubeEvent> {
   static apiVersion = 'v1';
 
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'events');
 
   // Max number of events to fetch from the API
   private static maxEventsLimit = 2000;

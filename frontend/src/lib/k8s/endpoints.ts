@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeMetadata } from './KubeMetadata';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
@@ -34,8 +33,6 @@ class Endpoints extends KubeObject<KubeEndpoint> {
   static apiName = 'endpoints';
   static apiVersion = 'v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'endpoints');
 
   // @todo Remove this when we can break backward compatibility.
   static get detailsRoute() {

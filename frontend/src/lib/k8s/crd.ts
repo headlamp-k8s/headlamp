@@ -55,10 +55,6 @@ class CustomResourceDefinition extends KubeObject<KubeCRD> {
   static apiVersion = ['apiextensions.k8s.io/v1', 'apiextensions.k8s.io/v1beta1'];
   static isNamespaced = false;
 
-  static apiEndpoint = apiFactory(
-    ['apiextensions.k8s.io', 'v1', 'customresourcedefinitions'],
-    ['apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions']
-  );
   static readOnlyFields = ['metadata.managedFields'];
 
   static get listRoute(): string {

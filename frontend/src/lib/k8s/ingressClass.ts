@@ -1,4 +1,3 @@
-import { apiFactory } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeIngressClass extends KubeObjectInterface {
@@ -13,8 +12,6 @@ class IngressClass extends KubeObject<KubeIngressClass> {
   static apiName = 'ingressclasses';
   static apiVersion = 'networking.k8s.io/v1';
   static isNamespaced = false;
-
-  static apiEndpoint = apiFactory(['networking.k8s.io', 'v1', 'ingressclasses']);
 
   get spec(): KubeIngressClass['spec'] {
     return this.jsonData.spec;

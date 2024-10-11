@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface LeaseSpec {
@@ -17,8 +16,6 @@ export class Lease extends KubeObject<KubeLease> {
   static apiName = 'leases';
   static apiVersion = 'coordination.k8s.io/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('coordination.k8s.io', 'v1', 'leases');
 
   get spec() {
     return this.jsonData.spec;

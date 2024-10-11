@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeContainer, LabelSelector } from './cluster';
 import { KubeMetadata } from './KubeMetadata';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
@@ -29,8 +28,6 @@ class DaemonSet extends KubeObject<KubeDaemonSet> {
   static apiName = 'daemonsets';
   static apiVersion = 'apps/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'daemonsets');
 
   get spec() {
     return this.jsonData.spec;

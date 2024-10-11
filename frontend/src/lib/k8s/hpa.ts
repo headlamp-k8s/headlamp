@@ -1,5 +1,4 @@
 import { ResourceClasses } from '.';
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeMetadata } from './KubeMetadata';
 import { KubeObject, KubeObjectClass, KubeObjectInterface } from './KubeObject';
 export interface CrossVersionObjectReference {
@@ -172,8 +171,6 @@ class HPA extends KubeObject<KubeHPA> {
   static apiName = 'horizontalpodautoscalers';
   static apiVersion = 'autoscaling/v2';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('autoscaling', 'v2', 'horizontalpodautoscalers');
 
   get spec(): HpaSpec {
     return this.jsonData.spec;

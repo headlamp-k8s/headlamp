@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface LimitRangeSpec {
@@ -32,8 +31,6 @@ export class LimitRange extends KubeObject<KubeLimitRange> {
   static apiName = 'limitranges';
   static apiVersion = 'v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'limitranges');
 
   get spec() {
     return this.jsonData.spec;

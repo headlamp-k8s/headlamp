@@ -1,4 +1,3 @@
-import { apiFactory } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubePriorityClass extends KubeObjectInterface {
@@ -14,10 +13,8 @@ class PriorityClass extends KubeObject<KubePriorityClass> {
   static apiVersion = 'scheduling.k8s.io/v1';
   static isNamespaced = false;
 
-  static apiEndpoint = apiFactory('scheduling.k8s.io', 'v1', 'priorityclasses');
-
-  get value(): string {
-    return String(this.jsonData!.value);
+  get value(): number {
+    return this.jsonData!.value;
   }
 
   get globalDefault(): boolean | null {

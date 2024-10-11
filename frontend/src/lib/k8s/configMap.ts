@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { StringDict } from './cluster';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
@@ -11,8 +10,6 @@ class ConfigMap extends KubeObject<KubeConfigMap> {
   static apiName = 'configmaps';
   static apiVersion = 'v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'configmaps');
 
   get data() {
     return this.jsonData.data;

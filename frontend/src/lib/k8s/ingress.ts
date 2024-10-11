@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 interface LegacyIngressRule {
@@ -74,10 +73,6 @@ class Ingress extends KubeObject<KubeIngress> {
   static apiVersion = ['networking.k8s.io/v1', 'extensions/v1beta1'];
   static isNamespaced = true;
 
-  static apiEndpoint = apiFactoryWithNamespace(
-    ['networking.k8s.io', 'v1', 'ingresses'],
-    ['extensions', 'v1beta1', 'ingresses']
-  );
   // Normalized, cached rules.
   private cachedRules: IngressRule[] = [];
 

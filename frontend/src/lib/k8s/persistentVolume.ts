@@ -1,4 +1,3 @@
-import { apiFactory } from './apiProxy';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubePersistentVolume extends KubeObjectInterface {
@@ -20,8 +19,6 @@ class PersistentVolume extends KubeObject<KubePersistentVolume> {
   static apiName = 'persistentvolumes';
   static apiVersion = 'v1';
   static isNamespaced = false;
-
-  static apiEndpoint = apiFactory('', 'v1', 'persistentvolumes');
 
   get spec() {
     return this.jsonData.spec;

@@ -23,12 +23,46 @@ function getAllowedNamespaces() {
 }
 
 export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
-  static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
-  static readOnlyFields: string[] = [];
-  static objectName: string;
-
   jsonData: T;
+  /** Readonly field defined as JSONPath paths */
+  static readOnlyFields: string[] = [];
   _clusterName: string;
+
+  /** The kind of the object. Corresponding to the resource kind in Kubernetes. */
+  static readonly kind: string;
+
+  /** Name of the resource, plural, used in API */
+  static readonly apiName: string;
+
+  /** Group and version of the resource formatted as "GROUP/VERSION", e.g. "policy.k8s.io/v1". */
+  static readonly apiVersion: string | string[];
+
+  /** Whether the object is namespaced. */
+  static readonly isNamespaced: boolean;
+
+  static _internalApiEndpoint?: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
+
+  static get apiEndpoint() {
+    if (this._internalApiEndpoint) return this._internalApiEndpoint;
+
+    const factory = this.isNamespaced ? apiFactoryWithNamespace : apiFactory;
+    const versions = Array.isArray(this.apiVersion) ? this.apiVersion : [this.apiVersion];
+
+    const factoryArguments = versions.map(apiVersion => {
+      const [group, version] = apiVersion.includes('/') ? apiVersion.split('/') : ['', apiVersion];
+      const includeScaleApi = ['Deployment', 'ReplicaSet', 'StatefulSet'].includes(this.kind);
+
+      return [group, version, this.apiName, includeScaleApi];
+    });
+
+    const endpoint = factory(...(factoryArguments as any));
+    this._internalApiEndpoint = endpoint;
+
+    return endpoint;
+  }
+  static set apiEndpoint(endpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>) {
+    this._internalApiEndpoint = endpoint;
+  }
 
   constructor(json: T, cluster?: string) {
     this.jsonData = json;
@@ -44,7 +78,7 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
   }
 
   static get className(): string {
-    return this.objectName;
+    return this.kind;
   }
 
   get detailsRoute(): string {
@@ -52,13 +86,13 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
   }
 
   static get detailsRoute(): string {
-    return this.className;
+    return this.kind;
   }
 
   static get pluralName(): string {
     // This is a naive way to get the plural name of the object by default. It will
     // work in most cases, but for exceptions (like Ingress), we must override this.
-    return this.className.toLowerCase() + 's';
+    return this.apiName;
   }
 
   get pluralName(): string {
@@ -71,7 +105,11 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
   }
 
   static get listRoute(): string {
-    return this.detailsRoute + 's';
+    return this.apiName;
+  }
+
+  get kind() {
+    return this.jsonData.kind;
   }
 
   getDetailsLink() {
@@ -111,16 +149,8 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
     return this.jsonData.metadata;
   }
 
-  get kind() {
-    return this.jsonData.kind;
-  }
-
   get isNamespaced() {
     return this._class().isNamespaced;
-  }
-
-  static get isNamespaced() {
-    return this.apiEndpoint.isNamespaced;
   }
 
   getEditableObject() {

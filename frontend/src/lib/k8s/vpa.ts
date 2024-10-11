@@ -1,5 +1,4 @@
 import { ResourceClasses } from '.';
-import { apiFactoryWithNamespace } from './apiProxy';
 import { request } from './apiProxy';
 import { KubeObject } from './KubeObject';
 import { KubeObjectInterface } from './KubeObject';
@@ -83,12 +82,6 @@ class VPA extends KubeObject<KubeVPA> {
   static apiName = 'verticalpodautoscalers';
   static apiVersion = 'autoscaling.k8s.io/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace(
-    'autoscaling.k8s.io',
-    'v1',
-    'verticalpodautoscalers'
-  );
 
   static async isEnabled(): Promise<boolean> {
     let res;

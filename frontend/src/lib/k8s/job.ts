@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeContainer, LabelSelector } from './cluster';
 import { KubeMetadata } from './KubeMetadata';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
@@ -23,8 +22,6 @@ class Job extends KubeObject<KubeJob> {
   static apiName = 'jobs';
   static apiVersion = 'batch/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('batch', 'v1', 'jobs');
 
   get spec() {
     return this.jsonData.spec;
