@@ -1,4 +1,3 @@
-import { apiFactory } from './apiProxy';
 import { KubeCondition, KubeObject, KubeObjectInterface } from './cluster';
 
 export interface KubeNamespace extends KubeObjectInterface {
@@ -13,8 +12,6 @@ class Namespace extends KubeObject<KubeNamespace> {
   static apiName = 'namespaces';
   static apiVersion = 'v1';
   static isNamespaced = false;
-
-  static apiEndpoint = apiFactory('', 'v1', 'namespaces');
 
   get status() {
     return this.jsonData.status;
