@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeRole extends KubeObjectInterface {
@@ -16,8 +15,6 @@ class Role extends makeKubeObject<KubeRole>() {
   static apiName = 'roles';
   static apiVersion = 'rbac.authorization.k8s.io/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('rbac.authorization.k8s.io', 'v1', 'roles');
 
   get rules() {
     return this.jsonData!.rules;

@@ -1,4 +1,3 @@
-import { apiFactory } from './apiProxy';
 import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
 
 export interface KubeRuleWithOperations {
@@ -47,12 +46,6 @@ class MutatingWebhookConfiguration extends makeKubeObject<KubeMutatingWebhookCon
   static apiName = 'mutatingwebhookconfigurations';
   static apiVersion = 'admissionregistration.k8s.io/v1';
   static isNamespaced = false;
-
-  static apiEndpoint = apiFactory(
-    'admissionregistration.k8s.io',
-    'v1',
-    'mutatingwebhookconfigurations'
-  );
 
   get webhooks(): KubeMutatingWebhookConfiguration['webhooks'] {
     return this.jsonData!.webhooks;

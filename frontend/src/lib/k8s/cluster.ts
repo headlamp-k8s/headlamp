@@ -364,7 +364,6 @@ type JsonPath<T> = T extends object
  */
 export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(): KubeObjectIface<T> {
   class KubeObject {
-    static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
     jsonData: T | null = null;
     /** Readonly field defined as JSONPath paths */
     static readOnlyFields: JsonPath<T>[] = [];
@@ -381,6 +380,29 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(): Kub
 
     /** Whether the object is namespaced. */
     static readonly isNamespaced: boolean;
+
+    static _internalApiEndpoint?: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
+
+    static get apiEndpoint() {
+      if (this._internalApiEndpoint) return this._internalApiEndpoint;
+
+      const factory = this.isNamespaced ? apiFactoryWithNamespace : apiFactory;
+      const versions = Array.isArray(this.apiVersion) ? this.apiVersion : [this.apiVersion];
+
+      const factoryArguments = versions.map(apiVersion => {
+        const [group, version] = apiVersion.includes('/')
+          ? apiVersion.split('/')
+          : ['', apiVersion];
+        const includeScaleApi = ['Deployment', 'ReplicaSet', 'StatefulSet'].includes(this.kind);
+
+        return [group, version, this.apiName, includeScaleApi];
+      });
+
+      const endpoint = factory(...(factoryArguments as any));
+      this._internalApiEndpoint = endpoint;
+
+      return endpoint;
+    }
 
     constructor(json: T) {
       this.jsonData = json;

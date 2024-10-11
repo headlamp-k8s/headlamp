@@ -53,10 +53,6 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>() {
   static apiVersion = ['apiextensions.k8s.io/v1', 'apiextensions.k8s.io/v1beta1'];
   static isNamespaced = false;
 
-  static apiEndpoint = apiFactory(
-    ['apiextensions.k8s.io', 'v1', 'customresourcedefinitions'],
-    ['apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions']
-  );
   static readOnlyFields = ['metadata.managedFields'];
 
   static get listRoute(): string {
@@ -170,7 +166,9 @@ export function makeCustomResourceClass(
     static apiVersion = apiInfoArgs.map(([group, version]) =>
       group ? `${group}/${version}` : version
     );
-    static apiEndpoint = apiFunc(...apiInfoArgs);
+    static get apiEndpoint() {
+      return apiFunc(...apiInfoArgs);
+    }
   };
 }
 

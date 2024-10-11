@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeCondition, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubePortStatus {
@@ -44,8 +43,6 @@ class Service extends makeKubeObject<KubeService>() {
   static apiName = 'services';
   static apiVersion = 'v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'services');
 
   get spec(): KubeService['spec'] {
     return this.jsonData!.spec;

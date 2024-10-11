@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeMetadata, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeEndpointPort {
@@ -33,8 +32,6 @@ class Endpoints extends makeKubeObject<KubeEndpoint>() {
   static apiName = 'endpoints';
   static apiVersion = 'v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'endpoints');
 
   // @todo Remove this when we can break backward compatibility.
   static get detailsRoute() {

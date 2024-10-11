@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
 
 export interface NetworkPolicyPort {
@@ -40,8 +39,6 @@ class NetworkPolicy extends makeKubeObject<KubeNetworkPolicy>() {
   static apiName = 'networkpolicies';
   static apiVersion = 'networking.k8s.io/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('networking.k8s.io', 'v1', 'networkpolicies');
 
   static get pluralName() {
     return 'networkpolicies';

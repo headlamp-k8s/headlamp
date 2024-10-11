@@ -1,4 +1,3 @@
-import { apiFactory } from './apiProxy';
 import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
 import { KubeRuleWithOperations, KubeWebhookClientConfig } from './mutatingWebhookConfiguration';
 
@@ -28,12 +27,6 @@ class ValidatingWebhookConfiguration extends makeKubeObject<KubeValidatingWebhoo
   static apiName = 'validatingwebhookconfigurations';
   static apiVersion = 'admissionregistration.k8s.io/v1';
   static isNamespaced = false;
-
-  static apiEndpoint = apiFactory(
-    'admissionregistration.k8s.io',
-    'v1',
-    'validatingwebhookconfigurations'
-  );
 
   get webhooks(): KubeValidatingWebhookConfiguration['webhooks'] {
     return this.jsonData!.webhooks;

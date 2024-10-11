@@ -1,7 +1,7 @@
 import React from 'react';
 import { useErrorState } from '../util';
 import { useConnectApi } from '.';
-import { ApiError, apiFactory, metrics } from './apiProxy';
+import { ApiError, metrics } from './apiProxy';
 import { KubeCondition, KubeMetrics, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeNode extends KubeObjectInterface {
@@ -57,8 +57,6 @@ class Node extends makeKubeObject<KubeNode>() {
   static apiName = 'nodes';
   static apiVersion = 'v1';
   static isNamespaced = false;
-
-  static apiEndpoint = apiFactory('', 'v1', 'nodes');
 
   get status(): KubeNode['status'] {
     return this.jsonData!.status;

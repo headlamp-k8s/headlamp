@@ -1,5 +1,5 @@
 import { Base64 } from 'js-base64';
-import { apiFactoryWithNamespace, stream, StreamArgs, StreamResultsCb } from './apiProxy';
+import { stream, StreamArgs, StreamResultsCb } from './apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -92,7 +92,6 @@ class Pod extends makeKubeObject<KubePod>() {
   static apiVersion = 'v1';
   static isNamespaced = true;
 
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
   protected detailedStatusCache: Partial<{ resourceVersion: string; details: PodDetailedStatus }>;
 
   constructor(jsonData: KubePod) {

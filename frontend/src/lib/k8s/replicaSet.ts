@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -35,8 +34,6 @@ class ReplicaSet extends makeKubeObject<KubeReplicaSet>() {
   static apiName = 'replicasets';
   static apiVersion = 'apps/v1';
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'replicasets', true);
 
   get spec(): KubeReplicaSet['spec'] {
     return this.jsonData!.spec;

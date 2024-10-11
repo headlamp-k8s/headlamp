@@ -1,4 +1,3 @@
-import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeContainer, KubeMetadata, KubeObjectInterface, makeKubeObject } from './cluster';
 
 /**
@@ -39,11 +38,6 @@ class CronJob extends makeKubeObject<KubeCronJob>() {
   static apiName = 'cronjobs';
   static apiVersion = ['batch/v1', 'batch/v1beta1'];
   static isNamespaced = true;
-
-  static apiEndpoint = apiFactoryWithNamespace(
-    ['batch', 'v1', 'cronjobs'],
-    ['batch', 'v1beta1', 'cronjobs']
-  );
 
   get spec() {
     return this.getValue('spec');
