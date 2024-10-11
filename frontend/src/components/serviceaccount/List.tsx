@@ -18,6 +18,7 @@ export default function ServiceAccountList() {
           getValue: (serviceaccount: ServiceAccount) => serviceaccount?.secrets?.length || 0,
           gridTemplate: 0.5,
         },
+        'cluster',
         'age',
       ]}
     />

@@ -143,6 +143,7 @@ export default function DeploymentsList() {
           },
           show: false,
         },
+        'cluster',
         'age',
       ]}
     />

@@ -52,6 +52,7 @@ export default function VpaList() {
               label: t('translation|Provided'),
               getValue: item => item?.status?.conditions?.[0]?.status ?? null,
             },
+            'cluster',
             'age',
           ]}
         />

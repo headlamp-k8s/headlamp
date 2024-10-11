@@ -21,6 +21,7 @@ export default function PriorityClassList() {
           label: t('translation|Global Default'),
           getValue: item => String(item.globalDefault || 'False'),
         },
+        'cluster',
         'age',
       ]}
     />

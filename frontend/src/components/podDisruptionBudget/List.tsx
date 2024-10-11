@@ -27,6 +27,7 @@ export default function PDBList() {
           label: t('translation|Allowed Disruptions'),
           getValue: (item: PDB) => item.status.disruptionsAllowed || t('translation|N/A'),
         },
+        'cluster',
         'age',
       ]}
     />

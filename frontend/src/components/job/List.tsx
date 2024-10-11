@@ -158,6 +158,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
             );
           },
         },
+        'cluster',
         'age',
       ]}
       data={jobs}

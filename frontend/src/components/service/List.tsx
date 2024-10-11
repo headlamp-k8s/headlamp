@@ -40,6 +40,7 @@ export default function ServiceList() {
           getValue: service => service.getSelector().join(', '),
           render: service => <LabelListItem labels={service.getSelector()} />,
         },
+        'cluster',
         'age',
       ]}
     />

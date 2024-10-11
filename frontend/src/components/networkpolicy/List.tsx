@@ -52,6 +52,7 @@ export function NetworkPolicyList() {
             ) : null;
           },
         },
+        'cluster',
         'age',
       ]}
     />

@@ -212,6 +212,7 @@ export function PodListRenderer(props: PodListProps) {
           },
           show: false,
         },
+        'cluster',
         'age',
       ]}
       data={pods}
