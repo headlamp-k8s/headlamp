@@ -119,6 +119,8 @@ export interface Route {
   hideAppBar?: boolean;
   /** Whether the route should be disabled (not registered). */
   disabled?: boolean;
+  /** Render route for full width */
+  isFullWidth?: boolean;
 }
 
 const defaultRoutes: {

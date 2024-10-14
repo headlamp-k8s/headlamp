@@ -13,7 +13,7 @@ import {
   Route as RouteType,
 } from '../../lib/router';
 import { getCluster, getClusterGroup } from '../../lib/util';
-import { setHideAppBar } from '../../redux/actions/actions';
+import { setHideAppBar, setIsFullWidth } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import ErrorBoundary from '../common/ErrorBoundary';
 import ErrorComponent from '../common/ErrorPage';
@@ -82,6 +82,10 @@ function RouteComponent({ route }: { route: RouteType }) {
   React.useEffect(() => {
     dispatch(setHideAppBar(route.hideAppBar));
   }, [route.hideAppBar]);
+
+  React.useEffect(() => {
+    dispatch(setIsFullWidth(route.isFullWidth));
+  }, [route.isFullWidth]);
 
   return (
     <PageTitle
