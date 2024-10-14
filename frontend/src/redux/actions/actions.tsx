@@ -7,6 +7,7 @@ export const UI_HIDE_APP_BAR = 'UI_HIDE_APP_BAR';
 export const UI_FUNCTIONS_OVERRIDE = 'UI_FUNCTIONS_OVERRIDE';
 export const UI_VERSION_DIALOG_OPEN = 'UI_VERSION_DIALOG_OPEN';
 export const UI_INITIALIZE_PLUGIN_VIEWS = 'UI_INITIALIZE_PLUGIN_VIEWS';
+export const UI_SET_IS_FULLWIDTH = 'UI_SET_IS_FULLWIDTH';
 
 export interface BrandingProps {
   logo: AppLogoType;
@@ -35,4 +36,8 @@ export type FunctionsToOverride = {
 
 export function setFunctionsToOverride(override: FunctionsToOverride) {
   return { type: UI_FUNCTIONS_OVERRIDE, override };
+}
+
+export function setIsFullWidth(isFullWidth?: boolean) {
+  return { type: UI_SET_IS_FULLWIDTH, isFullWidth };
 }

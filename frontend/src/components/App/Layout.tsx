@@ -98,6 +98,7 @@ export default function Layout({}: LayoutProps) {
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
+  const isFullWidth = useTypedSelector(state => state.ui.isFullWidth);
   const { t } = useTranslation();
   const allClusters = useClustersConf();
   const clusterInURL = getCluster();
@@ -179,6 +180,10 @@ export default function Layout({}: LayoutProps) {
       });
   };
 
+  const containerProps = isFullWidth
+    ? ({ maxWidth: false, disableGutters: true } as const)
+    : ({ maxWidth: 'xl' } as const);
+
   return (
     <>
       <Link
@@ -213,7 +218,7 @@ export default function Layout({}: LayoutProps) {
           <AlertNotification />
           <Box>
             <Div sx={theme.mixins.toolbar} />
-            <Container maxWidth="xl">
+            <Container {...containerProps}>
               <NavigationTabs />
               {arePluginsLoaded && (
                 <RouteSwitcher
