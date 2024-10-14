@@ -7,6 +7,7 @@ import {
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
   UI_SET_CLUSTER_CHOOSER_BUTTON,
+  UI_SET_IS_FULLWIDTH,
   UI_VERSION_DIALOG_OPEN,
 } from '../actions/actions';
 
@@ -14,12 +15,14 @@ export interface UIState {
   isVersionDialogOpen: boolean;
   clusterChooserButtonComponent?: ClusterChooserType;
   hideAppBar?: boolean;
+  isFullWidth?: boolean;
   functionsToOverride: FunctionsToOverride;
 }
 
 export const INITIAL_STATE: UIState = {
   isVersionDialogOpen: false,
   hideAppBar: false,
+  isFullWidth: false,
   functionsToOverride: {},
 };
 
@@ -51,6 +54,10 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
           newFilters.functionsToOverride[key] = functionToOverride[key];
         }
       }
+      break;
+    }
+    case UI_SET_IS_FULLWIDTH: {
+      newFilters.isFullWidth = action.isFullWidth;
       break;
     }
     default:
