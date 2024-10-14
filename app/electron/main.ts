@@ -60,6 +60,22 @@ const startUrl = (
   .replace(/\\/g, '/');
 
 const args = yargs(hideBin(process.argv))
+  .command(
+    'list-plugins',
+    'List all static and user-added plugins.',
+    () => {},
+    () => {
+      try {
+        const backendPath = path.join(process.resourcesPath, 'headlamp-server');
+        const stdout = execSync(`${backendPath} list-plugins`);
+        process.stdout.write(stdout);
+        process.exit(0);
+      } catch (error) {
+        console.error(`Error listing plugins: ${error}`);
+        process.exit(1);
+      }
+    }
+  )
   .options({
     headless: {
       describe: 'Open Headlamp in the default web browser instead of its app window',
