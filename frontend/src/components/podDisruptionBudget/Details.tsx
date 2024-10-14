@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import PDB from '../../lib/k8s/podDisruptionBudget';
 import { DetailsGrid, StatusLabel } from '../common';
 
-export default function PDBDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function PDBDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
 
   function selectorsToJSX(selectors: string[]) {
     const values: ReactNode[] = [];

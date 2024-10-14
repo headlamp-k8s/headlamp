@@ -14,8 +14,9 @@ import PortForward from '../common/Resource/PortForward';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
-export default function ServiceDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function ServiceDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   const [endpoints, endpointsError] = Endpoint.useList({ namespace });

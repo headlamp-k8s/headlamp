@@ -7,11 +7,9 @@ import { DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
-export default function RoleBindingDetails() {
-  const { namespace = undefined, name } = useParams<{
-    namespace: string | undefined;
-    name: string;
-  }>();
+export default function RoleBindingDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation('glossary');
 
   return (

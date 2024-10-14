@@ -10,9 +10,10 @@ import NetworkPolicy, {
 } from '../../lib/k8s/networkpolicy';
 import { DetailsGrid, metadataStyles, NameValueTable, SectionBox } from '../common';
 
-export function NetworkPolicyDetails() {
+export function NetworkPolicyDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation(['glossary', 'translation']);
-  const { name, namespace } = useParams<{ name: string; namespace: string }>();
 
   function prepareMatchLabelsAndExpressions(
     matchLabels: LabelSelector['matchLabels'],

@@ -9,8 +9,9 @@ import {
   OwnedPodsSection,
 } from '../common/Resource';
 
-export default function StatefulSetDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function StatefulSetDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation('glossary');
 
   return (
