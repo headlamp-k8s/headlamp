@@ -89,7 +89,7 @@ export function PureNamespacesAutocomplete({
         });
 
         return (
-          <Typography style={{ overflowWrap: 'anywhere' }}>
+          <Typography style={{ overflowWrap: 'anywhere' }} ml={1}>
             {namespacesToShow.length > maxNamespacesChars
               ? namespacesToShow.slice(0, maxNamespacesChars) + '…'
               : namespacesToShow}
@@ -106,7 +106,8 @@ export function PureNamespacesAutocomplete({
         <Box width="15rem">
           <TextField
             {...params}
-            variant="standard"
+            variant="outlined"
+            size="small"
             label={t('Namespaces')}
             fullWidth
             InputLabelProps={{ shrink: true }}
