@@ -65,8 +65,10 @@ function TolerationsSection(props: TolerationsSection) {
   );
 }
 
-export default function DaemonSetDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function DaemonSetDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (

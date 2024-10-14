@@ -6,8 +6,10 @@ import { DetailsGrid, SecretField } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
 
-export default function SecretDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function SecretDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
   const { t } = useTranslation();
 
   return (

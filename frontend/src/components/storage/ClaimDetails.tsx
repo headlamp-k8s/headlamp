@@ -10,8 +10,10 @@ export function makePVCStatusLabel(item: PersistentVolumeClaim) {
   return StatusLabelByPhase(status);
 }
 
-export default function VolumeClaimDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function VolumeClaimDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (

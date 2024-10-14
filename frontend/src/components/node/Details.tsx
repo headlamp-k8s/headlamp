@@ -35,8 +35,9 @@ function NodeConditionsLabel(props: { node: Node }) {
   );
 }
 
-export default function NodeDetails() {
-  const { name } = useParams<{ name: string }>();
+export default function NodeDetails(props: { name?: string }) {
+  const params = useParams<{ name: string }>();
+  const name = props.name ?? params.name;
   const { t } = useTranslation(['glossary']);
   const dispatch: AppDispatch = useDispatch();
 

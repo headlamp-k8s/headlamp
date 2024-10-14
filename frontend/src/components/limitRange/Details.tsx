@@ -4,9 +4,11 @@ import { useParams } from 'react-router';
 import { LimitRange } from '../../lib/k8s/limitRange';
 import { DetailsGrid, MetadataDictGrid } from '../common';
 
-export function LimitRangeDetails() {
+export function LimitRangeDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
   const { t } = useTranslation(['translation']);
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   return (
     <DetailsGrid
       resourceType={LimitRange}

@@ -134,8 +134,10 @@ function SpawnJobDialog(props: {
   );
 }
 
-export default function CronJobDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function CronJobDetails(props: any) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
   const { t, i18n } = useTranslation('glossary');
 
   const [jobs, jobsError] = Job.useList({ namespace });
