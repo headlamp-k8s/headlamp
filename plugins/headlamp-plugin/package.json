@@ -23,7 +23,6 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
-    "@dagrejs/dagre": "^1.1.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@headlamp-k8s/eslint-config": "^0.6.0",
