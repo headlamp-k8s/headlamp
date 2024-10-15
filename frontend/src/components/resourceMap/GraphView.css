@@ -1,0 +1,47 @@
+:root {
+  --graph-animation-duration: 0.15s;
+}
+
+.react-flow__node,
+.react-flow__edge,
+.react-flow__edges path {
+  transition: all;
+  transition-duration: var(--graph-animation-duration);
+}
+
+.react-flow__edges {
+  z-index: 1;
+}
+
+.react-flow__node-group,
+.react-flow__node-group:focus,
+.react-flow__node-group:active {
+  border: unset;
+  color: unset;
+}
+
+.react-flow__pane:not(.dragging) .react-flow__viewport {
+  transition: transform var(--graph-animation-duration);
+}
+
+@media (prefers-reduced-motion) {
+  .react-flow__node,
+  .react-flow__edge,
+  .react-flow__edges path {
+    transition-duration: 0;
+  }
+  .react-flow__pane:not(.dragging) .react-flow__viewport {
+    transition-duration: 0;
+  }
+}
+
+.react-flow__controls-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: 36px;
+  padding: 2px;
+  cursor: pointer;
+  user-select: none;
+}
