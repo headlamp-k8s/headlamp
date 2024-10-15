@@ -93,6 +93,10 @@ import Job from './k8s/job';
 import ReplicaSet from './k8s/replicaSet';
 import { getCluster, getClusterPrefixedPath } from './util';
 
+const LazyGraphView = React.lazy(() =>
+  import('../components/resourceMap/GraphView').then(it => ({ default: it.GraphView }))
+);
+
 export interface Route {
   /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */
   path: string;
@@ -788,6 +792,14 @@ const defaultRoutes: {
     noAuthRequired: true,
     disabled: !helpers.isElectron(),
     component: () => <KubeConfigLoader />,
+  },
+  map: {
+    path: '/map',
+    exact: true,
+    name: 'Resource Map',
+    sidebar: 'map',
+    isFullWidth: true,
+    component: () => <LazyGraphView height="calc(100vh - 64px)" />,
   },
 };
 

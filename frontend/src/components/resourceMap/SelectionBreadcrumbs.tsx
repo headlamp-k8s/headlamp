@@ -1,0 +1,82 @@
+import { Box, Link } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { GraphNode, isGroup } from './graph/graphModel';
+
+/**
+ * Find a path in graph from root to the selected node
+ */
+function findSelectionPath(graph: GraphNode, selectedNodeId?: string) {
+  function dfs(node: GraphNode, path: GraphNode[]): GraphNode[] | null {
+    path.push(node);
+
+    if (node.id === selectedNodeId) {
+      return path;
+    }
+
+    if (isGroup(node)) {
+      for (const child of node.data.nodes) {
+        const result = dfs(child, path);
+        if (result) {
+          return result;
+        }
+      }
+    }
+
+    path.pop();
+    return null;
+  }
+
+  const result = dfs(graph, []);
+  return result || [];
+}
+
+export function SelectionBreadcrumbs({
+  graph,
+  selectedNodeId,
+  onNodeClick,
+}: {
+  graph: GraphNode;
+  selectedNodeId?: string;
+  onNodeClick: (id: string) => void;
+}) {
+  const { t } = useTranslation();
+  const path = findSelectionPath(graph, selectedNodeId);
+
+  return (
+    <Box display="flex" gap={1} alignItems="center" flexWrap="wrap">
+      {path.flatMap((it, i) => {
+        const getLabel = (node: GraphNode) => {
+          if (node.type === 'kubeObject') {
+            return node.data.resource.metadata.name;
+          }
+          if (node.id === 'root') {
+            return t('translation|Home');
+          }
+          return node.data.label;
+        };
+        const separator = i === 0 ? null : <Box key={'separator' + it.id}>/</Box>;
+        const title =
+          i === path.length - 1 ? (
+            <Box key={it.id}>{getLabel(it)}</Box>
+          ) : (
+            <Link
+              key={it.id}
+              href="#"
+              onClick={() => onNodeClick(it.id)}
+              sx={{
+                textTransform: 'unset',
+                maxWidth: '200px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {getLabel(it)}
+            </Link>
+          );
+
+        return [separator, title];
+      })}
+    </Box>
+  );
+}
