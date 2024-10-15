@@ -310,19 +310,19 @@ export interface KubeManagedFields extends KubeManagedFieldsEntry {}
 export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   apiList: (
     onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
-    onError?: (err: ApiError) => void,
+    onError?: (err: ApiError, cluster?: string) => void,
     opts?: ApiListSingleNamespaceOptions
   ) => any;
   useApiList: (
     onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
-    onError?: (err: ApiError) => void,
+    onError?: (err: ApiError, cluster?: string) => void,
     opts?: ApiListOptions
   ) => any;
   useApiGet: (
     onGet: (...args: any) => void,
     name: string,
     namespace?: string,
-    onError?: (err: ApiError) => void
+    onError?: (err: ApiError, cluster?: string) => void
   ) => void;
   useList(options?: ApiListOptions): ReturnType<typeof useKubeObjectList>;
   useGet: (
@@ -488,7 +488,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
      */
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
-      onError?: (err: ApiError) => void,
+      onError?: (err: ApiError, cluster?: string) => void,
       opts?: ApiListSingleNamespaceOptions
     ) {
       const createInstance = (item: T) => this.create(item) as U;
@@ -520,7 +520,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     static useApiList<U extends KubeObject>(
       onList: (...arg: any[]) => any,
-      onError?: (err: ApiError) => void,
+      onError?: (err: ApiError, cluster?: string) => void,
       opts?: ApiListOptions
     ) {
       const [objs, setObjs] = React.useState<{ [key: string]: U[] }>({});
@@ -628,7 +628,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onGet: (...args: any) => void,
       name: string,
       namespace?: string,
-      onError?: (err: ApiError | null) => void,
+      onError?: (err: ApiError | null, cluster?: string) => void,
       opts?: {
         queryParams?: QueryParameters;
         cluster?: string;
@@ -652,7 +652,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onGet: (...args: any) => any,
       name: string,
       namespace?: string,
-      onError?: (err: ApiError | null) => void,
+      onError?: (err: ApiError | null, cluster?: string) => void,
       opts?: {
         queryParams?: QueryParameters;
         cluster?: string;
