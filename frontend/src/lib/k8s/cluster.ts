@@ -6,6 +6,7 @@ import helpers from '../../helpers';
 import { createRouteURL } from '../router';
 import { getCluster, timeAgo } from '../util';
 import { useConnectApi } from '.';
+import { useCluster } from './';
 import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
@@ -237,9 +238,16 @@ export interface KubeOwnerReference {
 }
 
 export interface ApiListOptions extends QueryParameters {
+  /**
+   * The clusters to list objects from. By default uses the current clusters being viewed.
+   */
+  clusters?: string[];
   /** The namespace to list objects from. */
   namespace?: string | string[];
-  /** The cluster to list objects from. By default uses the current cluster being viewed. */
+  /**
+   * The cluster to list objects from. By default uses the current cluster being viewed.
+   * If clusters is set, then we use that and "cluster" is ignored.
+   */
   cluster?: string;
 }
 
@@ -547,7 +555,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       let namespaces: string[] = [];
       unset(queryParams, 'namespace');
 
-      const cluster = opts?.cluster;
+      const cluster = opts?.clusters?.[0] || opts?.cluster;
 
       if (!!opts?.namespace) {
         if (typeof opts.namespace === 'string') {
@@ -588,17 +596,15 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     static useList<U extends KubeObjectClass>(
       this: U,
-      {
-        cluster,
-        namespace,
-        ...queryParams
-      }: { cluster?: string; namespace?: string } & QueryParameters = {}
+      { cluster, namespace, clusters, ...queryParams }: ApiListOptions & QueryParameters = {}
     ) {
+      const currentCluster = useCluster();
+
       return useKubeObjectList({
         queryParams: queryParams,
         kubeObjectClass: this,
-        cluster: cluster,
-        namespace: namespace,
+        cluster: clusters?.[0] || cluster || currentCluster || undefined,
+        namespace: Array.isArray(namespace) ? namespace[0] : namespace,
       });
     }
 
