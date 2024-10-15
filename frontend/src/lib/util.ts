@@ -194,6 +194,22 @@ export function useErrorState(dependentSetter?: (...args: any) => void) {
   return [error, setError as any];
 }
 
+/**
+ * This function joins a list of items per cluster into a single list of items.
+ *
+ * @param args The list of objects per cluster to join.
+ * @returns The joined list of items, or null if there are no items.
+ */
+export function flattenClusterListItems<T>(
+  ...args: ({ [cluster: string]: T[] | null } | null)[]
+): T[] | null {
+  const flatItems = args
+    .filter(Boolean)
+    .flatMap(clusterItems => Object.values(clusterItems ?? {}).flatMap(items => items ?? []));
+
+  return flatItems.length > 0 ? flatItems : null;
+}
+
 type URLStateParams<T> = {
   /** The defaultValue for the URL state. */
   defaultValue: T;
