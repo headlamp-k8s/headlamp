@@ -57,6 +57,25 @@ export class HeadlampPage {
     expect(await pageContent).toContain(text);
   }
 
+  // note: must have minikube started before running these
+  async startFromMainPage() {
+    await this.page.goto('/');
+    await this.page.waitForLoadState('load');
+
+    console.log('MAIN PAGE');
+
+    await this.page.waitForTimeout(5000);
+    const currentURL = this.page.url();
+
+    if (!currentURL.includes('c/minikube')) {
+      console.log('MORE THAN ONE CLUSTER');
+
+      await this.page.waitForSelector('link:has-text("minikube")');
+      await this.page.getByRole('link', { name: 'minikube' }).click();
+      await this.page.waitForLoadState('load');
+    }
+  }
+
   async navigateTopage(page: string, title: RegExp) {
     await this.page.goto(page);
     await this.page.waitForLoadState('load');
