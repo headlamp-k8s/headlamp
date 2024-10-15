@@ -379,9 +379,9 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     public static readOnlyFields: JsonPath<T>[];
     private readonly _clusterName: string;
 
-    constructor(json: T) {
+    constructor(json: T, cluster?: string) {
       this.jsonData = json;
-      this._clusterName = getCluster() || '';
+      this._clusterName = cluster || getCluster() || '';
     }
 
     static get className(): string {
@@ -499,7 +499,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onError?: (err: ApiError, cluster?: string) => void,
       opts?: ApiListSingleNamespaceOptions
     ) {
-      const createInstance = (item: T) => this.create(item) as U;
+      const createInstance = (item: T) => this.create(item, opts?.cluster) as U;
 
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
 
@@ -626,8 +626,12 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       });
     }
 
-    static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
-      return new this(item) as U;
+    static create<U extends KubeObject>(
+      this: new (arg: T, cluster?: string) => U,
+      item: T,
+      cluster?: string
+    ): U {
+      return new this(item, cluster) as U;
     }
 
     static apiGet<U extends KubeObject>(
