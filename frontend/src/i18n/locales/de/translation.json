@@ -114,6 +114,8 @@
   "Current//context:cluster": "Aktuell",
   "Choose cluster": "Cluster auswählen",
   "Add Cluster": "Cluster hinzufügen",
+  "Failed to load resources from some of the clusters in the group.": "",
+  "Failed to load resources from the following clusters: {{ clusterList }}": "",
   "Duplicate cluster: {{ clusterNames }} in the list. Please edit the context name.": "",
   "Error setting up clusters, please load a valid kubeconfig file": "Fehler beim Einrichten der Cluster. Bitte laden Sie eine korrekte kubeconfig-Datei",
   "Couldn't read kubeconfig file": "Konnte die kubeconfig-Datei nicht lesen",
