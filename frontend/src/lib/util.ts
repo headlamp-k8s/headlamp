@@ -1,4 +1,5 @@
 import humanizeDuration from 'humanize-duration';
+import merge from 'lodash/merge';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { filterGeneric, filterResource } from '../redux/filterSlice';
@@ -208,6 +209,28 @@ export function flattenClusterListItems<T>(
     .flatMap(clusterItems => Object.values(clusterItems ?? {}).flatMap(items => items ?? []));
 
   return flatItems.length > 0 ? flatItems : null;
+}
+
+/**
+ * Combines errors per cluster.
+ *
+ * @param args The list of errors per cluster to join.
+ * @returns The joint list of errors, or null if there are no errors.
+ */
+export function combineClusterListErrors(
+  ...args: ({ [cluster: string]: ApiError | null } | null)[]
+): { [cluster: string]: ApiError | null } | null {
+  const filteredArgs = args.map(clusterErrors => {
+    if (clusterErrors === null) {
+      return {};
+    }
+    return Object.fromEntries(Object.entries(clusterErrors).filter(([, error]) => error !== null));
+  });
+
+  const errors = merge({}, ...filteredArgs);
+  const hasErrors = Object.values(errors).some(error => error !== null);
+
+  return hasErrors ? errors : null;
 }
 
 type URLStateParams<T> = {

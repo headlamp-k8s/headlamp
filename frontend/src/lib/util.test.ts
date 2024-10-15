@@ -1,4 +1,4 @@
-import { flattenClusterListItems } from './util';
+import { combineClusterListErrors, flattenClusterListItems } from './util';
 
 describe('flattenClusterListItems', () => {
   it('should return a flattened list of items', () => {
@@ -27,5 +27,44 @@ describe('flattenClusterListItems', () => {
       null
     );
     expect(result).toEqual([1, 2, 3, 4]);
+  });
+});
+
+describe('combineClusterListErrors', () => {
+  it('should return null if there are no errors', () => {
+    const result = combineClusterListErrors(null, null);
+    expect(result).toBeNull();
+  });
+
+  it('should combine errors from multiple clusters', () => {
+    const error1 = { message: 'Error 1', status: 500, name: 'InternalServerError' };
+    const error2 = { message: 'Error 2', status: 404, name: 'NotFoundError' };
+    const clusterErrors1 = { clusterA: error1 };
+    const clusterErrors2 = { clusterB: error2 };
+
+    const result = combineClusterListErrors(clusterErrors1, clusterErrors2);
+    expect(result).toEqual({
+      clusterA: error1,
+      clusterB: error2,
+    });
+  });
+
+  it('should ignore null errors', () => {
+    const error1 = { message: 'Error 1', status: 500, name: 'InternalServerError' };
+    const clusterErrors1 = { clusterA: error1 };
+    const clusterErrors2 = { clusterB: null };
+
+    const result = combineClusterListErrors(clusterErrors1, clusterErrors2);
+    expect(result).toEqual({
+      clusterA: error1,
+    });
+  });
+
+  it('should return null if all errors are null', () => {
+    const clusterErrors1 = { clusterA: null };
+    const clusterErrors2 = { clusterB: null };
+
+    const result = combineClusterListErrors(clusterErrors1, clusterErrors2);
+    expect(result).toBeNull();
   });
 });
