@@ -789,6 +789,101 @@ describe('apiProxy', () => {
     });
   });
 
+  // describe('fetchMetricsForClusters', () => {
+  //   let onMetrics: jest.Mock;
+  //   let onError: jest.Mock;
+
+  //   beforeEach(() => {
+  //     onMetrics = jest.fn();
+  //     onError = jest.fn();
+  //     jest.spyOn(console, 'warn').mockImplementation();
+  //     jest.spyOn(util, 'getClusterGroup').mockReturnValue(['cluster1', 'cluster2']);
+  //   });
+
+  //   afterEach(() => {
+  //     nock.cleanAll();
+  //     jest.restoreAllMocks();
+  //   });
+
+  //   it('Successfully retrieves metrics for multiple clusters', async () => {
+  //     expect.assertions(2);
+
+  //     const mockMetrics1 = [{ metricName: 'cpu_usage', value: '42' }];
+  //     nock(baseApiUrl)
+  //       .persist()
+  //       .get('/clusters/cluster1/apis/metrics.k8s.io/v1/nodes')
+  //       .reply(200, { items: mockMetrics1 });
+
+  //     const mockMetrics2 = [{ metricName: 'cpu_usage', value: '84' }];
+  //     nock(baseApiUrl)
+  //       .persist()
+  //       .get('/clusters/cluster2/apis/metrics.k8s.io/v1/nodes')
+  //       .reply(200, { items: mockMetrics2 });
+
+  //     await apiProxy.fetchMetricsForClusters('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+
+  //     // Sleep to avoid timing out
+  //     await new Promise(resolve => setTimeout(resolve, 100));
+  //     expect(onMetrics).toHaveBeenCalledWith({
+  //       cluster1: mockMetrics1,
+  //       cluster2: mockMetrics2,
+  //     });
+  //     expect(onError).not.toHaveBeenCalled();
+  //   });
+
+  //   it('Successfully handles metrics with error status 500', async () => {
+  //     expect.assertions(2);
+
+  //     nock(baseApiUrl)
+  //       .get('/clusters/cluster1/apis/metrics.k8s.io/v1/nodes')
+  //       .reply(500, errorResponse500);
+
+  //     const mockMetrics2 = [{ metricName: 'cpu_usage', value: '84' }];
+  //     nock(baseApiUrl)
+  //       .persist()
+  //       .get('/clusters/cluster2/apis/metrics.k8s.io/v1/nodes')
+  //       .reply(200, { items: mockMetrics2 });
+
+  //     await apiProxy.fetchMetricsForClusters('/apis/metrics.k8s.io/v1/nodes', onMetrics, onError);
+
+  //     // Sleep to avoid timing out
+  //     await new Promise(resolve => setTimeout(resolve, 100));
+  //     expect(onMetrics).toHaveBeenCalledWith({
+  //       cluster2: mockMetrics2,
+  //     });
+  //     expect(onError).toHaveBeenCalled();
+  //   });
+
+  //   it('Successfully handles metrics cancellation', async () => {
+  //     // expect.assertions(2);
+
+  //     const mockMetrics1 = [{ metricName: 'cpu_usage', value: '42' }];
+  //     nock(baseApiUrl)
+  //       .persist()
+  //       .get('/clusters/cluster1/apis/metrics.k8s.io/v1/nodes')
+  //       .reply(200, { items: mockMetrics1 });
+
+  //     const mockMetrics2 = [{ metricName: 'cpu_usage', value: '84' }];
+  //     nock(baseApiUrl)
+  //       .persist()
+  //       .get('/clusters/cluster2/apis/metrics.k8s.io/v1/nodes')
+  //       .reply(200, { items: mockMetrics2 });
+
+  //     const cancel = await apiProxy.fetchMetricsForClusters(
+  //       '/apis/metrics.k8s.io/v1/nodes',
+  //       onMetrics,
+  //       onError
+  //     );
+
+  //     cancel();
+
+  //     // Sleep to avoid timing out
+  //     await new Promise(resolve => setTimeout(resolve, 200));
+  //     expect(onMetrics).not.toHaveBeenCalled();
+  //     expect(onError).not.toHaveBeenCalled();
+  //   });
+  // });
+
   describe('testAuth', () => {
     const apiPath = '/apis/authorization.k8s.io/v1/selfsubjectrulesreviews';
     const customNamespace = 'custom-namespace';

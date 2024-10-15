@@ -83,6 +83,7 @@ export default function HpaList() {
           label: t('glossary|Replicas'),
           getValue: item => item.status.currentReplicas,
         },
+        'cluster',
         'age',
       ]}
     />

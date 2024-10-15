@@ -91,6 +91,7 @@ export default function DaemonSetList() {
             );
           },
         },
+        'cluster',
         'age',
       ]}
     />

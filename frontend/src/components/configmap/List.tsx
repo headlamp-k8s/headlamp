@@ -18,6 +18,7 @@ export default function ConfigMapList() {
           getValue: (configmap: ConfigMap) => Object.keys(configmap.data || {}).length || 0,
           gridTemplate: 0.5,
         },
+        'cluster',
         'age',
       ]}
     />

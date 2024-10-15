@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useClustersConf } from '../../lib/k8s';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
-import { getCluster } from '../../lib/util';
+import { getCluster, getClusterGroup } from '../../lib/util';
 import { setConfig } from '../../redux/configSlice';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -100,8 +100,8 @@ export default function Layout({}: LayoutProps) {
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation();
   const allClusters = useClustersConf();
-  const clusterInURL = getCluster();
   const theme = useTheme();
+  const clusterGroup = getClusterGroup();
 
   /** This fetches the cluster config from the backend and updates the redux store on an interval.
    * When stateless clusters are enabled, it also fetches the stateless cluster config from the
@@ -179,6 +179,12 @@ export default function Layout({}: LayoutProps) {
       });
   };
 
+  const clustersNotFound =
+    allClusters &&
+    clusterGroup.length > 0 &&
+    clusterGroup.filter(clusterFromGroup => Object.keys(allClusters).includes(clusterFromGroup))
+      .length === 0;
+
   return (
     <>
       <Link
@@ -203,13 +209,7 @@ export default function Layout({}: LayoutProps) {
         <TopBar />
         <Sidebar />
         <Main id="main" sx={{ flexGrow: 1, marginLeft: 'initial' }}>
-          {allClusters &&
-          !!clusterInURL &&
-          !Object.keys(allClusters).includes(getCluster() || '') ? (
-            <ClusterNotFoundPopup />
-          ) : (
-            ''
-          )}
+          {clustersNotFound ? <ClusterNotFoundPopup /> : ''}
           <AlertNotification />
           <Box>
             <Div sx={theme.mixins.toolbar} />

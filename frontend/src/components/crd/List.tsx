@@ -74,6 +74,7 @@ export default function CustomResourceDefinitionList() {
           filterVariant: 'multi-select',
           filterSelectOptions: categories,
         },
+        'cluster',
         'age',
       ]}
     />

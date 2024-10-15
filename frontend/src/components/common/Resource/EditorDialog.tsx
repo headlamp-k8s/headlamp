@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
+import Grid from '@mui/material/Grid';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import * as yaml from 'js-yaml';
@@ -62,11 +63,22 @@ export interface EditorDialogProps extends DialogProps {
   errorMessage?: string;
   /** The dialog title. */
   title?: string;
+  /** Extra optional actions. */
+  actions?: React.ReactNode[];
 }
 
 export default function EditorDialog(props: EditorDialogProps) {
-  const { item, onClose, onSave, onEditorChanged, saveLabel, errorMessage, title, ...other } =
-    props;
+  const {
+    item,
+    onClose,
+    onSave,
+    onEditorChanged,
+    saveLabel,
+    errorMessage,
+    title,
+    actions = [],
+    ...other
+  } = props;
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: isReadOnly(),
@@ -330,21 +342,34 @@ export default function EditorDialog(props: EditorDialogProps) {
               overflowY: 'hidden',
             }}
           >
-            <Box display="flex" flexDirection="row-reverse">
-              <Box p={1}>
-                <FormGroup row>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={useSimpleEditor}
-                        onChange={() => setUseSimpleEditor(!useSimpleEditor)}
-                        name="useSimpleEditor"
-                      />
-                    }
-                    label={t('Use minimal editor')}
-                  />
-                </FormGroup>
-              </Box>
+            <Box py={1}>
+              <Grid container spacing={2} justifyContent="space-between">
+                {
+                  actions.length > 0 ? (
+                    actions.map((action, i) => (
+                      <Grid item key={`editor_action_${i}`}>
+                        {action}
+                      </Grid>
+                    ))
+                  ) : (
+                    <Grid item></Grid>
+                  ) // Just to keep the layout consistent.
+                }
+                <Grid item>
+                  <FormGroup row>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useSimpleEditor}
+                          onChange={() => setUseSimpleEditor(!useSimpleEditor)}
+                          name="useSimpleEditor"
+                        />
+                      }
+                      label={t('Use minimal editor')}
+                    />
+                  </FormGroup>
+                </Grid>
+              </Grid>
             </Box>
             {isReadOnly() ? (
               makeEditor()

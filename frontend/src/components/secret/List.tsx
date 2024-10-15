@@ -22,6 +22,7 @@ export default function SecretList() {
           label: t('translation|Data'),
           getValue: (secret: Secret) => Object.keys(secret.data || {}).length || 0,
         },
+        'cluster',
         'age',
       ]}
     />

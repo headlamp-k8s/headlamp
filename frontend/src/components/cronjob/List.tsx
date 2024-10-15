@@ -100,6 +100,7 @@ export default function CronJobList() {
             );
           },
         },
+        'cluster',
         'age',
       ]}
     />

@@ -1,5 +1,6 @@
 import { isDebugVerbose } from '../../../../helpers';
 import { getCluster } from '../../../cluster';
+import { getClusterGroup } from '../../../util';
 import { KubeMetrics } from '../../cluster';
 import { ApiError, clusterRequest } from './clusterRequests';
 
@@ -40,6 +41,61 @@ export async function metrics(
 
   function cancel() {
     clearInterval(handle);
+  }
+
+  getMetrics();
+
+  return cancel;
+}
+
+/**
+ * Fetches the metrics for the specified clusters.
+ *
+ * Gets new metrics every 10 seconds.
+ *
+ * @param url - The url of the resource to get metrics for.
+ * @param onMetrics - The function to call with the metrics.
+ * @param onError - The function to call if there's an error.
+ *
+ * @returns A function to cancel the metrics request.
+ */
+export async function fetchMetricsForClusters(
+  url: string,
+  onMetrics: (arg: { [cluster: string]: KubeMetrics[] }) => void,
+  onError?: (err: { [cluster: string]: ApiError }) => void
+) {
+  let cancelled = false;
+  const handler = setInterval(getMetrics, 10000);
+
+  async function getMetrics() {
+    const items: { [cluster: string]: KubeMetrics[] } = {};
+    const errors: { [cluster: string]: ApiError } = {};
+    const clusters = getClusterGroup();
+    for (const cluster of clusters) {
+      try {
+        const metric = await clusterRequest(url, { cluster: cluster });
+
+        if (cancelled) {
+          return;
+        }
+
+        items[cluster] = metric.items || metric;
+        delete errors[cluster];
+      } catch (err) {
+        errors[cluster] = err as ApiError;
+        delete items[cluster];
+      }
+    }
+
+    onMetrics(items);
+    if (onError && Object.keys(errors).length > 0) {
+      onError(errors);
+    }
+  }
+
+  function cancel() {
+    clearInterval(handler);
+    cancelled = true;
   }
 
   getMetrics();

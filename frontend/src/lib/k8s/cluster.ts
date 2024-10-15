@@ -1,11 +1,12 @@
 import { OpPatch } from 'json-patch';
 import { JSONPath } from 'jsonpath-plus';
-import { cloneDeep, unset } from 'lodash';
+import { cloneDeep, isEqual } from 'lodash';
 import React from 'react';
 import helpers from '../../helpers';
 import { createRouteURL } from '../router';
-import { getCluster, timeAgo } from '../util';
+import { getCluster, getClusterGroup, timeAgo } from '../util';
 import { useConnectApi } from '.';
+import { useCluster } from './';
 import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
@@ -237,9 +238,16 @@ export interface KubeOwnerReference {
 }
 
 export interface ApiListOptions extends QueryParameters {
+  /**
+   * The clusters to list objects from. By default uses the current clusters being viewed.
+   */
+  clusters?: string[];
   /** The namespace to list objects from. */
   namespace?: string | string[];
-  /** The cluster to list objects from. By default uses the current cluster being viewed. */
+  /**
+   * The cluster to list objects from. By default uses the current cluster being viewed.
+   * If clusters is set, then we use that and clusters is ignored.
+   */
   cluster?: string;
 }
 
@@ -325,6 +333,15 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
     onError?: (err: ApiError, cluster?: string) => void
   ) => void;
   useList(options?: ApiListOptions): ReturnType<typeof useKubeObjectList>;
+  /**
+   * List resource items or errors for each cluster currently being viewed.
+   *
+   * @param opts The options to use for listing (allows to restrict clusters or namespaces).
+   * @returns An array with: an object corresponding clusters with resource items, an object corresponding clusters with errors (when items couldn't be fetched).
+   */
+  useListPerCluster: (
+    opts?: ApiListOptions
+  ) => [{ [clusterName: string]: any[] | null }, { [clusterName: string]: null | ApiError }];
   useGet: (
     name: string,
     namespace?: string,
@@ -371,9 +388,9 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     public static readOnlyFields: JsonPath<T>[];
     private readonly _clusterName: string;
 
-    constructor(json: T) {
+    constructor(json: T, cluster?: string) {
       this.jsonData = json;
-      this._clusterName = getCluster() || '';
+      this._clusterName = cluster || getCluster() || '';
     }
 
     static get className(): string {
@@ -491,7 +508,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onError?: (err: ApiError, cluster?: string) => void,
       opts?: ApiListSingleNamespaceOptions
     ) {
-      const createInstance = (item: T) => this.create(item) as U;
+      const createInstance = (item: T) => this.create(item, opts?.cluster) as U;
 
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
 
@@ -523,82 +540,185 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onError?: (err: ApiError, cluster?: string) => void,
       opts?: ApiListOptions
     ) {
-      const [objs, setObjs] = React.useState<{ [key: string]: U[] }>({});
-      const listCallback = onList as (arg: U[]) => void;
+      const setObjs = React.useState<{ [key: string]: { [key: string]: U[] } }>({})[1];
+      // Keep a copy of the options so we can re-run the API call if the options change more
+      // efficiently.
+      const [apiListOpts, setApiListOpts] = React.useState<ApiListOptions | undefined>(opts);
 
-      function onObjs(namespace: string, objList: U[]) {
-        let newObjs: typeof objs = {};
+      const includeCluster = !!opts?.clusters;
+
+      function onObjs(cluster: string, namespace: string, objList: U[]) {
         // Set the objects so we have them for the next API response...
-        setObjs(previousObjs => {
-          newObjs = { ...previousObjs, [namespace || '']: objList };
-          return newObjs;
+        setObjs(clusters => {
+          const newClusters = { ...clusters };
+          const previousObjs = newClusters[cluster] || {};
+          const objsPerNamespace = { ...previousObjs, [namespace || '']: objList };
+          newClusters[cluster] = objsPerNamespace;
+
+          const allObjs: U[] = Object.values(objsPerNamespace).flat();
+
+          // @todo: This branch use of the list callback is not very clear, so we should
+          // find a way to make this more explicit.
+          // Also, the reason we call this function from inside the state setter is because
+          // it's the one moment where we have the new list of objects but also the cluster
+          // for which they were fetched.
+          if (includeCluster) {
+            onList(allObjs, cluster);
+          } else {
+            onList(allObjs);
+          }
+
+          return newClusters;
         });
-
-        let allObjs: U[] = [];
-        Object.values(newObjs).map(currentObjs => {
-          allObjs = allObjs.concat(currentObjs);
-        });
-
-        listCallback(allObjs);
       }
 
-      const listCalls = [];
-      const queryParams = cloneDeep(opts);
-      let namespaces: string[] = [];
-      unset(queryParams, 'namespace');
-
-      const cluster = opts?.cluster;
-
-      if (!!opts?.namespace) {
-        if (typeof opts.namespace === 'string') {
-          namespaces = [opts.namespace];
-        } else if (Array.isArray(opts.namespace)) {
-          namespaces = opts.namespace as string[];
-        } else {
-          throw Error('namespace should be a string or array of strings');
+      React.useEffect(() => {
+        // Avoid triggering more API calls if the options haven't changed.
+        if (!isEqual(opts, apiListOpts)) {
+          setApiListOpts(opts);
         }
-      }
+      }, [opts]);
 
-      // If the request itself has no namespaces set, we check whether to apply the
-      // allowed namespaces.
-      if (namespaces.length === 0 && this.isNamespaced) {
-        namespaces = getAllowedNamespaces();
-      }
+      const onErrForCluster = (err: ApiError, cluster?: string) => {
+        onError && onError(err, cluster);
+      };
 
-      if (namespaces.length > 0) {
-        // If we have a namespace set, then we have to make an API call for each
-        // namespace and then set the objects once we have all of the responses.
-        for (const namespace of namespaces) {
-          listCalls.push(
-            this.apiList(objList => onObjs(namespace, objList as U[]), onError, {
-              namespace,
-              queryParams,
-              cluster,
-            })
-          );
+      const listCalls = React.useMemo(() => {
+        const apiCalls = [];
+        let namespaces: string[] = [];
+        const { namespace, clusters = getClusterGroup(['']), ...queryParams } = apiListOpts || {};
+
+        if (!!namespace) {
+          if (typeof namespace === 'string') {
+            namespaces = [namespace];
+          } else if (Array.isArray(namespace)) {
+            namespaces = namespace as string[];
+          } else {
+            throw Error('namespace should be a string or array of strings');
+          }
         }
-      } else {
-        // If we don't have a namespace set, then we only have one API call
-        // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError, { queryParams, cluster }));
-      }
+        for (const cluster of clusters) {
+          // If the request itself has no namespaces set, we check whether to apply the
+          // allowed namespaces.
+          if (namespaces.length === 0 && this.isNamespaced) {
+            namespaces = getAllowedNamespaces(cluster);
+          }
+
+          if (namespaces.length > 0) {
+            // If we have a namespace set, then we have to make an API call for each
+            // namespace and then set the objects once we have all of the responses.
+            for (const namespace of namespaces) {
+              apiCalls.push(
+                this.apiList(
+                  objList => onObjs(cluster, namespace, objList as U[]),
+                  (err: ApiError) => onErrForCluster(err, cluster),
+                  {
+                    namespace,
+                    queryParams,
+                    cluster,
+                  }
+                )
+              );
+            }
+          } else {
+            // If we don't have a namespace set, then we only have one API call
+            // response to set and we return it right away.
+            apiCalls.push(
+              this.apiList(
+                (objs: U[]) => onObjs(cluster, '', objs),
+                (err: ApiError) => onErrForCluster(err, cluster),
+                {
+                  queryParams,
+                  cluster,
+                }
+              )
+            );
+          }
+        }
+
+        return apiCalls;
+      }, [apiListOpts]);
 
       useConnectApi(...listCalls);
     }
 
+    static useListPerCluster<U extends KubeObject>(
+      opts?: ApiListOptions
+    ): [{ [clusterName: string]: U[] | null }, { [clusterName: string]: null | ApiError }] {
+      const clusters = opts?.clusters || getClusterGroup(['']);
+      const [objList, setObjList] = React.useState<{ [clusterName: string]: U[] | null }>(() => {
+        const clusterObjects: { [clusterName: string]: U[] | null } = {};
+        for (const cluster of clusters) {
+          clusterObjects[cluster] = null;
+        }
+        return clusterObjects;
+      });
+      const [error, setError] = React.useState<{ [clusterName: string]: null | ApiError }>(() => {
+        const clusterObjects: { [clusterName: string]: null | ApiError } = {};
+        for (const cluster of clusters) {
+          clusterObjects[cluster] = null;
+        }
+        return clusterObjects;
+      });
+
+      const createInstance = (item: T, cluster: string) => this.create(item, cluster) as U;
+
+      function setList(items: T[] | null, cluster: string) {
+        const objList =
+          items?.map((item: T) => {
+            const obj = createInstance(item, cluster);
+            return obj;
+          }) || null;
+        setListofObjs(cluster, objList);
+      }
+
+      function setListofObjs(cluster: string, objList: U[] | null) {
+        // Set the objects in the format clusterName->objectList.
+        setObjList(objsPerClusters => ({
+          ...objsPerClusters,
+          [cluster]: objList,
+        }));
+
+        // If there was a list of objects (even if empty) returned, then we
+        // ensure there is no error set for this cluster.
+        if (objList !== null) {
+          setError(errsPerCluster => {
+            const newErrors = { ...errsPerCluster };
+            delete newErrors[cluster];
+            return newErrors;
+          });
+        }
+      }
+
+      function setErr(cluster: string, err: ApiError | null) {
+        // Set the errors in the format clusterName->error.
+        setError(errsPerCluster => ({
+          ...errsPerCluster,
+          [cluster]: err,
+        }));
+      }
+
+      const apiOpts = { ...opts, clusters };
+      this.useApiList(setList, (err, cluster) => setErr(cluster || '', err), apiOpts);
+
+      return [objList, error];
+    }
+
     static useList<U extends KubeObjectClass>(
       this: U,
-      {
-        cluster,
-        namespace,
-        ...queryParams
-      }: { cluster?: string; namespace?: string } & QueryParameters = {}
+      { cluster, namespace, clusters, ...queryParams }: ApiListOptions & QueryParameters = {}
     ) {
+      const currentCluster = useCluster();
+      //@todo: what to do about multiple clusters here?
+      const theCluster = clusters?.[0] || cluster || currentCluster || undefined;
+      //@todo: what to do about multiple namespaces here?
+      const theNamespace = Array.isArray(namespace) ? namespace[0] : namespace;
+
       return useKubeObjectList({
         queryParams: queryParams,
         kubeObjectClass: this,
-        cluster: cluster,
-        namespace: namespace,
+        cluster: theCluster,
+        namespace: theNamespace,
       });
     }
 
@@ -620,8 +740,12 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       });
     }
 
-    static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
-      return new this(item) as U;
+    static create<U extends KubeObject>(
+      this: new (arg: T, cluster?: string) => U,
+      item: T,
+      cluster?: string
+    ): U {
+      return new this(item, cluster) as U;
     }
 
     static apiGet<U extends KubeObject>(
@@ -634,7 +758,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         cluster?: string;
       }
     ) {
-      const createInstance = (item: T) => this.create(item) as U;
+      const createInstance = (item: T) => this.create(item, opts?.cluster) as U;
       const args: any[] = [name, (obj: T) => onGet(createInstance(obj))];
 
       if (this.apiEndpoint.isNamespaced) {

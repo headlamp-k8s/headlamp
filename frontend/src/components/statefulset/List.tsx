@@ -71,6 +71,7 @@ export default function StatefulSetList() {
             );
           },
         },
+        'cluster',
         'age',
       ]}
     />

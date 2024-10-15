@@ -64,6 +64,7 @@ export default function NamespacesList() {
             label: t('translation|Status'),
             getValue: () => 'Unknown',
           },
+          'cluster',
           {
             id: 'age',
             label: t('translation|Age'),
@@ -83,6 +84,7 @@ export default function NamespacesList() {
           getValue: ns => ns.status.phase,
           render: makeStatusLabel,
         },
+        'cluster',
         'age',
       ],
     };
