@@ -1,12 +1,16 @@
 import { InlineIcon } from '@iconify/react';
 import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getCluster } from '../../../lib/cluster';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { getClusterGroup } from '../../../lib/util';
 import { clusterAction } from '../../../redux/clusterActionSlice';
 import {
   EventStatus,
@@ -30,6 +34,8 @@ export default function CreateButton(props: CreateButtonProps) {
   const location = useLocation();
   const { t } = useTranslation(['translation']);
   const dispatchCreateEvent = useEventCallback(HeadlampEventType.CREATE_RESOURCE);
+  const clusters = getClusterGroup();
+  const [targetCluster, setTargetCluster] = React.useState(clusters[0] || '');
 
   const applyFunc = async (newItems: KubeObjectInterface[], clusterName: string) => {
     await Promise.allSettled(newItems.map(newItem => apply(newItem, clusterName))).then(
@@ -84,10 +90,8 @@ export default function CreateButton(props: CreateButtonProps) {
     const resourceNames = massagedNewItemDefs.map(newItemDef => newItemDef.metadata.name);
     setOpenDialog(false);
 
-    const clusterName = getCluster() || '';
-
     dispatch(
-      clusterAction(() => applyFunc(massagedNewItemDefs, clusterName), {
+      clusterAction(() => applyFunc(massagedNewItemDefs, targetCluster), {
         startMessage: t('translation|Applying {{ newItemName }}…', {
           newItemName: resourceNames.join(','),
         }),
@@ -142,6 +146,29 @@ export default function CreateButton(props: CreateButtonProps) {
         errorMessage={errorMessage}
         onEditorChanged={() => setErrorMessage('')}
         title={t('translation|Create / Apply')}
+        actions={
+          clusters.length > 1
+            ? [
+                <FormControl>
+                  <InputLabel id="edit-dialog-cluster-target">{t('glossary|Cluster')}</InputLabel>
+                  <Select
+                    labelId="edit-dialog-cluster-target"
+                    id="edit-dialog-cluster-target-select"
+                    value={targetCluster}
+                    onChange={event => {
+                      setTargetCluster(event.target.value as string);
+                    }}
+                  >
+                    {clusters.map(cluster => (
+                      <MenuItem key={cluster} value={cluster}>
+                        {cluster}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>,
+              ]
+            : []
+        }
       />
     </React.Fragment>
   );
