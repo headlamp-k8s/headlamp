@@ -92,45 +92,52 @@
           class="MuiDialogContent-root css-erhy6c-MuiDialogContent-root"
         >
           <div
-            class="MuiBox-root css-l256j9"
+            class="MuiBox-root css-1jpm9pd"
           >
             <div
-              class="MuiBox-root css-hpgf8j"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1xu1mzw-MuiGrid-root"
             >
               <div
-                class="MuiFormGroup-root MuiFormGroup-row css-qfz70r-MuiFormGroup-root"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
-                <label
-                  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+                <div
+                  class="MuiFormGroup-root MuiFormGroup-row css-qfz70r-MuiFormGroup-root"
                 >
-                  <span
-                    class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
+                  <label
+                    class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
                   >
                     <span
-                      class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-1nsozxe-MuiButtonBase-root-MuiSwitch-switchBase"
+                      class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
                     >
-                      <input
-                        class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                        name="useSimpleEditor"
-                        type="checkbox"
-                      />
                       <span
-                        class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                      />
+                        class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-1nsozxe-MuiButtonBase-root-MuiSwitch-switchBase"
+                      >
+                        <input
+                          class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+                          name="useSimpleEditor"
+                          type="checkbox"
+                        />
+                        <span
+                          class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+                        />
+                        <span
+                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                        />
+                      </span>
                       <span
-                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                        class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
                       />
                     </span>
                     <span
-                      class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                    />
-                  </span>
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1ezega9-MuiTypography-root"
-                  >
-                    Use minimal editor
-                  </span>
-                </label>
+                      class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1ezega9-MuiTypography-root"
+                    >
+                      Use minimal editor
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
