@@ -4,7 +4,7 @@ import { MRT_FilterFns, MRT_Row, MRT_SortingFn } from 'material-react-table';
 import { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeObject, KubeObjectClass } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
@@ -96,23 +96,28 @@ export interface ResourceTableProps<RowItem> {
   reflectInURL?: string | boolean;
 }
 
-export interface ResourceTableFromResourceClassProps<RowItem>
-  extends Omit<ResourceTableProps<RowItem>, 'data'> {
-  resourceClass: KubeObject;
+export interface ResourceTableFromResourceClassProps<KubeClass extends KubeObjectClass>
+  extends Omit<ResourceTableProps<InstanceType<KubeClass>>, 'data'> {
+  resourceClass: KubeClass;
 }
 
-export default function ResourceTable<RowItem>(
-  props: ResourceTableFromResourceClassProps<RowItem> | ResourceTableProps<RowItem>
+export default function ResourceTable<KubeClass extends KubeObjectClass>(
+  props:
+    | ResourceTableFromResourceClassProps<KubeClass>
+    | ResourceTableProps<InstanceType<KubeClass>>
 ) {
-  if (!!(props as ResourceTableFromResourceClassProps<RowItem>).resourceClass) {
-    const { resourceClass, ...otherProps } = props as ResourceTableFromResourceClassProps<RowItem>;
+  if (!!(props as ResourceTableFromResourceClassProps<KubeClass>).resourceClass) {
+    const { resourceClass, ...otherProps } =
+      props as ResourceTableFromResourceClassProps<KubeClass>;
     return <TableFromResourceClass resourceClass={resourceClass!} {...otherProps} />;
   }
 
-  return <ResourceTableContent {...(props as ResourceTableProps<RowItem>)} />;
+  return <ResourceTableContent {...(props as ResourceTableProps<InstanceType<KubeClass>>)} />;
 }
 
-function TableFromResourceClass<RowItem>(props: ResourceTableFromResourceClassProps<RowItem>) {
+function TableFromResourceClass<KubeClass extends KubeObjectClass>(
+  props: ResourceTableFromResourceClassProps<KubeClass>
+) {
   const { resourceClass, id, ...otherProps } = props;
   const [items, error] = resourceClass.useList();
   // throttle the update of the table to once per second
@@ -121,7 +126,7 @@ function TableFromResourceClass<RowItem>(props: ResourceTableFromResourceClassPr
 
   useEffect(() => {
     dispatchHeadlampEvent({
-      resources: items,
+      resources: items!,
       resourceKind: resourceClass.className,
       error: error || undefined,
     });
@@ -209,7 +214,7 @@ export function useThrottle(value: any, interval = 1000): any {
   return throttledValue;
 }
 
-function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
+function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTableProps<RowItem>) {
   const {
     columns,
     defaultSortingColumn,
@@ -246,7 +251,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
       });
     }
     const allColumns = processedColumns
-      .map((col, index): TableColumn<KubeObject> => {
+      .map((col, index): TableColumn<RowItem> => {
         const indexId = String(index);
 
         if (typeof col !== 'string') {
@@ -254,7 +259,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
 
           const sort = column.sort ?? true;
 
-          const mrtColumn: TableColumn<KubeObject> = {
+          const mrtColumn: TableColumn<RowItem> = {
             id: column.id ?? indexId,
             header: column.label,
             filterVariant: column.filterVariant,
@@ -276,7 +281,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
           } else if ('getter' in column) {
             mrtColumn.accessorFn = column.getter;
           } else {
-            mrtColumn.accessorFn = (item: KubeObject) => item[column.datum];
+            mrtColumn.accessorFn = (item: RowItem) => item[column.datum];
           }
           if ('render' in column) {
             mrtColumn.Cell = ({ row }: { row: MRT_Row<any> }) =>
@@ -295,7 +300,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
               id: 'name',
               header: t('translation|Name'),
               gridTemplate: 1.5,
-              accessorFn: (item: KubeObject) => item.metadata.name,
+              accessorFn: (item: RowItem) => item.metadata.name,
               Cell: ({ row }: { row: MRT_Row<any> }) =>
                 row.original && <Link kubeObject={row.original} />,
             };
@@ -304,13 +309,12 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
               id: 'age',
               header: t('translation|Age'),
               gridTemplate: 'min-content',
-              accessorFn: (item: KubeObject) =>
-                -new Date(item.metadata.creationTimestamp).getTime(),
+              accessorFn: (item: RowItem) => -new Date(item.metadata.creationTimestamp).getTime(),
               enableColumnFilter: false,
               muiTableBodyCellProps: {
                 align: 'right',
               },
-              Cell: ({ row }: { row: MRT_Row<KubeObject> }) =>
+              Cell: ({ row }: { row: MRT_Row<RowItem> }) =>
                 row.original && (
                   <DateLabel
                     date={row.original.metadata.creationTimestamp}
@@ -323,9 +327,9 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
             return {
               id: 'namespace',
               header: t('glossary|Namespace'),
-              accessorFn: (item: KubeObject) => item.getNamespace(),
+              accessorFn: (item: RowItem) => item.getNamespace(),
               filterVariant: 'multi-select',
-              Cell: ({ row }: { row: MRT_Row<KubeObject> }) =>
+              Cell: ({ row }: { row: MRT_Row<RowItem> }) =>
                 row.original?.getNamespace() ? (
                   <Link routeName="namespace" params={{ name: row.original.getNamespace() }}>
                     {row.original.getNamespace()}
@@ -339,7 +343,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
             return {
               id: 'kind',
               header: t('translation|Type'),
-              accessorFn: (resource: KubeObject) => String(resource?.kind),
+              accessorFn: (resource: RowItem) => String(resource?.kind),
               filterVariant: 'multi-select',
             };
           default:
@@ -347,7 +351,7 @@ function ResourceTableContent<RowItem>(props: ResourceTableProps<RowItem>) {
         }
       })
       .filter(col => !hideColumns?.includes(col.id ?? '')) as Array<
-      TableColumn<KubeObject> & { gridTemplate?: string | number }
+      TableColumn<RowItem> & { gridTemplate?: string | number }
     >;
 
     let sort = undefined;

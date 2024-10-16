@@ -1,17 +1,20 @@
-import { apiFactory } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeCondition, KubeObject, KubeObjectInterface } from './cluster';
 
 export interface KubeNamespace extends KubeObjectInterface {
   status: {
     phase: string;
+    conditions?: KubeCondition[];
   };
 }
 
-class Namespace extends makeKubeObject<KubeNamespace>('namespace') {
-  static apiEndpoint = apiFactory('', 'v1', 'namespaces');
+class Namespace extends KubeObject<KubeNamespace> {
+  static kind = 'Namespace';
+  static apiName = 'namespaces';
+  static apiVersion = 'v1';
+  static isNamespaced = false;
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   /**

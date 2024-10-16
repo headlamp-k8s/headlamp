@@ -1,5 +1,6 @@
 import { Box, Chip } from '@mui/material';
 import { styled } from '@mui/system';
+import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import ResourceQuota from '../../lib/k8s/resourceQuota';
@@ -50,7 +51,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
           label: t('translation|Request'),
           getValue: item => item.requests.join(', '),
           render: item => {
-            const requests: JSX.Element[] = [];
+            const requests: ReactNode[] = [];
             item.requests.forEach((request: string) => {
               requests.push(<PaddedChip label={request} variant="outlined" size="small" />);
             });
@@ -62,7 +63,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
           label: t('translation|Limit'),
           getValue: item => item?.limits?.join(', '),
           render: item => {
-            const limits: JSX.Element[] = [];
+            const limits: ReactNode[] = [];
             item.limits.forEach((limit: string) => {
               limits.push(<PaddedChip label={limit} variant="outlined" size="small" />);
             });

@@ -223,7 +223,8 @@ const namespacedClasses = [
   'CronJob',
   'DaemonSet',
   'Deployment',
-  'Endpoint',
+  'Endpoint', // included for backward compatibility
+  'Endpoints',
   'HorizontalPodAutoscaler',
   'Ingress',
   'Job',
@@ -244,7 +245,7 @@ const namespacedClasses = [
 ];
 
 describe('Test class namespaces', () => {
-  const classCopy = { ...ResourceClasses };
+  const classCopy: Record<string, KubeObjectClass> = { ...ResourceClasses };
   namespacedClasses.forEach(cls => {
     test(`Check namespaced ${cls}`, () => {
       expect(classCopy[cls]).toBeDefined();

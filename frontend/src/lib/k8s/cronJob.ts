@@ -1,5 +1,4 @@
-import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeContainer, KubeMetadata, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeContainer, KubeMetadata, KubeObject, KubeObjectInterface } from './cluster';
 
 /**
  * CronJob structure returned by the k8s API.
@@ -34,11 +33,11 @@ export interface KubeCronJob extends KubeObjectInterface {
   };
 }
 
-class CronJob extends makeKubeObject<KubeCronJob>('CronJob') {
-  static apiEndpoint = apiFactoryWithNamespace(
-    ['batch', 'v1', 'cronjobs'],
-    ['batch', 'v1beta1', 'cronjobs']
-  );
+class CronJob extends KubeObject<KubeCronJob> {
+  static kind = 'CronJob';
+  static apiName = 'cronjobs';
+  static apiVersion = ['batch/v1', 'batch/v1beta1'];
+  static isNamespaced = true;
 
   get spec() {
     return this.getValue('spec');

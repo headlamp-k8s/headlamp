@@ -97,15 +97,14 @@ export function useKubeObject<T extends KubeObjectClass>({
     staleTime: 5000,
     queryKey,
     queryFn: async () => {
-      if (!endpoint) return;
       const url = makeUrl(
-        [KubeObjectEndpoint.toUrl(endpoint, namespace), name],
+        [KubeObjectEndpoint.toUrl(endpoint!, namespace), name],
         cleanedUpQueryParams
       );
       const obj: KubeObjectInterface = await clusterFetch(url, {
         cluster,
       }).then(it => it.json());
-      return new kubeObjectClass(obj);
+      return new kubeObjectClass(obj) as Instance;
     },
   });
 

@@ -232,7 +232,7 @@ type TableWithFilterProps = TableProps<any> & { matchCriteria?: string[] };
 function TableWithFilter(props: TableWithFilterProps) {
   const { matchCriteria, ...otherProps } = props;
   const filterFunc = useFilterFunc(matchCriteria);
-  return <Table filterFunction={filterFunc} {...otherProps} />;
+  return <Table<any> filterFunction={filterFunc} {...otherProps} />;
 }
 
 const TemplateWithFilter: StoryFn<{

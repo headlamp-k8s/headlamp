@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { KubeObject, Workload } from '../../lib/k8s/cluster';
+import { Workload, WorkloadClass } from '../../lib/k8s/cluster';
 import {
   ConditionsSection,
   ContainersSection,
@@ -9,11 +9,11 @@ import {
   OwnedPodsSection,
 } from '../common/Resource';
 
-interface WorkloadDetailsProps {
-  workloadKind: KubeObject;
+interface WorkloadDetailsProps<T extends WorkloadClass> {
+  workloadKind: T;
 }
 
-export default function WorkloadDetails(props: WorkloadDetailsProps) {
+export default function WorkloadDetails<T extends WorkloadClass>(props: WorkloadDetailsProps<T>) {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { workloadKind } = props;
   const { t } = useTranslation(['glossary', 'translation']);

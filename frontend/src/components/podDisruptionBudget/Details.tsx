@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import PDB from '../../lib/k8s/podDisruptionBudget';
@@ -7,7 +8,7 @@ export default function PDBDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
 
   function selectorsToJSX(selectors: string[]) {
-    const values: JSX.Element[] = [];
+    const values: ReactNode[] = [];
 
     selectors.forEach((selector: string) => {
       values.push(

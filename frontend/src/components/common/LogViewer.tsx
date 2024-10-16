@@ -3,7 +3,7 @@ import { FitAddon } from '@xterm/addon-fit';
 import { ISearchOptions, SearchAddon } from '@xterm/addon-search';
 import { Terminal as XTerminal } from '@xterm/xterm';
 import _ from 'lodash';
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useTranslation } from 'react-i18next';
 import ActionButton from './ActionButton';
@@ -14,7 +14,7 @@ export interface LogViewerProps extends DialogProps {
   title?: string;
   downloadName?: string;
   onClose: () => void;
-  topActions?: JSX.Element[];
+  topActions?: ReactNode[];
   open: boolean;
   xtermRef?: React.MutableRefObject<XTerminal | null>;
   /**
