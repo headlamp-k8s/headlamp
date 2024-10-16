@@ -166,8 +166,19 @@ interface HPAMetrics {
   shortValue: string;
 }
 
-class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
+class HPA extends makeKubeObject<KubeHPA>('HorizontalPodAutoscaler') {
   static apiEndpoint = apiFactoryWithNamespace('autoscaling', 'v2', 'horizontalpodautoscalers');
+
+  static getBaseObject(): KubeHPA {
+    const baseObject = super.getBaseObject() as KubeHPA;
+    baseObject.spec = {
+      maxReplicas: 0,
+      minReplicas: 0,
+      scaleTargetRef: { apiVersion: '', kind: '', name: '' },
+      metrics: [],
+    };
+    return baseObject;
+  }
 
   get spec(): HpaSpec {
     return this.jsonData!.spec;
