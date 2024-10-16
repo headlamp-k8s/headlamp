@@ -5,6 +5,12 @@ export class HeadlampPage {
   constructor(private page: Page) {}
 
   async authenticate() {
+    // If we are running in cluster, we need to authenticate
+    if (process.env.PLAYWRIGHT_TEST_MODE === 'app' || process.env.PLAYWRIGHT_TEST_MODE === 'web') {
+      await this.startFromMainPage();
+      return;
+    }
+
     // Go to the authentication page
     const url = process.env.HEADLAMP_TEST_URL;
     await this.page.goto(url || '/');
@@ -57,6 +63,27 @@ export class HeadlampPage {
   async pageLocatorContent(locator: string, text: string) {
     const pageContent = this.page.locator(locator).textContent();
     expect(await pageContent).toContain(text);
+  }
+
+  // note: must have minikube started before running these
+  async startFromMainPage() {
+    await this.page.waitForLoadState('load');
+
+    // note: backend must be running with connected frontend for web mode
+    if (process.env.PLAYWRIGHT_TEST_MODE === 'web') {
+      await this.page.goto('localhost:3000');
+    }
+
+    await this.page.waitForTimeout(5000);
+    const currentURL = this.page.url();
+
+    // note: this starts at the cluster select page if the URL does not contain minikube or main then there is more than one cluster
+    if (!currentURL.includes('c/minikube') && !currentURL.includes('c/main')) {
+      console.log('MORE THAN ONE CLUSTER');
+      await this.page.waitForSelector('a:has-text("minikube")');
+      await this.page.getByRole('link', { name: 'minikube' }).click();
+      await this.page.waitForLoadState('load');
+    }
   }
 
   async navigateTopage(page: string, title: RegExp) {
