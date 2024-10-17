@@ -88,6 +88,7 @@ export function PodListRenderer(props: PodListProps) {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           label: t('Restarts'),
           getValue: (pod: Pod) => {

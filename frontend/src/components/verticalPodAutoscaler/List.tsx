@@ -37,6 +37,7 @@ export default function VpaList() {
           columns={[
             'name',
             'namespace',
+            'cluster',
             {
               id: 'cpu',
               label: t('glossary|CPU'),

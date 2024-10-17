@@ -43,6 +43,7 @@ export default function IngressList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'class',
           label: t('Class Name'),

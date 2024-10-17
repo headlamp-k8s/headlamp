@@ -13,6 +13,7 @@ export default function ServiceList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'type',
           label: t('translation|Type'),
