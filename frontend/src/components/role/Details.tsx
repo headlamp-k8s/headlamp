@@ -6,11 +6,10 @@ import { DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
-export default function RoleDetails() {
-  const { namespace = undefined, name } = useParams<{
-    namespace: string | undefined;
-    name: string;
-  }>();
+export default function RoleDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace?: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
   const { t } = useTranslation('glossary');
 
   return (

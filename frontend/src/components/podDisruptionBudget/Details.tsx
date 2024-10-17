@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import PDB from '../../lib/k8s/podDisruptionBudget';
 import { DetailsGrid, StatusLabel } from '../common';
 
-export default function PDBDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function PDBDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
 
   function selectorsToJSX(selectors: string[]) {
     const values: JSX.Element[] = [];

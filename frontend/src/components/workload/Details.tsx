@@ -11,10 +11,15 @@ import {
 
 interface WorkloadDetailsProps {
   workloadKind: KubeObject;
+
+  name?: string;
+  namespace?: string;
 }
 
 export default function WorkloadDetails(props: WorkloadDetailsProps) {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const params = useParams<{ namespace: string; name: string }>();
+  const name = props.name ?? params.name;
+  const namespace = props.namespace ?? params.namespace;
   const { workloadKind } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 

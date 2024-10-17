@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
@@ -13,7 +13,7 @@ import {
   Route as RouteType,
 } from '../../lib/router';
 import { getCluster, getClusterGroup } from '../../lib/util';
-import { setHideAppBar } from '../../redux/actions/actions';
+import { setHideAppBar, setIsFullWidth } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { useSidebarItem } from '../Sidebar';
 
@@ -34,25 +34,31 @@ export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
     );
 
   return (
-    <Switch>
-      {filteredRoutes.map((route, index) =>
-        route.name === 'OidcAuth' ? (
-          <Route path={route.path} component={() => <RouteComponent route={route} />} key={index} />
-        ) : (
-          <AuthRoute
-            path={getRoutePath(route)}
-            sidebar={route.sidebar}
-            requiresAuth={!route.noAuthRequired}
-            requiresCluster={getRouteUseClusterURL(route)}
-            exact={!!route.exact}
-            clusters={clusters}
-            requiresToken={props.requiresToken}
-            children={<RouteComponent route={route} key={getCluster()} />}
-            key={`${getCluster()}`}
-          />
-        )
-      )}
-    </Switch>
+    <Suspense fallback={null}>
+      <Switch>
+        {filteredRoutes.map((route, index) =>
+          route.name === 'OidcAuth' ? (
+            <Route
+              path={route.path}
+              component={() => <RouteComponent route={route} />}
+              key={index}
+            />
+          ) : (
+            <AuthRoute
+              path={getRoutePath(route)}
+              sidebar={route.sidebar}
+              requiresAuth={!route.noAuthRequired}
+              requiresCluster={getRouteUseClusterURL(route)}
+              exact={!!route.exact}
+              clusters={clusters}
+              requiresToken={props.requiresToken}
+              children={<RouteComponent route={route} key={getCluster()} />}
+              key={`${getCluster()}`}
+            />
+          )
+        )}
+      </Switch>
+    </Suspense>
   );
 }
 
@@ -62,6 +68,10 @@ function RouteComponent({ route }: { route: RouteType }) {
   React.useEffect(() => {
     dispatch(setHideAppBar(route.hideAppBar));
   }, [route.hideAppBar]);
+
+  React.useEffect(() => {
+    dispatch(setIsFullWidth(route.isFullWidth));
+  }, [route.isFullWidth]);
 
   return (
     <PageTitle
