@@ -51,9 +51,9 @@ export async function apply<T extends KubeObjectInterface>(
     delete bodyToApply.metadata.resourceVersion;
     return await apiEndpoint.post(bodyToApply, {}, cluster!);
   } catch (err) {
-    // Check to see if failed because the record already exists.
-    // If the failure isn't a 409 (i.e. Confilct), just rethrow.
-    if ((err as ApiError).status !== 409) throw err;
+    // We had a conflict or cannot create. Try a PUT in case the resource already exists.
+    const errorCode = (err as ApiError).status;
+    if (errorCode !== 409 && errorCode !== 403) throw err;
 
     // Preserve the resourceVersion if its an update request
     bodyToApply.metadata.resourceVersion = resourceVersion;
