@@ -3,7 +3,7 @@ import React from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { getCluster, getClusterPrefixedPath } from '../util';
+import { getCluster, getClusterGroup, getClusterPrefixedPath } from '../util';
 import { ApiError, clusterRequest } from './apiProxy';
 import { Cluster, KubeObject, LabelSelector, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
@@ -135,6 +135,21 @@ export function useCluster() {
   }, [cluster, location]);
 
   return cluster;
+}
+
+/**
+ * Get the group of clusters as defined in the URL. Updates when the cluster changes.
+ *
+ * @returns the cluster group from the URL. If no cluster is defined in the URL, an empty list is returned.
+ */
+export function useClusterGroup(): string[] {
+  const clusterInURL = useCluster();
+
+  const clusterGroup = React.useMemo(() => {
+    return getClusterGroup();
+  }, [clusterInURL]);
+
+  return clusterGroup;
 }
 
 export function getVersion(clusterName: string = ''): Promise<StringDict> {
