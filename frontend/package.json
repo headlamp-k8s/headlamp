@@ -9,7 +9,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "9.0.9",
     "@apidevtools/swagger-parser": "^10.0.3",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
