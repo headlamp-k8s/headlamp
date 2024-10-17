@@ -384,6 +384,10 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       this._clusterName = cluster || getCluster() || '';
     }
 
+    get cluster() {
+      return this._clusterName;
+    }
+
     static get className(): string {
       return objectName;
     }
