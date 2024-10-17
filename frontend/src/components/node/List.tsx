@@ -143,6 +143,7 @@ export default function NodeList() {
           },
           show: false,
         },
+        'cluster',
         'age',
       ]}
     />

@@ -11,6 +11,7 @@ export function RuntimeClassList() {
       resourceClass={RuntimeClass}
       columns={[
         'name',
+        'cluster',
         {
           id: 'handler',
           label: t('translation|Handler'),

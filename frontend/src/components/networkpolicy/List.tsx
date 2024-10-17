@@ -12,6 +12,7 @@ export function NetworkPolicyList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'type',
           label: t('translation|Type'),

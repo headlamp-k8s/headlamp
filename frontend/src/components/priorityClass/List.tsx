@@ -11,6 +11,7 @@ export default function PriorityClassList() {
       resourceClass={PriorityClass}
       columns={[
         'name',
+        'cluster',
         {
           id: 'value',
           label: t('translation|Value'),

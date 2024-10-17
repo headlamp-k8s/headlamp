@@ -38,6 +38,7 @@ export default function CronJobList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'schedule',
           label: t('Schedule'),

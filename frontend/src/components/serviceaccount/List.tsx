@@ -12,6 +12,7 @@ export default function ServiceAccountList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'secrets',
           label: t('Secrets'),

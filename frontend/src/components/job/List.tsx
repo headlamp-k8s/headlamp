@@ -92,6 +92,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'completions',
           label: t('Completions'),
