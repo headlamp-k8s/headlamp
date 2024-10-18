@@ -377,7 +377,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
     jsonData: T | null = null;
     public static readOnlyFields: JsonPath<T>[];
-    private readonly _clusterName: string;
+    private _clusterName: string;
 
     constructor(json: T, cluster?: string) {
       this.jsonData = json;
@@ -386,6 +386,10 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     get cluster() {
       return this._clusterName;
+    }
+
+    set cluster(cluster: string) {
+      this._clusterName = cluster;
     }
 
     static get className(): string {
