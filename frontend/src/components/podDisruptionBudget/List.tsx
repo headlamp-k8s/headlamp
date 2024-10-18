@@ -12,6 +12,7 @@ export default function PDBList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'minAvailable',
           label: t('translation|Min Available'),

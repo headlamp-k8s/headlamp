@@ -59,6 +59,7 @@ export default function NamespacesList() {
               </Link>
             ),
           },
+          'cluster',
           {
             id: 'status',
             label: t('translation|Status'),
@@ -77,6 +78,7 @@ export default function NamespacesList() {
       resourceClass: Namespace,
       columns: [
         'name',
+        'cluster',
         {
           id: 'status',
           label: t('translation|Status'),

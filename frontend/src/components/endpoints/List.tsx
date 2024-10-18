@@ -20,6 +20,7 @@ export default function EndpointList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'addresses',
           label: t('translation|Addresses'),

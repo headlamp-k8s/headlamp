@@ -29,6 +29,7 @@ export default function HpaList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'reference',
           label: t('translation|Reference'),

@@ -12,6 +12,7 @@ export default function ConfigMapList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'data',
           label: t('translation|Data'),

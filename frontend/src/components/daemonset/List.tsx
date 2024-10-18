@@ -14,6 +14,7 @@ export default function DaemonSetList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'pods',
           label: t('Pods'),

@@ -12,6 +12,7 @@ export default function SecretList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'type',
           label: t('translation|Type'),

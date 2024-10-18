@@ -63,6 +63,7 @@ export default function DeploymentsList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'pods',
           label: t('Pods'),

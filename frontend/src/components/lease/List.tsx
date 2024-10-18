@@ -11,6 +11,7 @@ export function LeaseList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'holder',
           label: t('translation|Holder'),
