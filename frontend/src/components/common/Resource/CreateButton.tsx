@@ -8,9 +8,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { useClusterGroup } from '../../../lib/k8s';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
-import { getClusterGroup } from '../../../lib/util';
 import { clusterAction } from '../../../redux/clusterActionSlice';
 import {
   EventStatus,
@@ -34,8 +34,18 @@ export default function CreateButton(props: CreateButtonProps) {
   const location = useLocation();
   const { t } = useTranslation(['translation']);
   const dispatchCreateEvent = useEventCallback(HeadlampEventType.CREATE_RESOURCE);
-  const clusters = getClusterGroup();
+  const clusters = useClusterGroup();
   const [targetCluster, setTargetCluster] = React.useState(clusters[0] || '');
+
+  // When the clusters in the group change, we want to reset the target cluster
+  // if it's not in the new list of clusters.
+  React.useEffect(() => {
+    if (clusters.length === 0) {
+      setTargetCluster('');
+    } else if (!clusters.includes(targetCluster)) {
+      setTargetCluster(clusters[0]);
+    }
+  }, [clusters]);
 
   const applyFunc = async (newItems: KubeObjectInterface[], clusterName: string) => {
     await Promise.allSettled(newItems.map(newItem => apply(newItem, clusterName))).then(
