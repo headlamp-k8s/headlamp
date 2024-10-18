@@ -9,8 +9,9 @@ import DetailsViewSection from '../DetailsViewSection';
 import { LimitRangeRenderer } from '../limitRange/List';
 import { ResourceQuotaRenderer } from '../resourceQuota/List';
 
-export default function NamespaceDetails() {
-  const { name } = useParams<{ name: string }>();
+export default function NamespaceDetails(props: { name?: string }) {
+  const params = useParams<{ name: string }>();
+  const name = props.name ?? params.name;
   const { t } = useTranslation(['glossary', 'translation']);
 
   function makeStatusLabel(namespace: Namespace | null) {

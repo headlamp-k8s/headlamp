@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import IngressClass from '../../lib/k8s/ingressClass';
 import { DetailsGrid } from '../common/Resource';
 
-export default function IngressClassDetails() {
-  const { name } = useParams<{ name: string }>();
+export default function IngressClassDetails(props: { name?: string }) {
+  const params = useParams<{ name: string }>();
+  const name = props.name ?? params.name;
   const { t } = useTranslation('glossary');
 
   return (
