@@ -368,9 +368,11 @@ export async function fetchStatelessClusterKubeConfigs(dispatch: any) {
   )
     .then((config: ParsedConfig) => {
       const clustersToConfig: ConfigState['statelessClusters'] = {};
-      config?.clusters.forEach((cluster: Cluster) => {
-        clustersToConfig[cluster.name] = cluster;
-      });
+      if (config?.clusters && Array.isArray(config.clusters)) {
+        config?.clusters.forEach((cluster: Cluster) => {
+          clustersToConfig[cluster.name] = cluster;
+        });
+      }
 
       const configToStore = {
         statelessClusters: clustersToConfig,
