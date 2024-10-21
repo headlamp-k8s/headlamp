@@ -22,12 +22,11 @@ read those guidelines.
 
 ## Community Monthly Call
 
-We are starting a monthly call to discuss the project, the roadmap, and the community.
+We hold a monthly call to discuss the project, the roadmap, and the community.
 
-This first call will be held on Wednesday, September 25th, 2024 at [6:00 PM CEST](https://www.timeanddate.com/worldclock/converter.html?iso=20240925T160000&p1=37&p2=179&p3=224&p4=136&p5=33&p6=176).
-Please mark it on your calendar via this [event](https://calendar.app.google/xKZQJ6hEs5YNYHtaA).
+You can find Headlamp's list of upcoming events in its [CNCF calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp?view=list).
 
-Details on the meeting link will be added to the calendar event soon.
+The next Community Call will be held on October 24th, 2024 at [5:00 PM CEST](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp?view=month&occurrence=1729782000).
 
 ## Filing an issue or feature request
 
