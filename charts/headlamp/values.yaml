@@ -205,3 +205,18 @@ tolerations: []
 
 # -- Affinity settings for pod assignment
 affinity: {}
+
+# -- Additional Kubernetes manifests to be deployed. Include the manifest as nested YAML.
+extraManifests: []
+# - apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: my-config
+#   data:
+#     key: value
+# - apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: my-config-too
+#   data:
+#     key: value
