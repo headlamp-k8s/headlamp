@@ -34,6 +34,7 @@ func main() {
 
 	cache := cache.New[interface{}]()
 	kubeConfigStore := kubeconfig.NewContextStore()
+	multiplexer := NewMultiplexer(kubeConfigStore)
 
 	StartHeadlampServer(&HeadlampConfig{
 		useInCluster:          conf.InCluster,
@@ -53,5 +54,6 @@ func main() {
 		enableDynamicClusters: conf.EnableDynamicClusters,
 		cache:                 cache,
 		kubeConfigStore:       kubeConfigStore,
+		multiplexer:           multiplexer,
 	})
 }

@@ -59,6 +59,7 @@ type HeadlampConfig struct {
 	proxyURLs             []string
 	cache                 cache.Cache[interface{}]
 	kubeConfigStore       kubeconfig.ContextStore
+	multiplexer           *Multiplexer
 }
 
 const DrainNodeCacheTTL = 20 // seconds
@@ -1599,6 +1600,9 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 
 	// Rename a cluster
 	r.HandleFunc("/cluster/{name}", c.renameCluster).Methods("PUT")
+
+	// Websocket connections
+	r.HandleFunc("/wsMutliplexer", c.multiplexer.HandleClientWebSocket)
 }
 
 /*
