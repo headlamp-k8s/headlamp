@@ -1,12 +1,27 @@
 import { GlobalStyles } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
-import React from 'react';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, HashRouter, useHistory, useLocation } from 'react-router-dom';
 import helpers from '../../helpers';
 import Plugins from '../../plugin/Plugins';
 import ReleaseNotes from '../common/ReleaseNotes/ReleaseNotes';
 import Layout from './Layout';
 import { PreviousRouteProvider } from './RouteSwitcher';
+
+const RedirectHandler = () => {
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const redirectPath = searchParams.get('to');
+    if (redirectPath) {
+      history.replace(redirectPath);
+    }
+  }, [history, location]);
+
+  return null;
+};
 
 export default function AppContainer() {
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
@@ -39,6 +54,7 @@ export default function AppContainer() {
       />
       <Router>
         <PreviousRouteProvider>
+          <RedirectHandler />
           <Plugins />
           <Layout />
         </PreviousRouteProvider>
