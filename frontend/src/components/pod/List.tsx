@@ -9,6 +9,7 @@ import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSl
 import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { ResourceTableProps } from '../common/Resource/ResourceTable';
 
 export function makePodStatusLabel(pod: Pod) {
   const phase = pod.status.phase;
@@ -71,10 +72,18 @@ export interface PodListProps {
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
+  clusterErrors?: ResourceTableProps<Pod>['clusterErrors'];
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter } = props;
+  const {
+    pods,
+    error,
+    hideColumns = [],
+    reflectTableInURL = 'pods',
+    noNamespaceFilter,
+    clusterErrors,
+  } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (
@@ -208,22 +217,26 @@ export function PodListRenderer(props: PodListProps) {
       ]}
       data={pods}
       reflectInURL={reflectTableInURL}
+      clusterErrors={clusterErrors}
       id="headlamp-pods"
     />
   );
 }
 
 export default function PodList() {
-  const [pods, error] = Pod.useList();
+  const { items, error, clusterErrors } = Pod.useList();
+
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
 
   React.useEffect(() => {
     dispatchHeadlampEvent({
-      resources: pods ?? [],
+      resources: items ?? [],
       resourceKind: 'Pod',
       error: error || undefined,
     });
-  }, [pods, error]);
+  }, [items, error]);
 
-  return <PodListRenderer pods={pods} error={error} reflectTableInURL />;
+  return (
+    <PodListRenderer pods={items} error={error} clusterErrors={clusterErrors} reflectTableInURL />
+  );
 }
