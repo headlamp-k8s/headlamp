@@ -55,6 +55,14 @@ export interface QueryResponse<DataType, ErrorType> {
 export interface QueryListResponse<DataType, ItemType, ErrorType>
   extends QueryResponse<DataType, ErrorType> {
   items: Array<ItemType> | null;
+  /**
+   * Results from individual clusters. Keyed by cluster name.
+   */
+  clusterResults?: Record<string, QueryListResponse<DataType, ItemType, ErrorType>>;
+  /**
+   * Errors from individual clusters. Keyed by cluster name.
+   */
+  clusterErrors?: Record<string, ApiError | null> | null;
 }
 
 /**
@@ -189,8 +197,10 @@ const useEndpoints = (endpoints: KubeObjectEndpoint[]) => {
 
 /**
  * Returns a list of Kubernetes objects and watches for changes
+ *
+ * @private please use useKubeObjectList.
  */
-export function useKubeObjectList<T extends KubeObjectClass>({
+function _useKubeObjectList<T extends KubeObjectClass>({
   kubeObjectClass,
   namespace,
   cluster: maybeCluster,
@@ -231,9 +241,11 @@ export function useKubeObjectList<T extends KubeObjectClass>({
           cluster,
         }
       ).then(it => it.json());
-      list.items = list.items.map(
-        item => new kubeObjectClass({ ...item, kind: list.kind.replace('List', '') })
-      );
+      list.items = list.items.map(item => {
+        const itm = new kubeObjectClass({ ...item, kind: list.kind.replace('List', '') });
+        itm.cluster = cluster;
+        return itm;
+      });
 
       return list;
     },
@@ -273,5 +285,124 @@ export function useKubeObjectList<T extends KubeObjectClass>({
       yield items;
       yield query.error;
     },
+  };
+}
+
+/**
+ * Returns a combined list of Kubernetes objects and watches for changes from the clusters given.
+ */
+export function useKubeObjectList<T extends KubeObjectClass>({
+  kubeObjectClass,
+  namespace,
+  cluster,
+  clusters,
+  queryParams,
+}: {
+  /** Class to instantiate the object with */
+  kubeObjectClass: T;
+  /** Object list namespace */
+  namespace?: string;
+  cluster?: string;
+  /** Object list clusters */
+  clusters?: string[];
+  queryParams?: QueryParameters;
+}): [Array<InstanceType<T>> | null, ApiError | null] &
+  QueryListResponse<KubeList<InstanceType<T>>, InstanceType<T>, ApiError> {
+  if (clusters && clusters.length > 0) {
+    return _useKubeObjectLists({
+      kubeObjectClass,
+      namespace,
+      clusters: clusters,
+      queryParams,
+    });
+  } else {
+    return _useKubeObjectList<T>({
+      kubeObjectClass,
+      namespace,
+      cluster: cluster,
+      queryParams,
+    });
+  }
+}
+
+/**
+ * Returns a combined list of Kubernetes objects and watches for changes from the clusters given.
+ *
+ * @private please use useKubeObjectList
+ */
+function _useKubeObjectLists<T extends KubeObjectClass>({
+  kubeObjectClass,
+  namespace,
+  clusters,
+  queryParams,
+}: {
+  /** Class to instantiate the object with */
+  kubeObjectClass: T;
+  /** Object list namespace */
+  namespace?: string;
+  /** Object list clusters */
+  clusters: string[];
+  queryParams?: QueryParameters;
+}): [Array<InstanceType<T>> | null, ApiError | null] &
+  QueryListResponse<KubeList<InstanceType<T>>, InstanceType<T>, ApiError> {
+  const clusterResults: Record<string, ReturnType<typeof useKubeObjectList>> = {};
+
+  for (const cluster of clusters) {
+    clusterResults[cluster] = useKubeObjectList({
+      kubeObjectClass,
+      namespace,
+      cluster: cluster || undefined,
+      queryParams,
+    });
+  }
+
+  let items = null;
+  for (const cluster of clusters) {
+    if (items === null) {
+      items = clusterResults[cluster].items;
+    } else {
+      items = items.concat(clusterResults[cluster].items);
+    }
+  }
+
+  // data makes no sense really for multiple clusters, but useful for single cluster?
+  const data =
+    clusters.map(cluster => clusterResults[cluster].data).find(it => it !== null) ?? null;
+  const error =
+    clusters.map(cluster => clusterResults[cluster].error).find(it => it !== null) ?? null;
+  const isError = clusters.some(cluster => clusterResults[cluster].isError);
+  const isLoading = clusters.some(cluster => clusterResults[cluster].isLoading);
+  const isFetching = clusters.some(cluster => clusterResults[cluster].isFetching);
+  const isSuccess = clusters.every(cluster => clusterResults[cluster].isSuccess);
+  // status makes no sense really for multiple clusters, but maybe useful for single cluster?
+  const status =
+    clusters.map(cluster => clusterResults[cluster].status).find(it => it !== null) ?? 'pending';
+
+  let clusterErrors: Record<string, ApiError | null> | null = {};
+  clusters.forEach(cluster => {
+    if (clusterErrors && clusterResults[cluster]?.error !== null) {
+      clusterErrors[cluster] = clusterResults[cluster].error;
+    }
+  });
+  if (Object.keys(clusterErrors).length === 0) {
+    clusterErrors = null;
+  }
+
+  // @ts-ignore
+  return {
+    items,
+    data,
+    error,
+    isError,
+    isLoading,
+    isFetching,
+    isSuccess,
+    status,
+    *[Symbol.iterator](): ArrayIterator<ApiError | InstanceType<T>[] | null> {
+      yield items;
+      yield error;
+    },
+    clusterResults,
+    clusterErrors,
   };
 }
