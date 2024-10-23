@@ -5,23 +5,25 @@ export class HeadlampPage {
   constructor(private page: Page) {}
 
   async authenticate() {
-    await this.page.goto('/');
+    // Go to the authentication page
+    const url = process.env.HEADLAMP_TEST_URL;
+    await this.page.goto(url || '/');
     await this.page.waitForSelector('h1:has-text("Authentication")');
 
-    // Expects the URL to contain c/main/token
-    this.hasURLContaining(/.*token/);
+    // Check to see if already authenticated
+    if (await this.page.isVisible('button:has-text("Authenticate")')) {
+      const token = process.env.HEADLAMP_TOKEN || '';
+      this.hasToken(token);
 
-    const token = process.env.HEADLAMP_TOKEN || '';
-    this.hasToken(token);
+      // Fill in the token
+      await this.page.locator('#token').fill(token);
 
-    // Fill in the token
-    await this.page.locator('#token').fill(token);
-
-    // Click on the "Authenticate" button and wait for navigation
-    await Promise.all([
-      this.page.waitForNavigation(),
-      this.page.click('button:has-text("Authenticate")'),
-    ]);
+      // Click on the "Authenticate" button and wait for navigation
+      await Promise.all([
+        this.page.waitForNavigation(),
+        this.page.click('button:has-text("Authenticate")'),
+      ]);
+    }
   }
 
   async hasURLContaining(pattern: RegExp) {
@@ -55,6 +57,27 @@ export class HeadlampPage {
   async pageLocatorContent(locator: string, text: string) {
     const pageContent = this.page.locator(locator).textContent();
     expect(await pageContent).toContain(text);
+  }
+
+  async startFromMainPage() {
+    await this.page.waitForLoadState('load');
+
+    // for local test use only
+    // note: backend must be running with connected frontend for web mode
+    if (process.env.PLAYWRIGHT_TEST_MODE === 'web') {
+      await this.page.goto('localhost:3000');
+    }
+
+    await this.page.waitForTimeout(5000);
+    const currentURL = this.page.url();
+
+    // note: this starts at the cluster select page if the URL does not contain minikube or main then there is more than one cluster
+    if (!currentURL.includes('c/minikube') && !currentURL.includes('c/main')) {
+      console.log('MORE THAN ONE CLUSTER');
+      await this.page.waitForSelector('a:has-text("minikube")');
+      await this.page.getByRole('link', { name: 'minikube' }).click();
+      await this.page.waitForLoadState('load');
+    }
   }
 
   async navigateTopage(page: string, title: RegExp) {
