@@ -30,8 +30,14 @@ export interface KubeResourceQuota extends KubeObjectInterface {
   status: status;
 }
 
-class ResourceQuota extends makeKubeObject<KubeResourceQuota>('resourceQuota') {
+class ResourceQuota extends makeKubeObject<KubeResourceQuota>('ResourceQuota') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'resourcequotas');
+
+  static getBaseObject(): KubeResourceQuota {
+    const baseObject = super.getBaseObject() as KubeResourceQuota;
+    baseObject.spec = { hard: {} };
+    return baseObject;
+  }
 
   get spec(): spec {
     return this.jsonData!.spec;

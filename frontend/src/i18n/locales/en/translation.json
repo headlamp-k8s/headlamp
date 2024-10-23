@@ -141,6 +141,7 @@
   "Lost connection to the cluster.": "Lost connection to the cluster.",
   "No": "No",
   "Yes": "Yes",
+  "Create {{ name }}": "Create {{ name }}",
   "Toggle fullscreen": "Toggle fullscreen",
   "Close": "Close",
   "Uh-oh! Something went wrong.": "Uh-oh! Something went wrong.",

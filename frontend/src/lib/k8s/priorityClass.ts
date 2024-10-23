@@ -8,8 +8,17 @@ export interface KubePriorityClass extends KubeObjectInterface {
   description: string;
 }
 
-class PriorityClass extends makeKubeObject<KubePriorityClass>('priorityClass') {
+class PriorityClass extends makeKubeObject<KubePriorityClass>('PriorityClass') {
   static apiEndpoint = apiFactory('scheduling.k8s.io', 'v1', 'priorityclasses');
+
+  static getBaseObject(): KubePriorityClass {
+    const baseObject = super.getBaseObject() as KubePriorityClass;
+    baseObject.value = 0;
+    baseObject.preemptionPolicy = '';
+    baseObject.globalDefault = false;
+    baseObject.description = '';
+    return baseObject;
+  }
 
   static get pluralName(): string {
     return 'priorityclasses';

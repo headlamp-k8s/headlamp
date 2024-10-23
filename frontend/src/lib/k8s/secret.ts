@@ -6,8 +6,14 @@ export interface KubeSecret extends KubeObjectInterface {
   type: string;
 }
 
-class Secret extends makeKubeObject<KubeSecret>('secret') {
+class Secret extends makeKubeObject<KubeSecret>('Secret') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'secrets');
+
+  static getBaseObject(): KubeSecret {
+    const baseObject = super.getBaseObject() as KubeSecret;
+    baseObject.data = {};
+    return baseObject;
+  }
 
   get data() {
     return this.jsonData!.data;
