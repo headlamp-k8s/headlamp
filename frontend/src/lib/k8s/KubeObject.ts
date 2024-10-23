@@ -9,15 +9,24 @@ import { timeAgo } from '../util';
 import { useConnectApi } from '.';
 import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
-import {
-  ApiListOptions,
-  ApiListSingleNamespaceOptions,
-  AuthRequestResourceAttrs,
-  KubeMetadata,
-  KubeObjectClass,
-  KubeObjectInterface,
-} from './cluster';
-import { KubeEvent } from './event';
+// import {
+//   ApiListOptions,
+//   ApiListSingleNamespaceOptions,
+//   AuthRequestResourceAttrs,
+//   KubeMetadata,
+//   KubeObjectClass,
+//   KubeObjectInterface,
+// } from './cluster';
+
+type KubeObjectInterface = any;
+type ApiListOptions = any;
+type ApiListSingleNamespaceOptions = any;
+type KubeMetadata = any;
+type AuthRequestResourceAttrs = any;
+
+class KubeObjectClass {
+  [any: string]: any;
+}
 
 function getAllowedNamespaces() {
   const cluster = getCluster();
@@ -29,11 +38,11 @@ function getAllowedNamespaces() {
   return clusterSettings.allowedNamespaces || [];
 }
 
-export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
+export class KubeObject<T extends any> {
   static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
   static readOnlyFields: string[] = [];
   static objectName: string;
-  jsonData: T;
+  jsonData: any;
   _clusterName: string;
 
   constructor(json: T, cluster?: string) {
