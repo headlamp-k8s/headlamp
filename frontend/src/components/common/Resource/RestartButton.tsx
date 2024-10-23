@@ -106,7 +106,7 @@ interface RestartDialogProps {
 function RestartDialog(props: RestartDialogProps) {
   const { resource, open, onClose, onSave } = props;
   const { t } = useTranslation();
-  const dispatchRestartEvent = useEventCallback(HeadlampEventType.DELETE_RESOURCE);
+  const dispatchRestartEvent = useEventCallback(HeadlampEventType.RESTART_RESOURCE);
 
   return (
     <Dialog
