@@ -160,7 +160,7 @@ export function useFilterFunc<
   const filter = useTypedSelector(state => state.filter);
 
   return (item: T, search?: string) => {
-    if (!!item.metadata) {
+    if (item?.metadata) {
       return filterResource(item as KubeObjectInterface | KubeEvent, filter, search, matchCriteria);
     }
     return filterGeneric<T>(item, search, matchCriteria);
