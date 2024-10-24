@@ -1,4 +1,4 @@
-import { TableCellProps } from '@mui/material';
+import { MenuItem, TableCellProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { MRT_FilterFns, MRT_Row, MRT_SortingFn } from 'material-react-table';
 import { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
@@ -9,6 +9,7 @@ import { ApiError } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 import { useFilterFunc } from '../../../lib/util';
+import { DefaultHeaderAction, RowAction } from '../../../redux/actionButtonsSlice';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
@@ -16,6 +17,11 @@ import { ClusterGroupErrorMessage } from '../../cluster/ClusterGroupErrorMessage
 import { DateLabel } from '../Label';
 import Link from '../Link';
 import Table, { TableColumn } from '../Table';
+import DeleteButton from './DeleteButton';
+import EditButton from './EditButton';
+import { RestartButton } from './RestartButton';
+import ScaleButton from './ScaleButton';
+import ViewButton from './ViewButton';
 
 export type ResourceTableColumn<RowItem> = {
   /** Unique id for the column, not required but recommended */
@@ -75,6 +81,9 @@ type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind' | 'cluster';
 export interface ResourceTableProps<RowItem> {
   /** The columns to be rendered, like used in Table, or by name. */
   columns: (ResourceTableColumn<RowItem> | ColumnType)[];
+  /** Show or hide row actions @default false*/
+  enableRowActions?: boolean;
+  actions?: null | RowAction[];
   /** Provide a list of columns that won't be shown and cannot be turned on */
   hideColumns?: string[] | null;
   /** ID for the table. Will be used by plugins to identify this table.
@@ -241,6 +250,8 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
     reflectInURL,
     data,
     defaultGlobalFilter,
+    actions,
+    enableRowActions = false,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
   const theme = useTheme();
@@ -400,6 +411,53 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
     tableSettings,
   ]);
 
+  const defaultActions: RowAction[] = [
+    {
+      id: DefaultHeaderAction.RESTART,
+      action: ({ item }) => <RestartButton item={item} buttonStyle="menu" />,
+    },
+    {
+      id: DefaultHeaderAction.SCALE,
+      action: ({ item }) => <ScaleButton item={item} buttonStyle="menu" />,
+    },
+    {
+      id: DefaultHeaderAction.EDIT,
+      action: ({ item, closeMenu }) => (
+        <EditButton item={item} buttonStyle="menu" afterConfirm={closeMenu} />
+      ),
+    },
+    {
+      id: DefaultHeaderAction.VIEW,
+      action: ({ item }) => <ViewButton item={item} buttonStyle="menu" />,
+    },
+    {
+      id: DefaultHeaderAction.DELETE,
+      action: ({ item, closeMenu }) => (
+        <DeleteButton item={item} buttonStyle="menu" afterConfirm={closeMenu} />
+      ),
+    },
+  ];
+  let hAccs: RowAction[] = [];
+  if (actions !== undefined && actions !== null) {
+    hAccs = actions;
+  }
+
+  const actionsProcessed: RowAction[] = [...hAccs, ...defaultActions];
+
+  const renderRowActionMenuItems = useMemo(() => {
+    if (actionsProcessed.length === 0) {
+      return null;
+    }
+    return ({ closeMenu, row }: { closeMenu: () => void; row: MRT_Row<Record<string, any>> }) => {
+      return actionsProcessed.map(action => {
+        if (action.action === undefined || action.action === null) {
+          return <MenuItem />;
+        }
+        return action.action({ item: row.original, closeMenu });
+      });
+    };
+  }, [actionsProcessed]);
+
   function onColumnsVisibilityChange(updater: any): void {
     setColumnVisibility(oldCols => {
       const newCols = updater(oldCols);
@@ -444,6 +502,8 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
         }}
         reflectInURL={reflectInURL}
         onColumnVisibilityChange={onColumnsVisibilityChange as any}
+        enableRowActions={enableRowActions}
+        renderRowActionMenuItems={renderRowActionMenuItems as any}
         filterFns={{
           kubeObjectSearch: (row, id, filterValue) => {
             const customFilterResult = filterFunc(row.original, filterValue);

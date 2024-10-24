@@ -45,7 +45,7 @@ export default function ResourceListView(
         )
       }
     >
-      <ResourceTable {...tableProps} />
+      <ResourceTable enableRowActions {...tableProps} />
       {children}
     </SectionBox>
   );

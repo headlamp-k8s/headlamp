@@ -207,6 +207,7 @@
     "POD_TERMINAL": "POD_TERMINAL",
     "RESTART": "RESTART",
     "SCALE": "SCALE",
+    "VIEW": "VIEW",
   },
   "Headlamp": [Function],
   "Iconify": {

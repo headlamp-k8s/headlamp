@@ -229,8 +229,8 @@
                   class="MuiTableContainer-root css-nhjqqh-MuiTableContainer-root"
                 >
                   <table
-                    class="MuiTable-root css-une18s-MuiTable-root"
-                    style="--header-0-size: 180; --col-0-size: 180; --header-namespace-size: 180; --col-namespace-size: 180; --header-2-size: 180; --col-2-size: 180; --header-age-size: 180; --col-age-size: 180;"
+                    class="MuiTable-root css-1woaafz-MuiTable-root"
+                    style="--header-0-size: 180; --col-0-size: 180; --header-namespace-size: 180; --col-namespace-size: 180; --header-2-size: 180; --col-2-size: 180; --header-age-size: 180; --col-age-size: 180; --header-mrt_row_actions-size: 70; --col-mrt_row_actions-size: 70;"
                   >
                     <thead
                       class="MuiTableHead-root css-114s3s2-MuiTableHead-root"
@@ -554,6 +554,30 @@
                             </div>
                           </div>
                         </th>
+                        <th
+                          aria-sort="none"
+                          class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-tb4te8-MuiTableCell-root"
+                          colspan="1"
+                          data-index="4"
+                          scope="col"
+                        >
+                          <div
+                            class="Mui-TableHeadCell-Content MuiBox-root css-1w86f15"
+                          >
+                            <div
+                              class="Mui-TableHeadCell-Content-Labels MuiBox-root css-4ng264"
+                            >
+                              <div
+                                class="Mui-TableHeadCell-Content-Wrapper MuiBox-root css-bbxzxe"
+                              >
+                                Actions
+                              </div>
+                            </div>
+                            <div
+                              class="Mui-TableHeadCell-Content-Actions MuiBox-root css-epvm6"
+                            />
+                          </div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody
@@ -603,6 +627,33 @@
                             3mo
                           </p>
                         </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e3iv5e-MuiTableCell-root"
+                          data-index="4"
+                        >
+                          <button
+                            aria-label="Row Actions"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1cxdeyj-MuiButtonBase-root-MuiIconButton-root"
+                            data-mui-internal-clone-element="true"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                              data-testid="MoreHorizIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2"
+                              />
+                            </svg>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </button>
+                        </td>
                       </tr>
                       <tr
                         class="MuiTableRow-root css-n8542r-MuiTableRow-root"
@@ -647,6 +698,33 @@
                           >
                             3mo
                           </p>
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e3iv5e-MuiTableCell-root"
+                          data-index="4"
+                        >
+                          <button
+                            aria-label="Row Actions"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1cxdeyj-MuiButtonBase-root-MuiIconButton-root"
+                            data-mui-internal-clone-element="true"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                              data-testid="MoreHorizIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2"
+                              />
+                            </svg>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </button>
                         </td>
                       </tr>
                     </tbody>

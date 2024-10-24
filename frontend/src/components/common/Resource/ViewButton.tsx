@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { KubeObject } from '../../../lib/k8s/KubeObject';
-import ActionButton from '../ActionButton';
+import { KubeObject } from '../../../lib/k8s/cluster';
+import ActionButton, { ButtonStyle } from '../ActionButton';
 import EditorDialog from './EditorDialog';
 
 export interface ViewButtonProps {
@@ -9,20 +9,20 @@ export interface ViewButtonProps {
   item: KubeObject;
   /** If we want to have the view open by default */
   initialToggle?: boolean;
+  buttonStyle?: ButtonStyle;
 }
 
-function ViewButton({ item, initialToggle = false }: ViewButtonProps) {
+function ViewButton({ item, buttonStyle, initialToggle = false }: ViewButtonProps) {
   const [toggle, setToggle] = React.useState(initialToggle);
   const { t } = useTranslation();
-
-  function handleButtonClick() {
-    setToggle(toggle => !toggle);
-  }
   return (
     <>
       <ActionButton
-        description={t('View YAML')}
-        onClick={handleButtonClick}
+        description={t('translation|View YAML')}
+        buttonStyle={buttonStyle}
+        onClick={() => {
+          setToggle(true);
+        }}
         icon="mdi:eye"
         edge="end"
       />
