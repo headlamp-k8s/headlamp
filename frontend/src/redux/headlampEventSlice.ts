@@ -5,8 +5,8 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { KubeObject } from '../lib/k8s/cluster';
 import Event from '../lib/k8s/event';
+import { KubeObject } from '../lib/k8s/KubeObject';
 import Pod from '../lib/k8s/pod';
 import { Plugin } from '../plugin/lib';
 import { RootState } from './reducers/reducers';

@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeCondition, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeCondition } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubePortStatus {
   error?: string;
@@ -39,15 +39,18 @@ export interface KubeService extends KubeObjectInterface {
   };
 }
 
-class Service extends makeKubeObject<KubeService>('service') {
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'services');
+class Service extends KubeObject<KubeService> {
+  static kind = 'Service';
+  static apiName = 'services';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
 
   get spec(): KubeService['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getExternalAddresses() {

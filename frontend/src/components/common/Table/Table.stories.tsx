@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, StoryFn } from '@storybook/react';
 import { useLocation } from 'react-router-dom';
-import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../../lib/k8s/KubeObject';
 import { useFilterFunc } from '../../../lib/util';
 import { TestContext, TestContextProps } from '../../../test';
 import SectionFilterHeader from '../SectionFilterHeader';
@@ -232,7 +232,7 @@ type TableWithFilterProps = TableProps<any> & { matchCriteria?: string[] };
 function TableWithFilter(props: TableWithFilterProps) {
   const { matchCriteria, ...otherProps } = props;
   const filterFunc = useFilterFunc(matchCriteria);
-  return <Table filterFunction={filterFunc} {...otherProps} />;
+  return <Table<any> filterFunction={filterFunc} {...otherProps} />;
 }
 
 const TemplateWithFilter: StoryFn<{

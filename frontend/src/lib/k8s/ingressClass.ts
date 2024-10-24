@@ -1,5 +1,4 @@
-import { apiFactory } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeIngressClass extends KubeObjectInterface {
   spec: {
@@ -8,15 +7,18 @@ export interface KubeIngressClass extends KubeObjectInterface {
   };
 }
 
-class IngressClass extends makeKubeObject<KubeIngressClass>('ingressClass') {
-  static apiEndpoint = apiFactory(['networking.k8s.io', 'v1', 'ingressclasses']);
+class IngressClass extends KubeObject<KubeIngressClass> {
+  static kind = 'IngressClass';
+  static apiName = 'ingressclasses';
+  static apiVersion = 'networking.k8s.io/v1';
+  static isNamespaced = false;
 
   get spec(): KubeIngressClass['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get isDefault(): boolean {
-    const annotations = this.jsonData!.metadata?.annotations;
+    const annotations = this.jsonData.metadata?.annotations;
     if (annotations !== undefined) {
       return annotations['ingressclass.kubernetes.io/is-default-class'] === 'true';
     }

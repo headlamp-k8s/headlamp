@@ -1,25 +1,32 @@
-import { apiFactory } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeStorageClass extends KubeObjectInterface {
   provisioner: string;
   reclaimPolicy: string;
   volumeBindingMode: string;
+  allowVolumeExpansion?: boolean;
 }
 
-class StorageClass extends makeKubeObject<KubeStorageClass>('storageClass') {
-  static apiEndpoint = apiFactory('storage.k8s.io', 'v1', 'storageclasses');
+class StorageClass extends KubeObject<KubeStorageClass> {
+  static kind = 'StorageClass';
+  static apiName = 'storageclasses';
+  static apiVersion = 'storage.k8s.io/v1';
+  static isNamespaced = false;
 
   get provisioner() {
-    return this.jsonData?.provisioner;
+    return this.jsonData.provisioner;
   }
 
   get reclaimPolicy() {
-    return this.jsonData?.reclaimPolicy;
+    return this.jsonData.reclaimPolicy;
   }
 
   get volumeBindingMode() {
-    return this.jsonData?.volumeBindingMode;
+    return this.jsonData.volumeBindingMode;
+  }
+
+  get allowVolumeExpansion() {
+    return this.jsonData.allowVolumeExpansion;
   }
 
   static get listRoute() {

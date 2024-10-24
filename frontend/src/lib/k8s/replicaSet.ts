@@ -1,12 +1,6 @@
-import { apiFactoryWithNamespace } from './apiProxy';
-import {
-  KubeCondition,
-  KubeContainer,
-  KubeMetadata,
-  KubeObjectInterface,
-  LabelSelector,
-  makeKubeObject,
-} from './cluster';
+import { KubeCondition, KubeContainer, LabelSelector } from './cluster';
+import { KubeMetadata } from './KubeMetadata';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 import { KubePodSpec } from './pod';
 
 export interface KubeReplicaSet extends KubeObjectInterface {
@@ -30,15 +24,18 @@ export interface KubeReplicaSet extends KubeObjectInterface {
   };
 }
 
-class ReplicaSet extends makeKubeObject<KubeReplicaSet>('ReplicaSet') {
-  static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'replicasets', true);
+class ReplicaSet extends KubeObject<KubeReplicaSet> {
+  static kind = 'ReplicaSet';
+  static apiName = 'replicasets';
+  static apiVersion = 'apps/v1';
+  static isNamespaced = true;
 
   get spec(): KubeReplicaSet['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): KubeReplicaSet['status'] {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getContainers(): KubeContainer[] {

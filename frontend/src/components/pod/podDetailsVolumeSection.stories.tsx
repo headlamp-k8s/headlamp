@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../lib/k8s/KubeObject';
 import { TestContext } from '../../test';
 import { VolumeSection, VolumeSectionProps } from '../common';
 

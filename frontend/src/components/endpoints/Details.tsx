@@ -55,7 +55,9 @@ export default function EndpointDetails() {
                               label: t('Target'),
                               getter: address => {
                                 const targetRefClass = !!address.targetRef?.kind
-                                  ? ResourceClasses[address.targetRef?.kind]
+                                  ? ResourceClasses[
+                                      address.targetRef?.kind as keyof typeof ResourceClasses
+                                    ]
                                   : null;
                                 if (!!targetRefClass) {
                                   return (

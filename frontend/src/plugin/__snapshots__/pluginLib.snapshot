@@ -252,6 +252,7 @@
       "DaemonSet": [Function],
       "Deployment": [Function],
       "Endpoint": [Function],
+      "Endpoints": [Function],
       "HorizontalPodAutoscaler": [Function],
       "Ingress": [Function],
       "IngressClass": [Function],
@@ -279,6 +280,7 @@
     },
     "cluster": {
       "HEADLAMP_ALLOWED_NAMESPACES": "headlamp.allowed-namespaces",
+      "KubeObject": [Function],
       "getAllowedNamespaces": [Function],
       "makeKubeObject": [Function],
     },

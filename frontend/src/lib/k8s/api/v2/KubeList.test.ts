@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { KubeObjectClass, KubeObjectInterface } from '../../cluster';
+import { KubeObjectClass, KubeObjectInterface } from '../../KubeObject';
 import { KubeList, KubeListUpdateEvent } from './KubeList';
 
 class MockKubeObject implements KubeObjectInterface {
@@ -17,7 +17,7 @@ class MockKubeObject implements KubeObjectInterface {
 
 describe('KubeList.applyUpdate', () => {
   const itemClass = MockKubeObject as unknown as KubeObjectClass;
-  const initialList = {
+  const initialList: KubeList<any> = {
     kind: 'MockKubeList',
     apiVersion: 'v1',
     items: [

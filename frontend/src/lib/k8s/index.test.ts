@@ -1,6 +1,7 @@
 import { createRouteURL } from '../router';
 import { labelSelectorToQuery, ResourceClasses } from '.';
-import { KubeObjectClass, LabelSelector } from './cluster';
+import { LabelSelector } from './cluster';
+import { KubeObjectClass } from './KubeObject';
 import Namespace from './namespace';
 
 // Remove NetworkPolicy since we don't use it.
@@ -224,6 +225,7 @@ const namespacedClasses = [
   'DaemonSet',
   'Deployment',
   'Endpoint',
+  'Endpoints',
   'HorizontalPodAutoscaler',
   'Ingress',
   'Job',
@@ -244,7 +246,7 @@ const namespacedClasses = [
 ];
 
 describe('Test class namespaces', () => {
-  const classCopy = { ...ResourceClasses };
+  const classCopy: Record<string, KubeObjectClass> = { ...ResourceClasses };
   namespacedClasses.forEach(cls => {
     test(`Check namespaced ${cls}`, () => {
       expect(classCopy[cls]).toBeDefined();

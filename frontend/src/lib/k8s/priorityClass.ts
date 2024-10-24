@@ -1,38 +1,32 @@
-import { apiFactory } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubePriorityClass extends KubeObjectInterface {
   value: number;
   preemptionPolicy: string;
-  globalDefault?: boolean;
+  globalDefault?: boolean | null;
   description: string;
 }
 
-class PriorityClass extends makeKubeObject<KubePriorityClass>('priorityClass') {
-  static apiEndpoint = apiFactory('scheduling.k8s.io', 'v1', 'priorityclasses');
+class PriorityClass extends KubeObject<KubePriorityClass> {
+  static kind = 'PriorityClass';
+  static apiName = 'priorityclasses';
+  static apiVersion = 'scheduling.k8s.io/v1';
+  static isNamespaced = false;
 
-  static get pluralName(): string {
-    return 'priorityclasses';
-  }
-
-  static get listRoute() {
-    return 'priorityclasses';
-  }
-
-  get value(): string {
+  get value(): number {
     return this.jsonData!.value;
   }
 
   get globalDefault(): boolean | null {
-    return this.jsonData.globalDefault;
+    return this.jsonData.globalDefault!;
   }
 
   get description(): string {
-    return this.jsonData!.description;
+    return this.jsonData.description;
   }
 
   get preemptionPolicy(): string {
-    return this.jsonData!.preemptionPolicy;
+    return this.jsonData.preemptionPolicy;
   }
 }
 

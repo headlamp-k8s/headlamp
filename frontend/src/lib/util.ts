@@ -7,9 +7,11 @@ import { useTypedSelector } from '../redux/reducers/reducers';
 import store from '../redux/stores/store';
 import { getCluster, getClusterPrefixedPath } from './cluster';
 import { ApiError } from './k8s/apiProxy';
-import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
+import { KubeMetrics } from './k8s/cluster';
 import { KubeEvent } from './k8s/event';
+import { KubeObjectInterface } from './k8s/KubeObject';
 import Node from './k8s/node';
+import { Workload } from './k8s/Workload';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 
 // Exported to keep compatibility for plugins that may have used them.
@@ -191,8 +193,7 @@ export function useErrorState(dependentSetter?: (...args: any) => void) {
     [error]
   );
 
-  // Adding "as any" here because it was getting difficult to validate the setter type.
-  return [error, setError as any];
+  return [error, setError] as const;
 }
 
 /**

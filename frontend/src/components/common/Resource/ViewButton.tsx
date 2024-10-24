@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeObject } from '../../../lib/k8s/KubeObject';
 import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
 

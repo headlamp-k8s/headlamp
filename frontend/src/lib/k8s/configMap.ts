@@ -1,15 +1,18 @@
-import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject, StringDict } from './cluster';
+import { StringDict } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeConfigMap extends KubeObjectInterface {
   data: StringDict;
 }
 
-class ConfigMap extends makeKubeObject<KubeConfigMap>('configMap') {
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'configmaps');
+class ConfigMap extends KubeObject<KubeConfigMap> {
+  static kind = 'ConfigMap';
+  static apiName = 'configmaps';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
 
   get data() {
-    return this.jsonData?.data;
+    return this.jsonData.data;
   }
 }
 

@@ -1,5 +1,4 @@
-import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface LeaseSpec {
   holderIdentity: string;
@@ -12,10 +11,13 @@ export interface KubeLease extends KubeObjectInterface {
   spec: LeaseSpec;
 }
 
-export class Lease extends makeKubeObject<KubeLease>('Lease') {
-  static apiEndpoint = apiFactoryWithNamespace('coordination.k8s.io', 'v1', 'leases');
+export class Lease extends KubeObject<KubeLease> {
+  static kind = 'Lease';
+  static apiName = 'leases';
+  static apiVersion = 'coordination.k8s.io/v1';
+  static isNamespaced = true;
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 }

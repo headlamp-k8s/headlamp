@@ -1,7 +1,8 @@
 import { ResourceClasses } from '.';
-import { apiFactoryWithNamespace } from './apiProxy';
 import { request } from './apiProxy';
-import { KubeObject, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject } from './KubeObject';
+import { KubeObjectInterface } from './KubeObject';
+import { KubeObjectClass } from './KubeObject';
 
 type ResourceName = 'cpu' | 'memory' | 'storage' | 'ephemeral-storage';
 
@@ -76,12 +77,11 @@ export interface KubeVPA extends KubeObjectInterface {
   status: VpaStatus;
 }
 
-class VPA extends makeKubeObject<KubeVPA>('verticalPodAutoscaler') {
-  static apiEndpoint = apiFactoryWithNamespace(
-    'autoscaling.k8s.io',
-    'v1',
-    'verticalpodautoscalers'
-  );
+class VPA extends KubeObject<KubeVPA> {
+  static kind = 'VerticalPodAutoscaler';
+  static apiName = 'verticalpodautoscalers';
+  static apiVersion = 'autoscaling.k8s.io/v1';
+  static isNamespaced = true;
 
   static async isEnabled(): Promise<boolean> {
     let res;
@@ -102,11 +102,11 @@ class VPA extends makeKubeObject<KubeVPA>('verticalPodAutoscaler') {
   }
 
   get spec(): VpaSpec {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): VpaStatus {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get referenceObject(): KubeObject | null {
@@ -115,7 +115,7 @@ class VPA extends makeKubeObject<KubeVPA>('verticalPodAutoscaler') {
       return null;
     }
 
-    const TargetObjectClass = ResourceClasses[target.kind];
+    const TargetObjectClass = (ResourceClasses as Record<string, KubeObjectClass>)[target.kind];
     let objInstance: KubeObject | null = null;
     if (!!TargetObjectClass) {
       objInstance = new TargetObjectClass({
@@ -124,7 +124,7 @@ class VPA extends makeKubeObject<KubeVPA>('verticalPodAutoscaler') {
           namespace: target.namespace || this.metadata.namespace,
         },
         kind: target.kind,
-      });
+      } as KubeObjectInterface);
     }
     return objInstance;
   }

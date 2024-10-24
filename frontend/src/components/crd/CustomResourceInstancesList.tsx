@@ -1,8 +1,8 @@
 import { Alert, AlertTitle } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { KubeObject } from '../../lib/k8s/cluster';
 import CRD from '../../lib/k8s/crd';
+import { KubeObject } from '../../lib/k8s/KubeObject';
 import { Link, Loader, SectionBox, ShowHideLabel } from '../common/';
 import Empty from '../common/EmptyContent';
 import { ResourceListView } from '../common/Resource';
@@ -115,7 +115,7 @@ function CrInstancesView({ crds }: { crds: CRD[]; key: string }) {
           {
             label: 'Categories',
             getValue: cr => {
-              const categories = getCRDForCR(cr).jsonData!.status.acceptedNames.categories;
+              const categories = getCRDForCR(cr).jsonData.status?.acceptedNames?.categories;
               return categories !== undefined ? categories.toString().split(',').join(', ') : '';
             },
           },

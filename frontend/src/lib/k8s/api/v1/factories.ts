@@ -4,7 +4,7 @@
 import { OpPatch } from 'json-patch';
 import { isDebugVerbose } from '../../../../helpers';
 import { getCluster } from '../../../cluster';
-import { KubeObjectInterface } from '../../cluster';
+import { KubeObjectInterface } from '../../KubeObject';
 import { ApiError, clusterRequest, patch, post, put, remove } from './clusterRequests';
 import { asQuery, getApiRoot } from './formatUrl';
 import { QueryParameters } from './queryParameters';

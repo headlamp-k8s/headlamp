@@ -1,6 +1,5 @@
 import { normalizeUnit } from '../util';
-import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 interface spec {
   hard: {
@@ -30,15 +29,18 @@ export interface KubeResourceQuota extends KubeObjectInterface {
   status: status;
 }
 
-class ResourceQuota extends makeKubeObject<KubeResourceQuota>('resourceQuota') {
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'resourcequotas');
+class ResourceQuota extends KubeObject<KubeResourceQuota> {
+  static kind = 'ResourceQuota';
+  static apiName = 'resourcequotas';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
 
   get spec(): spec {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status(): status {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get requests(): string[] {

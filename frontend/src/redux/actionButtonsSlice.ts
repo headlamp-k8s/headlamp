@@ -1,20 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { get, set } from 'lodash';
 import { ReactElement, ReactNode } from 'react';
-import { KubeObject } from '../lib/k8s/cluster';
+import { KubeObject } from '../lib/k8s/KubeObject';
 
-export type HeaderActionType =
-  | ((...args: any[]) => JSX.Element | null | ReactNode)
-  | null
-  | ReactElement
-  | ReactNode;
+export type HeaderActionType = ((...args: any[]) => ReactNode) | null | ReactElement | ReactNode;
 export type DetailsViewFunc = HeaderActionType;
 
-export type AppBarActionType =
-  | ((...args: any[]) => JSX.Element | null | ReactNode)
-  | null
-  | ReactElement
-  | ReactNode;
+export type AppBarActionType = ((...args: any[]) => ReactNode) | null | ReactElement | ReactNode;
 
 export type HeaderAction = {
   id: string;

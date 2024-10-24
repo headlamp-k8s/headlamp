@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeObject } from '../../../lib/k8s/KubeObject';
+import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 
 export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
   /** The item for which auth will be checked or a resource class (e.g. Job). */
-  item: KubeObject;
+  item: KubeObject | KubeObjectClass | null;
   /** The verb associated with the permissions being verifying. See https://kubernetes.io/docs/reference/access-authn-authz/authorization/#determine-the-request-verb . */
   authVerb: string;
   /** The subresource for which the permissions are being verifyied (e.g. "log" when checking for a pod's log). */
@@ -31,7 +32,7 @@ export default function AuthVisible(props: AuthVisibleProps) {
     queryKey: ['authVisible', item, authVerb, subresource, namespace],
     queryFn: async () => {
       try {
-        const res = await item.getAuthorization(authVerb, { subresource, namespace });
+        const res = await item!.getAuthorization(authVerb, { subresource, namespace });
         return res;
       } catch (e: any) {
         onError?.(e);

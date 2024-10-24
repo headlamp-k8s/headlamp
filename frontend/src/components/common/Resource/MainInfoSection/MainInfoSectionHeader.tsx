@@ -1,7 +1,7 @@
 import { has } from 'lodash';
 import React, { isValidElement } from 'react';
 import { useLocation } from 'react-router-dom';
-import { KubeObject } from '../../../../lib/k8s/cluster';
+import { KubeObject } from '../../../../lib/k8s/KubeObject';
 import {
   DefaultHeaderAction,
   HeaderAction,
@@ -15,12 +15,12 @@ import EditButton from '../EditButton';
 import { RestartButton } from '../RestartButton';
 import ScaleButton from '../ScaleButton';
 
-export interface MainInfoHeaderProps {
-  resource: KubeObject | null;
-  headerSection?: ((resource: KubeObject | null) => React.ReactNode) | React.ReactNode;
+export interface MainInfoHeaderProps<T extends KubeObject> {
+  resource: T | null;
+  headerSection?: ((resource: T | null) => React.ReactNode) | React.ReactNode;
   title?: string;
   actions?:
-    | ((resource: KubeObject | null) => React.ReactNode[] | HeaderAction[] | null)
+    | ((resource: T | null) => React.ReactNode[] | HeaderAction[] | null)
     | React.ReactNode[]
     | null
     | HeaderAction[];
@@ -30,7 +30,7 @@ export interface MainInfoHeaderProps {
   backLink?: string | ReturnType<typeof useLocation> | null;
 }
 
-export function MainInfoHeader(props: MainInfoHeaderProps) {
+export function MainInfoHeader<T extends KubeObject>(props: MainInfoHeaderProps<T>) {
   const { resource, title, actions = [], headerStyle = 'main', noDefaultActions = false } = props;
   const headerActions = useTypedSelector(state => state.actionButtons.headerActions);
   const headerActionsProcessors = useTypedSelector(

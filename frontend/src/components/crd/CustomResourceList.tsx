@@ -3,8 +3,8 @@ import { JSONPath } from 'jsonpath-plus';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { KubeObject } from '../../lib/k8s/cluster';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
+import { KubeObject } from '../../lib/k8s/KubeObject';
 import { localeDate } from '../../lib/util';
 import { Link, Loader, PageGrid, SectionHeader } from '../common';
 import BackLink from '../common/BackLink';
@@ -35,10 +35,14 @@ export default function CustomResourceList() {
     );
   }
 
-  return <CustomResourceListRenderer crd={crd} />;
+  return <CustomResourceListRenderer crd={crd!} />;
 }
 
-function CustomResourceLink(props: { resource: KubeCRD; crd: CRD; [otherProps: string]: any }) {
+function CustomResourceLink(props: {
+  resource: KubeObject<KubeCRD>;
+  crd: CRD;
+  [otherProps: string]: any;
+}) {
   const { resource, crd, ...otherProps } = props;
 
   return (
@@ -83,7 +87,7 @@ function CustomResourceListRenderer(props: CustomResourceListProps) {
   );
 }
 
-function getValueWithJSONPath(item: KubeCRD, jsonPath: string): string {
+function getValueWithJSONPath(item: { jsonData: object }, jsonPath: string): string {
   let value: string | undefined;
   try {
     // Extract the value from the json item
@@ -110,7 +114,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
     return crd.getMainAPIGroup();
   }, [crd]);
 
-  const CRClass = React.useMemo(() => {
+  const CRClass: typeof KubeObject<KubeCRD> = React.useMemo(() => {
     return crd.makeCRClass();
   }, [crd]);
 
@@ -124,7 +128,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
       crd.jsonData.spec.versions.find(
         (version: KubeCRD['spec']['versions'][number]) => version.name === currentVersion
       )?.additionalPrinterColumns || [];
-    const cols: ResourceTableColumn<KubeCRD>[] = [];
+    const cols: ResourceTableColumn<KubeObject<KubeCRD>>[] = [];
     for (let i = 0; i < colsFromSpec.length; i++) {
       const idx = i;
       const colSpec = colsFromSpec[idx];
@@ -150,15 +154,15 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
   }, [crd, apiGroup]);
 
   const cols = React.useMemo(() => {
-    const colsToDisplay: ResourceTableProps<KubeCRD>['columns'] = [
+    const colsToDisplay = [
       {
         label: t('translation|Name'),
         getValue: resource => resource.metadata.name,
-        render: (resource: KubeObject) => <CustomResourceLink resource={resource} crd={crd} />,
+        render: resource => <CustomResourceLink resource={resource} crd={crd} />,
       },
       ...additionalPrinterCols,
       'age',
-    ];
+    ] as ResourceTableProps<KubeObject<KubeCRD>>['columns'];
 
     if (crd.isNamespacedScope) {
       colsToDisplay.splice(1, 0, 'namespace');

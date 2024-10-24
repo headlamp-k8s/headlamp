@@ -1,4 +1,4 @@
-import { KubeObjectInterface } from './cluster';
+import { KubeObjectInterface } from './KubeObject';
 
 export interface KubeToken extends KubeObjectInterface {
   status: {

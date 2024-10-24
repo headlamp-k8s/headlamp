@@ -1,5 +1,4 @@
-import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 interface LegacyIngressRule {
   host: string;
@@ -68,16 +67,17 @@ export interface KubeIngress extends KubeObjectInterface {
   };
 }
 
-class Ingress extends makeKubeObject<KubeIngress>('ingress') {
-  static apiEndpoint = apiFactoryWithNamespace(
-    ['networking.k8s.io', 'v1', 'ingresses'],
-    ['extensions', 'v1beta1', 'ingresses']
-  );
+class Ingress extends KubeObject<KubeIngress> {
+  static kind = 'Ingress';
+  static apiName = 'ingresses';
+  static apiVersion = ['networking.k8s.io/v1', 'extensions/v1beta1'];
+  static isNamespaced = true;
+
   // Normalized, cached rules.
   private cachedRules: IngressRule[] = [];
 
   get spec(): KubeIngress['spec'] {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   getHosts() {
@@ -128,14 +128,6 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
 
     this.cachedRules = rules;
     return rules;
-  }
-
-  static get listRoute() {
-    return 'ingresses';
-  }
-
-  static get pluralName() {
-    return 'ingresses';
   }
 }
 

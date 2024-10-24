@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useClusterGroup } from '../../../lib/k8s';
 import { apply } from '../../../lib/k8s/apiProxy';
-import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../../lib/k8s/KubeObject';
 import { clusterAction } from '../../../redux/clusterActionSlice';
 import {
   EventStatus,
@@ -83,7 +83,7 @@ export default function CreateButton(props: CreateButtonProps) {
       if (massagedNewItemDefs[i].kind === 'List') {
         // flatten this List kind with the items that it has which is a list of valid k8s resources
         const deletedItem = massagedNewItemDefs.splice(i, 1);
-        massagedNewItemDefs = massagedNewItemDefs.concat(deletedItem[0].items);
+        massagedNewItemDefs = massagedNewItemDefs.concat(deletedItem[0].items!);
       }
       if (!massagedNewItemDefs[i].metadata?.name) {
         setErrorMessage(

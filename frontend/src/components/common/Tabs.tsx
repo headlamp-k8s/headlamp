@@ -3,12 +3,12 @@ import MuiTab from '@mui/material/Tab';
 import MuiTabs from '@mui/material/Tabs';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { SxProps } from '@mui/system';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useId } from '../../lib/util';
 
 export interface Tab {
   label: string;
-  component: JSX.Element | JSX.Element[];
+  component: ReactNode;
 }
 
 export interface TabsProps {

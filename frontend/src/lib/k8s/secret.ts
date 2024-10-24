@@ -1,20 +1,22 @@
-import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject, StringDict } from './cluster';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeSecret extends KubeObjectInterface {
-  data: StringDict;
+  data: Record<string, string>;
   type: string;
 }
 
-class Secret extends makeKubeObject<KubeSecret>('secret') {
-  static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'secrets');
+class Secret extends KubeObject<KubeSecret> {
+  static kind = 'Secret';
+  static apiName = 'secrets';
+  static apiVersion = 'v1';
+  static isNamespaced = true;
 
   get data() {
-    return this.jsonData!.data;
+    return this.jsonData.data;
   }
 
   get type() {
-    return this.jsonData!.type;
+    return this.jsonData.type;
   }
 }
 
