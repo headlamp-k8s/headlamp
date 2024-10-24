@@ -19,7 +19,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		if err := plugins.ListPlugins(conf.StaticDir, conf.PluginsDir); err != nil {
+		if err := plugins.ListPlugins(conf.StaticDir, conf.PluginsDir, conf.DisablePlugins); err != nil {
 			logger.Log(logger.LevelError, nil, err, "listing plugins")
 		}
 
@@ -44,6 +44,7 @@ func main() {
 		staticDir:             conf.StaticDir,
 		insecure:              conf.InsecureSsl,
 		pluginDir:             conf.PluginsDir,
+		disablePlugins:        conf.DisablePlugins,
 		oidcClientID:          conf.OidcClientID,
 		oidcClientSecret:      conf.OidcClientSecret,
 		oidcIdpIssuerURL:      conf.OidcIdpIssuerURL,
