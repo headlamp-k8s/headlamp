@@ -1,4 +1,4 @@
-import { KubeObjectClass, KubeObjectInterface } from '../../cluster';
+import { KubeObject, KubeObjectInterface } from '../../KubeObject';
 
 export interface KubeList<T extends KubeObjectInterface> {
   kind: string;
@@ -23,11 +23,14 @@ export const KubeList = {
    * @param itemClass - Class of an item in the list. Used to instantiate each item
    * @returns New list with the updated values
    */
-  applyUpdate<T extends KubeObjectInterface>(
-    list: KubeList<T>,
-    update: KubeListUpdateEvent<T>,
-    itemClass: KubeObjectClass
-  ): KubeList<T> {
+  applyUpdate<
+    ObjectInterface extends KubeObjectInterface,
+    ObjectClass extends typeof KubeObject<ObjectInterface>
+  >(
+    list: KubeList<KubeObject<ObjectInterface>>,
+    update: KubeListUpdateEvent<ObjectInterface>,
+    itemClass: ObjectClass
+  ): KubeList<KubeObject<ObjectInterface>> {
     const newItems = [...list.items];
     const index = newItems.findIndex(item => item.metadata.uid === update.object.metadata.uid);
 
@@ -35,9 +38,9 @@ export const KubeList = {
       case 'ADDED':
       case 'MODIFIED':
         if (index !== -1) {
-          newItems[index] = new itemClass(update.object) as T;
+          newItems[index] = new itemClass(update.object);
         } else {
-          newItems.push(new itemClass(update.object) as T);
+          newItems.push(new itemClass(update.object));
         }
         break;
       case 'DELETED':

@@ -1,7 +1,7 @@
 import '../../i18n/config';
 import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
@@ -14,11 +14,11 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
   const { t } = useTranslation(['translation', 'glossary']);
 
-  function memoryUsedGetter(item: KubeObject) {
+  function memoryUsedGetter(item: KubeMetrics) {
     return parseRam(item.usage.memory) / TO_GB;
   }
 
-  function memoryAvailableGetter(item: KubeObject) {
+  function memoryAvailableGetter(item: Node | Pod) {
     return parseRam(item.status!.capacity.memory) / TO_GB;
   }
 
@@ -50,11 +50,11 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
   const { t } = useTranslation(['translation', 'glossary']);
 
-  function cpuUsedGetter(item: KubeObject) {
+  function cpuUsedGetter(item: KubeMetrics) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
   }
 
-  function cpuAvailableGetter(item: KubeObject) {
+  function cpuAvailableGetter(item: Node | Pod) {
     return parseCpu(item.status!.capacity.cpu) / TO_ONE_CPU;
   }
 
@@ -82,7 +82,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
   );
 }
 
-export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'items'>) {
+export function PodsStatusCircleChart(props: { items: Pod[] | null }) {
   const theme = useTheme();
   const { items } = props;
   const { t } = useTranslation(['translation', 'glossary']);
@@ -143,7 +143,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
   );
 }
 
-export function NodesStatusCircleChart(props: Pick<ResourceCircularChartProps, 'items'>) {
+export function NodesStatusCircleChart(props: { items: Node[] | null }) {
   const theme = useTheme();
   const { items } = props;
   const { t } = useTranslation(['translation', 'glossary']);

@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, StoryFn } from '@storybook/react';
 import { useLocation } from 'react-router-dom';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../lib/k8s/KubeObject';
 import { useFilterFunc } from '../../lib/util';
 import { TestContext, TestContextProps } from '../../test';
 import SectionFilterHeader from './SectionFilterHeader';

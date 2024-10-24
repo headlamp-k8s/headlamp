@@ -13,7 +13,7 @@ import SimpleTable from '../common/SimpleTable';
  * Is https used in the ingress item
  */
 function isHttpsUsed(item: Ingress, url: String) {
-  const hostList: string[] = item.jsonData.spec?.tls?.map(({ ...hosts }) => `${hosts.hosts}`);
+  const hostList = item.jsonData.spec?.tls?.map(({ ...hosts }) => `${hosts.hosts}`) ?? [];
   const isHttps = hostList.includes(`${url}`);
 
   return isHttps;

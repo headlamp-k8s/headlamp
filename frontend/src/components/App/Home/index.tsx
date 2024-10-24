@@ -213,7 +213,7 @@ function HomeComponent(props: HomeComponentProps) {
           />
         }
       >
-        <ResourceTable
+        <ResourceTable<any>
           defaultSortingColumn={{ id: 'name', desc: false }}
           columns={[
             {

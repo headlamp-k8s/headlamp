@@ -2,7 +2,6 @@ import Grid from '@mui/material/Grid';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import Deployment from '../../lib/k8s/deployment';
@@ -10,6 +9,8 @@ import Job from '../../lib/k8s/job';
 import Pod from '../../lib/k8s/pod';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import StatefulSet from '../../lib/k8s/statefulSet';
+import { WorkloadClass } from '../../lib/k8s/Workload';
+import { Workload } from '../../lib/k8s/Workload';
 import { getReadyReplicas, getTotalReplicas } from '../../lib/util';
 import Link from '../common/Link';
 import { PageGrid, ResourceLink } from '../common/Resource';
@@ -81,7 +82,7 @@ export default function Overview() {
     return joint;
   }, [workloadsData]);
 
-  const workloads: KubeObject[] = [
+  const workloads: WorkloadClass[] = [
     Pod,
     Deployment,
     StatefulSet,
@@ -101,7 +102,7 @@ export default function Overview() {
     [CronJob.className]: t('glossary|Cron Jobs'),
   };
 
-  function ChartLink({ workload }: { workload: KubeObject }) {
+  function ChartLink({ workload }: { workload: WorkloadClass }) {
     return <Link routeName={workload.pluralName}>{workloadLabel[workload.className]}</Link>;
   }
 
@@ -129,9 +130,7 @@ export default function Overview() {
             id: 'name',
             label: t('translation|Name'),
             getValue: item => item.metadata.name,
-            render: item => (
-              <ResourceLink resource={item as KubeObject} state={{ backLink: { ...location } }} />
-            ),
+            render: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
           },
           'namespace',
           {

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { get, set } from 'lodash';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { ReactNode } from 'react';
+import { KubeObject } from '../../lib/k8s/KubeObject';
 import { DetailsViewSectionType } from './DetailsViewSection';
 
 export type DetailsViewSection = {
@@ -20,7 +21,7 @@ export enum DefaultDetailsViewSection {
 
 type HeaderActionFuncType = (
   resource: KubeObject | null,
-  sections: DetailsViewSection[]
+  sections: (DetailsViewSection | ReactNode)[]
 ) => DetailsViewSection[];
 
 export type DetailsViewsSectionProcessor = {

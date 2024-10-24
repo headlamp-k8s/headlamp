@@ -1,5 +1,5 @@
 import { has } from 'lodash';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
 import { PluginManager } from '../components/App/pluginManager';
 import { runCommand } from '../components/App/runCommand';
@@ -14,13 +14,13 @@ import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/D
 import {
   addDetailsViewSectionsProcessor,
   DefaultDetailsViewSection,
-  DetailsViewSectionsProcessor,
+  DetailsViewsSectionProcessor,
   setDetailsViewSection,
 } from '../components/DetailsViewSection/detailsViewSectionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
 import { setSidebarItem, setSidebarItemFilter } from '../components/Sidebar/sidebarSlice';
 import { getHeadlampAPIHeaders } from '../helpers';
-import { KubeObject } from '../lib/k8s/cluster';
+import { KubeObject } from '../lib/k8s/KubeObject';
 import { Route } from '../lib/router';
 import {
   addDetailsViewHeaderActionsProcessor,
@@ -67,7 +67,7 @@ import {
 
 export interface SectionFuncProps {
   title: string;
-  component: (props: { resource: any }) => JSX.Element | null;
+  component: (props: { resource: any }) => ReactNode;
 }
 
 export type {
@@ -161,7 +161,7 @@ export default class Registry {
   /**
    * @deprecated Registry.registerAppBarAction is deprecated. Please use registerAppBarAction.
    */
-  registerAppBarAction(actionName: string, actionFunc: (...args: any[]) => JSX.Element | null) {
+  registerAppBarAction(actionName: string, actionFunc: (...args: any[]) => ReactNode) {
     console.warn('Registry.registerAppBarAction is deprecated. Please use registerAppBarAction.');
     return registerAppBarAction(actionFunc);
   }
@@ -185,7 +185,7 @@ export default class Registry {
    */
   registerDetailsViewSection(
     sectionName: string,
-    sectionFunc: (props: { resource: any }) => SectionFuncProps | null
+    sectionFunc: (resource: KubeObject) => SectionFuncProps | null
   ) {
     console.warn(
       'Registry.registerDetailsViewSection is deprecated. Please use registerDetailsViewSection.'
@@ -520,7 +520,7 @@ export function registerDetailsViewSection(viewSection: DetailsViewSectionType) 
  * ```
  */
 export function registerDetailsViewSectionsProcessor(
-  processor: DetailsViewSectionsProcessor | DetailsViewSectionsProcessor['processor']
+  processor: DetailsViewsSectionProcessor | DetailsViewsSectionProcessor['processor']
 ) {
   store.dispatch(addDetailsViewSectionsProcessor(processor));
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { CallbackActionOptions, clusterAction } from '../../../redux/clusterActionSlice';
 import {
   EventStatus,

@@ -1,11 +1,7 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import {
-  KubeContainer,
-  KubeMetadata,
-  KubeObjectInterface,
-  LabelSelector,
-  makeKubeObject,
-} from './cluster';
+import { KubeContainer, LabelSelector } from './cluster';
+import { KubeMetadata } from './KubeMetadata';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 import { KubePodSpec } from './pod';
 
 export interface KubeJob extends KubeObjectInterface {
@@ -22,15 +18,16 @@ export interface KubeJob extends KubeObjectInterface {
   };
 }
 
-class Job extends makeKubeObject<KubeJob>('Job') {
+class Job extends KubeObject<KubeJob> {
+  static objectName = 'Job';
   static apiEndpoint = apiFactoryWithNamespace('batch', 'v1', 'jobs');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getContainers(): KubeContainer[] {

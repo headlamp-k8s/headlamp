@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JSONPath } from 'jsonpath-plus';
-import { KubeObjectInterface } from '../lib/k8s/cluster';
 import { KubeEvent } from '../lib/k8s/event';
+import { KubeObjectInterface } from '../lib/k8s/KubeObject';
 
 export interface FilterState {
   /** The namespaces to filter on. */

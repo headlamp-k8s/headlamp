@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
-import { KubeObjectClass } from '../../lib/k8s/cluster';
+import { KubeObjectClass } from '../../lib/k8s/KubeObject';
 import { TestContext, TestContextProps } from '../../test';
 import CustomResourceList from './CustomResourceList';
 import { mockCRD, mockCRList } from './storyHelper';

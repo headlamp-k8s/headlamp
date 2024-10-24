@@ -39,8 +39,8 @@ export default function NamespacesList() {
   }
 
   const resourceTableProps:
-    | ResourceTableFromResourceClassProps<Namespace>
-    | ResourceTableProps<Namespace> = React.useMemo(() => {
+    | ResourceTableProps<Namespace>
+    | ResourceTableFromResourceClassProps<typeof Namespace> = React.useMemo(() => {
     if (allowedNamespaces.length > 0) {
       return {
         columns: [
@@ -72,7 +72,7 @@ export default function NamespacesList() {
           },
         ],
         data: allowedNamespaces as unknown as Namespace[],
-      };
+      } satisfies ResourceTableProps<Namespace>;
     }
     return {
       resourceClass: Namespace,
@@ -87,7 +87,7 @@ export default function NamespacesList() {
         },
         'age',
       ],
-    };
+    } satisfies ResourceTableFromResourceClassProps<typeof Namespace>;
   }, [allowedNamespaces]);
 
   return (
@@ -97,7 +97,7 @@ export default function NamespacesList() {
         titleSideActions: [<CreateNamespaceButton />],
         noNamespaceFilter: true,
       }}
-      {...resourceTableProps}
+      {...(resourceTableProps as ResourceTableProps<Namespace>)}
     />
   );
 }

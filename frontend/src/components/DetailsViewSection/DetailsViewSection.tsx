@@ -1,5 +1,5 @@
 import React, { isValidElement, ReactElement, ReactNode, useMemo } from 'react';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObject } from '../../lib/k8s/KubeObject';
 import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import ErrorBoundary from '../common/ErrorBoundary';

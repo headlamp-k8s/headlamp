@@ -2,7 +2,9 @@ import { useMemo } from 'react';
 import { ResourceClasses } from '.';
 import { ApiError, apiFactoryWithNamespace, QueryParameters } from './apiProxy';
 import { request } from './apiProxy';
-import { KubeMetadata, KubeObject, makeKubeObject } from './cluster';
+import { KubeMetadata } from './KubeMetadata';
+import { KubeObject } from './KubeObject';
+import { KubeObjectClass } from './KubeObject';
 
 export interface KubeEvent {
   type: string;
@@ -21,7 +23,8 @@ export interface KubeEvent {
   [otherProps: string]: any;
 }
 
-class Event extends makeKubeObject<KubeEvent>('Event') {
+class Event extends KubeObject<KubeEvent> {
+  static objectName = 'Event';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'events');
 
   // Max number of events to fetch from the API
@@ -105,7 +108,7 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
       return eventTime;
     }
 
-    const firstTimestamp = this.firstTimestamp;
+    const firstTimestamp = this.getValue('firstTimestamp');
     if (!!firstTimestamp) {
       return firstTimestamp;
     }
@@ -149,7 +152,9 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
       return null;
     }
 
-    const InvolvedObjectClass = ResourceClasses[this.involvedObject.kind];
+    const InvolvedObjectClass = (ResourceClasses as Record<string, KubeObjectClass>)[
+      this.involvedObject.kind
+    ];
     let objInstance: KubeObject | null = null;
     if (!!InvolvedObjectClass) {
       objInstance = new InvolvedObjectClass({
@@ -157,7 +162,7 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
         metadata: {
           name: this.involvedObject.name,
           namespace: this.involvedObject.namespace,
-        },
+        } as KubeMetadata,
       });
     }
 

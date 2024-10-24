@@ -1,5 +1,5 @@
 import { apiFactory } from './apiProxy';
-import { makeKubeObject } from './cluster';
+import { makeKubeObject } from './KubeObject';
 import { KubeRoleBinding } from './roleBinding';
 
 class ClusterRoleBinding extends makeKubeObject<KubeRoleBinding>('roleBinding') {

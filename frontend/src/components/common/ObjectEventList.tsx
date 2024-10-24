@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { KubeObject } from '../../lib/k8s/cluster';
 import Event, { KubeEvent } from '../../lib/k8s/event';
+import { KubeObject } from '../../lib/k8s/KubeObject';
 import { localeDate, timeAgo } from '../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { HoverInfoLabel, SectionBox, SimpleTable } from '../common';

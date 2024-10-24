@@ -1,11 +1,7 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import {
-  KubeContainer,
-  KubeMetadata,
-  KubeObjectInterface,
-  LabelSelector,
-  makeKubeObject,
-} from './cluster';
+import { KubeContainer, LabelSelector } from './cluster';
+import { KubeMetadata } from './KubeMetadata';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 import { KubePodSpec } from './pod';
 
 export interface KubeStatefulSet extends KubeObjectInterface {
@@ -28,15 +24,16 @@ export interface KubeStatefulSet extends KubeObjectInterface {
   };
 }
 
-class StatefulSet extends makeKubeObject<KubeStatefulSet>('StatefulSet') {
+class StatefulSet extends KubeObject<KubeStatefulSet> {
+  static objectName = 'StatefulSet';
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'statefulsets', true);
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   getContainers(): KubeContainer[] {

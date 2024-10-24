@@ -1,5 +1,7 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeContainer, KubeMetadata, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeContainer } from './cluster';
+import { KubeMetadata } from './KubeMetadata';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 /**
  * CronJob structure returned by the k8s API.
@@ -34,7 +36,8 @@ export interface KubeCronJob extends KubeObjectInterface {
   };
 }
 
-class CronJob extends makeKubeObject<KubeCronJob>('CronJob') {
+class CronJob extends KubeObject<KubeCronJob> {
+  static objectName = 'CronJob';
   static apiEndpoint = apiFactoryWithNamespace(
     ['batch', 'v1', 'cronjobs'],
     ['batch', 'v1beta1', 'cronjobs']

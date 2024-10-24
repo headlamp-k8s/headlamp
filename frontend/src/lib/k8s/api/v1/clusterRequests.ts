@@ -5,7 +5,7 @@ import store from '../../../../redux/stores/store';
 import { findKubeconfigByClusterName, getUserIdFromLocalStorage } from '../../../../stateless';
 import { getToken, logout, setToken } from '../../../auth';
 import { getCluster } from '../../../cluster';
-import { KubeObjectInterface } from '../../cluster';
+import { KubeObjectInterface } from '../../KubeObject';
 import { BASE_HTTP_URL, CLUSTERS_PREFIX, DEFAULT_TIMEOUT, JSON_HEADERS } from './constants';
 import { asQuery, combinePath } from './formatUrl';
 import { QueryParameters } from './queryParameters';

@@ -1,5 +1,5 @@
 import { apiFactory } from './apiProxy';
-import { makeKubeObject } from './cluster';
+import { makeKubeObject } from './KubeObject';
 import { KubeRole } from './role';
 
 class ClusterRole extends makeKubeObject<KubeRole>('role') {

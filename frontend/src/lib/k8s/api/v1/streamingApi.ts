@@ -2,7 +2,7 @@ import { isDebugVerbose } from '../../../../helpers';
 import { findKubeconfigByClusterName, getUserIdFromLocalStorage } from '../../../../stateless';
 import { getToken } from '../../../auth';
 import { getCluster } from '../../../cluster';
-import { KubeObjectInterface } from '../../cluster';
+import { KubeObjectInterface } from '../../KubeObject';
 import { ApiError, clusterRequest } from './clusterRequests';
 import { BASE_HTTP_URL, CLUSTERS_PREFIX } from './constants';
 import { asQuery, combinePath } from './formatUrl';

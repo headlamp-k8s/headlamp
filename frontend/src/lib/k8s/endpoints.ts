@@ -1,5 +1,6 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeMetadata, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeMetadata } from './KubeMetadata';
+import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeEndpointPort {
   name?: string;
@@ -28,19 +29,20 @@ export interface KubeEndpoint extends KubeObjectInterface {
   subsets: KubeEndpointSubset[];
 }
 
-class Endpoints extends makeKubeObject<KubeEndpoint>('endpoint') {
+class Endpoints extends KubeObject<KubeEndpoint> {
+  static objectName = 'endpoint';
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'endpoints');
 
   get spec() {
-    return this.jsonData!.spec;
+    return this.jsonData.spec;
   }
 
   get status() {
-    return this.jsonData!.status;
+    return this.jsonData.status;
   }
 
   get subsets() {
-    return this.jsonData!.subsets;
+    return this.jsonData.subsets;
   }
 
   getAddressesText() {

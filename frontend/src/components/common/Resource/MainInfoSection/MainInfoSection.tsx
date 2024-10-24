@@ -2,7 +2,7 @@ import Paper from '@mui/material/Paper';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { KubeObject } from '../../../../lib/k8s/cluster';
+import { KubeObject } from '../../../../lib/k8s/KubeObject';
 import { createRouteURL } from '../../../../lib/router';
 import { HeaderAction } from '../../../../redux/actionButtonsSlice';
 import Loader from '../../../common/Loader';
@@ -13,16 +13,13 @@ import SectionBox from '../../SectionBox';
 import { MetadataDisplay } from '../MetadataDisplay';
 import { MainInfoHeader } from './MainInfoSectionHeader';
 
-export interface MainInfoSectionProps {
-  resource: KubeObject | null;
-  headerSection?: ((resource: KubeObject | null) => React.ReactNode) | React.ReactNode;
+export interface MainInfoSectionProps<T extends KubeObject = KubeObject> {
+  resource: T | null;
+  headerSection?: ((resource: T | null) => React.ReactNode) | React.ReactNode;
   title?: string;
-  extraInfo?:
-    | ((resource: KubeObject | null) => NameValueTableRow[] | null)
-    | NameValueTableRow[]
-    | null;
+  extraInfo?: ((resource: T | null) => NameValueTableRow[] | null) | NameValueTableRow[] | null;
   actions?:
-    | ((resource: KubeObject | null) => React.ReactNode[] | HeaderAction[] | null)
+    | ((resource: T | null) => React.ReactNode[] | HeaderAction[] | null)
     | React.ReactNode[]
     | null
     | HeaderAction[];
@@ -33,7 +30,7 @@ export interface MainInfoSectionProps {
   error?: string | Error | null;
 }
 
-export function MainInfoSection(props: MainInfoSectionProps) {
+export function MainInfoSection<T extends KubeObject>(props: MainInfoSectionProps<T>) {
   const {
     resource,
     headerSection,

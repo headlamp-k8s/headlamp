@@ -18,7 +18,7 @@ import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../../lib/k8s/KubeObject';
 import { getThemeName } from '../../../lib/themes';
 import { useId } from '../../../lib/util';
 import ConfirmButton from '../ConfirmButton';
