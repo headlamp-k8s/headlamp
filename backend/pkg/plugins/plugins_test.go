@@ -343,7 +343,37 @@ func TestHandlePluginEvents(t *testing.T) { //nolint:funlen
 	require.NoError(t, err)
 	require.NotNil(t, pluginRefresh)
 
+	// Refresh should be set to false as we cannot send the refresh request
 	pluginRefreshBool, ok := pluginRefresh.(bool)
+	require.True(t, ok)
+	require.False(t, pluginRefreshBool)
+
+	// Allow the plugins module to send the refresh request
+	err = ch.Set(context.Background(), plugins.PluginCanSendRefreshKey, true)
+	require.NoError(t, err)
+
+	// Reset the plugin list again to test the plugin handling
+	err = ch.Delete(context.Background(), plugins.PluginListKey)
+	require.NoError(t, err)
+
+	go plugins.HandlePluginEvents("", testDirPath, events, ch)
+
+	// send event
+	events <- "test"
+
+	// wait for the plugin list and refresh keys to be set
+	for {
+		_, err = ch.Get(context.Background(), plugins.PluginListKey)
+		if err == nil {
+			break
+		}
+	}
+
+	pluginRefresh, err = ch.Get(context.Background(), plugins.PluginRefreshKey)
+	require.NoError(t, err)
+
+	// Refresh should be set to true now that we can send the refresh request
+	pluginRefreshBool, ok = pluginRefresh.(bool)
 	require.True(t, ok)
 	require.True(t, pluginRefreshBool)
 
@@ -373,7 +403,23 @@ func TestHandlePluginReload(t *testing.T) {
 	// call HandlePluginReload
 	plugins.HandlePluginReload(ch, w)
 
+	// verify that we cannot send the refresh request yet as the
+	// canSendRefresh key is not set.
+	assert.Equal(t, "", w.Header().Get("X-RELOAD"))
+
+	err = ch.Set(context.Background(), plugins.PluginCanSendRefreshKey, false)
+	require.NoError(t, err)
+
+	// verify that we cannot send the refresh request yet as the
+	// canSendRefresh key is false.
+	plugins.HandlePluginReload(ch, w)
+	assert.Equal(t, "", w.Header().Get("X-RELOAD"))
+
+	err = ch.Set(context.Background(), plugins.PluginCanSendRefreshKey, true)
+	require.NoError(t, err)
+
 	// check if the header X-RELOAD is set to true
+	plugins.HandlePluginReload(ch, w)
 	assert.Equal(t, "reload", w.Header().Get("X-RELOAD"))
 
 	// create new recorder

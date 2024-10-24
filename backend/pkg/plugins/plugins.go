@@ -3,6 +3,7 @@ package plugins
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/fs"
 	"net/http"
@@ -19,9 +20,10 @@ import (
 )
 
 const (
-	PluginRefreshKey       = "PLUGIN_REFRESH"
-	PluginListKey          = "PLUGIN_LIST"
-	subFolderWatchInterval = 5 * time.Second
+	PluginRefreshKey        = "PLUGIN_REFRESH"
+	PluginListKey           = "PLUGIN_LIST"
+	PluginCanSendRefreshKey = "PLUGIN_CAN_SEND_REFRESH"
+	subFolderWatchInterval  = 5 * time.Second
 )
 
 // Watch watches the given path for changes and sends the events to the notify channel.
@@ -203,7 +205,7 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 		_, err = os.Stat(packageJSONPath)
 		if err != nil {
 			logger.Log(logger.LevelInfo, map[string]string{"packageJSONPath": packageJSONPath},
-				err, `Not including plugin path, package.json not found. 
+				err, `Not including plugin path, package.json not found.
 				Please run 'headlamp-plugin extract' again with headlamp-plugin >= 0.6.0`)
 		}
 
@@ -214,14 +216,35 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 	return pluginListURLs, nil
 }
 
+func canSendRefresh(c cache.Cache[interface{}]) bool {
+	value, err := c.Get(context.Background(), PluginCanSendRefreshKey)
+	if err != nil {
+		if errors.Is(err, cache.ErrNotFound) {
+			return false
+		}
+
+		logger.Log(logger.LevelError, map[string]string{"key": PluginCanSendRefreshKey},
+			err, "getting plugin-can-send-refresh key")
+	}
+
+	canSendRefresh, ok := value.(bool)
+	if !ok {
+		logger.Log(logger.LevelInfo, nil, nil, "converting plugin-can-send-refresh key to bool")
+	}
+
+	return canSendRefresh
+}
+
 // HandlePluginEvents handles the plugin events by updating the plugin list
 // and plugin refresh key in the cache.
 func HandlePluginEvents(staticPluginDir, pluginDir string,
 	notify <-chan string, cache cache.Cache[interface{}],
 ) {
 	for range notify {
-		// set the plugin refresh key to true
-		err := cache.Set(context.Background(), PluginRefreshKey, true)
+		// Set the refresh signal only if we cannot send it. We prevent it here
+		// because we only want to send refresh signals that *happen after* we are
+		// allowed to send them.
+		err := cache.Set(context.Background(), PluginRefreshKey, canSendRefresh(cache))
 		if err != nil {
 			logger.Log(logger.LevelError, nil, err, "setting plugin refresh key")
 		}
@@ -267,6 +290,11 @@ func PopulatePluginsCache(staticPluginDir, pluginDir string, cache cache.Cache[i
 // and sends a signal to the frontend to reload the plugins by setting
 // the X-Reload header to reload.
 func HandlePluginReload(cache cache.Cache[interface{}], w http.ResponseWriter) {
+	// Avoid processing if we cannot send refresh signals.
+	if !canSendRefresh(cache) {
+		return
+	}
+
 	value, err := cache.Get(context.Background(), PluginRefreshKey)
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"key": PluginRefreshKey},
