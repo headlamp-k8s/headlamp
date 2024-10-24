@@ -228,11 +228,6 @@
                         style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                       >
                         Error
-                        <div
-                          aria-label="hidden"
-                          class="MuiBox-root css-p4lqkr"
-                          style="vertical-align: text-top;"
-                        />
                       </span>
                     </div>
                   </dd>

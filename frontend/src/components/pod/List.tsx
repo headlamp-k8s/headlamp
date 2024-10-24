@@ -34,15 +34,7 @@ export function makePodStatusLabel(pod: Pod) {
         <StatusLabel status={status}>
           {reason}
           {(status === 'warning' || status === 'error') && (
-            <Box
-              aria-label="hidden"
-              display="inline"
-              paddingTop={1}
-              paddingLeft={0.5}
-              style={{ verticalAlign: 'text-top' }}
-            >
-              <Icon icon="mdi:alert-outline" width="1.2rem" height="1.2rem" />
-            </Box>
+            <Icon aria-label="hidden" icon="mdi:alert-outline" width="1.2rem" height="1.2rem" />
           )}
         </StatusLabel>
       </Box>
