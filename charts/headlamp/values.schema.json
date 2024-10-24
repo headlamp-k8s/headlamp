@@ -405,6 +405,13 @@
           }
         }
       }
+    },
+    "extraManifests": {
+      "type": "array",
+      "description": "Extra manifests to apply to the deployment",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }
