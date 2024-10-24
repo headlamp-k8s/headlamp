@@ -2,7 +2,7 @@ import React from 'react';
 import { LightTooltip } from './Tooltip';
 
 export interface LabelListItemProps {
-  labels: React.ReactNode[];
+  labels?: React.ReactNode[];
 }
 
 export default function LabelListItem(props: LabelListItemProps) {

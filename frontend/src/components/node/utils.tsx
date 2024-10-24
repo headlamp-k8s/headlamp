@@ -1,5 +1,6 @@
 import { Box, Chip, Tooltip } from '@mui/material';
 import { styled } from '@mui/system';
+import { ReactNode } from 'react';
 import Node from '../../lib/k8s/node';
 
 const WrappingBox = styled(Box)(({ theme }) => ({
@@ -21,7 +22,7 @@ export function NodeTaintsLabel(props: { node: Node }) {
   if (node.spec?.taints === undefined) {
     return <WrappingBox></WrappingBox>;
   }
-  const limits: JSX.Element[] = [];
+  const limits: ReactNode[] = [];
   node.spec.taints.forEach(taint => {
     limits.push(
       <Tooltip title={`${taint.key}:${taint.effect}`} key={taint.key}>

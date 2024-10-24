@@ -28,7 +28,7 @@ export function SectionBox(props: SectionBoxProps) {
   if (typeof title === 'string') {
     titleElem = <SectionHeader title={title as string} {...headerProps} />;
   } else {
-    titleElem = title as JSX.Element;
+    titleElem = title;
   }
 
   return (

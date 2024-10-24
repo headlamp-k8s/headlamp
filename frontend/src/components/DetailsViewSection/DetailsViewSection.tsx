@@ -8,7 +8,7 @@ export interface DetailsViewSectionProps {
   resource: KubeObject;
 }
 export type DetailsViewSectionType =
-  | ((...args: any[]) => JSX.Element | null | ReactNode)
+  | ((...args: any[]) => ReactNode)
   | null
   | ReactElement
   | ReactNode;

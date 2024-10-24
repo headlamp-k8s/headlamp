@@ -93,7 +93,7 @@ function PageTitle({
 }
 
 interface AuthRouteProps {
-  children: React.ReactNode | JSX.Element;
+  children: React.ReactNode;
   sidebar: RouteType['sidebar'];
   requiresAuth: boolean;
   requiresCluster: boolean;
