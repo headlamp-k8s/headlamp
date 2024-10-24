@@ -94,7 +94,7 @@ export function useKubeObject<T extends KubeObjectClass>({
   );
 
   const queryKey = useMemo(
-    () => ['object', cluster, endpoint, namespace, name, cleanedUpQueryParams],
+    () => ['object', cluster, endpoint, namespace ?? '', name, cleanedUpQueryParams],
     [endpoint, namespace, name]
   );
 
@@ -224,7 +224,7 @@ function _useKubeObjectList<T extends KubeObjectClass>({
   const cluster = maybeCluster ?? getCluster() ?? '';
 
   const queryKey = useMemo(
-    () => ['list', cluster, endpoint, namespace, cleanedUpQueryParams],
+    () => ['list', cluster, endpoint, namespace ?? '', cleanedUpQueryParams],
     [endpoint, namespace, cleanedUpQueryParams]
   );
 
