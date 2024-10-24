@@ -15,8 +15,8 @@ const checkIcons = async () => {
 
   for (const file of files) {
     const content = await fs.readFileSync(file, 'utf8');
-    // this will find all matches of a word starting with 'mdi:' and includes a dash
-    const regex = /mdi:[\w-]+/g;
+    // this will find all matches of a word starting with 'mdi:' and includes a dash also find word starting with simple-icons
+    const regex = /mdi:[\w-]+|simple-icons:[\w-]+/g;
 
     let match: any;
     while ((match = regex.exec(content)) !== null) {
