@@ -86,8 +86,8 @@ export function useKubeObject<K extends KubeObject>({
   queryParams?: QueryParameters;
 }): [K | null, ApiError | null] & QueryResponse<K, ApiError> {
   type Instance = K;
-  const endpoint = useEndpoints(kubeObjectClass.apiEndpoint.apiInfo);
   const cluster = maybeCluster ?? getCluster() ?? '';
+  const endpoint = useEndpoints(kubeObjectClass.apiEndpoint.apiInfo, cluster);
 
   const cleanedUpQueryParams = Object.fromEntries(
     Object.entries(queryParams ?? {}).filter(([, value]) => value !== undefined && value !== '')
@@ -159,11 +159,11 @@ export function useKubeObject<K extends KubeObject>({
  * @throws Error
  * When no endpoints are working
  */
-const getWorkingEndpoint = async (endpoints: KubeObjectEndpoint[]) => {
+const getWorkingEndpoint = async (endpoints: KubeObjectEndpoint[], cluster: string) => {
   const promises = endpoints.map(endpoint => {
     return clusterFetch(KubeObjectEndpoint.toUrl(endpoint), {
       method: 'GET',
-      cluster: getCluster() ?? '',
+      cluster: cluster ?? getCluster() ?? '',
     }).then(it => {
       if (!it.ok) {
         throw new Error('error');
@@ -179,12 +179,12 @@ const getWorkingEndpoint = async (endpoints: KubeObjectEndpoint[]) => {
  *
  * @params endpoints - List of possible endpoints
  */
-const useEndpoints = (endpoints: KubeObjectEndpoint[]) => {
+const useEndpoints = (endpoints: KubeObjectEndpoint[], cluster: string) => {
   const { data: endpoint } = useQuery({
     enabled: endpoints.length > 1,
     queryKey: ['endpoints', endpoints],
     queryFn: () =>
-      getWorkingEndpoint(endpoints)
+      getWorkingEndpoint(endpoints, cluster)
         .then(endpoints => endpoints)
         .catch(() => null),
   });
@@ -213,13 +213,12 @@ function _useKubeObjectList<K extends KubeObject>({
   cluster?: string;
   queryParams?: QueryParameters;
 }): [Array<K> | null, ApiError | null] & QueryListResponse<KubeList<K>, K, ApiError> {
-  const endpoint = useEndpoints(kubeObjectClass.apiEndpoint.apiInfo);
+  const cluster = maybeCluster ?? getCluster() ?? '';
+  const endpoint = useEndpoints(kubeObjectClass.apiEndpoint.apiInfo, cluster);
 
   const cleanedUpQueryParams = Object.fromEntries(
     Object.entries(queryParams ?? {}).filter(([, value]) => value !== undefined && value !== '')
   );
-
-  const cluster = maybeCluster ?? getCluster() ?? '';
 
   const queryKey = useMemo(
     () => ['list', cluster, endpoint, namespace, cleanedUpQueryParams],
@@ -344,7 +343,7 @@ function _useKubeObjectLists<K extends KubeObject>({
   const clusterResults: Record<string, ReturnType<typeof useKubeObjectList<K>>> = {};
 
   for (const cluster of clusters) {
-    clusterResults[cluster] = useKubeObjectList({
+    clusterResults[cluster] = _useKubeObjectList({
       kubeObjectClass,
       namespace,
       cluster: cluster || undefined,
