@@ -395,7 +395,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	// load kubeConfig clusters
 	err := kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPath, kubeconfig.KubeConfig)
-	if err != nil {
+	if err != nil && !config.useInCluster {
 		logger.Log(logger.LevelError, nil, err, "loading kubeconfig")
 	}
 
@@ -406,7 +406,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	}
 
 	err = kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPersistenceFile, kubeconfig.DynamicCluster)
-	if err != nil {
+	if err != nil && !config.useInCluster {
 		logger.Log(logger.LevelError, nil, err, "loading dynamic kubeconfig")
 	}
 
