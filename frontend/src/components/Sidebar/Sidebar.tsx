@@ -13,6 +13,7 @@ import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import CreateCluster from '../App/CreateCluster/CreateCluster';
 import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
@@ -117,18 +118,25 @@ function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
 
   if (sidebarName === DefaultSidebars.HOME) {
     return (
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        flexDirection={isOpen ? 'row' : 'column'}
-        p={1}
-      >
-        <Box>{helpers.isElectron() && <AddClusterButton />}</Box>
-        <Box>
-          <SidebarToggleButton />
+      <>
+        {helpers.isElectron() && (
+          <Box p={1} display="flex" alignItems="left">
+            <CreateCluster />
+          </Box>
+        )}
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          flexDirection={isOpen ? 'row' : 'column'}
+          p={1}
+        >
+          <Box>{helpers.isElectron() && <AddClusterButton />}</Box>
+          <Box>
+            <SidebarToggleButton />
+          </Box>
         </Box>
-      </Box>
+      </>
     );
   }
 
