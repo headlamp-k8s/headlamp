@@ -19,7 +19,7 @@ export default mergeConfig(viteConfig, defineConfig({
 
     coverage: {
       provider: 'istanbul',
-      reporter: [['text', { maxCols: 200 }]],
+      reporter: [['text', { maxCols: 200 }], ['html']],
       exclude: [
         ...coverageConfigDefaults.exclude,
         'node_modules/**',
