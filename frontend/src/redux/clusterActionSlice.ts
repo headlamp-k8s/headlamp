@@ -6,6 +6,8 @@ import { OptionsObject as SnackbarProps } from 'notistack';
  * See components/common/ActionsNotifier.tsx for a user of cluster actions.
  */
 
+type ActionState = 'start' | 'complete' | 'error';
+
 /**
  * A button to display on the action.
  */
@@ -41,6 +43,10 @@ export interface ClusterAction {
    * The url to navigate to when the action is complete.
    */
   url?: string;
+  /**
+   * The state of the action. Helps identify if in progress, complete, or failed.
+   */
+  state?: ActionState;
   /**
    * The buttons to display on the action.
    */
@@ -172,6 +178,7 @@ export const executeClusterAction = createAsyncThunk(
           id: actionKey,
           key: actionKey,
           message: startMessage,
+          state: 'start',
           url: startUrl,
           buttons: [
             {
@@ -190,6 +197,7 @@ export const executeClusterAction = createAsyncThunk(
           dismissSnackbar: actionKey,
           id: actionKey,
           message: successMessage,
+          state: 'complete',
           snackbarProps: successOptions,
           url: successUrl,
         })
@@ -201,6 +209,7 @@ export const executeClusterAction = createAsyncThunk(
           buttons: undefined,
           id: actionKey,
           message: cancelledMessage,
+          state: 'complete',
           dismissSnackbar: actionKey,
           url: cancelUrl,
           snackbarProps: cancelledOptions,
@@ -215,6 +224,7 @@ export const executeClusterAction = createAsyncThunk(
           dismissSnackbar: actionKey,
           id: actionKey,
           message: errorMessage,
+          state: 'error',
           snackbarProps: errorOptions,
           url: errorUrl,
         })
