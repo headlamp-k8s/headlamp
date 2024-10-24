@@ -6,7 +6,7 @@ import helpers from '../../helpers';
 import { getCluster } from '../cluster';
 import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
-import { useConnectApi } from '.';
+import { useClusterGroup, useConnectApi } from '.';
 import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import { KubeEvent } from './event';
@@ -289,13 +289,18 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
     this: new (...args: any) => K,
     {
       cluster,
+      clusters,
       namespace,
       ...queryParams
-    }: { cluster?: string; namespace?: string } & QueryParameters = {}
+    }: { cluster?: string; namespace?: string; clusters?: string[] } & QueryParameters = {}
   ) {
+    const clusterGroup = useClusterGroup();
+    const theClusters = clusters || clusterGroup;
+
     return useKubeObjectList<K>({
       queryParams: queryParams,
       kubeObjectClass: this as (new (...args: any) => K) & typeof KubeObject<any>,
+      clusters: theClusters,
       cluster: cluster,
       namespace: namespace,
     });
