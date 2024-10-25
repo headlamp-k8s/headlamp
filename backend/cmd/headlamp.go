@@ -304,6 +304,12 @@ func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
 		}
 		if err := json.NewEncoder(w).Encode(pluginsList); err != nil {
 			logger.Log(logger.LevelError, nil, err, "encoding plugins base paths list")
+		} else {
+			// Notify that the client has requested the plugins list. So we can start sending
+			// refresh requests.
+			if err := config.cache.Set(context.Background(), plugins.PluginCanSendRefreshKey, true); err != nil {
+				logger.Log(logger.LevelError, nil, err, "setting plugin-can-send-refresh key")
+			}
 		}
 	}).Methods("GET")
 
