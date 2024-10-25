@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
@@ -36,25 +36,31 @@ export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
     );
 
   return (
-    <Switch>
-      {filteredRoutes.map((route, index) =>
-        route.name === 'OidcAuth' ? (
-          <Route path={route.path} component={() => <RouteComponent route={route} />} key={index} />
-        ) : (
-          <AuthRoute
-            path={getRoutePath(route)}
-            sidebar={route.sidebar}
-            requiresAuth={!route.noAuthRequired}
-            requiresCluster={getRouteUseClusterURL(route)}
-            exact={!!route.exact}
-            clusters={clusters}
-            requiresToken={props.requiresToken}
-            children={<RouteComponent route={route} key={getCluster()} />}
-            key={`${getCluster()}`}
-          />
-        )
-      )}
-    </Switch>
+    <Suspense fallback={null}>
+      <Switch>
+        {filteredRoutes.map((route, index) =>
+          route.name === 'OidcAuth' ? (
+            <Route
+              path={route.path}
+              component={() => <RouteComponent route={route} />}
+              key={index}
+            />
+          ) : (
+            <AuthRoute
+              path={getRoutePath(route)}
+              sidebar={route.sidebar}
+              requiresAuth={!route.noAuthRequired}
+              requiresCluster={getRouteUseClusterURL(route)}
+              exact={!!route.exact}
+              clusters={clusters}
+              requiresToken={props.requiresToken}
+              children={<RouteComponent route={route} key={getCluster()} />}
+              key={`${getCluster()}`}
+            />
+          )
+        )}
+      </Switch>
+    </Suspense>
   );
 }
 
