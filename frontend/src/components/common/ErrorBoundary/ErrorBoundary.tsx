@@ -42,17 +42,19 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, State> 
     return { error };
   }
 
-  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+  componentDidUpdate(prevProps: ErrorBoundaryProps, prevState: State) {
     if (prevProps.children !== this.props.children) {
       this.setState({ error: null });
+    }
+    if (prevState.error !== this.state.error && this.state.error) {
+      store.dispatch(
+        eventAction({ type: HeadlampEventType.ERROR_BOUNDARY, data: this.state.error })
+      );
     }
   }
 
   render() {
     const { error } = this.state;
-    if (error) {
-      store.dispatch(eventAction({ type: HeadlampEventType.ERROR_BOUNDARY, data: error }));
-    }
     if (!error) {
       return this.props.children;
     }
