@@ -15,6 +15,8 @@ import {
 import { getCluster, getClusterGroup } from '../../lib/util';
 import { setHideAppBar } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import ErrorBoundary from '../common/ErrorBoundary';
+import ErrorComponent from '../common/ErrorPage';
 import { useSidebarItem } from '../Sidebar';
 
 export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
@@ -56,6 +58,18 @@ export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
   );
 }
 
+function RouteErrorBoundary(props: { error: Error; route: RouteType }) {
+  const { error, route } = props;
+  const { t } = useTranslation();
+  return (
+    <ErrorComponent
+      title={t('Uh-oh! Something went wrong.')}
+      error={error}
+      message={t('translation|Error loading {{ routeName }}', { routeName: route.name })}
+    />
+  );
+}
+
 function RouteComponent({ route }: { route: RouteType }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -73,7 +87,13 @@ function RouteComponent({ route }: { route: RouteType }) {
           : route.sidebar?.item || ''
       )}
     >
-      <route.component />
+      <ErrorBoundary
+        fallback={(props: { error: Error }) => (
+          <RouteErrorBoundary error={props.error} route={route} />
+        )}
+      >
+        <route.component />
+      </ErrorBoundary>
     </PageTitle>
   );
 }
