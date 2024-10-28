@@ -42,6 +42,12 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, State> 
     return { error };
   }
 
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+    if (prevProps.children !== this.props.children) {
+      this.setState({ error: null });
+    }
+  }
+
   render() {
     const { error } = this.state;
     if (error) {
