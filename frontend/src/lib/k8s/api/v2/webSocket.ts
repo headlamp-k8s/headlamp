@@ -104,7 +104,7 @@ export function useWebSocket<T>({
    */
   protocols?: string | string[];
   /**
-   *
+   * Type of websocket data
    */
   type?: 'json' | 'binary';
   /**
@@ -117,53 +117,108 @@ export function useWebSocket<T>({
   onMessage: (data: T) => void;
 }) {
   const url = useMemo(() => (enabled ? createUrl() : ''), [enabled]);
+  const connections = useMemo(() => [{ cluster: cluster ?? '', url, onMessage }], [cluster, url]);
 
+  return useWebSockets({
+    connections,
+    protocols,
+    type,
+  });
+}
+
+export type WebSocketConnectionRequest<T> = {
+  cluster: string;
+  url: string;
+  onMessage: (data: T) => void;
+};
+
+/**
+ * Creates or joins mutiple existing WebSocket connections
+ *
+ * @param url - endpoint URL
+ * @param options - WebSocket options
+ */
+export function useWebSockets<T>({
+  connections,
+  enabled = true,
+  protocols,
+  type = 'json',
+}: {
+  enabled?: boolean;
+  /** Make sure that connections value is stable between renders */
+  connections: Array<WebSocketConnectionRequest<T>>;
+  /**
+   * Any additional protocols to include in WebSocket connection
+   * make sure that the value is stable between renders
+   */
+  protocols?: string | string[];
+  /**
+   * Type of websocket data
+   */
+  type?: 'json' | 'binary';
+}) {
   useEffect(() => {
     if (!enabled) return;
 
-    // Add new listener for this URL
-    listeners.set(url, [...(listeners.get(url) ?? []), onMessage]);
-
     let isCurrent = true;
-    async function init() {
-      // Mark socket as pending, so we don't open more than one
-      sockets.set(url, 'pending');
-      const ws = await openWebSocket(url, { protocols, type, cluster, onMessage });
 
-      // Hook was unmounted while it was connecting to WebSocket
-      // so we close the socket and clean up
-      if (!isCurrent) {
-        ws.close();
-        sockets.delete(url);
-        return;
+    /** Open a connection to websocket */
+    function connect({ cluster, url, onMessage }: WebSocketConnectionRequest<T>) {
+      const connectionKey = cluster + url;
+
+      if (!sockets.has(connectionKey)) {
+        // Add new listener for this URL
+        listeners.set(connectionKey, [...(listeners.get(connectionKey) ?? []), onMessage]);
+
+        // Mark socket as pending, so we don't open more than one
+        sockets.set(connectionKey, 'pending');
+
+        let ws: WebSocket | undefined;
+        openWebSocket(url, { protocols, type, cluster, onMessage })
+          .then(socket => {
+            ws = socket;
+
+            // Hook was unmounted while it was connecting to WebSocket
+            // so we close the socket and clean up
+            if (!isCurrent) {
+              ws.close();
+              sockets.delete(connectionKey);
+              return;
+            }
+
+            sockets.set(connectionKey, ws);
+          })
+          .catch(err => {
+            console.error(err);
+          });
       }
 
-      sockets.set(url, ws);
+      return () => {
+        const connectionKey = cluster + url;
+
+        // Clean up the listener
+        const newListeners = listeners.get(connectionKey)?.filter(it => it !== onMessage) ?? [];
+        listeners.set(connectionKey, newListeners);
+
+        // No one is listening to the connection
+        // so we can close it
+        if (newListeners.length === 0) {
+          const maybeExisting = sockets.get(connectionKey);
+          if (maybeExisting) {
+            if (maybeExisting !== 'pending') {
+              maybeExisting.close();
+            }
+            sockets.delete(connectionKey);
+          }
+        }
+      };
     }
 
-    // Check if we already have a connection (even if still pending)
-    if (!sockets.has(url)) {
-      init();
-    }
+    const disconnectCallbacks = connections.map(endpoint => connect(endpoint));
 
     return () => {
       isCurrent = false;
-
-      // Clean up the listener
-      const newListeners = listeners.get(url)?.filter(it => it !== onMessage) ?? [];
-      listeners.set(url, newListeners);
-
-      // No one is listening to the connection
-      // so we can close it
-      if (newListeners.length === 0) {
-        const maybeExisting = sockets.get(url);
-        if (maybeExisting) {
-          if (maybeExisting !== 'pending') {
-            maybeExisting.close();
-          }
-          sockets.delete(url);
-        }
-      }
+      disconnectCallbacks.forEach(fn => fn());
     };
-  }, [enabled, url, protocols, type, cluster]);
+  }, [enabled, type, connections, protocols]);
 }
