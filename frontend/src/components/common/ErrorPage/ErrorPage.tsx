@@ -1,4 +1,10 @@
+import { Icon } from '@iconify/react';
 import { Grid, Typography } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import { styled } from '@mui/system';
 import React from 'react';
@@ -19,6 +25,8 @@ export interface ErrorComponentProps {
   graphic?: React.ReactNode;
   /** Whether to use Typography or not. By default it is true. */
   withTypography?: boolean;
+  /** The error object to display. */
+  error?: Error;
 }
 
 export default function ErrorComponent(props: ErrorComponentProps) {
@@ -30,6 +38,7 @@ export default function ErrorComponent(props: ErrorComponentProps) {
     // In vite headlampBrokenImage is a string, but in webpack it is an object
     // TODO: Remove this once we migrate plugins to vite
     graphic = headlampBrokenImage as any as string,
+    error,
   } = props;
   return (
     <Grid
@@ -63,6 +72,44 @@ export default function ErrorComponent(props: ErrorComponentProps) {
           message
         )}
       </Grid>
+      {!!error?.stack && (
+        <Grid item xs={12}>
+          <Box
+            sx={{
+              width: '100%',
+              maxWidth: 800,
+            }}
+          >
+            <Accordion>
+              <AccordionSummary expandIcon={<Icon icon="mdi:chevron-down" />}>
+                <Typography>{t('translation|Error Details')}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box textAlign="right">
+                  <Button
+                    onClick={() => {
+                      navigator.clipboard.writeText(error.stack!);
+                    }}
+                  >
+                    {t('translation|Copy')}
+                  </Button>
+                </Box>
+                <Typography
+                  variant="body2"
+                  component="pre"
+                  sx={{
+                    textWrapMode: 'wrap',
+                    textAlign: 'left',
+                    overflowWrap: 'anywhere',
+                  }}
+                >
+                  {error.stack}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          </Box>
+        </Grid>
+      )}
     </Grid>
   );
 }
