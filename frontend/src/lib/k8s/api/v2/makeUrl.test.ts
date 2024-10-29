@@ -51,4 +51,10 @@ describe('makeUrl', () => {
     const result = makeUrl(urlParts);
     expect(result).toBe('http://example.com/123/true/resource');
   });
+
+  it('should create a url from a single string', () => {
+    expect(makeUrl('http://example.com/some/path', { watch: 1 })).toBe(
+      'http://example.com/some/path?watch=1'
+    );
+  });
 });
