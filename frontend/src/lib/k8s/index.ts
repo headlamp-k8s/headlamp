@@ -356,7 +356,10 @@ export function useClustersVersion(clusters: Cluster[]) {
       }
 
       if (Date.now() - lastUpdateRef.current > versionFetchInterval - 1) {
-        setClusterNames(clusterNames);
+        // Refreshes the list of clusters
+        // Creating a new array will trigger the useEffect above
+        // effectively refreshing the versions/errors/statuses
+        setClusterNames([...clusterNames]);
       }
     }, versionFetchInterval);
 
