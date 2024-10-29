@@ -1,4 +1,4 @@
-import { useKubeObjectList } from '../lib/k8s/api/v2/hooks';
+import { KubeObject } from '../lib/k8s/KubeObject';
 
 export const useMockListQuery = {
   noData: () =>
@@ -10,7 +10,7 @@ export const useMockListQuery = {
         yield null;
         yield null;
       },
-    } as any as typeof useKubeObjectList),
+    } as any as typeof KubeObject.useList),
   error: () =>
     ({
       data: null,
@@ -20,7 +20,7 @@ export const useMockListQuery = {
         yield null;
         yield 'Phony error is phony!';
       },
-    } as any as typeof useKubeObjectList),
+    } as any as typeof KubeObject.useList),
   data: (items: any[]) =>
     (() => ({
       data: { kind: 'List', items },
@@ -30,5 +30,5 @@ export const useMockListQuery = {
         yield items;
         yield null;
       },
-    })) as any as typeof useKubeObjectList,
+    })) as any as typeof KubeObject.useList,
 };
