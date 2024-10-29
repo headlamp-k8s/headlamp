@@ -44,7 +44,7 @@ jobs:
       - name: Install winget dependencies
         run: |
           cd $GITHUB_WORKSPACE/app
-          npm install
+          npm ci
 
       # We set the latest tag as an environment variable before we use it in the next steps
       # note that we have to echo the variable to the environment file to make it available in the next steps
