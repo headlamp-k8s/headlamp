@@ -1,66 +1,46 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useClusterGroup } from '../../lib/k8s';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
-import { useErrorState } from '../../lib/util';
+import { combineClusterListErrors } from '../../lib/util';
 import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
-
-interface RolesDict {
-  [kind: string]: Role[] | null;
-}
+import { ColumnType } from '../common/Resource/ResourceTable';
 
 export default function RoleList() {
-  const [roles, setRoles] = React.useState<RolesDict | null>(null);
-  const [roleError, setRolesError] = useErrorState(setupRoles);
-  const [clusterRoleError, setClusterRolesError] = useErrorState(setupClusterRoles);
   const { t } = useTranslation('glossary');
+  const { items: roles, clusterErrors: rolesErrors } = Role.useList();
+  const { items: clusterRoles, clusterErrors: clusterRolesErrors } = ClusterRole.useList();
 
-  function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
-    setRoles(oldRoles => ({ ...(oldRoles || {}), [kind]: newRoles }));
-  }
+  const clusters = useClusterGroup();
+  const isMultiCluster = clusters.length > 1;
 
-  function setupRoles(roles: Role[] | null) {
-    setupRolesWithKind(roles, 'Role');
-  }
-
-  function setupClusterRoles(roles: ClusterRole[] | null) {
-    setupRolesWithKind(roles, 'ClusterRole');
-  }
-
-  function getJointItems() {
-    if (roles === null) {
+  const allRoles = React.useMemo(() => {
+    if (roles === null && clusterRoles === null) {
       return null;
     }
 
-    let joint: Role[] = [];
-    let hasItems = false;
+    return roles ? roles.concat(clusterRoles || []) : clusterRoles;
+  }, [roles, clusterRoles]);
 
-    for (const items of Object.values(roles)) {
-      if (items !== null) {
-        joint = joint.concat(items);
-        hasItems = true;
-      }
-    }
-
-    return hasItems ? joint : null;
-  }
+  const allErrors = React.useMemo(() => {
+    return combineClusterListErrors(rolesErrors || null, clusterRolesErrors || null);
+  }, [rolesErrors, clusterRolesErrors]);
 
   function getErrorMessage() {
-    if (getJointItems() === null) {
-      return Role.getErrorMessage(roleError || clusterRoleError);
+    if (Object.values(allErrors || {}).length === clusters.length && clusters.length > 1) {
+      return Role.getErrorMessage(Object.values(allErrors!)[0]);
     }
 
     return null;
   }
 
-  Role.useApiList(setupRoles, setRolesError);
-  ClusterRole.useApiList(setupClusterRoles, setClusterRolesError);
-
   return (
     <ResourceListView
       title={t('Roles')}
       errorMessage={getErrorMessage()}
+      clusterErrors={isMultiCluster ? allErrors : null}
       columns={[
         'type',
         {
@@ -72,6 +52,7 @@ export default function RoleList() {
               params={{
                 namespace: item.metadata.namespace || '',
                 name: item.metadata.name,
+                cluster: item.cluster,
               }}
             >
               {item.metadata.name}
@@ -79,9 +60,10 @@ export default function RoleList() {
           ),
         },
         'namespace',
+        ...(isMultiCluster ? (['cluster'] as ColumnType[]) : ([] as ColumnType[])),
         'age',
       ]}
-      data={getJointItems()}
+      data={allRoles}
       id="headlamp-roles"
     />
   );
