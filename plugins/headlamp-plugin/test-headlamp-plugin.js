@@ -42,10 +42,14 @@ function testHeadlampPlugin() {
   run(`node bin/headlamp-plugin.js build ${PACKAGE_NAME}`);
   checkFileExists(join(PACKAGE_NAME, 'dist', 'main.js'));
 
+  fs.writeFileSync(join(PACKAGE_NAME, 'dist', 'extra.txt'), 'All dist/ files will be copied.');
+
   // test extraction works
   run(`node bin/headlamp-plugin.js extract . .plugins`);
   checkFileExists(join('.plugins', PACKAGE_NAME, 'main.js'));
   checkFileExists(join('.plugins', PACKAGE_NAME, 'package.json'));
+  // make sure extra files in dist/ folder are copied too
+  checkFileExists(join('.plugins', PACKAGE_NAME, 'extra.txt'));
 
   // test packing works
   const tmpDir = fs.mkdtempSync('headlamp-plugin-test-');

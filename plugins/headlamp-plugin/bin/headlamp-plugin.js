@@ -173,25 +173,12 @@ function extract(pluginPackagesPath, outputPlugins, logSteps = true) {
     fs.mkdirSync(outputPlugins);
   }
 
-  function copyFiles(plugName, inputMainJs, mainjs) {
-    if (!fs.existsSync(plugName)) {
-      if (logSteps) {
-        console.log(`Making output folder "${plugName}".`);
-      }
-      fs.mkdirSync(plugName);
-    }
-
-    if (logSteps) {
-      console.log(`Copying "${inputMainJs}" to "${mainjs}".`);
-    }
-    fs.copyFileSync(inputMainJs, mainjs);
-  }
-
   /**
    * pluginPackagesPath is a package folder, not a folder of packages.
    */
   function extractPackage() {
     if (fs.existsSync(path.join(pluginPackagesPath, 'dist', 'main.js'))) {
+      const distPath = path.join(pluginPackagesPath, 'dist');
       const trimmedPath =
         pluginPackagesPath.slice(-1) === path.sep
           ? pluginPackagesPath.slice(0, -1)
@@ -199,9 +186,15 @@ function extract(pluginPackagesPath, outputPlugins, logSteps = true) {
       const folderName = trimmedPath.split(path.sep).splice(-1)[0];
       const plugName = path.join(outputPlugins, folderName);
 
-      const inputMainJs = path.join(pluginPackagesPath, 'dist', 'main.js');
-      const outputMainjs = path.join(plugName, 'main.js');
-      copyFiles(plugName, inputMainJs, outputMainjs);
+      fs.ensureDirSync(plugName);
+
+      const files = fs.readdirSync(distPath);
+      files.forEach(file => {
+        const srcFile = path.join(distPath, file);
+        const destFile = path.join(plugName, file);
+        console.log(`Copying "${srcFile}" to "${destFile}".`);
+        fs.copyFileSync(srcFile, destFile);
+      });
 
       const inputPackageJson = path.join(pluginPackagesPath, 'package.json');
       const outputPackageJson = path.join(plugName, 'package.json');
@@ -222,11 +215,18 @@ function extract(pluginPackagesPath, outputPlugins, logSteps = true) {
     });
 
     folders.forEach(folder => {
+      const distPath = path.join(pluginPackagesPath, folder.name, 'dist');
       const plugName = path.join(outputPlugins, folder.name);
 
-      const inputMainJs = path.join(pluginPackagesPath, folder.name, 'dist', 'main.js');
-      const outputMainjs = path.join(plugName, 'main.js');
-      copyFiles(plugName, inputMainJs, outputMainjs);
+      fs.ensureDirSync(plugName);
+
+      const files = fs.readdirSync(distPath);
+      files.forEach(file => {
+        const srcFile = path.join(distPath, file);
+        const destFile = path.join(plugName, file);
+        console.log(`Copying "${srcFile}" to "${destFile}".`);
+        fs.copyFileSync(srcFile, destFile);
+      });
 
       const inputPackageJson = path.join(pluginPackagesPath, folder.name, 'package.json');
       const outputPackageJson = path.join(plugName, 'package.json');
