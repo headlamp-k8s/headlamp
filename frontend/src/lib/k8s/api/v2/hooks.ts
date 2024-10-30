@@ -356,7 +356,7 @@ function _useKubeObjectLists<K extends KubeObject>({
     if (items === null) {
       items = clusterResults[cluster].items;
     } else {
-      items = items.concat(clusterResults[cluster].items!);
+      items = items.concat(clusterResults[cluster].items ?? []);
     }
   }
 
