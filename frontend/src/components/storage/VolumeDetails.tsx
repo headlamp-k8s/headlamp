@@ -10,8 +10,9 @@ export function makePVStatusLabel(item: PersistentVolume) {
   return StatusLabelByPhase(status);
 }
 
-export default function VolumeDetails() {
-  const { name } = useParams<{ namespace: string; name: string }>();
+export default function VolumeDetails(props: { name?: string }) {
+  const params = useParams<{ name: string }>();
+  const { name = params.name } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (

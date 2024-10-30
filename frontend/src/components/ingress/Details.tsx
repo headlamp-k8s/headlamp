@@ -152,8 +152,9 @@ export function BackendFormat({ backend }: BackendFormatProps) {
   );
 }
 
-export default function IngressDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function IngressDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation(['glossary', 'translation']);
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
 

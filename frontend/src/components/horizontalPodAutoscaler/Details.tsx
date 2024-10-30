@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import HPA from '../../lib/k8s/hpa';
 import { ConditionsSection, DetailsGrid, Link, SimpleTable } from '../common';
 
-export default function HpaDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function HpaDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation();
 
   return (

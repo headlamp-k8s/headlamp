@@ -12,10 +12,13 @@ import {
 
 interface WorkloadDetailsProps<T extends WorkloadClass> {
   workloadKind: T;
+  name?: string;
+  namespace?: string;
 }
 
 export default function WorkloadDetails<T extends WorkloadClass>(props: WorkloadDetailsProps<T>) {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { workloadKind } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 

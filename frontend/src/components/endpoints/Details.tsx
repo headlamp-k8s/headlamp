@@ -8,8 +8,9 @@ import { DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
-export default function EndpointDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function EndpointDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const location = useLocation();
   const { t } = useTranslation(['glossary', 'translation']);
 

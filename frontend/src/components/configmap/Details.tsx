@@ -6,8 +6,9 @@ import { DataField, DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
 
-export default function ConfigDetails() {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+export default function ConfigDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation(['translation']);
 
   return (

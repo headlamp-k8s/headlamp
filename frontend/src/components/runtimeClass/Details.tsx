@@ -3,9 +3,10 @@ import { useParams } from 'react-router';
 import { RuntimeClass } from '../../lib/k8s/runtime';
 import { DetailsGrid } from '../common';
 
-export function RuntimeClassDetails() {
+export function RuntimeClassDetails(props: { name?: string; namespace?: string }) {
+  const params = useParams<{ namespace: string; name: string }>();
+  const { name = params.name, namespace = params.namespace } = props;
   const { t } = useTranslation(['translation']);
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
 
   return (
     <DetailsGrid
