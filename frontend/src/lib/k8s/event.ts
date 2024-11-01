@@ -185,8 +185,9 @@ class Event extends KubeObject<KubeEvent> {
   ) {
     // Calling hooks in a loop is usually forbidden
     // But if we make sure that clusters don't change between renders it's fine
-    const queries = clusterNames.map(cluster => {
-      return Event.useList({ cluster, ...options.queryParams });
+    const queries = Event.useList({
+      clusters: clusterNames,
+      ...options.queryParams,
     });
 
     type EventsPerCluster = {
@@ -199,12 +200,19 @@ class Event extends KubeObject<KubeEvent> {
     const result = useMemo(() => {
       const res: EventsPerCluster = {};
 
-      queries.forEach((query, index) => {
-        const cluster = clusterNames[index];
-        res[cluster] = {
-          warnings: query.data?.items ?? [],
-          error: query.error as ApiError,
-        };
+      Object.entries(queries.clusterErrors ?? {}).forEach(([cluster, error]) => {
+        if (!res[cluster]) {
+          res[cluster] = { warnings: [] };
+        }
+
+        res[cluster].error = error;
+      });
+      Object.entries(queries.clusterResults ?? {}).forEach(([cluster, result]) => {
+        if (!res[cluster]) {
+          res[cluster] = { warnings: [] };
+        }
+
+        res[cluster].warnings = result.items ?? [];
       });
 
       return res;

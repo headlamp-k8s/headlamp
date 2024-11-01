@@ -1,24 +1,24 @@
 import { OpPatch } from 'json-patch';
 import { JSONPath } from 'jsonpath-plus';
 import { cloneDeep, unset } from 'lodash';
-import React from 'react';
-import helpers from '../../helpers';
+import React, { useMemo } from 'react';
+import exportFunctions from '../../helpers';
 import { getCluster } from '../cluster';
 import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
 import { useClusterGroup, useConnectApi } from '.';
-import { useKubeObject, useKubeObjectList } from './api/v2/hooks';
+import { useKubeObject } from './api/v2/hooks';
+import { makeListRequests, useKubeObjectList } from './api/v2/useKubeObjectList';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import { KubeEvent } from './event';
 import { KubeMetadata } from './KubeMetadata';
 
-function getAllowedNamespaces() {
-  const cluster = getCluster();
+function getAllowedNamespaces(cluster: string | null = getCluster()): string[] {
   if (!cluster) {
     return [];
   }
 
-  const clusterSettings = helpers.loadClusterSettings(cluster);
+  const clusterSettings = exportFunctions.loadClusterSettings(cluster);
   return clusterSettings.allowedNamespaces || [];
 }
 
@@ -286,24 +286,48 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
   }
 
   static useList<K extends KubeObject>(
-    this: new (...args: any) => K,
+    this: (new (...args: any) => K) & typeof KubeObject<any>,
     {
       cluster,
       clusters,
       namespace,
       ...queryParams
-    }: { cluster?: string; namespace?: string; clusters?: string[] } & QueryParameters = {}
+    }: {
+      cluster?: string;
+      clusters?: string[];
+      namespace?: string | string[];
+    } & QueryParameters = {}
   ) {
-    const clusterGroup = useClusterGroup();
-    const theClusters = clusters || clusterGroup;
+    const fallbackClusters = useClusterGroup();
 
-    return useKubeObjectList<K>({
+    // Create requests for each cluster and namespace
+    const requests = useMemo(() => {
+      const clusterList = cluster
+        ? [cluster]
+        : clusters || (fallbackClusters.length === 0 ? [''] : fallbackClusters);
+
+      const namespacesFromParams =
+        typeof namespace === 'string'
+          ? [namespace]
+          : Array.isArray(namespace)
+          ? namespace
+          : undefined;
+
+      return makeListRequests(
+        clusterList,
+        getAllowedNamespaces,
+        this.isNamespaced,
+        namespacesFromParams
+      );
+    }, [cluster, clusters, fallbackClusters, namespace, this.isNamespaced]);
+
+    const result = useKubeObjectList<K>({
       queryParams: queryParams,
-      kubeObjectClass: this as (new (...args: any) => K) & typeof KubeObject<any>,
-      clusters: theClusters,
-      cluster: cluster,
-      namespace: namespace,
+      kubeObjectClass: this,
+      requests,
     });
+
+    return result;
   }
 
   static useGet<K extends KubeObject>(

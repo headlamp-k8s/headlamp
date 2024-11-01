@@ -12,11 +12,14 @@
  *
  * @returns Formatted URL path
  */
-export function makeUrl(urlParts: any[], query: Record<string, any> = {}) {
-  const url = urlParts
-    .map(it => (typeof it === 'string' ? it : String(it)))
-    .filter(Boolean)
-    .join('/');
+export function makeUrl(urlParts: any[] | string, query: Record<string, any> = {}) {
+  const url =
+    typeof urlParts === 'string'
+      ? urlParts
+      : urlParts
+          .map(it => (typeof it === 'string' ? it : String(it)))
+          .filter(Boolean)
+          .join('/');
   const queryString = new URLSearchParams(query).toString();
   const fullUrl = queryString ? `${url}?${queryString}` : url;
 
