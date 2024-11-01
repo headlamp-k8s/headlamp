@@ -27,7 +27,7 @@ export function useQueryParamsState<T extends string | undefined>(
     const searchParams = new URLSearchParams(search);
     const paramValue = searchParams.get(param);
 
-    return paramValue !== null ? (decodeURIComponent(paramValue) as T) : initialState;
+    return paramValue !== null ? (decodeURIComponent(paramValue) as T) : undefined;
   });
 
   // Update the value from URL to state
@@ -62,9 +62,14 @@ export function useQueryParamsState<T extends string | undefined>(
     history.push(newUrl);
   }, [param, value]);
 
+  // Initi state with initial state value
+  useEffect(() => {
+    setValue(initialState);
+  }, []);
+
   const handleSetValue = useCallback(
     (newValue: T | undefined) => {
-      if (typeof newValue !== 'string') {
+      if (newValue !== undefined && typeof newValue !== 'string') {
         throw new Error("useQueryParamsState: Can't set a value to something that isn't a string");
       }
       setValue(newValue);
