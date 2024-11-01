@@ -48,14 +48,23 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
     const factory = this.isNamespaced ? apiFactoryWithNamespace : apiFactory;
     const versions = Array.isArray(this.apiVersion) ? this.apiVersion : [this.apiVersion];
 
-    const factoryArguments = versions.map(apiVersion => {
+    // Create factory arguments per API version, usually just one
+    const factoryArgumentsArray = versions.map(apiVersion => {
       const [group, version] = apiVersion.includes('/') ? apiVersion.split('/') : ['', apiVersion];
       const includeScaleApi = ['Deployment', 'ReplicaSet', 'StatefulSet'].includes(this.kind);
 
       return [group, version, this.apiName, includeScaleApi];
     });
 
-    const endpoint = factory(...(factoryArguments as any));
+    // Extract the first argument list if we only have one version
+    // Because for resources with only one API version
+    // the factory expects flat arguments instead of an array
+    const factoryArguments =
+      factoryArgumentsArray.length === 1
+        ? factoryArgumentsArray[0]
+        : (factoryArgumentsArray as any);
+
+    const endpoint = factory(...factoryArguments);
     this._internalApiEndpoint = endpoint;
 
     return endpoint;
