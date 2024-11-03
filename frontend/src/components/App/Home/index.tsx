@@ -6,7 +6,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import isEqual from 'lodash/isEqual';
+import React, { useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -160,13 +161,15 @@ function ClusterStatus({ error }: { error?: ApiError | null }) {
 
 export default function Home() {
   const history = useHistory();
-  const clusters = useClustersConf() || {};
+  const clustersConf = useClustersConf() || {};
+  const clusters = useMemo(() => {
+    return clustersConf;
+  }, [clustersConf]);
 
   if (!helpers.isElectron() && Object.keys(clusters).length === 1) {
     history.push(createRouteURL('cluster', { cluster: Object.keys(clusters)[0] }));
     return null;
   }
-
   return <HomeComponent clusters={clusters} key={Object.keys(clusters).join('')} />;
 }
 
@@ -174,16 +177,90 @@ interface HomeComponentProps {
   clusters: { [name: string]: Cluster };
 }
 
+/**
+ * Custom hook that caches the result and only returns a new result if there is a deep equality change.
+ *
+ * @template T - The type of the value to be memoized.
+ * @param factory - The function that returns the value to be memoized.
+ * @param deps - The dependencies array.
+ * @returns The memoized value.
+ *
+ * @example
+ * const memoizedValue = useDeepCompareMemo(computeExpensiveValue(a, b), [a, b]);
+ */
+function useDeepCompareMemo<T>(value: T, deps: any[]): T {
+  const previousDepsRef = useRef<any[]>([]);
+  const previousValueRef = useRef<T>();
+
+  if (!isEqual(previousDepsRef.current, deps)) {
+    previousDepsRef.current = deps;
+    previousValueRef.current = value;
+  }
+
+  return previousValueRef.current as T;
+}
+
 function HomeComponent(props: HomeComponentProps) {
   const { clusters } = props;
-  const customNameClusters = Object.values(clusters).map(c => ({
-    ...c,
-    name: c.meta_data?.extensions?.headlamp_info?.customName || c.name,
-  }));
+  const customNameClusters = useMemo(() => {
+    return Object.values(clusters).map(c => ({
+      ...c,
+      name: c.meta_data?.extensions?.headlamp_info?.customName || c.name,
+    }));
+  }, [clusters]);
+
+  const customClusterNames = useMemo(() => {
+    return customNameClusters.map(c => c.name);
+  }, [customNameClusters]);
+
+  const clusterList = useMemo(() => {
+    return Object.values(clusters);
+  }, [clusters]);
+
+  const versionsErrors = useClustersVersion(clusterList);
+  const [versions, errors] = useDeepCompareMemo(versionsErrors, [versionsErrors]);
+  const warningsList = Event.useWarningList(customClusterNames);
+  const warningsMap = useDeepCompareMemo(warningsList, [warningsList]);
+
+  console.log('versions', versions);
+  console.log('clusterList', clusterList);
+  console.log('warningsList', warningsList);
+  console.log('customClusterNames.join', customClusterNames.join('-'));
+
+  const rendered = useMemo(() => {
+    return (
+      <HomePure
+        customNameClusters={customNameClusters}
+        customClusterNames={customClusterNames}
+        versions={versions}
+        errors={errors}
+        warningsMap={warningsMap}
+      />
+    );
+  }, [customClusterNames, customClusterNames, versions, errors, warningsMap]);
+
+  return rendered;
+}
+
+type EventsPerCluster = {
+  [cluster: string]: {
+    warnings: Event[];
+    error?: ApiError | null;
+  };
+};
+
+interface HomePureProps {
+  customNameClusters: Cluster[];
+  customClusterNames: string[];
+  versions: { [cluster: string]: { [key: string]: string } };
+  errors: { [cluster: string]: ApiError | null };
+  warningsMap: EventsPerCluster;
+}
+
+function HomePure(props: HomePureProps) {
   const { t } = useTranslation(['translation', 'glossary']);
-  const [versions, errors] = useClustersVersion(Object.values(clusters));
+  const { customNameClusters, versions, errors, warningsMap } = props;
   const maxWarnings = 50;
-  const warningsMap = Event.useWarningList(Object.values(customNameClusters).map(c => c.name));
 
   function renderWarningsText(clusterName: string) {
     const numWarnings =
@@ -202,7 +279,7 @@ function HomeComponent(props: HomeComponentProps) {
   return (
     <PageGrid>
       <SectionBox headerProps={{ headerStyle: 'main' }} title={t('Home')}>
-        <RecentClusters clusters={Object.values(customNameClusters)} onButtonClick={() => {}} />
+        <RecentClusters clusters={customNameClusters} onButtonClick={() => {}} />
       </SectionBox>
       <SectionBox
         title={
@@ -248,7 +325,7 @@ function HomeComponent(props: HomeComponentProps) {
               render: cluster => <ContextMenu cluster={cluster} />,
             },
           ]}
-          data={Object.values(customNameClusters)}
+          data={customNameClusters}
           id="headlamp-home-clusters"
         />
       </SectionBox>
