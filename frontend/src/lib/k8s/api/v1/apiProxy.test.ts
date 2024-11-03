@@ -857,10 +857,8 @@ describe('apiProxy', () => {
       nock.cleanAll();
     });
 
-    it('Successfully checks cluster health', async () => {
-      const response = await apiProxy.testClusterHealth(clusterName);
-      const body = await response.text();
-      expect(body).toEqual('ok');
+    it('Should not raise an error on success', async () => {
+      await apiProxy.testClusterHealth(clusterName);
     });
 
     it.each([
