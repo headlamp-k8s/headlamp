@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useClustersConf } from '../../lib/k8s';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
-import { getCluster } from '../../lib/util';
+import { getCluster, getClusterGroup } from '../../lib/util';
 import { setConfig } from '../../redux/configSlice';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -27,8 +27,8 @@ export interface LayoutProps {}
 
 const CLUSTER_FETCH_INTERVAL = 10 * 1000; // ms
 
-function ClusterNotFoundPopup() {
-  const cluster = getCluster();
+function ClusterNotFoundPopup({ cluster }: { cluster?: string }) {
+  const problemCluster = cluster || getCluster();
   const { t } = useTranslation();
 
   return (
@@ -46,7 +46,9 @@ function ClusterNotFoundPopup() {
       p={0.5}
       alignItems="center"
     >
-      <Box p={0.5}>{t(`Something went wrong with cluster {{ cluster }}`, { cluster })}</Box>
+      <Box p={0.5}>
+        {t(`Something went wrong with cluster {{ cluster }}`, { cluster: problemCluster })}
+      </Box>
       <Button variant="contained" size="small" href={window.desktopApi ? '#' : '/'}>
         {t('Choose another cluster')}
       </Button>
@@ -100,7 +102,6 @@ export default function Layout({}: LayoutProps) {
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation();
   const allClusters = useClustersConf();
-  const clusterInURL = getCluster();
   const theme = useTheme();
 
   /** This fetches the cluster config from the backend and updates the redux store on an interval.
@@ -179,6 +180,12 @@ export default function Layout({}: LayoutProps) {
       });
   };
 
+  const urlClusters = getClusterGroup();
+  const clustersNotInURL =
+    allClusters && urlClusters.length !== 0
+      ? urlClusters.filter(clusterName => !Object.keys(allClusters).includes(clusterName))
+      : [];
+
   return (
     <>
       <Link
@@ -203,13 +210,9 @@ export default function Layout({}: LayoutProps) {
         <TopBar />
         <Sidebar />
         <Main id="main" sx={{ flexGrow: 1, marginLeft: 'initial' }}>
-          {allClusters &&
-          !!clusterInURL &&
-          !Object.keys(allClusters).includes(getCluster() || '') ? (
-            <ClusterNotFoundPopup />
-          ) : (
-            ''
-          )}
+          {clustersNotInURL.length > 0
+            ? clustersNotInURL.map(clusterName => <ClusterNotFoundPopup cluster={clusterName} />)
+            : ''}
           <AlertNotification />
           <Box>
             <Div sx={theme.mixins.toolbar} />
