@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { getCluster, getClusterGroup, getClusterPrefixedPath } from '../util';
@@ -138,6 +139,17 @@ export function useClusterGroup(): string[] {
   }, [clusterInURL]);
 
   return clusterGroup;
+}
+
+/**
+ * Use the cluster name from the URL query parameters if it's there.
+ *
+ * @returns the cluster name from the URL. If no cluster is defined in the URL, undefined is returned.
+ */
+export function useClusterFromURLVar(): string | undefined {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  return searchParams.get('cluster') || undefined;
 }
 
 export function getVersion(clusterName: string = ''): Promise<StringDict> {
