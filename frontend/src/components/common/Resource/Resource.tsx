@@ -89,6 +89,8 @@ export interface DetailsGridProps<T extends KubeObjectClass>
   name: string;
   /** Namespace of the resource. If not provided, it's assumed the resource is not namespaced. */
   namespace?: string;
+  /** Cluster of the resource. If not provided, it's assumed single cluster mode. */
+  cluster?: string;
   /** Sections to show in the details grid (besides the default ones). */
   extraSections?:
     | ((item: InstanceType<T>) => boolean | DetailsViewSection[] | ReactNode[])
@@ -111,6 +113,7 @@ export function DetailsGrid<T extends KubeObjectClass>(props: DetailsGridProps<T
     resourceType,
     name,
     namespace,
+    cluster,
     children,
     withEvents,
     extraSections,
@@ -131,7 +134,7 @@ export function DetailsGrid<T extends KubeObjectClass>(props: DetailsGridProps<T
   const { extraInfo, actions, noDefaultActions, headerStyle, backLink, title, headerSection } =
     otherMainInfoSectionProps;
 
-  const [item, error] = resourceType.useGet(name, namespace) as [
+  const [item, error] = resourceType.useGet(name, namespace, { cluster }) as [
     InstanceType<T> | null,
     ApiError | null
   ];
