@@ -11,6 +11,7 @@ export default function ValidatingWebhookConfigurationList() {
       resourceClass={ValidatingWebhookConfiguration}
       columns={[
         'name',
+        'cluster',
         {
           id: 'webhooks',
           label: t('Webhooks'),

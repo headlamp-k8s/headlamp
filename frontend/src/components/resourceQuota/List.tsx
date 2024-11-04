@@ -46,6 +46,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'requests',
           label: t('translation|Request'),
