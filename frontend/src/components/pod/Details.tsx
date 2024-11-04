@@ -10,6 +10,7 @@ import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useClusterFromURLVar } from '../../lib/k8s';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
@@ -392,12 +393,14 @@ export default function PodDetails(props: PodDetailsProps) {
   const { t } = useTranslation('glossary');
   const [isAttached, setIsAttached] = React.useState(false);
   const dispatchHeadlampEvent = useEventCallback();
+  const cluster = useClusterFromURLVar();
 
   return (
     <DetailsGrid
       resourceType={Pod}
       name={name}
       namespace={namespace}
+      cluster={cluster}
       withEvents
       actions={item =>
         item && [
