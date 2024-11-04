@@ -151,6 +151,7 @@ function EventsSection() {
           gridTemplate: 1.5,
         },
         'namespace',
+        'cluster',
         {
           label: t('Reason'),
           getValue: event => event.reason,

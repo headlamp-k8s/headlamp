@@ -22,6 +22,7 @@ export default function NodeList() {
       resourceClass={Node}
       columns={[
         'name',
+        'cluster',
         {
           id: 'cpu',
           label: t('CPU'),
@@ -143,7 +144,6 @@ export default function NodeList() {
           },
           show: false,
         },
-        'cluster',
         'age',
       ]}
     />
