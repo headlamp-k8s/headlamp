@@ -17,7 +17,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import YAML from 'yaml';
-import { labelSelectorToQuery, ResourceClasses } from '../../../lib/k8s';
+import { labelSelectorToQuery, ResourceClasses, useClusterFromURLVar } from '../../../lib/k8s';
 import { ApiError } from '../../../lib/k8s/apiProxy';
 import { KubeCondition, KubeContainer, KubeContainerStatus } from '../../../lib/k8s/cluster';
 import { KubeEvent } from '../../../lib/k8s/event';
@@ -113,7 +113,6 @@ export function DetailsGrid<T extends KubeObjectClass>(props: DetailsGridProps<T
     resourceType,
     name,
     namespace,
-    cluster,
     children,
     withEvents,
     extraSections,
@@ -128,6 +127,8 @@ export function DetailsGrid<T extends KubeObjectClass>(props: DetailsGridProps<T
     state => state.detailsViewSection.detailsViewSectionsProcessors
   );
   const dispatchHeadlampEvent = useEventCallback();
+  const clusterFromURLVar = useClusterFromURLVar();
+  const cluster = props.cluster || clusterFromURLVar;
 
   // This component used to have a MainInfoSection with all these props passed to it, so we're
   // using them to accomplish the same behavior.
