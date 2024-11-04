@@ -10,8 +10,14 @@ import { ResourceListView } from '../common/Resource';
 function CrInstancesView({ crds }: { crds: CRD[]; key: string }) {
   const { t } = useTranslation(['glossary', 'translation']);
 
-  const crdInfo = useMemo(() => crds.map(crd => crd.makeCRClass()), [crds]);
-  const queries = crdInfo.map(cr => cr.useList());
+  const dataClassCrds = crds.map(crd => {
+    const crdClass = crd.makeCRClass();
+    const data = crdClass.useList({ cluster: crd.cluster });
+    return { data, crdClass, crd };
+  });
+
+  const queries = dataClassCrds.map(it => it.data);
+
   const [isWarningClosed, setIsWarningClosed] = useState(false);
 
   const { crInstancesList, getCRDForCR, isLoading, crdsFailedToLoad, allFailed } = useMemo(() => {
@@ -112,6 +118,7 @@ function CrInstancesView({ crds }: { crds: CRD[]; key: string }) {
               );
             },
           },
+          'cluster',
           {
             label: 'Categories',
             getValue: cr => {
