@@ -14,6 +14,7 @@ export default function ReplicaSetList() {
       columns={[
         'name',
         'namespace',
+        'cluster',
         {
           id: 'generation',
           label: t('Generation'),

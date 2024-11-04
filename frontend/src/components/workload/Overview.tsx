@@ -133,6 +133,7 @@ export default function Overview() {
             render: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
           },
           'namespace',
+          'cluster',
           {
             id: 'pods',
             label: t('Pods'),
