@@ -119,7 +119,13 @@ export interface Route {
   hideAppBar?: boolean;
   /** Whether the route should be disabled (not registered). */
   disabled?: boolean;
+  /** Render route for full width */
+  isFullWidth?: boolean;
 }
+
+const LazyGraphView = React.lazy(() =>
+  import('../components/resourceMap/GraphView').then(it => ({ default: it.GraphView }))
+);
 
 const defaultRoutes: {
   [routeName: string]: Route;
@@ -786,6 +792,14 @@ const defaultRoutes: {
     noAuthRequired: true,
     disabled: !helpers.isElectron(),
     component: () => <KubeConfigLoader />,
+  },
+  map: {
+    path: '/map',
+    exact: true,
+    name: 'Map (beta)',
+    sidebar: 'map',
+    isFullWidth: true,
+    component: () => <LazyGraphView height="calc(100vh - 64px)" />,
   },
 };
 
