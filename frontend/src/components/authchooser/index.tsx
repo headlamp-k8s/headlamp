@@ -42,7 +42,7 @@ function AuthChooser({ children }: AuthChooserProps) {
   const location = useLocation();
   const clusters = useClustersConf();
   const dispatch = useDispatch();
-  const [testingAuth, setTestingAuth] = React.useState(false);
+  const [testingAuth, setTestingAuth] = React.useState(true);
   const [error, setError] = React.useState<Error | null>(null);
   const { from = { pathname: createRouteURL('cluster') } } = (location.state ||
     {}) as ReactRouterLocationStateIface;
@@ -70,6 +70,10 @@ function AuthChooser({ children }: AuthChooserProps) {
         clustersRef.current = clusters;
       }
       const clusterName = getCluster();
+
+      // Reset the testing auth state just to prevent the early return from this function
+      // without actually testing auth, which would cause the auth chooser to never show up.
+      setTestingAuth(false);
 
       if (!clusterName || !clusters || sameClusters || error || numClusters === 0) {
         return;
