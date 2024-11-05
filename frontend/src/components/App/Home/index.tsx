@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import { isEqual } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -176,10 +177,7 @@ interface HomeComponentProps {
 
 function HomeComponent(props: HomeComponentProps) {
   const { clusters } = props;
-  const customNameClusters = Object.values(clusters).map(c => ({
-    ...c,
-    name: c.meta_data?.extensions?.headlamp_info?.customName || c.name,
-  }));
+  const [customNameClusters, setCustomNameClusters] = React.useState(getClusterNames());
   const { t } = useTranslation(['translation', 'glossary']);
   const [versions, errors] = useClustersVersion(Object.values(clusters));
   const maxWarnings = 50;
@@ -198,6 +196,24 @@ function HomeComponent(props: HomeComponentProps) {
     }
     return numWarnings;
   }
+
+  function getClusterNames() {
+    return Object.values(clusters)
+      .map(c => ({
+        ...c,
+        name: c.meta_data?.extensions?.headlamp_info?.customName || c.name,
+      }))
+      .sort();
+  }
+
+  React.useEffect(() => {
+    setCustomNameClusters(currentNames => {
+      if (isEqual(currentNames, getClusterNames())) {
+        return currentNames;
+      }
+      return getClusterNames();
+    });
+  }, [customNameClusters]);
 
   return (
     <PageGrid>
