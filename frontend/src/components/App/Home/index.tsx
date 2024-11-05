@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -52,17 +53,19 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
 
   return (
     <>
-      <IconButton
-        size="small"
-        onClick={event => {
-          setAnchorEl(event.currentTarget);
-        }}
-        aria-haspopup="menu"
-        aria-controls={menuId}
-        aria-label={t('Actions')}
-      >
-        <Icon icon="mdi:more-vert" />
-      </IconButton>
+      <Tooltip title={t('Actions')}>
+        <IconButton
+          size="small"
+          onClick={event => {
+            setAnchorEl(event.currentTarget);
+          }}
+          aria-haspopup="menu"
+          aria-controls={menuId}
+          aria-label={t('Actions')}
+        >
+          <Icon icon="mdi:more-vert" />
+        </IconButton>
+      </Tooltip>
       <Menu
         id={menuId}
         anchorEl={anchorEl}
