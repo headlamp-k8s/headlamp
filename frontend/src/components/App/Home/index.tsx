@@ -236,6 +236,24 @@ function HomeComponent(props: HomeComponentProps) {
       .sort();
   }
 
+  /**
+   * Gets the origin of a cluster.
+   *
+   * @param cluster
+   * @returns A description of where the cluster is picked up from: dynamic, in-cluster, or from a kubeconfig file.
+   */
+  function getOrigin(cluster: Cluster): string {
+    if (cluster.meta_data?.source === 'kubeconfig') {
+      const kubeconfigPath = process.env.KUBECONFIG ?? '~/.kube/config';
+      return t('translation|Kubeconfig') + ` (${kubeconfigPath})`;
+    } else if (cluster.meta_data?.source === 'dynamic_cluster') {
+      return t('translation|Dynamic cluster');
+    } else if (cluster.meta_data?.source === 'in_cluster') {
+      return t('translation|In-cluster');
+    }
+    return 'Unknown';
+  }
+
   const memoizedComponent = React.useMemo(
     () => (
       <PageGrid>
@@ -262,6 +280,13 @@ function HomeComponent(props: HomeComponentProps) {
                   <Link routeName="cluster" params={{ cluster: name }}>
                     {name}
                   </Link>
+                ),
+              },
+              {
+                label: t('Origin'),
+                getValue: cluster => getOrigin(cluster),
+                render: ({ name }) => (
+                  <Typography variant="body2">{getOrigin(clusters[name])}</Typography>
                 ),
               },
               {
