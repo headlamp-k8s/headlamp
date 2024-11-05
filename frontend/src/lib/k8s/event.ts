@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+import _ from 'lodash';
+import React, { useMemo } from 'react';
 import { ResourceClasses } from '.';
 import { ApiError, QueryParameters } from './apiProxy';
 import { request } from './apiProxy';
@@ -238,7 +239,19 @@ class Event extends KubeObject<KubeEvent> {
       options?.queryParams ?? {}
     );
 
-    return this.useListForClusters(clusters, { queryParams: queryParameters });
+    const newWarningsList = this.useListForClusters(clusters, { queryParams: queryParameters });
+    const [warningList, setWarningList] = React.useState<typeof newWarningsList>(newWarningsList);
+
+    // Only update the warnings if they actually differ
+    React.useEffect(() => {
+      if (_.isEqual(warningList, newWarningsList)) {
+        return;
+      }
+
+      setWarningList(newWarningsList);
+    }, [newWarningsList]);
+
+    return warningList;
   }
 }
 

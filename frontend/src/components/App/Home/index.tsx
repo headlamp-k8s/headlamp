@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import { isEqual } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -174,21 +175,14 @@ interface HomeComponentProps {
   clusters: { [name: string]: Cluster };
 }
 
-function HomeComponent(props: HomeComponentProps) {
-  const { clusters } = props;
-  const customNameClusters = Object.values(clusters).map(c => ({
-    ...c,
-    name: c.meta_data?.extensions?.headlamp_info?.customName || c.name,
-  }));
-  const { t } = useTranslation(['translation', 'glossary']);
-  const [versions, errors] = useClustersVersion(Object.values(clusters));
+function useWarningSettingsPerCluster(clusterNames: string[]) {
+  const warningsMap = Event.useWarningList(clusterNames);
+  const [warningLabels, setWarningLabels] = React.useState<{ [cluster: string]: string }>({});
   const maxWarnings = 50;
-  const warningsMap = Event.useWarningList(Object.values(customNameClusters).map(c => c.name));
 
-  function renderWarningsText(clusterName: string) {
+  function renderWarningsText(warnings: typeof warningsMap, clusterName: string) {
     const numWarnings =
-      (!!warningsMap[clusterName]?.error && -1) ||
-      (warningsMap[clusterName]?.warnings?.length ?? -1);
+      (!!warnings[clusterName]?.error && -1) || (warnings[clusterName]?.warnings?.length ?? -1);
 
     if (numWarnings === -1) {
       return '⋯';
@@ -196,62 +190,110 @@ function HomeComponent(props: HomeComponentProps) {
     if (numWarnings >= maxWarnings) {
       return `${maxWarnings}+`;
     }
-    return numWarnings;
+    return numWarnings.toString();
   }
 
-  return (
-    <PageGrid>
-      <SectionBox headerProps={{ headerStyle: 'main' }} title={t('Home')}>
-        <RecentClusters clusters={Object.values(customNameClusters)} onButtonClick={() => {}} />
-      </SectionBox>
-      <SectionBox
-        title={
-          <SectionFilterHeader
-            title={t('All Clusters')}
-            noNamespaceFilter
-            headerStyle="subsection"
-          />
-        }
-      >
-        <ResourceTable<any>
-          defaultSortingColumn={{ id: 'name', desc: false }}
-          columns={[
-            {
-              id: 'name',
-              label: t('Name'),
-              getValue: cluster => cluster.name,
-              render: ({ name }) => (
-                <Link routeName="cluster" params={{ cluster: name }}>
-                  {name}
-                </Link>
-              ),
-            },
-            {
-              label: t('Status'),
-              getValue: cluster => cluster.name,
-              render: ({ name }) => <ClusterStatus error={errors[name]} />,
-            },
-            {
-              label: t('Warnings'),
-              getValue: ({ name }) => renderWarningsText(name),
-            },
-            {
-              label: t('glossary|Kubernetes Version'),
-              getValue: ({ name }) => versions[name]?.gitVersion || '⋯',
-            },
-            {
-              label: '',
-              getValue: () => '',
-              cellProps: {
-                align: 'right',
-              },
-              render: cluster => <ContextMenu cluster={cluster} />,
-            },
-          ]}
-          data={Object.values(customNameClusters)}
-          id="headlamp-home-clusters"
-        />
-      </SectionBox>
-    </PageGrid>
+  React.useEffect(() => {
+    setWarningLabels(currentWarningLabels => {
+      const newWarningLabels: { [cluster: string]: string } = {};
+      for (const cluster of clusterNames) {
+        newWarningLabels[cluster] = renderWarningsText(warningsMap, cluster);
+      }
+      if (!isEqual(newWarningLabels, currentWarningLabels)) {
+        return newWarningLabels;
+      }
+      return currentWarningLabels;
+    });
+  }, [warningsMap]);
+
+  return warningLabels;
+}
+
+function HomeComponent(props: HomeComponentProps) {
+  const { clusters } = props;
+  const [customNameClusters, setCustomNameClusters] = React.useState(getClusterNames());
+  const { t } = useTranslation(['translation', 'glossary']);
+  const [versions, errors] = useClustersVersion(Object.values(clusters));
+  const warningLabels = useWarningSettingsPerCluster(
+    Object.values(customNameClusters).map(c => c.name)
   );
+
+  React.useEffect(() => {
+    setCustomNameClusters(currentNames => {
+      if (isEqual(currentNames, getClusterNames())) {
+        return currentNames;
+      }
+      return getClusterNames();
+    });
+  }, [customNameClusters]);
+
+  function getClusterNames() {
+    return Object.values(clusters)
+      .map(c => ({
+        ...c,
+        name: c.meta_data?.extensions?.headlamp_info?.customName || c.name,
+      }))
+      .sort();
+  }
+
+  const memoizedComponent = React.useMemo(
+    () => (
+      <PageGrid>
+        <SectionBox headerProps={{ headerStyle: 'main' }} title={t('Home')}>
+          <RecentClusters clusters={Object.values(customNameClusters)} onButtonClick={() => {}} />
+        </SectionBox>
+        <SectionBox
+          title={
+            <SectionFilterHeader
+              title={t('All Clusters')}
+              noNamespaceFilter
+              headerStyle="subsection"
+            />
+          }
+        >
+          <ResourceTable<any>
+            defaultSortingColumn={{ id: 'name', desc: false }}
+            columns={[
+              {
+                id: 'name',
+                label: t('Name'),
+                getValue: cluster => cluster.name,
+                render: ({ name }) => (
+                  <Link routeName="cluster" params={{ cluster: name }}>
+                    {name}
+                  </Link>
+                ),
+              },
+              {
+                label: t('Status'),
+                getValue: cluster => cluster.name,
+                render: ({ name }) => <ClusterStatus error={errors[name]} />,
+              },
+              {
+                label: t('Warnings'),
+                getValue: ({ name }) => warningLabels[name],
+              },
+              {
+                label: t('glossary|Kubernetes Version'),
+                getValue: ({ name }) => versions[name]?.gitVersion || '⋯',
+              },
+              {
+                label: '',
+                getValue: () => '',
+                cellProps: {
+                  align: 'right',
+                },
+                render: cluster => <ContextMenu cluster={cluster} />,
+              },
+            ]}
+            data={Object.values(customNameClusters)}
+            id="headlamp-home-clusters"
+          />
+        </SectionBox>
+      </PageGrid>
+    ),
+    [customNameClusters, errors, versions, warningLabels]
+  );
+
+  return memoizedComponent;
 }

@@ -287,18 +287,27 @@ export function matchExpressionSimplifier(
  * @returns a map with cluster -> version-info, and a map with cluster -> error.
  */
 export function useClustersVersion(clusters: Cluster[]) {
+  type VersionInfo = {
+    version: StringDict | null;
+    error: ApiError | null;
+  };
+
   const [clusterNames, setClusterNames] = React.useState<string[]>(
     Object.values(clusters).map(c => c.name)
   );
-  const [versions, setVersions] = React.useState<{ [cluster: string]: StringDict }>({});
-  const [errors, setErrors] = React.useState<{ [cluster: string]: ApiError | null }>({});
+  const [versions, setVersions] = React.useState<{ [cluster: string]: VersionInfo }>({});
   const versionFetchInterval = 10000; // ms
   const cancelledRef = React.useRef(false);
   const lastUpdateRef = React.useRef(0);
 
   React.useEffect(() => {
-    const newClusterNames = Object.values(clusters).map(c => c.name);
-    if (_.isEqual(newClusterNames, clusterNames)) {
+    // We sort the lists so the order of clusters doesn't influence our comparison. We only
+    // care for presence, not for order.
+    const newClusterNames = Object.values(clusters)
+      .map(c => c.name)
+      .sort();
+    const sortedClusterNames = [...clusterNames].sort();
+    if (_.isEqual(sortedClusterNames, clusterNames)) {
       return;
     }
 
@@ -308,38 +317,34 @@ export function useClustersVersion(clusters: Cluster[]) {
 
   React.useEffect(() => {
     const newVersions: typeof versions = {};
-    const newErrors: typeof errors = {};
 
     function updateValues() {
       if (cancelledRef.current) {
         return;
       }
 
+      let needsUpdate = false;
+
       setVersions(currentVersions => {
         const newVersionsToSet = { ...currentVersions };
-        Object.keys(newErrors).forEach(clusterName => {
-          if (!!newErrors[clusterName]) {
-            delete newVersionsToSet[clusterName];
+        for (const clusterName in newVersions) {
+          if (!_.isEqual(newVersionsToSet[clusterName], newVersions[clusterName])) {
+            needsUpdate = true;
+            newVersionsToSet[clusterName] = newVersions[clusterName];
           }
-        });
-        return { ...newVersionsToSet, ...newVersions };
-      });
-      setErrors(currentErrors => {
-        const newErrorsToSet = { ...currentErrors };
-        Object.keys(newVersions).forEach(clusterName => {
-          newErrorsToSet[clusterName] = null;
-        });
-        return { ...newErrorsToSet, ...newErrors };
+        }
+
+        return needsUpdate ? newVersionsToSet : currentVersions;
       });
     }
 
     clusterNames.forEach(clusterName => {
       getVersion(clusterName)
         .then(version => {
-          newVersions[clusterName] = version;
+          newVersions[clusterName] = { version, error: null };
         })
         .catch(err => {
-          newErrors[clusterName] = err;
+          newVersions[clusterName] = { version: null, error: err };
         })
         .finally(() => {
           updateValues();
@@ -369,7 +374,21 @@ export function useClustersVersion(clusters: Cluster[]) {
     };
   }, []);
 
-  return [versions, errors] as const;
+  return React.useMemo<
+    [{ [clusterName: string]: StringDict }, { [clusterName: string]: VersionInfo['error'] }]
+  >(() => {
+    const versionsInfo: { [clusterName: string]: StringDict } = {};
+    const errorsInfo: { [clusterName: string]: VersionInfo['error'] } = {};
+
+    Object.entries(versions).forEach(([clusterName, versionInfo]) => {
+      if (!!versionInfo.version) {
+        versionsInfo[clusterName] = versionInfo.version;
+      }
+      errorsInfo[clusterName] = versionInfo.error;
+    });
+
+    return [versionsInfo, errorsInfo];
+  }, [versions]);
 }
 
 // Other exports that can be used by plugins:
