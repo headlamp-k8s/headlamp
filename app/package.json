@@ -159,8 +159,6 @@
     "electron-builder": "^24.13.3",
     "i18next-parser": "^9.0.0",
     "jest": "^29.7.0",
-    "mime-types": "^2.1.35",
-    "octokit": "^4.0.2",
     "typescript": "5.5.4",
     "@headlamp-k8s/eslint-config": "^0.6.0"
   },
