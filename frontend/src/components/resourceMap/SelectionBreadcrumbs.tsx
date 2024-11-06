@@ -64,7 +64,6 @@ export function SelectionBreadcrumbs({
         ) : (
           <Link
             key={it.id}
-            href="#"
             onClick={() => onNodeClick(it.id)}
             sx={{
               textTransform: 'unset',
@@ -72,6 +71,7 @@ export function SelectionBreadcrumbs({
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
+              cursor: 'pointer',
             }}
           >
             {getLabel(it)}
