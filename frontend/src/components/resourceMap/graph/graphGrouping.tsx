@@ -200,18 +200,7 @@ export function groupGraph(
     },
   };
 
-  let components: GraphNode[] = [];
-  const groupComponents = true;
-  if (groupComponents) {
-    const relationEdges = edges.filter(it => it.type === 'kubeRelation');
-    const elseEdges = edges.filter(it => it.type !== 'kubeRelation');
-    root.data.edges.push(...elseEdges);
-    const groups = getConnectedComponents(nodes, relationEdges);
-    components = groups;
-  } else {
-    root.data.nodes = nodes;
-    root.data.edges = edges;
-  }
+  let components: GraphNode[] = getConnectedComponents(nodes, edges);
 
   if (groupBy === 'namespace') {
     // Create groups based on the Kube resource namespace
