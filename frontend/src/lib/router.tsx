@@ -27,6 +27,14 @@ import DaemonSetList from '../components/daemonset/List';
 import DeploymentsList from '../components/deployments/List';
 import EndpointDetails from '../components/endpoints/Details';
 import EndpointList from '../components/endpoints/List';
+import GatewayClassDetails from '../components/gateway/ClassDetails';
+import GatewayClassList from '../components/gateway/ClassList';
+import GatewayDetails from '../components/gateway/GatewayDetails';
+import GatewayList from '../components/gateway/GatewayList';
+import GRPCRouteDetails from '../components/gateway/GRPCRouteDetails';
+import GRPCRouteList from '../components/gateway/GRPCRouteList';
+import HTTPRouteDetails from '../components/gateway/HTTPRouteDetails';
+import HTTPRouteList from '../components/gateway/HTTPRouteList';
 import HpaDetails from '../components/horizontalPodAutoscaler/Details';
 import HpaList from '../components/horizontalPodAutoscaler/List';
 import IngressClassDetails from '../components/ingress/ClassDetails';
@@ -326,6 +334,63 @@ const defaultRoutes: {
     exact: true,
     sidebar: 'NetworkPolicies',
     component: () => <NetworkPolicyDetails />,
+  },
+  k8sgateways: {
+    // fix magic name gateway
+    path: '/k8sgateways',
+    exact: true,
+    name: 'Gateways',
+    sidebar: 'k8sgateways',
+    component: () => <GatewayList />,
+  },
+  k8sgateway: {
+    // fix magic name gateway
+    path: '/k8sgateways/:namespace/:name',
+    exact: true,
+    name: 'Gateways',
+    sidebar: 'k8sgateways',
+    component: () => <GatewayDetails />,
+  },
+  httproutes: {
+    path: '/httproutes',
+    exact: true,
+    name: 'HttpRoutes',
+    sidebar: 'httproutes',
+    component: () => <HTTPRouteList />,
+  },
+  httproute: {
+    path: '/httproutes/:namespace/:name',
+    exact: true,
+    name: 'HttpRoutes',
+    sidebar: 'httproutes',
+    component: () => <HTTPRouteDetails />,
+  },
+  grpcroutes: {
+    path: '/grpcroutes',
+    exact: true,
+    name: 'GRPCRoutes',
+    sidebar: 'grpcroutes',
+    component: () => <GRPCRouteList />,
+  },
+  grpcroute: {
+    path: '/grpcroutes/:namespace/:name',
+    exact: true,
+    name: 'GRPCRoutes',
+    sidebar: 'grpcroutes',
+    component: () => <GRPCRouteDetails />,
+  },
+  gatewayclasses: {
+    path: '/gatewayclasses',
+    exact: true,
+    name: 'GatewayClasses',
+    sidebar: 'gatewayclasses',
+    component: () => <GatewayClassList />,
+  },
+  gatewayclass: {
+    path: '/gatewayclasses/:name',
+    exact: true,
+    sidebar: 'gatewayclasses',
+    component: () => <GatewayClassDetails />,
   },
   DaemonSets: {
     path: '/daemonsets',
