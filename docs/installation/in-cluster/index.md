@@ -43,6 +43,18 @@ you can run:
 kubectl apply -f https://raw.githubusercontent.com/kinvolk/headlamp/main/kubernetes-headlamp.yaml
 ```
 
+## Use a non-default kube config file
+
+By default, Headlamp uses the default service account from the namespace it is deployed to, and generates a kubeconfig from it named `main`.
+
+If you wish to use another specific non-default kubeconfig file, then you can do it by mounting it to the default location at `/home/headlamp/.config/Headlamp/kubeconfigs/config`, or 
+providing a custom path Headlamp with the ` -kubeconfig` argument or the KUBECONFIG env (through helm values.env)
+
+### Use several kubeconfig files
+
+If you need to use more than one kubeconfig file at the same time, you can list
+each config file path with a ":" separator in the KUBECONFIG env.
+
 ## Exposing Headlamp with an ingress server
 
 With the instructions in the previous section, the Headlamp service should be
