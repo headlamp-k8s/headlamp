@@ -909,6 +909,37 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
   }
 
   /**
+   * Upgrades "@headlamp-k8s/eslint-config" dependency to latest or given version.
+   *
+   * @returns true unless there is a problem with the upgrade.
+   */
+  function upgradeEslintConfig() {
+    const theTag = 'latest';
+    const packageJsonPath = path.join('.', 'package.json');
+    let packageJson = {};
+    try {
+      packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    } catch (e) {
+      console.error(`Error: Failed to read package.json from "${packageJsonPath}".`);
+      return false;
+    }
+
+    const oldVersion = packageJson.devDependencies['@headlamp-k8s/eslint-config'];
+    if (
+      oldVersion === undefined ||
+      '@headlamp-k8s/eslint-config' in getNpmOutdated() ||
+      !fs.existsSync('node_modules')
+    ) {
+      const cmd = `npm install -D @headlamp-k8s/eslint-config@${theTag} --save`;
+      if (runCmd(cmd, '.')) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
    * Upgrade a single package in a folder.
    *
    * @param {string} folder - where the package is.
@@ -935,6 +966,10 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
       if (!failed && !upgradeHeadlampPlugin()) {
         failed = true;
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
+      }
+      if (!failed && !upgradeEslintConfig()) {
+        failed = true;
+        reason = 'upgrading @headlamp-k8s/eslint-config failed.';
       }
       if (!failed && !upgradeMui()) {
         failed = true;
