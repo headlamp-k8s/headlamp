@@ -1,6 +1,6 @@
 {
   "name": "@headlamp-k8s/eslint-config",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Lint rules for Headlamp TypeScript projects",
   "main": "index.js",
   "private": false,
