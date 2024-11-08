@@ -914,7 +914,40 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
    * @returns true unless there is a problem with the upgrade.
    */
   function upgradeEslintConfig() {
-    const theTag = 'latest';
+    // This should be the version related to headlamp-plugin. If it is the latest
+    // version old versions in CI will look at the latest headlamp-k8s/eslint-config
+    // and that latest version might not be compatible.
+
+    function getEslintConfigToMatchHeadlampPlugin() {
+      // Read node_modules/@kinvolk/headlamp-plugin/package.json and get the version of eslint-config
+      const headlampPluginPackageJsonPath = path.join(
+        'node_modules',
+        '@kinvolk',
+        'headlamp-plugin',
+        'package.json'
+      );
+      let headlampPluginPackageJson = {};
+      try {
+        headlampPluginPackageJson = JSON.parse(
+          fs.readFileSync(headlampPluginPackageJsonPath, 'utf8')
+        );
+      } catch (e) {
+        console.error(
+          `Error: Failed to read package.json from "${headlampPluginPackageJsonPath}".`
+        );
+        return false;
+      }
+
+      return headlampPluginPackageJson.devDependencies['@headlamp-k8s/eslint-config'];
+    }
+    const headlampPluginEslintVersion = getEslintConfigToMatchHeadlampPlugin();
+    if (!headlampPluginEslintVersion) {
+      console.error(
+        `Error: Failed to get version of @headlamp-k8s/eslint-config from headlamp-plugin.`
+      );
+      return false;
+    }
+
     const packageJsonPath = path.join('.', 'package.json');
     let packageJson = {};
     try {
@@ -930,7 +963,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
       '@headlamp-k8s/eslint-config' in getNpmOutdated() ||
       !fs.existsSync('node_modules')
     ) {
-      const cmd = `npm install -D @headlamp-k8s/eslint-config@${theTag} --save`;
+      const cmd = `npm install -D @headlamp-k8s/eslint-config@${headlampPluginEslintVersion} --save`;
       if (runCmd(cmd, '.')) {
         return false;
       }
