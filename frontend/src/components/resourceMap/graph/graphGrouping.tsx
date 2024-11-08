@@ -1,5 +1,6 @@
 import { groupBy } from 'lodash';
 import Pod from '../../../lib/k8s/pod';
+import { makeGraphLookup } from './graphLookup';
 import {
   forEachNode,
   GraphEdge,
@@ -37,7 +38,11 @@ export const getGraphSize = (graph: GraphNode) => {
  */
 const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): GraphNode[] => {
   const components: KubeGroupNode[] = [];
-  const visited: { [key: string]: boolean } = {};
+
+  const graphLookup = makeGraphLookup(nodes, edges);
+
+  const visitedNodes = new Set<string>();
+  const visitedEdges = new Set<string>();
 
   /**
    * Recursively finds all nodes in the connected component of a given node
@@ -47,31 +52,51 @@ const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): Gr
    * @param node - The starting node for the connected component search
    * @param componentNodes - An array to store the nodes that are part of the connected component
    */
-  const findConnectedComponent = (node: KubeObjectNode, componentNodes: KubeObjectNode[]) => {
-    visited[node.id] = true;
+  const findConnectedComponent = (
+    node: KubeObjectNode,
+    componentNodes: KubeObjectNode[],
+    componentEdges: GraphEdge[]
+  ) => {
+    visitedNodes.add(node.id);
     componentNodes.push(node);
-    edges.forEach(edge => {
-      if (edge.source === node.id && !visited[edge.target]) {
-        const targetNode = nodes.find(n => n.id === edge.target);
-        if (targetNode) findConnectedComponent(targetNode, componentNodes);
-      } else if (edge.target === node.id && !visited[edge.source]) {
-        const sourceNode = nodes.find(n => n.id === edge.source);
-        if (sourceNode) findConnectedComponent(sourceNode, componentNodes);
+
+    graphLookup.getOutgoingEdges(node.id)?.forEach(edge => {
+      if (visitedNodes.has(edge.target)) return;
+
+      if (!visitedEdges.has(edge.id)) {
+        visitedEdges.add(edge.id);
+        componentEdges.push(edge);
+      }
+
+      const targetNode = graphLookup.getNode(edge.target);
+      if (targetNode) {
+        componentEdges.push(edge);
+        findConnectedComponent(targetNode, componentNodes, componentEdges);
+      }
+    });
+
+    graphLookup.getIncomingEdges(node.id)?.forEach(edge => {
+      if (visitedNodes.has(edge.source)) return;
+
+      if (!visitedEdges.has(edge.id)) {
+        visitedEdges.add(edge.id);
+        componentEdges.push(edge);
+      }
+
+      const sourceNode = graphLookup.getNode(edge.source);
+      if (sourceNode) {
+        componentEdges.push(edge);
+        findConnectedComponent(sourceNode, componentNodes, componentEdges);
       }
     });
   };
 
   // Iterate over each node and find connected components
   nodes.forEach(node => {
-    if (!visited[node.id]) {
+    if (!visitedNodes.has(node.id)) {
       const componentNodes: KubeObjectNode[] = [];
-      findConnectedComponent(node, componentNodes);
-      // Find edges for the current component
-      const componentEdges = edges.filter(
-        edge =>
-          componentNodes.find(n => n.id === edge.source) &&
-          componentNodes.find(n => n.id === edge.target)
-      );
+      const componentEdges: GraphEdge[] = [];
+      findConnectedComponent(node, componentNodes, componentEdges);
       const mainNode = getMainNode(componentNodes);
 
       const id = 'group-' + mainNode.id;
@@ -175,18 +200,7 @@ export function groupGraph(
     },
   };
 
-  let components: GraphNode[] = [];
-  const groupComponents = true;
-  if (groupComponents) {
-    const relationEdges = edges.filter(it => it.type === 'kubeRelation');
-    const elseEdges = edges.filter(it => it.type !== 'kubeRelation');
-    root.data.edges.push(...elseEdges);
-    const groups = getConnectedComponents(nodes, relationEdges);
-    components = groups;
-  } else {
-    root.data.nodes = nodes;
-    root.data.edges = edges;
-  }
+  let components: GraphNode[] = getConnectedComponents(nodes, edges);
 
   if (groupBy === 'namespace') {
     // Create groups based on the Kube resource namespace

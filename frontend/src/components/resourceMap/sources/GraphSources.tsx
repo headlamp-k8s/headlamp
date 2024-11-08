@@ -232,13 +232,17 @@ export function GraphSourceManager({ sources, children }: GraphSourceManagerProp
 
   const contextValue = useThrottledMemo(
     () => {
-      const nodes: GraphNode[] = [];
-      const edges: GraphEdge[] = [];
+      let nodes: GraphNode[] = [];
+      let edges: GraphEdge[] = [];
 
       selectedSources.forEach(id => {
         const data = sourceData.get(id);
-        nodes.push(...(data?.nodes ?? []));
-        edges.push(...(data?.edges ?? []));
+        if (data?.nodes) {
+          nodes = nodes.concat(data.nodes);
+        }
+        if (data?.edges) {
+          edges = edges.concat(data.edges);
+        }
       });
 
       const isLoading =

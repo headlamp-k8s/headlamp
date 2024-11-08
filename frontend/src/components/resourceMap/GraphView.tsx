@@ -129,7 +129,7 @@ function GraphViewContent({
     if (hasErrorsFilter) {
       filters.push({ type: 'hasErrors' });
     }
-    if (namespaces) {
+    if (namespaces?.size > 0) {
       filters.push({ type: 'namespace', namespaces });
     }
     return filterGraph(nodes, edges, filters);
