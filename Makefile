@@ -70,8 +70,27 @@ else
 	@echo "Copying frontend dist to backend/static..."
 	@cp -R frontend/build/* backend/cmd/static/
 endif
-	@echo "Building backend with embedded static files..."
+	@echo "Building backend with embedded static files for current platform..."
 	cd backend && go build -tags embed -o ./headlamp-server${SERVER_EXE_EXT} ./cmd
+	@echo "Building backend with embedded static files for multiple platforms..."
+	@$(MAKE) backend-embed-darwin-arm64
+	@$(MAKE) backend-embed-linux-x64
+	@$(MAKE) backend-embed-win32-x64
+
+.PHONY: backend-embed-darwin-arm64
+backend-embed-darwin-arm64:
+	@echo "Building for darwin/arm64..."
+	cd backend && GOOS=darwin GOARCH=arm64 go build -tags embed -o ./headlamp-server-darwin-arm64 ./cmd
+
+.PHONY: backend-embed-linux-x64
+backend-embed-linux-x64:
+	@echo "Building for linux/amd64..."
+	cd backend && GOOS=linux GOARCH=amd64 go build -tags embed -o ./headlamp-server-linux-x64 ./cmd
+
+.PHONY: backend-embed-win32-x64
+backend-embed-win32-x64:
+	@echo "Building for windows/amd64..."
+	cd backend && GOOS=windows GOARCH=amd64 go build -tags embed -o ./headlamp-server-win32-x64.exe ./cmd
 
 .PHONY: backend-test
 backend-test:
