@@ -246,6 +246,7 @@ export default function Terminal(props: TerminalProps) {
           scrollback: 10000,
           rows: 30, // initial rows before fit
           windowsMode: isWindows,
+          allowProposedApi: true,
         }),
         connected: false,
         reconnectOnEnter: false,

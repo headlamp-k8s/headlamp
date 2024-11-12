@@ -77,6 +77,7 @@ export function LogViewer(props: LogViewerProps) {
       scrollback: 10000,
       rows: 30, // initial rows before fit
       lineHeight: 1.21,
+      allowProposedApi: true,
     });
 
     if (!!outXtermRef) {
