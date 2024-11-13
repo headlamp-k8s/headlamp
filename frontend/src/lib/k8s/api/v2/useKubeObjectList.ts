@@ -1,14 +1,14 @@
 import { QueryObserverOptions, useQueries, useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { KubeObject, KubeObjectClass } from '../../KubeObject';
 import { ApiError } from '../v1/clusterRequests';
 import { QueryParameters } from '../v1/queryParameters';
 import { clusterFetch } from './fetch';
 import { QueryListResponse, useEndpoints } from './hooks';
-import { KubeList, KubeListUpdateEvent } from './KubeList';
+import { KubeList } from './KubeList';
 import { KubeObjectEndpoint } from './KubeObjectEndpoint';
 import { makeUrl } from './makeUrl';
-import { useWebSockets } from './webSocket';
+import { BASE_WS_URL, WebSocketManager } from './webSocket';
 
 /**
  * Object representing a List of Kube object
@@ -117,43 +117,83 @@ export function useWatchKubeObjectLists<K extends KubeObject>({
   lists: Array<{ cluster: string; namespace?: string; resourceVersion: string }>;
 }) {
   const client = useQueryClient();
+  const latestResourceVersions = useRef<Record<string, string>>({});
 
+  // Create URLs for all lists
   const connections = useMemo(() => {
     if (!endpoint) return [];
 
-    return lists.map(({ cluster, namespace, resourceVersion }) => {
-      const url = makeUrl([KubeObjectEndpoint.toUrl(endpoint!, namespace)], {
-        ...queryParams,
-        watch: 1,
-        resourceVersion,
-      });
+    return lists.map(list => {
+      const key = `${list.cluster}:${list.namespace || ''}`;
+      // Only update resourceVersion if it's newer
+      if (
+        !latestResourceVersions.current[key] ||
+        parseInt(list.resourceVersion) > parseInt(latestResourceVersions.current[key])
+      ) {
+        latestResourceVersions.current[key] = list.resourceVersion;
+      }
 
       return {
-        cluster,
-        url,
-        onMessage(update: KubeListUpdateEvent<K>) {
-          const key = kubeObjectListQuery<K>(
-            kubeObjectClass,
-            endpoint,
-            namespace,
-            cluster,
-            queryParams ?? {}
-          ).queryKey;
-          client.setQueryData(key, (oldResponse: ListResponse<any> | undefined | null) => {
-            if (!oldResponse) return oldResponse;
-
-            const newList = KubeList.applyUpdate(oldResponse.list, update, kubeObjectClass);
-            return { ...oldResponse, list: newList };
-          });
-        },
+        url: makeUrl([KubeObjectEndpoint.toUrl(endpoint, list.namespace)], {
+          ...queryParams,
+          watch: 1,
+          resourceVersion: latestResourceVersions.current[key],
+        }),
+        cluster: list.cluster,
+        namespace: list.namespace,
       };
     });
-  }, [lists, kubeObjectClass, endpoint]);
+  }, [endpoint, lists, queryParams]);
 
-  useWebSockets<KubeListUpdateEvent<K>>({
-    enabled: !!endpoint,
-    connections,
-  });
+  useEffect(() => {
+    if (!endpoint || connections.length === 0) return;
+
+    const cleanups: (() => void)[] = [];
+
+    connections.forEach(({ url, cluster, namespace }) => {
+      const parsedUrl = new URL(url, BASE_WS_URL);
+      const key = `${cluster}:${namespace || ''}`;
+
+      WebSocketManager.subscribe(cluster, parsedUrl.pathname, parsedUrl.search.slice(1), update => {
+        if (!update || typeof update !== 'object') return;
+
+        // Update latest resourceVersion
+        if (update.object?.metadata?.resourceVersion) {
+          latestResourceVersions.current[key] = update.object.metadata.resourceVersion;
+        }
+
+        const queryKey = kubeObjectListQuery<K>(
+          kubeObjectClass,
+          endpoint,
+          namespace,
+          cluster,
+          queryParams ?? {}
+        ).queryKey;
+
+        client.setQueryData(queryKey, (oldResponse: ListResponse<any> | undefined | null) => {
+          if (!oldResponse) return oldResponse;
+          const newList = KubeList.applyUpdate(oldResponse.list, update, kubeObjectClass);
+          if (newList === oldResponse.list) return oldResponse;
+          return { ...oldResponse, list: newList };
+        });
+      }).then(
+        cleanup => cleanups.push(cleanup),
+        error => {
+          // Track retry count in the URL's searchParams
+          const retryCount = parseInt(parsedUrl.searchParams.get('retryCount') || '0');
+          if (retryCount < 3) {
+            // Only log and allow retry if under threshold
+            console.error('WebSocket subscription failed:', error);
+            parsedUrl.searchParams.set('retryCount', (retryCount + 1).toString());
+          }
+        }
+      );
+    });
+
+    return () => {
+      cleanups.forEach(cleanup => cleanup());
+    };
+  }, [connections, endpoint, client, kubeObjectClass, queryParams]);
 }
 
 /**
