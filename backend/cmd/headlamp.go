@@ -234,6 +234,18 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 	}
 }
 
+// defaultKubeConfigFile returns the default path to the kubeconfig file.
+func defaultKubeConfigFile() (string, error) {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return "", fmt.Errorf("failed to get user home directory: %v", err)
+	}
+
+	kubeConfigFile := filepath.Join(homeDir, ".kube", "config")
+
+	return kubeConfigFile, nil
+}
+
 // defaultKubeConfigPersistenceDir returns the default directory to store kubeconfig
 // files of clusters that are loaded in Headlamp.
 func defaultKubeConfigPersistenceDir() (string, error) {
@@ -1384,6 +1396,30 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	removeKubeConfig := r.URL.Query().Get("removeKubeConfig") == "true"
+
+	if removeKubeConfig {
+		// delete context from actual default kubecofig file
+		kubeConfigFile, err := defaultKubeConfigFile()
+		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": name},
+				err, "failed to get default kubeconfig file path")
+			http.Error(w, "failed to get default kubeconfig file path", http.StatusInternalServerError)
+
+			return
+		}
+
+		// Use kubeConfigFile to remove the context from the default kubeconfig file
+		err = kubeconfig.RemoveContextFromFile(name, kubeConfigFile)
+		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": name},
+				err, "removing context from default kubeconfig file")
+			http.Error(w, "removing context from default kubeconfig file", http.StatusInternalServerError)
+
+			return
+		}
+	}
+
 	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"cluster": name},
@@ -1396,8 +1432,7 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 	logger.Log(logger.LevelInfo, map[string]string{
 		"cluster":                   name,
 		"kubeConfigPersistenceFile": kubeConfigPersistenceFile,
-	},
-		nil, "Removing cluster from kubeconfig")
+	}, nil, "Removing cluster from kubeconfig")
 
 	err = kubeconfig.RemoveContextFromFile(name, kubeConfigPersistenceFile)
 	if err != nil {
