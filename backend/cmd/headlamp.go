@@ -1608,7 +1608,7 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 	r.HandleFunc("/cluster/{name}", c.renameCluster).Methods("PUT")
 
 	// Websocket connections
-	r.HandleFunc("/wsMutliplexer", c.multiplexer.HandleClientWebSocket)
+	r.HandleFunc("/wsMultiplexer", c.multiplexer.HandleClientWebSocket)
 }
 
 /*
