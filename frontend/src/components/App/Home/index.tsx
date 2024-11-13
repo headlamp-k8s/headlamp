@@ -25,6 +25,24 @@ import { ConfirmDialog } from '../../common';
 import ResourceTable from '../../common/Resource/ResourceTable';
 import RecentClusters from './RecentClusters';
 
+/**
+ * Gets the origin of a cluster.
+ *
+ * @param cluster
+ * @returns A description of where the cluster is picked up from: dynamic, in-cluster, or from a kubeconfig file.
+ */
+function getOrigin(cluster: Cluster, t: any): string {
+  if (cluster?.meta_data?.source === 'kubeconfig') {
+    const kubeconfigPath = process.env.KUBECONFIG ?? '~/.kube/config';
+    return `Kubeconfig: ${kubeconfigPath}`;
+  } else if (cluster.meta_data?.source === 'dynamic_cluster') {
+    return t('translation|Plugin');
+  } else if (cluster.meta_data?.source === 'in_cluster') {
+    return t('translation|In-cluster');
+  }
+  return 'Unknown';
+}
+
 function ContextMenu({ cluster }: { cluster: Cluster }) {
   const { t } = useTranslation(['translation']);
   const history = useHistory();
@@ -33,8 +51,8 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
   const menuId = useId('context-menu');
   const [openConfirmDialog, setOpenConfirmDialog] = React.useState(false);
 
-  function removeCluster(cluster: Cluster) {
-    deleteCluster(cluster.name || '')
+  function removeCluster(cluster: Cluster, removeKubeconfig?: boolean) {
+    deleteCluster(cluster.name || '', removeKubeconfig)
       .then(config => {
         dispatch(setConfig(config));
       })
@@ -91,7 +109,8 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
         >
           <ListItemText>{t('translation|Settings')}</ListItemText>
         </MenuItem>
-        {helpers.isElectron() && cluster.meta_data?.source === 'dynamic_cluster' && (
+
+        {helpers.isElectron() && (
           <MenuItem
             onClick={() => {
               setOpenConfirmDialog(true);
@@ -105,18 +124,28 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
 
       <ConfirmDialog
         open={openConfirmDialog}
-        handleClose={() => setOpenConfirmDialog(false)}
+        handleClose={() => {
+          setOpenConfirmDialog(false);
+        }}
         onConfirm={() => {
           setOpenConfirmDialog(false);
-          removeCluster(cluster);
+          if (cluster.meta_data?.source !== 'dynamic_cluster') {
+            removeCluster(cluster, true);
+          } else {
+            removeCluster(cluster);
+          }
         }}
         title={t('translation|Delete Cluster')}
         description={t(
-          'translation|Are you sure you want to remove the cluster "{{ clusterName }}"?',
+          'translation|This action will delete cluster "{{ clusterName }}" from {{ source }}.',
           {
             clusterName: cluster.name,
+            source: getOrigin(cluster, t),
           }
         )}
+        checkboxDescription={
+          cluster.meta_data?.source !== 'dynamic_cluster' ? t('Delete from kubeconfig') : ''
+        }
       />
     </>
   );
@@ -238,24 +267,6 @@ function HomeComponent(props: HomeComponentProps) {
       .sort();
   }
 
-  /**
-   * Gets the origin of a cluster.
-   *
-   * @param cluster
-   * @returns A description of where the cluster is picked up from: dynamic, in-cluster, or from a kubeconfig file.
-   */
-  function getOrigin(cluster: Cluster): string {
-    if (cluster.meta_data?.source === 'kubeconfig') {
-      const kubeconfigPath = process.env.KUBECONFIG ?? '~/.kube/config';
-      return `Kubeconfig: ${kubeconfigPath}`;
-    } else if (cluster.meta_data?.source === 'dynamic_cluster') {
-      return t('translation|Plugin');
-    } else if (cluster.meta_data?.source === 'in_cluster') {
-      return t('translation|In-cluster');
-    }
-    return 'Unknown';
-  }
-
   const memoizedComponent = React.useMemo(
     () => (
       <PageGrid>
@@ -286,10 +297,8 @@ function HomeComponent(props: HomeComponentProps) {
               },
               {
                 label: t('Origin'),
-                getValue: cluster => getOrigin(cluster),
-                render: ({ name }) => (
-                  <Typography variant="body2">{getOrigin(clusters[name])}</Typography>
-                ),
+                getValue: cluster => getOrigin(cluster, t),
+                render: cluster => <Typography variant="body2">{getOrigin(cluster, t)}</Typography>,
               },
               {
                 label: t('Status'),
