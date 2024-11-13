@@ -82,6 +82,8 @@ type Message struct {
 	UserID string `json:"userId"`
 	// Data contains the message payload.
 	Data []byte `json:"data,omitempty"`
+	// Type is the type of the message.
+	Type string `json:"type"`
 }
 
 // Multiplexer manages multiple WebSocket connections.
@@ -315,7 +317,6 @@ func (m *Multiplexer) reconnect(conn *Connection) (*Connection, error) {
 	return newConn, nil
 }
 
-// HandleClientWebSocket handles incoming WebSocket connections from clients.
 // HandleClientWebSocket handles incoming WebSocket connections from clients.
 func (m *Multiplexer) HandleClientWebSocket(w http.ResponseWriter, r *http.Request) {
 	clientConn, err := m.upgrader.Upgrade(w, r, nil)
