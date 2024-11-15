@@ -221,7 +221,10 @@ export function updateSettingsPackages(
         isEnabled: true,
       };
     }
-    return settingsPlugins[index];
+    return {
+      ...settingsPlugins[index],
+      ...plugin,
+    };
   });
 }
 
