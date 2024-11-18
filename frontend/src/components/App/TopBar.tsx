@@ -29,6 +29,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SettingsButton } from '../App/Settings';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
+import { GlobalSearch } from '../globalSearch/GlobalSearch';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import { setWhetherSidebarOpen } from '../Sidebar/sidebarSlice';
@@ -354,6 +355,10 @@ export function PureTopBar({
 
   const allAppBarActions: AppBarAction[] = [
     {
+      id: DefaultAppBarAction.GLOBAL_SEARCH,
+      action: <GlobalSearch />,
+    },
+    {
       id: DefaultAppBarAction.CLUSTER,
       action: (
         <Box
@@ -433,7 +438,6 @@ export function PureTopBar({
           ) : (
             <>
               <AppLogo />
-              <Box sx={{ flexGrow: 1 }} />
               <AppBarActions
                 appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
               />
