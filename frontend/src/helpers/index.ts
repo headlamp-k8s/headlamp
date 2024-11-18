@@ -6,6 +6,10 @@ import { Cluster } from '../lib/k8s/cluster';
  *   https://github.com/cheton/is-electron/blob/master/index.js
  */
 function isElectron(): boolean {
+  if (window.__TAURI__) {
+    return true;
+  }
+
   // Renderer process
   if (
     typeof window !== 'undefined' &&

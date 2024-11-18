@@ -3,14 +3,18 @@ import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgr from 'vite-plugin-svgr';
 
+const host = process.env.TAURI_DEV_HOST;
+
 export default defineConfig({
+  clearScreen: false,
   define: {
     global: 'globalThis',
   },
-  envPrefix: 'REACT_APP_',
+  envPrefix: ['REACT_APP_', 'TAURI_ENV_*'],
   base: process.env.PUBLIC_URL,
   server: {
     port: 3000,
+    host: host || false,
     proxy: {
       '/plugins': {
         target: 'http://localhost:4466',
@@ -18,6 +22,9 @@ export default defineConfig({
       },
     },
     cors: true,
+    watch: {
+      ignored: ['**/src-tauri/**'],
+    },
   },
   plugins: [
     svgr({

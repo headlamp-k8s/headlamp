@@ -9,6 +9,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-shell": "^2",
     "@apidevtools/swagger-parser": "^10.0.3",
     "@dagrejs/dagre": "^1.1.2",
     "@emotion/react": "^11.11.1",
@@ -128,7 +130,8 @@
     "build-storybook": "storybook build -o ../docs/development/storybook",
     "i18n": "i18next 'src/**/*.{ts,tsx}' -c ./src/i18n/i18next-parser.config.js",
     "tsc": "tsc",
-    "make-version": "node ./make-env.js"
+    "make-version": "node ./make-env.js",
+    "tauri": "tauri"
   },
   "browserslist": {
     "production": [
@@ -188,6 +191,7 @@
   },
   "prettier": "@headlamp-k8s/eslint-config/prettier-config",
   "devDependencies": {
+    "@tauri-apps/cli": "^2",
     "@axe-core/react": "^4.3.2",
     "@storybook/addon-actions": "^8.3.5",
     "@storybook/addon-essentials": "^8.3.5",
