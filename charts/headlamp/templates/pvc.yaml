@@ -21,7 +21,7 @@ spec:
   {{- with .Values.persistentVolumeClaim.volumeMode }}
   volumeMode: {{ . }}
   {{- end }}
-  {{- with .Values.persistentVolumeClaim.storageClass }}
+  {{- with .Values.persistentVolumeClaim.storageClassName }}
   storageClassName: {{ . }}
   {{- end }}
   {{- with .Values.persistentVolumeClaim.selector }}
