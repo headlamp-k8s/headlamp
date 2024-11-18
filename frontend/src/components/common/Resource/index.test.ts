@@ -36,6 +36,7 @@ const checkExports = [
   'SimpleEditor',
   'ViewButton',
   'AuthVisible',
+  'LogsButton',
 ];
 
 function getFilesToVerify() {

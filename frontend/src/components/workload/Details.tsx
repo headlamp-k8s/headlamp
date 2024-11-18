@@ -6,6 +6,7 @@ import {
   ConditionsSection,
   ContainersSection,
   DetailsGrid,
+  LogsButton,
   MetadataDictGrid,
   OwnedPodsSection,
 } from '../common/Resource';
@@ -85,6 +86,18 @@ export default function WorkloadDetails<T extends WorkloadClass>(props: Workload
       name={name}
       withEvents
       namespace={namespace}
+      actions={item => {
+        if (!item) return [];
+        const isLoggable = ['Deployment', 'ReplicaSet', 'DaemonSet'].includes(workloadKind.kind);
+        if (!isLoggable) return [];
+
+        return [
+          {
+            id: 'logs',
+            action: <LogsButton key="logs" item={item} />,
+          },
+        ];
+      }}
       extraInfo={item =>
         item && [
           {
