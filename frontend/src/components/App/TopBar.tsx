@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { has } from 'lodash';
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -76,12 +76,23 @@ export default function TopBar({}: TopBarProps) {
     return !!cluster ? !!getToken(cluster) : false;
   }
 
-  function logout() {
+  const logout = useCallback(() => {
     if (!!cluster) {
       setToken(cluster, null);
     }
     history.push('/');
-  }
+  }, [cluster]);
+
+  const handletoggleOpen = useCallback(() => {
+    // For medium view we default to closed if they have not made a selection.
+    // This handles the case when the user resizes the window from large to small.
+    // If they have not made a selection then the window size stays the default for
+    //   the size.
+
+    const openSideBar = isMedium && isSidebarOpenUserSelected === undefined ? false : isSidebarOpen;
+
+    dispatch(setWhetherSidebarOpen(!openSideBar));
+  }, [isMedium, isSidebarOpenUserSelected, isSidebarOpen]);
 
   if (hideAppBar) {
     return null;
@@ -94,17 +105,7 @@ export default function TopBar({}: TopBarProps) {
       hasToken={hasToken()}
       isSidebarOpen={isSidebarOpen}
       isSidebarOpenUserSelected={isSidebarOpenUserSelected}
-      onToggleOpen={() => {
-        // For medium view we default to closed if they have not made a selection.
-        // This handles the case when the user resizes the window from large to small.
-        // If they have not made a selection then the window size stays the default for
-        //   the size.
-
-        const openSideBar =
-          isMedium && isSidebarOpenUserSelected === undefined ? false : isSidebarOpen;
-
-        dispatch(setWhetherSidebarOpen(!openSideBar));
-      }}
+      onToggleOpen={handletoggleOpen}
       cluster={cluster || undefined}
       clusters={clustersConfig || undefined}
     />
@@ -190,262 +191,268 @@ function AppBarActions({
   return <>{actions}</>;
 }
 
-export function PureTopBar({
-  appBarActions,
-  appBarActionsProcessors = [],
-  logout,
-  hasToken,
-  cluster,
-  clusters,
-  isSidebarOpen,
-  isSidebarOpenUserSelected,
-  onToggleOpen,
-}: PureTopBarProps) {
-  const { t } = useTranslation();
-  const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const dispatch = useDispatch();
-  const history = useHistory();
+export const PureTopBar = memo(
+  ({
+    appBarActions,
+    appBarActionsProcessors = [],
+    logout,
+    hasToken,
+    cluster,
+    clusters,
+    isSidebarOpen,
+    isSidebarOpenUserSelected,
+    onToggleOpen,
+  }: PureTopBarProps) => {
+    const { t } = useTranslation();
+    const theme = useTheme();
+    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-  const openSideBar = !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
+    const openSideBar = !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-  const isClusterContext = !!cluster;
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+    const isClusterContext = !!cluster;
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+    const handleMobileMenuClose = () => {
+      setMobileMoreAnchorEl(null);
+    };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+    const handleMenuClose = () => {
+      setAnchorEl(null);
+      handleMobileMenuClose();
+    };
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-  const userMenuId = 'primary-user-menu';
+    const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+      setMobileMoreAnchorEl(event.currentTarget);
+    };
+    const userMenuId = 'primary-user-menu';
 
-  const renderUserMenu = !!isClusterContext && (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={userMenuId}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={() => {
-        handleMenuClose();
-        handleMobileMenuClose();
-      }}
-      style={{ zIndex: 1400 }}
-      sx={{
-        '& .MuiMenu-list': {
-          paddingBottom: 0,
-        },
-      }}
-    >
-      <MenuItem
-        component="a"
-        onClick={() => {
-          logout();
+    const renderUserMenu = !!isClusterContext && (
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        id={userMenuId}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isMenuOpen}
+        onClose={() => {
           handleMenuClose();
+          handleMobileMenuClose();
         }}
-        disabled={!hasToken}
-      >
-        <ListItemIcon>
-          <Icon icon="mdi:logout" />
-        </ListItemIcon>
-        <ListItemText primary={t('Log out')} secondary={hasToken ? null : t('(No token set up)')} />
-      </MenuItem>
-      <MenuItem
-        component="a"
-        onClick={() => {
-          history.push(createRouteURL('settings'));
-          handleMenuClose();
+        style={{ zIndex: 1400 }}
+        sx={{
+          '& .MuiMenu-list': {
+            paddingBottom: 0,
+          },
         }}
       >
-        <ListItemIcon>
-          <Icon icon="mdi:cog-box" />
-        </ListItemIcon>
-        <ListItemText>{t('translation|General Settings')}</ListItemText>
-      </MenuItem>
-      <MenuItem
-        component="a"
-        onClick={() => {
-          dispatch(setVersionDialogOpen(true));
-          handleMenuClose();
-        }}
-      >
-        <ListItemIcon>
-          <Icon icon="mdi:information-outline" />
-        </ListItemIcon>
-        <ListItemText>
-          {helpers.getProductName()} {helpers.getVersion()['VERSION']}
-        </ListItemText>
-      </MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-menu-mobile';
-  const allAppBarActionsMobile: AppBarAction[] = [
-    {
-      id: DefaultAppBarAction.CLUSTER,
-      action: isClusterContext && (
-        <ClusterTitle cluster={cluster} clusters={clusters} onClick={() => handleMenuClose()} />
-      ),
-    },
-    ...appBarActions,
-    {
-      id: DefaultAppBarAction.NOTIFICATION,
-      action: null,
-    },
-    {
-      id: DefaultAppBarAction.SETTINGS,
-      action: (
-        <MenuItem>
-          <SettingsButton onClickExtra={handleMenuClose} />
+        <MenuItem
+          component="a"
+          onClick={() => {
+            logout();
+            handleMenuClose();
+          }}
+          disabled={!hasToken}
+        >
+          <ListItemIcon>
+            <Icon icon="mdi:logout" />
+          </ListItemIcon>
+          <ListItemText
+            primary={t('Log out')}
+            secondary={hasToken ? null : t('(No token set up)')}
+          />
         </MenuItem>
-      ),
-    },
-    {
-      id: DefaultAppBarAction.USER,
-      action: !!isClusterContext && (
-        <MenuItem>
+        <MenuItem
+          component="a"
+          onClick={() => {
+            history.push(createRouteURL('settings'));
+            handleMenuClose();
+          }}
+        >
+          <ListItemIcon>
+            <Icon icon="mdi:cog-box" />
+          </ListItemIcon>
+          <ListItemText>{t('translation|General Settings')}</ListItemText>
+        </MenuItem>
+        <MenuItem
+          component="a"
+          onClick={() => {
+            dispatch(setVersionDialogOpen(true));
+            handleMenuClose();
+          }}
+        >
+          <ListItemIcon>
+            <Icon icon="mdi:information-outline" />
+          </ListItemIcon>
+          <ListItemText>
+            {helpers.getProductName()} {helpers.getVersion()['VERSION']}
+          </ListItemText>
+        </MenuItem>
+      </Menu>
+    );
+
+    const mobileMenuId = 'primary-menu-mobile';
+    const allAppBarActionsMobile: AppBarAction[] = [
+      {
+        id: DefaultAppBarAction.CLUSTER,
+        action: isClusterContext && (
+          <ClusterTitle cluster={cluster} clusters={clusters} onClick={() => handleMenuClose()} />
+        ),
+      },
+      ...appBarActions,
+      {
+        id: DefaultAppBarAction.NOTIFICATION,
+        action: null,
+      },
+      {
+        id: DefaultAppBarAction.SETTINGS,
+        action: (
+          <MenuItem>
+            <SettingsButton onClickExtra={handleMenuClose} />
+          </MenuItem>
+        ),
+      },
+      {
+        id: DefaultAppBarAction.USER,
+        action: !!isClusterContext && (
+          <MenuItem>
+            <IconButton
+              aria-label={t('Account of current user')}
+              aria-controls={userMenuId}
+              aria-haspopup="true"
+              color="inherit"
+              onClick={event => {
+                handleMenuClose();
+                handleProfileMenuOpen(event);
+              }}
+              size="medium"
+            >
+              <Icon icon="mdi:account" />
+            </IconButton>
+          </MenuItem>
+        ),
+      },
+    ];
+    const renderMobileMenu = (
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        <AppBarActionsMenu
+          appBarActions={processAppBarActions(allAppBarActionsMobile, appBarActionsProcessors)}
+        />
+      </Menu>
+    );
+
+    const allAppBarActions: AppBarAction[] = [
+      {
+        id: DefaultAppBarAction.GLOBAL_SEARCH,
+        action: <GlobalSearch />,
+      },
+      {
+        id: DefaultAppBarAction.CLUSTER,
+        action: (
+          <Box
+            sx={theme => ({
+              paddingRight: theme.spacing(10),
+            })}
+          >
+            <ClusterTitle cluster={cluster} clusters={clusters} onClick={handleMobileMenuClose} />
+          </Box>
+        ),
+      },
+      ...appBarActions,
+      {
+        id: DefaultAppBarAction.NOTIFICATION,
+        action: null,
+      },
+      {
+        id: DefaultAppBarAction.SETTINGS,
+        action: <SettingsButton onClickExtra={handleMenuClose} />,
+      },
+      {
+        id: DefaultAppBarAction.USER,
+        action: !!isClusterContext && (
           <IconButton
             aria-label={t('Account of current user')}
             aria-controls={userMenuId}
             aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
             color="inherit"
-            onClick={event => {
-              handleMenuClose();
-              handleProfileMenuOpen(event);
-            }}
             size="medium"
           >
             <Icon icon="mdi:account" />
           </IconButton>
-        </MenuItem>
-      ),
-    },
-  ];
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <AppBarActionsMenu
-        appBarActions={processAppBarActions(allAppBarActionsMobile, appBarActionsProcessors)}
-      />
-    </Menu>
-  );
-
-  const allAppBarActions: AppBarAction[] = [
-    {
-      id: DefaultAppBarAction.GLOBAL_SEARCH,
-      action: <GlobalSearch />,
-    },
-    {
-      id: DefaultAppBarAction.CLUSTER,
-      action: (
-        <Box
+        ),
+      },
+    ];
+    return (
+      <>
+        <AppBar
+          position="fixed"
           sx={theme => ({
-            paddingRight: theme.spacing(10),
-          })}
-        >
-          <ClusterTitle cluster={cluster} clusters={clusters} onClick={handleMobileMenuClose} />
-        </Box>
-      ),
-    },
-    ...appBarActions,
-    {
-      id: DefaultAppBarAction.NOTIFICATION,
-      action: null,
-    },
-    {
-      id: DefaultAppBarAction.SETTINGS,
-      action: <SettingsButton onClickExtra={handleMenuClose} />,
-    },
-    {
-      id: DefaultAppBarAction.USER,
-      action: !!isClusterContext && (
-        <IconButton
-          aria-label={t('Account of current user')}
-          aria-controls={userMenuId}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpen}
-          color="inherit"
-          size="medium"
-        >
-          <Icon icon="mdi:account" />
-        </IconButton>
-      ),
-    },
-  ];
-  return (
-    <>
-      <AppBar
-        position="fixed"
-        sx={theme => ({
-          marginLeft: drawerWidth,
-          zIndex: theme.zIndex.drawer + 1,
-          '& > *': {
-            color: theme.palette.text.primary,
-          },
-          backgroundColor: theme.palette.background.default,
-        })}
-        elevation={1}
-        component="nav"
-        aria-label={t('Appbar Tools')}
-        enableColorOnDark
-      >
-        <Toolbar
-          sx={{
-            [theme.breakpoints.down('sm')]: {
-              paddingLeft: 0,
-              paddingRight: 0,
+            marginLeft: drawerWidth,
+            zIndex: theme.zIndex.drawer + 1,
+            '& > *': {
+              color: theme.palette.text.primary,
             },
-          }}
+            backgroundColor: theme.palette.background.default,
+          })}
+          elevation={1}
+          component="nav"
+          aria-label={t('Appbar Tools')}
+          enableColorOnDark
         >
-          {isSmall ? (
-            <>
-              <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />
-              <Box sx={{ flexGrow: 1 }} />
-              <GlobalSearch isIconButton />
-              <IconButton
-                aria-label={t('show more')}
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-                size="medium"
-              >
-                <Icon icon="mdi:more-vert" />
-              </IconButton>
-            </>
-          ) : (
-            <>
-              <AppLogo />
-              <AppBarActions
-                appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
-              />
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-      {renderUserMenu}
-      {isSmall && renderMobileMenu}
-    </>
-  );
-}
+          <Toolbar
+            sx={{
+              [theme.breakpoints.down('sm')]: {
+                paddingLeft: 0,
+                paddingRight: 0,
+              },
+            }}
+          >
+            {isSmall ? (
+              <>
+                <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />
+                <Box sx={{ flexGrow: 1 }} />
+                <GlobalSearch isIconButton />
+                <IconButton
+                  aria-label={t('show more')}
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                  size="medium"
+                >
+                  <Icon icon="mdi:more-vert" />
+                </IconButton>
+              </>
+            ) : (
+              <>
+                <AppLogo />
+                <AppBarActions
+                  appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
+                />
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+        {renderUserMenu}
+        {isSmall && renderMobileMenu}
+      </>
+    );
+  }
+);
