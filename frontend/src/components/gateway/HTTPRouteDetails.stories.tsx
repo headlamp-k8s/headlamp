@@ -21,10 +21,10 @@ export default {
     msw: {
       handlers: {
         baseStory: [
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/httproutes', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/httproutes', () =>
             HttpResponse.json({})
           ),
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/httproutes', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/httproutes', () =>
             HttpResponse.error()
           ),
           http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
@@ -57,7 +57,7 @@ Basic.parameters = {
     handlers: {
       story: [
         http.get(
-          'http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/httproutes/default-httproute',
+          'http://localhost:4466/apis/gateway.networking.k8s.io/v1/httproutes/default-httproute',
           () => HttpResponse.json(DEFAULT_HTTP_ROUTE)
         ),
       ],

@@ -335,20 +335,20 @@ const defaultRoutes: {
     sidebar: 'NetworkPolicies',
     component: () => <NetworkPolicyDetails />,
   },
-  k8sgateways: {
+  gateways: {
     // fix magic name gateway
-    path: '/k8sgateways',
+    path: '/gateways',
     exact: true,
     name: 'Gateways',
-    sidebar: 'k8sgateways',
+    sidebar: 'gateways',
     component: () => <GatewayList />,
   },
-  k8sgateway: {
+  gateway: {
     // fix magic name gateway
-    path: '/k8sgateways/:namespace/:name',
+    path: '/gateways/:namespace/:name',
     exact: true,
     name: 'Gateways',
-    sidebar: 'k8sgateways',
+    sidebar: 'gateways',
     component: () => <GatewayDetails />,
   },
   httproutes: {

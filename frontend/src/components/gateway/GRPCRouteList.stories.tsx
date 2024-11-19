@@ -22,14 +22,14 @@ export default {
       handlers: {
         storyBase: [],
         story: [
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/grpcroutes', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/grpcroutes', () =>
             HttpResponse.json({
               kind: 'GRPCRouteList',
               metadata: {},
               items: [DEFAULT_GRPC_ROUTE],
             })
           ),
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/grpcroutes', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/grpcroutes', () =>
             HttpResponse.error()
           ),
         ],

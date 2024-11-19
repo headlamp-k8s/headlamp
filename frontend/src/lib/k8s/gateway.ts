@@ -1,15 +1,25 @@
 import { KubeCondition } from './cluster';
 import { KubeObject, KubeObjectInterface } from './KubeObject';
 
+/**
+ * ParentReference identifies an API object (usually a Gateway) that can be considered a parent of this resource (usually a route).
+ *
+ * @see {@link https://gateway-api.sigs.k8s.io/reference/spec/#gateway.networking.k8s.io/v1.ParentReference} Gateway API reference for ParentReference
+ */
 export interface GatewayParentReference {
-  group: string;
-  kind: string;
-  namespace: string;
-  sectionName: string | null;
+  group?: string;
+  kind?: string;
+  namespace?: string;
+  sectionName?: string;
   name: string;
-  [key: string]: any;
+  port?: number;
 }
 
+/**
+ * Listener embodies the concept of a logical endpoint where a Gateway accepts network connections.
+ *
+ * @see {@link https://gateway-api.sigs.k8s.io/reference/spec/#gateway.networking.k8s.io/v1.Listener} Gateway API reference for Listener
+ */
 export interface GatewayListener {
   hostname: string;
   name: string;
@@ -17,16 +27,36 @@ export interface GatewayListener {
   port: number;
   [key: string]: any;
 }
+
+/**
+ * ListenerStatus is the status associated with a Listener.
+ *
+ * @see {@link https://gateway-api.sigs.k8s.io/reference/spec/#gateway.networking.k8s.io/v1.ListenerStatus} Gateway API reference for ListenerStatus
+ */
 export interface GatewayListenerStatus {
   name: string;
+  attachedRoutes: number;
+  supportedKinds: any[];
   conditions: KubeCondition[];
-  [key: string]: any;
 }
-export interface GatewayAddress {
-  type: string;
+
+/**
+ * GatewayStatusAddress describes a network address that is bound to a Gateway.
+ *
+ * @see {@link https://gateway-api.sigs.k8s.io/reference/spec/#gateway.networking.k8s.io/v1.GatewayStatusAddress} Gateway API reference for GatewayStatusAddress
+ */
+export interface GatewayStatusAddress {
+  type?: string;
   value: string;
 }
 
+/**
+ * Gateway represents an instance of a service-traffic handling infrastructure by binding Listeners to a set of IP addresses.
+ *
+ * @see {@link https://gateway-api.sigs.k8s.io/reference/spec/#gateway.networking.k8s.io/v1.Gateway} Gateway API reference for Gateway
+ *
+ * @see {@link https://gateway-api.sigs.k8s.io/api-types/gateway/} Gateway API definition for Gateway
+ */
 export interface KubeGateway extends KubeObjectInterface {
   spec: {
     gatewayClassName?: string;
@@ -34,8 +64,9 @@ export interface KubeGateway extends KubeObjectInterface {
     [key: string]: any;
   };
   status: {
-    addresses: GatewayAddress[];
-    listeners: GatewayListenerStatus[];
+    addresses?: GatewayStatusAddress[];
+    listeners?: GatewayListenerStatus[];
+    conditions?: KubeCondition[];
     [otherProps: string]: any;
   };
 }
@@ -43,7 +74,7 @@ export interface KubeGateway extends KubeObjectInterface {
 class Gateway extends KubeObject<KubeGateway> {
   static kind = 'Gateway';
   static apiName = 'gateways';
-  static apiVersion = 'gateway.networking.k8s.io/v1beta1';
+  static apiVersion = ['gateway.networking.k8s.io/v1', 'gateway.networking.k8s.io/v1beta1'];
   static isNamespaced = true;
 
   get spec(): KubeGateway['spec'] {
@@ -58,22 +89,16 @@ class Gateway extends KubeObject<KubeGateway> {
     return this.jsonData.spec.listeners;
   }
 
-  getAddresses(): GatewayAddress[] {
-    return this.jsonData.status.addresses;
+  getAddresses(): GatewayStatusAddress[] {
+    return this.jsonData.status.addresses || [];
   }
 
   getListernerStatusByName(name: string): GatewayListenerStatus | null {
-    return this.jsonData.status.listeners.find(t => t.name === name) || null;
+    return this.jsonData.status.listeners?.find(t => t.name === name) || null;
   }
 
   static get pluralName() {
     return 'gateways';
-  }
-  get listRoute(): string {
-    return 'k8sgateways'; // fix magic name gateway
-  }
-  get detailsRoute(): string {
-    return 'k8sgateway'; // fix magic name gateway
   }
 }
 

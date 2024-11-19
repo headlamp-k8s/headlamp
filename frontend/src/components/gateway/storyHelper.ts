@@ -64,16 +64,15 @@ export const DEFAULT_HTTP_ROUTE: KubeHTTPRoute = {
     parentRefs: [],
     rules: [
       {
+        name: 'test',
         backendRefs: [],
         matches: [],
       },
       {
-        backendRefs: null,
         matches: [],
       },
       {
         backendRefs: [],
-        matches: null,
       },
     ],
   },
@@ -96,8 +95,14 @@ export const DEFAULT_GRPC_ROUTE: KubeGRPCRoute = {
         group: 'gateway.networking.k8s.io',
         kind: 'Gateway',
         namespace: 'shared-gateway',
-        sectionName: null,
         name: 'envoy-gateway-system',
+      },
+      {
+        group: 'gateway.networking.k8s.io',
+        kind: 'Gateway',
+        namespace: 'shared-gateway',
+        sectionName: 'test',
+        name: 'envoy-gateway-system-test',
       },
     ],
   },

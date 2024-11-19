@@ -167,12 +167,12 @@ function prepareRoutes(
       ],
     },
     {
-      name: 'gateway',
+      name: 'gatewayapi',
       label: t('glossary|Gateway'),
       icon: 'mdi:lan-connect',
       subList: [
         {
-          name: 'k8sgateways',
+          name: 'gateways',
           label: t('glossary|Gateways'),
         },
         {

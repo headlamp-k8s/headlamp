@@ -21,14 +21,12 @@ export default {
     msw: {
       handlers: {
         story: [
-          http.get(
-            'http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gatewayclasses',
-            () =>
-              HttpResponse.json({
-                kind: 'GatewayClassList',
-                metadata: {},
-                items: [DEFAULT_GATEWAY_CLASS],
-              })
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gatewayclasses', () =>
+            HttpResponse.json({
+              kind: 'GatewayClassList',
+              metadata: {},
+              items: [DEFAULT_GATEWAY_CLASS],
+            })
           ),
         ],
       },

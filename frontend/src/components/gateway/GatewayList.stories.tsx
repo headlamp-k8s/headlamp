@@ -22,14 +22,14 @@ export default {
       handlers: {
         storyBase: [],
         story: [
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gateways', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gateways', () =>
             HttpResponse.json({
               kind: 'GatewayList',
               metadata: {},
               items: [DEFAULT_GATEWAY],
             })
           ),
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gateways', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gateways', () =>
             HttpResponse.error()
           ),
         ],

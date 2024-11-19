@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { KubeCondition } from '../../lib/k8s/cluster';
 import Gateway, {
-  GatewayAddress,
   GatewayListener,
   GatewayListenerStatus,
+  GatewayStatusAddress,
 } from '../../lib/k8s/gateway';
 import { EmptyContent, StatusLabel, StatusLabelProps } from '../common';
 import Link from '../common/Link';
@@ -91,11 +91,11 @@ export default function GatewayDetails(props: { name?: string; namespace?: strin
                   columns={[
                     {
                       label: t('translation|Type'),
-                      getter: (data: GatewayAddress) => data.type,
+                      getter: (data: GatewayStatusAddress) => data.type,
                     },
                     {
                       label: t('translation|Value'),
-                      getter: (data: GatewayAddress) => data.value,
+                      getter: (data: GatewayStatusAddress) => data.value,
                     },
                   ]}
                   data={item?.getAddresses() || []}

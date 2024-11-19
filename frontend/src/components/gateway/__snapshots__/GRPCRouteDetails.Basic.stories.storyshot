@@ -207,7 +207,7 @@
                 class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root css-1msda30-MuiPaper-root-MuiTableContainer-root"
               >
                 <table
-                  class="MuiTable-root css-vd1o8p-MuiTable-root"
+                  class="MuiTable-root css-wd17ns-MuiTable-root"
                 >
                   <thead
                     class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
@@ -245,6 +245,12 @@
                       >
                         Section Name
                       </th>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall css-t33dlg-MuiTableCell-root"
+                        scope="col"
+                      >
+                        Port
+                      </th>
                     </tr>
                   </thead>
                   <tbody
@@ -277,6 +283,46 @@
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         gateway.networking.k8s.io
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      />
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      />
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/"
+                        >
+                          envoy-gateway-system-test
+                        </a>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        shared-gateway
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        Gateway
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        gateway.networking.k8s.io
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        test
                       </td>
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"

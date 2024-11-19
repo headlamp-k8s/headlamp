@@ -64,9 +64,9 @@ export default function GatewayClassList() {
           getValue: (gatewayClass: GatewayClass) =>
             gatewayClass.status?.conditions?.find(
               ({ status }: { status: string }) => status === 'True'
-            ) ?? null,
+            )?.type || null,
           render: (gatewayClass: GatewayClass) =>
-            makeGatewayStatusLabel(gatewayClass.status?.conditions),
+            makeGatewayStatusLabel(gatewayClass.status?.conditions || null),
         },
         'age',
       ]}
