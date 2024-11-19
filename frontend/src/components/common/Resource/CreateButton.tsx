@@ -147,39 +147,41 @@ export default function CreateButton(props: CreateButtonProps) {
           {t('translation|Create')}
         </Button>
       )}
-      <EditorDialog
-        item={{}}
-        open={openDialog}
-        onClose={() => setOpenDialog(false)}
-        onSave={handleSave}
-        saveLabel={t('translation|Apply')}
-        errorMessage={errorMessage}
-        onEditorChanged={() => setErrorMessage('')}
-        title={t('translation|Create / Apply')}
-        actions={
-          clusters.length > 1
-            ? [
-                <FormControl>
-                  <InputLabel id="edit-dialog-cluster-target">{t('glossary|Cluster')}</InputLabel>
-                  <Select
-                    labelId="edit-dialog-cluster-target"
-                    id="edit-dialog-cluster-target-select"
-                    value={targetCluster}
-                    onChange={event => {
-                      setTargetCluster(event.target.value as string);
-                    }}
-                  >
-                    {clusters.map(cluster => (
-                      <MenuItem key={cluster} value={cluster}>
-                        {cluster}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>,
-              ]
-            : []
-        }
-      />
+      {openDialog && (
+        <EditorDialog
+          item={{}}
+          open={openDialog}
+          onClose={() => setOpenDialog(false)}
+          onSave={handleSave}
+          saveLabel={t('translation|Apply')}
+          errorMessage={errorMessage}
+          onEditorChanged={() => setErrorMessage('')}
+          title={t('translation|Create / Apply')}
+          actions={
+            clusters.length > 1
+              ? [
+                  <FormControl>
+                    <InputLabel id="edit-dialog-cluster-target">{t('glossary|Cluster')}</InputLabel>
+                    <Select
+                      labelId="edit-dialog-cluster-target"
+                      id="edit-dialog-cluster-target-select"
+                      value={targetCluster}
+                      onChange={event => {
+                        setTargetCluster(event.target.value as string);
+                      }}
+                    >
+                      {clusters.map(cluster => (
+                        <MenuItem key={cluster} value={cluster}>
+                          {cluster}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>,
+                ]
+              : []
+          }
+        />
+      )}
     </React.Fragment>
   );
 }
