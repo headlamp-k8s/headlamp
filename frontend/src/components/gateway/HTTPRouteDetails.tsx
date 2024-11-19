@@ -12,6 +12,11 @@ function HTTPRouteRuleTable(props: { rule: HTTPRouteRule }) {
 
   const mainRows = [
     {
+      name: rule.name,
+      withHighlightStyle: true,
+      hide: rule.name === undefined,
+    },
+    {
       name: t('translation|BackendRefs'),
       value: rule.backendRefs?.length,
       hide: (rule.backendRefs?.length || 0) === 0,

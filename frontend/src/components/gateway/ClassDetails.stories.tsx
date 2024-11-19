@@ -21,9 +21,8 @@ export default {
     msw: {
       handlers: {
         storyBase: [
-          http.get(
-            'http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gatewayclasses',
-            () => HttpResponse.error()
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gatewayclasses', () =>
+            HttpResponse.error()
           ),
           http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
             HttpResponse.json({
@@ -51,7 +50,7 @@ Basic.parameters = {
     handlers: {
       story: [
         http.get(
-          'http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gatewayclasses/default-gateway-class',
+          'http://localhost:4466/apis/gateway.networking.k8s.io/v1/gatewayclasses/default-gateway-class',
           () => HttpResponse.json(DEFAULT_GATEWAY_CLASS)
         ),
       ],

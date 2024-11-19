@@ -15,9 +15,7 @@ export function GatewayParentRefSection(props: { parentRefs: GatewayParentRefere
             label: t('translation|Name'),
             getter: (data: GatewayParentReference) => (
               <Link
-                routeName={
-                  data.kind.toLowerCase() === 'gateway' ? 'k8sgateway' : data.kind.toLowerCase()
-                }
+                routeName={data.kind?.toLowerCase()}
                 params={{ namespace: data.namespace, name: data.name }}
               >
                 {data.name}
@@ -40,9 +38,13 @@ export function GatewayParentRefSection(props: { parentRefs: GatewayParentRefere
             label: t('translation|Section Name'),
             getter: (data: GatewayParentReference) => data.sectionName,
           },
+          {
+            label: t('translation|Port'),
+            getter: (data: GatewayParentReference) => data.port,
+          },
         ]}
         data={parentRefs || []}
-        reflectInURL="listeners"
+        reflectInURL="parentRefs"
       />
     </SectionBox>
   );

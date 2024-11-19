@@ -21,10 +21,10 @@ export default {
     msw: {
       handlers: {
         baseStory: [
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/grpcroutes', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/grpcroutes', () =>
             HttpResponse.json({})
           ),
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/grpcroutes', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/grpcroutes', () =>
             HttpResponse.error()
           ),
           http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
@@ -57,7 +57,7 @@ Basic.parameters = {
     handlers: {
       story: [
         http.get(
-          'http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/grpcroutes/default-grpcroute',
+          'http://localhost:4466/apis/gateway.networking.k8s.io/v1/grpcroutes/default-grpcroute',
           () => HttpResponse.json(DEFAULT_GRPC_ROUTE)
         ),
       ],

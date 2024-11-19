@@ -30,10 +30,9 @@ export default function GatewayList() {
           id: 'conditions',
           label: t('translation|Conditions'),
           getValue: (gateway: Gateway) =>
-            gateway.status?.conditions?.find(
-              ({ status }: { status: string }) => status === 'True'
-            ) ?? null,
-          render: (gateway: Gateway) => makeGatewayStatusLabel(gateway.status?.conditions),
+            gateway.status?.conditions?.find(({ status }: { status: string }) => status === 'True')
+              ?.type || null,
+          render: (gateway: Gateway) => makeGatewayStatusLabel(gateway.status?.conditions || null),
         },
         {
           id: 'listeners',
