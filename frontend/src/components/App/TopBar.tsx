@@ -424,6 +424,7 @@ export function PureTopBar({
             <>
               <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />
               <Box sx={{ flexGrow: 1 }} />
+              <GlobalSearch isIconButton />
               <IconButton
                 aria-label={t('show more')}
                 aria-controls={mobileMenuId}
