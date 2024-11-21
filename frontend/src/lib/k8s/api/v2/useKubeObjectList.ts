@@ -97,7 +97,7 @@ export function kubeObjectListQuery<K extends KubeObject>(
  * Accepts a list of lists to watch.
  * Upon receiving update it will modify query data for list query
  */
-function useWatchKubeObjectLists<K extends KubeObject>({
+export function useWatchKubeObjectLists<K extends KubeObject>({
   kubeObjectClass,
   endpoint,
   lists,
