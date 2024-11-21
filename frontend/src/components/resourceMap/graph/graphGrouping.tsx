@@ -70,7 +70,6 @@ const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): Gr
 
       const targetNode = graphLookup.getNode(edge.target);
       if (targetNode) {
-        componentEdges.push(edge);
         findConnectedComponent(targetNode, componentNodes, componentEdges);
       }
     });
@@ -85,7 +84,6 @@ const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): Gr
 
       const sourceNode = graphLookup.getNode(edge.source);
       if (sourceNode) {
-        componentEdges.push(edge);
         findConnectedComponent(sourceNode, componentNodes, componentEdges);
       }
     });
