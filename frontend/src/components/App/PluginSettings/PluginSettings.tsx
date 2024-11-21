@@ -3,12 +3,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import { MRT_Row } from 'material-react-table';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../../helpers';
 import { useFilterFunc } from '../../../lib/util';
-import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
+import { PluginInfo, reloadPage, setEnablePlugin } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { Link as HeadlampLink, SectionBox, Table } from '../../common';
 import SectionFilterHeader from '../../common/SectionFilterHeader';
@@ -24,6 +24,7 @@ import SectionFilterHeader from '../../common/SectionFilterHeader';
  */
 export interface PluginSettingsPureProps {
   plugins: PluginInfo[];
+  pluginsEnabledList: Record<string, boolean>;
   onSave: (plugins: PluginInfo[]) => void;
   saveAlwaysEnable?: boolean;
 }
@@ -92,20 +93,17 @@ const EnableSwitch = (props: SwitchProps) => {
 
 /** PluginSettingsPure is the main component to where we render the plugin data. */
 export function PluginSettingsPure(props: PluginSettingsPureProps) {
+  const dispatch = useDispatch();
+
   const { t } = useTranslation(['translation']);
 
-  /** Plugin arr to be rendered to the page from prop data */
-  const pluginArr: any = props.plugins ? props.plugins : [];
-
-  /** enableSave state enables the save button when changes are made to the plugin list */
-  const [enableSave, setEnableSave] = useState(false);
-
-  /**
-   * pluginChanges state is the array of plugin data and any current changes made by the user to a plugin's "Enable" field via toggler.
-   * The name and origin fields are split for consistency.
+  /** Plugin arr to be rendered to the page from prop data
+   * Note:
+   * The pluginArr is the main array that will be used to render the plugin data to the page.
+   * Any changes made here is what will be rendered to the page.
    */
-  const [pluginChanges, setPluginChanges] = useState(() =>
-    pluginArr.map((plugin: PluginInfo) => {
+  const [pluginArr, setPluginArr] = useState<PluginInfo[]>(
+    props.plugins.map((plugin: PluginInfo) => {
       const [author, name] = plugin.name.includes('@')
         ? plugin.name.split(/\/(.+)/)
         : [null, plugin.name];
@@ -119,60 +117,54 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
   );
 
   /**
-   * useEffect to control the rendering of the save button.
-   * By default, the enableSave is set to false.
-   * If props.plugins matches pluginChanges enableSave is set to false, disabling the save button.
+   * pendingPluginsEnabled is either from the local storage or the prop data
    */
-  useEffect(() => {
-    /** This matcher function compares the fields of name and isEnabled of each object in props.plugins to each object in pluginChanges */
-    function matcher(objA: PluginInfo, objB: PluginInfo) {
-      return objA.name === objB.name && objA.isEnabled === objB.isEnabled;
-    }
+  const [pendingPluginsEnabled, setPendingPluginsEnabled] = useState<Record<string, boolean>>(
+    props.pluginsEnabledList
+  );
 
-    /**
-     * arrayComp returns true if each object in both arrays are identical by name and isEnabled.
-     * If both arrays are identical in this scope, then no changes need to be saved.
-     * If they do not match, there are changes in the pluginChanges array that can be saved and thus enableSave should be enabled.
-     */
-    const arrayComp = props.plugins.every((val, key) => matcher(val, pluginChanges[key]));
-
-    /** For storybook usage, determines if the save button should be enabled by default */
-    if (props.saveAlwaysEnable) {
-      setEnableSave(true);
-    } else {
-      if (arrayComp) {
-        setEnableSave(false);
-      }
-      if (!arrayComp) {
-        setEnableSave(true);
-      }
-    }
-  }, [pluginChanges]);
+  const enableSave = useMemo(() => {
+    return !pluginArr.every((plugin: { name: string }) => {
+      return (
+        Boolean(props.pluginsEnabledList[plugin.name]) ===
+        Boolean(pendingPluginsEnabled[plugin.name])
+      );
+    });
+  }, [pendingPluginsEnabled, pluginArr, props.pluginsEnabledList]);
 
   /**
    * onSaveButton function to be called once the user clicks the Save button.
    * This function then takes the current state of the pluginChanges array and inputs it to the onSave prop function.
    */
   function onSaveButtonHandler() {
-    props.onSave(pluginChanges);
+    dispatch(setEnablePlugin(pendingPluginsEnabled));
+    dispatch(reloadPage());
   }
 
   /**
-   * On change function handler to control the enableSave state and update the pluginChanges state.
-   * This function is called on every plugin toggle action and recreates the state for pluginChanges.
+   * On change function handler to control the enableSave state and update the pluginArr state.
+   * This function is called on every plugin toggle action and recreates the state for pluginArr.
    * Once the user clicks a toggle, the Save button is also rendered via setEnableSave.
    */
-  function switchChangeHanlder(plug: { name: any }) {
+  function switchChangeHandler(plug: { name: any }) {
     const plugName = plug.name;
 
-    setPluginChanges((currentInfo: any[]) =>
-      currentInfo.map((p: { name: any; isEnabled: any }) => {
+    setPluginArr([
+      ...pluginArr.map(p => {
         if (p.name === plugName) {
-          return { ...p, isEnabled: !p.isEnabled };
+          return {
+            ...p,
+            isEnabled: !p.isEnabled,
+          };
         }
         return p;
-      })
-    );
+      }),
+    ]);
+
+    setPendingPluginsEnabled({
+      ...pendingPluginsEnabled,
+      [plugName]: !pendingPluginsEnabled[plugName],
+    });
   }
 
   return (
@@ -235,7 +227,9 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                 if (plugin.isCompatible === false) {
                   return t('translation|Incompatible');
                 }
-                return plugin.isEnabled ? t('translation|Enabled') : t('translation|Disabled');
+                return pendingPluginsEnabled[plugin.name]
+                  ? t('translation|Enabled')
+                  : t('translation|Disabled');
               },
             },
             {
@@ -247,8 +241,8 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                 return (
                   <EnableSwitch
                     aria-label={`Toggle ${plugin.name}`}
-                    checked={plugin.isEnabled}
-                    onChange={() => switchChangeHanlder(plugin)}
+                    checked={pendingPluginsEnabled[plugin.name]}
+                    onChange={() => switchChangeHandler(plugin)}
                     color="primary"
                     name={plugin.name}
                   />
@@ -260,7 +254,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
           ]
             // remove the enable column if we're not in app mode
             .filter(el => !(el.header === t('translation|Enable') && !helpers.isElectron()))}
-          data={pluginChanges}
+          data={pluginArr}
           filterFunction={useFilterFunc<PluginInfo>(['.name'])}
         />
       </SectionBox>
@@ -284,15 +278,69 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
 export default function PluginSettings() {
   const dispatch = useDispatch();
 
-  const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
+  const pluginData = useTypedSelector(state => state.plugins.pluginData);
+
+  const oldLocalEnabledList = localStorage.getItem('headlampPluginSettings');
+  const localEnabledList = localStorage.getItem('enabledPluginsList');
+
+  let pluginsEnabledList;
+
+  /**
+   * Need to improve later, this is a temporary fix to handle the migration of the old plugin settings.
+   */
+
+  if (oldLocalEnabledList) {
+    const oldSettings = JSON.parse(oldLocalEnabledList);
+
+    const newSettings = oldSettings.map((setting: { name: string; isEnabled: boolean }) => {
+      return {
+        name: setting.name,
+        isEnabled: setting.isEnabled,
+      };
+    });
+
+    pluginsEnabledList = newSettings.reduce(
+      (acc: Record<string, boolean>, p: { name: string; isEnabled: boolean }) => {
+        acc[p.name] = !!p.isEnabled;
+        return acc;
+      },
+      {} as Record<string, boolean>
+    );
+
+    localStorage.setItem('enabledPluginsList', JSON.stringify(pluginsEnabledList));
+    localStorage.removeItem('headlampPluginSettings');
+
+    dispatch(setEnablePlugin(pluginsEnabledList));
+
+    dispatch(reloadPage());
+  } else {
+    /**
+     * NOTE: For compatibility with old settings, we need to check if the `localEnabledList` exists.
+     * If `localEnabledList` exists, parse it and assign it to `pluginsEnabledList`.
+     * This indicates that previous plugin settings have been saved and can be used.
+     *
+     * If `localEnabledList` does not exist, it means the settings are not initialized
+     * and no previous plugin settings have been saved. In this case, default the plugins
+     * to being disabled to allow users to turn on their desired plugins.
+     */
+    if (localEnabledList) {
+      pluginsEnabledList = JSON.parse(localEnabledList) as Record<string, boolean>;
+    } else {
+      pluginsEnabledList = pluginData.reduce((acc, p) => {
+        acc[p.name] = !!p.isEnabled;
+        return acc;
+      }, {} as Record<string, boolean>);
+
+      dispatch(setEnablePlugin(pluginsEnabledList));
+      dispatch(reloadPage());
+    }
+  }
 
   return (
     <PluginSettingsPure
-      plugins={pluginSettings}
-      onSave={plugins => {
-        dispatch(setPluginSettings(plugins));
-        dispatch(reloadPage());
-      }}
+      plugins={pluginData}
+      pluginsEnabledList={pluginsEnabledList}
+      onSave={() => {}}
     />
   );
 }

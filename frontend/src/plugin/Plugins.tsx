@@ -8,7 +8,7 @@ import helpers from '../helpers';
 import { UI_INITIALIZE_PLUGIN_VIEWS } from '../redux/actions/actions';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import { fetchAndExecutePlugins } from './index';
-import { pluginsLoaded, setPluginSettings } from './pluginsSlice';
+import { pluginsLoaded, setPluginData } from './pluginsSlice';
 
 /**
  * For discovering and executing plugins.
@@ -26,7 +26,8 @@ export default function Plugins() {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const settingsPlugins = useTypedSelector(state => state.plugins.pluginSettings);
+  const settingsPlugins = useTypedSelector(state => state.plugins.pluginData);
+  const enabledPlugins = useTypedSelector(state => state.plugins.enabledPlugins);
 
   // only run on first load
   useEffect(() => {
@@ -34,8 +35,9 @@ export default function Plugins() {
 
     fetchAndExecutePlugins(
       settingsPlugins,
+      enabledPlugins,
       updatedSettingsPackages => {
-        dispatch(setPluginSettings(updatedSettingsPackages));
+        dispatch(setPluginData(updatedSettingsPackages));
       },
       incompatiblePlugins => {
         const pluginList = Object.values(incompatiblePlugins)
