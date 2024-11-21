@@ -90,14 +90,17 @@ export type PluginInfo = {
 export interface PluginsState {
   /** Have plugins finished executing? */
   loaded: boolean;
+  /** Map where key is plugin's name and value is whether it is enabled */
+  enabledPlugins: Record<string, boolean>;
   /** Information stored by settings about plugins. */
-  pluginSettings: PluginInfo[];
+  pluginData: PluginInfo[];
 }
 const initialState: PluginsState = {
   /** Once the plugins have been fetched and executed. */
   loaded: false,
   /** If plugin settings are saved use those. */
-  pluginSettings: JSON.parse(localStorage.getItem('headlampPluginSettings') || '[]'),
+  enabledPlugins: JSON.parse(localStorage.getItem('enabledPluginsList') || '[]'),
+  pluginData: [],
 };
 
 export const pluginsSlice = createSlice({
@@ -107,12 +110,16 @@ export const pluginsSlice = createSlice({
     pluginsLoaded(state) {
       state.loaded = true;
     },
-    /**
-     * Save the plugin settings. To both the store, and localStorage.
-     */
-    setPluginSettings(state, action: PayloadAction<PluginInfo[]>) {
-      state.pluginSettings = action.payload;
-      localStorage.setItem('headlampPluginSettings', JSON.stringify(action.payload));
+
+    /** Updates the local storage for plugin enable settings */
+    setEnablePlugin(state, action: PayloadAction<Record<string, boolean>>) {
+      state.enabledPlugins = action.payload;
+      localStorage.setItem('enabledPluginsList', JSON.stringify(action.payload));
+    },
+
+    /** Sets the plugin data */
+    setPluginData(state, action: PayloadAction<PluginInfo[]>) {
+      state.pluginData = action.payload;
     },
     /** Reloads the browser page */
     reloadPage() {
@@ -130,7 +137,7 @@ export const pluginsSlice = createSlice({
       }>
     ) {
       const { name, component, displaySaveButton } = action.payload;
-      state.pluginSettings = state.pluginSettings.map(plugin => {
+      state.pluginData = state.pluginData.map(plugin => {
         if (plugin.name === name) {
           return {
             ...plugin,
@@ -144,7 +151,12 @@ export const pluginsSlice = createSlice({
   },
 });
 
-export const { pluginsLoaded, setPluginSettings, setPluginSettingsComponent, reloadPage } =
-  pluginsSlice.actions;
+export const {
+  pluginsLoaded,
+  setEnablePlugin,
+  setPluginData,
+  setPluginSettingsComponent,
+  reloadPage,
+} = pluginsSlice.actions;
 
 export default pluginsSlice.reducer;

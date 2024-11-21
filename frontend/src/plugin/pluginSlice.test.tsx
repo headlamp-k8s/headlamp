@@ -11,7 +11,8 @@ const initialState: PluginsState = {
   /** Once the plugins have been fetched and executed. */
   loaded: false,
   /** If plugin settings are saved use those. */
-  pluginSettings: JSON.parse(localStorage.getItem('headlampPluginSettings') || '[]'),
+  enabledPlugins: JSON.parse(localStorage.getItem('headlampPluginSettings') || '{}'),
+  pluginData: [],
 };
 
 // Mock React component for testing
@@ -24,7 +25,7 @@ describe('pluginsSlice reducers', () => {
     const existingPluginName = 'test-plugin';
     const initialStateWithPlugin: PluginsState = {
       ...initialState,
-      pluginSettings: [
+      pluginData: [
         {
           name: existingPluginName,
           settingsComponent: undefined,
@@ -41,15 +42,15 @@ describe('pluginsSlice reducers', () => {
 
     const newState = pluginsSlice.reducer(initialStateWithPlugin, action);
 
-    expect(newState.pluginSettings[0].settingsComponent).toBeDefined();
-    expect(newState.pluginSettings[0].displaySettingsComponentWithSaveButton).toBe(true);
+    expect(newState.pluginData[0].settingsComponent).toBeDefined();
+    expect(newState.pluginData[0].displaySettingsComponentWithSaveButton).toBe(true);
   });
 
   test('should not modify state when plugin name does not match any existing plugin', () => {
     const nonExistingPluginName = 'non-existing-plugin';
     const initialStateWithPlugin: PluginsState = {
       ...initialState,
-      pluginSettings: [
+      pluginData: [
         {
           name: 'existing-plugin',
           settingsComponent: undefined,

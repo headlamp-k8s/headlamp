@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { PluginInfo } from '../../../plugin/pluginsSlice';
 import { TestContext } from '../../../test';
 import { PluginSettingsPure, PluginSettingsPureProps } from './PluginSettings';
 
@@ -41,6 +42,18 @@ function createDemoData(arrSize: number, useHomepage?: boolean) {
 }
 
 /**
+ * createDemoEnabledList function will create a list of plugin objects with a boolean value to enable/disable the plugin.
+ * The function will return an object of plugin names with a boolean value.
+ */
+function createDemoEnabledList(arr: PluginInfo[]): Record<string, boolean> {
+  const enabledList = arr.reduce((acc, p) => {
+    acc[p.name] = !!p.isEnabled;
+    return acc;
+  }, {} as Record<string, boolean>);
+  return enabledList;
+}
+
+/**
  * Creation of data arrays ranging from 0 to 50 to demo state of empty, few, many, and large numbers of data objects.
  * NOTE: The numbers used are up to the users preference.
  */
@@ -55,6 +68,7 @@ const demoEmpty = createDemoData(0);
 export const FewItems = Template.bind({});
 FewItems.args = {
   plugins: demoFew,
+  pluginsEnabledMap: createDemoEnabledList(demoFew),
   onSave: plugins => {
     console.log('demo few', plugins);
   },
@@ -63,12 +77,14 @@ FewItems.args = {
 export const Empty = Template.bind({});
 Empty.args = {
   plugins: demoEmpty,
+  pluginsEnabledMap: createDemoEnabledList(demoEmpty),
 };
 
 /** NOTE: The save button will load by default on plugin page regardless of data */
 export const DefaultSaveEnable = Template.bind({});
 DefaultSaveEnable.args = {
   plugins: demoFewSaveEnable,
+  pluginsEnabledMap: createDemoEnabledList(demoFewSaveEnable),
   onSave: plugins => {
     console.log('demo few', plugins);
   },
@@ -78,6 +94,7 @@ DefaultSaveEnable.args = {
 export const ManyItems = Template.bind({});
 ManyItems.args = {
   plugins: demoMany,
+  pluginsEnabledMap: createDemoEnabledList(demoMany),
   onSave: plugins => {
     console.log('demo many', plugins);
   },
@@ -86,6 +103,7 @@ ManyItems.args = {
 export const MoreItems = Template.bind({});
 MoreItems.args = {
   plugins: demoMore,
+  pluginsEnabledMap: createDemoEnabledList(demoMore),
   onSave: plugins => {
     console.log('demo more', plugins);
   },
@@ -94,6 +112,7 @@ MoreItems.args = {
 export const EmptyHomepageItems = Template.bind({});
 EmptyHomepageItems.args = {
   plugins: demoHomepageEmpty,
+  pluginsEnabledMap: createDemoEnabledList(demoHomepageEmpty),
   onSave: (plugins: any) => {
     console.log('Empty Homepage', plugins);
   },

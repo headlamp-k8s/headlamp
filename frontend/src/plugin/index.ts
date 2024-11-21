@@ -137,6 +137,7 @@ export async function initializePlugins() {
 export function filterSources(
   sources: string[],
   packageInfos: PluginInfo[],
+  enabledPlugins: Record<string, boolean>,
   appMode: boolean,
   compatibleVersion: string,
   settingsPackages?: PluginInfo[]
@@ -161,9 +162,8 @@ export function filterSources(
 
     // settingsPackages might have a different order or length than packageInfos
     // If it's not in the settings don't enable the plugin.
-    const enabledInSettings =
-      settingsPackages[settingsPackages.findIndex(x => x.name === packageInfo.name)]?.isEnabled ===
-      true;
+
+    const enabledInSettings = enabledPlugins[packageInfo.name];
     return enabledInSettings;
   });
 
@@ -242,6 +242,7 @@ export function updateSettingsPackages(
  */
 export async function fetchAndExecutePlugins(
   settingsPackages: PluginInfo[],
+  enabledPlugins: Record<string, boolean>,
   onSettingsChange: (plugins: PluginInfo[]) => void,
   onIncompatible: (plugins: Record<string, PluginInfo>) => void
 ) {
@@ -298,6 +299,7 @@ export async function fetchAndExecutePlugins(
   const { sourcesToExecute, incompatiblePlugins } = filterSources(
     sources,
     packageInfos,
+    enabledPlugins,
     helpers.isElectron(),
     compatibleHeadlampPluginVersion,
     updatedSettingsPackages

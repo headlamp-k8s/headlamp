@@ -54,7 +54,7 @@ const PluginSettingsDetailsInitializer = (props: { plugin: PluginInfo }) => {
 };
 
 export default function PluginSettingsDetails() {
-  const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
+  const pluginSettings = useTypedSelector(state => state.plugins.pluginData);
   const { name } = useParams<{ name: string }>();
 
   const plugin = useMemo(() => {
