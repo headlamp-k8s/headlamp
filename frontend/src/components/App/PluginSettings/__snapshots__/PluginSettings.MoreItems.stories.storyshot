@@ -10,7 +10,7 @@
           class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
         >
           <div
-            class="MuiBox-root css-70qvj9"
+            class="MuiBox-root css-15xsm7k"
           >
             <h1
               class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
@@ -488,7 +488,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-0"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -529,7 +534,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-1"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -570,7 +580,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-2"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -611,7 +626,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-3"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -652,7 +672,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-4"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -693,7 +718,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-5"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -734,7 +764,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-6"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -775,7 +810,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-7"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -816,7 +856,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-8"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -857,7 +902,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-9"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -898,7 +948,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-10"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -939,7 +994,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-11"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -980,7 +1040,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-12"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -1021,7 +1086,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-13"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"
@@ -1062,7 +1132,12 @@
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ac5fut-MuiTableCell-root"
                     data-index="2"
                   >
-                    Unknown
+                    <a
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                      href="https://example.com/plugin-link-14"
+                    >
+                      Unknown
+                    </a>
                   </td>
                   <td
                     class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-14fks5x-MuiTableCell-root"

@@ -107,6 +107,9 @@ export function PluginSettingsDetailsPure(props: PluginSettingsDetailsPureProps)
   const [enableSaveButton, setEnableSaveButton] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const history = useHistory();
+  const [author, name] = plugin.name.includes('@')
+    ? plugin.name.substring(1).split(/\/(.+)/)
+    : [null, plugin.name];
 
   useEffect(() => {
     if (!_.isEqual(config, data)) {
@@ -156,7 +159,12 @@ export function PluginSettingsDetailsPure(props: PluginSettingsDetailsPureProps)
 
   return (
     <>
-      <SectionBox aria-live="polite" title={plugin.name} backLink={'/settings/plugins'}>
+      <SectionBox
+        aria-live="polite"
+        title={name}
+        subtitle={author ? `${t('translation|By')}: ${author}` : undefined}
+        backLink={'/settings/plugins'}
+      >
         {plugin.description}
         <ScrollableBox style={{ height: '70vh' }} py={0}>
           <ConfirmDialog
