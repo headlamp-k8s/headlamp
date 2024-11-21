@@ -20,7 +20,7 @@ test('plugin settings page should have a table', async ({ page }) => {
 
 test('pod counter plugin should have setting option', async ({ page }) => {
   const headlampPage = new HeadlampPage(page);
-  const pluginName = '@kinvolk/headlamp-pod-counter';
+  const pluginName = 'headlamp-pod-counter';
 
   await headlampPage.authenticate();
   await headlampPage.navigateTopage('/settings/plugins', /Plugin/);
