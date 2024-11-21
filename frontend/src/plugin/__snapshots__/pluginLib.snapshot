@@ -168,6 +168,7 @@
   },
   "DefaultAppBarAction": {
     "CLUSTER": "CLUSTER",
+    "GLOBAL_SEARCH": "GLOBAL_SEARCH",
     "NOTIFICATION": "NOTIFICATION",
     "SETTINGS": "SETTINGS",
     "USER": "USER",
