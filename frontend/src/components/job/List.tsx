@@ -111,14 +111,13 @@ export function JobsListRenderer(props: JobsListRendererProps) {
           id: 'duration',
           label: t('translation|Duration'),
           getValue: job => {
-            const startTime = job.status?.startTime;
-            const completionTime = job.status?.completionTime;
-            if (!!startTime && !!completionTime) {
-              const duration = new Date(completionTime).getTime() - new Date(startTime).getTime();
+            const duration = job.getDuration();
+            if (duration > 0) {
               return formatDuration(duration, { format: 'mini' });
             }
             return '-';
           },
+          sort: (job1, job2) => job1.getDuration() - job2.getDuration(),
           gridTemplate: 0.6,
         },
         {
