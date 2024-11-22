@@ -43,6 +43,10 @@ export type PluginInfo = {
    */
   description: string;
   /**
+   * displayName is the name of the plugin without the author prefix.
+   */
+  displayName?: string;
+  /**
    * origin is the source of the plugin.
    */
   origin?: string;

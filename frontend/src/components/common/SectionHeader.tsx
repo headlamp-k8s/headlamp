@@ -8,6 +8,7 @@ export type HeaderStyle = 'main' | 'subsection' | 'normal' | 'label';
 
 export interface SectionHeaderProps {
   title: string;
+  subtitle?: string | React.ReactNode;
   actions?: React.ReactNode[] | null;
   noPadding?: boolean;
   headerStyle?: HeaderStyle;
@@ -38,18 +39,25 @@ export default function SectionHeader(props: SectionHeaderProps) {
     >
       <Grid item>
         {(!!props.title || titleSideActions.length > 0) && (
-          <Box display="flex" alignItems="center">
+          <Box display="flex" flexDirection="column" alignItems="left">
             {!!props.title && (
-              <Typography
-                variant={titleVariants[headerStyle]}
-                noWrap
-                sx={theme => ({
-                  ...theme.palette.headerStyle[headerStyle || 'normal'],
-                  whiteSpace: 'pre-wrap',
-                })}
-              >
-                {props.title}
-              </Typography>
+              <>
+                <Typography
+                  variant={titleVariants[headerStyle]}
+                  noWrap
+                  sx={theme => ({
+                    ...theme.palette.headerStyle[headerStyle || 'normal'],
+                    whiteSpace: 'pre-wrap',
+                  })}
+                >
+                  {props.title}
+                </Typography>
+                {!!props.subtitle && (
+                  <Typography variant="h6" component="h2" sx={{ fontStyle: 'italic' }}>
+                    {props.subtitle}
+                  </Typography>
+                )}
+              </>
             )}
             {!!titleSideActions && (
               <Box ml={1} justifyContent="center">

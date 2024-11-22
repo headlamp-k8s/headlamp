@@ -100,8 +100,23 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
   /** enableSave state enables the save button when changes are made to the plugin list */
   const [enableSave, setEnableSave] = useState(false);
 
-  /** pluginChanges state is the array of plugin data and any current changes made by the user to a plugin's "Enable" field via toggler */
-  const [pluginChanges, setPluginChanges] = useState(() => pluginArr.map((p: any) => p));
+  /**
+   * pluginChanges state is the array of plugin data and any current changes made by the user to a plugin's "Enable" field via toggler.
+   * The name and origin fields are split for consistency.
+   */
+  const [pluginChanges, setPluginChanges] = useState(() =>
+    pluginArr.map((plugin: PluginInfo) => {
+      const [author, name] = plugin.name.includes('@')
+        ? plugin.name.split(/\/(.+)/)
+        : [null, plugin.name];
+
+      return {
+        ...plugin,
+        displayName: name ?? plugin.name,
+        origin: plugin.origin ?? author?.substring(1) ?? t('translation|Unknown'),
+      };
+    })
+  );
 
   /**
    * useEffect to control the rendering of the save button.
@@ -186,7 +201,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                         params={{ name: plugin.name }}
                         align="right"
                       >
-                        {plugin.name}
+                        {plugin.displayName}
                       </HeadlampLink>
                     </Typography>
                     <Typography variant="caption">{plugin.version}</Typography>
@@ -204,7 +219,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                 const url = plugin?.homepage || plugin?.repository?.url;
                 return plugin?.origin ? (
                   url ? (
-                    <Link href={url}>{plugin?.origin}</Link>
+                    <Link href={url}>{plugin.origin}</Link>
                   ) : (
                     plugin?.origin
                   )
