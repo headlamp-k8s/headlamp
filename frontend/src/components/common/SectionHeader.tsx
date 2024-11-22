@@ -39,25 +39,18 @@ export default function SectionHeader(props: SectionHeaderProps) {
     >
       <Grid item>
         {(!!props.title || titleSideActions.length > 0) && (
-          <Box display="flex" flexDirection="column" alignItems="left">
+          <Box display="flex" alignItems="center">
             {!!props.title && (
-              <>
-                <Typography
-                  variant={titleVariants[headerStyle]}
-                  noWrap
-                  sx={theme => ({
-                    ...theme.palette.headerStyle[headerStyle || 'normal'],
-                    whiteSpace: 'pre-wrap',
-                  })}
-                >
-                  {props.title}
-                </Typography>
-                {!!props.subtitle && (
-                  <Typography variant="h6" component="h2" sx={{ fontStyle: 'italic' }}>
-                    {props.subtitle}
-                  </Typography>
-                )}
-              </>
+              <Typography
+                variant={titleVariants[headerStyle]}
+                noWrap
+                sx={theme => ({
+                  ...theme.palette.headerStyle[headerStyle || 'normal'],
+                  whiteSpace: 'pre-wrap',
+                })}
+              >
+                {props.title}
+              </Typography>
             )}
             {!!titleSideActions && (
               <Box ml={1} justifyContent="center">
@@ -65,6 +58,11 @@ export default function SectionHeader(props: SectionHeaderProps) {
               </Box>
             )}
           </Box>
+        )}
+        {!!props.subtitle && (
+          <Typography variant="h6" component="p" sx={{ fontStyle: 'italic' }}>
+            {props.subtitle}
+          </Typography>
         )}
       </Grid>
       {actions.length > 0 && (
