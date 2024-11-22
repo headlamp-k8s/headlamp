@@ -1,6 +1,7 @@
 import { Box, Chip, Tooltip } from '@mui/material';
 import { styled } from '@mui/system';
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import Node from '../../lib/k8s/node';
 
 const WrappingBox = styled(Box)(({ theme }) => ({
@@ -19,8 +20,9 @@ const PaddedChip = styled(Chip)({
 
 export function NodeTaintsLabel(props: { node: Node }) {
   const { node } = props;
+  const { t } = useTranslation(['glossary', 'translation']);
   if (node.spec?.taints === undefined) {
-    return <WrappingBox></WrappingBox>;
+    return <WrappingBox>{t('translation|None')}</WrappingBox>;
   }
   const limits: ReactNode[] = [];
   node.spec.taints.forEach(taint => {
