@@ -7,16 +7,10 @@ export type HeaderActionType = ((...args: any[]) => ReactNode) | null | ReactEle
 export type DetailsViewFunc = HeaderActionType;
 
 export type AppBarActionType = ((...args: any[]) => ReactNode) | null | ReactElement | ReactNode;
-export type RowActionType = ((item: any) => JSX.Element | null | ReactNode) | null;
 
 export type HeaderAction = {
   id: string;
   action?: HeaderActionType;
-};
-
-export type RowAction = {
-  id: string;
-  action?: RowActionType;
 };
 
 export type AppBarAction = {
