@@ -56,7 +56,6 @@ export default function ThemeChangeButton(props: { showBothIcons?: boolean }) {
             '& button': {
               boxShadow: 'none',
               borderRadius: '4px',
-              padding: '0.8rem 1.5rem',
             },
             '& .MuiButton-contained': {
               backgroundColor: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.45)',

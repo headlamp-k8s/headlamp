@@ -76,10 +76,10 @@
             Language
           </dt>
           <dd
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-9f9ori-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
           >
             <div
-              class="MuiFormControl-root css-k2e4wk-MuiFormControl-root"
+              class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
             >
               <div
                 class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
@@ -123,10 +123,10 @@
             Theme
           </dt>
           <dd
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-9f9ori-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
           >
             <div
-              class="MuiButtonGroup-root MuiButtonGroup-outlined css-1b41vff-MuiButtonGroup-root"
+              class="MuiButtonGroup-root MuiButtonGroup-outlined css-1o97n10-MuiButtonGroup-root"
               role="group"
             >
               <button
@@ -157,7 +157,7 @@
             Number of rows for tables
           </dt>
           <dd
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-9f9ori-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-deb4a-MuiGrid-root"
           >
             <div
               class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
@@ -203,7 +203,7 @@
             Timezone to display for dates
           </dt>
           <dd
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-9f9ori-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
           >
             <div
               class="MuiBox-root css-10rqxfs"
@@ -214,19 +214,12 @@
                 <div
                   class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
                 >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-standard MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-standard css-zh08sj-MuiFormLabel-root-MuiInputLabel-root"
-                    data-shrink="false"
-                    for="cluster-selector-autocomplete"
-                    id="cluster-selector-autocomplete-label"
-                  >
-                    Timezone
-                  </label>
                   <div
                     class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-lbi814-MuiInputBase-root-MuiInput-root"
                   >
                     <input
                       aria-autocomplete="both"
+                      aria-describedby="cluster-selector-autocomplete-helper-text"
                       aria-expanded="false"
                       aria-invalid="false"
                       autocapitalize="none"
@@ -265,6 +258,12 @@
                       </button>
                     </div>
                   </div>
+                  <p
+                    class="MuiFormHelperText-root MuiFormHelperText-sizeMedium css-nnd8o8-MuiFormHelperText-root"
+                    id="cluster-selector-autocomplete-helper-text"
+                  >
+                    Timezone
+                  </p>
                 </div>
               </div>
             </div>

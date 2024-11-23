@@ -48,14 +48,6 @@ export default function Settings() {
       backLink
     >
       <NameValueTable
-        valueCellProps={{
-          sx: theme => ({
-            width: '60%',
-            [theme.breakpoints.down('sm')]: {
-              width: 'unset',
-            },
-          }),
-        }}
         rows={[
           {
             name: t('translation|Language'),
