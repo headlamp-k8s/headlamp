@@ -118,7 +118,7 @@ export function MainInfoHeader<T extends KubeObject>(props: MainInfoHeaderProps<
 
   return (
     <SectionHeader
-      title={title || (resource ? resource.kind : '')}
+      title={title || (resource ? `${resource.kind}: ${resource.getName()}` : '')}
       headerStyle={headerStyle}
       actions={allActions}
     />
