@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import {
   kubeObjectListQuery,
   ListResponse,
@@ -8,6 +9,18 @@ import {
   useWatchKubeObjectLists,
 } from './useKubeObjectList';
 import * as websocket from './webSocket';
+
+// Mock WebSocket functionality
+const mockUseWebSockets = vi.fn();
+const mockSubscribe = vi.fn().mockImplementation(() => Promise.resolve(() => {}));
+
+vi.mock('./webSocket', () => ({
+  useWebSockets: (...args: any[]) => mockUseWebSockets(...args),
+  WebSocketManager: {
+    subscribe: (...args: any[]) => mockSubscribe(...args),
+  },
+  BASE_WS_URL: 'http://localhost:3000',
+}));
 
 describe('makeListRequests', () => {
   describe('for non namespaced resource', () => {
@@ -96,6 +109,11 @@ const mockClass = class {
 } as any;
 
 describe('useWatchKubeObjectLists', () => {
+  beforeEach(() => {
+    vi.stubEnv('REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER', 'false');
+    vi.clearAllMocks();
+  });
+
   it('should not be enabled when no endpoint is provided', () => {
     const spy = vi.spyOn(websocket, 'useWebSockets');
     const queryClient = new QueryClient();
@@ -269,5 +287,99 @@ describe('useKubeObjectList', () => {
     expect(spy.mock.calls[1][0].connections.length).toBe(2); // new connections with 'a' and 'b' namespaces
     expect(spy.mock.calls[2][0].connections.length).toBe(2); // rerender with new props
     expect(spy.mock.calls[3][0].connections.length).toBe(1); // updated connections after we removed namespace 'b'
+  });
+});
+
+describe('useWatchKubeObjectLists (Multiplexer)', () => {
+  beforeEach(() => {
+    vi.stubEnv('REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER', 'true');
+    vi.clearAllMocks();
+  });
+
+  it('should subscribe using WebSocketManager when multiplexer is enabled', () => {
+    const lists = [{ cluster: 'cluster-a', namespace: 'namespace-a', resourceVersion: '1' }];
+
+    renderHook(
+      () =>
+        useWatchKubeObjectLists({
+          kubeObjectClass: mockClass,
+          endpoint: { version: 'v1', resource: 'pods' },
+          lists,
+        }),
+      {
+        wrapper: ({ children }) => (
+          <QueryClientProvider client={new QueryClient()}>{children}</QueryClientProvider>
+        ),
+      }
+    );
+
+    expect(mockSubscribe).toHaveBeenCalledWith(
+      'cluster-a',
+      expect.stringContaining('/api/v1/namespaces/namespace-a/pods'),
+      'watch=1&resourceVersion=1',
+      expect.any(Function)
+    );
+  });
+
+  it('should subscribe to multiple clusters', () => {
+    const lists = [
+      { cluster: 'cluster-a', namespace: 'namespace-a', resourceVersion: '1' },
+      { cluster: 'cluster-b', namespace: 'namespace-b', resourceVersion: '2' },
+    ];
+
+    renderHook(
+      () =>
+        useWatchKubeObjectLists({
+          kubeObjectClass: mockClass,
+          endpoint: { version: 'v1', resource: 'pods' },
+          lists,
+        }),
+      {
+        wrapper: ({ children }) => (
+          <QueryClientProvider client={new QueryClient()}>{children}</QueryClientProvider>
+        ),
+      }
+    );
+
+    expect(mockSubscribe).toHaveBeenCalledTimes(2);
+    expect(mockSubscribe).toHaveBeenNthCalledWith(
+      1,
+      'cluster-a',
+      expect.stringContaining('/api/v1/namespaces/namespace-a/pods'),
+      'watch=1&resourceVersion=1',
+      expect.any(Function)
+    );
+    expect(mockSubscribe).toHaveBeenNthCalledWith(
+      2,
+      'cluster-b',
+      expect.stringContaining('/api/v1/namespaces/namespace-b/pods'),
+      'watch=1&resourceVersion=2',
+      expect.any(Function)
+    );
+  });
+
+  it('should handle non-namespaced resources', () => {
+    const lists = [{ cluster: 'cluster-a', resourceVersion: '1' }];
+
+    renderHook(
+      () =>
+        useWatchKubeObjectLists({
+          kubeObjectClass: mockClass,
+          endpoint: { version: 'v1', resource: 'pods' },
+          lists,
+        }),
+      {
+        wrapper: ({ children }) => (
+          <QueryClientProvider client={new QueryClient()}>{children}</QueryClientProvider>
+        ),
+      }
+    );
+
+    expect(mockSubscribe).toHaveBeenCalledWith(
+      'cluster-a',
+      expect.stringContaining('/api/v1/pods'),
+      'watch=1&resourceVersion=1',
+      expect.any(Function)
+    );
   });
 });
