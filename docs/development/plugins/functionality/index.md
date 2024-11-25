@@ -59,7 +59,7 @@ what we have so far:
 Show a component in the app bar (in the top right) with
 [registerAppBarAction](../api/plugin/registry/functions/registerappbaraction).
 
-![screenshot of the header showing two actions](./images/podcounter_screenshot.png)
+![screenshot of the header showing two actions](../images/podcounter_screenshot.png)
 
 - Example plugin shows [How To Register an App Bar Action](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/pod-counter)
 - API reference for [registerAppBarAction](../api/plugin/registry/functions/registerappbaraction)
@@ -69,7 +69,7 @@ Show a component in the app bar (in the top right) with
 Change the logo (at the top left) with
 [registerAppLogo](../api/plugin/registry/functions/registerapplogo).
 
-![screenshot of the logo being changed](./images/change-logo.png)
+![screenshot of the logo being changed](../images/change-logo.png)
 
 - Example plugin shows [How To Change The Logo](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/change-logo)
 - API reference for [registerAppLogo](../api/plugin/registry/functions/registerapplogo)
@@ -79,7 +79,7 @@ Change the logo (at the top left) with
 Add menus when Headlamp is running as an app.
 [Headlamp.setAppMenu](../api/plugin/lib/classes/Headlamp#setappmenu)
 
-![screenshot of the logo being changed](./images/app-menus.png)
+![screenshot of the logo being changed](../images/app-menus.png)
 
 - Example plugin shows [How To Add App Menus](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/app-menus)
 - API reference for [Headlamp.setAppMenu](../api/plugin/lib/classes/Headlamp#setappmenu)
@@ -89,7 +89,7 @@ Add menus when Headlamp is running as an app.
 Change the Cluster Chooser button (in the middle top of the Headlamp app bar) with
 [registerClusterChooser](../api/plugin/registry/functions/registerclusterchooser).
 
-![screenshot of the cluster chooser button](./images/cluster-chooser.png)
+![screenshot of the cluster chooser button](../images/cluster-chooser.png)
 
 - Example plugin shows [How To Register Cluster Chooser button](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/clusterchooser)
 - API reference for [registerClusterChooser](../api/plugin/registry/functions/registerclusterchooser)
@@ -100,7 +100,7 @@ Show a component to the top right area of a detail view
 (in the area of the screenshot below that's highlighted as yellow)
 [registerDetailsViewHeaderAction](../api/plugin/registry/functions/registerdetailsviewheaderaction).
 
-![screenshot of the header showing two actions](./images/header_actions_screenshot.png)
+![screenshot of the header showing two actions](../images/header_actions_screenshot.png)
 
 - Example plugin shows [How To set a Details View Header Action](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/details-view)
 - API reference for [registerDetailsViewHeaderAction](../api/plugin/registry/functions/registerdetailsviewheaderaction)
@@ -112,7 +112,7 @@ Change sections in cluster resources' details views with [registerDetailsViewSec
 Or simply append a component at the bottom of different details views with
 [registerDetailsViewSection](../api/plugin/registry/functions/registerdetailsviewsection).
 
-![screenshot of the appended Details View Section](./images/details-view.jpeg)
+![screenshot of the appended Details View Section](../images/details-view.jpeg)
 
 - Example plugin shows [How To set a Details View Section](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/details-view)
 - API reference for [registerDetailsViewSection](../api/plugin/registry/functions/registerdetailsviewsection)
@@ -140,7 +140,7 @@ Add sidebar items (menu on the left) with
 [registerSidebarEntry](../api/plugin/registry/functions/registersidebarentry).
 Remove sidebar items with [registerSidebarEntryFilter](../api/plugin/registry/functions/registersidebarentryfilter).
 
-![screenshot of the sidebar being changed](./images/sidebar.png)
+![screenshot of the sidebar being changed](../images/sidebar.png)
 
 - Example plugin shows [How To add items to the sidebar](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/sidebar), and also how to remove sidebar items.
 - API reference for [registerSidebarEntry](../api/plugin/registry/functions/registersidebarentry)
@@ -150,7 +150,7 @@ Remove sidebar items with [registerSidebarEntryFilter](../api/plugin/registry/fu
 
 Change what tables across Headlamp show with [registerResourceTableColumnsProcessor](../api/plugin/registry/functions/registersidebarentry). This allows you to remove, add, update, or shuffle table columns.
 
-![screenshot of the pods list with a context menu added by a plugin](./images/table-context-menu.png)
+![screenshot of the pods list with a context menu added by a plugin](../images/table-context-menu.png)
 
 - Example plugin shows [How to add a context menu to each row in the pods list table](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/tables).
 - API reference for [registerResourceTableColumnsProcessor](../api/plugin/registry/functions/registerresourcetablecolumnsprocessor)
@@ -161,7 +161,7 @@ Headlamp has the concept of "Headlamp events". Those are fired when something re
 
 React to Headlamp events with [registerHeadlampEventCallback](../api/plugin/registry/functions/registerheadlampeventcallback).
 
-![screenshot of a snackbar notification when an event occurred](./images/event-snackbar.png)
+![screenshot of a snackbar notification when an event occurred](../images/event-snackbar.png)
 
 - Example plugin shows [How to show snackbars for Headlamp events](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/headlamp-events).
 - API reference for [registerHeadlampEventCallback](../api/plugin/registry/functions/registerheadlampeventcallback)
@@ -172,4 +172,4 @@ The plugins can have user-configurable settings that can be used to change the b
 
 - Example plugin shows [How to create plugin settings and use them](https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/change-logo)
 
-![screenshot of the plugin settings](./images/plugin-settings.png)
+![screenshot of the plugin settings](../images/plugin-settings.png)
