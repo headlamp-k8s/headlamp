@@ -4,6 +4,7 @@ import { getCluster } from '../../../cluster';
 import { ApiError, QueryParameters } from '../../apiProxy';
 import { KubeObject, KubeObjectInterface } from '../../KubeObject';
 import { clusterFetch } from './fetch';
+import { KubeListUpdateEvent } from './KubeList';
 import { KubeObjectEndpoint } from './KubeObjectEndpoint';
 import { makeUrl } from './makeUrl';
 import { useWebSocket } from './webSocket';
@@ -117,7 +118,7 @@ export function useKubeObject<K extends KubeObject>({
 
   const data: Instance | null = query.error ? null : query.data ?? null;
 
-  useWebSocket<Instance>({
+  useWebSocket<KubeListUpdateEvent<K>>({
     url: () =>
       makeUrl([KubeObjectEndpoint.toUrl(endpoint!)], {
         ...cleanedUpQueryParams,
@@ -126,7 +127,7 @@ export function useKubeObject<K extends KubeObject>({
       }),
     enabled: !!endpoint && !!data,
     cluster,
-    onMessage(update) {
+    onMessage(update: KubeListUpdateEvent<K>) {
       if (update.type !== 'ADDED' && update.object) {
         client.setQueryData(queryKey, new kubeObjectClass(update.object));
       }
