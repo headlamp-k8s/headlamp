@@ -1,7 +1,7 @@
 import { KubeMetadata } from '../../../lib/k8s/KubeMetadata';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { groupGraph } from './graphGrouping';
-import { GraphEdge, KubeObjectNode } from './graphModel';
+import { GraphEdge, GroupNode, KubeObjectNode } from './graphModel';
 
 describe('groupGraph', () => {
   const nodes: KubeObjectNode[] = [
@@ -92,9 +92,11 @@ describe('groupGraph', () => {
       {}
     );
     const instances = groupedGraph.data.nodes.map(node => node.id);
+    const edgeIds = (groupedGraph.data.nodes[0] as GroupNode).data.edges.map(edge => edge.id);
 
     // Nodes 2 and 4 are connected by the egde and so are grouped together
     // group-2 takes has 2 in it because it's the ID of the first node
     expect(instances).toEqual(['group-2', '1', '3']);
+    expect(edgeIds).toEqual(['e2']);
   });
 });
