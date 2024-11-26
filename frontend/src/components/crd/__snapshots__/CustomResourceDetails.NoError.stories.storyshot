@@ -42,7 +42,7 @@
                   <h1
                     class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
                   >
-                    MyCustomResource
+                    MyCustomResource: mycustomresource
                   </h1>
                   <div
                     class="MuiBox-root css-ldp2l3"
