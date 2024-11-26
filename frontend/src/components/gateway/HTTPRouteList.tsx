@@ -25,7 +25,7 @@ export default function HTTPRouteList() {
         {
           id: 'rules',
           label: t('translation|rules'),
-          getValue: (httpRoute: HTTPRoute) => httpRoute.spec.rules.length,
+          getValue: (httpRoute: HTTPRoute) => httpRoute.spec.rules?.length,
         },
         'age',
       ]}
