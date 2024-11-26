@@ -44,7 +44,7 @@ export default function HTTPRouteDetails(props: { name?: string; namespace?: str
         httpRoute && [
           {
             name: 'Hostnames',
-            value: <LabelListItem labels={httpRoute.hostnames?.map(tls => `${tls}`)} />,
+            value: <LabelListItem labels={httpRoute.hostnames.map(tls => `${tls}`)} />,
           },
         ]
       }

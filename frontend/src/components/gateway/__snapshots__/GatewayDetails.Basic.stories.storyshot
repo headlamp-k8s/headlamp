@@ -42,12 +42,12 @@
               class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiBox-root css-70qvj9"
+                class="MuiBox-root css-15xsm7k"
               >
                 <h1
                   class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap css-yeaech-MuiTypography-root"
                 >
-                  Gateway
+                  Gateway: default-gateway
                 </h1>
                 <div
                   class="MuiBox-root css-ldp2l3"
@@ -202,7 +202,7 @@
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiBox-root css-70qvj9"
+                  class="MuiBox-root css-15xsm7k"
                 >
                   <h2
                     class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
@@ -251,7 +251,7 @@
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiBox-root css-70qvj9"
+                  class="MuiBox-root css-15xsm7k"
                 >
                   <h2
                     class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
@@ -342,7 +342,7 @@
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiBox-root css-70qvj9"
+                  class="MuiBox-root css-15xsm7k"
                 >
                   <h2
                     class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
@@ -391,7 +391,7 @@
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiBox-root css-70qvj9"
+                  class="MuiBox-root css-15xsm7k"
                 >
                   <h2
                     class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap css-m5vcfd-MuiTypography-root"
