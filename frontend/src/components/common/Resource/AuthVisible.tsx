@@ -3,6 +3,18 @@ import React, { useEffect } from 'react';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 
+/** List of valid request verbs. See https://kubernetes.io/docs/reference/access-authn-authz/authorization/#determine-the-request-verb. */
+const VALID_AUTH_VERBS = [
+  'create',
+  'get',
+  'list',
+  'watch',
+  'update',
+  'patch',
+  'delete',
+  'deletecollection',
+];
+
 export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
   /** The item for which auth will be checked or a resource class (e.g. Job). */
   item: KubeObject | KubeObjectClass | null;
@@ -27,6 +39,12 @@ export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
  */
 export default function AuthVisible(props: AuthVisibleProps) {
   const { item, authVerb, subresource, namespace, onError, onAuthResult, children } = props;
+
+  if (!VALID_AUTH_VERBS.includes(authVerb)) {
+    console.warn(`Invalid authVerb provided: "${authVerb}". Skipping authorization check.`);
+    return null;
+  }
+
   const { data } = useQuery<any>({
     enabled: !!item,
     queryKey: ['authVisible', item, authVerb, subresource, namespace],
