@@ -202,6 +202,7 @@
     "DELETE": "DELETE",
     "EDIT": "EDIT",
     "NODE_DRAIN": "NODE_DRAIN",
+    "NODE_SHELL": "NODE_SHELL",
     "NODE_TOGGLE_CORDON": "NODE_TOGGLE_CORDON",
     "POD_ATTACH": "POD_ATTACH",
     "POD_LOGS": "POD_LOGS",
@@ -16078,6 +16079,7 @@
     "localeDate": [Function],
     "normalizeUnit": [Function],
     "timeAgo": [Function],
+    "uniqueString": [Function],
     "units": {
       "TO_GB": 1073741824,
       "TO_ONE_CPU": 1000000000,

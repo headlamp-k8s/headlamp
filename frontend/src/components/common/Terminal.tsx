@@ -11,6 +11,7 @@ import { Terminal as XTerminal } from '@xterm/xterm';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { Dialog } from './Dialog';
 
@@ -26,7 +27,8 @@ enum Channel {
 }
 
 interface TerminalProps extends DialogProps {
-  item: Pod;
+  item: Pod | Node;
+  title: string;
   isAttach?: boolean;
   onClose?: () => void;
 }
@@ -35,15 +37,75 @@ interface XTerminalConnected {
   xterm: XTerminal;
   connected: boolean;
   reconnectOnEnter: boolean;
+  onClose?: () => void;
 }
 
-type execReturn = ReturnType<Pod['exec']>;
+interface ContainerSelectionProps {
+  item: Pod;
+  container: string;
+  setContainer: (container: string) => void;
+}
+
+function ContainerSelection(props: ContainerSelectionProps) {
+  const { item, container, setContainer } = props;
+  const { t } = useTranslation(['translation', 'glossary']);
+
+  function wrappedHandleContainerChange(event: any) {
+    setContainer(event.target.value);
+  }
+  return (
+    <Box>
+      <FormControl sx={{ minWidth: '11rem' }}>
+        <InputLabel shrink id="container-name-chooser-label">
+          {t('glossary|Container')}
+        </InputLabel>
+        <Select
+          labelId="container-name-chooser-label"
+          id="container-name-chooser"
+          value={container}
+          onChange={wrappedHandleContainerChange}
+        >
+          {item?.spec?.containers && (
+            <MenuItem disabled value="">
+              {t('glossary|Containers')}
+            </MenuItem>
+          )}
+          {item?.spec?.containers.map(({ name }) => (
+            <MenuItem value={name} key={name}>
+              {name}
+            </MenuItem>
+          ))}
+          {item?.spec?.initContainers && (
+            <MenuItem disabled value="">
+              {t('translation|Init Containers')}
+            </MenuItem>
+          )}
+          {item.spec.initContainers?.map(({ name }) => (
+            <MenuItem value={name} key={`init_container_${name}`}>
+              {name}
+            </MenuItem>
+          ))}
+          {item?.spec?.ephemeralContainers && (
+            <MenuItem disabled value="">
+              {t('glossary|Ephemeral Containers')}
+            </MenuItem>
+          )}
+          {item.spec.ephemeralContainers?.map(({ name }) => (
+            <MenuItem value={name} key={`eph_container_${name}`}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}
 
 export default function Terminal(props: TerminalProps) {
-  const { item, onClose, isAttach, ...other } = props;
+  const { item, onClose, isAttach, title, ...other } = props;
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = useState<string | null>(getDefaultContainer());
-  const execOrAttachRef = React.useRef<execReturn | null>(null);
+  const streamRef = React.useRef<any | null>(null);
   const fitAddonRef = React.useRef<FitAddon | null>(null);
   const xtermRef = React.useRef<XTerminalConnected | null>(null);
   const [shells, setShells] = React.useState({
@@ -52,8 +114,25 @@ export default function Terminal(props: TerminalProps) {
   });
   const { t } = useTranslation(['translation', 'glossary']);
 
+  function isPod(item: Pod | Node): item is Pod {
+    return item && 'containers' in item.spec;
+  }
+
+  const wrappedOnClose = () => {
+    if (!!onClose) {
+      onClose();
+    }
+
+    if (!!xtermRef.current?.onClose) {
+      xtermRef.current?.onClose();
+    }
+  };
+
   function getDefaultContainer() {
-    return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
+    if (isPod(item)) {
+      return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
+    }
+    return '';
   }
 
   // @todo: Give the real exec type when we have it.
@@ -85,15 +164,16 @@ export default function Terminal(props: TerminalProps) {
           return false;
         }
       }
-
-      if (!isAttach && arg.type === 'keydown' && arg.code === 'Enter') {
-        if (xtermRef.current?.reconnectOnEnter) {
-          setShells(shells => ({
-            ...shells,
-            currentIdx: 0,
-          }));
-          xtermRef.current!.reconnectOnEnter = false;
-          return false;
+      if (isPod(item)) {
+        if (!isAttach && arg.type === 'keydown' && arg.code === 'Enter') {
+          if (xtermRef.current?.reconnectOnEnter) {
+            setShells(shells => ({
+              ...shells,
+              currentIdx: 0,
+            }));
+            xtermRef.current!.reconnectOnEnter = false;
+            return false;
+          }
         }
       }
 
@@ -104,7 +184,7 @@ export default function Terminal(props: TerminalProps) {
   }
 
   function send(channel: number, data: string) {
-    const socket = execOrAttachRef.current!.getSocket();
+    const socket = streamRef.current!.getSocket();
 
     // We should only send data if the socket is ready.
     if (!socket || socket.readyState !== 1) {
@@ -148,12 +228,10 @@ export default function Terminal(props: TerminalProps) {
     }
 
     if (isSuccessfulExitError(channel, text)) {
-      if (!!onClose) {
-        onClose();
-      }
+      wrappedOnClose();
 
-      if (execOrAttachRef.current) {
-        execOrAttachRef.current?.cancel();
+      if (streamRef.current) {
+        streamRef.current?.cancel();
       }
 
       return;
@@ -163,16 +241,18 @@ export default function Terminal(props: TerminalProps) {
       shellConnectFailed(xtermc);
       return;
     }
-    if (isAttach) {
-      // in case of attach if we didn't recieve any data from the process we should notify the user that if any data comes
-      // we will be showing it in the terminal
-      if (firstConnect && !text) {
-        text =
-          t(
-            "Any new output for this container's process should be shown below. In case it doesn't show up, press enter…"
-          ) + '\r\n';
+    if (isPod(item)) {
+      if (isAttach) {
+        // in case of attach if we didn't recieve any data from the process we should notify the user that if any data comes
+        // we will be showing it in the terminal
+        if (firstConnect && !text) {
+          text =
+            t(
+              "Any new output for this container's process should be shown below. In case it doesn't show up, press enter…"
+            ) + '\r\n';
+        }
+        text = text.replace(/\r\n/g, '\n').replace(/\n/g, '\r\n');
       }
-      text = text.replace(/\r\n/g, '\n').replace(/\n/g, '\r\n');
     }
     xterm.write(text);
   }
@@ -196,22 +276,27 @@ export default function Terminal(props: TerminalProps) {
 
   function shellConnectFailed(xtermc: XTerminalConnected) {
     const xterm = xtermc.xterm;
-    const command = getCurrentShellCommand();
-    if (isLastShell()) {
-      if (xtermc.connected) {
-        xterm.write(t('Failed to run "{{command}}"…', { command }) + '\r\n');
-      } else {
-        xterm.clear();
-        xterm.write(t('Failed to connect…') + '\r\n');
-      }
+    if (isPod(item)) {
+      const command = getCurrentShellCommand();
+      if (isLastShell()) {
+        if (xtermc.connected) {
+          xterm.write(t('Failed to run "{{command}}"…', { command }) + '\r\n');
+        } else {
+          xterm.clear();
+          xterm.write(t('Failed to connect…') + '\r\n');
+        }
 
-      xterm.write('\r\n' + t('Press the enter key to reconnect.') + '\r\n');
-      if (xtermRef.current) {
-        xtermRef.current.reconnectOnEnter = true;
+        xterm.write('\r\n' + t('Press the enter key to reconnect.') + '\r\n');
+        if (xtermRef.current) {
+          xtermRef.current.reconnectOnEnter = true;
+        }
+      } else {
+        xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
+        tryNextShell();
       }
     } else {
-      xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
-      tryNextShell();
+      xterm.clear();
+      xterm.write(t('Failed to connect…') + '\r\n');
     }
   }
 
@@ -222,10 +307,12 @@ export default function Terminal(props: TerminalProps) {
         return;
       }
 
-      // Don't do anything until the pod's container is assigned. We used the pod's late
-      // assignment to prevent calling exec before the dialog is opened.
-      if (container === null) {
-        return;
+      if (isPod(item)) {
+        // Don't do anything until the pod's container is assigned. We used the pod's late
+        // assignment to prevent calling exec before the dialog is opened.
+        if (container === null) {
+          return;
+        }
       }
 
       // Don't do anything if the dialog is not open.
@@ -235,7 +322,7 @@ export default function Terminal(props: TerminalProps) {
 
       if (xtermRef.current) {
         xtermRef.current.xterm.dispose();
-        execOrAttachRef.current?.cancel();
+        streamRef.current?.cancel();
       }
 
       const isWindows = ['Windows', 'Win16', 'Win32', 'WinCE'].indexOf(navigator?.platform) >= 0;
@@ -256,26 +343,35 @@ export default function Terminal(props: TerminalProps) {
       xtermRef.current.xterm.loadAddon(fitAddonRef.current);
 
       (async function () {
-        if (isAttach) {
-          xtermRef?.current?.xterm.writeln(
-            t('Trying to attach to the container {{ container }}…', { container }) + '\n'
-          );
+        if (isPod(item)) {
+          if (isAttach) {
+            xtermRef?.current?.xterm.writeln(
+              t('Trying to attach to the container {{ container }}…', { container }) + '\n'
+            );
 
-          execOrAttachRef.current = await item.attach(
-            container,
-            items => onData(xtermRef.current!, items),
-            { failCb: () => shellConnectFailed(xtermRef.current!) }
-          );
+            streamRef.current = await item.attach(
+              container!!,
+              (items: ArrayBuffer) => onData(xtermRef.current!, items),
+              { failCb: () => shellConnectFailed(xtermRef.current!) }
+            );
+          } else {
+            const command = getCurrentShellCommand();
+
+            xtermRef?.current?.xterm.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
+
+            streamRef.current = await item.exec(
+              container!!,
+              (items: ArrayBuffer) => onData(xtermRef.current!, items),
+              { command: [command], failCb: () => shellConnectFailed(xtermRef.current!) }
+            );
+          }
         } else {
-          const command = getCurrentShellCommand();
-
-          xtermRef?.current?.xterm.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
-
-          execOrAttachRef.current = await item.exec(
-            container,
-            items => onData(xtermRef.current!, items),
-            { command: [command], failCb: () => shellConnectFailed(xtermRef.current!) }
+          xtermRef?.current?.xterm.writeln(t('Trying to open a shell'));
+          const { stream, onClose } = await item.shell((items: ArrayBuffer) =>
+            onData(xtermRef.current!, items)
           );
+          streamRef.current = stream;
+          xtermRef.current!.onClose = onClose;
         }
         setupTerminal(terminalContainerRef, xtermRef.current!.xterm, fitAddonRef.current!);
       })();
@@ -288,7 +384,7 @@ export default function Terminal(props: TerminalProps) {
 
       return function cleanup() {
         xtermRef.current?.xterm.dispose();
-        execOrAttachRef.current?.cancel();
+        streamRef.current?.cancel();
         window.removeEventListener('resize', handler);
       };
     },
@@ -298,8 +394,10 @@ export default function Terminal(props: TerminalProps) {
 
   React.useEffect(
     () => {
-      if (props.open && container === null) {
-        setContainer(getDefaultContainer());
+      if (isPod(item)) {
+        if (props.open && container === null) {
+          setContainer(getDefaultContainer());
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -307,11 +405,13 @@ export default function Terminal(props: TerminalProps) {
   );
 
   React.useEffect(() => {
-    if (!isAttach && shells.available.length === 0) {
-      setShells({
-        available: getAvailableShells(),
-        currentIdx: 0,
-      });
+    if (isPod(item)) {
+      if (!isAttach && shells.available.length === 0) {
+        setShells({
+          available: getAvailableShells(),
+          currentIdx: 0,
+        });
+      }
     }
   }, [item]);
 
@@ -324,10 +424,6 @@ export default function Terminal(props: TerminalProps) {
       return ['powershell.exe', 'cmd.exe'];
     }
     return ['bash', '/bin/bash', 'sh', '/bin/sh', 'powershell.exe', 'cmd.exe'];
-  }
-
-  function handleContainerChange(event: any) {
-    setContainer(event.target.value);
   }
 
   function isSuccessfulExitError(channel: number, text: string): boolean {
@@ -364,7 +460,7 @@ export default function Terminal(props: TerminalProps) {
 
   return (
     <Dialog
-      onClose={onClose}
+      onClose={wrappedOnClose}
       onFullScreenToggled={() => {
         setTimeout(() => {
           fitAddonRef.current!.fit();
@@ -372,11 +468,7 @@ export default function Terminal(props: TerminalProps) {
       }}
       keepMounted
       withFullScreen
-      title={
-        isAttach
-          ? t('Attach: {{ itemName }}', { itemName: item.metadata.name })
-          : t('Terminal: {{ itemName }}', { itemName: item.metadata.name })
-      }
+      title={title}
       {...other}
     >
       <DialogContent
@@ -399,50 +491,15 @@ export default function Terminal(props: TerminalProps) {
           },
         })}
       >
-        <Box>
-          <FormControl sx={{ minWidth: '11rem' }}>
-            <InputLabel shrink id="container-name-chooser-label">
-              {t('glossary|Container')}
-            </InputLabel>
-            <Select
-              labelId="container-name-chooser-label"
-              id="container-name-chooser"
-              value={container !== null ? container : getDefaultContainer()}
-              onChange={handleContainerChange}
-            >
-              {item?.spec?.containers && (
-                <MenuItem disabled value="">
-                  {t('glossary|Containers')}
-                </MenuItem>
-              )}
-              {item?.spec?.containers.map(({ name }) => (
-                <MenuItem value={name} key={name}>
-                  {name}
-                </MenuItem>
-              ))}
-              {item?.spec?.initContainers && (
-                <MenuItem disabled value="">
-                  {t('translation|Init Containers')}
-                </MenuItem>
-              )}
-              {item.spec.initContainers?.map(({ name }) => (
-                <MenuItem value={name} key={`init_container_${name}`}>
-                  {name}
-                </MenuItem>
-              ))}
-              {item?.spec?.ephemeralContainers && (
-                <MenuItem disabled value="">
-                  {t('glossary|Ephemeral Containers')}
-                </MenuItem>
-              )}
-              {item.spec.ephemeralContainers?.map(({ name }) => (
-                <MenuItem value={name} key={`eph_container_${name}`}>
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
+        {isPod(item) ? (
+          <ContainerSelection
+            item={item as Pod}
+            container={container !== null ? container : getDefaultContainer()}
+            setContainer={setContainer}
+          />
+        ) : (
+          <></>
+        )}
         <Box
           sx={theme => ({
             paddingTop: theme.spacing(1),

@@ -448,6 +448,12 @@ export function useId(prefix = '') {
   return id;
 }
 
+export function uniqueString() {
+  const timestamp = Date.now().toString(36);
+  const randomNum = Math.random().toString(36).substring(2, 5);
+  return `${timestamp}-${randomNum}`;
+}
+
 // Make units available from here
 export * as auth from './auth';
 export * as units from './units';

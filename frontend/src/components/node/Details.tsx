@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import { apply, drainNode, drainNodeStatus } from '../../lib/k8s/apiProxy';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
+import Pod from '../../lib/k8s/pod';
 import { getCluster, timeAgo } from '../../lib/util';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { clusterAction } from '../../redux/clusterActionSlice';
@@ -22,6 +23,7 @@ import { ConditionsSection, DetailsGrid, OwnedPodsSection } from '../common/Reso
 import AuthVisible from '../common/Resource/AuthVisible';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
+import Terminal from '../common/Terminal';
 import { NodeTaintsLabel } from './utils';
 
 function NodeConditionsLabel(props: { node: Node }) {
@@ -47,6 +49,7 @@ export default function NodeDetails(props: { name?: string }) {
   const [isNodeDrainInProgress, setisNodeDrainInProgress] = React.useState(false);
   const [nodeFromAPI, nodeError] = Node.useGet(name);
   const [node, setNode] = useState(nodeFromAPI);
+  const [showShell, setShowShell] = React.useState(false);
   const noMetrics = metricsError?.status === 404;
   const [drainDialogOpen, setDrainDialogOpen] = useState(false);
 
@@ -159,6 +162,10 @@ export default function NodeDetails(props: { name?: string }) {
     );
   }
 
+  function isLinux(item: Node | null): boolean {
+    return item?.status?.nodeInfo?.operatingSystem === 'linux';
+  }
+
   function DrainDialog() {
     return (
       <>
@@ -224,6 +231,34 @@ export default function NodeDetails(props: { name?: string }) {
                 </AuthVisible>
               ),
             },
+            {
+              id: DefaultHeaderAction.NODE_SHELL,
+              action: (
+                <AuthVisible authVerb="create" item={Pod} namespace={'kube-system'}>
+                  <AuthVisible
+                    item={Pod}
+                    namespace={'kube-system'}
+                    authVerb="get"
+                    subresource="exec"
+                  >
+                    <ActionButton
+                      description={
+                        isLinux(item)
+                          ? t('Node Shell')
+                          : t('Node shell is not supported in this OS: {{ nodeOS }}', {
+                              nodeOS: item?.status?.nodeInfo?.operatingSystem,
+                            })
+                      }
+                      icon="mdi:console"
+                      onClick={() => setShowShell(true)}
+                      iconButtonProps={{
+                        disabled: !isLinux(item),
+                      }}
+                    />
+                  </AuthVisible>
+                </AuthVisible>
+              ),
+            },
           ];
         }}
         extraInfo={item =>
@@ -260,6 +295,20 @@ export default function NodeDetails(props: { name?: string }) {
             {
               id: 'headlamp.node-owned-pods',
               section: <OwnedPodsSection resource={item?.jsonData} />,
+            },
+            {
+              id: 'headlamp.node-shell',
+              section: (
+                <Terminal
+                  key="terminal"
+                  open={showShell}
+                  title={t('Shell: {{ itemName }}', { itemName: item.metadata.name })}
+                  item={item}
+                  onClose={() => {
+                    setShowShell(false);
+                  }}
+                />
+              ),
             },
           ]
         }
