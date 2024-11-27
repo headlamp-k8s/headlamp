@@ -34,7 +34,7 @@ export default function TimezoneSelect(props: TimezoneSelectorProps) {
       autoComplete
       includeInputInList
       openOnFocus
-      renderInput={params => <TextField {...params} label={t('Timezone')} />}
+      renderInput={params => <TextField {...params} helperText={t('Timezone')} />}
       onChange={(_ev, value) => onChange(value.name)}
       value={timezoneOptions.find(option => option.name === initialTimezone)}
     />

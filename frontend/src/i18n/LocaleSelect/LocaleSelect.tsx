@@ -56,7 +56,7 @@ export default function LocaleSelect(props: LocaleSelectProps) {
   const extraInputProps = import.meta.env.UNDER_TEST ? { 'aria-controls': 'under-test' } : {};
 
   return (
-    <FormControl sx={{ margin: theme.spacing(2) }} {...formControlProps}>
+    <FormControl {...formControlProps}>
       {props.showTitle && <FormLabel component="legend">{t('Select locale')}</FormLabel>}
       <Select
         value={i18n.language ? i18n.language : 'en'}
