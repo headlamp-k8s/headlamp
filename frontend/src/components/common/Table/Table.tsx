@@ -196,6 +196,7 @@ export default function Table<RowItem extends Record<string, any>>({
     ...tableProps,
     columns: tableColumns ?? [],
     data: tableData,
+    enablePagination: tableData.length > rowsPerPageOptions[0],
     enableDensityToggle: tableProps.enableDensityToggle ?? false,
     enableFullScreenToggle: tableProps.enableFullScreenToggle ?? false,
     localization: tableLocalizationMap[i18n.language],
