@@ -199,6 +199,7 @@ export default function Table<RowItem extends Record<string, any>>({
     enablePagination: tableData.length > rowsPerPageOptions[0],
     enableDensityToggle: tableProps.enableDensityToggle ?? false,
     enableFullScreenToggle: tableProps.enableFullScreenToggle ?? false,
+    enableColumnActions: false,
     localization: tableLocalizationMap[i18n.language],
     autoResetAll: false,
     onPaginationChange: (updater: any) => {
