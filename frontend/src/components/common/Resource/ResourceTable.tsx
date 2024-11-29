@@ -513,6 +513,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
         }}
         globalFilterFn="kubeObjectSearch"
         filterFunction={filterFunc as any}
+        getRowId={item => item?.metadata?.uid}
       />
     </>
   );
