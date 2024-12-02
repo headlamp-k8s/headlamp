@@ -3,6 +3,7 @@ import {
   Theme as MuiTheme,
   ThemeOptions as MuitThemesOptions,
 } from '@mui/material/styles';
+import { deepmerge } from '@mui/utils';
 import React from 'react';
 import lightTheme from './baseTheme';
 import darkTheme from './darkTheme';
@@ -268,5 +269,19 @@ export function createTheme(options?: ThemeOptions | 'light' | 'dark', ...args: 
     }
     return createMuiTheme(lightTheme, ...args);
   }
-  return createMuiTheme(options, ...args);
+  return createMuiTheme(deepmerge(lightTheme, options), ...args);
+}
+
+// This function is not to be exported to plugins. So they have to go through Redux.
+export function addTheme(themeName: string, theme: Theme) {
+  themesConf[themeName] = theme;
+}
+
+// This function is not to be exported to plugins. So they have to go through Redux.
+export function removeTheme(themeName: string) {
+  delete themesConf[themeName];
+}
+
+export function getTheme(themeName: string): Theme {
+  return themesConf[themeName];
 }
