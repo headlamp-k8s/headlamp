@@ -370,7 +370,6 @@ export default function Terminal(props: TerminalProps) {
           fitAddonRef.current!.fit();
         }, 1);
       }}
-      keepMounted
       withFullScreen
       title={
         isAttach
