@@ -19,6 +19,8 @@ export enum HeadlampEventType {
   ERROR_BOUNDARY = 'headlamp.error-boundary',
   /** Events related to deleting a resource. */
   DELETE_RESOURCE = 'headlamp.delete-resource',
+  /** Events related to deleting multiple resources. */
+  DELETE_RESOURCES = 'headlamp.delete-resources',
   /** Events related to creating a resource. */
   CREATE_RESOURCE = 'headlamp.create-resource',
   /** Events related to editing a resource. */
@@ -86,6 +88,20 @@ export interface DeleteResourceEvent extends HeadlampEvent<HeadlampEventType.DEL
     /** The resource for which the deletion was called. */
     resource: KubeObject;
     /** What exactly this event represents. 'CONFIRMED' when the user confirms the deletion of a resource.
+     * For now only 'CONFIRMED' is sent.
+     */
+    status: EventStatus.CONFIRMED;
+  };
+}
+
+/**
+ * Event fired when resources is to be deleted.
+ */
+export interface DeleteResourcesEvent extends HeadlampEvent<HeadlampEventType.DELETE_RESOURCES> {
+  data: {
+    /** Resources for which the deletion was called. */
+    resources: KubeObject[];
+    /** What exactly this event represents. 'CONFIRMED' when the user confirms the deletion of resources.
      * For now only 'CONFIRMED' is sent.
      */
     status: EventStatus.CONFIRMED;
@@ -327,6 +343,9 @@ export function useEventCallback(
   eventType: HeadlampEventType.DELETE_RESOURCE
 ): (data: EventDataType<DeleteResourceEvent>) => void;
 export function useEventCallback(
+  eventType: HeadlampEventType.DELETE_RESOURCES
+): (data: EventDataType<DeleteResourcesEvent>) => void;
+export function useEventCallback(
   eventType: HeadlampEventType.EDIT_RESOURCE
 ): (data: EventDataType<EditResourceEvent>) => void;
 export function useEventCallback(
@@ -388,6 +407,8 @@ export function useEventCallback(eventType?: HeadlampEventType | string) {
       };
     case HeadlampEventType.DELETE_RESOURCE:
       return dispatchDataEventFunc<DeleteResourceEvent>(HeadlampEventType.DELETE_RESOURCE);
+    case HeadlampEventType.DELETE_RESOURCES:
+      return dispatchDataEventFunc<DeleteResourcesEvent>(HeadlampEventType.DELETE_RESOURCES);
     case HeadlampEventType.EDIT_RESOURCE:
       return dispatchDataEventFunc<EditResourceEvent>(HeadlampEventType.EDIT_RESOURCE);
     case HeadlampEventType.SCALE_RESOURCE:

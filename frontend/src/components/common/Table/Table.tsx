@@ -95,6 +95,8 @@ export type TableProps<RowItem extends Record<string, any>> = Omit<
    * Whether to show a loading spinner
    */
   loading?: boolean;
+
+  renderRowSelectionToolbar?: (props: { table: MRT_TableInstance<RowItem> }) => ReactNode;
 };
 
 // Use a zero-indexed "useURLState" hook, so pages are shown in the URL as 1-indexed
@@ -185,18 +187,32 @@ export default function Table<RowItem extends Record<string, any>>({
     return (tableProps.data ?? []).filter(it => filterFunction(it));
   }, [tableProps.data, filterFunction]);
 
-  const gridTemplateColumns = tableProps.columns
-    .filter(it => {
-      const isHidden = tableProps.state?.columnVisibility?.[it.id!] === false;
-      return !isHidden;
-    })
-    .map(it => {
-      if (typeof it.gridTemplate === 'number') {
-        return `${it.gridTemplate}fr`;
-      }
-      return it.gridTemplate ?? '1fr';
-    })
-    .join(' ');
+  const gridTemplateColumns = useMemo(() => {
+    let preGridTemplateColumns = tableProps.columns
+      .filter(it => {
+        const isHidden = tableProps.state?.columnVisibility?.[it.id!] === false;
+        return !isHidden;
+      })
+      .map(it => {
+        if (typeof it.gridTemplate === 'number') {
+          return `${it.gridTemplate}fr`;
+        }
+        return it.gridTemplate ?? '1fr';
+      })
+      .join(' ');
+    if (tableProps.enableRowActions) {
+      preGridTemplateColumns = `${preGridTemplateColumns} 0.05fr`;
+    }
+    if (tableProps.enableRowSelection) {
+      preGridTemplateColumns = `0.05fr ${preGridTemplateColumns}`;
+    }
+    return preGridTemplateColumns;
+  }, [
+    tableProps.columns,
+    tableProps.state?.columnVisibility,
+    tableProps.enableRowActions,
+    tableProps.enableRowSelection,
+  ]);
 
   const paginationSelectProps = import.meta.env.UNDER_TEST
     ? {
@@ -236,6 +252,17 @@ export default function Table<RowItem extends Record<string, any>>({
       },
     },
     positionActionsColumn: 'last',
+    renderToolbarInternalActions: props => {
+      const isSomeRowsSelected =
+        tableProps.enableRowSelection && props.table.getSelectedRowModel().rows.length !== 0;
+      if (isSomeRowsSelected) {
+        const renderRowSelectionToolbar = tableProps.renderRowSelectionToolbar;
+        if (renderRowSelectionToolbar !== undefined) {
+          return renderRowSelectionToolbar(props);
+        }
+      }
+      return null;
+    },
     layoutMode: 'grid',
     // Need to provide our own empty message
     // because default one breaks with our custom layout
@@ -315,10 +342,7 @@ export default function Table<RowItem extends Record<string, any>>({
           borderRadius: 1,
           borderBottom: 'none',
           overflow: 'hidden',
-          gridTemplateColumns:
-            tableProps.enableRowActions === true
-              ? `${gridTemplateColumns} 0.05fr`
-              : gridTemplateColumns,
+          gridTemplateColumns: gridTemplateColumns,
         }}
       >
         <TableHead sx={{ display: 'contents' }}>
