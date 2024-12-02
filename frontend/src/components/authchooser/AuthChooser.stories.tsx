@@ -32,7 +32,6 @@ const argFixture = {
   error: null,
   oauthUrl: 'http://example.com/',
   clusterAuthType: '',
-  haveClusters: false,
 };
 
 export const BasicAuthChooser = Template.bind({});
@@ -49,7 +48,6 @@ Testing.args = {
 export const HaveClusters = Template.bind({});
 HaveClusters.args = {
   ...argFixture,
-  haveClusters: true,
 };
 
 export const AuthTypeoidc = Template.bind({});

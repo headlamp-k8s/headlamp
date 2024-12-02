@@ -186,7 +186,6 @@ function AuthChooser({ children }: AuthChooserProps) {
           ? t('Authentication: {{ clusterName }}', { clusterName })
           : t('Authentication')
       }
-      haveClusters={!!clusters && Object.keys(clusters).length > 1}
       error={error}
       oauthUrl={`${helpers.getAppUrl()}oidc?dt=${Date()}&cluster=${getCluster()}`}
       clusterAuthType={clusterAuthType}
@@ -199,7 +198,7 @@ function AuthChooser({ children }: AuthChooserProps) {
         });
       }}
       handleBackButtonPress={() => {
-        history.goBack();
+        numClusters > 1 ? history.goBack() : history.push('/');
       }}
       handleTokenAuth={() => {
         history.push({
@@ -221,7 +220,6 @@ export interface PureAuthChooserProps {
   error: Error | null;
   oauthUrl: string;
   clusterAuthType: string;
-  haveClusters: boolean;
   handleOidcAuth: () => void;
   handleTokenAuth: () => void;
   handleTryAgain: () => void;
@@ -237,7 +235,6 @@ export function PureAuthChooser({
   error,
   oauthUrl,
   clusterAuthType,
-  haveClusters,
   handleOidcAuth,
   handleTokenAuth,
   handleTryAgain,
@@ -310,25 +307,23 @@ export function PureAuthChooser({
           )}
         </Box>
       )}
-      {haveClusters && (
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <Box
-            m={2}
-            display="flex"
-            alignItems="center"
-            style={{ cursor: 'pointer' }}
-            onClick={handleBackButtonPress}
-            role="button"
-          >
-            <Box pt={0.5}>
-              <InlineIcon icon="mdi:chevron-left" height={20} width={20} />
-            </Box>
-            <Box fontSize={14} style={{ textTransform: 'uppercase' }}>
-              {t('translation|Back')}
-            </Box>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Box
+          m={2}
+          display="flex"
+          alignItems="center"
+          style={{ cursor: 'pointer' }}
+          onClick={handleBackButtonPress}
+          role="button"
+        >
+          <Box pt={0.5}>
+            <InlineIcon icon="mdi:chevron-left" height={20} width={20} />
+          </Box>
+          <Box fontSize={14} style={{ textTransform: 'uppercase' }}>
+            {t('translation|Back')}
           </Box>
         </Box>
-      )}
+      </Box>
       {children}
     </ClusterDialog>
   );

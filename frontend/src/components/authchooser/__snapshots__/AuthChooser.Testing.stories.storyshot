@@ -118,6 +118,25 @@
               </span>
             </div>
           </main>
+          <div
+            class="MuiBox-root css-dvxtzn"
+          >
+            <div
+              class="MuiBox-root css-oo0cqs"
+              role="button"
+              style="cursor: pointer;"
+            >
+              <div
+                class="MuiBox-root css-37urdo"
+              />
+              <div
+                class="MuiBox-root css-1kuy7z7"
+                style="text-transform: uppercase;"
+              >
+                Back
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
