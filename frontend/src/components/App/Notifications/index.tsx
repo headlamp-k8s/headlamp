@@ -270,7 +270,6 @@ export default function Notifications() {
       </IconButton>
       <Popover
         anchorEl={anchorEl}
-        keepMounted={false}
         open={show}
         onClose={handleClose}
         sx={{
