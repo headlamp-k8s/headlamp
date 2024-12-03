@@ -42,12 +42,15 @@ export function GraphNodeDetails({
 
   return (
     <Card
+      elevation={0}
       sx={theme => ({
         margin: '0',
         padding: '1rem',
         width: '900px',
         overflowY: 'auto',
         flexShrink: 0,
+        borderLeft: '1px solid',
+        borderColor: theme.palette.divider,
         [theme.breakpoints.down('xl')]: {
           width: '720px',
         },
