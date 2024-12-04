@@ -10,6 +10,7 @@ import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { ResourceTableProps } from '../common/Resource/ResourceTable';
+import { useNamespaces } from '../../redux/filterSlice';
 
 export function makePodStatusLabel(pod: Pod) {
   const phase = pod.status.phase;
@@ -216,7 +217,7 @@ export function PodListRenderer(props: PodListProps) {
 }
 
 export default function PodList() {
-  const { items, error, clusterErrors } = Pod.useList();
+  const { items, error, clusterErrors } = Pod.useList({ namespace: useNamespaces() });
 
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
 

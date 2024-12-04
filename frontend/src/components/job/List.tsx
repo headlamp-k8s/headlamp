@@ -6,6 +6,7 @@ import Job from '../../lib/k8s/job';
 import { formatDuration } from '../../lib/util';
 import { LightTooltip, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { useNamespaces } from '../../redux/filterSlice';
 
 export function makeJobStatusLabel(job: Job) {
   if (!job?.status?.conditions) {
@@ -53,7 +54,7 @@ export function makeJobStatusLabel(job: Job) {
 }
 
 export default function JobsList() {
-  const [jobs, error] = Job.useList();
+  const [jobs, error] = Job.useList({ namespace: useNamespaces() });
   return <JobsListRenderer jobs={jobs} error={Job.getErrorMessage(error)} reflectTableInURL />;
 }
 

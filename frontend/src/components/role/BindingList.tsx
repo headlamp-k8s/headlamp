@@ -6,6 +6,7 @@ import { combineClusterListErrors, getClusterGroup } from '../../lib/util';
 import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { useNamespaces } from '../../redux/filterSlice';
 
 function RoleLink(props: { role: string; namespace?: string }) {
   const { role, namespace } = props;
@@ -27,7 +28,9 @@ function RoleLink(props: { role: string; namespace?: string }) {
 
 export default function RoleBindingList() {
   const { t } = useTranslation(['glossary', 'translation']);
-  const { items: roles, clusterErrors: rolesErrors } = RoleBinding.useList();
+  const { items: roles, clusterErrors: rolesErrors } = RoleBinding.useList({
+    namespace: useNamespaces(),
+  });
   const { items: clusterRoles, clusterErrors: clusterRolesErrors } = ClusterRoleBinding.useList();
   const clusters = getClusterGroup();
 

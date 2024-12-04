@@ -7,10 +7,11 @@ import { combineClusterListErrors } from '../../lib/util';
 import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { ColumnType } from '../common/Resource/ResourceTable';
+import { useNamespaces } from '../../redux/filterSlice';
 
 export default function RoleList() {
   const { t } = useTranslation('glossary');
-  const { items: roles, clusterErrors: rolesErrors } = Role.useList();
+  const { items: roles, clusterErrors: rolesErrors } = Role.useList({ namespace: useNamespaces() });
   const { items: clusterRoles, clusterErrors: clusterRolesErrors } = ClusterRole.useList();
 
   const clusters = useClusterGroup();

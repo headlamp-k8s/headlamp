@@ -6,6 +6,7 @@ import { ApiError } from '../../lib/k8s/apiProxy';
 import ResourceQuota from '../../lib/k8s/resourceQuota';
 import { SimpleTableProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { useNamespaces } from '../../redux/filterSlice';
 
 const WrappingBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -85,7 +86,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
 }
 
 export default function ResourceQuotaList() {
-  const [resourceQuotas, error] = ResourceQuota.useList();
+  const [resourceQuotas, error] = ResourceQuota.useList({ namespace: useNamespaces() });
 
   return <ResourceQuotaRenderer resourceQuotas={resourceQuotas} error={error} reflectTableInURL />;
 }

@@ -3,6 +3,7 @@ import { ApiError } from '../../lib/k8s/apiProxy';
 import { LimitRange } from '../../lib/k8s/limitRange';
 import { SimpleTableProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { useNamespaces } from '../../redux/filterSlice';
 
 export interface LimitRangeProps {
   limitRanges: LimitRange[] | null;
@@ -39,7 +40,7 @@ export function LimitRangeRenderer(props: LimitRangeProps) {
 }
 
 export function LimitRangeList() {
-  const [limitRanges, error] = LimitRange.useList();
+  const [limitRanges, error] = LimitRange.useList({ namespace: useNamespaces() });
 
   return <LimitRangeRenderer limitRanges={limitRanges} error={error} reflectTableInURL />;
 }

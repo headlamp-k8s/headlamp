@@ -6,13 +6,14 @@ import { KubeObject } from '../../lib/k8s/KubeObject';
 import { Link, Loader, SectionBox, ShowHideLabel } from '../common/';
 import Empty from '../common/EmptyContent';
 import { ResourceListView } from '../common/Resource';
+import { useNamespaces } from '../../redux/filterSlice';
 
 function CrInstancesView({ crds }: { crds: CRD[]; key: string }) {
   const { t } = useTranslation(['glossary', 'translation']);
 
   const dataClassCrds = crds.map(crd => {
     const crdClass = crd.makeCRClass();
-    const data = crdClass.useList({ cluster: crd.cluster });
+    const data = crdClass.useList({ cluster: crd.cluster, namespace: useNamespaces() });
     return { data, crdClass, crd };
   });
 
@@ -136,7 +137,11 @@ function CrInstancesView({ crds }: { crds: CRD[]; key: string }) {
 
 export function CrInstanceList() {
   const { t } = useTranslation(['glossary', 'translation']);
-  const { items: crds, error: crdsError, isLoading: isLoadingCRDs } = CRD.useList();
+  const {
+    items: crds,
+    error: crdsError,
+    isLoading: isLoadingCRDs,
+  } = CRD.useList({ namespace: useNamespaces() });
 
   if (crdsError) {
     return (
