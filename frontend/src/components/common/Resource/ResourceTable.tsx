@@ -10,6 +10,7 @@ import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 import { useFilterFunc } from '../../../lib/util';
 import { DefaultHeaderAction, RowAction } from '../../../redux/actionButtonsSlice';
+import { useNamespaces } from '../../../redux/filterSlice';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
@@ -22,7 +23,6 @@ import EditButton from './EditButton';
 import { RestartButton } from './RestartButton';
 import ScaleButton from './ScaleButton';
 import ViewButton from './ViewButton';
-import { useNamespaces } from '../../../redux/filterSlice';
 
 export type ResourceTableColumn<RowItem> = {
   /** Unique id for the column, not required but recommended */

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CRD from '../../lib/k8s/crd';
+import { useNamespaces } from '../../redux/filterSlice';
 import { Link, useThrottle } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
-import { useNamespaces } from '../../redux/filterSlice';
 
 export default function CustomResourceDefinitionList() {
   const { t } = useTranslation(['glossary', 'frequent']);

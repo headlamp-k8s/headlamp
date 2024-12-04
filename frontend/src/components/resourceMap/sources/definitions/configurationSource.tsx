@@ -7,6 +7,7 @@ import Pod from '../../../../lib/k8s/pod';
 import Secret from '../../../../lib/k8s/secret';
 import Service from '../../../../lib/k8s/service';
 import ValidatingWebhookConfiguration from '../../../../lib/k8s/validatingWebhookConfiguration';
+import { useNamespaces } from '../../../../redux/filterSlice';
 import { GraphEdge, GraphSource } from '../../graph/graphModel';
 import { getKindGroupColor, KubeIcon } from '../../kubeIcon/KubeIcon';
 import { makeKubeObjectNode, makeKubeToKubeEdge } from '../GraphSources';
@@ -17,9 +18,8 @@ const secretsSource: GraphSource = {
   icon: <KubeIcon kind="Secret" />,
   isEnabledByDefault: false,
   useData() {
-    const [secrets] = Secret.useList();
-
-    const [pods] = Pod.useList();
+    const [secrets] = Secret.useList({ namespace: useNamespaces() });
+    const [pods] = Pod.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!secrets || !pods) return null;
@@ -76,9 +76,9 @@ const configMapsSource: GraphSource = {
   isEnabledByDefault: false,
   icon: <KubeIcon kind="ConfigMap" />,
   useData() {
-    const [configMaps] = ConfigMap.useList();
-    const [pods] = Pod.useList();
-    const [jobs] = Job.useList();
+    const [configMaps] = ConfigMap.useList({ namespace: useNamespaces() });
+    const [pods] = Pod.useList({ namespace: useNamespaces() });
+    const [jobs] = Job.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!configMaps || !pods || !jobs) return null;
@@ -123,8 +123,8 @@ const validatingWebhookConfigurationSource: GraphSource = {
   icon: <KubeIcon kind="ConfigMap" />,
   isEnabledByDefault: false,
   useData() {
-    const [vwc] = ValidatingWebhookConfiguration.useList();
-    const [services] = Service.useList();
+    const [vwc] = ValidatingWebhookConfiguration.useList({ namespace: useNamespaces() });
+    const [services] = Service.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!vwc || !services) return null;
@@ -155,8 +155,8 @@ const mutatingWebhookConfigurationSource: GraphSource = {
   icon: <KubeIcon kind="ConfigMap" />,
   isEnabledByDefault: false,
   useData() {
-    const [mwc] = MutatingWebhookConfiguration.useList();
-    const [services] = Service.useList();
+    const [mwc] = MutatingWebhookConfiguration.useList({ namespace: useNamespaces() });
+    const [services] = Service.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!mwc || !services) return null;

@@ -7,6 +7,7 @@ import NetworkPolicy from '../../../../lib/k8s/networkpolicy';
 import Pod from '../../../../lib/k8s/pod';
 import Secret from '../../../../lib/k8s/secret';
 import Service from '../../../../lib/k8s/service';
+import { useNamespaces } from '../../../../redux/filterSlice';
 import { GraphEdge, GraphSource } from '../../graph/graphModel';
 import { getKindGroupColor, KubeIcon } from '../../kubeIcon/KubeIcon';
 import { makeKubeObjectNode, makeKubeToKubeEdge } from '../GraphSources';
@@ -17,8 +18,8 @@ const serviceSource: GraphSource = {
   label: 'Services',
   icon: <KubeIcon kind={'Service'} />,
   useData() {
-    const [services] = Service.useList();
-    const [pods] = Pod.useList();
+    const [services] = Service.useList({ namespace: useNamespaces() });
+    const [pods] = Pod.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!services || !pods) return null;
@@ -46,8 +47,8 @@ const endpointsSource: GraphSource = {
   label: 'Endpoints',
   icon: <KubeIcon kind="Endpoint" />,
   useData() {
-    const [endpoints] = Endpoints.useList();
-    const [services] = Service.useList();
+    const [endpoints] = Endpoints.useList({ namespace: useNamespaces() });
+    const [services] = Service.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       const nodes = endpoints?.map(makeKubeObjectNode) ?? [];
@@ -71,9 +72,9 @@ const ingressListSource: GraphSource = {
   label: 'Ingress',
   icon: <KubeIcon kind={'Ingress'} />,
   useData() {
-    const [ingresses] = Ingress.useList();
-    const [services] = Service.useList();
-    const [secrets] = Secret.useList();
+    const [ingresses] = Ingress.useList({ namespace: useNamespaces() });
+    const [services] = Service.useList({ namespace: useNamespaces() });
+    const [secrets] = Secret.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!ingresses || !services || !secrets) return null;
@@ -115,8 +116,8 @@ const networkPoliciesSource: GraphSource = {
   label: 'Network Policies',
   icon: <KubeIcon kind="NetworkPolicy" />,
   useData() {
-    const [networkPolicies] = NetworkPolicy.useList();
-    const [pods] = Pod.useList();
+    const [networkPolicies] = NetworkPolicy.useList({ namespace: useNamespaces() });
+    const [pods] = Pod.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!networkPolicies || !pods) return null;
@@ -144,7 +145,7 @@ const ingressClassesSource: GraphSource = {
   label: 'Ingress Classes',
   icon: <KubeIcon kind="Ingress" />,
   useData() {
-    const [ingressClasses] = IngressClass.useList();
+    const [ingressClasses] = IngressClass.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       return {

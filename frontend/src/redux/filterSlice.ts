@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JSONPath } from 'jsonpath-plus';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { KubeEvent } from '../lib/k8s/event';
 import { KubeObjectInterface } from '../lib/k8s/KubeObject';
-import { useSelector } from 'react-redux';
-import { useMemo } from 'react';
 
 export interface FilterState {
   /** The namespaces to filter on. */

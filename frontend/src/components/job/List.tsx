@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import Job from '../../lib/k8s/job';
 import { formatDuration } from '../../lib/util';
+import { useNamespaces } from '../../redux/filterSlice';
 import { LightTooltip, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
-import { useNamespaces } from '../../redux/filterSlice';
 
 export function makeJobStatusLabel(job: Job) {
   if (!job?.status?.conditions) {

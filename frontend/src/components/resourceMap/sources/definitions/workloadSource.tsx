@@ -10,6 +10,7 @@ import Pod from '../../../../lib/k8s/pod';
 import ReplicaSet from '../../../../lib/k8s/replicaSet';
 import Secret from '../../../../lib/k8s/secret';
 import StatefulSet from '../../../../lib/k8s/statefulSet';
+import { useNamespaces } from '../../../../redux/filterSlice';
 import { GraphEdge, GraphSource } from '../../graph/graphModel';
 import { getKindGroupColor, KubeIcon } from '../../kubeIcon/KubeIcon';
 import { kubeOwnersEdges, makeKubeObjectNode, makeKubeToKubeEdge } from '../GraphSources';
@@ -27,8 +28,8 @@ const podsSource: GraphSource = {
   label: 'Pods',
   icon: <KubeIcon kind="Pod" />,
   useData: () => {
-    const [pods] = Pod.useList();
-    const [nodes] = Node.useList();
+    const [pods] = Pod.useList({ namespace: useNamespaces() });
+    const [nodes] = Node.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!pods || !nodes) return null;
@@ -77,7 +78,7 @@ const deploymentsSource: GraphSource = {
   label: 'Deployments',
   icon: <KubeIcon kind="Deployment" />,
   useData() {
-    const [deployments] = Deployment.useList();
+    const [deployments] = Deployment.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!deployments) return null;
@@ -93,7 +94,7 @@ const cronJobSource: GraphSource = {
   label: 'CronJobs',
   icon: <KubeIcon kind="CronJob" />,
   useData() {
-    const [cronJobs] = CronJob.useList();
+    const [cronJobs] = CronJob.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!cronJobs) return null;
@@ -110,8 +111,8 @@ const jobsSource: GraphSource = {
   label: 'Jobs',
   icon: <KubeIcon kind="Job" />,
   useData() {
-    const [jobs] = Job.useList();
-    const [secrets] = Secret.useList();
+    const [jobs] = Job.useList({ namespace: useNamespaces() });
+    const [secrets] = Secret.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!jobs || !secrets) return null;
@@ -159,7 +160,7 @@ const replicaSetsSource: GraphSource = {
   label: 'Replica Sets',
   icon: <KubeIcon kind="ReplicaSet" />,
   useData() {
-    const [replicaSets] = ReplicaSet.useList();
+    const [replicaSets] = ReplicaSet.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!replicaSets) return null;
@@ -183,7 +184,7 @@ const statefulSetSource: GraphSource = {
   label: 'Stateful Sets',
   icon: <KubeIcon kind="StatefulSet" />,
   useData() {
-    const [statefulSets] = StatefulSet.useList();
+    const [statefulSets] = StatefulSet.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!statefulSets) return null;
@@ -199,7 +200,7 @@ const daemonSetSource: GraphSource = {
   label: 'Daemon Sets',
   icon: <KubeIcon kind="DaemonSet" />,
   useData() {
-    const [daemonSets] = DaemonSet.useList();
+    const [daemonSets] = DaemonSet.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!daemonSets) return null;
