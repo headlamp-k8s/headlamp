@@ -291,17 +291,20 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
       {helpers.isElectron() && (
         <>
           <Button
-            sx={{
+            sx={theme => ({
               backgroundColor: theme.palette.sidebarBg,
-              color: theme.palette.primary.contrastText,
+              color:
+                theme.palette.mode === 'dark'
+                  ? theme.palette.text.primary
+                  : theme.palette.primary.contrastText,
               '&:hover': {
-                color: theme.palette.text.primary,
+                color: theme.palette.text.secondary,
               },
               width: '100%',
               borderTopLeftRadius: 0,
               borderTopRightRadius: 0,
               textTransform: 'none',
-            }}
+            })}
             onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           >
             {t('translation|Add Cluster')}
