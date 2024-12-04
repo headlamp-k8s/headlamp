@@ -22,6 +22,7 @@ import EditButton from './EditButton';
 import { RestartButton } from './RestartButton';
 import ScaleButton from './ScaleButton';
 import ViewButton from './ViewButton';
+import { useNamespaces } from '../../../redux/filterSlice';
 
 export type ResourceTableColumn<RowItem> = {
   /** Unique id for the column, not required but recommended */
@@ -141,7 +142,7 @@ function TableFromResourceClass<KubeClass extends KubeObjectClass>(
   props: ResourceTableFromResourceClassProps<KubeClass>
 ) {
   const { resourceClass, id, ...otherProps } = props;
-  const { items, error, clusterErrors } = resourceClass.useList();
+  const { items, error, clusterErrors } = resourceClass.useList({ namespace: useNamespaces() });
 
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);
