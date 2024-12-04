@@ -60,7 +60,7 @@ export default function NodeList() {
           label: t('translation|Ready'),
           gridTemplate: 'minmax(150px, .3fr)',
           getValue: node => {
-            const isReady = !!node.status.conditions.find(
+            const isReady = !!node.status.conditions?.find(
               condition => condition.type === 'Ready' && condition.status === 'True'
             );
             return isReady ? t('translation|Yes') : t('translation|No');
@@ -99,14 +99,17 @@ export default function NodeList() {
           id: 'version',
           label: t('translation|Version'),
           gridTemplate: 'minmax(150px, .5fr)',
-          getValue: node => node.status.nodeInfo.kubeletVersion,
+          getValue: node => node.status.nodeInfo?.kubeletVersion,
         },
         {
           id: 'software',
           label: t('translation|Software'),
           gridTemplate: 'minmax(200px, 1.5fr)',
-          getValue: node => node.status.nodeInfo.operatingSystem,
+          getValue: node => node.status.nodeInfo?.operatingSystem,
           render: node => {
+            if (node.status.nodeInfo === undefined) {
+              return <></>;
+            }
             let osIcon = 'mdi:desktop-classic';
             if (node.status.nodeInfo.operatingSystem === 'linux') {
               osIcon = 'mdi:linux';

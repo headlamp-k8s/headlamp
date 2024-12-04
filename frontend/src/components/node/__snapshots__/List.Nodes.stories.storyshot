@@ -1096,6 +1096,114 @@
                       </button>
                     </td>
                   </tr>
+                  <tr
+                    class="MuiTableRow-root css-n8542r-MuiTableRow-root"
+                    data-index="1"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1my6grb-MuiTableCell-root"
+                      data-index="0"
+                    >
+                      <a
+                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                        href="/"
+                      >
+                        node-2
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1omirxm-MuiTableCell-root"
+                      data-index="1"
+                    >
+                      <div
+                        class="recharts-responsive-container css-a9n7s9"
+                        style="width: 95%; height: 20px; min-width: 0;"
+                      />
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-157islm-MuiTableCell-root"
+                      data-index="2"
+                    >
+                      <div
+                        class="recharts-responsive-container css-a9n7s9"
+                        style="width: 95%; height: 20px; min-width: 0;"
+                      />
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-l8pc90-MuiTableCell-root"
+                      data-index="3"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 css-1q14vbw-MuiTypography-root"
+                        style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                      >
+                        No
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-3v4n1h-MuiTableCell-root"
+                      data-index="4"
+                    >
+                      <div
+                        class="MuiBox-root css-am63uh"
+                      />
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-165tvm3-MuiTableCell-root"
+                      data-index="5"
+                    />
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-4hrpnu-MuiTableCell-root"
+                      data-index="6"
+                    />
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-g49sdf-MuiTableCell-root"
+                      data-index="7"
+                    />
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-nzc431-MuiTableCell-root"
+                      data-index="8"
+                    />
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-1k7434z-MuiTableCell-root"
+                      data-index="9"
+                    >
+                      <p
+                        aria-label="2022-01-01T00:00:00.000Z"
+                        class="MuiTypography-root MuiTypography-body1 css-1d0cpfm-MuiTypography-root"
+                        data-mui-internal-clone-element="true"
+                      >
+                        3mo
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e3iv5e-MuiTableCell-root"
+                      data-index="10"
+                    >
+                      <button
+                        aria-label="Row Actions"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1cxdeyj-MuiButtonBase-root-MuiIconButton-root"
+                        data-mui-internal-clone-element="true"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                          data-testid="MoreHorizIcon"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2"
+                          />
+                        </svg>
+                        <span
+                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                        />
+                      </button>
+                    </td>
+                  </tr>
                 </tbody>
                 <tfoot
                   class="MuiTableFooter-root css-4ar9ic-MuiTableFooter-root"
@@ -1160,7 +1268,7 @@
                     <span
                       class="MuiTypography-root MuiTypography-body2 MuiTypography-alignCenter css-htm6yz-MuiTypography-root"
                     >
-                      1-1 of 1
+                      1-2 of 2
                     </span>
                     <div
                       class="MuiBox-root css-192dx0w"

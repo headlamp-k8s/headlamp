@@ -53,4 +53,23 @@ export const NODE_DUMMY_DATA: KubeNode[] = [
       },
     },
   },
+  {
+    kind: 'Node',
+    apiVersion: 'v1',
+    metadata: {
+      name: 'node-2',
+      namespace: 'default',
+      creationTimestamp,
+      uid: '123',
+      labels: {},
+    },
+    spec: {
+      podCIDR: '',
+      podCIDRs: [],
+      providerID: '',
+      taints: [],
+      unschedulable: false,
+    },
+    status: {},
+  },
 ];

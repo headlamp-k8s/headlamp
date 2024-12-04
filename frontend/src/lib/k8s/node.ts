@@ -7,11 +7,11 @@ import { KubeObject, KubeObjectInterface } from './KubeObject';
 
 export interface KubeNode extends KubeObjectInterface {
   status: {
-    addresses: {
+    addresses?: {
       address: string;
       type: string;
     }[];
-    allocatable: {
+    allocatable?: {
       cpu: any;
       memory: any;
       ephemeralStorage: any;
@@ -19,7 +19,7 @@ export interface KubeNode extends KubeObjectInterface {
       hugepages_2Mi: any;
       pods: any;
     };
-    capacity: {
+    capacity?: {
       cpu: any;
       memory: any;
       ephemeralStorage: any;
@@ -27,10 +27,10 @@ export interface KubeNode extends KubeObjectInterface {
       hugepages_2Mi: any;
       pods: any;
     };
-    conditions: (Omit<KubeCondition, 'lastProbeTime' | 'lastUpdateTime'> & {
+    conditions?: (Omit<KubeCondition, 'lastProbeTime' | 'lastUpdateTime'> & {
       lastHeartbeatTime: string;
     })[];
-    nodeInfo: {
+    nodeInfo?: {
       architecture: string;
       bootID: string;
       containerRuntimeVersion: string;
@@ -85,11 +85,11 @@ class Node extends KubeObject<KubeNode> {
   }
 
   getExternalIP(): string {
-    return this.status.addresses.find(address => address.type === 'ExternalIP')?.address || '';
+    return this.status.addresses?.find(address => address.type === 'ExternalIP')?.address || '';
   }
 
   getInternalIP(): string {
-    return this.status.addresses.find(address => address.type === 'InternalIP')?.address || '';
+    return this.status.addresses?.find(address => address.type === 'InternalIP')?.address || '';
   }
 }
 

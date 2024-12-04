@@ -134,6 +134,9 @@ export function getResourceMetrics(
   metrics: KubeMetrics[],
   resourceType: 'cpu' | 'memory'
 ) {
+  if (item.status.capacity === undefined) {
+    return [0, 0];
+  }
   const resourceParsers: any = {
     cpu: parseCpu,
     memory: parseRam,

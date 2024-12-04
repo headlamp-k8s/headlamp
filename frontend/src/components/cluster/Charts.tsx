@@ -19,7 +19,7 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
   }
 
   function memoryAvailableGetter(item: Node | Pod) {
-    return parseRam(item.status!.capacity.memory) / TO_GB;
+    return parseRam(item.status?.capacity?.memory) / TO_GB;
   }
 
   function getLegend(used: number, available: number) {
@@ -55,7 +55,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
   }
 
   function cpuAvailableGetter(item: Node | Pod) {
-    return parseCpu(item.status!.capacity.cpu) / TO_ONE_CPU;
+    return parseCpu(item.status?.capacity?.cpu) / TO_ONE_CPU;
   }
 
   function getLegend(used: number, available: number) {
