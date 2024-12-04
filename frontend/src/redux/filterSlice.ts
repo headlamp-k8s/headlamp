@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JSONPath } from 'jsonpath-plus';
 import { KubeEvent } from '../lib/k8s/event';
 import { KubeObjectInterface } from '../lib/k8s/KubeObject';
+import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 
 export interface FilterState {
   /** The namespaces to filter on. */
@@ -134,3 +136,13 @@ const filterSlice = createSlice({
 export const { setNamespaceFilter, resetFilter } = filterSlice.actions;
 
 export default filterSlice.reducer;
+
+/**
+ * Get globally selected namespaces
+ *
+ * @returns An array of selected namespaces, empty means all namespaces are visible
+ */
+export const useNamespaces = () => {
+  const namespacesSet = useSelector(({ filter }: { filter: FilterState }) => filter.namespaces);
+  return useMemo(() => [...namespacesSet], [namespacesSet]);
+};
