@@ -1,5 +1,5 @@
 import { InlineIcon } from '@iconify/react';
-import { Button } from '@mui/material';
+import { Button, selectClasses } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
@@ -17,7 +17,7 @@ import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
-import SidebarItem from './SidebarItem';
+import SidebarItem, { SidebarItemProps } from './SidebarItem';
 import {
   DefaultSidebars,
   setSidebarSelected,
@@ -153,6 +153,34 @@ const DefaultLinkArea = memo((props: { sidebarName: string; isOpen: boolean }) =
   );
 });
 
+/**
+ * Checks if item or any sub items are selected
+ */
+function getIsSelected(item: SidebarItemProps, selectedName?: string | null): boolean {
+  if (!selectedName) return false;
+  return (
+    item.name === selectedName || Boolean(item.subList?.find(it => getIsSelected(it, selectedName)))
+  );
+}
+
+/**
+ * Updates the isSelected field of an item
+ */
+function updateItemSelected(
+  item: SidebarItemProps,
+  selectedName?: string | null
+): SidebarItemProps {
+  const isSelected = getIsSelected(item, selectedName);
+  if (isSelected === false) return item;
+  return {
+    ...item,
+    isSelected: isSelected,
+    subList: item.subList
+      ? item.subList.map(it => updateItemSelected(it, selectedName))
+      : item.subList,
+  };
+}
+
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary', 'translation']);
 
@@ -177,7 +205,7 @@ export default function Sidebar() {
     return prepareRoutes(t, sidebar.selected.sidebar || '');
   }, [
     cluster,
-    sidebar.selected,
+    sidebar.selected.sidebar,
     sidebar.entries,
     sidebar.filters,
     i18n.language,
@@ -195,13 +223,18 @@ export default function Sidebar() {
     [sidebar.selected.sidebar, isOpen]
   );
 
+  const processedItems = useMemo(
+    () => items.map(item => updateItemSelected(item, sidebar.selected.item)),
+    [items, sidebar.selected.item]
+  );
+
   if (sidebar.selected.sidebar === null || !sidebar?.isVisible) {
     return null;
   }
 
   return (
     <PureSidebar
-      items={items}
+      items={processedItems}
       open={isOpen}
       openUserSelected={isUserOpened}
       isNarrowOnly={isNarrowOnly}
@@ -220,7 +253,7 @@ export interface PureSidebarProps {
   /** If the user has selected to open/shrink the sidebar */
   openUserSelected?: boolean;
   /** To show in the sidebar. */
-  items: SidebarEntry[];
+  items: SidebarItemProps[];
   /** The selected route name of the sidebar open. */
   selectedName: string | null;
   /** If the sidebar is the temporary one (full sidebar when user selects it in mobile). */
@@ -292,7 +325,7 @@ export const PureSidebar = memo(
               {items.map(item => (
                 <SidebarItem
                   key={item.name}
-                  selectedName={selectedName}
+                  isSelected={item.isSelected}
                   fullWidth={largeSideBarOpen}
                   search={search}
                   {...item}
