@@ -2,7 +2,7 @@ import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ListItem, { ListItemProps } from '@mui/material/ListItem';
 import { useTheme } from '@mui/system';
-import React from 'react';
+import React, { memo } from 'react';
 import { generatePath } from 'react-router';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
@@ -14,7 +14,7 @@ import { SidebarEntry } from './sidebarSlice';
  */
 export interface SidebarItemProps extends ListItemProps, SidebarEntry {
   /** The route name which is selected. */
-  selectedName?: string | null;
+  isSelected?: boolean;
   /** The navigation is a child. */
   hasParent?: boolean;
   /** Displayed wide with icon and text, otherwise with just a small icon. */
@@ -27,7 +27,7 @@ export interface SidebarItemProps extends ListItemProps, SidebarEntry {
   hide?: boolean;
 }
 
-export default function SidebarItem(props: SidebarItemProps) {
+const SidebarItem = memo((props: SidebarItemProps) => {
   const {
     label,
     name,
@@ -36,7 +36,7 @@ export default function SidebarItem(props: SidebarItemProps) {
     search,
     useClusterURL = false,
     subList = [],
-    selectedName,
+    isSelected,
     hasParent = false,
     icon,
     fullWidth = true,
@@ -60,31 +60,6 @@ export default function SidebarItem(props: SidebarItemProps) {
     }
     fullURL = createRouteURL(routeName);
   }
-
-  const isSelected = React.useMemo(() => {
-    if (name === selectedName) {
-      return true;
-    }
-
-    let subListToCheck = [...subList];
-    for (let i = 0; i < subListToCheck.length; i++) {
-      const subItem = subListToCheck[i];
-      if (subItem.name === selectedName) {
-        return true;
-      }
-
-      if (!!subItem.subList) {
-        subListToCheck = subListToCheck.concat(subItem.subList);
-      }
-    }
-    return false;
-  }, [subList, name, selectedName]);
-
-  function shouldExpand() {
-    return isSelected || !!subList.find(item => item.name === selectedName);
-  }
-
-  const expanded = subList.length > 0 && shouldExpand();
 
   return hide ? null : (
     <React.Fragment>
@@ -221,7 +196,7 @@ export default function SidebarItem(props: SidebarItemProps) {
             padding: 0,
           }}
         >
-          <Collapse in={fullWidth && expanded} sx={{ width: '100%' }}>
+          <Collapse in={fullWidth && isSelected} sx={{ width: '100%' }}>
             <List
               component="ul"
               disablePadding
@@ -236,7 +211,7 @@ export default function SidebarItem(props: SidebarItemProps) {
               {subList.map((item: SidebarItemProps) => (
                 <SidebarItem
                   key={item.name}
-                  selectedName={selectedName}
+                  isSelected={item.isSelected}
                   hasParent
                   search={search}
                   {...item}
@@ -248,4 +223,6 @@ export default function SidebarItem(props: SidebarItemProps) {
       )}
     </React.Fragment>
   );
-}
+});
+
+export default SidebarItem;
