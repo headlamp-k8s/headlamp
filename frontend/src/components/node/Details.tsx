@@ -55,12 +55,14 @@ export default function NodeDetails(props: { name?: string }) {
   }, [nodeFromAPI]);
 
   function getAddresses(item: Node) {
-    return item.status.addresses.map(({ type, address }) => {
-      return {
-        name: type,
-        value: address,
-      };
-    });
+    return (
+      item.status.addresses?.map(({ type, address }) => {
+        return {
+          name: type,
+          value: address,
+        };
+      }) || []
+    );
   }
 
   function handleNodeScheduleState(node: Node, cordon: boolean) {
@@ -283,7 +285,7 @@ function ChartsSection(props: ChartsSectionProps) {
       return '…';
     }
 
-    const readyInfo = node.status.conditions.find(({ type }) => type === 'Ready');
+    const readyInfo = node.status.conditions?.find(({ type }) => type === 'Ready');
     if (readyInfo) {
       return timeAgo(readyInfo.lastTransitionTime as string);
     }
@@ -352,7 +354,7 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
     );
   }
 
-  if (!node) {
+  if (!node || !node.status.nodeInfo) {
     return null;
   }
 
@@ -412,7 +414,7 @@ interface NodeReadyLabelProps {
 
 export function NodeReadyLabel(props: NodeReadyLabelProps) {
   const { node } = props;
-  const isReady = !!node.status.conditions.find(
+  const isReady = !!node.status.conditions?.find(
     condition => condition.type === 'Ready' && condition.status === 'True'
   );
   const { t } = useTranslation();
