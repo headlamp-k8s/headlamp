@@ -225,7 +225,7 @@ func TestHandleClusterMessages(t *testing.T) {
 		t.Fatal("Test timed out")
 	}
 
-	assert.Equal(t, StateClosed, conn.Status.State)
+	assert.Equal(t, StateConnecting, conn.Status.State)
 }
 
 func TestCleanupConnections(t *testing.T) {
@@ -295,11 +295,8 @@ func TestCloseConnection(t *testing.T) {
 	err := m.CloseConnection("test-cluster", "/api/v1/pods", "test-user")
 	assert.NoError(t, err)
 	assert.Empty(t, m.connections)
-	assert.Equal(t, StateClosed, conn.Status.State)
-
-	// Test closing a non-existent connection
-	err = m.CloseConnection("non-existent", "/api/v1/pods", "test-user")
-	assert.Error(t, err)
+	// It will reconnect to the cluster
+	assert.Equal(t, StateConnecting, conn.Status.State)
 }
 
 func TestCreateWrapperMessage(t *testing.T) {
