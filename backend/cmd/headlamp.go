@@ -1604,11 +1604,11 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 	// Delete a cluster
 	r.HandleFunc("/cluster/{name}", c.deleteCluster).Methods("DELETE")
 
+	// Websocket connections
+	// r.HandleFunc("/wsMutliplexer", c.multiplexer.HandleClientWebSocket)
+
 	// Rename a cluster
 	r.HandleFunc("/cluster/{name}", c.renameCluster).Methods("PUT")
-
-	// Websocket connections
-	r.HandleFunc("/wsMutliplexer", c.multiplexer.HandleClientWebSocket)
 }
 
 /*
