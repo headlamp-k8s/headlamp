@@ -10,7 +10,7 @@ import { ActionButton, NameValueTable, SectionBox } from '../../common';
 import TimezoneSelect from '../../common/TimezoneSelect';
 import { useSettings } from './hook';
 import NumRowsInput from './NumRowsInput';
-import ThemeChangeButton from './ThemeChangeButton';
+import ThemeSettings from './ThemeSettings';
 
 export default function Settings() {
   const { t } = useTranslation(['translation']);
@@ -54,10 +54,6 @@ export default function Settings() {
             value: <LocaleSelect showFullNames formControlProps={{ className: '' }} />,
           },
           {
-            name: t('translation|Theme'),
-            value: <ThemeChangeButton showBothIcons />,
-          },
-          {
             name: t('translation|Number of rows for tables'),
             value: (
               <NumRowsInput
@@ -75,6 +71,10 @@ export default function Settings() {
                 />
               </Box>
             ),
+          },
+          {
+            name: t('translation|Theme'),
+            value: <ThemeSettings />,
           },
         ]}
       />
