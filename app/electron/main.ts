@@ -1321,7 +1321,7 @@ function startElecron() {
     // Finally load the frontend
     mainWindow.loadURL(startUrl);
   }
-
+  disableGPU = true;
   if (disableGPU) {
     console.info('Disabling GPU hardware acceleration. Reason: related flag is set.');
   } else if (
