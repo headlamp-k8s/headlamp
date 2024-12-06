@@ -74,12 +74,15 @@ export function StatusLabel(props: StatusLabelProps) {
   const theme = useTheme();
 
   const statuses = ['success', 'warning', 'error'];
+  const properStatus = !!status ? status : 'error';
 
   // Assign to a status color if it exists.
   const bgColor = statuses.includes(status)
-    ? theme.palette[status].light
+    ? theme.palette[properStatus].light
     : theme.palette.normalEventBg;
-  const color = statuses.includes(status) ? theme.palette[status].main : theme.palette.text.primary;
+  const color = statuses.includes(status)
+    ? theme.palette[properStatus].main
+    : theme.palette.text.primary;
 
   return (
     <Typography

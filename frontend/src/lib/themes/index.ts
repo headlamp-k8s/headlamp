@@ -13,6 +13,8 @@ declare module '@mui/material/styles' {
     squareButton: {
       background: string;
     };
+    // @todo: Deprecate this
+    primaryColor: string;
     sidebarLink: {
       color: string;
       main: {
@@ -100,6 +102,7 @@ declare module '@mui/material/styles' {
   }
 
   interface PaletteOptions {
+    // @todo: Deprecate this
     primaryColor?: string;
     squareButton?: {
       background?: string;
