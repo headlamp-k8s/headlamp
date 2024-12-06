@@ -70,7 +70,6 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
       <Menu
         id={menuId}
         anchorEl={anchorEl}
-        keepMounted
         open={Boolean(anchorEl)}
         onClose={() => {
           handleMenuClose();

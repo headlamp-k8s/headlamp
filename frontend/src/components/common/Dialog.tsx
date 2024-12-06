@@ -135,14 +135,7 @@ export function Dialog(props: DialogProps) {
   }
 
   return (
-    <MuiDialog
-      maxWidth="lg"
-      scroll="paper"
-      fullWidth
-      keepMounted
-      fullScreen={fullScreen}
-      {...other}
-    >
+    <MuiDialog maxWidth="lg" scroll="paper" fullWidth fullScreen={fullScreen} {...other}>
       {(!!title || withFullScreen) && (
         <DialogTitle buttons={[<FullScreenButton />, <CloseButton />]} {...titleProps}>
           {title}
