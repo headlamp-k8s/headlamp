@@ -10,6 +10,7 @@ import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 import { useFilterFunc } from '../../../lib/util';
 import { DefaultHeaderAction, RowAction } from '../../../redux/actionButtonsSlice';
+import { useNamespaces } from '../../../redux/filterSlice';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
@@ -141,7 +142,7 @@ function TableFromResourceClass<KubeClass extends KubeObjectClass>(
   props: ResourceTableFromResourceClassProps<KubeClass>
 ) {
   const { resourceClass, id, ...otherProps } = props;
-  const { items, error, clusterErrors } = resourceClass.useList();
+  const { items, error, clusterErrors } = resourceClass.useList({ namespace: useNamespaces() });
 
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);

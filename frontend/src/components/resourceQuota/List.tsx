@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import ResourceQuota from '../../lib/k8s/resourceQuota';
+import { useNamespaces } from '../../redux/filterSlice';
 import { SimpleTableProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
@@ -85,7 +86,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
 }
 
 export default function ResourceQuotaList() {
-  const [resourceQuotas, error] = ResourceQuota.useList();
+  const [resourceQuotas, error] = ResourceQuota.useList({ namespace: useNamespaces() });
 
   return <ResourceQuotaRenderer resourceQuotas={resourceQuotas} error={error} reflectTableInURL />;
 }

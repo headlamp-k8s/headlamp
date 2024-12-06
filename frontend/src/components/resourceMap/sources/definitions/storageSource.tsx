@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import { useMemo } from 'react';
 import PersistentVolumeClaim from '../../../../lib/k8s/persistentVolumeClaim';
 import Pod from '../../../../lib/k8s/pod';
+import { useNamespaces } from '../../../../redux/filterSlice';
 import { GraphEdge, GraphSource } from '../../graph/graphModel';
 import { getKindGroupColor, KubeIcon } from '../../kubeIcon/KubeIcon';
 import { makeKubeObjectNode, makeKubeToKubeEdge } from '../GraphSources';
@@ -11,8 +12,8 @@ const pvcSource: GraphSource = {
   label: 'PVCs',
   icon: <KubeIcon kind="PersistentVolumeClaim" />,
   useData() {
-    const [pvcs] = PersistentVolumeClaim.useList();
-    const [pods] = Pod.useList();
+    const [pvcs] = PersistentVolumeClaim.useList({ namespace: useNamespaces() });
+    const [pods] = Pod.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!pvcs || !pods) return null;

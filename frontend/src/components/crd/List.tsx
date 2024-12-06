@@ -1,12 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CRD from '../../lib/k8s/crd';
+import { useNamespaces } from '../../redux/filterSlice';
 import { Link, useThrottle } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function CustomResourceDefinitionList() {
   const { t } = useTranslation(['glossary', 'frequent']);
-  const [items, error] = CRD.useList();
+  const [items, error] = CRD.useList({ namespace: useNamespaces() });
   const throttledItems = useThrottle(items, 1000);
 
   const categories = React.useMemo(() => {

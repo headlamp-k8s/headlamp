@@ -4,13 +4,14 @@ import { useClusterGroup } from '../../lib/k8s';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
 import { combineClusterListErrors } from '../../lib/util';
+import { useNamespaces } from '../../redux/filterSlice';
 import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { ColumnType } from '../common/Resource/ResourceTable';
 
 export default function RoleList() {
   const { t } = useTranslation('glossary');
-  const { items: roles, clusterErrors: rolesErrors } = Role.useList();
+  const { items: roles, clusterErrors: rolesErrors } = Role.useList({ namespace: useNamespaces() });
   const { items: clusterRoles, clusterErrors: clusterRolesErrors } = ClusterRole.useList();
 
   const clusters = useClusterGroup();

@@ -5,6 +5,7 @@ import Deployment from '../../../../lib/k8s/deployment';
 import Role from '../../../../lib/k8s/role';
 import RoleBinding from '../../../../lib/k8s/roleBinding';
 import ServiceAccount from '../../../../lib/k8s/serviceAccount';
+import { useNamespaces } from '../../../../redux/filterSlice';
 import { GraphEdge, GraphSource } from '../../graph/graphModel';
 import { getKindGroupColor, KubeIcon } from '../../kubeIcon/KubeIcon';
 import { makeKubeObjectNode, makeKubeToKubeEdge } from '../GraphSources';
@@ -14,7 +15,7 @@ const rolesSource: GraphSource = {
   label: 'Roles',
   icon: <KubeIcon kind="Role" />,
   useData() {
-    const [roles] = Role.useList();
+    const [roles] = Role.useList({ namespace: useNamespaces() });
 
     return useMemo(
       () =>
@@ -33,9 +34,9 @@ const roleBindingsSource: GraphSource = {
   label: 'Role Bindings',
   icon: <KubeIcon kind="RoleBinding" />,
   useData() {
-    const [roleBindings] = RoleBinding.useList();
-    const [roles] = Role.useList();
-    const [serviceAccounts] = ServiceAccount.useList();
+    const [roleBindings] = RoleBinding.useList({ namespace: useNamespaces() });
+    const [roles] = Role.useList({ namespace: useNamespaces() });
+    const [serviceAccounts] = ServiceAccount.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!roleBindings || !roles || !serviceAccounts) return null;
@@ -72,9 +73,9 @@ const serviceAccountsSource: GraphSource = {
   label: 'Service Accounts',
   icon: <KubeIcon kind="ServiceAccount" />,
   useData() {
-    const [serviceAccounts] = ServiceAccount.useList();
-    const [deployments] = Deployment.useList();
-    const [daemonSets] = DaemonSet.useList();
+    const [serviceAccounts] = ServiceAccount.useList({ namespace: useNamespaces() });
+    const [deployments] = Deployment.useList({ namespace: useNamespaces() });
+    const [daemonSets] = DaemonSet.useList({ namespace: useNamespaces() });
 
     return useMemo(() => {
       if (!serviceAccounts || !deployments || !daemonSets) return null;

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
 import { combineClusterListErrors, getClusterGroup } from '../../lib/util';
+import { useNamespaces } from '../../redux/filterSlice';
 import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -27,7 +28,9 @@ function RoleLink(props: { role: string; namespace?: string }) {
 
 export default function RoleBindingList() {
   const { t } = useTranslation(['glossary', 'translation']);
-  const { items: roles, clusterErrors: rolesErrors } = RoleBinding.useList();
+  const { items: roles, clusterErrors: rolesErrors } = RoleBinding.useList({
+    namespace: useNamespaces(),
+  });
   const { items: clusterRoles, clusterErrors: clusterRolesErrors } = ClusterRoleBinding.useList();
   const clusters = getClusterGroup();
 

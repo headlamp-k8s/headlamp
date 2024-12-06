@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo } from '../../lib/util';
+import { useNamespaces } from '../../redux/filterSlice';
 import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
@@ -216,7 +217,7 @@ export function PodListRenderer(props: PodListProps) {
 }
 
 export default function PodList() {
-  const { items, error, clusterErrors } = Pod.useList();
+  const { items, error, clusterErrors } = Pod.useList({ namespace: useNamespaces() });
 
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
 

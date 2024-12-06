@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import Job from '../../lib/k8s/job';
 import { formatDuration } from '../../lib/util';
+import { useNamespaces } from '../../redux/filterSlice';
 import { LightTooltip, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
@@ -53,7 +54,7 @@ export function makeJobStatusLabel(job: Job) {
 }
 
 export default function JobsList() {
-  const [jobs, error] = Job.useList();
+  const [jobs, error] = Job.useList({ namespace: useNamespaces() });
   return <JobsListRenderer jobs={jobs} error={Job.getErrorMessage(error)} reflectTableInURL />;
 }
 
