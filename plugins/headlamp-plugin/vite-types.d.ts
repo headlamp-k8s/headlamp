@@ -7,9 +7,7 @@ declare module '*.svg?react' {
   export default content;
 }
 
-declare global {
-  const vi: any;
-}
+declare const vi: any;
 
 interface ImportMeta {
   env: any;
