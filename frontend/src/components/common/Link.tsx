@@ -1,6 +1,8 @@
 import MuiLink from '@mui/material/Link';
+import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { kubeObjectQueryKey, useEndpoints } from '../../lib/k8s/api/v2/hooks';
 import { KubeObject } from '../../lib/k8s/KubeObject';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
 import { LightTooltip } from './Tooltip';
@@ -28,14 +30,41 @@ export interface LinkObjectProps extends LinkBaseProps {
   [prop: string]: any;
 }
 
+function KubeObjectLink(props: { kubeObject: KubeObject; [prop: string]: any }) {
+  const { kubeObject, ...otherProps } = props;
+
+  const client = useQueryClient();
+  const { namespace, name } = kubeObject.metadata;
+  const endpoint = useEndpoints(kubeObject._class().apiEndpoint.apiInfo, kubeObject.cluster);
+
+  return (
+    <MuiLink
+      onClick={() => {
+        const key = kubeObjectQueryKey({
+          cluster: kubeObject.cluster,
+          endpoint,
+          namespace,
+          name,
+        });
+        // prepopulate the query cache with existing object
+        client.setQueryData(key, kubeObject);
+        // and invalidate it (mark as stale)
+        // so that the latest version will be downloaded in the background
+        client.invalidateQueries({ queryKey: key });
+      }}
+      component={RouterLink}
+      to={kubeObject.getDetailsLink()}
+      {...otherProps}
+    >
+      {props.children || kubeObject!.getName()}
+    </MuiLink>
+  );
+}
+
 function PureLink(props: React.PropsWithChildren<LinkProps | LinkObjectProps>) {
   if ((props as LinkObjectProps).kubeObject) {
     const { kubeObject, ...otherProps } = props as LinkObjectProps;
-    return (
-      <MuiLink component={RouterLink} to={kubeObject!.getDetailsLink()} {...otherProps}>
-        {props.children || kubeObject!.getName()}
-      </MuiLink>
-    );
+    return <KubeObjectLink kubeObject={kubeObject!} {...otherProps} />;
   }
 
   const { routeName, params = {}, search, state, ...otherProps } = props as LinkProps;

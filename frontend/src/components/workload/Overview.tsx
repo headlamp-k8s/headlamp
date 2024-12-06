@@ -1,7 +1,6 @@
 import Grid from '@mui/material/Grid';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import Deployment from '../../lib/k8s/deployment';
@@ -13,7 +12,7 @@ import { WorkloadClass } from '../../lib/k8s/Workload';
 import { Workload } from '../../lib/k8s/Workload';
 import { getReadyReplicas, getTotalReplicas } from '../../lib/util';
 import Link from '../common/Link';
-import { PageGrid, ResourceLink } from '../common/Resource';
+import { PageGrid } from '../common/Resource';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
 import { WorkloadCircleChart } from './Charts';
@@ -44,7 +43,6 @@ export default function Overview() {
     [pods, deployments, statefulSets, daemonSets, replicaSets, jobs, cronJobs]
   );
 
-  const location = useLocation();
   const { t } = useTranslation('glossary');
 
   function getPods(item: Workload) {
@@ -130,7 +128,7 @@ export default function Overview() {
             id: 'name',
             label: t('translation|Name'),
             getValue: item => item.metadata.name,
-            render: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
+            render: item => <Link kubeObject={item} />,
           },
           'namespace',
           'cluster',

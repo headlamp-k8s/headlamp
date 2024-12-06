@@ -65,6 +65,20 @@ export interface QueryListResponse<DataType, ItemType, ErrorType>
   clusterErrors?: Record<string, ApiError | null> | null;
 }
 
+export const kubeObjectQueryKey = ({
+  cluster,
+  endpoint,
+  namespace,
+  name,
+  queryParams,
+}: {
+  cluster: string;
+  endpoint?: KubeObjectEndpoint | null;
+  namespace?: string;
+  name: string;
+  queryParams?: QueryParameters;
+}) => ['object', cluster, endpoint, namespace ?? '', name, queryParams ?? {}];
+
 /**
  * Returns a single KubeObject.
  */
@@ -94,7 +108,8 @@ export function useKubeObject<K extends KubeObject>({
   );
 
   const queryKey = useMemo(
-    () => ['object', cluster, endpoint, namespace ?? '', name, cleanedUpQueryParams],
+    () =>
+      kubeObjectQueryKey({ cluster, name, namespace, endpoint, queryParams: cleanedUpQueryParams }),
     [endpoint, namespace, name]
   );
 
