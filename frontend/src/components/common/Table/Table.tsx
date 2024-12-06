@@ -1,18 +1,27 @@
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Table as MuiTable, TableCellProps, TableHead } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/system';
 import {
-  MaterialReactTable,
+  MRT_BottomToolbar,
+  MRT_Cell,
   MRT_ColumnDef as MaterialTableColumn,
+  MRT_Header,
   MRT_Localization,
+  MRT_Row,
+  MRT_TableBodyCell,
+  MRT_TableHeadCell,
+  MRT_TableInstance,
   MRT_TableOptions as MaterialTableOptions,
+  MRT_TopToolbar,
   useMaterialReactTable,
+  useMRT_Rows,
 } from 'material-react-table';
 import { MRT_Localization_DE } from 'material-react-table/locales/de';
 import { MRT_Localization_EN } from 'material-react-table/locales/en';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import { MRT_Localization_PT } from 'material-react-table/locales/pt';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { memo, ReactNode, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { useURLState } from '../../../lib/util';
@@ -123,6 +132,13 @@ const tableLocalizationMap: Record<string, MRT_Localization> = {
   pt: MRT_Localization_PT,
 };
 
+const StyledHeadRow = styled('tr')(({ theme }) => ({
+  display: 'contents',
+  background: theme.palette.tables.head.background,
+}));
+const StyledRow = styled('tr')({ display: 'contents' });
+const StyledBody = styled('tbody')({ display: 'contents' });
+
 /**
  * Table component based on the Material React Table
  *
@@ -196,8 +212,10 @@ export default function Table<RowItem extends Record<string, any>>({
     ...tableProps,
     columns: tableColumns ?? [],
     data: tableData,
+    enablePagination: tableData.length > rowsPerPageOptions[0],
     enableDensityToggle: tableProps.enableDensityToggle ?? false,
     enableFullScreenToggle: tableProps.enableFullScreenToggle ?? false,
+    enableColumnActions: false,
     localization: tableLocalizationMap[i18n.language],
     autoResetAll: false,
     onPaginationChange: (updater: any) => {
@@ -246,22 +264,9 @@ export default function Table<RowItem extends Record<string, any>>({
         minWidth: 'unset',
       },
     },
-    muiTablePaperProps: {
-      variant: 'outlined',
-      elevation: 0,
+    muiTopToolbarProps: {
       sx: {
-        display: 'grid',
-      },
-    },
-    muiTableBodyProps: {
-      sx: {
-        display: 'contents',
-      },
-    },
-    muiTableBodyRowProps: {
-      sx: {
-        display: 'contents',
-        backgroundColor: theme.palette.tables.body.background,
+        backgroundColor: undefined,
       },
     },
     muiBottomToolbarProps: {
@@ -270,36 +275,16 @@ export default function Table<RowItem extends Record<string, any>>({
         boxShadow: undefined,
       },
     },
-    muiTableProps: {
-      sx: {
-        gridTemplateColumns:
-          tableProps.enableRowActions === true
-            ? `${gridTemplateColumns} 0.05fr`
-            : gridTemplateColumns,
-      },
-    },
-    muiTableHeadProps: {
-      sx: {
-        display: 'contents',
-      },
-    },
     muiTableHeadCellProps: {
       sx: {
         width: 'unset',
         minWidth: 'unset',
-        borderTop: '1px solid',
-        borderColor: theme.palette.tables.head.borderColor,
         paddingTop: '0.5rem',
       },
     },
-    muiTableHeadRowProps: {
-      sx: {
-        display: 'contents',
-        background: theme.palette.tables.head.background,
-        boxShadow: undefined,
-      },
-    },
   });
+
+  const rows = useMRT_Rows(table);
 
   if (!!errorMessage) {
     return <Empty color="error">{errorMessage}</Empty>;
@@ -317,5 +302,96 @@ export default function Table<RowItem extends Record<string, any>>({
     );
   }
 
-  return <MaterialReactTable table={table} />;
+  const headerGroups = table.getHeaderGroups();
+
+  return (
+    <>
+      <MRT_TopToolbar table={table} />
+      <MuiTable
+        sx={{
+          display: 'grid',
+          border: '1px solid',
+          borderColor: theme.palette.tables.head.borderColor,
+          borderRadius: 1,
+          borderBottom: 'none',
+          overflow: 'hidden',
+          gridTemplateColumns:
+            tableProps.enableRowActions === true
+              ? `${gridTemplateColumns} 0.05fr`
+              : gridTemplateColumns,
+        }}
+      >
+        <TableHead sx={{ display: 'contents' }}>
+          <StyledHeadRow>
+            {headerGroups[0].headers.map(header => (
+              <MemoHeadCell
+                key={header.id}
+                header={header}
+                table={table}
+                isFiltered={header.column.getIsFiltered()}
+                sorting={header.column.getIsSorted()}
+                showColumnFilters={table.getState().showColumnFilters}
+              />
+            ))}
+          </StyledHeadRow>
+        </TableHead>
+        <StyledBody>
+          {rows.map(row => (
+            <Row key={row.id} row={row} table={table} />
+          ))}
+        </StyledBody>
+      </MuiTable>
+      <MRT_BottomToolbar table={table} />
+    </>
+  );
 }
+
+const MemoHeadCell = memo(
+  ({
+    header,
+    table,
+  }: {
+    table: MRT_TableInstance<any | null>;
+    header: MRT_Header<any>;
+    sorting: string | false;
+    isFiltered: boolean;
+    showColumnFilters: boolean;
+  }) => {
+    return (
+      <MRT_TableHeadCell header={header} key={header.id} staticColumnIndex={-1} table={table} />
+    );
+  },
+  (a, b) =>
+    a.header.column.id === b.header.column.id &&
+    a.sorting === b.sorting &&
+    a.isFiltered === b.isFiltered &&
+    a.showColumnFilters === b.showColumnFilters
+);
+
+const Row = memo(({ row, table }: { table: MRT_TableInstance<any>; row: MRT_Row<any> }) => (
+  <StyledRow>
+    {row.getVisibleCells().map(cell => (
+      <MemoCell cell={cell} table={table} key={cell.id} />
+    ))}
+  </StyledRow>
+));
+
+const MemoCell = memo(
+  ({ cell, table }: { cell: MRT_Cell<any, unknown>; table: any }) => {
+    return (
+      <MRT_TableBodyCell
+        staticRowIndex={-1}
+        cell={cell}
+        table={table}
+        rowRef={{ current: null }}
+        sx={{
+          whiteSpace: 'normal',
+          width: 'unset',
+          minWidth: 'unset',
+          ...(cell.column.columnDef.muiTableBodyCellProps as TableCellProps)?.sx,
+        }}
+      />
+    );
+  },
+  (a, b) => a.cell.getValue() === b.cell.getValue()
+);

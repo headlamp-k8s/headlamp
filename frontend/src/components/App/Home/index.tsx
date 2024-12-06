@@ -294,7 +294,8 @@ function HomeComponent(props: HomeComponentProps) {
               },
               {
                 label: t('Status'),
-                getValue: cluster => cluster.name,
+                getValue: cluster =>
+                  errors[cluster.name] === null ? 'Active' : errors[cluster.name]?.message,
                 render: ({ name }) => <ClusterStatus error={errors[name]} />,
               },
               {

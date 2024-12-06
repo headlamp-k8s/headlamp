@@ -316,7 +316,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
             mrtColumn.accessorFn = (item: RowItem) => item[column.datum];
           }
           if ('render' in column) {
-            mrtColumn.Cell = ({ row }: { row: MRT_Row<any> }) =>
+            mrtColumn.Cell = ({ row }: { row: MRT_Row<RowItem> }) =>
               column.render?.(row.original) ?? null;
           }
           if (sort && typeof sort === 'function') {
@@ -333,7 +333,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
               header: t('translation|Name'),
               gridTemplate: 1.5,
               accessorFn: (item: RowItem) => item.metadata.name,
-              Cell: ({ row }: { row: MRT_Row<any> }) =>
+              Cell: ({ row }: { row: MRT_Row<RowItem> }) =>
                 row.original && <Link kubeObject={row.original} />,
             };
           case 'age':
@@ -514,6 +514,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
         }}
         globalFilterFn="kubeObjectSearch"
         filterFunction={filterFunc as any}
+        getRowId={item => item?.metadata?.uid}
       />
     </>
   );
