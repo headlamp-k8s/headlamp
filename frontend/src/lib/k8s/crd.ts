@@ -168,6 +168,7 @@ export function makeCustomResourceClass(
     static apiVersion = apiInfoArgs.map(([group, version]) =>
       group ? `${group}/${version}` : version
     );
+    static isNamespaced = objArgs.isNamespaced;
     static apiEndpoint = apiFunc(...apiInfoArgs);
   };
 }
