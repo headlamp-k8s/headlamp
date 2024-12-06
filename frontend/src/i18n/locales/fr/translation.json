@@ -88,6 +88,7 @@
   "Log out": "Déconnexion",
   "(No token set up)": "(Pas de jeton mis en place)",
   "Account of current user": "Compte de l'utilisateur actuel",
+  "Account": "",
   "Appbar Tools": "Outils de la barre d'application",
   "show more": "afficher plus",
   "Getting auth info: {{ clusterName }}": "Obtenir des informations d'authentification : {{ clusterName }}",

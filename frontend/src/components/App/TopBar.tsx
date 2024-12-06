@@ -139,9 +139,21 @@ function AppBarActionsMenu({
       appBarActions.map(action => {
         const Action = has(action, 'action') ? action.action : action;
         if (React.isValidElement(Action)) {
+          const label = (action as AppBarAction)?.label;
           return (
             <ErrorBoundary>
-              <MenuItem>{Action}</MenuItem>
+              <MenuItem
+                onClick={(action as AppBarAction)?.onClick || undefined}
+                sx={{
+                  justifyContent: 'center',
+                  gap: '12px',
+                }}
+              >
+                <ListItemIcon sx={{ minWidth: '40px', justifyContent: 'center' }}>
+                  {Action}
+                </ListItemIcon>
+                {label && <ListItemText primary={label} />}
+              </MenuItem>
             </ErrorBoundary>
           );
         } else if (Action === null) {
@@ -150,7 +162,10 @@ function AppBarActionsMenu({
           const ActionComponent = Action as React.FC;
           return (
             <ErrorBoundary>
-              <MenuItem>
+              <MenuItem
+                onClick={(action as AppBarAction)?.onClick || undefined}
+                sx={{ justifyContent: 'center' }}
+              >
                 <ActionComponent />
               </MenuItem>
             </ErrorBoundary>
@@ -307,33 +322,41 @@ export function PureTopBar({
       id: DefaultAppBarAction.NOTIFICATION,
       action: null,
     },
-    {
-      id: DefaultAppBarAction.SETTINGS,
-      action: (
-        <MenuItem>
-          <SettingsButton onClickExtra={handleMenuClose} />
-        </MenuItem>
-      ),
-    },
+    ...(isClusterContext
+      ? [
+          {
+            id: DefaultAppBarAction.SETTINGS,
+            action: <SettingsButton onClickExtra={handleMenuClose} />,
+            label: t('translation|Settings'),
+            onClick: () => {
+              handleMenuClose();
+              history.push(createRouteURL('settingsCluster', { cluster }));
+            },
+          },
+        ]
+      : []),
     {
       id: DefaultAppBarAction.USER,
       action: !!isClusterContext && (
-        <MenuItem>
-          <IconButton
-            aria-label={t('Account of current user')}
-            aria-controls={userMenuId}
-            aria-haspopup="true"
-            color="inherit"
-            onClick={event => {
-              handleMenuClose();
-              handleProfileMenuOpen(event);
-            }}
-            size="medium"
-          >
-            <Icon icon="mdi:account" />
-          </IconButton>
-        </MenuItem>
+        <IconButton
+          aria-label={t('Account of current user')}
+          aria-controls={userMenuId}
+          aria-haspopup="true"
+          color="inherit"
+          onClick={event => {
+            handleMenuClose();
+            handleProfileMenuOpen(event);
+          }}
+          size="medium"
+        >
+          <Icon icon="mdi:account" />
+        </IconButton>
       ),
+      label: t('translation|Account'),
+      onClick: (event: React.MouseEvent<HTMLElement>) => {
+        handleMenuClose();
+        handleProfileMenuOpen(event);
+      },
     },
   ];
   const renderMobileMenu = (
@@ -393,6 +416,12 @@ export function PureTopBar({
       ),
     },
   ];
+
+  const visibleMobileActions = processAppBarActions(
+    allAppBarActionsMobile,
+    appBarActionsProcessors
+  ).filter(action => React.isValidElement(action.action) || typeof action === 'function');
+
   return (
     <>
       <AppBar
@@ -423,16 +452,18 @@ export function PureTopBar({
               <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />
               <Box sx={{ flexGrow: 1 }} />
               <GlobalSearch isIconButton />
-              <IconButton
-                aria-label={t('show more')}
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-                size="medium"
-              >
-                <Icon icon="mdi:more-vert" />
-              </IconButton>
+              {visibleMobileActions.length > 0 && (
+                <IconButton
+                  aria-label={t('show more')}
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                  size="medium"
+                >
+                  <Icon icon="mdi:more-vert" />
+                </IconButton>
+              )}
             </>
           ) : (
             <>
