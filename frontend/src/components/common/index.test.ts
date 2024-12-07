@@ -49,7 +49,7 @@ function getFilesToVerify() {
   const filesToVerify: string[] = [];
   fs.readdirSync(__dirname).forEach(file => {
     const fileNoSuffix = file.replace(/\.[^/.]+$/, '');
-    if (!avoidCheck.find(suffix => fileNoSuffix.endsWith(suffix))) {
+    if (!avoidCheck.find(suffix => fileNoSuffix.endsWith(suffix)) && fileNoSuffix) {
       filesToVerify.push(fileNoSuffix);
     }
   });
