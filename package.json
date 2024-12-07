@@ -1,0 +1,70 @@
+{
+  "name": "@headlamp/monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "pnpm run '/(frontend|backend):start/'",
+    "start-app": "pnpm run '/(frontend|backend|app):start/'",
+    "frontend:build": "pnpm --dir frontend build",
+    "frontend:start": "pnpm --dir frontend start",
+    "frontend:test": "pnpm --dir frontend test",
+    "backend:build": "cd backend && go build -o ./headlamp-server${SERVER_EXE_EXT} ./cmd",
+    "backend:start": "cd backend && cross-env HEADLAMP_BACKEND_TOKEN=headlamp HEADLAMP_CONFIG_ENABLE_HELM=true HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS=true go run ./cmd -dev -proxy-urls https://artifacthub.io/* -enable-dynamic-clusters",
+    "backend:test": "cd backend && go test -v -p 1 ./...",
+    "app:start": "pnpm --dir app dev-only-app",
+    "app:preview": "pnpm --dir app dev",
+    "app:build": "node ./app/scripts/setup-plugins.js && pnpm --dir app build",
+    "app:package-win": "pnpm --dir app package -- --win",
+    "app:package-win-msi": "pnpm --dir app package-msi",
+    "app:package-linux": "pnpm --dir app package -- --linux",
+    "app:package-mac": "pnpm --dir app package -- --mac",
+    "docs:build": "pnpm --dir frontend build-typedoc",
+    "storybook:build": "pnpm --dir frontend build-storybook"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "frontend/src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "frontend/src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "app/**/*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "app/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "plugins/headlamp-plugin/{bin,lib,template}/**/*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "plugins/headlamp-plugin/{bin,lib,template}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "plugins/examples/**/*.{ts,tsx}": [
+      "eslint --fix --resolve-plugins-relative-to ."
+    ],
+    "plugins/examples/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "e2e-tests/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ],
+    "e2e-tests/**/*.{ts,tsx}": [
+      "eslint --fix --resolve-plugins-relative-to ."
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^10.5.4"
+  }
+}

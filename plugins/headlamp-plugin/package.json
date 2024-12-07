@@ -26,7 +26,7 @@
     "@dagrejs/dagre": "^1.1.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@headlamp-k8s/eslint-config": "^0.6.0",
+    "@headlamp-k8s/eslint-config": "workspace:*",
     "@iconify/icons-mdi": "^1.2.9",
     "@iconify/react": "^3.2.1",
     "@monaco-editor/react": "^4.3.1",
@@ -125,8 +125,8 @@
     "patch-package": "^6.4.7",
     "prettier": "^2.7.1",
     "process": "^0.11.10",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-dropzone": "^14.2.9",
     "react-hotkeys-hook": "^4.5.1",
     "react-i18next": "^15.0.2",
@@ -149,7 +149,7 @@
     "table": "^6.8.2",
     "tar": "^7.4.3",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
-    "typescript": "5.6.2",
+    "typescript": "catalog:",
     "url": "^0.11.0",
     "url-loader": "^4.1.1",
     "util": "^0.12.4",
@@ -160,9 +160,6 @@
     "webpack-cli": "^4.9.0",
     "ws": "^8.16.0",
     "yargs": "^16.2.0"
-  },
-  "overrides": {
-    "typescript": "5.6.2"
   },
   "files": [
     "bin",
