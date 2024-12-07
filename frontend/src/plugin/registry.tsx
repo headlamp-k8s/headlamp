@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
 import { PluginManager } from '../components/App/pluginManager';
 import { runCommand } from '../components/App/runCommand';
-import { setBrandingAppLogoComponent } from '../components/App/themeSlice';
+import { addTheme,setBrandingAppLogoComponent } from '../components/App/themeSlice';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import {
   addResourceTableColumnsProcessor,
@@ -22,6 +22,7 @@ import { setSidebarItem, setSidebarItemFilter } from '../components/Sidebar/side
 import { getHeadlampAPIHeaders } from '../helpers';
 import { KubeObject } from '../lib/k8s/KubeObject';
 import { Route } from '../lib/router';
+import { Theme } from '../lib/themes';
 import {
   addDetailsViewHeaderActionsProcessor,
   AppBarAction,
@@ -682,6 +683,33 @@ export function registerPluginSettings(
   displaySaveButton: boolean = false
 ) {
   store.dispatch(setPluginSettingsComponent({ name, component, displaySaveButton }));
+}
+
+/**
+ * Register a theme with Headlamp.
+ *
+ * @param name - The name of the theme.
+ * @param theme - The theme to register.
+ *
+ * @example
+ *
+ * ```ts
+ * import { createTheme } from '@kinvolk/headlamp-plugin/lib/Theme';
+ * import { registerTheme } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * const myTheme = createTheme({
+ *   palette: {
+ *     primary: {
+ *       main: '#ff0000',
+ *     },
+ *   },
+ * });
+ *
+ * registerTheme('my-theme', myTheme);
+ * ```
+ */
+export function registerTheme(name: string, theme: Theme) {
+  store.dispatch(addTheme({ name, theme }));
 }
 
 export {
