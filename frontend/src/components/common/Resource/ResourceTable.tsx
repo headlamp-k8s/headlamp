@@ -1,6 +1,6 @@
 import { MenuItem, TableCellProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { MRT_FilterFns, MRT_Row, MRT_SortingFn } from 'material-react-table';
+import { MRT_FilterFns, MRT_Row, MRT_SortingFn, MRT_TableInstance } from 'material-react-table';
 import { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
@@ -20,6 +20,7 @@ import Link from '../Link';
 import Table, { TableColumn } from '../Table';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
+import ResourceTableMultiActions from './ResourceTableMultiActions';
 import { RestartButton } from './RestartButton';
 import ScaleButton from './ScaleButton';
 import ViewButton from './ViewButton';
@@ -84,6 +85,8 @@ export interface ResourceTableProps<RowItem> {
   columns: (ResourceTableColumn<RowItem> | ColumnType)[];
   /** Show or hide row actions @default false*/
   enableRowActions?: boolean;
+  /** Show or hide row selections and actions @default false*/
+  enableRowSelection?: boolean;
   actions?: null | RowAction[];
   /** Provide a list of columns that won't be shown and cannot be turned on */
   hideColumns?: string[] | null;
@@ -253,6 +256,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
     defaultGlobalFilter,
     actions,
     enableRowActions = false,
+    enableRowSelection = false,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
   const theme = useTheme();
@@ -459,6 +463,22 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
     };
   }, [actionsProcessed]);
 
+  const wrappedEnableRowSelection = useMemo(() => {
+    if (import.meta.env.REACT_APP_HEADLAMP_ENABLE_ROW_SELECTION === 'false') {
+      return false;
+    }
+    return enableRowSelection;
+  }, [enableRowSelection]);
+
+  const renderRowSelectionToolbar = useMemo(() => {
+    if (!wrappedEnableRowSelection) {
+      return undefined;
+    }
+    return ({ table }: { table: MRT_TableInstance<Record<string, any>> }) => (
+      <ResourceTableMultiActions table={table} />
+    );
+  }, [wrappedEnableRowSelection]);
+
   function onColumnsVisibilityChange(updater: any): void {
     setColumnVisibility(oldCols => {
       const newCols = updater(oldCols);
@@ -491,6 +511,8 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
       <Table
         enableFullScreenToggle={false}
         enableFacetedValues
+        enableRowSelection={wrappedEnableRowSelection}
+        renderRowSelectionToolbar={renderRowSelectionToolbar}
         errorMessage={errorMessage}
         // @todo: once KubeObject is not any we can remove this casting
         columns={allColumns as TableColumn<Record<string, any>>[]}

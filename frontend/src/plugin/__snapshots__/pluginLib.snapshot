@@ -185,6 +185,7 @@
   "DefaultHeadlampEvents": {
     "CREATE_RESOURCE": "headlamp.create-resource",
     "DELETE_RESOURCE": "headlamp.delete-resource",
+    "DELETE_RESOURCES": "headlamp.delete-resources",
     "DETAILS_VIEW": "headlamp.details-view",
     "EDIT_RESOURCE": "headlamp.edit-resource",
     "ERROR_BOUNDARY": "headlamp.error-boundary",
