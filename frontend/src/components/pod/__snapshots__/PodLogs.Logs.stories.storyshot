@@ -4,6 +4,7 @@
   />
   <div
     class="MuiDialog-root MuiModal-root css-zw3mfo-MuiModal-root-MuiDialog-root"
+    logview="[object Object]"
     role="presentation"
   >
     <div
