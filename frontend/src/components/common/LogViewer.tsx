@@ -3,7 +3,7 @@ import { FitAddon } from '@xterm/addon-fit';
 import { ISearchOptions, SearchAddon } from '@xterm/addon-search';
 import { Terminal as XTerminal } from '@xterm/xterm';
 import _ from 'lodash';
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useTranslation } from 'react-i18next';
 import ActionButton from './ActionButton';
@@ -64,6 +64,20 @@ export function LogViewer(props: LogViewerProps) {
     element.click();
   }
 
+  /**
+   * This is used to pass the logView state to the Dialog component to handle full screen
+   */
+  const [logView, setLogView] = useState({
+    hasAdjustment: false,
+    setter: (value: boolean) => {
+      logViewSetter(value);
+    },
+  });
+
+  function logViewSetter(value: boolean) {
+    setLogView({ ...logView, hasAdjustment: value });
+  }
+
   React.useEffect(() => {
     if (!terminalContainerRef || !!xtermRef.current) {
       return;
@@ -106,7 +120,7 @@ export function LogViewer(props: LogViewerProps) {
       searchAddonRef.current?.dispose();
       xtermRef.current = null;
     };
-  }, [terminalContainerRef, xtermRef.current]);
+  }, [terminalContainerRef, xtermRef.current, logView.hasAdjustment]);
 
   React.useEffect(() => {
     if (!xtermRef.current) {
@@ -129,7 +143,7 @@ export function LogViewer(props: LogViewerProps) {
   }
 
   return (
-    <Dialog title={title} withFullScreen onClose={onClose} {...other}>
+    <Dialog title={title} withFullScreen logView={logView} onClose={onClose} {...other}>
       <DialogContent
         sx={theme => ({
           height: '80%',

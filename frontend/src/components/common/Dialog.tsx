@@ -76,6 +76,7 @@ export function DialogTitle(props: OurDialogTitleProps) {
 export interface OurDialogProps {
   withFullScreen?: boolean;
   onFullScreenToggled?: (isFullScreen: boolean) => void;
+  logView?: any;
   titleProps?: OurDialogTitleProps;
 }
 
@@ -106,6 +107,9 @@ export function Dialog(props: DialogProps) {
 
       return newFullScreenState;
     });
+
+    // If we are using the log viewer component this handles the full screen sizing for xterm
+    props.logView?.setter(!props.logView.hasAdjustment);
   }
 
   function FullScreenButton() {
