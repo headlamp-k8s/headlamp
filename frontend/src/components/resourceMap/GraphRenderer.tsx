@@ -15,6 +15,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../common';
 import { KubeRelationEdge } from './edges/KubeRelationEdge';
+import { maxZoom, minZoom } from './graphConstants';
 import { GraphControls } from './GraphControls';
 import { GroupNodeComponent } from './nodes/GroupNode';
 import { KubeGroupNodeComponent } from './nodes/KubeGroupNode';
@@ -81,8 +82,8 @@ export function GraphRenderer({
           onBackgroundClick?.();
         }
       }}
-      minZoom={0.1}
-      maxZoom={2.0}
+      minZoom={minZoom}
+      maxZoom={maxZoom}
       connectionMode={ConnectionMode.Loose}
     >
       <Background variant={BackgroundVariant.Dots} style={{ color: theme.palette.divider }} />

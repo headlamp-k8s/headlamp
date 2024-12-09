@@ -2,15 +2,7 @@ import '@xyflow/react/dist/base.css';
 import './GraphView.css';
 import { Icon } from '@iconify/react';
 import { Box, Chip, Theme, ThemeProvider } from '@mui/material';
-import {
-  Edge,
-  getNodesBounds,
-  Node,
-  Panel,
-  ReactFlowProvider,
-  useReactFlow,
-  useStore,
-} from '@xyflow/react';
+import { Edge, Node, Panel, ReactFlowProvider } from '@xyflow/react';
 import {
   createContext,
   ReactNode,
@@ -45,6 +37,7 @@ import { ResourceSearch } from './search/ResourceSearch';
 import { SelectionBreadcrumbs } from './SelectionBreadcrumbs';
 import { allSources, GraphSourceManager, useSources } from './sources/GraphSources';
 import { GraphSourcesView } from './sources/GraphSourcesView';
+import { useGraphViewport } from './useGraphViewport';
 import { useQueryParamsState } from './useQueryParamsState';
 
 interface GraphViewContent {
@@ -121,8 +114,6 @@ function GraphViewContent({
     edges: [],
   });
 
-  const flow = useReactFlow();
-
   // Apply filters
   const filteredGraph = useMemo(() => {
     const filters = [...defaultFilters];
@@ -146,54 +137,18 @@ function GraphViewContent({
     return { visibleGraph, fullGraph: graph };
   }, [filteredGraph, groupBy, selectedNodeId, expandAll]);
 
-  // Apply layout to visible graph
-  const aspectRatio = useStore(it => it.width / it.height);
-  const reactFlowWidth = useStore(it => it.width);
-  const reactFlowHeight = useStore(it => it.height);
-
-  /**
-   * Zooms the viewport to 100% zoom level
-   * It will center the nodes if they fit into view
-   * Or if they don't fit it:
-   *  - align to top if they don't fit vertically
-   *  - align to left if they don't fit horizontally
-   */
-  const zoomTo100 = useCallback(
-    (nodes: Node[]) => {
-      const bounds = getNodesBounds(nodes);
-
-      const defaultViewportPaddingPx = 50;
-
-      const topLeftOrigin = { x: defaultViewportPaddingPx, y: defaultViewportPaddingPx };
-      const centerOrigin = {
-        x: reactFlowWidth / 2 - bounds.width / 2,
-        y: reactFlowHeight / 2 - bounds.height / 2,
-      };
-
-      const xFits = bounds.width + defaultViewportPaddingPx * 2 <= reactFlowWidth;
-      const yFits = bounds.height + defaultViewportPaddingPx * 2 <= reactFlowHeight;
-
-      const defaultZoomViewport = {
-        x: xFits ? centerOrigin.x : topLeftOrigin.x,
-        y: yFits ? centerOrigin.y : topLeftOrigin.y,
-        zoom: 1,
-      };
-
-      flow.setViewport(defaultZoomViewport);
-    },
-    [flow, reactFlowWidth, reactFlowHeight]
-  );
+  const viewport = useGraphViewport();
 
   useEffect(() => {
-    applyGraphLayout(visibleGraph, aspectRatio).then(layout => {
+    applyGraphLayout(visibleGraph, viewport.aspectRatio).then(layout => {
       setLayoutedGraph(layout);
 
       // Only fit bounds when user hasn't moved viewport manually
       if (!viewportMovedRef.current) {
-        zoomTo100(layout.nodes);
+        viewport.updateViewport({ nodes: layout.nodes });
       }
     });
-  }, [visibleGraph, aspectRatio, zoomTo100]);
+  }, [visibleGraph, viewport]);
 
   // Reset after view change
   useLayoutEffect(() => {
@@ -324,12 +279,20 @@ function GraphViewContent({
                   }
                 }}
                 controlActions={
-                  <GraphControlButton
-                    title={t('Zoom to 100%')}
-                    onClick={() => zoomTo100(layoutedGraph.nodes)}
-                  >
-                    100%
-                  </GraphControlButton>
+                  <>
+                    <GraphControlButton
+                      title={t('Fit to screen')}
+                      onClick={() => viewport.updateViewport({ mode: 'fit' })}
+                    >
+                      <Icon icon="mdi:fit-to-screen" />
+                    </GraphControlButton>
+                    <GraphControlButton
+                      title={t('Zoom to 100%')}
+                      onClick={() => viewport.updateViewport({ mode: '100%' })}
+                    >
+                      100%
+                    </GraphControlButton>
+                  </>
                 }
               >
                 <Panel position="top-left">
