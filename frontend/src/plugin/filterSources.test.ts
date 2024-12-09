@@ -5,15 +5,15 @@ describe('filterSources', () => {
   test('when sources is empty, it also returns an empty array', () => {
     const sources: string[] = [];
     const packageInfos: PluginInfo[] = [];
-    const settingsPackages = undefined;
+    const enabledPlugins: Record<string, boolean> = {};
     const appMode = false;
 
     const { sourcesToExecute } = filterSources(
       sources,
       packageInfos,
+      enabledPlugins,
       appMode,
-      '>=0.8.0-alpha.3',
-      settingsPackages
+      '>=0.8.0-alpha.3'
     );
     expect(sourcesToExecute.length).toBe(0);
   });
@@ -32,15 +32,15 @@ describe('filterSources', () => {
         },
       },
     ];
-    const settingsPackages = undefined;
+    const enabledPlugins: Record<string, boolean> = {};
     const appMode = false;
 
     const { sourcesToExecute, incompatiblePlugins } = filterSources(
       sources,
       packageInfos,
+      enabledPlugins,
       appMode,
-      '>=0.8.0-alpha.3',
-      settingsPackages
+      '>=0.8.0-alpha.3'
     );
     expect(Object.keys(incompatiblePlugins).length).toBe(0);
     expect(sourcesToExecute[0]).toBe('source1');
@@ -67,10 +67,14 @@ describe('filterSources', () => {
         isEnabled: false,
       },
     ];
+    const enabledPlugins: Record<string, boolean> = {
+      ourplugin1: false,
+    };
     const appMode = true;
     const { sourcesToExecute } = filterSources(
       sources,
       packageInfos,
+      enabledPlugins,
       appMode,
       '>=0.8.0-alpha.3',
       settingsPackages
@@ -121,10 +125,15 @@ describe('filterSources', () => {
         isEnabled: false,
       },
     ];
+    const enabledPlugins: Record<string, boolean> = {
+      ourplugin1: true,
+      ourplugin2: false,
+    };
     const appMode = true;
     const { sourcesToExecute } = filterSources(
       sources,
       packageInfos,
+      enabledPlugins,
       appMode,
       '>=0.8.0-alpha.3',
       settingsPackages
@@ -176,10 +185,15 @@ describe('filterSources', () => {
         isEnabled: true,
       },
     ];
+    const enabledPlugins: Record<string, boolean> = {
+      ourplugin1: true,
+      ourplugin2: true,
+    };
     const appMode = true;
     const { sourcesToExecute, incompatiblePlugins } = filterSources(
       sources,
       packageInfos,
+      enabledPlugins,
       appMode,
       '>=0.8.0-alpha.3',
       settingsPackages
@@ -193,6 +207,7 @@ describe('filterSources', () => {
     const disabledCompatCheck = filterSources(
       sources,
       packageInfos,
+      enabledPlugins,
       appMode,
       '', // empty string disables compatibility check
       settingsPackages
