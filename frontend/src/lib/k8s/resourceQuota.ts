@@ -35,6 +35,12 @@ class ResourceQuota extends KubeObject<KubeResourceQuota> {
   static apiVersion = 'v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeResourceQuota {
+    const baseObject = super.getBaseObject() as KubeResourceQuota;
+    baseObject.spec = { hard: {} };
+    return baseObject;
+  }
+
   get spec(): spec {
     return this.jsonData.spec;
   }

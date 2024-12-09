@@ -18,9 +18,19 @@ import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { getCluster } from '../../../lib/cluster';
+import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../../lib/k8s/KubeObject';
 import { getThemeName } from '../../../lib/themes';
 import { useId } from '../../../lib/util';
+import { clusterAction } from '../../../redux/clusterActionSlice';
+import {
+  EventStatus,
+  HeadlampEventType,
+  useEventCallback,
+} from '../../../redux/headlampEventSlice';
+import { AppDispatch } from '../../../redux/stores/store';
 import ConfirmButton from '../ConfirmButton';
 import { Dialog, DialogProps } from '../Dialog';
 import Loader from '../Loader';
@@ -49,14 +59,16 @@ import SimpleEditor from './SimpleEditor';
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
 export interface EditorDialogProps extends DialogProps {
-  /** The object to edit, or null to make the dialog be in "loading mode". Pass it an empty object if no contents are to be shown when the dialog is first open. */
-  item: KubeObjectIsh | null;
+  /** The object(s) to edit, or null to make the dialog be in "loading mode". Pass it an empty object if no contents are to be shown when the dialog is first open. */
+  item: KubeObjectIsh | object | object[] | string | null;
   /** Called when the dialog is closed. */
   onClose: () => void;
-  /** Called when the user clicks the save button. */
-  onSave: ((...args: any[]) => void) | null;
+  /** Called by a component for when the user clicks the save button. When set to "default", internal save logic is applied. */
+  onSave?: ((...args: any[]) => void) | 'default' | null;
   /** Called when the editor's contents change. */
   onEditorChanged?: ((newValue: string) => void) | null;
+  /** The function to open the dialog. */
+  setOpen?: (open: boolean) => void;
   /** The label to use for the save button. */
   saveLabel?: string;
   /** The error message to display. */
@@ -71,8 +83,9 @@ export default function EditorDialog(props: EditorDialogProps) {
   const {
     item,
     onClose,
-    onSave,
+    onSave = 'default',
     onEditorChanged,
+    setOpen,
     saveLabel,
     errorMessage,
     title,
@@ -88,11 +101,14 @@ export default function EditorDialog(props: EditorDialogProps) {
   const [lang, setLang] = React.useState(i18n.language);
   const themeName = getThemeName();
 
-  const originalCodeRef = React.useRef({ code: '', format: item ? 'yaml' : '' });
+  const initialCode = typeof item === 'string' ? item : yaml.dump(item || {});
+  const originalCodeRef = React.useRef({ code: initialCode, format: item ? 'yaml' : '' });
   const [code, setCode] = React.useState(originalCodeRef.current);
   const codeRef = React.useRef(code);
   const lastCodeCheckHandler = React.useRef(0);
-  const previousVersionRef = React.useRef(item?.metadata?.resourceVersion || '');
+  const previousVersionRef = React.useRef(
+    isKubeObjectIsh(item) ? item?.metadata?.resourceVersion || '' : ''
+  );
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState<
     KubeObjectInterface | KubeObjectInterface[] | null
@@ -103,42 +119,53 @@ export default function EditorDialog(props: EditorDialogProps) {
     const localData = localStorage.getItem('useSimpleEditor');
     return localData ? JSON.parse(localData) : false;
   });
+  const dispatchCreateEvent = useEventCallback(HeadlampEventType.CREATE_RESOURCE);
+  const dispatch: AppDispatch = useDispatch();
 
   function setUseSimpleEditor(data: boolean) {
     localStorage.setItem('useSimpleEditor', JSON.stringify(data));
     setUseSimpleEditorState(data);
   }
 
+  function isKubeObjectIsh(item: any): item is KubeObjectIsh {
+    return item && typeof item === 'object' && !Array.isArray(item) && 'metadata' in item;
+  }
+
   // Update the code when the item changes, but only if the code hasn't been touched.
   React.useEffect(() => {
     if (!item || Object.keys(item || {}).length === 0) {
+      const defaultCode = '# Enter your YAML or JSON here';
+      originalCodeRef.current = { code: defaultCode, format: 'yaml' };
+      setCode({ code: defaultCode, format: 'yaml' });
       return;
     }
 
-    const originalCode = originalCodeRef.current.code;
-    const itemCode =
-      originalCodeRef.current.format === 'json' ? JSON.stringify(item) : yaml.dump(item);
+    // Determine the format (YAML or JSON) and serialize to string
+    const format = looksLikeJson(originalCodeRef.current.code) ? 'json' : 'yaml';
+    const itemCode = format === 'json' ? JSON.stringify(item) : yaml.dump(item);
+
+    // Update the code if the item representation has changed
     if (itemCode !== originalCodeRef.current.code) {
-      originalCodeRef.current = { code: itemCode, format: originalCodeRef.current.format };
+      originalCodeRef.current = { code: itemCode, format };
+      setCode({ code: itemCode, format });
     }
 
-    if (!item.metadata) {
-      return;
-    }
+    // Additional handling for Kubernetes objects
+    if (isKubeObjectIsh(item) && item.metadata) {
+      const resourceVersionsDiffer =
+        (previousVersionRef.current || '') !== (item.metadata!.resourceVersion || '');
+      // Only change if the code hasn't been touched.
+      // We use the codeRef in this effect instead of the code, because we need to access the current
+      // state of the code but we don't want to trigger a re-render when we set the code here.
+      if (resourceVersionsDiffer || codeRef.current.code === originalCodeRef.current.code) {
+        // Prevent updating to the same code, which would lead to an infinite loop.
+        if (codeRef.current.code !== itemCode) {
+          setCode({ code: itemCode, format: originalCodeRef.current.format });
+        }
 
-    const resourceVersionsDiffer =
-      (previousVersionRef.current || '') !== (item.metadata!.resourceVersion || '');
-    // Only change if the code hasn't been touched.
-    // We use the codeRef in this effect instead of the code, because we need to access the current
-    // state of the code but we don't want to trigger a re-render when we set the code here.
-    if (resourceVersionsDiffer || codeRef.current.code === originalCode) {
-      // Prevent updating to the same code, which would lead to an infinite loop.
-      if (codeRef.current.code !== itemCode) {
-        setCode({ code: itemCode, format: originalCodeRef.current.format });
-      }
-
-      if (resourceVersionsDiffer && !!item.metadata!.resourceVersion) {
-        previousVersionRef.current = item.metadata!.resourceVersion;
+        if (resourceVersionsDiffer && !!item.metadata!.resourceVersion) {
+          previousVersionRef.current = item.metadata!.resourceVersion;
+        }
       }
     }
   }, [item]);
@@ -257,6 +284,34 @@ export default function EditorDialog(props: EditorDialogProps) {
     setCode(originalCodeRef.current);
   }
 
+  const applyFunc = async (newItems: KubeObjectInterface[], clusterName: string) => {
+    await Promise.allSettled(newItems.map(newItem => apply(newItem, clusterName))).then(
+      (values: any) => {
+        values.forEach((value: any, index: number) => {
+          if (value.status === 'rejected') {
+            let msg;
+            const kind = newItems[index].kind;
+            const name = newItems[index].metadata.name;
+            const apiVersion = newItems[index].apiVersion;
+            if (newItems.length === 1) {
+              msg = t('translation|Failed to create {{ kind }} {{ name }}.', { kind, name });
+            } else {
+              msg = t('translation|Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
+                kind,
+                name,
+                apiVersion,
+              });
+            }
+            setError(msg);
+            setOpen?.(true);
+            // throw msg;
+            throw new Error(msg);
+          }
+        });
+      }
+    );
+  };
+
   function handleSave() {
     // Verify the YAML even means anything before trying to use it.
     const { obj, format, error } = getObjectsFromCode(code);
@@ -273,7 +328,39 @@ export default function EditorDialog(props: EditorDialogProps) {
       setError(t("Error parsing the code. Please verify it's valid YAML or JSON!"));
       return;
     }
-    onSave!(obj);
+
+    const newItemDefs = obj!;
+
+    if (typeof onSave === 'string' && onSave === 'default') {
+      const resourceNames = newItemDefs.map(newItemDef => newItemDef.metadata.name);
+      const clusterName = getCluster() || '';
+
+      dispatch(
+        clusterAction(() => applyFunc(newItemDefs, clusterName), {
+          startMessage: t('translation|Applying {{ newItemName }}…', {
+            newItemName: resourceNames.join(','),
+          }),
+          cancelledMessage: t('translation|Cancelled applying {{ newItemName }}.', {
+            newItemName: resourceNames.join(','),
+          }),
+          successMessage: t('translation|Applied {{ newItemName }}.', {
+            newItemName: resourceNames.join(','),
+          }),
+          errorMessage: t('translation|Failed to apply {{ newItemName }}.', {
+            newItemName: resourceNames.join(','),
+          }),
+          cancelUrl: location.pathname,
+        })
+      );
+
+      dispatchCreateEvent({
+        status: EventStatus.CONFIRMED,
+      });
+
+      onClose();
+    } else if (typeof onSave === 'function') {
+      onSave!(obj);
+    }
   }
 
   function makeEditor() {
@@ -309,7 +396,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   const errorLabel = error || errorMessage;
   let dialogTitle = title;
   if (!dialogTitle && item) {
-    const itemName = item.metadata?.name || t('New Object');
+    const itemName = (isKubeObjectIsh(item) && item.metadata?.name) || t('New Object');
     dialogTitle = isReadOnly()
       ? t('translation|View: {{ itemName }}', { itemName })
       : t('translation|Edit: {{ itemName }}', { itemName });

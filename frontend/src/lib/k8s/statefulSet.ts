@@ -13,7 +13,7 @@ export interface KubeStatefulSet extends KubeObjectInterface {
       type: string;
     };
     template: {
-      metadata: KubeMetadata;
+      metadata?: KubeMetadata;
       spec: KubePodSpec;
     };
     [other: string]: any;
@@ -35,6 +35,36 @@ class StatefulSet extends KubeObject<KubeStatefulSet> {
 
   get status() {
     return this.jsonData.status;
+  }
+
+  static getBaseObject(): KubeStatefulSet {
+    const baseObject = super.getBaseObject() as KubeStatefulSet;
+    baseObject.metadata = {
+      ...baseObject.metadata,
+      namespace: '',
+    };
+    baseObject.spec = {
+      selector: {
+        matchLabels: { app: 'headlamp' },
+      },
+      updateStrategy: {
+        type: 'RollingUpdate',
+        rollingUpdate: { partition: 0 },
+      },
+      template: {
+        spec: {
+          containers: [
+            {
+              name: '',
+              image: '',
+              imagePullPolicy: 'Always',
+            },
+          ],
+          nodeName: '',
+        },
+      },
+    };
+    return baseObject;
   }
 
   getContainers(): KubeContainer[] {

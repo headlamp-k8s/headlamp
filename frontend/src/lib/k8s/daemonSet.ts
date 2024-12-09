@@ -13,7 +13,7 @@ export interface KubeDaemonSet extends KubeObjectInterface {
     };
     selector: LabelSelector;
     template: {
-      metadata: KubeMetadata;
+      metadata?: KubeMetadata;
       spec: KubePodSpec;
     };
     [otherProps: string]: any;
@@ -35,6 +35,38 @@ class DaemonSet extends KubeObject<KubeDaemonSet> {
 
   get status() {
     return this.jsonData.status;
+  }
+
+  static getBaseObject(): KubeDaemonSet {
+    const baseObject = super.getBaseObject() as KubeDaemonSet;
+    baseObject.metadata = {
+      ...baseObject.metadata,
+      namespace: '',
+    };
+    baseObject.spec = {
+      updateStrategy: {
+        type: 'RollingUpdate',
+        rollingUpdate: {
+          maxUnavailable: 1,
+        },
+      },
+      selector: {
+        matchLabels: { app: 'headlamp' },
+      },
+      template: {
+        spec: {
+          containers: [
+            {
+              name: '',
+              image: '',
+              imagePullPolicy: 'Always',
+            },
+          ],
+          nodeName: '',
+        },
+      },
+    };
+    return baseObject;
   }
 
   getContainers(): KubeContainer[] {

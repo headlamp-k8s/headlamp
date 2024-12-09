@@ -31,6 +31,19 @@ class PersistentVolumeClaim extends KubeObject<KubePersistentVolumeClaim> {
   static apiVersion = 'v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubePersistentVolumeClaim {
+    const baseObject = super.getBaseObject() as KubePersistentVolumeClaim;
+    baseObject.metadata = {
+      ...baseObject.metadata,
+      namespace: '',
+    };
+    baseObject.spec = {
+      storageClassName: '',
+      volumeName: '',
+    };
+    return baseObject;
+  }
+
   get spec() {
     return this.jsonData.spec;
   }
