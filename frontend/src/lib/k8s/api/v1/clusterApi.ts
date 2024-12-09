@@ -78,7 +78,8 @@ export async function setCluster(clusterReq: ClusterRequest) {
 // @todo: needs documenting.
 
 export async function deleteCluster(
-  cluster: string
+  cluster: string,
+  removeKubeConfig?: boolean
 ): Promise<{ clusters: ConfigState['clusters'] }> {
   if (cluster) {
     const kubeconfig = await findKubeconfigByClusterName(cluster);
@@ -89,12 +90,11 @@ export async function deleteCluster(
     }
   }
 
-  return request(
-    `/cluster/${cluster}`,
-    { method: 'DELETE', headers: { ...getHeadlampAPIHeaders() } },
-    false,
-    false
-  );
+  const url = removeKubeConfig
+    ? `/cluster/${cluster}?removeKubeconfig=true`
+    : `/cluster/${cluster}`;
+
+  return request(url, { method: 'DELETE', headers: { ...getHeadlampAPIHeaders() } }, false, false);
 }
 
 /**
