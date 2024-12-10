@@ -29,6 +29,29 @@ export default {
               items: podList,
             })
           ),
+          http.get('http://localhost:4466/apis/metrics.k8s.io/v1beta1/pods', () =>
+            HttpResponse.json({
+              kind: 'PodMetricsList',
+              apiVersion: 'metrics.k8s.io/v1beta1',
+              metadata: {},
+              items: [
+                {
+                  metadata: {
+                    name: 'successful',
+                  },
+                  containers: [
+                    {
+                      name: 'etcd',
+                      usage: {
+                        cpu: '16317640n',
+                        memory: '47544Ki',
+                      },
+                    },
+                  ],
+                },
+              ],
+            })
+          ),
         ],
       },
     },
