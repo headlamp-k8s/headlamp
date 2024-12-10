@@ -300,11 +300,14 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
       cluster,
       clusters,
       namespace,
+      refetchInterval,
       ...queryParams
     }: {
       cluster?: string;
       clusters?: string[];
       namespace?: string | string[];
+      /** How often to refetch the list. Won't refetch by default. Disables watching if set. */
+      refetchInterval?: number;
     } & QueryParameters = {}
   ) {
     const fallbackClusters = useClusterGroup();
@@ -334,6 +337,7 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
       queryParams: queryParams,
       kubeObjectClass: this,
       requests,
+      refetchInterval,
     });
 
     return result;
