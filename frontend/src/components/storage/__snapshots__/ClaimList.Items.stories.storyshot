@@ -890,18 +890,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-tubot5-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="default"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    default
-                  </a>
-                </span>
+                  default
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-cawnn5-MuiTableCell-root"
@@ -927,18 +923,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-2lpxtb-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="pvc-abc-1234"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    pvc-abc-1234
-                  </a>
-                </span>
+                  pvc-abc-1234
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-okjmrx-MuiTableCell-root"
@@ -1069,18 +1061,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-2lpxtb-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="pvc-abc-1234"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    pvc-abc-1234
-                  </a>
-                </span>
+                  pvc-abc-1234
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-okjmrx-MuiTableCell-root"
