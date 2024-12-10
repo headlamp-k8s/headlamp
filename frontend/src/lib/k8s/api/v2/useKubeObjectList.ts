@@ -39,10 +39,12 @@ export function kubeObjectListQuery<K extends KubeObject>(
   endpoint: KubeObjectEndpoint,
   namespace: string | undefined,
   cluster: string,
-  queryParams: QueryParameters
+  queryParams: QueryParameters,
+  refetchInterval?: number
 ): QueryObserverOptions<ListResponse<K> | undefined | null, ApiError> {
   return {
     placeholderData: null,
+    refetchInterval,
     queryKey: [
       'kubeObject',
       'list',
@@ -368,6 +370,7 @@ export function useKubeObjectList<K extends KubeObject>({
   kubeObjectClass,
   queryParams,
   watch = true,
+  refetchInterval,
 }: {
   requests: Array<{ cluster: string; namespaces?: string[] }>;
   /** Class to instantiate the object with */
@@ -375,6 +378,8 @@ export function useKubeObjectList<K extends KubeObject>({
   queryParams?: QueryParameters;
   /** Watch for updates @default true */
   watch?: boolean;
+  /** How often to refetch the list. Won't refetch by default. Disables watching if set. */
+  refetchInterval?: number;
 }): [Array<K> | null, ApiError | null] &
   QueryListResponse<Array<ListResponse<K> | undefined | null>, K, ApiError> {
   const maybeNamespace = requests.find(it => it.namespaces)?.namespaces?.[0];
@@ -402,7 +407,8 @@ export function useKubeObjectList<K extends KubeObject>({
                     endpoint,
                     namespace,
                     cluster,
-                    cleanedUpQueryParams
+                    cleanedUpQueryParams,
+                    refetchInterval
                   )
                 )
               : kubeObjectListQuery<K>(
@@ -410,7 +416,8 @@ export function useKubeObjectList<K extends KubeObject>({
                   endpoint,
                   undefined,
                   cluster,
-                  cleanedUpQueryParams
+                  cleanedUpQueryParams,
+                  refetchInterval
                 )
           )
         : [],
@@ -450,7 +457,7 @@ export function useKubeObjectList<K extends KubeObject>({
     },
   });
 
-  const shouldWatch = watch && !query.isLoading;
+  const shouldWatch = watch && !refetchInterval && !query.isLoading;
 
   const [listsToWatch, setListsToWatch] = useState<
     { cluster: string; namespace?: string; resourceVersion: string }[]
