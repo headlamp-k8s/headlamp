@@ -13,6 +13,12 @@ class IngressClass extends KubeObject<KubeIngressClass> {
   static apiVersion = 'networking.k8s.io/v1';
   static isNamespaced = false;
 
+  static getBaseObject(): KubeIngressClass {
+    const baseObject = super.getBaseObject() as KubeIngressClass;
+    baseObject.spec = { controller: '' };
+    return baseObject;
+  }
+
   get spec(): KubeIngressClass['spec'] {
     return this.jsonData.spec;
   }

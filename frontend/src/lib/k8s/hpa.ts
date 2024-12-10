@@ -172,6 +172,17 @@ class HPA extends KubeObject<KubeHPA> {
   static apiVersion = 'autoscaling/v2';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeHPA {
+    const baseObject = super.getBaseObject() as KubeHPA;
+    baseObject.spec = {
+      maxReplicas: 0,
+      minReplicas: 0,
+      scaleTargetRef: { apiVersion: '', kind: '', name: '' },
+      metrics: [],
+    };
+    return baseObject;
+  }
+
   get spec(): HpaSpec {
     return this.jsonData.spec;
   }

@@ -35,6 +35,7 @@
     "ConfirmButton": [Function],
     "ConfirmDialog": [Function],
     "CreateButton": [Function],
+    "CreateResourceButton": [Function],
     "DateLabel": [Function],
     "DeleteButton": [Function],
     "Dialog": [Function],

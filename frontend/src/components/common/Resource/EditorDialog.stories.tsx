@@ -2,12 +2,23 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Switch from '@mui/material/Switch';
 import { Meta, StoryFn } from '@storybook/react';
+import { Provider } from 'react-redux';
+import store from '../../../redux/stores/store';
 import { EditorDialog, EditorDialogProps } from '..';
 
 export default {
   title: 'Resource/EditorDialog',
   component: EditorDialog,
   argTypes: {},
+  decorators: [
+    Story => {
+      return (
+        <Provider store={store}>
+          <Story />
+        </Provider>
+      );
+    },
+  ],
 } as Meta;
 
 const Template: StoryFn<EditorDialogProps> = args => {

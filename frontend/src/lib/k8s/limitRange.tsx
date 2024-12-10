@@ -32,6 +32,34 @@ export class LimitRange extends KubeObject<KubeLimitRange> {
   static apiVersion = 'v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeLimitRange {
+    const baseObject = super.getBaseObject() as KubeLimitRange;
+    baseObject.spec = {
+      limits: [
+        {
+          default: {
+            cpu: '',
+            memory: '',
+          },
+          defaultRequest: {
+            cpu: '',
+            memory: '',
+          },
+          max: {
+            cpu: '',
+            memory: '',
+          },
+          min: {
+            cpu: '',
+            memory: '',
+          },
+          type: '',
+        },
+      ],
+    };
+    return baseObject;
+  }
+
   get spec() {
     return this.jsonData.spec;
   }

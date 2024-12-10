@@ -599,6 +599,18 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
         return 'Error';
     }
   }
+
+  static getBaseObject(): Omit<KubeObjectInterface, 'metadata'> & {
+    metadata: Partial<KubeMetadata>;
+  } {
+    return {
+      apiVersion: Array.isArray(this.apiVersion) ? this.apiVersion[0] : this.apiVersion,
+      kind: this.kind,
+      metadata: {
+        name: '',
+      },
+    };
+  }
 }
 
 /**

@@ -34,6 +34,29 @@ class Endpoints extends KubeObject<KubeEndpoint> {
   static apiVersion = 'v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeEndpoint {
+    const baseObject = super.getBaseObject() as KubeEndpoint;
+    baseObject.subsets = [
+      {
+        addresses: [
+          {
+            hostname: '',
+            ip: '',
+          },
+        ],
+        ports: [
+          {
+            name: '',
+            appProtocol: 'http',
+            port: 80,
+            protocol: 'TCP',
+          },
+        ],
+      },
+    ];
+    return baseObject;
+  }
+
   // @todo Remove this when we can break backward compatibility.
   static get detailsRoute() {
     return 'Endpoint';

@@ -13,6 +13,15 @@ class StorageClass extends KubeObject<KubeStorageClass> {
   static apiVersion = 'storage.k8s.io/v1';
   static isNamespaced = false;
 
+  static getBaseObject(): KubeStorageClass {
+    const baseObject = super.getBaseObject() as KubeStorageClass;
+    baseObject.provisioner = '';
+    baseObject.reclaimPolicy = '';
+    baseObject.volumeBindingMode = '';
+    baseObject.allowVolumeExpansion = false;
+    return baseObject;
+  }
+
   get provisioner() {
     return this.jsonData.provisioner;
   }

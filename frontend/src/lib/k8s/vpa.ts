@@ -83,6 +83,18 @@ class VPA extends KubeObject<KubeVPA> {
   static apiVersion = 'autoscaling.k8s.io/v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeVPA {
+    const baseObject = super.getBaseObject() as KubeVPA;
+    baseObject.spec = {
+      targetRef: {
+        apiVersion: '',
+        kind: '',
+        name: '',
+      },
+    };
+    return baseObject;
+  }
+
   static async isEnabled(): Promise<boolean> {
     let res;
     try {

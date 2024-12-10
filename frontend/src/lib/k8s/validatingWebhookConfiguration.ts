@@ -29,6 +29,32 @@ class ValidatingWebhookConfiguration extends KubeObject<KubeValidatingWebhookCon
   static apiVersion = 'admissionregistration.k8s.io/v1';
   static isNamespaced = false;
 
+  static getBaseObject(): KubeValidatingWebhookConfiguration {
+    const baseObject = super.getBaseObject() as KubeValidatingWebhookConfiguration;
+    baseObject.webhooks = [
+      {
+        admissionReviewVersions: [],
+        clientConfig: {
+          caBundle: '',
+          service: {
+            name: '',
+            namespace: '',
+          },
+        },
+        name: '',
+        rules: [
+          {
+            apiGroups: [],
+            apiVersions: [],
+            operations: [],
+            resources: [],
+          },
+        ],
+      },
+    ];
+    return baseObject;
+  }
+
   get webhooks(): KubeValidatingWebhookConfiguration['webhooks'] {
     return this.jsonData.webhooks;
   }

@@ -48,6 +48,32 @@ class MutatingWebhookConfiguration extends KubeObject<KubeMutatingWebhookConfigu
   static apiVersion = 'admissionregistration.k8s.io/v1';
   static isNamespaced = false;
 
+  static getBaseObject(): KubeMutatingWebhookConfiguration {
+    const baseObject = super.getBaseObject() as KubeMutatingWebhookConfiguration;
+    baseObject.webhooks = [
+      {
+        admissionReviewVersions: [],
+        clientConfig: {
+          caBundle: '',
+          service: {
+            name: '',
+            namespace: '',
+          },
+        },
+        name: '',
+        rules: [
+          {
+            apiGroups: [],
+            apiVersions: [],
+            operations: [],
+            resources: [],
+          },
+        ],
+      },
+    ];
+    return baseObject;
+  }
+
   get webhooks(): KubeMutatingWebhookConfiguration['webhooks'] {
     return this.jsonData.webhooks;
   }

@@ -13,6 +13,15 @@ class PriorityClass extends KubeObject<KubePriorityClass> {
   static apiVersion = 'scheduling.k8s.io/v1';
   static isNamespaced = false;
 
+  static getBaseObject(): KubePriorityClass {
+    const baseObject = super.getBaseObject() as KubePriorityClass;
+    baseObject.value = 0;
+    baseObject.preemptionPolicy = '';
+    baseObject.globalDefault = false;
+    baseObject.description = '';
+    return baseObject;
+  }
+
   get value(): number {
     return this.jsonData!.value;
   }

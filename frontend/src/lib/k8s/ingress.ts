@@ -73,6 +73,39 @@ class Ingress extends KubeObject<KubeIngress> {
   static apiVersion = ['networking.k8s.io/v1', 'extensions/v1beta1'];
   static isNamespaced = true;
 
+  static getBaseObject(): KubeIngress {
+    const baseObject = super.getBaseObject() as KubeIngress;
+    baseObject.spec = {
+      rules: [
+        {
+          host: '',
+          http: {
+            paths: [
+              {
+                path: '',
+                backend: {
+                  service: {
+                    name: '',
+                    port: {
+                      number: 80,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+      ],
+      tls: [
+        {
+          hosts: [],
+          secretName: '',
+        },
+      ],
+    };
+    return baseObject;
+  }
+
   // Normalized, cached rules.
   private cachedRules: IngressRule[] = [];
 

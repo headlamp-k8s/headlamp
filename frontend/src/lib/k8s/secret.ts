@@ -11,6 +11,12 @@ class Secret extends KubeObject<KubeSecret> {
   static apiVersion = 'v1';
   static isNamespaced = true;
 
+  static getBaseObject(): KubeSecret {
+    const baseObject = super.getBaseObject() as KubeSecret;
+    baseObject.data = {};
+    return baseObject;
+  }
+
   get data() {
     return this.jsonData.data;
   }

@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { KubeObject } from '../../lib/k8s/KubeObject';
 import { localeDate } from '../../lib/util';
-import { Link, Loader, PageGrid, SectionHeader } from '../common';
+import { CreateResourceButton, Link, Loader, PageGrid, SectionHeader } from '../common';
 import BackLink from '../common/BackLink';
 import Empty from '../common/EmptyContent';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -69,11 +69,16 @@ function CustomResourceListRenderer(props: CustomResourceListProps) {
   const { crd } = props;
   const { t } = useTranslation('glossary');
 
+  const CRClass = crd.makeCRClass();
+
   return (
     <PageGrid>
       <BackLink />
       <SectionHeader
         title={crd.spec.names.kind}
+        titleSideActions={[
+          <CreateResourceButton resourceClass={CRClass} resourceName={crd.spec.names.kind} />,
+        ]}
         actions={[
           <Box mr={2}>
             <Link routeName="crd" params={{ name: crd.metadata.name }}>
@@ -176,6 +181,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
       title={title}
       headerProps={{
         noNamespaceFilter: !crd.isNamespaced,
+        titleSideActions: [],
       }}
       resourceClass={CRClass}
       columns={cols}
