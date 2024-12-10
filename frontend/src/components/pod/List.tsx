@@ -4,6 +4,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
+import { METRIC_REFETCH_INTERVAL_MS, PodMetrics } from '../../lib/k8s/PodMetrics';
+import { parseCpu, parseRam, unparseCpu, unparseRam } from '../../lib/units';
 import { timeAgo } from '../../lib/util';
 import { useNamespaces } from '../../redux/filterSlice';
 import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
@@ -62,6 +64,7 @@ function getReadinessGatesStatus(pods: Pod) {
 export interface PodListProps {
   pods: Pod[] | null;
   error: ApiError | null;
+  metrics: PodMetrics[] | null;
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
@@ -72,6 +75,7 @@ export function PodListRenderer(props: PodListProps) {
   const {
     pods,
     error,
+    metrics,
     hideColumns = [],
     reflectTableInURL = 'pods',
     noNamespaceFilter,
@@ -116,6 +120,41 @@ export function PodListRenderer(props: PodListProps) {
           label: t('translation|Status'),
           getValue: pod => pod.getDetailedStatus().reason,
           render: makePodStatusLabel,
+        },
+        {
+          id: 'cpu',
+          label: t('CPU'),
+          gridTemplate: 'min-content',
+          getValue: pod => {
+            const metric = metrics?.find(it => it.getName() === pod.getName());
+            if (!metric) return;
+
+            const cpuUsage =
+              metric?.jsonData.containers
+                .map(it => parseCpu(it.usage.cpu))
+                .reduce((a, b) => a + b, 0) ?? 0;
+
+            const { value, unit } = unparseCpu(String(cpuUsage));
+
+            return `${value} ${unit}`;
+          },
+        },
+        {
+          id: 'memory',
+          label: t('Memory'),
+          getValue: pod => {
+            const metric = metrics?.find(it => it.getName() === pod.getName());
+            if (!metric) return;
+
+            const memoryUsage =
+              metric?.jsonData.containers
+                .map(it => parseRam(it.usage.memory))
+                .reduce((a, b) => a + b, 0) ?? 0;
+
+            const { value, unit } = unparseRam(memoryUsage);
+
+            return `${value} ${unit}`;
+          },
         },
         {
           id: 'ip',
@@ -218,6 +257,10 @@ export function PodListRenderer(props: PodListProps) {
 
 export default function PodList() {
   const { items, error, clusterErrors } = Pod.useList({ namespace: useNamespaces() });
+  const { items: podMetrics, clusterErrors: metricsClusterErrors } = PodMetrics.useList({
+    namespace: useNamespaces(),
+    refetchInterval: METRIC_REFETCH_INTERVAL_MS,
+  });
 
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
 
@@ -230,6 +273,12 @@ export default function PodList() {
   }, [items, error]);
 
   return (
-    <PodListRenderer pods={items} error={error} clusterErrors={clusterErrors} reflectTableInURL />
+    <PodListRenderer
+      pods={items}
+      error={error}
+      metrics={podMetrics}
+      clusterErrors={{ ...metricsClusterErrors, ...clusterErrors }}
+      reflectTableInURL
+    />
   );
 }
