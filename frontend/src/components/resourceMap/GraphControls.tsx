@@ -46,7 +46,7 @@ export function GraphControls({ children }: { children?: React.ReactNode }) {
   const { t } = useTranslation();
   const minZoomReached = useStore(it => it.transform[2] <= it.minZoom);
   const maxZoomReached = useStore(it => it.transform[2] >= it.maxZoom);
-  const { zoomIn, zoomOut, fitView } = useReactFlow();
+  const { zoomIn, zoomOut } = useReactFlow();
 
   return (
     <Box display="flex" gap={1} flexDirection="column">
@@ -72,9 +72,6 @@ export function GraphControls({ children }: { children?: React.ReactNode }) {
           <Icon icon="mdi:minus" />
         </GraphControlButton>
       </ButtonGroup>
-      <GraphControlButton title={t('Fit to screen')} onClick={() => fitView()}>
-        <Icon icon="mdi:fit-to-screen" />
-      </GraphControlButton>
       {children}
     </Box>
   );
