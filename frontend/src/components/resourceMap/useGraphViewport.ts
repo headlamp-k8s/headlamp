@@ -1,5 +1,6 @@
 import { getNodesBounds, getViewportForBounds, Node, useReactFlow, useStore } from '@xyflow/react';
 import { useCallback, useMemo } from 'react';
+import { useLocalStorageState } from '../globalSearch/useLocalStorageState';
 import { maxZoom, minZoom, viewportPaddingPx } from './graphConstants';
 
 /**
@@ -16,6 +17,7 @@ type zoomMode = '100%' | 'fit';
 
 /** Helper hook to deal with viewport zooming */
 export const useGraphViewport = () => {
+  const [zoomMode, setZoomMode] = useLocalStorageState<zoomMode>('map-zoom-mode', '100%');
   const reactFlowWidth = useStore(it => it.width);
   const reactFlowHeight = useStore(it => it.height);
   const aspectRatio = useStore(it => it.width / it.height);
@@ -24,13 +26,17 @@ export const useGraphViewport = () => {
   const updateViewport = useCallback(
     ({
       nodes = flow.getNodes(),
-      mode = '100%',
+      mode = zoomMode,
     }: {
       /** List of nodes, if not provided will use current nodes in the graph */
       nodes?: Node[];
       /** Zoom mode. More info in the type definition {@link zoomMode} */
       mode?: zoomMode;
     }) => {
+      if (mode !== zoomMode) {
+        setZoomMode(() => mode);
+      }
+
       const bounds = getNodesBounds(nodes);
 
       if (mode === 'fit') {
@@ -74,7 +80,7 @@ export const useGraphViewport = () => {
 
       console.error('Unknown zoom mode', mode);
     },
-    [flow, reactFlowWidth, reactFlowHeight]
+    [flow, zoomMode, reactFlowWidth, reactFlowHeight]
   );
 
   return useMemo(() => ({ updateViewport, aspectRatio }), [updateViewport, aspectRatio]);
