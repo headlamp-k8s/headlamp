@@ -25,6 +25,7 @@ import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { KubeObjectInterface } from '../../../lib/k8s/KubeObject';
 import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
+import { METRIC_REFETCH_INTERVAL_MS, PodMetrics } from '../../../lib/k8s/PodMetrics';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { localeDate, useId } from '../../../lib/util';
@@ -976,6 +977,10 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
   };
 
   const [pods, error] = Pod.useList(queryData);
+  const { items: podMetrics } = PodMetrics.useList({
+    ...queryData,
+    refetchInterval: METRIC_REFETCH_INTERVAL_MS,
+  });
   const onlyOneNamespace = !!resource.metadata.namespace || resource.kind === 'Namespace';
   const hideNamespaceFilter = onlyOneNamespace || noSearch;
 
@@ -984,6 +989,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
       hideColumns={hideColumns || onlyOneNamespace ? ['namespace'] : undefined}
       pods={pods}
       error={error}
+      metrics={podMetrics}
       noNamespaceFilter={hideNamespaceFilter}
     />
   );
