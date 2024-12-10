@@ -69,6 +69,31 @@ Active.parameters = {
         http.get('http://localhost:4466/api/v1/resourcequotas', () => HttpResponse.error()),
         http.get('http://localhost:4466/api/v1/limitranges', () => HttpResponse.error()),
         http.get('http://localhost:4466/api/v1/pods', () => HttpResponse.error()),
+        http.get(
+          'http://localhost:4466/apis/metrics.k8s.io/v1beta1/namespaces/my-namespaces/pods',
+          () =>
+            HttpResponse.json({
+              kind: 'PodMetricsList',
+              apiVersion: 'metrics.k8s.io/v1beta1',
+              metadata: {},
+              items: [
+                {
+                  metadata: {
+                    name: 'successful',
+                  },
+                  containers: [
+                    {
+                      name: 'etcd',
+                      usage: {
+                        cpu: '16317640n',
+                        memory: '47544Ki',
+                      },
+                    },
+                  ],
+                },
+              ],
+            })
+        ),
       ],
     },
   },
