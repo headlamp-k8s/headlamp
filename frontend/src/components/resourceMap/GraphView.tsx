@@ -38,6 +38,7 @@ import {
 } from './graph/graphGrouping';
 import { applyGraphLayout } from './graph/graphLayout';
 import { GraphNode, GraphSource, GroupNode, isGroup, KubeObjectNode } from './graph/graphModel';
+import { viewportPaddingPx } from './graphConstants';
 import { GraphControlButton } from './GraphControls';
 import { GraphRenderer } from './GraphRenderer';
 import { NodeHighlight, useNodeHighlight } from './NodeHighlight';
@@ -162,16 +163,14 @@ function GraphViewContent({
     (nodes: Node[]) => {
       const bounds = getNodesBounds(nodes);
 
-      const defaultViewportPaddingPx = 50;
-
-      const topLeftOrigin = { x: defaultViewportPaddingPx, y: defaultViewportPaddingPx };
+      const topLeftOrigin = { x: viewportPaddingPx, y: viewportPaddingPx };
       const centerOrigin = {
         x: reactFlowWidth / 2 - bounds.width / 2,
         y: reactFlowHeight / 2 - bounds.height / 2,
       };
 
-      const xFits = bounds.width + defaultViewportPaddingPx * 2 <= reactFlowWidth;
-      const yFits = bounds.height + defaultViewportPaddingPx * 2 <= reactFlowHeight;
+      const xFits = bounds.width + viewportPaddingPx * 2 <= reactFlowWidth;
+      const yFits = bounds.height + viewportPaddingPx * 2 <= reactFlowHeight;
 
       const defaultZoomViewport = {
         x: xFits ? centerOrigin.x : topLeftOrigin.x,
