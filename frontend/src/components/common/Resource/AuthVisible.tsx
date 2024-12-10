@@ -45,9 +45,20 @@ export default function AuthVisible(props: AuthVisibleProps) {
     return null;
   }
 
+  const itemClass: KubeObjectClass | null = (item as KubeObject)?._class?.() ?? item;
+  const itemName = (item as KubeObject)?.getName?.();
+
   const { data } = useQuery<any>({
     enabled: !!item,
-    queryKey: ['authVisible', item, authVerb, subresource, namespace],
+    queryKey: [
+      'authVisible',
+      itemName,
+      itemClass.apiName,
+      itemClass.apiVersion,
+      authVerb,
+      subresource,
+      namespace,
+    ],
     queryFn: async () => {
       try {
         const res = await item!.getAuthorization(authVerb, { subresource, namespace });
