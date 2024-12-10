@@ -1,6 +1,6 @@
 import { Box, Paper, Table as MuiTable, TableCellProps, TableHead } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { styled } from '@mui/system';
+import { alpha, styled } from '@mui/system';
 import {
   MRT_BottomToolbar,
   MRT_Cell,
@@ -95,6 +95,7 @@ export type TableProps<RowItem extends Record<string, any>> = Omit<
    * Whether to show a loading spinner
    */
   loading?: boolean;
+  renderRowSelectionToolbar?: (props: { table: MRT_TableInstance<RowItem> }) => ReactNode;
 };
 
 // Use a zero-indexed "useURLState" hook, so pages are shown in the URL as 1-indexed
@@ -136,7 +137,12 @@ const StyledHeadRow = styled('tr')(({ theme }) => ({
   display: 'contents',
   background: theme.palette.tables.head.background,
 }));
-const StyledRow = styled('tr')({ display: 'contents' });
+const StyledRow = styled('tr')(({ theme }) => ({
+  display: 'contents',
+  '&[data-selected=true]': {
+    background: alpha(theme.palette.primary.main, 0.2),
+  },
+}));
 const StyledBody = styled('tbody')({ display: 'contents' });
 
 /**
@@ -185,18 +191,33 @@ export default function Table<RowItem extends Record<string, any>>({
     return (tableProps.data ?? []).filter(it => filterFunction(it));
   }, [tableProps.data, filterFunction]);
 
-  const gridTemplateColumns = tableProps.columns
-    .filter(it => {
-      const isHidden = tableProps.state?.columnVisibility?.[it.id!] === false;
-      return !isHidden;
-    })
-    .map(it => {
-      if (typeof it.gridTemplate === 'number') {
-        return `${it.gridTemplate}fr`;
-      }
-      return it.gridTemplate ?? '1fr';
-    })
-    .join(' ');
+  const gridTemplateColumns = useMemo(() => {
+    let preGridTemplateColumns = tableProps.columns
+      .filter(it => {
+        const isHidden = tableProps.state?.columnVisibility?.[it.id!] === false;
+        return !isHidden;
+      })
+      .map(it => {
+        if (typeof it.gridTemplate === 'number') {
+          return `${it.gridTemplate}fr`;
+        }
+        return it.gridTemplate ?? '1fr';
+      })
+      .join(' ');
+    if (tableProps.enableRowActions) {
+      preGridTemplateColumns = `${preGridTemplateColumns} 0.05fr`;
+    }
+    if (tableProps.enableRowSelection) {
+      preGridTemplateColumns = `0.05fr ${preGridTemplateColumns}`;
+    }
+
+    return preGridTemplateColumns;
+  }, [
+    tableProps.columns,
+    tableProps.state?.columnVisibility,
+    tableProps.enableRowActions,
+    tableProps.enableRowSelection,
+  ]);
 
   const paginationSelectProps = import.meta.env.UNDER_TEST
     ? {
@@ -223,6 +244,17 @@ export default function Table<RowItem extends Record<string, any>>({
       const pagination = updater({ pageIndex: Number(page) - 1, pageSize: Number(pageSize) });
       setPage(pagination.pageIndex + 1);
       setPageSize(pagination.pageSize);
+    },
+    renderToolbarInternalActions: props => {
+      const isSomeRowsSelected =
+        tableProps.enableRowSelection && props.table.getSelectedRowModel().rows.length !== 0;
+      if (isSomeRowsSelected) {
+        const renderRowSelectionToolbar = tableProps.renderRowSelectionToolbar;
+        if (renderRowSelectionToolbar !== undefined) {
+          return renderRowSelectionToolbar(props);
+        }
+      }
+      return null;
     },
     initialState: {
       density: 'compact',
@@ -266,6 +298,7 @@ export default function Table<RowItem extends Record<string, any>>({
     },
     muiTopToolbarProps: {
       sx: {
+        height: '3.5rem',
         backgroundColor: undefined,
       },
     },
@@ -315,10 +348,7 @@ export default function Table<RowItem extends Record<string, any>>({
           borderRadius: 1,
           borderBottom: 'none',
           overflow: 'hidden',
-          gridTemplateColumns:
-            tableProps.enableRowActions === true
-              ? `${gridTemplateColumns} 0.05fr`
-              : gridTemplateColumns,
+          gridTemplateColumns,
         }}
       >
         <TableHead sx={{ display: 'contents' }}>
@@ -331,13 +361,20 @@ export default function Table<RowItem extends Record<string, any>>({
                 isFiltered={header.column.getIsFiltered()}
                 sorting={header.column.getIsSorted()}
                 showColumnFilters={table.getState().showColumnFilters}
+                selected={
+                  table.getIsAllRowsSelected()
+                    ? 'all'
+                    : table.getIsSomeRowsSelected()
+                    ? 'some'
+                    : 'none'
+                }
               />
             ))}
           </StyledHeadRow>
         </TableHead>
         <StyledBody>
           {rows.map(row => (
-            <Row key={row.id} row={row} table={table} />
+            <Row key={row.id} row={row} table={table} isSelected={row.getIsSelected()} />
           ))}
         </StyledBody>
       </MuiTable>
@@ -355,6 +392,7 @@ const MemoHeadCell = memo(
     header: MRT_Header<any>;
     sorting: string | false;
     isFiltered: boolean;
+    selected: any;
     showColumnFilters: boolean;
   }) => {
     return (
@@ -365,19 +403,37 @@ const MemoHeadCell = memo(
     a.header.column.id === b.header.column.id &&
     a.sorting === b.sorting &&
     a.isFiltered === b.isFiltered &&
-    a.showColumnFilters === b.showColumnFilters
+    a.showColumnFilters === b.showColumnFilters &&
+    a.header.column.id === 'mrt-row-select'
+      ? a.selected === b.selected
+      : true
 );
 
-const Row = memo(({ row, table }: { table: MRT_TableInstance<any>; row: MRT_Row<any> }) => (
-  <StyledRow>
-    {row.getVisibleCells().map(cell => (
-      <MemoCell cell={cell} table={table} key={cell.id} />
-    ))}
-  </StyledRow>
-));
+const Row = memo(
+  ({
+    row,
+    table,
+    isSelected,
+  }: {
+    table: MRT_TableInstance<any>;
+    row: MRT_Row<any>;
+    isSelected: boolean;
+  }) => (
+    <StyledRow data-selected={isSelected}>
+      {row.getVisibleCells().map(cell => (
+        <MemoCell
+          cell={cell}
+          table={table}
+          key={cell.id}
+          isRowSelected={cell.row.getIsSelected()}
+        />
+      ))}
+    </StyledRow>
+  )
+);
 
 const MemoCell = memo(
-  ({ cell, table }: { cell: MRT_Cell<any, unknown>; table: any }) => {
+  ({ cell, table }: { cell: MRT_Cell<any, unknown>; table: any; isRowSelected: boolean }) => {
     return (
       <MRT_TableBodyCell
         staticRowIndex={-1}
@@ -393,5 +449,9 @@ const MemoCell = memo(
       />
     );
   },
-  (a, b) => a.cell.getValue() === b.cell.getValue()
+  (a, b) =>
+    a.cell.getValue() === b.cell.getValue() &&
+    (a.cell.column.id === 'mrt-row-select' && b.cell.column.id === 'mrt-row-select'
+      ? a.isRowSelected === b.isRowSelected
+      : true)
 );
