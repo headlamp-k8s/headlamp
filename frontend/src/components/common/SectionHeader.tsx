@@ -67,7 +67,13 @@ export default function SectionHeader(props: SectionHeaderProps) {
       </Grid>
       {actions.length > 0 && (
         <Grid item>
-          <Grid item container alignItems="center" justifyContent="flex-end">
+          <Grid
+            item
+            container
+            alignItems="center"
+            justifyContent="flex-end"
+            sx={{ minHeight: '40px' }}
+          >
             {actions.map((action, i) => (
               <Grid item key={i}>
                 {action}
