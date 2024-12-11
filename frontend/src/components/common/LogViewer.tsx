@@ -129,7 +129,17 @@ export function LogViewer(props: LogViewerProps) {
   }
 
   return (
-    <Dialog title={title} withFullScreen onClose={onClose} {...other}>
+    <Dialog
+      title={title}
+      onFullScreenToggled={() => {
+        setTimeout(() => {
+          fitAddonRef.current!.fit();
+        }, 1);
+      }}
+      withFullScreen
+      onClose={onClose}
+      {...other}
+    >
       <DialogContent
         sx={theme => ({
           height: '80%',
