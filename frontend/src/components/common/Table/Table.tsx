@@ -208,7 +208,7 @@ export default function Table<RowItem extends Record<string, any>>({
       preGridTemplateColumns = `${preGridTemplateColumns} 0.05fr`;
     }
     if (tableProps.enableRowSelection) {
-      preGridTemplateColumns = `0.05fr ${preGridTemplateColumns}`;
+      preGridTemplateColumns = `44px ${preGridTemplateColumns}`;
     }
 
     return preGridTemplateColumns;
@@ -314,6 +314,14 @@ export default function Table<RowItem extends Record<string, any>>({
         minWidth: 'unset',
         paddingTop: '0.5rem',
       },
+    },
+    muiSelectCheckboxProps: {
+      size: 'small',
+      sx: { padding: 0 },
+    },
+    muiSelectAllCheckboxProps: {
+      size: 'small',
+      sx: { padding: 0 },
     },
   });
 
