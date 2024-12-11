@@ -404,6 +404,10 @@ export default function EditorDialog(props: EditorDialogProps) {
 
   const dialogTitleId = useId('editor-dialog-title-');
 
+  if (!other.open && !other.keepMounted) {
+    return null;
+  }
+
   return (
     <Dialog
       title={dialogTitle}

@@ -2,7 +2,7 @@ import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ListItem, { ListItemProps } from '@mui/material/ListItem';
 import { useTheme } from '@mui/system';
-import React from 'react';
+import React, { memo } from 'react';
 import { generatePath } from 'react-router';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
@@ -27,7 +27,7 @@ export interface SidebarItemProps extends ListItemProps, SidebarEntry {
   hide?: boolean;
 }
 
-export default function SidebarItem(props: SidebarItemProps) {
+const SidebarItem = memo((props: SidebarItemProps) => {
   const {
     label,
     name,
@@ -248,4 +248,6 @@ export default function SidebarItem(props: SidebarItemProps) {
       )}
     </React.Fragment>
   );
-}
+});
+
+export default SidebarItem;
