@@ -295,13 +295,14 @@ function prepareRoutes(
   const defaultRoutes: SidebarItemProps[] = sidebars[DefaultSidebars.IN_CLUSTER];
   for (const route of defaultRoutes) {
     const routeFiltered =
-      filters.length > 0 && filters.filter(f => f(route)).length !== filters.length;
+      !route.hide && filters.length > 0 && filters.filter(f => f(route)).length !== filters.length;
     if (routeFiltered) {
       continue;
     }
 
     const newSubList = route.subList?.filter(
       subRoute =>
+        !subRoute.hide &&
         !(filters.length > 0 && filters.filter(f => f(subRoute)).length !== filters.length)
     );
     route.subList = newSubList;
