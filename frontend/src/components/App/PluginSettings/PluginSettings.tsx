@@ -240,6 +240,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             },
             {
               header: t('translation|Enable'),
+              accessorFn: (plugin: PluginInfo) => plugin.isEnabled,
               Cell: ({ row: { original: plugin } }: { row: MRT_Row<PluginInfo> }) => {
                 if (!plugin.isCompatible || !helpers.isElectron()) {
                   return null;
@@ -247,15 +248,13 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
                 return (
                   <EnableSwitch
                     aria-label={`Toggle ${plugin.name}`}
-                    checked={plugin.isEnabled}
+                    checked={!!plugin.isEnabled}
                     onChange={() => switchChangeHanlder(plugin)}
                     color="primary"
                     name={plugin.name}
                   />
                 );
               },
-              sort: (a: PluginInfo, b: PluginInfo) =>
-                a.isEnabled === b.isEnabled ? 0 : a.isEnabled ? -1 : 1,
             },
           ]
             // remove the enable column if we're not in app mode
