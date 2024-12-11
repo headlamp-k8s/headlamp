@@ -88,6 +88,7 @@
   "Log out": "Log out",
   "(No token set up)": "(No token set up)",
   "Account of current user": "Account of current user",
+  "Account": "Account",
   "Appbar Tools": "Appbar Tools",
   "show more": "show more",
   "Getting auth info: {{ clusterName }}": "Getting auth info: {{ clusterName }}",

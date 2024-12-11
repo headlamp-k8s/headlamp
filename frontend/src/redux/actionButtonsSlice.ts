@@ -22,6 +22,8 @@ export type RowAction = {
 export type AppBarAction = {
   id: string;
   action?: AppBarActionType;
+  label?: string;
+  onClick?: (args?: any) => void;
 };
 
 export enum DefaultHeaderAction {
