@@ -404,9 +404,7 @@ const MemoHeadCell = memo(
     a.sorting === b.sorting &&
     a.isFiltered === b.isFiltered &&
     a.showColumnFilters === b.showColumnFilters &&
-    a.header.column.id === 'mrt-row-select'
-      ? a.selected === b.selected
-      : true
+    (a.header.column.id === 'mrt-row-select' ? a.selected === b.selected : true)
 );
 
 const Row = memo(
