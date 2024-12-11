@@ -208,7 +208,7 @@ export default function Table<RowItem extends Record<string, any>>({
       preGridTemplateColumns = `${preGridTemplateColumns} 0.05fr`;
     }
     if (tableProps.enableRowSelection) {
-      preGridTemplateColumns = `0.05fr ${preGridTemplateColumns}`;
+      preGridTemplateColumns = `44px ${preGridTemplateColumns}`;
     }
 
     return preGridTemplateColumns;
@@ -315,6 +315,14 @@ export default function Table<RowItem extends Record<string, any>>({
         paddingTop: '0.5rem',
       },
     },
+    muiSelectCheckboxProps: {
+      size: 'small',
+      sx: { padding: 0 },
+    },
+    muiSelectAllCheckboxProps: {
+      size: 'small',
+      sx: { padding: 0 },
+    },
   });
 
   const rows = useMRT_Rows(table);
@@ -404,9 +412,7 @@ const MemoHeadCell = memo(
     a.sorting === b.sorting &&
     a.isFiltered === b.isFiltered &&
     a.showColumnFilters === b.showColumnFilters &&
-    a.header.column.id === 'mrt-row-select'
-      ? a.selected === b.selected
-      : true
+    (a.header.column.id === 'mrt-row-select' ? a.selected === b.selected : true)
 );
 
 const Row = memo(

@@ -363,7 +363,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
             return {
               id: 'namespace',
               header: t('glossary|Namespace'),
-              accessorFn: (item: RowItem) => item.getNamespace(),
+              accessorFn: (item: RowItem) => item.getNamespace() ?? '',
               filterVariant: 'multi-select',
               Cell: ({ row }: { row: MRT_Row<RowItem> }) =>
                 row.original?.getNamespace() ? (
