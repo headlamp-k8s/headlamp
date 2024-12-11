@@ -168,6 +168,9 @@ export function filterSources(
   });
 
   const compatible = enabledSourcesAndPackageInfos.filter(({ packageInfo }) => {
+    if (packageInfo.devDependencies?.['@kinvolk/headlamp-plugin']?.includes?.('workspace'))
+      return true;
+
     const isCompatible = semver.satisfies(
       semver.coerce(packageInfo.devDependencies?.['@kinvolk/headlamp-plugin']) || '',
       compatibleVersion

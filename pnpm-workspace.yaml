@@ -1,0 +1,14 @@
+packages:
+  - 'app'
+  - 'app/e2e-tests'
+  - 'e2e-tests'
+  - 'eslint-config'
+  - 'frontend'
+  - 'plugins/headlamp-plugin'
+  - 'load-tests'
+  - 'plugins/examples/*'
+
+catalog:
+  react: ^18.3.1
+  react-dom: ^18.3.1
+  typescript: 5.6.2

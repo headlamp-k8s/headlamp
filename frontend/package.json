@@ -13,7 +13,7 @@
     "@dagrejs/dagre": "^1.1.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@headlamp-k8s/eslint-config": "^0.6.0",
+    "@headlamp-k8s/eslint-config": "workspace:*",
     "@iconify/icons-mdi": "^1.2.9",
     "@iconify/react": "^3.2.1",
     "@monaco-editor/react": "^4.3.1",
@@ -28,6 +28,7 @@
     "@tanstack/react-query-devtools": "^5.51.24",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/react": "^16.0.0",
+    "@types/history": "4",
     "@types/humanize-duration": "^3.27.1",
     "@types/js-yaml": "^4.0.3",
     "@types/json-patch": "0.0.30",
@@ -64,6 +65,7 @@
     "eslint-plugin-unused-imports": "^4.1.3",
     "fake-indexeddb": "^6.0.0",
     "fuse.js": "^7.0.0",
+    "history": "^4.10.1",
     "https-browserify": "^1.0.0",
     "humanize-duration": "^3.27.2",
     "i18next": "^23.15.1",
@@ -77,8 +79,8 @@
     "notistack": "^3.0.1",
     "openapi-types": "^9.3.0",
     "process": "^0.11.10",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-dropzone": "^14.2.9",
     "react-hotkeys-hook": "^4.5.1",
     "react-i18next": "^15.0.2",
@@ -89,21 +91,22 @@
     "react-router-dom": "^5.3.0",
     "react-window": "^1.8.7",
     "recharts": "^2.1.4",
+    "redux": "^5.0.1",
     "semver": "^7.3.5",
     "spacetime": "^7.4.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
-    "typescript": "5.6.2",
+    "typescript": "catalog:",
     "url": "^0.11.0",
     "util": "^0.12.4",
     "vite": "^5.4.9",
     "vite-plugin-node-polyfills": "^0.22.0",
     "vite-plugin-svgr": "^4.2.0",
-    "web-worker": "^1.3.0"
+    "web-worker": "^1.3.0",
+    "yaml": "^2.6.1"
   },
   "overrides": {
     "domain-browser": "npm:dry-uninstall",
-    "typescript": "5.6.2",
     "vitest": "^2.1.1",
     "cheerio": "1.0.0-rc.12"
   },
@@ -117,7 +120,7 @@
     "start": "cross-env REACT_APP_HEADLAMP_BACKEND_TOKEN=headlamp vite",
     "preview": "vite preview",
     "prebuild": "npm run make-version",
-    "build": "cross-env PUBLIC_URL=./ NODE_OPTIONS=--max-old-space-size=8096 vite build && npx shx rm -f build/frontend/index.baseUrl.html",
+    "build": "cross-env PUBLIC_URL=./ NODE_OPTIONS=--max-old-space-size=8096 vite build && shx rm -f build/frontend/index.baseUrl.html",
     "pretest": "npm run make-version",
     "test": "vitest",
     "lint": "eslint --cache -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin --ignore-pattern ../plugins/headlamp-plugin/template --ignore-pattern ../plugins/headlamp-plugin/lib/",
@@ -142,46 +145,9 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint -c package.json --fix"
-    ],
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --config package.json --write"
-    ],
-    "../app/**/*.{ts,tsx}": [
-      "eslint -c package.json --fix"
-    ],
-    "../app/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --config package.json --write"
-    ],
-    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{ts,tsx}": [
-      "eslint -c package.json --fix"
-    ],
-    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --config package.json --write"
-    ],
-    "../plugins/examples/**/*.{ts,tsx}": [
-      "eslint -c package.json --fix --resolve-plugins-relative-to ."
-    ],
-    "../plugins/examples/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --config package.json --write"
-    ],
-    "../e2e-tests/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --config package.json --write"
-    ],
-    "../e2e-tests/**/*.{ts,tsx}": [
-      "eslint -c package.json --fix --resolve-plugins-relative-to ."
-    ]
-  },
   "eslintConfig": {
     "extends": [
-      "@headlamp-k8s",
+      "@headlamp-k8s/eslint-config/.eslintrc.yml",
       "prettier",
       "plugin:jsx-a11y/recommended"
     ]
@@ -189,6 +155,7 @@
   "prettier": "@headlamp-k8s/eslint-config/prettier-config",
   "devDependencies": {
     "@axe-core/react": "^4.3.2",
+    "@nodelib/fs.walk": "^3.0.1",
     "@storybook/addon-actions": "^8.3.5",
     "@storybook/addon-essentials": "^8.3.5",
     "@storybook/addon-interactions": "^8.3.5",
@@ -196,25 +163,24 @@
     "@storybook/blocks": "^8.3.5",
     "@storybook/manager-api": "^8.3.5",
     "@storybook/node-logger": "^8.3.5",
+    "@storybook/react": "^8.3.5",
     "@storybook/react-vite": "^8.3.5",
     "@storybook/test": "^8.3.5",
     "@storybook/theming": "^8.3.5",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/user-event": "^14.5.2",
-    "@types/nock": "^11.1.0",
     "@vitest/coverage-istanbul": "^2.1.1",
-    "husky": "^4.3.8",
     "i18next-parser": "^9.0.2",
     "jsdom": "^24.0.0",
-    "lint-staged": "^10.5.4",
     "msw": "2.4.9",
     "msw-storybook-addon": "2.0.3",
     "nock": "^14.0.0-beta.14",
     "prettier": "^2.7.1",
     "resize-observer-polyfill": "^1.5.1",
+    "shx": "^0.3.4",
     "storybook": "^8.3.5",
-    "typedoc": "^0.26.5",
-    "typedoc-plugin-markdown": "^4.2.3",
+    "typedoc": "^0.27.3",
+    "typedoc-plugin-markdown": "^4.3.1",
     "typedoc-plugin-rename-defaults": "^0.7.1",
     "vitest": "^2.1.1",
     "vitest-canvas-mock": "^0.3.3",
