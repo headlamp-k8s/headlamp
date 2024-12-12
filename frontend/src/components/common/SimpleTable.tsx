@@ -329,7 +329,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       {
         // Show a refresh button if the data is not up to date, so we allow the user to keep
         // reading the current data without "losing" it or being sent to the first page
-        currentData !== data && (
+        currentData !== data && page !== 0 && (
           <Box textAlign="center" p={2}>
             <Button
               variant="contained"
