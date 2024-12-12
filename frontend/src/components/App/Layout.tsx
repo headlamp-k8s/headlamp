@@ -18,6 +18,7 @@ import store from '../../redux/stores/store';
 import { fetchStatelessClusterKubeConfigs, isEqualClusterConfigs } from '../../stateless/';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
+import DetailsDrawer from '../DetailsDrawer/DetailsDrawer';
 import Sidebar, { NavigationTabs } from '../Sidebar';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
@@ -103,6 +104,8 @@ export default function Layout({}: LayoutProps) {
   const allClusters = useClustersConf();
   const clusterInURL = getCluster();
   const theme = useTheme();
+
+  const isDetailDrawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
 
   /** This fetches the cluster config from the backend and updates the redux store on an interval.
    * When stateless clusters are enabled, it also fetches the stateless cluster config from the
@@ -232,6 +235,7 @@ export default function Layout({}: LayoutProps) {
             </Container>
           </Box>
         </Main>
+        {isDetailDrawerEnabled && <DetailsDrawer />}
         <ActionsNotifier />
       </Box>
     </>
