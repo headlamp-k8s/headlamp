@@ -58,9 +58,13 @@ function PureActionsNotifier({ dispatch, clusterActions }: PureActionsNotifierPr
     }
 
     if (clusterAction.message) {
-      // Check for completed actions
+      // Check for success or error states
       const refKey =
-        clusterAction.state === 'complete' ? `${clusterAction.id}-complete` : clusterAction.id;
+        clusterAction.state === 'complete'
+          ? `${clusterAction.id}-complete`
+          : clusterAction.state === 'error'
+          ? `${clusterAction.id}-error`
+          : clusterAction.id;
 
       if (!snackbarRefs.current[refKey]) {
         snackbarRefs.current[refKey] = uniqueKey;
