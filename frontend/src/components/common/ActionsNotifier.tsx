@@ -51,16 +51,20 @@ function PureActionsNotifier({ dispatch, clusterActions }: PureActionsNotifierPr
     }
 
     const prevKey = snackbarRefs.current[clusterAction.id];
-    const uniqueKey = clusterAction.key || clusterAction.id;
+    const uniqueKey = `${clusterAction.key || clusterAction.id}-${Date.now()}`;
 
     if (prevKey && prevKey !== uniqueKey) {
       closeSnackbar(prevKey);
     }
 
     if (clusterAction.message) {
-      // Check for completed actions
+      // Check for success or error states
       const refKey =
-        clusterAction.state === 'complete' ? `${clusterAction.id}-complete` : clusterAction.id;
+        clusterAction.state === 'complete'
+          ? `${clusterAction.id}-complete`
+          : clusterAction.state === 'error'
+          ? `${clusterAction.id}-error`
+          : clusterAction.id;
 
       if (!snackbarRefs.current[refKey]) {
         snackbarRefs.current[refKey] = uniqueKey;
