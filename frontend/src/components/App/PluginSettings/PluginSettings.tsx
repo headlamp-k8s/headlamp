@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../../helpers';
 import { useFilterFunc } from '../../../lib/util';
-import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
+import { PluginInfo, reloadPage } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { Link as HeadlampLink, SectionBox, Table } from '../../common';
 import SectionFilterHeader from '../../common/SectionFilterHeader';
@@ -285,11 +285,85 @@ export default function PluginSettings() {
 
   const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
 
+  const [plugins, setPlugins] = useState<PluginInfo[]>([]);
+
+  const [pluginsIsEnabled, setPluginsIsEnabled] = useState<any>([]);
+
+  useEffect(() => {
+    async function get() {
+      const pluginPaths = (await fetch(`${helpers.getAppUrl()}plugins`).then(resp =>
+        resp.json()
+      )) as string[];
+      const packageInfosPromise = await Promise.all<PluginInfo>(
+        pluginPaths.map(path =>
+          fetch(`${helpers.getAppUrl()}${path}/package.json`).then(resp => {
+            if (!resp.ok) {
+              if (resp.status !== 404) {
+                return Promise.reject(resp);
+              }
+              {
+                console.warn(
+                  'Missing package.json. ' +
+                    `Please upgrade the plugin ${path}` +
+                    ' by running "headlamp-plugin extract" again.' +
+                    ' Please use headlamp-plugin >= 0.8.0'
+                );
+                return {
+                  name: path.split('/').slice(-1)[0],
+                  version: '0.0.0',
+                  author: 'unknown',
+                  description: '',
+                };
+              }
+            }
+            return resp.json();
+          })
+        )
+      );
+      const packageInfos = await packageInfosPromise;
+      // setPlugins(packageInfos);
+      console.log('package', packageInfos);
+
+      // const pluginsWithIsEnabled = plugins.map(plugin => {
+      //   const isEnabledInfo = pluginSettings.find(it => it.name === plugin.name);
+
+      //   let isEnabled;
+      //   if (!isEnabledInfo) {
+      //     isEnabled = true;
+      //   } else {
+      //     isEnabled = isEnabledInfo.isEnabled;
+      //   }
+      //   return {
+      //     ...plugin,
+      //     isEnabled: isEnabled,
+      //   };
+      // });
+
+      const pluginsWithIsEnabled = packageInfos.map(plugin => {
+        const matchedSetting = pluginSettings.find(p => plugin.name === p.name);
+        if (matchedSetting) {
+          return {
+            ...plugin,
+            isEnabled: matchedSetting.isEnabled,
+          };
+        }
+        return plugin;
+      });
+
+      setPlugins(pluginsWithIsEnabled);
+
+      console.log('pluginsWithIsEnabled', pluginsWithIsEnabled);
+      setPluginsIsEnabled(pluginsWithIsEnabled);
+    }
+    get();
+  }, []);
+
+  console.log('END PLUGIN DATA', plugins);
+  console.log('ENABLED', pluginsIsEnabled);
   return (
     <PluginSettingsPure
-      plugins={pluginSettings}
-      onSave={plugins => {
-        dispatch(setPluginSettings(plugins));
+      plugins={plugins}
+      onSave={() => {
         dispatch(reloadPage());
       }}
     />
