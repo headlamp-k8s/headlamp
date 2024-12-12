@@ -529,13 +529,13 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
       // it may already have the details from the instance's API version.
       const attrs = { ...resourceAttrs };
 
-      if (!!attrs.resource) {
+      if (!attrs.resource) {
         attrs.resource = resource;
       }
-      if (!!attrs.group) {
+      if (!attrs.group) {
         attrs.group = group;
       }
-      if (!!attrs.version) {
+      if (!attrs.version) {
         attrs.version = version;
       }
 
