@@ -1,3 +1,5 @@
+import { Checkbox } from '@mui/material';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MuiDialog, { DialogProps as MuiDialogProps } from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,7 +11,8 @@ import { DialogTitle } from './Dialog';
 
 export interface ConfirmDialogProps extends MuiDialogProps {
   title: string;
-  description: ReactNode;
+  description: string | React.ReactNode;
+  checkboxDescription?: string;
   onConfirm: () => void;
   handleClose: () => void;
 }
@@ -17,10 +20,20 @@ export interface ConfirmDialogProps extends MuiDialogProps {
 export function ConfirmDialog(props: ConfirmDialogProps) {
   const { onConfirm, open, handleClose, title, description } = props;
   const { t } = useTranslation();
+  const [checkedChoice, setcheckedChoice] = React.useState(false);
 
   function onConfirmationClicked() {
     handleClose();
     onConfirm();
+  }
+
+  function closeDialog() {
+    setcheckedChoice(false);
+    handleClose();
+  }
+
+  function handleChoiceToggle() {
+    setcheckedChoice(!checkedChoice);
   }
 
   const focusedRef = React.useCallback((node: HTMLElement) => {
@@ -34,21 +47,46 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     <div>
       <MuiDialog
         open={open}
-        onClose={handleClose}
+        onClose={closeDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent ref={focusedRef}>
           <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
+          {props.checkboxDescription && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: '10px',
+              }}
+            >
+              <DialogContentText id="alert-dialog-description">
+                {props.checkboxDescription}
+              </DialogContentText>
+              <Checkbox checked={checkedChoice} onChange={handleChoiceToggle} />
+            </Box>
+          )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={() => {
+              closeDialog();
+            }}
+            color="primary"
+          >
             {t('No')}
           </Button>
-          <Button onClick={onConfirmationClicked} color="primary">
-            {t('Yes')}
-          </Button>
+          {props.checkboxDescription ? (
+            <Button disabled={!checkedChoice} onClick={onConfirmationClicked} color="primary">
+              {t('I Agree')}
+            </Button>
+          ) : (
+            <Button onClick={onConfirmationClicked} color="primary">
+              {t('Yes')}
+            </Button>
+          )}
         </DialogActions>
       </MuiDialog>
     </div>
