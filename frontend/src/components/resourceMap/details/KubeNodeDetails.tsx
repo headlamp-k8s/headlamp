@@ -4,6 +4,7 @@ import { KubeObject } from '../../../lib/k8s/cluster';
 import Deployment from '../../../lib/k8s/deployment';
 import Job from '../../../lib/k8s/job';
 import ReplicaSet from '../../../lib/k8s/replicaSet';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
 import ConfigDetails from '../../configmap/Details';
 import CronJobDetails from '../../cronjob/Details';
 import DaemonSetDetails from '../../daemonset/Details';
@@ -37,7 +38,7 @@ import WorkloadDetails from '../../workload/Details';
 
 const kindComponentMap: Record<
   string,
-  (props: { name?: string; namespace?: string }) => ReactElement
+  (props: { name: string; namespace?: string }) => ReactElement
 > = {
   Pod: PodDetails,
   Deployment: props => <WorkloadDetails {...props} workloadKind={Deployment} />,
@@ -84,20 +85,22 @@ function DetailsNotFound() {
 export const KubeObjectDetails = memo(({ resource }: { resource: KubeObject }) => {
   const kind = resource.kind;
   const { name, namespace } = resource.metadata;
+  const pluginDefinedDetails = useTypedSelector(state => state.graphView.kindDetailsPage);
 
-  const Component = kindComponentMap[kind] ?? DetailsNotFound;
+  const Component =
+    pluginDefinedDetails[kind]?.component ?? kindComponentMap[kind] ?? DetailsNotFound;
 
   useEffect(() => {
-    if (!kindComponentMap[kind]) {
+    if (Component === DetailsNotFound) {
       console.error(
         'No details component for kind ${kind} was found. See KubeNodeDetails.tsx for more info'
       );
     }
-  }, [kind, kindComponentMap]);
+  }, [Component]);
 
   return (
     <Box sx={{ overflow: 'hidden' }}>
-      <Box sx={{ marginTop: '-70px' }}>
+      <Box sx={{ marginTop: '-50px' }}>
         <Component name={name} namespace={namespace} />
       </Box>
     </Box>
