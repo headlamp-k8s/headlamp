@@ -375,7 +375,7 @@ export default function SimpleTable(props: SimpleTableProps) {
             overflow: 'hidden',
             textOverflow: 'unset',
             whiteSpace: 'nowrap',
-            color: theme.palette.tables.head.text,
+            color: theme.palette.tables.head.color,
             background: theme.palette.tables.head.background,
             width: '100%',
             minWidth: 'max-content',
