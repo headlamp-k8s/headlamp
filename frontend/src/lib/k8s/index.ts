@@ -14,7 +14,11 @@ import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import Endpoints from './endpoints';
+import Gateway from './gateway';
+import GatewayClass from './gatewayClass';
+import GRPCRoute from './grpcRoute';
 import HPA from './hpa';
+import HTTPRoute from './httpRoute';
 import Ingress from './ingress';
 import IngressClass from './ingressClass';
 import Job from './job';
@@ -73,6 +77,10 @@ export const ResourceClasses = {
   ServiceAccount,
   StatefulSet,
   StorageClass,
+  Gateway,
+  GatewayClass,
+  HTTPRoute,
+  GRPCRoute,
 };
 
 /** Hook for getting or fetching the clusters configuration.
