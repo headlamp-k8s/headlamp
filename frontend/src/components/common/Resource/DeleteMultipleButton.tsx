@@ -28,7 +28,7 @@ function DeleteMultipleButtonDescription(props: DeleteMultipleButtonDescriptionP
   const { t } = useTranslation(['translation']);
   return (
     <p>
-      {t('Are you sure you want to delete following items?')}
+      {t('Are you sure you want to delete the following items?')}
       <ul>
         {props.items?.map(item => (
           <li key={item.metadata.uid}>{item.metadata.name}</li>
