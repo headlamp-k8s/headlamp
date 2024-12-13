@@ -167,6 +167,29 @@ function prepareRoutes(
       ],
     },
     {
+      name: 'gatewayapi',
+      label: t('glossary|Gateway'),
+      icon: 'mdi:lan-connect',
+      subList: [
+        {
+          name: 'gateways',
+          label: t('glossary|Gateways'),
+        },
+        {
+          name: 'gatewayclasses',
+          label: t('glossary|Gateway Classes'),
+        },
+        {
+          name: 'httproutes',
+          label: t('glossary|HTTP Routes'),
+        },
+        {
+          name: 'grpcroutes',
+          label: t('glossary|GRPC Routes'),
+        },
+      ],
+    },
+    {
       name: 'security',
       label: t('glossary|Security'),
       icon: 'mdi:lock',
