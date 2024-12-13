@@ -183,7 +183,7 @@
   "Error deleting item {{ itemName }}.": "Fehler beim Löschen des Elements {{ itemName }}.",
   "Delete item": "Element löschen",
   "Are you sure you want to delete item {{ itemName }}?": "Sind Sie sicher, dass Sie dieses Element {{ itemName }} löschen möchten?",
-  "Are you sure you want to delete following items?": "Sind Sie sicher, dass Sie folgende Elemente löschen möchten?",
+  "Are you sure you want to delete the following items?": "Sind Sie sicher, dass Sie die folgende Elemente löschen möchten?",
   "Deleting {{ itemsLength }} items…": "Löschen von {{ itemsLength }} Elementen…",
   "Cancelled deletion of {{ itemsLength }} items.": "Löschen von {{ itemsLength }} Elementen abgebrochen.",
   "Deleted {{ itemsLength }} items.": "{{ itemsLength }} Elemente gelöscht.",

@@ -184,7 +184,7 @@
   "Error deleting item {{ itemName }}.": "Erreur lors de la suppression de l'élément {{ itemName }}.",
   "Delete item": "Supprimer un élément",
   "Are you sure you want to delete item {{ itemName }}?": "Voulez-vous vraiment supprimer cet élément {{ itemName }}?",
-  "Are you sure you want to delete following items?": "",
+  "Are you sure you want to delete the following items?": "Voulez-vous vraiment supprimer les éléments suivants?",
   "Deleting {{ itemsLength }} items…": "",
   "Cancelled deletion of {{ itemsLength }} items.": "",
   "Deleted {{ itemsLength }} items.": "",

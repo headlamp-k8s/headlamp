@@ -182,7 +182,7 @@
   "Error deleting item {{ itemName }}.": "刪除項目 {{ itemName }} 時出錯。",
   "Delete item": "刪除項目",
   "Are you sure you want to delete item {{ itemName }}?": "您確定要刪除項目 {{ itemName }} 嗎？",
-  "Are you sure you want to delete following items?": "您確定要刪除這些項目嗎？",
+  "Are you sure you want to delete the following items?": "您確定要刪除這些項目嗎？",
   "Deleting {{ itemsLength }} items…": "正在刪除 {{ itemsLength }} 個項目…",
   "Cancelled deletion of {{ itemsLength }} items.": "取消刪除 {{ itemsLength }} 個項目。",
   "Deleted {{ itemsLength }} items.": "已刪除 {{ itemsLength }} 個項目。",
