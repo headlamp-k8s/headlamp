@@ -7,7 +7,6 @@ import {
   MRT_ColumnDef as MaterialTableColumn,
   MRT_Header,
   MRT_Localization,
-  MRT_Row,
   MRT_TableBodyCell,
   MRT_TableHeadCell,
   MRT_TableInstance,
@@ -191,34 +190,6 @@ export default function Table<RowItem extends Record<string, any>>({
     return (tableProps.data ?? []).filter(it => filterFunction(it));
   }, [tableProps.data, filterFunction]);
 
-  const gridTemplateColumns = useMemo(() => {
-    let preGridTemplateColumns = tableProps.columns
-      .filter(it => {
-        const isHidden = tableProps.state?.columnVisibility?.[it.id!] === false;
-        return !isHidden;
-      })
-      .map(it => {
-        if (typeof it.gridTemplate === 'number') {
-          return `${it.gridTemplate}fr`;
-        }
-        return it.gridTemplate ?? '1fr';
-      })
-      .join(' ');
-    if (tableProps.enableRowActions) {
-      preGridTemplateColumns = `${preGridTemplateColumns} 0.05fr`;
-    }
-    if (tableProps.enableRowSelection) {
-      preGridTemplateColumns = `44px ${preGridTemplateColumns}`;
-    }
-
-    return preGridTemplateColumns;
-  }, [
-    tableProps.columns,
-    tableProps.state?.columnVisibility,
-    tableProps.enableRowActions,
-    tableProps.enableRowSelection,
-  ]);
-
   const paginationSelectProps = import.meta.env.UNDER_TEST
     ? {
         inputProps: {
@@ -325,6 +296,38 @@ export default function Table<RowItem extends Record<string, any>>({
     },
   });
 
+  const gridTemplateColumns = useMemo(() => {
+    let preGridTemplateColumns = tableProps.columns
+      .filter((it, i) => {
+        const id = it.id ?? String(i);
+        const isHidden =
+          table.getState().columnVisibility?.[id] === false ||
+          tableProps.state?.columnVisibility?.[id] === false;
+        return !isHidden;
+      })
+      .map(it => {
+        if (typeof it.gridTemplate === 'number') {
+          return `${it.gridTemplate}fr`;
+        }
+        return it.gridTemplate ?? '1fr';
+      })
+      .join(' ');
+    if (tableProps.enableRowActions) {
+      preGridTemplateColumns = `${preGridTemplateColumns} 0.05fr`;
+    }
+    if (tableProps.enableRowSelection) {
+      preGridTemplateColumns = `44px ${preGridTemplateColumns}`;
+    }
+
+    return preGridTemplateColumns;
+  }, [
+    tableProps.columns,
+    table.getState()?.columnVisibility,
+    tableProps.state?.columnVisibility,
+    tableProps.enableRowActions,
+    tableProps.enableRowSelection,
+  ]);
+
   const rows = useMRT_Rows(table);
 
   if (!!errorMessage) {
@@ -382,7 +385,12 @@ export default function Table<RowItem extends Record<string, any>>({
         </TableHead>
         <StyledBody>
           {rows.map(row => (
-            <Row key={row.id} row={row} table={table} isSelected={row.getIsSelected()} />
+            <Row
+              key={row.id}
+              cells={row.getVisibleCells()}
+              table={table}
+              isSelected={row.getIsSelected()}
+            />
           ))}
         </StyledBody>
       </MuiTable>
@@ -417,16 +425,16 @@ const MemoHeadCell = memo(
 
 const Row = memo(
   ({
-    row,
+    cells,
     table,
     isSelected,
   }: {
     table: MRT_TableInstance<any>;
-    row: MRT_Row<any>;
+    cells: MRT_Cell<any, unknown>[];
     isSelected: boolean;
   }) => (
     <StyledRow data-selected={isSelected}>
-      {row.getVisibleCells().map(cell => (
+      {cells.map(cell => (
         <MemoCell
           cell={cell}
           table={table}
