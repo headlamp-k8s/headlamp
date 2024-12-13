@@ -369,13 +369,7 @@ export default function Table<RowItem extends Record<string, any>>({
                 isFiltered={header.column.getIsFiltered()}
                 sorting={header.column.getIsSorted()}
                 showColumnFilters={table.getState().showColumnFilters}
-                selected={
-                  table.getIsAllRowsSelected()
-                    ? 'all'
-                    : table.getIsSomeRowsSelected()
-                    ? 'some'
-                    : 'none'
-                }
+                selected={table.getSelectedRowModel().flatRows.length}
               />
             ))}
           </StyledHeadRow>
@@ -400,7 +394,7 @@ const MemoHeadCell = memo(
     header: MRT_Header<any>;
     sorting: string | false;
     isFiltered: boolean;
-    selected: any;
+    selected: number;
     showColumnFilters: boolean;
   }) => {
     return (
