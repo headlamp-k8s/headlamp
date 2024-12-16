@@ -13,17 +13,18 @@ function RulesDisplay(props: { ingress: Ingress }) {
     let labels: string[] = [];
 
     rules.forEach(({ http }) => {
-      const text = http.paths.map(({ path, backend }) => {
-        let target = '';
-        if (!!backend.service) {
-          const service = backend.service.name;
-          const port = backend.service.port.number ?? backend.service.port.name ?? '';
-          target = `${!!service ? service + ':' + port.toString() : port.toString()}`;
-        } else if (!!backend.resource) {
-          target = `${backend.resource.kind}:${backend.resource.name}`;
-        }
-        return `${path} 🞂 ${target}`;
-      });
+      const text =
+        http?.paths.map(({ path, backend }) => {
+          let target = '';
+          if (!!backend.service) {
+            const service = backend.service.name;
+            const port = backend.service.port.number ?? backend.service.port.name ?? '';
+            target = `${!!service ? service + ':' + port.toString() : port.toString()}`;
+          } else if (!!backend.resource) {
+            target = `${backend.resource.kind}:${backend.resource.name}`;
+          }
+          return `${path} 🞂 ${target}`;
+        }) ?? '';
       labels = labels.concat(text);
     });
 

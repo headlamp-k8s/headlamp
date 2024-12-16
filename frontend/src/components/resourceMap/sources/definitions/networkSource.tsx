@@ -83,7 +83,7 @@ const ingressListSource: GraphSource = {
 
       ingresses.forEach(ingress => {
         ingress.spec.rules.forEach((rule: IngressRule) => {
-          rule.http.paths.forEach(path => {
+          rule.http?.paths?.forEach(path => {
             const service = services.find(
               service => service.metadata.name === path?.backend?.service?.name
             );

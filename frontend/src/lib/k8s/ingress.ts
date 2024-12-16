@@ -12,7 +12,7 @@ interface LegacyIngressRule {
 
 export interface IngressRule {
   host: string;
-  http: {
+  http?: {
     paths: {
       path: string;
       pathType?: string;

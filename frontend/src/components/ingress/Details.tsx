@@ -161,7 +161,7 @@ export default function IngressDetails(props: { name?: string; namespace?: strin
   function getPorts(item: Ingress) {
     const ports: string[] = [];
     item.getRules().forEach(rule => {
-      rule.http.paths.forEach(path => {
+      rule.http?.paths.forEach(path => {
         if (!!path.backend.service) {
           const portNumber =
             path.backend.service.port.number ?? path.backend.service.port.name ?? '';
@@ -243,7 +243,7 @@ export default function IngressDetails(props: { name?: string; namespace?: strin
                   {
                     label: t('translation|Path'),
                     getter: (data: IngressRule) =>
-                      data.http.paths.map(({ path }) => (
+                      data.http?.paths.map(({ path }) => (
                         <LinkStringFormat
                           key={path}
                           url={data.host || '*'}
@@ -255,7 +255,9 @@ export default function IngressDetails(props: { name?: string; namespace?: strin
                   {
                     label: t('Backends'),
                     getter: (data: IngressRule) => (
-                      <BackendFormat backend={data.http.paths.map(({ backend }) => backend)} />
+                      <BackendFormat
+                        backend={data.http?.paths.map(({ backend }) => backend) ?? []}
+                      />
                     ),
                   },
                 ]}
