@@ -508,7 +508,7 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
     };
 
     if (!resourceAttrs.resource) {
-      resourceAttrs['resource'] = this.pluralName;
+      resourceAttrs['resource'] = this.apiName;
     }
 
     // @todo: We should get the API info from the API endpoint.
