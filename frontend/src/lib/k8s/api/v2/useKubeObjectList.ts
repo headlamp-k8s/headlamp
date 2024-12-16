@@ -306,6 +306,19 @@ export function useKubeObjectList<K extends KubeObject>({
     setListsToWatch([...listsToWatch, ...listsNotYetWatched]);
   }
 
+  const listsToStopWatching = listsToWatch.filter(
+    watching =>
+      requests.find(request =>
+        watching.cluster === request?.cluster && request.namespaces && watching.namespace
+          ? request.namespaces?.includes(watching.namespace)
+          : true
+      ) === undefined
+  );
+
+  if (listsToStopWatching.length > 0) {
+    setListsToWatch(listsToWatch.filter(it => !listsToStopWatching.includes(it)));
+  }
+
   useWatchKubeObjectLists({
     lists: shouldWatch ? listsToWatch : [],
     endpoint,
