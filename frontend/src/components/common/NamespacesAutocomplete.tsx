@@ -157,7 +157,11 @@ function NamespacesFromClusterAutocomplete(
 ) {
   const [namespacesList] = Namespace.useList();
   const namespaceNames = useMemo(
-    () => namespacesList?.map(namespace => namespace.metadata.name) ?? [],
+    () =>
+      namespacesList
+        ?.map(namespace => namespace.metadata.name)
+        .slice()
+        .sort((a, b) => a.localeCompare(b)) ?? [],
     [namespacesList]
   );
 
