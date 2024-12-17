@@ -120,7 +120,7 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 				key = customObj.CustomName + userID
 			}
 		} else if context.Name != clusterName {
-			contextKey = clusterName
+			// Skip contexts that don't match the requested cluster name
 			continue
 		}
 
