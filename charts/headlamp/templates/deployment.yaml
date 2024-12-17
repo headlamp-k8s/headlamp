@@ -66,6 +66,10 @@ spec:
           envFrom:
           - secretRef:
               name: {{ $oidc.externalSecret.name }}
+          {{- if .Values.env }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
+          {{- end }}
           {{- else }}
           env:
             {{- if $oidc.secret.create }}
