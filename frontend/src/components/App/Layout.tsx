@@ -199,6 +199,7 @@ export default function Layout({}: LayoutProps) {
           whiteSpace: 'nowrap',
           width: '1px',
         }}
+        gg
       >
         {t('Skip to main content')}
       </Link>
@@ -220,7 +221,7 @@ export default function Layout({}: LayoutProps) {
             <Div sx={theme.mixins.toolbar} />
             <Container {...containerProps}>
               <NavigationTabs />
-              {arePluginsLoaded && (
+              {true && (
                 <RouteSwitcher
                   requiresToken={() => {
                     const clusterName = getCluster() || '';

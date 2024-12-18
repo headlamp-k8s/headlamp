@@ -1,5 +1,4 @@
 import '../../../i18n/config';
-import Editor, { loader } from '@monaco-editor/react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
@@ -10,12 +9,6 @@ import Grid from '@mui/material/Grid';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import * as yaml from 'js-yaml';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
-import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
-import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -36,25 +29,8 @@ import { Dialog, DialogProps } from '../Dialog';
 import Loader from '../Loader';
 import Tabs from '../Tabs';
 import DocsViewer from './DocsViewer';
+import { LazyEditor } from './LazyEditor';
 import SimpleEditor from './SimpleEditor';
-
-(self as any).MonacoEnvironment = {
-  getWorker(_: unknown, label: string) {
-    if (label === 'json') {
-      return new jsonWorker();
-    }
-    if (label === 'css' || label === 'scss' || label === 'less') {
-      return new cssWorker();
-    }
-    if (label === 'html' || label === 'handlebars' || label === 'razor') {
-      return new htmlWorker();
-    }
-    if (label === 'typescript' || label === 'javascript') {
-      return new tsWorker();
-    }
-    return new editorWorker();
-  },
-};
 
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
@@ -97,8 +73,8 @@ export default function EditorDialog(props: EditorDialogProps) {
     readOnly: isReadOnly(),
     automaticLayout: true,
   };
-  const { i18n } = useTranslation();
-  const [lang, setLang] = React.useState(i18n.language);
+  // const { i18n } = useTranslation();
+  // const [lang, setLang] = React.useState(i18n.language);
   const themeName = getThemeName();
 
   const initialCode = typeof item === 'string' ? item : yaml.dump(item || {});
@@ -174,16 +150,16 @@ export default function EditorDialog(props: EditorDialogProps) {
     codeRef.current = code;
   }, [code]);
 
-  React.useEffect(() => {
-    i18n.on('languageChanged', setLang);
-    return () => {
-      // Stop the timeout from trying to use the component after it's been unmounted.
-      clearTimeout(lastCodeCheckHandler.current);
+  // React.useEffect(() => {
+  //   i18n.on('languageChanged', setLang);
+  //   return () => {
+  //     // Stop the timeout from trying to use the component after it's been unmounted.
+  //     clearTimeout(lastCodeCheckHandler.current);
 
-      i18n.off('languageChanged', setLang);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //     i18n.off('languageChanged', setLang);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   function isReadOnly() {
     return onSave === null;
@@ -365,11 +341,11 @@ export default function EditorDialog(props: EditorDialogProps) {
 
   function makeEditor() {
     // @todo: monaco editor does not support pt, ta, hi amongst various other langs.
-    if (['de', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh-cn', 'zh-tw'].includes(lang)) {
-      loader.config({ 'vs/nls': { availableLanguages: { '*': lang } }, monaco });
-    } else {
-      loader.config({ monaco });
-    }
+    // if (['de', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh-cn', 'zh-tw'].includes(lang)) {
+    //   loader.config({ 'vs/nls': { availableLanguages: { '*': lang } }, monaco });
+    // } else {
+    //   loader.config({ monaco });
+    // }
 
     return useSimpleEditor ? (
       <Box paddingTop={2} height="100%">
@@ -381,7 +357,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       </Box>
     ) : (
       <Box paddingTop={2} height="100%">
-        <Editor
+        <LazyEditor
           language={originalCodeRef.current.format || 'yaml'}
           theme={themeName === 'dark' ? 'vs-dark' : 'light'}
           value={code.code}

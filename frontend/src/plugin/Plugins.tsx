@@ -32,6 +32,9 @@ export default function Plugins() {
   useEffect(() => {
     dispatch({ type: UI_INITIALIZE_PLUGIN_VIEWS });
 
+    dispatch(pluginsLoaded());
+    return;
+
     fetchAndExecutePlugins(
       settingsPlugins,
       updatedSettingsPackages => {

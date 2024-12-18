@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react';
-import Editor from '@monaco-editor/react';
 import { InputLabel } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -46,6 +45,7 @@ import InnerTable from '../InnerTable';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
 import { metadataStyles } from '.';
+import { LazyEditor } from './LazyEditor';
 import { MainInfoSection, MainInfoSectionProps } from './MainInfoSection/MainInfoSection';
 import { MainInfoHeader } from './MainInfoSection/MainInfoSectionHeader';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
@@ -427,7 +427,7 @@ export function DataField(props: DataFieldProps) {
   if (disableLabel === true) {
     return (
       <Box borderTop={0} border={1}>
-        <Editor
+        <LazyEditor
           value={value as string}
           language={language}
           onMount={handleEditorDidMount}
@@ -448,7 +448,7 @@ export function DataField(props: DataFieldProps) {
           <Box width="100%" borderTop={1} height={'1px'}></Box>
         </Box>
         <Box mt={1} px={1} pb={1}>
-          <Editor
+          <LazyEditor
             value={value as string}
             language={language}
             onMount={handleEditorDidMount}

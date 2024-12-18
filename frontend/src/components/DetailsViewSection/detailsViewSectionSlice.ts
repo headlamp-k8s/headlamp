@@ -133,12 +133,13 @@ const detailsViewSectionSlice = createSlice({
         DetailsViewsSectionProcessor | DetailsViewsSectionProcessor['processor']
       >
     ) {
-      state.detailsViewSectionsProcessors.push(
+      state.detailsViewSections = [
+        ...state.detailsViewSections,
         _normalizeProcessor<
           DetailsViewsSectionProcessor,
           DetailsViewsSectionProcessor['processor']
-        >(action)
-      );
+        >(action),
+      ];
     },
   },
 });

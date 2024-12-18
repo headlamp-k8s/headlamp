@@ -5,7 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import { styled } from '@mui/system';
-import { Terminal as XTerminal } from '@xterm/xterm';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,8 +14,9 @@ import Pod from '../../lib/k8s/pod';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { EventStatus, HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { ActionButton, LightTooltip, SectionBox, SimpleTable } from '../common';
+import { LazyLogViewer } from '../common/LazyLogViewer';
+import { LazyTerminal } from '../common/LazyTerminal';
 import Link from '../common/Link';
-import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import {
   ConditionsSection,
   ContainersSection,
@@ -24,7 +24,6 @@ import {
   VolumeSection,
 } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
-import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
 const PaddedFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
@@ -33,7 +32,7 @@ const PaddedFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
   paddingRight: theme.spacing(2),
 }));
 
-interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
+interface PodLogViewerProps extends Omit<any, 'logs'> {
   item: Pod;
 }
 
@@ -50,7 +49,7 @@ export function PodLogViewer(props: PodLogViewerProps) {
   });
   const [showReconnectButton, setShowReconnectButton] = React.useState(false);
   const [cancelLogsStream, setCancelLogsStream] = React.useState<(() => void) | null>(null);
-  const xtermRef = React.useRef<XTerminal | null>(null);
+  const xtermRef = React.useRef<any>(null);
   const { t } = useTranslation();
 
   function getDefaultContainer() {
@@ -187,7 +186,7 @@ export function PodLogViewer(props: PodLogViewerProps) {
   }
 
   return (
-    <LogViewer
+    <LazyLogViewer
       title={t('glossary|Logs: {{ itemName }}', { itemName: item.getName() })}
       downloadName={`${item.getName()}_${container}`}
       open={open}
@@ -560,7 +559,7 @@ export default function PodDetails(props: PodDetailsProps) {
           {
             id: 'headlamp.pod-terminal',
             section: (
-              <Terminal
+              <LazyTerminal
                 key="terminal"
                 open={showTerminal || isAttached}
                 item={item}

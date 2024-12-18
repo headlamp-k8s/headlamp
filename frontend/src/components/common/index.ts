@@ -35,7 +35,6 @@ export { default as SimpleTable } from './SimpleTable';
 export * from './Tabs';
 export { default as Tabs } from './Tabs';
 export * from './Terminal';
-export { default as Terminal } from './Terminal';
 export * from './TileChart';
 export { default as TileChart } from './TileChart';
 export * from './TimezoneSelect';

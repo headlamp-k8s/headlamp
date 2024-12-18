@@ -4,13 +4,13 @@
  * The lib.ts file should carry the bits to be used by plugins whereas
  */
 import * as Iconify from '@iconify/react';
-import * as ReactMonacoEditor from '@monaco-editor/react';
+// import * as ReactMonacoEditor from '@monaco-editor/react';
 import * as MuiLab from '@mui/lab';
 import * as MuiMaterial from '@mui/material';
 import * as MuiMaterialStyles from '@mui/material/styles';
 import { styled } from '@mui/system';
 import * as Lodash from 'lodash';
-import * as MonacoEditor from 'monaco-editor';
+// import * as MonacoEditor from 'monaco-editor';
 import * as Notistack from 'notistack';
 import * as React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
@@ -37,11 +37,11 @@ import Registry, * as registryToExport from './registry';
 window.pluginLib = {
   ApiProxy,
   ReactMonacoEditor: {
-    ...ReactMonacoEditor,
+    // ...ReactMonacoEditor,
     // required for compatibility with plugins built with webpack
     __esModule: true,
   },
-  MonacoEditor,
+  // MonacoEditor,
   K8s,
   ConfigStore,
   Crd: {
