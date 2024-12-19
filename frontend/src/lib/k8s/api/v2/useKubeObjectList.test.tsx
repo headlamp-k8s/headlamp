@@ -4,6 +4,7 @@ import {
   kubeObjectListQuery,
   ListResponse,
   makeListRequests,
+  useKubeObjectList,
   useWatchKubeObjectLists,
 } from './useKubeObjectList';
 import * as websocket from './webSocket';
@@ -80,6 +81,16 @@ describe('makeListRequests', () => {
 const mockClass = class {
   static apiVersion = 'v1';
   static apiName = 'pods';
+
+  static apiEndpoint = {
+    apiInfo: [
+      {
+        group: '',
+        resource: 'pods',
+        version: 'v1',
+      },
+    ],
+  };
 
   constructor(public jsonData: any) {}
 } as any;
@@ -219,5 +230,44 @@ describe('useWatchKubeObjectLists', () => {
     expect(
       (queryClient.getQueryData(keyForNamespaceB) as ListResponse<any>).list.items[0].jsonData
     ).toBe(objectB);
+  });
+});
+
+describe('useKubeObjectList', () => {
+  it('should call useKubeObjectList with 1 namespace after reducing amount of namespaces', async () => {
+    const spy = vi.spyOn(websocket, 'useWebSockets');
+    const queryClient = new QueryClient();
+
+    queryClient.setQueryData(['kubeObject', 'list', 'v1', 'pods', 'default', 'a', {}], {
+      list: { items: [], metadata: { resourceVersion: '0' } },
+      cluster: 'default',
+      namespace: 'a',
+    });
+    queryClient.setQueryData(['kubeObject', 'list', 'v1', 'pods', 'default', 'b', {}], {
+      list: { items: [], metadata: { resourceVersion: '0' } },
+      cluster: 'default',
+      namespace: 'b',
+    });
+
+    const result = renderHook(
+      (props: {}) =>
+        useKubeObjectList({
+          kubeObjectClass: mockClass,
+          requests: [{ cluster: 'default', namespaces: ['a', 'b'] }],
+          ...props,
+        }),
+      {
+        wrapper: ({ children }) => (
+          <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        ),
+      }
+    );
+
+    result.rerender({ requests: [{ cluster: 'default', namespaces: ['a'] }] });
+
+    expect(spy.mock.calls[0][0].connections.length).toBe(0); // initial render
+    expect(spy.mock.calls[1][0].connections.length).toBe(2); // new connections with 'a' and 'b' namespaces
+    expect(spy.mock.calls[2][0].connections.length).toBe(2); // rerender with new props
+    expect(spy.mock.calls[3][0].connections.length).toBe(1); // updated connections after we removed namespace 'b'
   });
 });
