@@ -385,11 +385,21 @@ function CustomThemeProvider({ children }: { children: ReactNode }) {
  * @returns
  */
 export function GraphView(props: GraphViewContentProps) {
+  const propsSources = props.defaultSources ?? allSources;
+
+  // Load plugin defined sources
+  const pluginGraphSources = useTypedSelector(state => state.graphView.graphSources);
+
+  const sources = useMemo(
+    () => [...propsSources, ...pluginGraphSources],
+    [propsSources, pluginGraphSources]
+  );
+
   return (
     <StrictMode>
       <ReactFlowProvider>
-        <GraphSourceManager sources={props.defaultSources ?? allSources}>
-          <GraphViewContent {...props} />
+        <GraphSourceManager sources={sources}>
+          <GraphViewContent {...props} defaultSources={sources} />
         </GraphSourceManager>
       </ReactFlowProvider>
     </StrictMode>
