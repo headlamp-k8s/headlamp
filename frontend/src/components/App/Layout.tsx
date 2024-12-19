@@ -202,12 +202,28 @@ export default function Layout({}: LayoutProps) {
       >
         {t('Skip to main content')}
       </Link>
-      <Box sx={{ display: 'flex', [theme.breakpoints.down('sm')]: { display: 'block' } }}>
+      <Box
+        sx={{
+          display: 'flex',
+          overflow: 'auto',
+          // paddingTop: '64px',
+          paddingTop: { sm: '64px', xs: '72px' },
+          height: '100vh',
+        }}
+      >
         <VersionDialog />
         <CssBaseline enableColorScheme />
         <TopBar />
         <Sidebar />
-        <Main id="main" sx={{ flexGrow: 1, marginLeft: 'initial' }}>
+        <Main
+          id="main"
+          sx={{
+            flexGrow: 1,
+            marginLeft: 'initial',
+            overflow: 'auto',
+            [theme.breakpoints.down('sm')]: { marginTop: { xs: '-12px', sm: '-8px' } },
+          }}
+        >
           {allClusters &&
           !!clusterInURL &&
           !Object.keys(allClusters).includes(getCluster() || '') ? (
@@ -217,7 +233,7 @@ export default function Layout({}: LayoutProps) {
           )}
           <AlertNotification />
           <Box>
-            <Div sx={theme.mixins.toolbar} />
+            <Div />
             <Container {...containerProps}>
               <NavigationTabs />
               {arePluginsLoaded && (
