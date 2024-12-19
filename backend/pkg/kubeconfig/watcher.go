@@ -1,6 +1,7 @@
 package kubeconfig
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"time"
@@ -48,14 +49,13 @@ func LoadAndWatchFiles(kubeConfigStore ContextStore, paths string, source int) {
 		case event := <-watcher.Events:
 			triggers := []fsnotify.Op{fsnotify.Create, fsnotify.Write, fsnotify.Remove, fsnotify.Rename}
 			for _, trigger := range triggers {
-				trigger := trigger
 				if event.Op.Has(trigger) {
 					logger.Log(logger.LevelInfo, map[string]string{"event": event.Name},
 						nil, "watcher: kubeconfig file changed, reloading contexts")
 
-					err := LoadAndStoreKubeConfigs(kubeConfigStore, paths, source)
+					err := syncContexts(kubeConfigStore, paths, source)
 					if err != nil {
-						logger.Log(logger.LevelError, nil, err, "watcher: error loading kubeconfig files")
+						logger.Log(logger.LevelError, nil, err, "watcher: error synchronizing contexts")
 					}
 				}
 			}
@@ -105,4 +105,53 @@ func addFilesToWatcher(watcher *fsnotify.Watcher, paths []string) {
 				err, "adding path to watcher")
 		}
 	}
+}
+
+// syncContexts synchronizes the contexts in the store with the ones in the kubeconfig files.
+func syncContexts(kubeConfigStore ContextStore, paths string, source int) error {
+	// First read all kubeconfig files to get new contexts
+	newContexts, _, err := LoadContextsFromMultipleFiles(paths, source)
+	if err != nil {
+		return fmt.Errorf("error reading kubeconfig files: %v", err)
+	}
+
+	// Get existing contexts from store
+	existingContexts, err := kubeConfigStore.GetContexts()
+	if err != nil {
+		return fmt.Errorf("error getting existing contexts: %v", err)
+	}
+
+	// Find and remove contexts that no longer exist in the kubeconfig
+	// but only for contexts that came from KubeConfig source
+	for _, existingCtx := range existingContexts {
+		// Skip contexts from other sources
+		if existingCtx.Source != KubeConfig {
+			continue
+		}
+
+		found := false
+
+		for _, newCtx := range newContexts {
+			if existingCtx.Name == newCtx.Name {
+				found = true
+
+				break
+			}
+		}
+
+		if !found {
+			err := kubeConfigStore.RemoveContext(existingCtx.Name)
+			if err != nil {
+				logger.Log(logger.LevelError, nil, err, "error removing context")
+			}
+		}
+	}
+
+	// Now load and store the new configurations
+	err = LoadAndStoreKubeConfigs(kubeConfigStore, paths, source)
+	if err != nil {
+		return fmt.Errorf("error loading kubeconfig files: %v", err)
+	}
+
+	return nil
 }
