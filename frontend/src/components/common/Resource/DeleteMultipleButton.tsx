@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { CallbackActionOptions, clusterAction } from '../../../redux/clusterActionSlice';
 import {
@@ -43,6 +44,7 @@ export default function DeleteMultipleButton(props: DeleteMultipleButtonProps) {
   const { items, options, afterConfirm, buttonStyle } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
   const { t } = useTranslation(['translation']);
+  const location = useLocation();
   const dispatchDeleteEvent = useEventCallback(HeadlampEventType.DELETE_RESOURCES);
 
   const deleteFunc = React.useCallback(
