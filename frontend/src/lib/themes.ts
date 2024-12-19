@@ -30,6 +30,14 @@ const commonRules = {
       xl: 1920,
     },
   },
+  mixins: {
+    toolbar: {
+      minHeight: 64,
+      '@media (max-width:600px)': {
+        minHeight: 60,
+      },
+    },
+  },
   palette: {
     primary: {
       contrastText: '#fff',
