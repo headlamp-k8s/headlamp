@@ -204,7 +204,7 @@ export default function Layout({}: LayoutProps) {
       </Link>
       <Box sx={{ display: 'flex', [theme.breakpoints.down('sm')]: { display: 'block' } }}>
         <VersionDialog />
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         <TopBar />
         <Sidebar />
         <Main id="main" sx={{ flexGrow: 1, marginLeft: 'initial' }}>
