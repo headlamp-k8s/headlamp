@@ -24,9 +24,7 @@ read those guidelines.
 
 We hold a monthly call to discuss the project, the roadmap, and the community.
 
-You can find Headlamp's list of upcoming events in its [CNCF calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp?view=list).
-
-The next Community Call will be held on November 28th, 2024 at [5:00 PM CET](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp?view=week&occurrence=1732809600).
+You can find Headlamp's Community Call event in its [CNCF calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp?view=month).
 
 ## Filing an issue or feature request
 
