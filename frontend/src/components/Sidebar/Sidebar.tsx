@@ -305,6 +305,7 @@ export const PureSidebar = memo(
         <Grid
           sx={{
             height: '100%',
+            overflowY: 'auto',
           }}
           container
           direction="column"
