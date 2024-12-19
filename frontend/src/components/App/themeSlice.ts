@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { setTheme as setAppTheme } from '../../lib/themes';
+import {
+  addTheme as addThemeToConf,
+  removeTheme as removeThemeFromConf,
+  setTheme as setAppTheme,
+  Theme,
+} from '../../lib/themes';
 import { AppLogoType } from './AppLogo';
 
 export interface ThemeState {
@@ -11,11 +16,16 @@ export interface ThemeState {
    * The name of the active theme.
    */
   name: string;
+  /**
+   * The available themes.
+   */
+  availableThemes: string[];
 }
 
 export const initialState: ThemeState = {
   logo: null,
   name: '',
+  availableThemes: [],
 };
 
 const themeSlice = createSlice({
@@ -35,9 +45,25 @@ const themeSlice = createSlice({
       state.name = action.payload;
       setAppTheme(state.name);
     },
+    /**
+     * Adds a new theme to the list of available themes.
+     */
+    addTheme(state, action: PayloadAction<{ name: string; theme: Theme }>) {
+      const { name, theme } = action.payload;
+      addThemeToConf(name, theme);
+      state.availableThemes.push(name);
+    },
+    /**
+     * Removes a theme from the list of available themes.
+     */
+    removeTheme(state, action: PayloadAction<string>) {
+      const themeName = action.payload;
+      removeThemeFromConf(themeName);
+      state.availableThemes = state.availableThemes.filter(name => name !== themeName);
+    },
   },
 });
 
-export const { setBrandingAppLogoComponent, setTheme } = themeSlice.actions;
+export const { setBrandingAppLogoComponent, setTheme, addTheme, removeTheme } = themeSlice.actions;
 export { themeSlice };
 export default themeSlice.reducer;
