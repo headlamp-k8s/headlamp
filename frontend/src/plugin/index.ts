@@ -26,6 +26,7 @@ import * as ApiProxy from '../lib/k8s/apiProxy';
 import * as Crd from '../lib/k8s/crd';
 import * as Notification from '../lib/notification';
 import * as Router from '../lib/router';
+import * as Theme from '../lib/themes/exportLib';
 import * as Utils from '../lib/util';
 import { eventAction, HeadlampEventType } from '../redux/headlampEventSlice';
 import store from '../redux/stores/store';
@@ -44,6 +45,7 @@ window.pluginLib = {
   MonacoEditor,
   K8s,
   ConfigStore,
+  Theme,
   Crd: {
     ...Crd,
     // required for compatibility with plugins built with webpack
