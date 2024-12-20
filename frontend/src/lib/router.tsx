@@ -864,7 +864,19 @@ export interface RouteURLProps {
   [prop: string]: any;
 }
 
-export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
+/**
+ * Creates a URL for the given route, params and query parameters.
+ *
+ * @param routeName - The name of the route
+ * @param params - The optional parameters to use in the route.
+ * @param queryParams - The optional query parameters to use in the route.
+ * @returns the URL for the route as a string.
+ */
+export function createRouteURL(
+  routeName: string,
+  params: RouteURLProps = {},
+  queryParams: {} = {}
+): string {
   const storeRoutes = store.getState().routes.routes;
   const route = (storeRoutes && storeRoutes[routeName]) || getRoute(routeName);
 
@@ -894,7 +906,10 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   }
 
   const url = getRoutePath(route);
-  return generatePath(url, fullParams);
+  const fullURL = generatePath(url, fullParams);
+
+  const searchParams = new URLSearchParams(queryParams).toString();
+  return searchParams ? `${fullURL}?${searchParams}` : fullURL;
 }
 
 export function getDefaultRoutes() {
