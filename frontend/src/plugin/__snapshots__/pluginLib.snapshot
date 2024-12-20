@@ -54,6 +54,7 @@
     "Link": [Function],
     "Loader": [Function],
     "LogViewer": [Function],
+    "LogsButton": [Function],
     "MatchExpressions": [Function],
     "MetadataDictGrid": [Function],
     "MetadataDisplay": [Function],
@@ -76,6 +77,7 @@
       "DocsViewer": [Function],
       "EditButton": [Function],
       "EditorDialog": [Function],
+      "LogsButton": [Function],
       "MatchExpressions": [Function],
       "MetadataDictGrid": [Function],
       "MetadataDisplay": [Function],
@@ -202,6 +204,7 @@
   },
   "DetailsViewDefaultHeaderActions": {
     "DELETE": "DELETE",
+    "DEPLOYMENT_LOGS": "DEPLOYMENT_LOGS",
     "EDIT": "EDIT",
     "NODE_DRAIN": "NODE_DRAIN",
     "NODE_TOGGLE_CORDON": "NODE_TOGGLE_CORDON",

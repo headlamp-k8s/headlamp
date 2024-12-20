@@ -12,6 +12,7 @@ import ErrorBoundary from '../../ErrorBoundary';
 import SectionHeader, { HeaderStyle } from '../../SectionHeader';
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';
+import { LogsButton } from '../LogsButton';
 import { RestartButton } from '../RestartButton';
 import ScaleButton from '../ScaleButton';
 
@@ -43,6 +44,9 @@ export function MainInfoHeader<T extends KubeObject>(props: MainInfoHeaderProps<
       switch ((headerAction as HeaderAction).id) {
         case DefaultHeaderAction.RESTART:
           Action = RestartButton;
+          break;
+        case DefaultHeaderAction.DEPLOYMENT_LOGS:
+          Action = LogsButton;
           break;
         case DefaultHeaderAction.SCALE:
           Action = ScaleButton;
@@ -78,6 +82,9 @@ export function MainInfoHeader<T extends KubeObject>(props: MainInfoHeaderProps<
   const defaultActions = [
     {
       id: DefaultHeaderAction.RESTART,
+    },
+    {
+      id: DefaultHeaderAction.DEPLOYMENT_LOGS,
     },
     {
       id: DefaultHeaderAction.SCALE,
