@@ -91,7 +91,7 @@ export interface PluginsState {
   /** Have plugins finished executing? */
   loaded: boolean;
   /** Information stored by settings about plugins. */
-  pluginSettings: PluginInfo[];
+  pluginSettings: { name: string; isEnabled: boolean }[];
 }
 const initialState: PluginsState = {
   /** Once the plugins have been fetched and executed. */
@@ -110,9 +110,14 @@ export const pluginsSlice = createSlice({
     /**
      * Save the plugin settings. To both the store, and localStorage.
      */
-    setPluginSettings(state, action: PayloadAction<PluginInfo[]>) {
-      state.pluginSettings = action.payload;
-      localStorage.setItem('headlampPluginSettings', JSON.stringify(action.payload));
+    setPluginSettings(state, action: PayloadAction<any[]>) {
+      const pluginInfo = action.payload.map(p => ({
+        name: p.name,
+        isEnabled: p.isEnabled,
+      }));
+      state.pluginSettings = pluginInfo;
+      console.log('LOCAL SAVE', pluginInfo);
+      localStorage.setItem('headlampPluginSettings', JSON.stringify(pluginInfo));
     },
     /** Reloads the browser page */
     reloadPage() {
