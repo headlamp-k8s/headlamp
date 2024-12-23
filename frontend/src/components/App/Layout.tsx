@@ -26,6 +26,8 @@ import VersionDialog from './VersionDialog';
 export interface LayoutProps {}
 
 const CLUSTER_FETCH_INTERVAL = 10 * 1000; // ms
+const TOPBAR_HEIGHT_DESKTOP = 64;
+const TOPBAR_HEIGHT_MOBILE = 72;
 
 function ClusterNotFoundPopup() {
   const cluster = getCluster();
@@ -202,12 +204,30 @@ export default function Layout({}: LayoutProps) {
       >
         {t('Skip to main content')}
       </Link>
-      <Box sx={{ display: 'flex', [theme.breakpoints.down('sm')]: { display: 'block' } }}>
+      <Box
+        sx={{
+          display: 'flex',
+          overflow: 'auto',
+          paddingTop: {
+            sm: `${TOPBAR_HEIGHT_DESKTOP}px`,
+            xs: `${TOPBAR_HEIGHT_MOBILE}px`,
+          },
+          height: '100dvh',
+        }}
+      >
         <VersionDialog />
         <CssBaseline enableColorScheme />
         <TopBar />
         <Sidebar />
-        <Main id="main" sx={{ flexGrow: 1, marginLeft: 'initial' }}>
+        <Main
+          id="main"
+          sx={{
+            flexGrow: 1,
+            marginLeft: 'initial',
+            overflow: 'auto',
+            [theme.breakpoints.down('sm')]: { marginTop: { xs: '-12px', sm: '-8px' } },
+          }}
+        >
           {allClusters &&
           !!clusterInURL &&
           !Object.keys(allClusters).includes(getCluster() || '') ? (
@@ -217,7 +237,7 @@ export default function Layout({}: LayoutProps) {
           )}
           <AlertNotification />
           <Box>
-            <Div sx={theme.mixins.toolbar} />
+            <Div />
             <Container {...containerProps}>
               <NavigationTabs />
               {arePluginsLoaded && (
