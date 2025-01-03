@@ -508,36 +508,24 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
     };
 
     if (!resourceAttrs.resource) {
-      resourceAttrs['resource'] = this.pluralName;
+      resourceAttrs['resource'] = this.apiName;
     }
 
     // @todo: We should get the API info from the API endpoint.
 
-    // If we already have the group, version, and resource, then we can make the request
-    // without trying the API info, which may have several versions and thus be less optimal.
+    // If we already have the group and version, then we can make the request without
+    // trying the API info, which may have several versions and thus be less optimal.
     if (!!resourceAttrs.group && !!resourceAttrs.version && !!resourceAttrs.resource) {
       return this.fetchAuthorization(resourceAttrs);
     }
 
-    // If we don't have the group, version, and resource, then we have to try all of the
+    // If we don't have the group or version, then we have to try all of the
     // API info versions until we find one that works.
     const apiInfo = this.apiEndpoint.apiInfo;
     for (let i = 0; i < apiInfo.length; i++) {
-      const { group, version, resource } = apiInfo[i];
-      // We only take from the details from the apiInfo if they're missing from the resourceAttrs.
-      // The idea is that, since this function may also be called from the instance's getAuthorization,
-      // it may already have the details from the instance's API version.
-      const attrs = { ...resourceAttrs };
-
-      if (!!attrs.resource) {
-        attrs.resource = resource;
-      }
-      if (!!attrs.group) {
-        attrs.group = group;
-      }
-      if (!!attrs.version) {
-        attrs.version = version;
-      }
+      const { group, version } = apiInfo[i];
+      // The group and version are tied, so we take both if one is missing.
+      const attrs = { ...resourceAttrs, group: group, version: version };
 
       let authResult;
 
