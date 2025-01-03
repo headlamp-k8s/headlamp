@@ -6,6 +6,7 @@ import pluginsReducer from '../../plugin/pluginsSlice';
 import actionButtons from '../actionButtonsSlice';
 import clusterAction from '../clusterActionSlice';
 import configReducer from '../configSlice';
+import drawerModeSlice from '../drawerModeSlice';
 import filterReducer from '../filterSlice';
 import eventCallbackReducer from '../headlampEventSlice';
 import routesReducer from '../routesSlice';
@@ -31,6 +32,7 @@ const reducers = combineReducers({
   detailsViewSections: detailsViewSectionReducer,
   eventCallbackReducer,
   pluginConfigs: pluginConfigReducer,
+  drawerMode: drawerModeSlice,
 });
 
 export type RootState = ReturnType<typeof reducers>;
