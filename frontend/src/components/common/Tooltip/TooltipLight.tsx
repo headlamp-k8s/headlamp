@@ -35,10 +35,8 @@ export default function TooltipLight(props: TooltipLightProps) {
 
   return (
     <Tooltip
-      {...props}
-      // children prop in the mui Tooltip is defined as ReactElement which is not totally correct
-      // string should be a valid child and is used a lot in this project
-      // but it's not included in the ReactElement type
+      {...rest}
+      disableInteractive={disableInteractive}
       children={props.children as unknown as ReactElement}
     />
   );

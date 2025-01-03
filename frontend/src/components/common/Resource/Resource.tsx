@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
-import { InputLabel } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material'; // Material icons for eye
+import { InputLabel, Snackbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Grid, { GridProps, GridSize } from '@mui/material/Grid';
@@ -20,11 +21,13 @@ import YAML from 'yaml';
 import { labelSelectorToQuery, ResourceClasses } from '../../../lib/k8s';
 import { ApiError } from '../../../lib/k8s/apiProxy';
 import { KubeCondition, KubeContainer, KubeContainerStatus } from '../../../lib/k8s/cluster';
+import ConfigMap from '../../../lib/k8s/configMap';
 import { KubeEvent } from '../../../lib/k8s/event';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { KubeObjectInterface } from '../../../lib/k8s/KubeObject';
 import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
+import Secret from '../../../lib/k8s/secret';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { localeDate, useId } from '../../../lib/util';
@@ -563,6 +566,246 @@ export function ConditionsTable(props: ConditionsTableProps) {
   );
 }
 
+export type EnvironmentVariablesProps = {
+  namespace?: KubeObject['metadata']['namespace'];
+  env?: KubeContainer['env'];
+  envFrom?: KubeContainer['envFrom'];
+};
+
+export type EnvironmentVariable = {
+  from: string;
+  value: string;
+  isError: boolean;
+  isSecret: boolean;
+};
+
+export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
+  const { t } = useTranslation();
+  const [revealedSecrets, setRevealedSecrets] = React.useState<Set<string>>(new Set());
+  const [copied, setCopied] = React.useState(false);
+
+  if ((!props?.env && !props?.envFrom) || !props?.namespace) {
+    return null;
+  }
+
+  // Copy to clipboard and show snackbar
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      },
+      err => {
+        console.error('Failed to copy: ', err);
+      }
+    );
+  };
+
+  // Function to reveal or hide secret values
+  const toggleSecret = (key: string) => {
+    setRevealedSecrets(prev => {
+      const newSet = new Set(prev);
+      newSet.has(key) ? newSet.delete(key) : newSet.add(key);
+      return newSet;
+    });
+  };
+
+  // Process env variables
+  const processEnvVariables = (props: EnvironmentVariablesProps): EnvironmentVariable[] => {
+    const variables = new Map<string, EnvironmentVariable>();
+
+    // Function to process secret data
+    const processValueFromSecret = (name: string, secretRef: { name: string; key: string }) => {
+      const [secret, setSecret] = React.useState<Secret | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.Secret.useApiGet(setSecret, secretRef.name, props.namespace, setError);
+
+      const key = secretRef.key;
+      const from = `secret/${secretRef.name}`;
+      let value = secret?.data?.[key] ? atob(secret.data[key]) : '';
+      let isSecret = true;
+
+      if (error) {
+        value = error.message;
+        isSecret = false;
+      }
+
+      variables.set(name, {
+        from,
+        value,
+        isError: !!error,
+        isSecret,
+      });
+    };
+
+    // Function to process configMap data
+    const processValueFromConfigMap = (
+      name: string,
+      configMapRef: { name: string; key: string }
+    ) => {
+      const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.ConfigMap.useApiGet(
+        setConfigMap,
+        configMapRef.name,
+        props.namespace,
+        setError
+      );
+
+      const key = configMapRef.key;
+      const from = `configMap/${configMapRef.name}`;
+      let value = configMap?.data?.[key] || '';
+
+      if (error) {
+        value = error.message;
+      }
+
+      variables.set(name, {
+        value,
+        from,
+        isError: !!error,
+        isSecret: false,
+      });
+    };
+
+    // Function to process all keys from a secret and add them to the variables map
+    const processAllSecretKeys = (secretName: string, prefix: string) => {
+      const [secret, setSecret] = React.useState<Secret | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.Secret.useApiGet(setSecret, secretName, props.namespace, setError);
+
+      if (error) {
+        variables.set(`${prefix}${secretName}`, {
+          from: `secret/${secretName}`,
+          value: error.message,
+          isError: true,
+          isSecret: false,
+        });
+      } else if (secret?.data) {
+        Object.entries(secret.data).forEach(([key, value]) => {
+          variables.set(`${prefix}${key}`, {
+            from: `secret/${secretName}`,
+            value: atob(value),
+            isError: false,
+            isSecret: true,
+          });
+        });
+      }
+    };
+
+    // Function to process all keys from a configMap and add them to the variables map
+    const processAllConfigMapKeys = (configMapName: string, prefix: string) => {
+      const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapName, props.namespace, setError);
+
+      if (error) {
+        variables.set(`${prefix}${configMapName}`, {
+          from: `configMap/${configMapName}`,
+          value: error.message,
+          isError: true,
+          isSecret: false,
+        });
+      } else if (configMap?.data) {
+        Object.entries(configMap.data).forEach(([key, value]) => {
+          variables.set(`${prefix}${key}`, {
+            from: `configMap/${configMapName}`,
+            value,
+            isError: false,
+            isSecret: false,
+          });
+        });
+      }
+    };
+
+    // Process env variables directly from env
+    props?.env?.forEach(item => {
+      if (item.value) {
+        variables.set(item.name, {
+          value: item.value,
+          from: 'manifest',
+          isSecret: false,
+          isError: false,
+        });
+      } else if (item.valueFrom) {
+        const ref = item.valueFrom;
+        if (ref.secretKeyRef) {
+          processValueFromSecret(item.name, ref.secretKeyRef);
+        } else if (ref.configMapKeyRef) {
+          processValueFromConfigMap(item.name, ref.configMapKeyRef);
+        }
+      }
+    });
+
+    // Process env variables from envFrom (configMap or secret references)
+    props?.envFrom?.forEach(item => {
+      if (item.secretRef) {
+        processAllSecretKeys(item.secretRef.name, prefix);
+      } else if (item.configMapRef) {
+        processAllConfigMapKeys(item.configMapRef.name, prefix);
+      }
+    });
+
+    return Array.from(variables.entries())
+      .map(([key, value]) => ({
+        key,
+        ...value,
+      }))
+      .sort((a, b) => a.key.localeCompare(b.key));
+  };
+
+  const variables = processEnvVariables(props);
+
+  // Define columns for the table
+  const columns = [
+    {
+      label: t('translation|Name'),
+      getter: (data: any) => data.key,
+    },
+    {
+      label: t('translation|Value'),
+      getter: (data: any) => {
+        const isRevealed = revealedSecrets.has(data.key);
+        let displayValue = data.value;
+        if (!data.isError && data.isSecret) {
+          displayValue = isRevealed ? displayValue : '••••••••';
+        }
+        return (
+          <Box display="flex" alignItems="center">
+            {data.isError && (
+              <Box aria-label="hidden" display="flex" alignItems="center" px={1}>
+                <Icon icon="mdi:alert-outline" width="1.3rem" height="1.3rem" aria-label="error" />
+                <Typography color="error" sx={{ marginLeft: 1 }}>
+                  {displayValue}
+                </Typography>
+              </Box>
+            )}
+            {!data.isError && (
+              <Box onClick={() => handleCopy(data.value)}>
+                <StatusLabel status="" sx={{ fontFamily: 'monospace' }}>
+                  {displayValue}
+                </StatusLabel>
+                <Snackbar open={copied} message="Copied!" autoHideDuration={2000} />
+              </Box>
+            )}
+            {!data.isError && data.isSecret && (
+              <IconButton onClick={() => toggleSecret(data.key)} sx={{ marginLeft: 1 }}>
+                {isRevealed ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            )}
+          </Box>
+        );
+      },
+    },
+    {
+      label: t('translation|From'),
+      getter: (data: any) => data.from,
+    },
+  ];
+
+  return <InnerTable columns={columns} data={variables} />;
+}
+
 export interface VolumeMountsProps {
   mounts?: {
     mountPath: string;
@@ -774,23 +1017,6 @@ export function ContainerInfo(props: ContainerInfoProps) {
   }
 
   function containerRows() {
-    const env: { [name: string]: string } = {};
-    (container.env || []).forEach(envVar => {
-      let value = '';
-
-      if (envVar.value) {
-        value = envVar.value;
-      } else if (envVar.valueFrom) {
-        if (envVar.valueFrom.fieldRef) {
-          value = envVar.valueFrom.fieldRef.fieldPath;
-        } else if (envVar.valueFrom.secretKeyRef) {
-          value = envVar.valueFrom.secretKeyRef.key;
-        }
-      }
-
-      env[envVar.name] = value;
-    });
-
     return [
       {
         name: container.name,
@@ -896,11 +1122,6 @@ export function ContainerInfo(props: ContainerInfoProps) {
         hide: !container.command,
       },
       {
-        name: t('Environment'),
-        value: <MetadataDictGrid dict={env} />,
-        hide: _.isEmpty(env),
-      },
-      {
         name: t('Liveness Probes'),
         value: <LivenessProbes liveness={container.livenessProbe} />,
         hide: _.isEmpty(container.livenessProbe),
@@ -934,6 +1155,18 @@ export function ContainerInfo(props: ContainerInfoProps) {
           </Grid>
         ),
         hide: _.isEmpty(container.ports),
+      },
+      {
+        name: 'Environment',
+        value: (
+          <GetEnvironmentVariables
+            namespace={resource?.metadata.namespace}
+            env={container.env}
+            envFrom={container.envFrom}
+          />
+        ),
+        valueCellProps: { sm: 12 as GridSize },
+        hide: _.isEmpty(container?.env) && _.isEmpty(container?.envFrom),
       },
       {
         name: t('Volume Mounts'),
