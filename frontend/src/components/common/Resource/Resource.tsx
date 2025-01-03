@@ -652,17 +652,23 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     const variables = new Map<string, EnvironmentVariable>();
 
     // Function to process secret data
-    const processValueFromSecret = (name: string, secretRef: { name: string; key: string }) => {
+    const processValueFromSecret = (
+      name: string,
+      secretKeyRef: { name: string; key: string; optional?: boolean }
+    ) => {
       const [secret, setSecret] = React.useState<Secret | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.Secret.useApiGet(setSecret, secretRef.name, namespace, setError);
+      ResourceClasses.Secret.useApiGet(setSecret, secretKeyRef.name, namespace, setError);
 
-      const key = secretRef.key;
-      const from = `secret/${secretRef.name}`;
+      const key = secretKeyRef.key;
+      const from = `secret/${secretKeyRef.name}`;
       let value = secret?.data?.[key] ? atob(secret.data[key]) : '';
       let isSecret = true;
 
       if (error) {
+        if (error.status === 404 && !!secretKeyRef.optional) {
+          return;
+        }
         value = error.message;
         isSecret = false;
       }
@@ -679,17 +685,21 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     // Function to process configMap data
     const processValueFromConfigMap = (
       name: string,
-      configMapRef: { name: string; key: string }
+      configMapKeyRef: { name: string; key: string; optional?: boolean }
     ) => {
       const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapRef.name, namespace, setError);
+      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapKeyRef.name, namespace, setError);
 
-      const key = configMapRef.key;
-      const from = `configmap/${configMapRef.name}`;
+      const key = configMapKeyRef.key;
+      const from = `configmap/${configMapKeyRef.name}`;
       let value = configMap?.data?.[key] || '';
 
       if (error) {
+        if (error.status === 404 && !!configMapKeyRef.optional) {
+          return;
+        }
+        console.log(error);
         value = error.message;
       }
       variables.set(name, {
@@ -703,16 +713,22 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     };
 
     // Function to process all keys from a secret and add them to the variables map
-    const processAllSecretKeys = (secretName: string, prefix: string) => {
+    const processAllSecretKeys = (
+      secretRef: { name: string; optional?: boolean },
+      prefix: string = ''
+    ) => {
       const [secret, setSecret] = React.useState<Secret | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.Secret.useApiGet(setSecret, secretName, namespace, setError);
+      ResourceClasses.Secret.useApiGet(setSecret, secretRef.name, namespace, setError);
       const isOutOfSync =
         compareTimestamps(secret?.metadata.creationTimestamp, containerStartTimestamp) === 1;
 
       if (error) {
-        variables.set(`${prefix}${secretName}`, {
-          from: `secret/${secretName}`,
+        if (error.status === 404 && !!secretRef.optional) {
+          return;
+        }
+        variables.set(`${prefix}${secretRef.name}`, {
+          from: `secret/${secretRef.name}`,
           value: error.message,
           isError: true,
           isSecret: false,
@@ -721,7 +737,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       } else if (secret?.data) {
         Object.entries(secret.data).forEach(([key, value]) => {
           variables.set(`${prefix}${key}`, {
-            from: `secret/${secretName}`,
+            from: `secret/${secretRef.name}`,
             value: atob(value),
             isError: false,
             isSecret: true,
@@ -732,16 +748,22 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     };
 
     // Function to process all keys from a configMap and add them to the variables map
-    const processAllConfigMapKeys = (configMapName: string, prefix: string) => {
+    const processAllConfigMapKeys = (
+      configMapRef: { name: string; optional?: boolean },
+      prefix: string = ''
+    ) => {
       const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapName, namespace, setError);
+      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapRef.name, namespace, setError);
       const isOutOfSync =
         compareTimestamps(configMap?.metadata.creationTimestamp, containerStartTimestamp) === 1;
 
       if (error) {
-        variables.set(`${prefix}${configMapName}`, {
-          from: `configmap/${configMapName}`,
+        if (error.status === 404 && !!configMapRef.optional) {
+          return;
+        }
+        variables.set(`${prefix}${configMapRef.name}`, {
+          from: `configmap/${configMapRef.name}`,
           value: error.message,
           isError: true,
           isSecret: false,
@@ -750,7 +772,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       } else if (configMap?.data) {
         Object.entries(configMap.data).forEach(([key, value]) => {
           variables.set(`${prefix}${key}`, {
-            from: `configmap/${configMapName}`,
+            from: `configmap/${configMapRef.name}`,
             value,
             isError: false,
             isSecret: false,
@@ -782,11 +804,10 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
 
     // Process env variables from envFrom (configMap or secret references)
     container?.envFrom?.forEach(item => {
-      const prefix = item.prefix || '';
       if (item.secretRef) {
-        processAllSecretKeys(item.secretRef.name, prefix);
+        processAllSecretKeys(item.secretRef, item.prefix);
       } else if (item.configMapRef) {
-        processAllConfigMapKeys(item.configMapRef.name, prefix);
+        processAllConfigMapKeys(item.configMapRef, item.prefix);
       }
     });
 
