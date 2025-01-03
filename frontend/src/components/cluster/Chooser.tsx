@@ -1,5 +1,5 @@
-import { Icon, InlineIcon } from '@iconify/react';
-import { DialogActions, IconButton } from '@mui/material';
+import { Icon } from '@iconify/react';
+import { DialogActions } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -300,16 +300,15 @@ export function ClusterDialog(props: ClusterDialogProps) {
         }}
         buttons={[
           showInfoButton && (
-            <IconButton
-              aria-label={t('Show build information')}
+            <ActionButton
+              description={t('Show build information')}
               onClick={() => {
                 handleClose();
                 dispatch(setVersionDialogOpen(true));
               }}
-              size="small"
-            >
-              <InlineIcon icon={'mdi:information-outline'} />
-            </IconButton>
+              icon={'mdi:information-outline'}
+              iconButtonProps={{ size: 'small' }}
+            />
           ),
         ]}
       >

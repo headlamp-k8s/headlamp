@@ -4,7 +4,6 @@ import { InputLabel } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Grid, { GridProps, GridSize } from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
 import Input, { InputProps } from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
 import { BaseTextFieldProps } from '@mui/material/TextField';
@@ -38,7 +37,7 @@ import {
   DetailsViewSection,
 } from '../../DetailsViewSection/detailsViewSectionSlice';
 import { PodListProps, PodListRenderer } from '../../pod/List';
-import { LightTooltip, Loader, ObjectEventList } from '..';
+import { ActionButton, LightTooltip, Loader, ObjectEventList } from '..';
 import BackLink from '../BackLink';
 import Empty from '../EmptyContent';
 import ErrorBoundary from '../ErrorBoundary';
@@ -473,15 +472,12 @@ export function SecretField(props: InputProps) {
   return (
     <Grid container alignItems="stretch" spacing={2}>
       <Grid item>
-        <IconButton
-          edge="end"
-          aria-label={t('toggle field visibility')}
+        <ActionButton
+          description={t('toggle field visibility')}
           onClick={handleClickShowPassword}
-          onMouseDown={event => event.preventDefault()}
-          size="medium"
-        >
-          <Icon icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'} />
-        </IconButton>
+          icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'}
+          iconButtonProps={{ size: 'medium' }}
+        />
       </Grid>
       <Grid item xs>
         <Input
