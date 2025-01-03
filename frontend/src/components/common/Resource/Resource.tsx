@@ -567,9 +567,8 @@ export function ConditionsTable(props: ConditionsTableProps) {
 }
 
 export type EnvironmentVariablesProps = {
-  podMetadata?: KubePod['metadata'];
-  env?: KubeContainer['env'];
-  envFrom?: KubeContainer['envFrom'];
+  pod?: KubePod;
+  container?: KubeContainer;
 };
 
 export type EnvironmentVariable = {
@@ -577,22 +576,33 @@ export type EnvironmentVariable = {
   value: string;
   isError: boolean;
   isSecret: boolean;
-  isOutOfSync: boolean; // If cm/sec creation timestamp is newer that pod's creation timestamp
+  isOutOfSync: boolean; // If cm/sec creation timestamp is newer that pod's start timestamp
 };
 
 export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
+  const { pod, container } = props;
   const { t } = useTranslation();
   const [revealedSecrets, setRevealedSecrets] = React.useState<Set<string>>(new Set());
   const [copied, setCopied] = React.useState(false);
 
-  if (!props?.env && !props?.envFrom) {
+  if (!container?.env && !container?.envFrom) {
     return null;
-  } else if (!props?.podMetadata) {
+  } else if (!pod?.status?.containerStatuses) {
+    return null;
+  } else if (!pod?.metadata?.namespace) {
     return null;
   }
 
-  const namespace = props.podMetadata.namespace;
-  const podCreationTimestamp = props.podMetadata.creationTimestamp;
+  const namespace = pod.metadata.namespace;
+  const containerStartTimestamp = (() => {
+    // Default to pod creation timestamp
+    let timestamp = pod.metadata.creationTimestamp;
+    const containerStatus = pod.status.containerStatuses.find(c => c.name === container.name);
+    if (containerStatus?.started && containerStatus.state?.running?.startedAt) {
+      timestamp = containerStatus.state.running.startedAt;
+    }
+    return timestamp;
+  })();
 
   // Copy to clipboard and show snackbar
   const handleCopy = (text: string) => {
@@ -638,7 +648,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
   }
 
   // Process env variables
-  const processEnvVariables = (props: EnvironmentVariablesProps): EnvironmentVariable[] => {
+  const processEnvVariables = (): EnvironmentVariable[] => {
     const variables = new Map<string, EnvironmentVariable>();
 
     // Function to process secret data
@@ -662,7 +672,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
         isError: !!error,
         isSecret,
         isOutOfSync:
-          compareTimestamps(secret?.metadata.creationTimestamp, podCreationTimestamp) === 1,
+          compareTimestamps(secret?.metadata.creationTimestamp, containerStartTimestamp) === 1,
       });
     };
 
@@ -688,7 +698,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
         isError: !!error,
         isSecret: false,
         isOutOfSync:
-          compareTimestamps(configMap?.metadata.creationTimestamp, podCreationTimestamp) === 1,
+          compareTimestamps(configMap?.metadata.creationTimestamp, containerStartTimestamp) === 1,
       });
     };
 
@@ -698,7 +708,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       const [error, setError] = React.useState<ApiError | null>(null);
       ResourceClasses.Secret.useApiGet(setSecret, secretName, namespace, setError);
       const isOutOfSync =
-        compareTimestamps(secret?.metadata.creationTimestamp, podCreationTimestamp) === 1;
+        compareTimestamps(secret?.metadata.creationTimestamp, containerStartTimestamp) === 1;
 
       if (error) {
         variables.set(`${prefix}${secretName}`, {
@@ -727,7 +737,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       const [error, setError] = React.useState<ApiError | null>(null);
       ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapName, namespace, setError);
       const isOutOfSync =
-        compareTimestamps(configMap?.metadata.creationTimestamp, podCreationTimestamp) === 1;
+        compareTimestamps(configMap?.metadata.creationTimestamp, containerStartTimestamp) === 1;
 
       if (error) {
         variables.set(`${prefix}${configMapName}`, {
@@ -751,7 +761,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     };
 
     // Process env variables directly from env
-    props?.env?.forEach(item => {
+    container?.env?.forEach(item => {
       if (item.value) {
         variables.set(item.name, {
           value: item.value,
@@ -771,7 +781,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     });
 
     // Process env variables from envFrom (configMap or secret references)
-    props?.envFrom?.forEach(item => {
+    container?.envFrom?.forEach(item => {
       const prefix = item.prefix || '';
       if (item.secretRef) {
         processAllSecretKeys(item.secretRef.name, prefix);
@@ -788,7 +798,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       .sort((a, b) => a.key.localeCompare(b.key));
   };
 
-  const variables = processEnvVariables(props);
+  const variables = processEnvVariables();
 
   // Define columns for the table
   const columns = [
@@ -1215,13 +1225,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
       },
       {
         name: 'Environment',
-        value: (
-          <GetEnvironmentVariables
-            podMetadata={resource?.metadata}
-            env={container.env}
-            envFrom={container.envFrom}
-          />
-        ),
+        value: <GetEnvironmentVariables pod={resource as KubePod} container={container} />,
         valueCellProps: { sm: 12 as GridSize },
         hide: _.isEmpty(container?.env) && _.isEmpty(container?.envFrom),
       },
