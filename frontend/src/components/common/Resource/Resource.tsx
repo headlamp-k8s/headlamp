@@ -782,6 +782,157 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       }
     };
 
+    const processValueFromFieldRef = (name: string, fieldRef: { fieldPath: string }) => {
+      let value = '';
+      let isError = false;
+
+      try {
+        // Support for predefined field paths
+        switch (fieldRef.fieldPath) {
+          case 'metadata.name':
+            value = pod.metadata.name || '';
+            break;
+          case 'metadata.namespace':
+            value = pod.metadata.namespace || '';
+            break;
+          case 'spec.nodeName':
+            value = pod.spec.nodeName || '';
+            break;
+          case 'spec.serviceAccountName':
+            value = pod.spec.serviceAccountName || '';
+            break;
+          case 'status.hostIP':
+            value = pod.status.hostIP || '';
+            break;
+          case 'status.podIP':
+            value = pod.status.podIP || '';
+            break;
+          // Extend support for metadata.labels and annotations
+          default:
+            if (fieldRef.fieldPath.startsWith("metadata.labels['")) {
+              const labelKey = fieldRef.fieldPath.match(/metadata\.labels\['(.+)'\]/)?.[1];
+              value =
+                labelKey && pod.metadata.labels?.[labelKey] ? pod.metadata.labels[labelKey] : '';
+            } else if (fieldRef.fieldPath.startsWith("metadata.annotations['")) {
+              const annotationKey = fieldRef.fieldPath.match(
+                /metadata\.annotations\['(.+)'\]/
+              )?.[1];
+              value =
+                annotationKey && pod.metadata.annotations?.[annotationKey]
+                  ? pod.metadata.annotations[annotationKey]
+                  : '';
+            } else {
+              isError = true;
+              value = `Unsupported fieldPath: ${fieldRef.fieldPath}`;
+            }
+            break;
+        }
+      } catch (err) {
+        isError = true;
+        if (err instanceof Error) {
+          value = `Error processing fieldPath: ${err.message}`;
+        } else {
+          value = 'Unknown error occurred.';
+        }
+      }
+      variables.set(name, {
+        value: value,
+        from: `fieldRef: ${fieldRef.fieldPath}`,
+        isSecret: false,
+        isError: isError,
+        isOutOfSync: false,
+      });
+    };
+
+    const processValueFromResourceFieldRef = (
+      name: string,
+      resourceFieldRef: { resource: string; containerName?: string; divisor?: string }
+    ) => {
+      let value = '';
+      let isError = false;
+      const containerName = resourceFieldRef.containerName || container.name;
+      const resourceType = resourceFieldRef.resource;
+      const divisor = resourceFieldRef.divisor || '1';
+
+      const BINARY_SUFFIXES = new Map([
+        ['Ki', Math.pow(2, 10)],
+        ['Mi', Math.pow(2, 20)],
+        ['Gi', Math.pow(2, 30)],
+        ['Ti', Math.pow(2, 40)],
+        ['Pi', Math.pow(2, 50)],
+        ['Ei', Math.pow(2, 60)],
+      ]);
+
+      const DECIMAL_SUFFIXES = new Map([
+        ['k', Math.pow(10, 3)],
+        ['M', Math.pow(10, 6)],
+        ['G', Math.pow(10, 9)],
+        ['T', Math.pow(10, 12)],
+        ['P', Math.pow(10, 15)],
+        ['E', Math.pow(10, 18)],
+      ]);
+
+      const parseK8sResource = (value: string): number => {
+        const match = value.match(/^(\d+\.?\d*)(([KMGTPE]i?)|)$/);
+        if (!match) throw new Error('Invalid resource quantity format');
+
+        const [, num, suffix] = match;
+        const quantity = parseFloat(num);
+
+        if (!suffix) return quantity;
+        const multiplier = BINARY_SUFFIXES.get(suffix) || DECIMAL_SUFFIXES.get(suffix);
+        if (!multiplier) throw new Error('Invalid suffix');
+
+        return quantity * multiplier;
+      };
+
+      const divideK8sResources = (a: string, b: string): number => {
+        return parseK8sResource(a) / parseK8sResource(b);
+      };
+
+      const formatK8sResource = (value: number, unit: string = ''): string => {
+        return `${value}${unit}`;
+      };
+
+      try {
+        // Find the container based on the containerName
+        const targetContainer = pod.spec.containers.find(c => c.name === containerName);
+        if (!targetContainer) {
+          isError = true;
+          throw new Error(`Container ${containerName} not found`);
+        }
+
+        // Fetch the resource value from container resources (CPU, memory, etc.)
+        const [category, type] = resourceType.split('.');
+        const resourceValue =
+          targetContainer.resources?.[category as 'requests' | 'limits']?.[
+            type as 'cpu' | 'memory'
+          ];
+        if (!resourceValue) {
+          isError = true;
+          throw new Error(`Resource ${resourceType} not found for container ${containerName}`);
+        }
+
+        // Handle the divisor if it exists (for formatting purposes, e.g., 1k, 1M, etc.
+        value = formatK8sResource(divideK8sResources(resourceValue, divisor));
+      } catch (err) {
+        isError = true;
+        if (err instanceof Error) {
+          value = err.message;
+        } else {
+          value = 'Unknown error occurred.';
+        }
+      }
+
+      variables.set(name, {
+        value: value,
+        from: `resourceFieldRef: ${containerName}.${resourceType} / ${divisor}`,
+        isSecret: false,
+        isError: isError,
+        isOutOfSync: false,
+      });
+    };
+
     // Process env variables directly from env
     container?.env?.forEach(item => {
       if (item.value) {
@@ -798,6 +949,10 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
           processValueFromSecret(item.name, ref.secretKeyRef);
         } else if (ref.configMapKeyRef) {
           processValueFromConfigMap(item.name, ref.configMapKeyRef);
+        } else if (ref.fieldRef) {
+          processValueFromFieldRef(item.name, ref.fieldRef);
+        } else if (ref.resourceFieldRef) {
+          processValueFromResourceFieldRef(item.name, ref.resourceFieldRef);
         }
       }
     });
@@ -889,7 +1044,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       label: t('translation|From'),
       getter: (data: any) => {
         const [kind, name] = data.from.split('/');
-        if (!kind || !name) {
+        if (!kind || !name || kind.startsWith('resourceFieldRef:')) {
           return data.from;
         }
         return (
