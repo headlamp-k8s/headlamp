@@ -567,7 +567,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
 }
 
 export type EnvironmentVariablesProps = {
-  namespace?: KubeObject['metadata']['namespace'];
+  podMetadata?: KubePod['metadata'];
   env?: KubeContainer['env'];
   envFrom?: KubeContainer['envFrom'];
 };
@@ -577,6 +577,7 @@ export type EnvironmentVariable = {
   value: string;
   isError: boolean;
   isSecret: boolean;
+  isOutOfSync: boolean; // If cm/sec creation timestamp is newer that pod's creation timestamp
 };
 
 export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
@@ -584,9 +585,14 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
   const [revealedSecrets, setRevealedSecrets] = React.useState<Set<string>>(new Set());
   const [copied, setCopied] = React.useState(false);
 
-  if ((!props?.env && !props?.envFrom) || !props?.namespace) {
+  if (!props?.env && !props?.envFrom) {
+    return null;
+  } else if (!props?.podMetadata) {
     return null;
   }
+
+  const namespace = props.podMetadata.namespace;
+  const podCreationTimestamp = props.podMetadata.creationTimestamp;
 
   // Copy to clipboard and show snackbar
   const handleCopy = (text: string) => {
@@ -610,6 +616,27 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     });
   };
 
+  // Function to parse ISO 8601 timestamps and compare them
+  function compareTimestamps(a: string | undefined, b: string | undefined): number {
+    if (!a || !b) {
+      return 0;
+    }
+    const aDate = new Date(a!);
+    const bDate = new Date(b!);
+    // Check if either timestamp failed to parse
+    if (isNaN(aDate.getTime()) || isNaN(bDate.getTime())) {
+      throw new Error('Invalid timestamp format');
+    }
+    // Compare the dates
+    if (aDate.getTime() < bDate.getTime()) {
+      return -1; // First is older
+    } else if (aDate.getTime() > bDate.getTime()) {
+      return 1; // Second is older
+    } else {
+      return 0; // Both have the same timestamp
+    }
+  }
+
   // Process env variables
   const processEnvVariables = (props: EnvironmentVariablesProps): EnvironmentVariable[] => {
     const variables = new Map<string, EnvironmentVariable>();
@@ -618,7 +645,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     const processValueFromSecret = (name: string, secretRef: { name: string; key: string }) => {
       const [secret, setSecret] = React.useState<Secret | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.Secret.useApiGet(setSecret, secretRef.name, props.namespace, setError);
+      ResourceClasses.Secret.useApiGet(setSecret, secretRef.name, namespace, setError);
 
       const key = secretRef.key;
       const from = `secret/${secretRef.name}`;
@@ -629,12 +656,13 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
         value = error.message;
         isSecret = false;
       }
-
       variables.set(name, {
         from,
         value,
         isError: !!error,
         isSecret,
+        isOutOfSync:
+          compareTimestamps(secret?.metadata.creationTimestamp, podCreationTimestamp) === 1,
       });
     };
 
@@ -645,12 +673,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     ) => {
       const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.ConfigMap.useApiGet(
-        setConfigMap,
-        configMapRef.name,
-        props.namespace,
-        setError
-      );
+      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapRef.name, namespace, setError);
 
       const key = configMapRef.key;
       const from = `configMap/${configMapRef.name}`;
@@ -659,12 +682,13 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       if (error) {
         value = error.message;
       }
-
       variables.set(name, {
         value,
         from,
         isError: !!error,
         isSecret: false,
+        isOutOfSync:
+          compareTimestamps(configMap?.metadata.creationTimestamp, podCreationTimestamp) === 1,
       });
     };
 
@@ -672,7 +696,9 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     const processAllSecretKeys = (secretName: string, prefix: string) => {
       const [secret, setSecret] = React.useState<Secret | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.Secret.useApiGet(setSecret, secretName, props.namespace, setError);
+      ResourceClasses.Secret.useApiGet(setSecret, secretName, namespace, setError);
+      const isOutOfSync =
+        compareTimestamps(secret?.metadata.creationTimestamp, podCreationTimestamp) === 1;
 
       if (error) {
         variables.set(`${prefix}${secretName}`, {
@@ -680,6 +706,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
           value: error.message,
           isError: true,
           isSecret: false,
+          isOutOfSync: false,
         });
       } else if (secret?.data) {
         Object.entries(secret.data).forEach(([key, value]) => {
@@ -688,6 +715,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
             value: atob(value),
             isError: false,
             isSecret: true,
+            isOutOfSync,
           });
         });
       }
@@ -697,7 +725,9 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     const processAllConfigMapKeys = (configMapName: string, prefix: string) => {
       const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
       const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapName, props.namespace, setError);
+      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapName, namespace, setError);
+      const isOutOfSync =
+        compareTimestamps(configMap?.metadata.creationTimestamp, podCreationTimestamp) === 1;
 
       if (error) {
         variables.set(`${prefix}${configMapName}`, {
@@ -705,6 +735,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
           value: error.message,
           isError: true,
           isSecret: false,
+          isOutOfSync: false,
         });
       } else if (configMap?.data) {
         Object.entries(configMap.data).forEach(([key, value]) => {
@@ -713,6 +744,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
             value,
             isError: false,
             isSecret: false,
+            isOutOfSync,
           });
         });
       }
@@ -726,6 +758,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
           from: 'manifest',
           isSecret: false,
           isError: false,
+          isOutOfSync: false,
         });
       } else if (item.valueFrom) {
         const ref = item.valueFrom;
@@ -739,6 +772,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
 
     // Process env variables from envFrom (configMap or secret references)
     props?.envFrom?.forEach(item => {
+      const prefix = item.prefix || '';
       if (item.secretRef) {
         processAllSecretKeys(item.secretRef.name, prefix);
       } else if (item.configMapRef) {
@@ -760,7 +794,30 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
   const columns = [
     {
       label: t('translation|Name'),
-      getter: (data: any) => data.key,
+      getter: (data: any) => {
+        return (
+          <Box display="flex" alignItems="center" onClick={() => handleCopy(data.key)}>
+            <StatusLabel status="" sx={{ fontFamily: 'monospace' }}>
+              {data.key}
+            </StatusLabel>
+            {data.isOutOfSync && (
+              <Box aria-label="hidden" display="flex" alignItems="center" px={1}>
+                <HoverInfoLabel
+                  label=""
+                  aria-label="error"
+                  icon="mdi:alert-outline"
+                  hoverInfo={t(
+                    'translation|This value may differ in the container, since the pod is older than {{from}}',
+                    {
+                      from: data.from,
+                    }
+                  )}
+                />
+              </Box>
+            )}
+          </Box>
+        );
+      },
     },
     {
       label: t('translation|Value'),
@@ -774,7 +831,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
           <Box display="flex" alignItems="center">
             {data.isError && (
               <Box aria-label="hidden" display="flex" alignItems="center" px={1}>
-                <Icon icon="mdi:alert-outline" width="1.3rem" height="1.3rem" aria-label="error" />
+                <Icon icon="mdi:alert-outline" aria-label="error" />
                 <Typography color="error" sx={{ marginLeft: 1 }}>
                   {displayValue}
                 </Typography>
@@ -1160,7 +1217,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
         name: 'Environment',
         value: (
           <GetEnvironmentVariables
-            namespace={resource?.metadata.namespace}
+            podMetadata={resource?.metadata}
             env={container.env}
             envFrom={container.envFrom}
           />
