@@ -10,13 +10,11 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
-import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
-import prepareRoutes from './prepareRoutes';
 import SidebarItem from './SidebarItem';
 import {
   DefaultSidebars,
@@ -24,6 +22,7 @@ import {
   setWhetherSidebarOpen,
   SidebarEntry,
 } from './sidebarSlice';
+import { useSidebarItems } from './useSidebarItems';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 240;
@@ -154,8 +153,6 @@ const DefaultLinkArea = memo((props: { sidebarName: string; isOpen: boolean }) =
 });
 
 export default function Sidebar() {
-  const { t, i18n } = useTranslation(['glossary', 'translation']);
-
   const sidebar = useTypedSelector(state => state.sidebar);
   const {
     isOpen,
@@ -165,24 +162,10 @@ export default function Sidebar() {
     isTemporary: isTemporaryDrawer,
   } = useSidebarInfo();
   const isNarrowOnly = isNarrow && !canExpand;
-  const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
-  const cluster = useCluster();
-  const items = React.useMemo(() => {
-    // If the sidebar is null, then it means it should not be visible.
-    if (sidebar.selected.sidebar === null) {
-      return [];
-    }
-    return prepareRoutes(t, sidebar.selected.sidebar || '');
-  }, [
-    cluster,
-    sidebar.selected,
-    sidebar.entries,
-    sidebar.filters,
-    i18n.language,
-    arePluginsLoaded,
-  ]);
+
+  const items = useSidebarItems(sidebar?.selected?.sidebar ?? undefined);
 
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
