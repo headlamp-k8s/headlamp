@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
-import { InputLabel } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material'; // Material icons for eye
+import { InputLabel, Snackbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Grid, { GridProps, GridSize } from '@mui/material/Grid';
@@ -20,11 +21,13 @@ import YAML from 'yaml';
 import { labelSelectorToQuery, ResourceClasses } from '../../../lib/k8s';
 import { ApiError } from '../../../lib/k8s/apiProxy';
 import { KubeCondition, KubeContainer, KubeContainerStatus } from '../../../lib/k8s/cluster';
+import ConfigMap from '../../../lib/k8s/configMap';
 import { KubeEvent } from '../../../lib/k8s/event';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { KubeObjectInterface } from '../../../lib/k8s/KubeObject';
 import { KubeObjectClass } from '../../../lib/k8s/KubeObject';
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
+import Secret from '../../../lib/k8s/secret';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { localeDate, useId } from '../../../lib/util';
@@ -563,6 +566,499 @@ export function ConditionsTable(props: ConditionsTableProps) {
   );
 }
 
+export type EnvironmentVariablesProps = {
+  pod?: KubePod;
+  container?: KubeContainer;
+};
+
+export type EnvironmentVariable = {
+  from: string;
+  value: string;
+  isError: boolean;
+  isSecret: boolean;
+  isOutOfSync: boolean; // If cm/sec creation timestamp is newer that pod's start timestamp
+};
+
+export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
+  const { pod, container } = props;
+  const { t } = useTranslation();
+  const [revealedSecrets, setRevealedSecrets] = React.useState<Set<string>>(new Set());
+  const [copied, setCopied] = React.useState(false);
+
+  if (!container?.env && !container?.envFrom) {
+    return null;
+  } else if (!pod?.status?.containerStatuses) {
+    return null;
+  } else if (!pod?.metadata?.namespace) {
+    return null;
+  }
+
+  const namespace = pod.metadata.namespace;
+  const containerStartTimestamp = (() => {
+    // Default to pod creation timestamp
+    let timestamp = pod.metadata.creationTimestamp;
+    const containerStatus = pod.status.containerStatuses.find(c => c.name === container.name);
+    if (containerStatus?.started && containerStatus.state?.running?.startedAt) {
+      timestamp = containerStatus.state.running.startedAt;
+    }
+    return timestamp;
+  })();
+
+  // Copy to clipboard and show snackbar
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      },
+      err => {
+        console.error('Failed to copy: ', err);
+      }
+    );
+  };
+
+  // Function to reveal or hide secret values
+  const toggleSecret = (key: string) => {
+    setRevealedSecrets(prev => {
+      const newSet = new Set(prev);
+      newSet.has(key) ? newSet.delete(key) : newSet.add(key);
+      return newSet;
+    });
+  };
+
+  // Function to parse ISO 8601 timestamps and compare them
+  function compareTimestamps(a: string | undefined, b: string | undefined): number {
+    if (!a || !b) {
+      return 0;
+    }
+    const aDate = new Date(a!);
+    const bDate = new Date(b!);
+    // Check if either timestamp failed to parse
+    if (isNaN(aDate.getTime()) || isNaN(bDate.getTime())) {
+      throw new Error('Invalid timestamp format');
+    }
+    // Compare the dates
+    if (aDate.getTime() < bDate.getTime()) {
+      return -1; // First is older
+    } else if (aDate.getTime() > bDate.getTime()) {
+      return 1; // Second is older
+    } else {
+      return 0; // Both have the same timestamp
+    }
+  }
+
+  // Process env variables
+  const processEnvVariables = (): EnvironmentVariable[] => {
+    const variables = new Map<string, EnvironmentVariable>();
+
+    // Function to process secret data
+    const processValueFromSecret = (
+      name: string,
+      secretKeyRef: { name: string; key: string; optional?: boolean }
+    ) => {
+      const [secret, setSecret] = React.useState<Secret | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.Secret.useApiGet(setSecret, secretKeyRef.name, namespace, setError);
+
+      const key = secretKeyRef.key;
+      const from = `secret/${secretKeyRef.name}`;
+      let value = secret?.data?.[key] ? atob(secret.data[key]) : '';
+      let isSecret = true;
+
+      if (error) {
+        if (error.status === 404 && !!secretKeyRef.optional) {
+          return;
+        }
+        value = error.message;
+        isSecret = false;
+      }
+      variables.set(name, {
+        from,
+        value,
+        isError: !!error,
+        isSecret,
+        isOutOfSync:
+          compareTimestamps(secret?.metadata.creationTimestamp, containerStartTimestamp) === 1,
+      });
+    };
+
+    // Function to process configMap data
+    const processValueFromConfigMap = (
+      name: string,
+      configMapKeyRef: { name: string; key: string; optional?: boolean }
+    ) => {
+      const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapKeyRef.name, namespace, setError);
+
+      const key = configMapKeyRef.key;
+      const from = `configmap/${configMapKeyRef.name}`;
+      let value = configMap?.data?.[key] || '';
+
+      if (error) {
+        if (error.status === 404 && !!configMapKeyRef.optional) {
+          return;
+        }
+        console.log(error);
+        value = error.message;
+      }
+      variables.set(name, {
+        value,
+        from,
+        isError: !!error,
+        isSecret: false,
+        isOutOfSync:
+          compareTimestamps(configMap?.metadata.creationTimestamp, containerStartTimestamp) === 1,
+      });
+    };
+
+    // Function to process all keys from a secret and add them to the variables map
+    const processAllSecretKeys = (
+      secretRef: { name: string; optional?: boolean },
+      prefix: string = ''
+    ) => {
+      const [secret, setSecret] = React.useState<Secret | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.Secret.useApiGet(setSecret, secretRef.name, namespace, setError);
+      const isOutOfSync =
+        compareTimestamps(secret?.metadata.creationTimestamp, containerStartTimestamp) === 1;
+
+      if (error) {
+        if (error.status === 404 && !!secretRef.optional) {
+          return;
+        }
+        variables.set(`${prefix}${secretRef.name}`, {
+          from: `secret/${secretRef.name}`,
+          value: error.message,
+          isError: true,
+          isSecret: false,
+          isOutOfSync: false,
+        });
+      } else if (secret?.data) {
+        Object.entries(secret.data).forEach(([key, value]) => {
+          variables.set(`${prefix}${key}`, {
+            from: `secret/${secretRef.name}`,
+            value: atob(value),
+            isError: false,
+            isSecret: true,
+            isOutOfSync,
+          });
+        });
+      }
+    };
+
+    // Function to process all keys from a configMap and add them to the variables map
+    const processAllConfigMapKeys = (
+      configMapRef: { name: string; optional?: boolean },
+      prefix: string = ''
+    ) => {
+      const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
+      const [error, setError] = React.useState<ApiError | null>(null);
+      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapRef.name, namespace, setError);
+      const isOutOfSync =
+        compareTimestamps(configMap?.metadata.creationTimestamp, containerStartTimestamp) === 1;
+
+      if (error) {
+        if (error.status === 404 && !!configMapRef.optional) {
+          return;
+        }
+        variables.set(`${prefix}${configMapRef.name}`, {
+          from: `configmap/${configMapRef.name}`,
+          value: error.message,
+          isError: true,
+          isSecret: false,
+          isOutOfSync: false,
+        });
+      } else if (configMap?.data) {
+        Object.entries(configMap.data).forEach(([key, value]) => {
+          variables.set(`${prefix}${key}`, {
+            from: `configmap/${configMapRef.name}`,
+            value,
+            isError: false,
+            isSecret: false,
+            isOutOfSync,
+          });
+        });
+      }
+    };
+
+    const processValueFromFieldRef = (name: string, fieldRef: { fieldPath: string }) => {
+      let value = '';
+      let isError = false;
+
+      try {
+        // Support for predefined field paths
+        switch (fieldRef.fieldPath) {
+          case 'metadata.name':
+            value = pod.metadata.name || '';
+            break;
+          case 'metadata.namespace':
+            value = pod.metadata.namespace || '';
+            break;
+          case 'spec.nodeName':
+            value = pod.spec.nodeName || '';
+            break;
+          case 'spec.serviceAccountName':
+            value = pod.spec.serviceAccountName || '';
+            break;
+          case 'status.hostIP':
+            value = pod.status.hostIP || '';
+            break;
+          case 'status.podIP':
+            value = pod.status.podIP || '';
+            break;
+          // Extend support for metadata.labels and annotations
+          default:
+            if (fieldRef.fieldPath.startsWith("metadata.labels['")) {
+              const labelKey = fieldRef.fieldPath.match(/metadata\.labels\['(.+)'\]/)?.[1];
+              value =
+                labelKey && pod.metadata.labels?.[labelKey] ? pod.metadata.labels[labelKey] : '';
+            } else if (fieldRef.fieldPath.startsWith("metadata.annotations['")) {
+              const annotationKey = fieldRef.fieldPath.match(
+                /metadata\.annotations\['(.+)'\]/
+              )?.[1];
+              value =
+                annotationKey && pod.metadata.annotations?.[annotationKey]
+                  ? pod.metadata.annotations[annotationKey]
+                  : '';
+            } else {
+              isError = true;
+              value = `Unsupported fieldPath: ${fieldRef.fieldPath}`;
+            }
+            break;
+        }
+      } catch (err) {
+        isError = true;
+        if (err instanceof Error) {
+          value = `Error processing fieldPath: ${err.message}`;
+        } else {
+          value = 'Unknown error occurred.';
+        }
+      }
+      variables.set(name, {
+        value: value,
+        from: `fieldRef: ${fieldRef.fieldPath}`,
+        isSecret: false,
+        isError: isError,
+        isOutOfSync: false,
+      });
+    };
+
+    const processValueFromResourceFieldRef = (
+      name: string,
+      resourceFieldRef: { resource: string; containerName?: string; divisor?: string }
+    ) => {
+      let value = '';
+      let isError = false;
+      const containerName = resourceFieldRef.containerName || container.name;
+      const resourceType = resourceFieldRef.resource;
+      const divisor = resourceFieldRef.divisor || '1';
+
+      const BINARY_SUFFIXES = new Map([
+        ['Ki', Math.pow(2, 10)],
+        ['Mi', Math.pow(2, 20)],
+        ['Gi', Math.pow(2, 30)],
+        ['Ti', Math.pow(2, 40)],
+        ['Pi', Math.pow(2, 50)],
+        ['Ei', Math.pow(2, 60)],
+      ]);
+
+      const DECIMAL_SUFFIXES = new Map([
+        ['k', Math.pow(10, 3)],
+        ['M', Math.pow(10, 6)],
+        ['G', Math.pow(10, 9)],
+        ['T', Math.pow(10, 12)],
+        ['P', Math.pow(10, 15)],
+        ['E', Math.pow(10, 18)],
+      ]);
+
+      const parseK8sResource = (value: string): number => {
+        const match = value.match(/^(\d+\.?\d*)(([KMGTPE]i?)|)$/);
+        if (!match) throw new Error('Invalid resource quantity format');
+
+        const [, num, suffix] = match;
+        const quantity = parseFloat(num);
+
+        if (!suffix) return quantity;
+        const multiplier = BINARY_SUFFIXES.get(suffix) || DECIMAL_SUFFIXES.get(suffix);
+        if (!multiplier) throw new Error('Invalid suffix');
+
+        return quantity * multiplier;
+      };
+
+      const divideK8sResources = (a: string, b: string): number => {
+        return parseK8sResource(a) / parseK8sResource(b);
+      };
+
+      const formatK8sResource = (value: number, unit: string = ''): string => {
+        return `${value}${unit}`;
+      };
+
+      try {
+        // Find the container based on the containerName
+        const targetContainer = pod.spec.containers.find(c => c.name === containerName);
+        if (!targetContainer) {
+          isError = true;
+          throw new Error(`Container ${containerName} not found`);
+        }
+
+        // Fetch the resource value from container resources (CPU, memory, etc.)
+        const [category, type] = resourceType.split('.');
+        const resourceValue =
+          targetContainer.resources?.[category as 'requests' | 'limits']?.[
+            type as 'cpu' | 'memory'
+          ];
+        if (!resourceValue) {
+          isError = true;
+          throw new Error(`Resource ${resourceType} not found for container ${containerName}`);
+        }
+
+        // Handle the divisor if it exists (for formatting purposes, e.g., 1k, 1M, etc.
+        value = formatK8sResource(divideK8sResources(resourceValue, divisor));
+      } catch (err) {
+        isError = true;
+        if (err instanceof Error) {
+          value = err.message;
+        } else {
+          value = 'Unknown error occurred.';
+        }
+      }
+
+      variables.set(name, {
+        value: value,
+        from: `resourceFieldRef: ${containerName}.${resourceType} / ${divisor}`,
+        isSecret: false,
+        isError: isError,
+        isOutOfSync: false,
+      });
+    };
+
+    // Process env variables directly from env
+    container?.env?.forEach(item => {
+      if (item.value) {
+        variables.set(item.name, {
+          value: item.value,
+          from: 'manifest',
+          isSecret: false,
+          isError: false,
+          isOutOfSync: false,
+        });
+      } else if (item.valueFrom) {
+        const ref = item.valueFrom;
+        if (ref.secretKeyRef) {
+          processValueFromSecret(item.name, ref.secretKeyRef);
+        } else if (ref.configMapKeyRef) {
+          processValueFromConfigMap(item.name, ref.configMapKeyRef);
+        } else if (ref.fieldRef) {
+          processValueFromFieldRef(item.name, ref.fieldRef);
+        } else if (ref.resourceFieldRef) {
+          processValueFromResourceFieldRef(item.name, ref.resourceFieldRef);
+        }
+      }
+    });
+
+    // Process env variables from envFrom (configMap or secret references)
+    container?.envFrom?.forEach(item => {
+      if (item.secretRef) {
+        processAllSecretKeys(item.secretRef, item.prefix);
+      } else if (item.configMapRef) {
+        processAllConfigMapKeys(item.configMapRef, item.prefix);
+      }
+    });
+
+    return Array.from(variables.entries())
+      .map(([key, value]) => ({
+        key,
+        ...value,
+      }))
+      .sort((a, b) => a.key.localeCompare(b.key));
+  };
+
+  const variables = processEnvVariables();
+
+  // Define columns for the table
+  const columns = [
+    {
+      label: t('translation|Name'),
+      getter: (data: any) => {
+        return (
+          <Box display="flex" alignItems="center" onClick={() => handleCopy(data.key)}>
+            <StatusLabel status="" sx={{ fontFamily: 'monospace' }}>
+              {data.key}
+            </StatusLabel>
+            {data.isOutOfSync && (
+              <Box aria-label="hidden" display="flex" alignItems="center" px={1}>
+                <HoverInfoLabel
+                  label=""
+                  aria-label="error"
+                  icon="mdi:alert-outline"
+                  hoverInfo={t(
+                    'translation|This value may differ in the container, since the pod is older than {{from}}',
+                    {
+                      from: data.from,
+                    }
+                  )}
+                />
+              </Box>
+            )}
+          </Box>
+        );
+      },
+    },
+    {
+      label: t('translation|Value'),
+      getter: (data: any) => {
+        const isRevealed = revealedSecrets.has(data.key);
+        let displayValue = data.value;
+        if (!data.isError && data.isSecret) {
+          displayValue = isRevealed ? displayValue : '••••••••';
+        }
+        return (
+          <Box display="flex" alignItems="center">
+            {data.isError && (
+              <Box aria-label="hidden" display="flex" alignItems="center" px={1}>
+                <Icon icon="mdi:alert-outline" aria-label="error" />
+                <Typography color="error" sx={{ marginLeft: 1 }}>
+                  {displayValue}
+                </Typography>
+              </Box>
+            )}
+            {!data.isError && (
+              <Box onClick={() => handleCopy(data.value)}>
+                <StatusLabel status="" sx={{ fontFamily: 'monospace' }}>
+                  {displayValue}
+                </StatusLabel>
+                <Snackbar open={copied} message="Copied!" autoHideDuration={2000} />
+              </Box>
+            )}
+            {!data.isError && data.isSecret && (
+              <IconButton onClick={() => toggleSecret(data.key)} sx={{ marginLeft: 1 }}>
+                {isRevealed ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            )}
+          </Box>
+        );
+      },
+    },
+    {
+      label: t('translation|From'),
+      getter: (data: any) => {
+        const [kind, name] = data.from.split('/');
+        if (!kind || !name || kind.startsWith('resourceFieldRef:')) {
+          return data.from;
+        }
+        return (
+          <Link routeName={kind} params={{ name, namespace }}>
+            {data.from}
+          </Link>
+        );
+      },
+    },
+  ];
+
+  return <InnerTable columns={columns} data={variables} />;
+}
+
 export interface VolumeMountsProps {
   mounts?: {
     mountPath: string;
@@ -774,23 +1270,6 @@ export function ContainerInfo(props: ContainerInfoProps) {
   }
 
   function containerRows() {
-    const env: { [name: string]: string } = {};
-    (container.env || []).forEach(envVar => {
-      let value = '';
-
-      if (envVar.value) {
-        value = envVar.value;
-      } else if (envVar.valueFrom) {
-        if (envVar.valueFrom.fieldRef) {
-          value = envVar.valueFrom.fieldRef.fieldPath;
-        } else if (envVar.valueFrom.secretKeyRef) {
-          value = envVar.valueFrom.secretKeyRef.key;
-        }
-      }
-
-      env[envVar.name] = value;
-    });
-
     return [
       {
         name: container.name,
@@ -896,11 +1375,6 @@ export function ContainerInfo(props: ContainerInfoProps) {
         hide: !container.command,
       },
       {
-        name: t('Environment'),
-        value: <MetadataDictGrid dict={env} />,
-        hide: _.isEmpty(env),
-      },
-      {
         name: t('Liveness Probes'),
         value: <LivenessProbes liveness={container.livenessProbe} />,
         hide: _.isEmpty(container.livenessProbe),
@@ -934,6 +1408,12 @@ export function ContainerInfo(props: ContainerInfoProps) {
           </Grid>
         ),
         hide: _.isEmpty(container.ports),
+      },
+      {
+        name: 'Environment',
+        value: <GetEnvironmentVariables pod={resource as KubePod} container={container} />,
+        valueCellProps: { sm: 12 as GridSize },
+        hide: _.isEmpty(container?.env) && _.isEmpty(container?.envFrom),
       },
       {
         name: t('Volume Mounts'),
