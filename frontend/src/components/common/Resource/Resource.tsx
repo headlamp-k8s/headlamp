@@ -686,7 +686,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapRef.name, namespace, setError);
 
       const key = configMapRef.key;
-      const from = `configMap/${configMapRef.name}`;
+      const from = `configmap/${configMapRef.name}`;
       let value = configMap?.data?.[key] || '';
 
       if (error) {
@@ -741,7 +741,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
 
       if (error) {
         variables.set(`${prefix}${configMapName}`, {
-          from: `configMap/${configMapName}`,
+          from: `configmap/${configMapName}`,
           value: error.message,
           isError: true,
           isSecret: false,
@@ -750,7 +750,7 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
       } else if (configMap?.data) {
         Object.entries(configMap.data).forEach(([key, value]) => {
           variables.set(`${prefix}${key}`, {
-            from: `configMap/${configMapName}`,
+            from: `configmap/${configMapName}`,
             value,
             isError: false,
             isSecret: false,
@@ -866,7 +866,17 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     },
     {
       label: t('translation|From'),
-      getter: (data: any) => data.from,
+      getter: (data: any) => {
+        const [kind, name] = data.from.split('/');
+        if (!kind || !name) {
+          return data.from;
+        }
+        return (
+          <Link routeName={kind} params={{ name, namespace }}>
+            {data.from}
+          </Link>
+        );
+      },
     },
   ];
 
