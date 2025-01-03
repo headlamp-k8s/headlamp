@@ -6,6 +6,7 @@ import { MRT_Row } from 'material-react-table';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import semver from 'semver';
 import helpers from '../../../helpers';
 import { useFilterFunc } from '../../../lib/util';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
@@ -285,9 +286,74 @@ export default function PluginSettings() {
 
   const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
 
+  const [plugins, setPlugins] = useState<PluginInfo[]>([]);
+
+  useEffect(() => {
+    // to do: this is reused code that needs to be refactored for this specific use, maybe in a different PR as a hook
+    async function get() {
+      const pluginPaths = (await fetch(`${helpers.getAppUrl()}plugins`).then(resp =>
+        resp.json()
+      )) as string[];
+      const packageInfosPromise = await Promise.all<PluginInfo>(
+        pluginPaths.map(path =>
+          fetch(`${helpers.getAppUrl()}${path}/package.json`).then(resp => {
+            if (!resp.ok) {
+              if (resp.status !== 404) {
+                return Promise.reject(resp);
+              }
+              {
+                console.warn(
+                  'Missing package.json. ' +
+                    `Please upgrade the plugin ${path}` +
+                    ' by running "headlamp-plugin extract" again.' +
+                    ' Please use headlamp-plugin >= 0.8.0'
+                );
+                return {
+                  name: path.split('/').slice(-1)[0],
+                  version: '0.0.0',
+                  author: 'unknown',
+                  description: '',
+                };
+              }
+            }
+            return resp.json();
+          })
+        )
+      );
+      const packageInfos = await packageInfosPromise;
+
+      const pluginsWithIsEnabled = packageInfos.map(plugin => {
+        const matchedSetting = pluginSettings.find(p => plugin.name === p.name);
+        if (matchedSetting) {
+          // to do: compatible version is also reused code that needs to be refactored for this use
+          const compatibleVersion = '>=0.8.0-alpha.3';
+
+          const isCompatible = semver.satisfies(
+            semver.coerce(plugin.devDependencies?.['@kinvolk/headlamp-plugin']) || '',
+            compatibleVersion
+          );
+
+          return {
+            ...plugin,
+            isEnabled: matchedSetting.isEnabled,
+            isCompatible: isCompatible,
+          };
+        }
+        return plugin;
+      });
+
+      setPlugins(pluginsWithIsEnabled);
+    }
+    get();
+  }, []);
+
+  if (!plugins.length) {
+    return null;
+  }
+
   return (
     <PluginSettingsPure
-      plugins={pluginSettings}
+      plugins={plugins}
       onSave={plugins => {
         dispatch(setPluginSettings(plugins));
         dispatch(reloadPage());
