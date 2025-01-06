@@ -583,7 +583,6 @@ func (m *Multiplexer) sendIfNewResourceVersion(
 // sendCompleteMessage sends a COMPLETE message to the client.
 func (m *Multiplexer) sendCompleteMessage(conn *Connection, clientConn *websocket.Conn) error {
 	conn.mu.RLock()
-
 	if conn.closed {
 		conn.mu.RUnlock()
 		return nil // Connection is already closed, no need to send message
@@ -602,9 +601,11 @@ func (m *Multiplexer) sendCompleteMessage(conn *Connection, clientConn *websocke
 	conn.writeMu.Lock()
 	defer conn.writeMu.Unlock()
 
-	if err := clientConn.WriteJSON(completeMsg); err != nil {
-		logger.Log(logger.LevelError, nil, err, "writing complete message")
-		return err
+	err := clientConn.WriteJSON(completeMsg)
+	if err != nil {
+		logger.Log(logger.LevelInfo, nil, err, "connection closed while writing complete message")
+
+		return nil // Just return nil for any error - connection is dead anyway
 	}
 
 	return nil
