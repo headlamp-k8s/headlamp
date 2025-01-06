@@ -31,6 +31,15 @@ export const KubeList = {
     update: KubeListUpdateEvent<ObjectInterface>,
     itemClass: ObjectClass
   ): KubeList<KubeObject<ObjectInterface>> {
+    // Skip if the update's resource version is older than or equal to what we have
+    if (
+      list.metadata.resourceVersion &&
+      update.object.metadata.resourceVersion &&
+      parseInt(update.object.metadata.resourceVersion) <= parseInt(list.metadata.resourceVersion)
+    ) {
+      return list;
+    }
+
     const newItems = [...list.items];
     const index = newItems.findIndex(item => item.metadata.uid === update.object.metadata.uid);
 

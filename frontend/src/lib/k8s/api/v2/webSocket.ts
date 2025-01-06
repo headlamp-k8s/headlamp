@@ -318,12 +318,6 @@ export const WebSocketManager = {
       // Handle COMPLETE messages
       if (data.type === 'COMPLETE') {
         this.completedPaths.add(key);
-        return;
-      }
-
-      // Skip if path is already completed
-      if (this.completedPaths.has(key)) {
-        return;
       }
 
       // Parse and validate update data
