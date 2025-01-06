@@ -9,7 +9,7 @@ import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import Tabs from '../common/Tabs';
 import { SidebarItemProps } from '../Sidebar';
-import prepareRoutes from './prepareRoutes';
+import { useSidebarItems } from './useSidebarItems';
 
 function searchNameInSubList(sublist: SidebarItemProps['subList'], name: string): boolean {
   if (!sublist) {
@@ -54,7 +54,7 @@ export default function NavigationTabs() {
   }
 
   let defaultIndex = null;
-  const listItems = prepareRoutes(t, sidebar.selected.sidebar || '');
+  const listItems = useSidebarItems(sidebar.selected.sidebar ?? undefined);
   let navigationItem = listItems.find(item => item.name === sidebar.selected.item);
   if (!navigationItem) {
     const parent = findParentOfSubList(listItems, sidebar.selected.item);
