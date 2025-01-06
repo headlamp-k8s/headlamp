@@ -133,7 +133,7 @@ export function useKubeObject<K extends KubeObject>({
 
   const data: Instance | null = query.error ? null : query.data ?? null;
 
-  useWebSocket<KubeListUpdateEvent<Instance>>({
+  useWebSocket<KubeListUpdateEvent<K>>({
     url: () =>
       makeUrl([KubeObjectEndpoint.toUrl(endpoint!)], {
         ...cleanedUpQueryParams,
@@ -142,7 +142,7 @@ export function useKubeObject<K extends KubeObject>({
       }),
     enabled: !!endpoint && !!data,
     cluster,
-    onMessage(update) {
+    onMessage(update: KubeListUpdateEvent<K>) {
       if (update.type !== 'ADDED' && update.object) {
         client.setQueryData(queryKey, new kubeObjectClass(update.object));
       }
