@@ -1,5 +1,6 @@
 import { QueryObserverOptions, useQueries, useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { getWebsocketMultiplexerEnabled } from '../../../../helpers';
 import { KubeObject, KubeObjectClass } from '../../KubeObject';
 import { ApiError } from '../v1/clusterRequests';
 import { QueryParameters } from '../v1/queryParameters';
@@ -8,7 +9,7 @@ import { QueryListResponse, useEndpoints } from './hooks';
 import { KubeList, KubeListUpdateEvent } from './KubeList';
 import { KubeObjectEndpoint } from './KubeObjectEndpoint';
 import { makeUrl } from './makeUrl';
-import { useWebSockets } from './webSocket';
+import { BASE_WS_URL, useWebSockets, WebSocketManager } from './webSocket';
 
 /**
  * Object representing a List of Kube object
@@ -102,6 +103,186 @@ export function kubeObjectListQuery<K extends KubeObject>(
  * Upon receiving update it will modify query data for list query
  */
 export function useWatchKubeObjectLists<K extends KubeObject>({
+  kubeObjectClass,
+  endpoint,
+  lists,
+  queryParams,
+}: {
+  /** KubeObject class of the watched resource list */
+  kubeObjectClass: (new (...args: any) => K) & typeof KubeObject<any>;
+  /** Query parameters for the WebSocket connection URL */
+  queryParams?: QueryParameters;
+  /** Kube resource API endpoint information */
+  endpoint?: KubeObjectEndpoint | null;
+  /** Which clusters and namespaces to watch */
+  lists: Array<{ cluster: string; namespace?: string; resourceVersion: string }>;
+}) {
+  if (getWebsocketMultiplexerEnabled()) {
+    return useWatchKubeObjectListsMultiplexed({
+      kubeObjectClass,
+      endpoint,
+      lists,
+      queryParams,
+    });
+  } else {
+    return useWatchKubeObjectListsLegacy({
+      kubeObjectClass,
+      endpoint,
+      lists,
+      queryParams,
+    });
+  }
+}
+
+/**
+ * Watches Kubernetes resource lists using multiplexed WebSocket connections.
+ * Efficiently manages subscriptions and updates to prevent unnecessary re-renders
+ * and WebSocket reconnections.
+ *
+ * @template K - Type extending KubeObject for the resources being watched
+ * @param kubeObjectClass - Class constructor for the Kubernetes resource type
+ * @param endpoint - API endpoint information for the resource
+ * @param lists - Array of cluster, namespace, and resourceVersion combinations to watch
+ * @param queryParams - Optional query parameters for the WebSocket URL
+ */
+function useWatchKubeObjectListsMultiplexed<K extends KubeObject>({
+  kubeObjectClass,
+  endpoint,
+  lists,
+  queryParams,
+}: {
+  kubeObjectClass: (new (...args: any) => K) & typeof KubeObject<any>;
+  endpoint?: KubeObjectEndpoint | null;
+  lists: Array<{ cluster: string; namespace?: string; resourceVersion: string }>;
+  queryParams?: QueryParameters;
+}): void {
+  const client = useQueryClient();
+
+  // Track the latest resource versions to prevent duplicate updates
+  const latestResourceVersions = useRef<Record<string, string>>({});
+
+  // Stabilize queryParams to prevent unnecessary effect triggers
+  // Only update when the stringified params change
+  const stableQueryParams = useMemo(() => queryParams, [JSON.stringify(queryParams)]);
+
+  // Create stable connection URLs for each list
+  // Updates only when endpoint, lists, or stableQueryParams change
+  const connections = useMemo(() => {
+    if (!endpoint) {
+      return [];
+    }
+
+    return lists.map(list => {
+      const key = `${list.cluster}:${list.namespace || ''}`;
+
+      // Update resource version if newer one is available
+      const currentVersion = latestResourceVersions.current[key];
+      const newVersion = list.resourceVersion;
+      if (!currentVersion || parseInt(newVersion) > parseInt(currentVersion)) {
+        latestResourceVersions.current[key] = newVersion;
+      }
+
+      // Construct WebSocket URL with current parameters
+      return {
+        url: makeUrl([KubeObjectEndpoint.toUrl(endpoint, list.namespace)], {
+          ...stableQueryParams,
+          watch: 1,
+          resourceVersion: latestResourceVersions.current[key],
+        }),
+        cluster: list.cluster,
+        namespace: list.namespace,
+      };
+    });
+  }, [endpoint, lists, stableQueryParams]);
+
+  // Create stable update handler to process WebSocket messages
+  // Re-create only when dependencies change
+  const handleUpdate = useCallback(
+    (update: any, cluster: string, namespace: string | undefined) => {
+      if (!update || typeof update !== 'object' || !endpoint) {
+        return;
+      }
+
+      const key = `${cluster}:${namespace || ''}`;
+
+      // Update resource version from incoming message
+      if (update.object?.metadata?.resourceVersion) {
+        latestResourceVersions.current[key] = update.object.metadata.resourceVersion;
+      }
+
+      // Create query key for React Query cache
+      const queryKey = kubeObjectListQuery<K>(
+        kubeObjectClass,
+        endpoint,
+        namespace,
+        cluster,
+        stableQueryParams ?? {}
+      ).queryKey;
+
+      // Update React Query cache with new data
+      client.setQueryData(queryKey, (oldResponse: ListResponse<any> | undefined | null) => {
+        if (!oldResponse) {
+          return oldResponse;
+        }
+
+        const newList = KubeList.applyUpdate(oldResponse.list, update, kubeObjectClass);
+
+        // Only update if the list actually changed
+        if (newList === oldResponse.list) {
+          return oldResponse;
+        }
+
+        return { ...oldResponse, list: newList };
+      });
+    },
+    [client, kubeObjectClass, endpoint, stableQueryParams]
+  );
+
+  // Set up WebSocket subscriptions
+  useEffect(() => {
+    if (!endpoint || connections.length === 0) {
+      return;
+    }
+
+    const cleanups: (() => void)[] = [];
+
+    // Create subscriptions for each connection
+    connections.forEach(({ url, cluster, namespace }) => {
+      const parsedUrl = new URL(url, BASE_WS_URL);
+
+      // Subscribe to WebSocket updates
+      WebSocketManager.subscribe(cluster, parsedUrl.pathname, parsedUrl.search.slice(1), update =>
+        handleUpdate(update, cluster, namespace)
+      ).then(
+        cleanup => cleanups.push(cleanup),
+        error => {
+          // Track retry count in the URL's searchParams
+          const retryCount = parseInt(parsedUrl.searchParams.get('retryCount') || '0');
+          if (retryCount < 3) {
+            // Only log and allow retry if under threshold
+            console.error('WebSocket subscription failed:', error);
+            parsedUrl.searchParams.set('retryCount', (retryCount + 1).toString());
+          }
+        }
+      );
+    });
+
+    // Cleanup subscriptions when effect re-runs or unmounts
+    return () => {
+      cleanups.forEach(cleanup => cleanup());
+    };
+  }, [connections, endpoint, handleUpdate]);
+}
+
+/**
+ * Accepts a list of lists to watch.
+ * Upon receiving update it will modify query data for list query
+ * @param kubeObjectClass - KubeObject class of the watched resource list
+ * @param endpoint - Kube resource API endpoint information
+ * @param lists - Which clusters and namespaces to watch
+ * @param queryParams - Query parameters for the WebSocket connection URL
+ */
+function useWatchKubeObjectListsLegacy<K extends KubeObject>({
   kubeObjectClass,
   endpoint,
   lists,

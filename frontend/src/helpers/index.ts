@@ -353,6 +353,14 @@ function loadTableSettings(tableId: string): { id: string; show: boolean }[] {
 }
 
 /**
+ * @returns true if the websocket multiplexer is enabled.
+ * defaults to true. This is a feature flag to enable the websocket multiplexer.
+ */
+export function getWebsocketMultiplexerEnabled(): boolean {
+  return import.meta.env.REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER !== 'false';
+}
+
+/**
  * The backend token to use when making API calls from Headlamp when running as an app.
  * The app opens the index.html?backendToken=... and passes the token to the frontend
  * in this way. The token is then used in the getHeadlampAPIHeaders function below.
@@ -393,6 +401,7 @@ const exportFunctions = {
   storeClusterSettings,
   loadClusterSettings,
   getHeadlampAPIHeaders,
+  getWebsocketMultiplexerEnabled,
   storeTableSettings,
   loadTableSettings,
 };
