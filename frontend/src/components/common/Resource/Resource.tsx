@@ -620,16 +620,16 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     if (!a || !b) {
       return 0;
     }
-    const aDate = new Date(a!);
-    const bDate = new Date(b!);
+    const aDate = new Date(a!).getTime();
+    const bDate = new Date(b!).getTime();
     // Check if either timestamp failed to parse
-    if (isNaN(aDate.getTime()) || isNaN(bDate.getTime())) {
+    if (isNaN(aDate) || isNaN(bDate)) {
       throw new Error('Invalid timestamp format');
     }
     // Compare the dates
-    if (aDate.getTime() < bDate.getTime()) {
+    if (aDate < bDate) {
       return -1; // First is older
-    } else if (aDate.getTime() > bDate.getTime()) {
+    } else if (aDate > bDate) {
       return 1; // Second is older
     } else {
       return 0; // Both have the same timestamp
