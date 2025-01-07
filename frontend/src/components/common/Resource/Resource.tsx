@@ -19,7 +19,11 @@ import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import YAML from 'yaml';
 import { labelSelectorToQuery, ResourceClasses } from '../../../lib/k8s';
 import { ApiError } from '../../../lib/k8s/apiProxy';
-import { KubeCondition, KubeContainer, KubeContainerStatus } from '../../../lib/k8s/cluster';
+import {
+  KubeCondition,
+  KubeContainer,
+  KubeContainerStatus,
+} from '../../../lib/k8s/cluster';
 import ConfigMap from '../../../lib/k8s/configMap';
 import { KubeEvent } from '../../../lib/k8s/event';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
@@ -477,7 +481,7 @@ export function SecretField(props: InputProps) {
       <Grid item>
         <IconButton
           edge="end"
-          aria-label={t('toggle field visibility')}
+          aria-label={t('glossary|toggle field visibility')}
           onClick={handleClickShowPassword}
           onMouseDown={event => event.preventDefault()}
           size="medium"
@@ -571,7 +575,7 @@ export type EnvironmentVariablesProps = {
 };
 
 export type EnvironmentVariable = {
-  from: string;
+  from?: KubeObject | string | null;
   value: string;
   isError: boolean;
   isSecret: boolean;
@@ -650,7 +654,6 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       ResourceClasses.Secret.useApiGet(setSecret, secretKeyRef.name, namespace, setError);
 
       const key = secretKeyRef.key;
-      const from = `secret/${secretKeyRef.name}`;
       let value = secret?.data?.[key] ? atob(secret.data[key]) : '';
       let isSecret = true;
 
@@ -662,7 +665,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
         isSecret = false;
       }
       variables.set(name, {
-        from,
+        from: secret,
         value,
         isError: !!error,
         isSecret,
@@ -681,19 +684,17 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapKeyRef.name, namespace, setError);
 
       const key = configMapKeyRef.key;
-      const from = `configmap/${configMapKeyRef.name}`;
       let value = configMap?.data?.[key] || '';
 
       if (error) {
         if (error.status === 404 && !!configMapKeyRef.optional) {
           return;
         }
-        console.log(error);
         value = error.message;
       }
       variables.set(name, {
+        from: configMap,
         value,
-        from,
         isError: !!error,
         isSecret: false,
         isOutOfSync:
@@ -717,7 +718,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
           return;
         }
         variables.set(`${prefix}${secretRef.name}`, {
-          from: `secret/${secretRef.name}`,
+          from: secret,
           value: error.message,
           isError: true,
           isSecret: false,
@@ -726,7 +727,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       } else if (secret?.data) {
         Object.entries(secret.data).forEach(([key, value]) => {
           variables.set(`${prefix}${key}`, {
-            from: `secret/${secretRef.name}`,
+            from: secret,
             value: atob(value),
             isError: false,
             isSecret: true,
@@ -752,7 +753,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
           return;
         }
         variables.set(`${prefix}${configMapRef.name}`, {
-          from: `configmap/${configMapRef.name}`,
+          from: configMap,
           value: error.message,
           isError: true,
           isSecret: false,
@@ -761,7 +762,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       } else if (configMap?.data) {
         Object.entries(configMap.data).forEach(([key, value]) => {
           variables.set(`${prefix}${key}`, {
-            from: `configmap/${configMapRef.name}`,
+            from: configMap,
             value,
             isError: false,
             isSecret: false,
@@ -984,7 +985,13 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
                   hoverInfo={t(
                     'translation|This value may differ in the container, since the pod is older than {{from}}',
                     {
-                      from: data.from,
+                      from: (() => {
+                        if (typeof data.from === 'object' && data.from !== null) {
+                          const o = data.from as KubeObject;
+                          return `${o.kind} ${o.metadata.name}`;
+                        }
+                        return 'in referenced object';
+                      })(),
                     }
                   )}
                 />
@@ -1017,9 +1024,6 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
                 <Snackbar open={copied} message="Copied!" autoHideDuration={2000} />
               </Box>
             )}
-            {/* {!data.isError && data.isSecret && (
-              
-            )} */}
           </Box>
         );
       },
@@ -1027,15 +1031,31 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     {
       label: t('translation|From'),
       getter: (data: any) => {
-        const [kind, name] = data.from.split('/');
-        if (!kind || !name || kind.startsWith('resourceFieldRef:')) {
+        if (typeof data.from === 'object' && data !== null) {
+          let routeName;
+          try {
+            routeName =
+              ResourceClasses[data.from?.kind as keyof typeof ResourceClasses].detailsRoute;
+          } catch (e) {
+            console.error(`Error getting routeName for {data.from.kind}`, e);
+            return null;
+          }
+          return (
+            <Link
+              routeName={routeName}
+              params={{
+                name: data.from?.metadata?.name,
+                namespace: data.from?.metadata?.namespace,
+              }}
+            >
+              {`${data.from?.kind}: ${data.from?.metadata?.name}`}
+            </Link>
+          );
+        } else if (typeof data.from === 'string') {
           return data.from;
         }
-        return (
-          <Link routeName={kind} params={{ name, namespace }}>
-            {data.from}
-          </Link>
-        );
+        console.error(`Unknown type of data.from: ${typeof data.from}`);
+        return null;
       },
     },
   ];
