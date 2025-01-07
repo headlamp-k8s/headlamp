@@ -616,33 +616,33 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     );
   };
 
-  // Function to parse ISO 8601 timestamps and compare them
-  function compareTimestamps(a: string | undefined, b: string | undefined): number {
-    if (!a || !b) {
-      return 0;
-    }
-    const aDate = new Date(a!).getTime();
-    const bDate = new Date(b!).getTime();
-    // Check if either timestamp failed to parse
-    if (isNaN(aDate) || isNaN(bDate)) {
-      throw new Error('Invalid timestamp format');
-    }
-    // Compare the dates
-    if (aDate < bDate) {
-      return -1; // First is older
-    } else if (aDate > bDate) {
-      return 1; // Second is older
-    } else {
-      return 0; // Both have the same timestamp
-    }
-  }
-
   // Process env variables
-  const processEnvVariables = (): EnvironmentVariable[] => {
+  const variables = ((): EnvironmentVariable[] => {
     const variables = new Map<string, EnvironmentVariable>();
 
+    // Function to parse ISO 8601 timestamps and compare them
+    function compareTimestamps(a: string | undefined, b: string | undefined): number {
+      if (!a || !b) {
+        return 0;
+      }
+      const aDate = new Date(a!).getTime();
+      const bDate = new Date(b!).getTime();
+      // Check if either timestamp failed to parse
+      if (isNaN(aDate) || isNaN(bDate)) {
+        throw new Error('Invalid timestamp format');
+      }
+      // Compare the dates
+      if (aDate < bDate) {
+        return -1; // First is older
+      } else if (aDate > bDate) {
+        return 1; // Second is older
+      } else {
+        return 0; // Both have the same timestamp
+      }
+    }
+
     // Function to process secret data
-    const processValueFromSecret = (
+    const useValueFromSecret = (
       name: string,
       secretKeyRef: { name: string; key: string; optional?: boolean }
     ) => {
@@ -669,7 +669,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     };
 
     // Function to process configMap data
-    const processValueFromConfigMap = (
+    const useValueFromConfigMap = (
       name: string,
       configMapKeyRef: { name: string; key: string; optional?: boolean }
     ) => {
@@ -694,7 +694,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     };
 
     // Function to process all keys from a secret and add them to the variables map
-    const processAllSecretKeys = (
+    const useAllSecretKeys = (
       secretRef: { name: string; optional?: boolean },
       prefix: string = ''
     ) => {
@@ -727,7 +727,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     };
 
     // Function to process all keys from a configMap and add them to the variables map
-    const processAllConfigMapKeys = (
+    const useAllConfigMapKeys = (
       configMapRef: { name: string; optional?: boolean },
       prefix: string = ''
     ) => {
@@ -759,7 +759,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       }
     };
 
-    const processValueFromFieldRef = (name: string, fieldRef: { fieldPath: string }) => {
+    const useValueFromFieldRef = (name: string, fieldRef: { fieldPath: string }) => {
       let value: string | undefined;
       let isError = false;
       try {
@@ -781,7 +781,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       });
     };
 
-    const processValueFromResourceFieldRef = (
+    const useValueFromResourceFieldRef = (
       name: string,
       resourceFieldRef: { resource: string; containerName?: string; divisor?: string }
     ) => {
@@ -883,13 +883,13 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       } else if (item.valueFrom) {
         const ref = item.valueFrom;
         if (ref.secretKeyRef) {
-          processValueFromSecret(item.name, ref.secretKeyRef);
+          useValueFromSecret(item.name, ref.secretKeyRef);
         } else if (ref.configMapKeyRef) {
-          processValueFromConfigMap(item.name, ref.configMapKeyRef);
+          useValueFromConfigMap(item.name, ref.configMapKeyRef);
         } else if (ref.fieldRef) {
-          processValueFromFieldRef(item.name, ref.fieldRef);
+          useValueFromFieldRef(item.name, ref.fieldRef);
         } else if (ref.resourceFieldRef) {
-          processValueFromResourceFieldRef(item.name, ref.resourceFieldRef);
+          useValueFromResourceFieldRef(item.name, ref.resourceFieldRef);
         }
       }
     });
@@ -897,9 +897,9 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     // Process env variables from envFrom (configMap or secret references)
     container?.envFrom?.forEach(item => {
       if (item.secretRef) {
-        processAllSecretKeys(item.secretRef, item.prefix);
+        useAllSecretKeys(item.secretRef, item.prefix);
       } else if (item.configMapRef) {
-        processAllConfigMapKeys(item.configMapRef, item.prefix);
+        useAllConfigMapKeys(item.configMapRef, item.prefix);
       }
     });
 
@@ -909,9 +909,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
         ...value,
       }))
       .sort((a, b) => a.key.localeCompare(b.key));
-  };
-
-  const variables = processEnvVariables();
+  })();
 
   // Define columns for the table
   const columns = [
