@@ -578,7 +578,7 @@ export type EnvironmentVariable = {
   isOutOfSync: boolean; // If cm/sec creation timestamp is newer that pod's start timestamp
 };
 
-export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
+function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
   const { pod, container } = props;
   const { t } = useTranslation();
   const [copied, setCopied] = React.useState(false);
@@ -1395,7 +1395,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
       },
       {
         name: 'Environment',
-        value: <GetEnvironmentVariables pod={resource as KubePod} container={container} />,
+        value: <ContainerEnvironmentVariables pod={resource as KubePod} container={container} />,
         valueCellProps: { sm: 12 as GridSize },
         hide: _.isEmpty(container?.env) && _.isEmpty(container?.envFrom),
       },
