@@ -175,12 +175,8 @@ function useWatchKubeObjectListsMultiplexed<K extends KubeObject>({
     return lists.map(list => {
       const key = `${list.cluster}:${list.namespace || ''}`;
 
-      // Update resource version if newer one is available
-      const currentVersion = latestResourceVersions.current[key];
-      const newVersion = list.resourceVersion;
-      if (!currentVersion || parseInt(newVersion) > parseInt(currentVersion)) {
-        latestResourceVersions.current[key] = newVersion;
-      }
+      // Always use the latest resource version from the server
+      latestResourceVersions.current[key] = list.resourceVersion;
 
       // Construct WebSocket URL with current parameters
       return {

@@ -2,7 +2,7 @@ import { Icon, IconProps } from '@iconify/react';
 import Grid from '@mui/material/Grid';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateFormatOptions, localeDate, timeAgo } from '../../lib/util';
 import { LightTooltip, TooltipIcon } from './Tooltip';
 
@@ -205,10 +205,29 @@ export function DateLabel(props: DateLabelProps) {
   const { date, format = 'brief', iconProps = {} } = props;
   return (
     <HoverInfoLabel
-      label={timeAgo(date, { format })}
+      label={<TimeAgo date={date} format={format} />}
       hoverInfo={localeDate(date)}
       icon="mdi:calendar"
       iconProps={iconProps}
     />
   );
+}
+
+/**
+ * Shows time passed since given date
+ * Automatically refreshes
+ */
+function TimeAgo({ date, format }: { date: number | string | Date; format?: DateFormatOptions }) {
+  const [formattedDate, setFormattedDate] = useState<string>(() => timeAgo(date, { format }));
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const newFormattedDate = timeAgo(date, { format });
+      setFormattedDate(newFormattedDate);
+    }, 1_000);
+
+    return () => clearInterval(id);
+  }, []);
+
+  return formattedDate;
 }

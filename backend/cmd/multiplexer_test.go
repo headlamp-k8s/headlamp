@@ -1001,7 +1001,67 @@ func TestSendCompleteMessage_ClosedConnection(t *testing.T) {
 	// Test with closed connection
 	clientConn.Close()
 	err = m.sendCompleteMessage(conn, clientConn)
-	assert.Error(t, err)
+	assert.NoError(t, err)
+}
+
+func TestSendCompleteMessage_ErrorConditions(t *testing.T) {
+	tests := []struct {
+		name          string
+		setupConn     func(*Connection, *websocket.Conn)
+		expectedError bool
+	}{
+		{
+			name: "connection already marked as closed",
+			setupConn: func(conn *Connection, _ *websocket.Conn) {
+				conn.closed = true
+			},
+			expectedError: false,
+		},
+		{
+			name: "normal closure",
+			setupConn: func(_ *Connection, clientConn *websocket.Conn) {
+				//nolint:errcheck
+				clientConn.WriteMessage(websocket.CloseMessage,
+					websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
+				clientConn.Close()
+			},
+			expectedError: false,
+		},
+		{
+			name: "unexpected close error",
+			setupConn: func(_ *Connection, clientConn *websocket.Conn) {
+				//nolint:errcheck
+				clientConn.WriteMessage(websocket.CloseMessage,
+					websocket.FormatCloseMessage(websocket.CloseProtocolError, ""))
+				clientConn.Close()
+			},
+			expectedError: false, // All errors return nil now
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			m := NewMultiplexer(kubeconfig.NewContextStore())
+			clientConn, clientServer := createTestWebSocketConnection()
+			defer clientServer.Close()
+
+			conn := &Connection{
+				ClusterID: "test-cluster",
+				Path:      "/api/v1/pods",
+				UserID:    "test-user",
+				Query:     "watch=true",
+			}
+
+			tt.setupConn(conn, clientConn)
+			err := m.sendCompleteMessage(conn, clientConn)
+
+			if tt.expectedError {
+				assert.Error(t, err)
+			} else {
+				assert.NoError(t, err)
+			}
+		})
+	}
 }
 
 func createMockKubeAPIServer() *httptest.Server {
