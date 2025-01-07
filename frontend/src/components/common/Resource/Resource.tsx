@@ -646,10 +646,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       name: string,
       secretKeyRef: { name: string; key: string; optional?: boolean }
     ) => {
-      const [secret, setSecret] = React.useState<Secret | null>(null);
-      const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.Secret.useApiGet(setSecret, secretKeyRef.name, namespace, setError);
-
+      const [secret, error] = Secret.useGet(secretKeyRef.name, namespace);
       const key = secretKeyRef.key;
       let value = secret?.data?.[key] ? atob(secret.data[key]) : '';
       let isSecret = true;
@@ -676,10 +673,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       name: string,
       configMapKeyRef: { name: string; key: string; optional?: boolean }
     ) => {
-      const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
-      const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapKeyRef.name, namespace, setError);
-
+      const [configMap, error] = ConfigMap.useGet(configMapKeyRef.name, namespace);
       const key = configMapKeyRef.key;
       let value = configMap?.data?.[key] || '';
 
@@ -704,9 +698,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       secretRef: { name: string; optional?: boolean },
       prefix: string = ''
     ) => {
-      const [secret, setSecret] = React.useState<Secret | null>(null);
-      const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.Secret.useApiGet(setSecret, secretRef.name, namespace, setError);
+      const [secret, error] = Secret.useGet(secretRef.name, namespace);
       const isOutOfSync =
         compareTimestamps(secret?.metadata.creationTimestamp, containerStartTimestamp) === 1;
 
@@ -739,9 +731,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       configMapRef: { name: string; optional?: boolean },
       prefix: string = ''
     ) => {
-      const [configMap, setConfigMap] = React.useState<ConfigMap | null>(null);
-      const [error, setError] = React.useState<ApiError | null>(null);
-      ResourceClasses.ConfigMap.useApiGet(setConfigMap, configMapRef.name, namespace, setError);
+      const [configMap, error] = ConfigMap.useGet(configMapRef.name, namespace);
       const isOutOfSync =
         compareTimestamps(configMap?.metadata.creationTimestamp, containerStartTimestamp) === 1;
 
