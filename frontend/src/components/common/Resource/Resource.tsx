@@ -1,6 +1,5 @@
 import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
-import { Visibility, VisibilityOff } from '@mui/icons-material'; // Material icons for eye
 import { InputLabel, Snackbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -474,7 +473,7 @@ export function SecretField(props: InputProps) {
   }
 
   return (
-    <Grid container alignItems="stretch" spacing={2}>
+    <Grid container alignItems={!!other?.disableUnderline ? 'center' : 'stretch'} spacing={2}>
       <Grid item>
         <IconButton
           edge="end"
@@ -493,7 +492,7 @@ export function SecretField(props: InputProps) {
           fullWidth
           multiline={showPassword}
           maxRows="20"
-          value={showPassword ? Base64.decode(value as string) : '******'}
+          value={showPassword ? Base64.decode(value as string) : '••••••••'}
           {...other}
         />
       </Grid>
@@ -582,7 +581,6 @@ export type EnvironmentVariable = {
 export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
   const { pod, container } = props;
   const { t } = useTranslation();
-  const [revealedSecrets, setRevealedSecrets] = React.useState<Set<string>>(new Set());
   const [copied, setCopied] = React.useState(false);
 
   if (!container?.env && !container?.envFrom) {
@@ -615,15 +613,6 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
         console.error('Failed to copy: ', err);
       }
     );
-  };
-
-  // Function to reveal or hide secret values
-  const toggleSecret = (key: string) => {
-    setRevealedSecrets(prev => {
-      const newSet = new Set(prev);
-      newSet.has(key) ? newSet.delete(key) : newSet.add(key);
-      return newSet;
-    });
   };
 
   // Function to parse ISO 8601 timestamps and compare them
@@ -1008,34 +997,29 @@ export function GetEnvironmentVariables(props: EnvironmentVariablesProps) {
     {
       label: t('translation|Value'),
       getter: (data: any) => {
-        const isRevealed = revealedSecrets.has(data.key);
-        let displayValue = data.value;
-        if (!data.isError && data.isSecret) {
-          displayValue = isRevealed ? displayValue : '••••••••';
-        }
         return (
           <Box display="flex" alignItems="center">
             {data.isError && (
               <Box aria-label="hidden" display="flex" alignItems="center" px={1}>
                 <Icon icon="mdi:alert-outline" aria-label="error" />
                 <Typography color="error" sx={{ marginLeft: 1 }}>
-                  {displayValue}
+                  {data.value}
                 </Typography>
               </Box>
             )}
             {!data.isError && (
               <Box onClick={() => handleCopy(data.value)}>
-                <StatusLabel status="" sx={{ fontFamily: 'monospace' }}>
-                  {displayValue}
-                </StatusLabel>
+                <SecretField
+                  disableUnderline
+                  value={btoa(data.value)}
+                  sx={{ fontFamily: 'monospace' }}
+                />
                 <Snackbar open={copied} message="Copied!" autoHideDuration={2000} />
               </Box>
             )}
-            {!data.isError && data.isSecret && (
-              <IconButton onClick={() => toggleSecret(data.key)} sx={{ marginLeft: 1 }}>
-                {isRevealed ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            )}
+            {/* {!data.isError && data.isSecret && (
+              
+            )} */}
           </Box>
         );
       },
