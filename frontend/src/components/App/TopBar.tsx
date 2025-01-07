@@ -399,6 +399,12 @@ export const PureTopBar = memo(
         ),
       },
     ];
+
+    const visibleMobileActions = processAppBarActions(
+      allAppBarActionsMobile,
+      appBarActionsProcessors
+    ).filter(action => React.isValidElement(action.action) || typeof action === 'function');
+
     return (
       <>
         <AppBar
@@ -429,16 +435,18 @@ export const PureTopBar = memo(
                 <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />
                 <Box sx={{ flexGrow: 1 }} />
                 <GlobalSearch isIconButton />
-                <IconButton
-                  aria-label={t('show more')}
-                  aria-controls={mobileMenuId}
-                  aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
-                  color="inherit"
-                  size="medium"
-                >
-                  <Icon icon="mdi:more-vert" />
-                </IconButton>
+                {visibleMobileActions.length > 0 && (
+                  <IconButton
+                    aria-label={t('show more')}
+                    aria-controls={mobileMenuId}
+                    aria-haspopup="true"
+                    onClick={handleMobileMenuOpen}
+                    color="inherit"
+                    size="medium"
+                  >
+                    <Icon icon="mdi:more-vert" />
+                  </IconButton>
+                )}
               </>
             ) : (
               <>
