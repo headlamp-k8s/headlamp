@@ -583,11 +583,11 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
   const { t } = useTranslation();
   const [copied, setCopied] = React.useState(false);
 
-  if (!container?.env && !container?.envFrom) {
-    return null;
-  } else if (!pod?.status?.containerStatuses) {
-    return null;
-  } else if (!pod?.metadata?.namespace) {
+  if (
+    (!container?.env && !container?.envFrom) ||
+    !pod?.status?.containerStatuses ||
+    !pod?.metadata?.namespace
+  ) {
     return null;
   }
 
