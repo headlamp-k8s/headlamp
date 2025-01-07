@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/system';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
+import { JSONPath } from 'jsonpath-plus';
 import _, { has } from 'lodash';
 import React, { PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,11 +20,7 @@ import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import YAML from 'yaml';
 import { labelSelectorToQuery, ResourceClasses } from '../../../lib/k8s';
 import { ApiError } from '../../../lib/k8s/apiProxy';
-import {
-  KubeCondition,
-  KubeContainer,
-  KubeContainerStatus,
-} from '../../../lib/k8s/cluster';
+import { KubeCondition, KubeContainer, KubeContainerStatus } from '../../../lib/k8s/cluster';
 import ConfigMap from '../../../lib/k8s/configMap';
 import { KubeEvent } from '../../../lib/k8s/event';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
@@ -773,50 +770,10 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
     };
 
     const processValueFromFieldRef = (name: string, fieldRef: { fieldPath: string }) => {
-      let value = '';
+      let value: string | undefined;
       let isError = false;
-
       try {
-        // Support for predefined field paths
-        switch (fieldRef.fieldPath) {
-          case 'metadata.name':
-            value = pod.metadata.name || '';
-            break;
-          case 'metadata.namespace':
-            value = pod.metadata.namespace || '';
-            break;
-          case 'spec.nodeName':
-            value = pod.spec.nodeName || '';
-            break;
-          case 'spec.serviceAccountName':
-            value = pod.spec.serviceAccountName || '';
-            break;
-          case 'status.hostIP':
-            value = pod.status.hostIP || '';
-            break;
-          case 'status.podIP':
-            value = pod.status.podIP || '';
-            break;
-          // Extend support for metadata.labels and annotations
-          default:
-            if (fieldRef.fieldPath.startsWith("metadata.labels['")) {
-              const labelKey = fieldRef.fieldPath.match(/metadata\.labels\['(.+)'\]/)?.[1];
-              value =
-                labelKey && pod.metadata.labels?.[labelKey] ? pod.metadata.labels[labelKey] : '';
-            } else if (fieldRef.fieldPath.startsWith("metadata.annotations['")) {
-              const annotationKey = fieldRef.fieldPath.match(
-                /metadata\.annotations\['(.+)'\]/
-              )?.[1];
-              value =
-                annotationKey && pod.metadata.annotations?.[annotationKey]
-                  ? pod.metadata.annotations[annotationKey]
-                  : '';
-            } else {
-              isError = true;
-              value = `Unsupported fieldPath: ${fieldRef.fieldPath}`;
-            }
-            break;
-        }
+        value = JSONPath({ path: '$' + fieldRef.fieldPath, json: pod });
       } catch (err) {
         isError = true;
         if (err instanceof Error) {
@@ -826,7 +783,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
         }
       }
       variables.set(name, {
-        value: value,
+        value: value!,
         from: `fieldRef: ${fieldRef.fieldPath}`,
         isSecret: false,
         isError: isError,
