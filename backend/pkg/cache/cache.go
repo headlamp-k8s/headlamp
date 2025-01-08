@@ -126,13 +126,13 @@ func (c *cache[T]) cleanUp() {
 	for {
 		<-ticker.C
 
+		c.lock.Lock()
 		for key, value := range c.store {
 			if !value.expiresAt.IsZero() && value.expiresAt.Before(time.Now()) {
-				c.lock.Lock()
 				delete(c.store, key)
-				c.lock.Unlock()
 			}
 		}
+		c.lock.Unlock()
 	}
 }
 

@@ -200,6 +200,7 @@ func TestUpdateStatus(t *testing.T) {
 	conn := &Connection{
 		Status: ConnectionStatus{},
 		Done:   make(chan struct{}),
+		mu:     sync.RWMutex{},
 	}
 
 	// Test different state transitions
@@ -211,7 +212,9 @@ func TestUpdateStatus(t *testing.T) {
 	}
 
 	for _, state := range states {
+		conn.mu.Lock()
 		conn.Status.State = state
+		conn.mu.Unlock()
 		assert.Equal(t, state, conn.Status.State)
 	}
 
@@ -222,15 +225,18 @@ func TestUpdateStatus(t *testing.T) {
 
 		go func(i int) {
 			defer wg.Done()
-
+			conn.mu.Lock()
 			state := states[i%len(states)]
 			conn.Status.State = state
+			conn.mu.Unlock()
 		}(i)
 	}
 	wg.Wait()
 
 	// Verify final state is valid
+	conn.mu.RLock()
 	assert.Contains(t, states, conn.Status.State)
+	conn.mu.RUnlock()
 }
 
 func TestMonitorConnection_Reconnect(t *testing.T) {
