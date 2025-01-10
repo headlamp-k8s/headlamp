@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/tls"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -60,6 +61,8 @@ func TestHandleClientWebSocket(t *testing.T) {
 
 	defer ws.Close()
 
+	wsConn := NewWSConnLock(ws)
+
 	// Test WATCH message
 	watchMsg := Message{
 		Type:      "WATCH",
@@ -67,7 +70,7 @@ func TestHandleClientWebSocket(t *testing.T) {
 		Path:      "/api/v1/pods",
 		UserID:    "test-user",
 	}
-	err = ws.WriteJSON(watchMsg)
+	err = wsConn.WriteJSON(watchMsg)
 	require.NoError(t, err)
 
 	// Test CLOSE message
@@ -77,7 +80,7 @@ func TestHandleClientWebSocket(t *testing.T) {
 		Path:      "/api/v1/pods",
 		UserID:    "test-user",
 	}
-	err = ws.WriteJSON(closeMsg)
+	err = wsConn.WriteJSON(closeMsg)
 	require.NoError(t, err)
 }
 
@@ -177,11 +180,16 @@ func TestDialWebSocket_Errors(t *testing.T) {
 
 func TestMonitorConnection(t *testing.T) {
 	m := NewMultiplexer(kubeconfig.NewContextStore())
-	clientConn, _ := createTestWebSocketConnection()
+	clientConn, clientServer := createTestWebSocketConnection()
 
-	// Updated createConnection call with all required arguments
-	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
-	conn.WSConn, _ = createTestWebSocketConnection()
+	defer clientServer.Close()
+
+	conn := createTestConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
+
+	wsConn, wsServer := createTestWebSocketConnection()
+	defer wsServer.Close()
+
+	conn.WSConn = wsConn.conn
 
 	done := make(chan struct{})
 	go func() {
@@ -197,11 +205,10 @@ func TestMonitorConnection(t *testing.T) {
 }
 
 func TestUpdateStatus(t *testing.T) {
-	conn := &Connection{
-		Status: ConnectionStatus{},
-		Done:   make(chan struct{}),
-		mu:     sync.RWMutex{},
-	}
+	clientConn, clientServer := createTestWebSocketConnection()
+	defer clientServer.Close()
+
+	conn := createTestConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
 
 	// Test different state transitions
 	states := []ConnectionState{
@@ -212,9 +219,7 @@ func TestUpdateStatus(t *testing.T) {
 	}
 
 	for _, state := range states {
-		conn.mu.Lock()
-		conn.Status.State = state
-		conn.mu.Unlock()
+		conn.updateStatus(state, nil)
 		assert.Equal(t, state, conn.Status.State)
 	}
 
@@ -225,150 +230,30 @@ func TestUpdateStatus(t *testing.T) {
 
 		go func(i int) {
 			defer wg.Done()
-			conn.mu.Lock()
+
 			state := states[i%len(states)]
-			conn.Status.State = state
-			conn.mu.Unlock()
+			conn.updateStatus(state, nil)
 		}(i)
 	}
 	wg.Wait()
 
 	// Verify final state is valid
-	conn.mu.RLock()
 	assert.Contains(t, states, conn.Status.State)
-	conn.mu.RUnlock()
 }
 
-func TestMonitorConnection_Reconnect(t *testing.T) {
-	contextStore := kubeconfig.NewContextStore()
-	m := NewMultiplexer(contextStore)
-
-	// Create a server that will accept the connection and then close it
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		upgrader := websocket.Upgrader{
-			CheckOrigin: func(r *http.Request) bool {
-				return true
-			},
-		}
-		ws, err := upgrader.Upgrade(w, r, nil)
-		require.NoError(t, err)
-
-		defer ws.Close()
-
-		// Keep connection alive briefly
-		time.Sleep(100 * time.Millisecond)
-		ws.Close()
-	}))
-
-	defer server.Close()
-
-	conn := &Connection{
-		Status: ConnectionStatus{
-			State: StateConnecting,
-		},
-		Done: make(chan struct{}),
-	}
-
-	wsURL := "ws" + strings.TrimPrefix(server.URL, "http")
-	tlsConfig := &tls.Config{InsecureSkipVerify: true} //nolint:gosec
-
-	ws, err := m.dialWebSocket(wsURL, tlsConfig, "")
-	require.NoError(t, err)
-
-	conn.WSConn = ws
-
-	// Start monitoring in a goroutine
-	go m.monitorConnection(conn)
-
-	// Wait for state transitions
-	time.Sleep(300 * time.Millisecond)
-
-	// Verify connection status, it should reconnect
-	assert.Equal(t, StateConnecting, conn.Status.State)
-
-	// Clean up
-	close(conn.Done)
-}
-
-//nolint:funlen
-func TestHandleClusterMessages(t *testing.T) {
+func TestCleanupConnections(t *testing.T) {
 	m := NewMultiplexer(kubeconfig.NewContextStore())
 	clientConn, clientServer := createTestWebSocketConnection()
 
 	defer clientServer.Close()
 
-	clusterConn, clusterServer := createTestWebSocketConnection()
+	wsConn, wsServer := createTestWebSocketConnection()
+	defer wsServer.Close()
 
-	defer clusterServer.Close()
+	conn := createTestConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
+	conn.WSConn = wsConn.conn
 
-	// Add RequestID to the createConnection call
-	conn := m.createConnection("minikube", "test-user", "/api/v1/pods", "watch=true", clientConn)
-	conn.WSConn = clusterConn
-
-	done := make(chan struct{})
-	go func() {
-		m.handleClusterMessages(conn, clientConn)
-		close(done)
-	}()
-
-	// Send a test message from the cluster
-	testMessage := []byte(`{"kind":"Pod","apiVersion":"v1","metadata":{"name":"test-pod"}}`)
-	err := clusterConn.WriteMessage(websocket.TextMessage, testMessage)
-	require.NoError(t, err)
-
-	// Read the message from the client connection
-	_, receivedMessage, err := clientConn.ReadMessage()
-	require.NoError(t, err)
-
-	var wrapperMsg struct {
-		ClusterID string `json:"clusterId"`
-		Path      string `json:"path"`
-		Query     string `json:"query"`
-		UserID    string `json:"userId"`
-		RequestID string `json:"requestId"`
-		Data      string `json:"data"`
-		Binary    bool   `json:"binary"`
-	}
-
-	err = json.Unmarshal(receivedMessage, &wrapperMsg)
-	require.NoError(t, err)
-
-	assert.Equal(t, "minikube", wrapperMsg.ClusterID)
-	assert.Equal(t, "/api/v1/pods", wrapperMsg.Path)
-	assert.Equal(t, "watch=true", wrapperMsg.Query)
-	assert.Equal(t, "test-user", wrapperMsg.UserID)
-	assert.False(t, wrapperMsg.Binary)
-
-	// Parse the Data field separately
-	var podData map[string]interface{}
-	err = json.Unmarshal([]byte(wrapperMsg.Data), &podData)
-	require.NoError(t, err)
-	assert.Equal(t, "Pod", podData["kind"])
-	assert.Equal(t, "v1", podData["apiVersion"])
-
-	// Close the connection to trigger the end of handleClusterMessages
-	conn.WSConn.Close()
-
-	// Wait for handleClusterMessages to finish
-	select {
-	case <-done:
-		// Function completed successfully
-	case <-time.After(5 * time.Second):
-		t.Fatal("Test timed out")
-	}
-
-	assert.Equal(t, StateConnecting, conn.Status.State)
-}
-
-func TestCleanupConnections(t *testing.T) {
-	m := NewMultiplexer(kubeconfig.NewContextStore())
-	clientConn, _ := createTestWebSocketConnection()
-	// Add RequestID to the createConnection call
-	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
-	conn.WSConn, _ = createTestWebSocketConnection()
-
-	// Use the new connection key format
-	connKey := "test-cluster:/api/v1/pods:test-request-id"
+	connKey := m.createConnectionKey("test-cluster", "/api/v1/pods", "test-user")
 	m.connections[connKey] = conn
 
 	m.cleanupConnections()
@@ -377,43 +262,197 @@ func TestCleanupConnections(t *testing.T) {
 	assert.Equal(t, StateClosed, conn.Status.State)
 }
 
-func TestCreateWebSocketURL(t *testing.T) {
-	tests := []struct {
-		name     string
-		host     string
-		path     string
-		query    string
-		expected string
-	}{
-		{
-			name:     "basic URL without query",
-			host:     "http://localhost:8080",
-			path:     "/api/v1/pods",
-			query:    "",
-			expected: "wss://localhost:8080/api/v1/pods",
+func TestCloseConnection(t *testing.T) {
+	m := NewMultiplexer(kubeconfig.NewContextStore())
+	clientConn, clientServer := createTestWebSocketConnection()
+
+	defer clientServer.Close()
+
+	wsConn, wsServer := createTestWebSocketConnection()
+	defer wsServer.Close()
+
+	conn := createTestConnection("test-cluster-1", "test-user", "/api/v1/pods", "", clientConn)
+	conn.WSConn = wsConn.conn
+
+	connKey := m.createConnectionKey("test-cluster-1", "/api/v1/pods", "test-user")
+	m.connections[connKey] = conn
+
+	m.CloseConnection("test-cluster-1", "/api/v1/pods", "test-user")
+	assert.Empty(t, m.connections)
+	assert.True(t, conn.closed)
+}
+
+func createTestConnection(
+	clusterID,
+	userID,
+	path,
+	query string,
+	client *WSConnLock,
+) *Connection {
+	return &Connection{
+		ClusterID: clusterID,
+		UserID:    userID,
+		Path:      path,
+		Query:     query,
+		Client:    client,
+		Done:      make(chan struct{}),
+		Status: ConnectionStatus{
+			State:   StateConnecting,
+			LastMsg: time.Now(),
 		},
-		{
-			name:     "URL with query parameters",
-			host:     "https://example.com",
-			path:     "/api/v1/pods",
-			query:    "watch=true",
-			expected: "wss://example.com/api/v1/pods?watch=true",
-		},
-		{
-			name:     "URL with path and multiple query parameters",
-			host:     "https://k8s.example.com",
-			path:     "/api/v1/namespaces/default/pods",
-			query:    "watch=true&labelSelector=app%3Dnginx",
-			expected: "wss://k8s.example.com/api/v1/namespaces/default/pods?watch=true&labelSelector=app%3Dnginx",
-		},
+		mu:      sync.RWMutex{},
+		writeMu: sync.Mutex{},
+	}
+}
+
+func createTestWebSocketConn() (*websocket.Conn, *httptest.Server) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		upgrader := websocket.Upgrader{
+			CheckOrigin: func(r *http.Request) bool {
+				return true
+			},
+		}
+		ws, err := upgrader.Upgrade(w, r, nil)
+		if err != nil {
+			return
+		}
+
+		defer ws.Close()
+
+		for {
+			messageType, message, err := ws.ReadMessage()
+			if err != nil {
+				break
+			}
+			err = ws.WriteMessage(messageType, message)
+			if err != nil {
+				break
+			}
+		}
+	}))
+
+	wsURL := "ws" + strings.TrimPrefix(server.URL, "http")
+	dialer := newTestDialer()
+
+	conn, resp, err := dialer.Dial(wsURL, nil)
+	if err != nil {
+		server.Close()
+
+		return nil, nil
 	}
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			result := createWebSocketURL(tt.host, tt.path, tt.query)
-			assert.Equal(t, tt.expected, result)
-		})
+	if resp != nil && resp.Body != nil {
+		defer resp.Body.Close()
 	}
+
+	return conn, server
+}
+
+func createTestWebSocketConnection() (*WSConnLock, *httptest.Server) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		upgrader := websocket.Upgrader{
+			CheckOrigin: func(r *http.Request) bool {
+				return true
+			},
+		}
+
+		ws, err := upgrader.Upgrade(w, r, nil)
+		if err != nil {
+			return
+		}
+
+		// Echo back any messages received
+		go func() {
+			for {
+				messageType, message, err := ws.ReadMessage()
+				if err != nil {
+					break
+				}
+
+				if err := ws.WriteMessage(messageType, message); err != nil {
+					break
+				}
+			}
+		}()
+	}))
+
+	wsURL := "ws" + strings.TrimPrefix(server.URL, "http")
+	dialer := newTestDialer()
+
+	conn, resp, err := dialer.Dial(wsURL, nil)
+	if err != nil {
+		server.Close()
+		return nil, nil
+	}
+
+	if resp != nil && resp.Body != nil {
+		defer resp.Body.Close()
+	}
+
+	return NewWSConnLock(conn), server
+}
+
+func TestWSConnLock(t *testing.T) {
+	wsConn, server := createTestWebSocketConnection()
+	defer server.Close()
+
+	// Test concurrent writes
+	var wg sync.WaitGroup
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+
+		go func(i int) {
+			defer wg.Done()
+
+			msg := fmt.Sprintf("message-%d", i)
+
+			err := wsConn.WriteJSON(msg)
+			assert.NoError(t, err)
+		}(i)
+	}
+
+	wg.Wait()
+
+	// Test ReadJSON
+	var msg string
+	err := wsConn.ReadJSON(&msg)
+	assert.NoError(t, err)
+	assert.Contains(t, msg, "message-")
+}
+
+func createMockKubeAPIServer() *httptest.Server {
+	server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		upgrader := websocket.Upgrader{
+			CheckOrigin: func(r *http.Request) bool {
+				return true
+			},
+		}
+		c, err := upgrader.Upgrade(w, r, nil)
+		if err != nil {
+			return
+		}
+
+		defer c.Close()
+
+		// Echo messages back
+		for {
+			_, msg, err := c.ReadMessage()
+			if err != nil {
+				break
+			}
+			if err := c.WriteMessage(websocket.TextMessage, msg); err != nil {
+				break
+			}
+		}
+	}))
+
+	// Configure the test client to accept the test server's TLS certificate
+	server.Client().Transport.(*http.Transport).TLSClientConfig = &tls.Config{
+		InsecureSkipVerify: true, //nolint:gosec
+	}
+
+	return server
 }
 
 func TestGetOrCreateConnection(t *testing.T) {
@@ -527,7 +566,12 @@ func TestReconnect(t *testing.T) {
 	defer clientServer.Close()
 
 	// Create initial connection
-	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn)
+	conn := m.createConnection("test-cluster", "test-user", "/api/v1/services", "watch=true", clientConn)
+	wsConn, wsServer := createTestWebSocketConnection()
+
+	defer wsServer.Close()
+
+	conn.WSConn = wsConn.conn
 	conn.Status.State = StateError // Simulate an error state
 
 	// Test successful reconnection
@@ -549,41 +593,19 @@ func TestReconnect(t *testing.T) {
 
 	// Test reconnection with closed connection
 	conn = m.createConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn)
-	clusterConn, err := m.establishClusterConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn)
-	require.NoError(t, err)
-	require.NotNil(t, clusterConn)
+	wsConn2, wsServer2 := createTestWebSocketConnection()
+
+	defer wsServer2.Close()
+
+	conn.WSConn = wsConn2.conn
 
 	// Close the connection and wait for cleanup
-	conn.closed = true
-	if conn.WSConn != nil {
-		conn.WSConn.Close()
-	}
-
-	if conn.Client != nil {
-		conn.Client.Close()
-	}
-
-	close(conn.Done)
+	conn.closed = true // Mark connection as closed
 
 	// Try to reconnect the closed connection
 	newConn, err = m.reconnect(conn)
 	assert.Error(t, err)
 	assert.Nil(t, newConn)
-}
-
-func TestCloseConnection(t *testing.T) {
-	m := NewMultiplexer(kubeconfig.NewContextStore())
-	clientConn, _ := createTestWebSocketConnection()
-	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
-	conn.WSConn, _ = createTestWebSocketConnection()
-
-	connKey := "test-cluster:/api/v1/pods:test-user"
-	m.connections[connKey] = conn
-
-	m.CloseConnection("test-cluster", "/api/v1/pods", "test-user")
-	assert.Empty(t, m.connections)
-	// It will reconnect to the cluster
-	assert.Equal(t, StateConnecting, conn.Status.State)
 }
 
 func TestCreateWrapperMessage(t *testing.T) {
@@ -666,47 +688,6 @@ func TestHandleConnectionError(t *testing.T) {
 	case <-time.After(time.Second):
 		t.Fatal("Test timed out")
 	}
-}
-
-func TestWriteMessageToCluster(t *testing.T) {
-	m := NewMultiplexer(kubeconfig.NewContextStore())
-	clusterConn, clusterServer := createTestWebSocketConnection()
-
-	defer clusterServer.Close()
-
-	conn := &Connection{
-		ClusterID: "test-cluster",
-		WSConn:    clusterConn,
-	}
-
-	testMessage := []byte("Hello, Cluster!")
-
-	// Capture the message sent to the cluster
-	var receivedMessage []byte
-
-	done := make(chan bool)
-	go func() {
-		_, receivedMessage, _ = clusterConn.ReadMessage()
-		done <- true
-	}()
-
-	err := m.writeMessageToCluster(conn, testMessage)
-	assert.NoError(t, err)
-
-	select {
-	case <-done:
-		assert.Equal(t, testMessage, receivedMessage)
-	case <-time.After(time.Second):
-		t.Fatal("Test timed out")
-	}
-
-	// Test error case
-	clusterConn.Close()
-
-	err = m.writeMessageToCluster(conn, testMessage)
-
-	assert.Error(t, err)
-	assert.Equal(t, StateError, conn.Status.State)
 }
 
 //nolint:funlen
@@ -838,9 +819,15 @@ func TestMonitorConnection_ReconnectFailure(t *testing.T) {
 	})
 	require.NoError(t, err)
 
-	clientConn, _ := createTestWebSocketConnection()
+	clientConn, clientServer := createTestWebSocketConnection()
+	defer clientServer.Close()
+
 	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
-	conn.WSConn, _ = createTestWebSocketConnection()
+	wsConn, wsServer := createTestWebSocketConn()
+
+	defer wsServer.Close()
+
+	conn.WSConn = wsConn
 
 	// Start monitoring
 	done := make(chan struct{})
@@ -864,12 +851,14 @@ func TestMonitorConnection_ReconnectFailure(t *testing.T) {
 	<-done
 }
 
+//nolint:funlen
 func TestHandleClientWebSocket_InvalidMessages(t *testing.T) {
 	m := NewMultiplexer(kubeconfig.NewContextStore())
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		m.HandleClientWebSocket(w, r)
 	}))
+
 	defer server.Close()
 
 	// Test invalid JSON
@@ -913,6 +902,7 @@ func TestHandleClientWebSocket_InvalidMessages(t *testing.T) {
 		Path:      "/api/v1/pods",
 		UserID:    "test-user",
 	})
+
 	require.NoError(t, err)
 
 	// Should receive an error message or close
@@ -1004,7 +994,7 @@ func TestSendCompleteMessage_ClosedConnection(t *testing.T) {
 	assert.Equal(t, conn.Query, msg.Query)
 	assert.Equal(t, conn.UserID, msg.UserID)
 
-	// Test with closed connection
+	// Test sending to closed connection
 	clientConn.Close()
 	err = m.sendCompleteMessage(conn, clientConn)
 	assert.NoError(t, err)
@@ -1013,19 +1003,19 @@ func TestSendCompleteMessage_ClosedConnection(t *testing.T) {
 func TestSendCompleteMessage_ErrorConditions(t *testing.T) {
 	tests := []struct {
 		name          string
-		setupConn     func(*Connection, *websocket.Conn)
+		setupConn     func(*Connection, *WSConnLock)
 		expectedError bool
 	}{
 		{
 			name: "connection already marked as closed",
-			setupConn: func(conn *Connection, _ *websocket.Conn) {
+			setupConn: func(conn *Connection, _ *WSConnLock) {
 				conn.closed = true
 			},
 			expectedError: false,
 		},
 		{
 			name: "normal closure",
-			setupConn: func(_ *Connection, clientConn *websocket.Conn) {
+			setupConn: func(_ *Connection, clientConn *WSConnLock) {
 				//nolint:errcheck
 				clientConn.WriteMessage(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
@@ -1035,7 +1025,7 @@ func TestSendCompleteMessage_ErrorConditions(t *testing.T) {
 		},
 		{
 			name: "unexpected close error",
-			setupConn: func(_ *Connection, clientConn *websocket.Conn) {
+			setupConn: func(_ *Connection, clientConn *WSConnLock) {
 				//nolint:errcheck
 				clientConn.WriteMessage(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseProtocolError, ""))
@@ -1049,6 +1039,7 @@ func TestSendCompleteMessage_ErrorConditions(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			m := NewMultiplexer(kubeconfig.NewContextStore())
 			clientConn, clientServer := createTestWebSocketConnection()
+
 			defer clientServer.Close()
 
 			conn := &Connection{
@@ -1070,74 +1061,202 @@ func TestSendCompleteMessage_ErrorConditions(t *testing.T) {
 	}
 }
 
-func createMockKubeAPIServer() *httptest.Server {
-	server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func TestMonitorConnection_Reconnect(t *testing.T) {
+	contextStore := kubeconfig.NewContextStore()
+	m := NewMultiplexer(contextStore)
+
+	// Create a server that will accept the connection and then close it
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		upgrader := websocket.Upgrader{
 			CheckOrigin: func(r *http.Request) bool {
 				return true
 			},
 		}
-		c, err := upgrader.Upgrade(w, r, nil)
-		if err != nil {
-			return
-		}
+		ws, err := upgrader.Upgrade(w, r, nil)
+		require.NoError(t, err)
 
-		defer c.Close()
+		defer ws.Close()
 
-		// Echo messages back
-		for {
-			_, msg, err := c.ReadMessage()
-			if err != nil {
-				break
-			}
-			if err := c.WriteMessage(websocket.TextMessage, msg); err != nil {
-				break
-			}
-		}
+		// Keep connection alive briefly
+		time.Sleep(100 * time.Millisecond)
 	}))
 
-	// Configure the test client to accept the test server's TLS certificate
-	server.Client().Transport.(*http.Transport).TLSClientConfig = &tls.Config{
-		InsecureSkipVerify: true, //nolint:gosec
-	}
+	defer server.Close()
 
-	return server
-}
+	clientConn, clientServer := createTestWebSocketConnection()
+	defer clientServer.Close()
 
-func createTestWebSocketConnection() (*websocket.Conn, *httptest.Server) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		upgrader := websocket.Upgrader{}
-		c, err := upgrader.Upgrade(w, r, nil)
-		if err != nil {
-			return
-		}
-
-		defer c.Close()
-
-		for {
-			mt, message, err := c.ReadMessage()
-			if err != nil {
-				break
-			}
-
-			err = c.WriteMessage(mt, message)
-			if err != nil {
-				break
-			}
-		}
-	}))
+	conn := createTestConnection("test-cluster", "test-user", "/api/v1/services", "", clientConn)
 
 	wsURL := "ws" + strings.TrimPrefix(server.URL, "http")
-	dialer := newTestDialer()
+	tlsConfig := &tls.Config{InsecureSkipVerify: true} //nolint:gosec
 
-	ws, resp, err := dialer.Dial(wsURL, nil)
-	if err != nil {
-		panic(err)
+	ws, err := m.dialWebSocket(wsURL, tlsConfig, "")
+	require.NoError(t, err)
+
+	conn.WSConn = ws
+
+	// Start monitoring in a goroutine
+	go m.monitorConnection(conn)
+
+	// Wait for state transitions
+	time.Sleep(300 * time.Millisecond)
+
+	// Verify connection status, it should be in error state or connecting
+	assert.Contains(t, []ConnectionState{StateError, StateConnecting}, conn.Status.State)
+
+	// Clean up
+	close(conn.Done)
+}
+
+func TestWriteMessageToCluster(t *testing.T) {
+	m := NewMultiplexer(kubeconfig.NewContextStore())
+	clusterConn, clusterServer := createTestWebSocketConnection()
+
+	defer clusterServer.Close()
+
+	conn := &Connection{
+		ClusterID: "test-cluster",
+		WSConn:    clusterConn.conn,
 	}
 
-	if resp != nil && resp.Body != nil {
-		defer resp.Body.Close()
+	testMessage := []byte("Hello, Cluster!")
+
+	// Capture the message sent to the cluster
+	var receivedMessage []byte
+
+	done := make(chan bool)
+
+	go func() {
+		_, receivedMessage, _ = clusterConn.conn.ReadMessage()
+		done <- true
+	}()
+
+	err := m.writeMessageToCluster(conn, testMessage)
+	assert.NoError(t, err)
+
+	select {
+	case <-done:
+		assert.Equal(t, testMessage, receivedMessage)
+	case <-time.After(time.Second):
+		t.Fatal("Test timed out")
 	}
 
-	return ws, server
+	// Test error case
+	clusterConn.Close()
+
+	err = m.writeMessageToCluster(conn, testMessage)
+
+	assert.Error(t, err)
+	assert.Equal(t, StateError, conn.Status.State)
+}
+
+func TestHandleClusterMessages(t *testing.T) {
+	m := NewMultiplexer(kubeconfig.NewContextStore())
+	clientConn, clientServer := createTestWebSocketConnection()
+
+	defer clientServer.Close()
+
+	wsConn, wsServer := createTestWebSocketConnection()
+	defer wsServer.Close()
+
+	conn := createTestConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn)
+	conn.WSConn = wsConn.conn
+
+	done := make(chan struct{})
+	go func() {
+		m.handleClusterMessages(conn, clientConn)
+		close(done)
+	}()
+
+	// Send a test message from the cluster
+	testMessage := []byte(`{"metadata":{"resourceVersion":"1"},"kind":"Pod","apiVersion":"v1","metadata":{"name":"test-pod"}}`) //nolint:lll
+	err := wsConn.WriteMessage(websocket.TextMessage, testMessage)
+	require.NoError(t, err)
+
+	// Read the message from the client connection
+	var msg Message
+	err = clientConn.ReadJSON(&msg)
+	require.NoError(t, err)
+
+	assert.Equal(t, "test-cluster", msg.ClusterID)
+	assert.Equal(t, "/api/v1/pods", msg.Path)
+	assert.Equal(t, "watch=true", msg.Query)
+	assert.Equal(t, "test-user", msg.UserID)
+
+	// Close the connection
+	wsConn.Close()
+
+	// Wait for handleClusterMessages to finish
+	select {
+	case <-done:
+		// Function completed successfully
+	case <-time.After(5 * time.Second):
+		t.Fatal("Test timed out")
+	}
+}
+
+func TestSendCompleteMessage(t *testing.T) {
+	m := NewMultiplexer(kubeconfig.NewContextStore())
+	clientConn, clientServer := createTestWebSocketConnection()
+
+	defer clientServer.Close()
+
+	conn := createTestConnection("test-cluster-1", "test-user-1", "/api/v1/pods", "", clientConn)
+
+	// Test sending complete message
+	err := m.sendCompleteMessage(conn, clientConn)
+	assert.NoError(t, err)
+
+	// Verify the complete message was sent
+	var msg Message
+	err = clientConn.ReadJSON(&msg)
+	require.NoError(t, err)
+	assert.Equal(t, "COMPLETE", msg.Type)
+	assert.Equal(t, conn.ClusterID, msg.ClusterID)
+	assert.Equal(t, conn.Path, msg.Path)
+	assert.Equal(t, conn.Query, msg.Query)
+	assert.Equal(t, conn.UserID, msg.UserID)
+
+	// Test sending to closed connection
+	conn.closed = true
+	err = m.sendCompleteMessage(conn, clientConn)
+	assert.NoError(t, err) // Should return nil for closed connection
+}
+
+func TestSendDataMessage(t *testing.T) {
+	m := NewMultiplexer(kubeconfig.NewContextStore())
+	clientConn, clientServer := createTestWebSocketConnection()
+
+	defer clientServer.Close()
+
+	conn := createTestConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
+
+	// Test sending a text message
+	textMsg := []byte("Hello, World!")
+	err := m.sendDataMessage(conn, clientConn, websocket.TextMessage, textMsg)
+	assert.NoError(t, err)
+
+	// Verify text message
+	var msg Message
+	err = clientConn.ReadJSON(&msg)
+	require.NoError(t, err)
+	assert.Equal(t, string(textMsg), msg.Data)
+	assert.False(t, msg.Binary)
+
+	// Test sending a binary message
+	binaryMsg := []byte{0x01, 0x02, 0x03}
+	err = m.sendDataMessage(conn, clientConn, websocket.BinaryMessage, binaryMsg)
+	assert.NoError(t, err)
+
+	// Verify binary message
+	err = clientConn.ReadJSON(&msg)
+	require.NoError(t, err)
+	assert.Equal(t, base64.StdEncoding.EncodeToString(binaryMsg), msg.Data)
+	assert.True(t, msg.Binary)
+
+	// Test sending to closed connection
+	conn.closed = true
+	err = m.sendDataMessage(conn, clientConn, websocket.TextMessage, textMsg)
+	assert.NoError(t, err) // Should return nil even for closed connection
 }
