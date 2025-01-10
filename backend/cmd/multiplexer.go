@@ -60,10 +60,10 @@ type Connection struct {
 	Query string
 	// WSConn is the WebSocket connection to the cluster.
 	WSConn *websocket.Conn
-	// Status is the status of the connection.
+	// Status is the status of the connec	tion.
 	Status ConnectionStatus
 	// Client is the WebSocket connection to the client.
-	Client *websocket.Conn
+	Client *WSConnLock
 	// Done is a channel to signal when the connection is done.
 	Done chan struct{}
 	// mu is a mutex to synchronize access to the connection.
@@ -183,7 +183,7 @@ func (m *Multiplexer) establishClusterConnection(
 	userID,
 	path,
 	query string,
-	clientConn *websocket.Conn,
+	clientConn *WSConnLock,
 ) (*Connection, error) {
 	config, err := m.getClusterConfigWithFallback(clusterID, userID)
 	if err != nil {
@@ -246,7 +246,7 @@ func (m *Multiplexer) createConnection(
 	userID,
 	path,
 	query string,
-	clientConn *websocket.Conn,
+	clientConn *WSConnLock,
 ) *Connection {
 	return &Connection{
 		ClusterID: clusterID,
@@ -355,6 +355,8 @@ func (m *Multiplexer) HandleClientWebSocket(w http.ResponseWriter, r *http.Reque
 
 	defer clientConn.Close()
 
+	lockClientConn := NewWSConnLock(clientConn)
+
 	for {
 		msg, err := m.readClientMessage(clientConn)
 		if err != nil {
@@ -368,9 +370,9 @@ func (m *Multiplexer) HandleClientWebSocket(w http.ResponseWriter, r *http.Reque
 			continue
 		}
 
-		conn, err := m.getOrCreateConnection(msg, clientConn)
+		conn, err := m.getOrCreateConnection(msg, lockClientConn)
 		if err != nil {
-			m.handleConnectionError(clientConn, msg, err)
+			m.handleConnectionError(lockClientConn, msg, err)
 
 			continue
 		}
@@ -408,7 +410,7 @@ func (m *Multiplexer) readClientMessage(clientConn *websocket.Conn) (Message, er
 }
 
 // getOrCreateConnection gets an existing connection or creates a new one if it doesn't exist.
-func (m *Multiplexer) getOrCreateConnection(msg Message, clientConn *websocket.Conn) (*Connection, error) {
+func (m *Multiplexer) getOrCreateConnection(msg Message, clientConn *WSConnLock) (*Connection, error) {
 	connKey := m.createConnectionKey(msg.ClusterID, msg.Path, msg.UserID)
 
 	m.mutex.RLock()
@@ -437,7 +439,7 @@ func (m *Multiplexer) getOrCreateConnection(msg Message, clientConn *websocket.C
 }
 
 // handleConnectionError handles errors that occur when establishing a connection.
-func (m *Multiplexer) handleConnectionError(clientConn *websocket.Conn, msg Message, err error) {
+func (m *Multiplexer) handleConnectionError(clientConn *WSConnLock, msg Message, err error) {
 	errorMsg := struct {
 		ClusterID string `json:"clusterId"`
 		Error     string `json:"error"`
@@ -477,7 +479,7 @@ func (m *Multiplexer) writeMessageToCluster(conn *Connection, data []byte) error
 }
 
 // handleClusterMessages handles messages from a cluster connection.
-func (m *Multiplexer) handleClusterMessages(conn *Connection, clientConn *websocket.Conn) {
+func (m *Multiplexer) handleClusterMessages(conn *Connection, clientConn *WSConnLock) {
 	defer m.cleanupConnection(conn)
 
 	var lastResourceVersion string
@@ -497,7 +499,7 @@ func (m *Multiplexer) handleClusterMessages(conn *Connection, clientConn *websoc
 // processClusterMessage processes a single message from the cluster.
 func (m *Multiplexer) processClusterMessage(
 	conn *Connection,
-	clientConn *websocket.Conn,
+	clientConn *WSConnLock,
 	lastResourceVersion *string,
 ) error {
 	messageType, message, err := conn.WSConn.ReadMessage()
@@ -541,7 +543,7 @@ func (m *Multiplexer) processClusterMessage(
 func (m *Multiplexer) sendIfNewResourceVersion(
 	message []byte,
 	conn *Connection,
-	clientConn *websocket.Conn,
+	clientConn *WSConnLock,
 	lastResourceVersion *string,
 ) error {
 	var obj map[string]interface{}
@@ -581,7 +583,7 @@ func (m *Multiplexer) sendIfNewResourceVersion(
 }
 
 // sendCompleteMessage sends a COMPLETE message to the client.
-func (m *Multiplexer) sendCompleteMessage(conn *Connection, clientConn *websocket.Conn) error {
+func (m *Multiplexer) sendCompleteMessage(conn *Connection, clientConn *WSConnLock) error {
 	conn.mu.RLock()
 	if conn.closed {
 		conn.mu.RUnlock()
@@ -614,7 +616,7 @@ func (m *Multiplexer) sendCompleteMessage(conn *Connection, clientConn *websocke
 // sendDataMessage sends the actual data message to the client.
 func (m *Multiplexer) sendDataMessage(
 	conn *Connection,
-	clientConn *websocket.Conn,
+	clientConn *WSConnLock,
 	messageType int,
 	message []byte,
 ) error {
