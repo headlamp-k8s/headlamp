@@ -55,7 +55,8 @@ type OidcConfig struct {
 type CustomObject struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
-	CustomName string `json:"customName"`
+	CustomName   string `json:"customName"`
+	OriginalName string `json:"originalName"`
 }
 
 // DeepCopyObject returns a copy of the CustomObject.

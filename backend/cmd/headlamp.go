@@ -1108,6 +1108,18 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 			continue
 		}
 
+		// if context.KubeContext.Extensions["headlamp_info"] does not exist we need to create it
+		// we then need to add the original name from the kubeconfig to the context
+
+		// we need to get the context and the original name (maybe the context.Name here changes like it does in the app)
+		var currentContextName = context.Name
+
+		err := c.keepOriginalClusterName(context.SourceStr(), currentContextName)
+		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": currentContextName},
+				err, "failed to keep original cluster name")
+		}
+
 		clusters = append(clusters, Cluster{
 			Name:     context.Name,
 			Server:   context.Cluster.Server,
@@ -1437,6 +1449,48 @@ func (c *HeadlampConfig) handleStatelessClusterRename(w http.ResponseWriter, r *
 	c.getConfig(w, r)
 }
 
+// originalNameToExtensions writes the original name to the Extensions map in the kubeconfig.
+func originalNameToExtensions(config, contextName string, path string) error {
+	var err error
+	
+	logger.Log(logger.LevelInfo, map[string]string{"cluster": contextName},
+		nil, "originalNameToExtensions")
+
+	// Get the context with the given cluster name
+	contextConfig, ok := config.contexts[contextName]
+	if !ok {
+		logger.Log(logger.LevelError, map[string]string{"cluster ERROR X": contextName},
+			err, "failed getting context from kubeconfig for original name")
+
+		logger.Log(logger.LevelError, map[string]string{"cluster ERROR Y": contextName},
+			err, "failed getting contextName " + contextName)
+
+		logger.Log(logger.LevelError, map[string]string{"cluster ERROR Z": contextName},
+			err, "failed getting path " + path)
+
+		return err
+	}
+
+	// Create a CustomObject with OriginalName field
+	customObj := &kubeconfig.CustomObject{
+		TypeMeta:     v1.TypeMeta{},
+		ObjectMeta:   v1.ObjectMeta{},
+		OriginalName: contextName,
+	}
+
+	// Assign the CustomObject to the Extensions map
+	contextConfig.Extensions["headlamp_info"] = customObj
+
+	if err := clientcmd.WriteToFile(*config, path); err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+			err, "writing kubeconfig file for original name")
+
+		return err
+	}
+
+	return nil
+}
+
 // customNameToExtenstions writes the custom name to the Extensions map in the kubeconfig.
 func customNameToExtenstions(config *api.Config, contextName, newClusterName, path string) error {
 	var err error
@@ -1524,6 +1578,54 @@ func (c *HeadlampConfig) getPathAndLoadKubeconfig(source, clusterName string) (s
 	}
 
 	return path, config, nil
+}
+
+// Handler to keep the original name for a cluster.
+func (c *HeadlampConfig) keepOriginalClusterName(source string, contextName string) error {
+	// Get path of kubeconfig from source
+	path, config, err := c.getPathAndLoadKubeconfig(source, contextName)
+	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+			err, "getting kubeconfig file")
+
+		return err
+	}
+
+	var originalClusterName string
+
+	// Iterate over the contexts to find the context with the given cluster name
+	for key, val := range config.Contexts {
+		info := val.Extensions["headlamp_info"]
+		if info != nil {
+			customObj, err := MarshalCustomObject(info, contextName)
+			if err == nil {
+				logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+					err, "marshaling custom object")
+				return err
+			}
+
+			// Check if the OriginalName field matches the cluster name
+			if customObj.OriginalName == val.Cluster {
+				fmt.Println("key", key)
+				logger.Log(logger.LevelInfo, map[string]string{"cluster": contextName},
+					nil, "found original cluster name" + val.Cluster + " for cluster " + contextName)
+				originalClusterName = contextName
+			}
+
+			if customObj.OriginalName == "" {
+				originalClusterName = contextName
+			}
+		}
+	}
+
+	if err := originalNameToExtensions(config, originalClusterName, path); err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+			err, "writing custom extension to kubeconfig")
+
+		return err
+	}
+
+	return nil
 }
 
 // Handler for renaming a cluster.
