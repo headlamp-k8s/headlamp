@@ -101,7 +101,7 @@
   "Try Again": "Essayez à nouveau",
   "Back": "Revenir en arrière",
   "Memory Usage": "Utilisation de la mémoire",
-  "{{ available }} units": "{{ disponible }} unités",
+  "{{ available }} units": "{{ available }} unités",
   "CPU Usage": "Utilisation du CPU",
   "{{ numReady }} / {{ numItems }} Requested": "{{ numReady }} / {{ numItems }} Demandé(s)",
   "{{ numReady }} / {{ numItems }} Ready": "{{ numReady }} / {{ numItems }} Ready",
