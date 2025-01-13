@@ -931,7 +931,13 @@ export interface RouteURLProps {
 
 export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   const storeRoutes = store.getState().routes.routes;
-  const route = (storeRoutes && storeRoutes[routeName]) || getRoute(routeName);
+  // find matching route in storedRoutes based on name
+  const route =
+    (storeRoutes &&
+      Object.entries(storeRoutes).find(
+        ([, route]) => route.name?.toLowerCase() === routeName.toLowerCase()
+      )?.[1]) ||
+    getRoute(routeName);
 
   if (!route) {
     return '';
