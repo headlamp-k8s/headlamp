@@ -783,18 +783,21 @@ function getDefaultAppMenu(): AppMenu[] {
         sep,
         {
           label: i18n.t('Reset Zoom'),
-          role: 'resetzoom',
           id: 'original-reset-zoom',
+          accelerator: 'CmdOrCtrl+0',
+          click: () => setZoom(1.0),
         },
         {
           label: i18n.t('Zoom In'),
-          role: 'zoomin',
           id: 'original-zoom-in',
+          accelerator: 'CmdOrCtrl+Plus',
+          click: () => adjustZoom(0.1),
         },
         {
           label: i18n.t('Zoom Out'),
-          role: 'zoomout',
           id: 'original-zoom-out',
+          accelerator: 'CmdOrCtrl+-',
+          click: () => adjustZoom(-0.1),
         },
         sep,
         {
@@ -1030,6 +1033,42 @@ function killProcess(pid: number) {
   }
 }
 
+const ZOOM_FILE_PATH = path.join(app.getPath('userData'), 'headlamp-config.json');
+let cachedZoom: number = 1.0;
+
+function saveZoomFactor(factor: number) {
+  try {
+    fs.writeFileSync(ZOOM_FILE_PATH, JSON.stringify({ zoomFactor: factor }), 'utf-8');
+  } catch (err) {
+    console.error('Failed to save zoom factor:', err);
+  }
+}
+
+function loadZoomFactor() {
+  try {
+    const { zoomFactor = 1.0 } = JSON.parse(fs.readFileSync(ZOOM_FILE_PATH, 'utf-8'));
+    return zoomFactor;
+  } catch (err) {
+    console.error('Failed to load zoom factor, defaulting to 1.0:', err);
+    return 1.0;
+  }
+}
+
+// The zoom factor should respect the fixed limits set by Electron.
+function clampZoom(factor: number) {
+  return Math.min(5.0, Math.max(0.25, factor));
+}
+
+function setZoom(factor: number) {
+  cachedZoom = factor;
+  mainWindow?.webContents.setZoomFactor(cachedZoom);
+}
+
+function adjustZoom(delta: number) {
+  const newZoom = clampZoom(cachedZoom + delta);
+  setZoom(newZoom);
+}
+
 function startElecron() {
   console.info('App starting...');
 
@@ -1081,6 +1120,11 @@ function startElecron() {
       if (!!goForwardMenu) {
         goForwardMenu.enabled = mainWindow?.webContents.canGoForward() || false;
       }
+    });
+
+    mainWindow.webContents.on('did-finish-load', () => {
+      const startZoom = loadZoomFactor();
+      setZoom(startZoom);
     });
 
     mainWindow.webContents.on('dom-ready', () => {
@@ -1311,6 +1355,7 @@ function startElecron() {
   app.once('window-all-closed', app.quit);
 
   app.once('before-quit', () => {
+    saveZoomFactor(cachedZoom);
     i18n.off('languageChanged');
     if (mainWindow) {
       mainWindow.removeAllListeners('close');
