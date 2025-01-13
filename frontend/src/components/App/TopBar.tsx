@@ -30,7 +30,6 @@ import { SettingsButton } from '../App/Settings';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { GlobalSearch } from '../globalSearch/GlobalSearch';
-import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import { setWhetherSidebarOpen } from '../Sidebar/sidebarSlice';
 import { AppLogo } from './AppLogo';
@@ -408,9 +407,8 @@ export const PureTopBar = memo(
     return (
       <>
         <AppBar
-          position="fixed"
+          position="static"
           sx={theme => ({
-            marginLeft: drawerWidth,
             zIndex: theme.zIndex.drawer + 1,
             '& > *': {
               color: theme.palette.text.primary,

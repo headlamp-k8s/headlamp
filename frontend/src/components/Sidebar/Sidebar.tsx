@@ -275,6 +275,9 @@ export const PureSidebar = memo(
     linkArea,
   }: PureSidebarProps) => {
     const { t } = useTranslation();
+    const listContainerRef = React.useRef<HTMLDivElement | null>(null);
+    const [isOverflowing, setIsOverflowing] = React.useState(false);
+    const adjustedDrawerWidthClosed = isOverflowing ? 84 : 72;
     const temporarySideBarOpen = open === true && isTemporaryDrawer && openUserSelected === true;
 
     // The large sidebar does not open in medium view (600-960px).
@@ -303,8 +306,10 @@ export const PureSidebar = memo(
           })}
         />
         <Grid
+          ref={listContainerRef}
           sx={{
             height: '100%',
+            overflowY: 'auto',
           }}
           container
           direction="column"
@@ -363,6 +368,23 @@ export const PureSidebar = memo(
         }
       : {};
 
+    React.useEffect(() => {
+      const el = listContainerRef.current;
+      if (!el) {
+        return;
+      }
+
+      const observer = new ResizeObserver(() => {
+        setIsOverflowing(el.scrollHeight > el.clientHeight);
+      });
+
+      observer.observe(el);
+
+      setIsOverflowing(el.scrollHeight > el.clientHeight);
+
+      return () => observer.disconnect();
+    }, [items]);
+
     return (
       <Box component="nav" aria-label={t('translation|Navigation')}>
         <Drawer
@@ -389,16 +411,7 @@ export const PureSidebar = memo(
                 duration: theme.transitions.duration.leavingScreen,
               }),
               overflowX: 'hidden',
-              width: '56px',
-              [theme.breakpoints.down('xs')]: {
-                background: 'initial',
-              },
-              [theme.breakpoints.down('sm')]: {
-                width: theme.spacing(0),
-              },
-              [theme.breakpoints.up('sm')]: {
-                width: '72px',
-              },
+              width: `${adjustedDrawerWidthClosed}px`,
               background: theme.palette.sidebarBg,
             };
 
