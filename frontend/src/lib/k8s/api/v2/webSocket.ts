@@ -429,7 +429,7 @@ export function useWebSocket<T>({
 
     const connectWebSocket = async () => {
       try {
-        const parsedUrl = new URL(url);
+        const parsedUrl = new URL(url, BASE_WS_URL);
         cleanup = await WebSocketManager.subscribe(
           cluster,
           parsedUrl.pathname,
