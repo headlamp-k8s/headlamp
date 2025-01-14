@@ -59,6 +59,10 @@ type CustomObject struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
 	CustomName string `json:"customName"`
+	// originalName is the name the cluster was created with.
+	OriginalName string `json:"originalName"`
+	// sourcePath is the path to the source file.
+	SourcePath string `json:"sourcePath"`
 }
 
 // DeepCopyObject returns a copy of the CustomObject.
