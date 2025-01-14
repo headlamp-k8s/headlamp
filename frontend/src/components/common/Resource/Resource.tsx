@@ -790,7 +790,10 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       let isError = false;
       const containerName = resourceFieldRef.containerName || container.name;
       const resourceType = resourceFieldRef.resource;
-      const divisor = resourceFieldRef.divisor || '1';
+      let divisor = resourceFieldRef.divisor || '1';
+      if (divisor === '0') {
+        divisor = '1';
+      }
 
       try {
         // Find the container based on the containerName
