@@ -1108,6 +1108,9 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 			continue
 		}
 
+		// this function handles the clusters that need to have headlamp_info created or updated
+		c.handleHeadlampInfo(context)
+
 		clusters = append(clusters, Cluster{
 			Name:     context.Name,
 			Server:   context.Cluster.Server,
@@ -1121,6 +1124,35 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 	}
 
 	return clusters
+}
+
+func (c *HeadlampConfig) handleHeadlampInfo(context *kubeconfig.Context) error {
+	headlampInfo := context.KubeContext.Extensions["headlamp_info"]
+
+	// if the headlamp_info is not present we create it and keep the original cluster name
+	if headlampInfo == nil {
+		err := c.keepOriginalClusterName(context.SourceStr(), context.Name, false)
+		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": context.Name},
+				err, "failed to keep original cluster name")
+			return err
+		}
+	}
+
+	// this handles the clusters that have been renamed before the headlamp_info was introduced with original name
+	if headlampInfo != nil {
+		existingObj, marshalErr := MarshalCustomObject(headlampInfo, context.Name)
+		if marshalErr == nil && existingObj.OriginalName == "" && existingObj.CustomName != "" {
+			keepErr := c.keepOriginalClusterName(context.SourceStr(), context.Name, true)
+			if keepErr != nil {
+				logger.Log(logger.LevelError, map[string]string{"cluster": context.Name},
+					keepErr, "failed to update original cluster name and custom name on headlamp_info")
+				return keepErr
+			}
+		}
+	}
+
+	return nil
 }
 
 // parseCustomNameClusters parses the custom name clusters from the kubeconfig.
@@ -1437,6 +1469,69 @@ func (c *HeadlampConfig) handleStatelessClusterRename(w http.ResponseWriter, r *
 	c.getConfig(w, r)
 }
 
+// originalNameToExtensions writes the original name to the "headlamp_info" Extensions map in the kubeconfig.
+func originalNameToExtensions(config *api.Config, contextName string, path string, isNeedUpdate bool) error {
+	var err error
+	// get the context with the given cluster name
+	contextConfig, ok := config.Contexts[contextName]
+	if !ok {
+		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+			err, "ERROR setting originalName - failed getting context from kubeconfig for original name.")
+
+		return err
+	}
+
+	headlampInfo := contextConfig.Extensions["headlamp_info"]
+
+	// if the headlamp_info field is not present we create it
+	if headlampInfo == nil {
+		// create a CustomObject with OriginalName field
+		customObj := &kubeconfig.CustomObject{
+			TypeMeta:     v1.TypeMeta{},
+			ObjectMeta:   v1.ObjectMeta{},
+			OriginalName: contextName,
+		}
+
+		// assign the CustomObject to the Extensions map
+		contextConfig.Extensions["headlamp_info"] = customObj
+
+		if err := clientcmd.WriteToFile(*config, path); err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+				err, "writing kubeconfig file for original name")
+
+			return err
+		}
+	}
+
+	if isNeedUpdate && headlampInfo != nil {
+		logger.Log(logger.LevelInfo, map[string]string{"cluster": contextName},
+			nil, "originalNameToExtensions - updating originalName")
+
+		// unmarshal the existing headlamp_info into a CustomObject
+		existingObj, err := MarshalCustomObject(headlampInfo, contextName)
+		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+				err, "unmarshaling headlamp_info")
+			return err
+		}
+
+		// update the OriginalName field
+		existingObj.OriginalName = contextName
+
+		// assign the updated CustomObject back to the Extensions map
+		contextConfig.Extensions["headlamp_info"] = &existingObj
+
+		// write the updated configuration to the file
+		if err := clientcmd.WriteToFile(*config, path); err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+				err, "writing updated kubeconfig file")
+			return err
+		}
+	}
+
+	return nil
+}
+
 // customNameToExtenstions writes the custom name to the Extensions map in the kubeconfig.
 func customNameToExtenstions(config *api.Config, contextName, newClusterName, path string) error {
 	var err error
@@ -1524,6 +1619,44 @@ func (c *HeadlampConfig) getPathAndLoadKubeconfig(source, clusterName string) (s
 	}
 
 	return path, config, nil
+}
+
+// handler to keep the original name for a cluster.
+func (c *HeadlampConfig) keepOriginalClusterName(source string, contextName string, isUpdateNeeded bool) error {
+	// get path of kubeconfig from source
+	path, config, err := c.getPathAndLoadKubeconfig(source, contextName)
+	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+			err, "getting kubeconfig file")
+
+		return err
+	}
+
+	if isUpdateNeeded {
+		// log the current isUpdatedNeeded
+		logger.Log(logger.LevelInfo, map[string]string{"cluster": contextName},
+			nil, fmt.Sprintf("isUpdateNeeded zzzzzzzzzzzzzzzzzzzzzz: %t", isUpdateNeeded))
+	}
+
+	// the original cluster name found by contextName
+	var originalClusterName string
+
+	// establish the headlamp info field if it does not exist
+	for key, val := range config.Contexts {
+		originalClusterName = contextName
+
+		if err := originalNameToExtensions(config, originalClusterName, path, isUpdateNeeded); err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+				err, "writing custom extension to kubeconfig "+key)
+
+			logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+				err, fmt.Sprintf("writing custom extension to kubeconfig %s", val.Extensions["headlamp_info"]))
+
+			return err
+		}
+	}
+
+	return nil
 }
 
 // Handler for renaming a cluster.
