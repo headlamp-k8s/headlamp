@@ -1554,20 +1554,34 @@ func customNameToExtenstions(config *api.Config, contextName, newClusterName, pa
 		return err
 	}
 
-	// Create a CustomObject with CustomName field
-	customObj := &kubeconfig.CustomObject{
-		TypeMeta:   v1.TypeMeta{},
-		ObjectMeta: v1.ObjectMeta{},
-		CustomName: newClusterName,
-	}
+	headlampInfo := contextConfig.Extensions["headlamp_info"]
 
-	// Assign the CustomObject to the Extensions map
-	contextConfig.Extensions["headlamp_info"] = customObj
+	if headlampInfo != nil {
+		existingObj, err := MarshalCustomObject(headlampInfo, contextName)
+		originalName := existingObj.OriginalName
+
+		if err == nil {
+			customObj := &kubeconfig.CustomObject{
+				TypeMeta:     v1.TypeMeta{},
+				ObjectMeta:   v1.ObjectMeta{},
+				OriginalName: originalName,
+				CustomName:   newClusterName,
+			}
+			customObj.OriginalName = existingObj.OriginalName
+
+			// Assign the CustomObject to the Extensions map
+			contextConfig.Extensions["headlamp_info"] = customObj
+		} else {
+			logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+				err, "ERROR setting customName - failure to marshaling custom object")
+
+			return err
+		}
+	}
 
 	if err := clientcmd.WriteToFile(*config, path); err != nil {
 		logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
 			err, "writing kubeconfig file")
-
 		return err
 	}
 

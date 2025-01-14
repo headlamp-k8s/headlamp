@@ -56,9 +56,14 @@ type OidcConfig struct {
 
 // CustomObject represents the custom object that holds the HeadlampInfo regarding custom name.
 type CustomObject struct {
+	// ???
 	metav1.TypeMeta
+	// ???
 	metav1.ObjectMeta
+	// CustomName is the name the cluster is renamed to.
 	CustomName string `json:"customName"`
+	// originalName is the name the cluster was created with.
+	OriginalName string `json:"originalName"`
 }
 
 // DeepCopyObject returns a copy of the CustomObject.
