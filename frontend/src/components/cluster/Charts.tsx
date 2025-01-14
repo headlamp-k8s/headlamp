@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
-import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
+import { formatK8sResource, parseCpu, parseRam } from '../../lib/units';
 import ResourceCircularChart, {
   CircularChartProps as ResourceCircularChartProps,
 } from '../common/Resource/CircularChart';
@@ -15,11 +15,11 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { t } = useTranslation(['translation', 'glossary']);
 
   function memoryUsedGetter(item: KubeMetrics) {
-    return parseRam(item.usage.memory) / TO_GB;
+    return parseRam(item.usage.memory);
   }
 
   function memoryAvailableGetter(item: Node | Pod) {
-    return parseRam(item.status?.capacity?.memory) / TO_GB;
+    return parseRam(item.status?.capacity?.memory);
   }
 
   function getLegend(used: number, available: number) {
@@ -27,12 +27,13 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
       return '';
     }
 
-    const availableLabel = `${available.toFixed(2)} GB`;
+    const availableLabel = formatK8sResource(available, '', 'binary');
     if (noMetrics) {
       return availableLabel;
     }
+    const usedLabel = formatK8sResource(used, '', 'binary');
 
-    return `${used.toFixed(2)} / ${availableLabel}`;
+    return `${usedLabel} / ${availableLabel}`;
   }
 
   return (
@@ -51,11 +52,11 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
   const { t } = useTranslation(['translation', 'glossary']);
 
   function cpuUsedGetter(item: KubeMetrics) {
-    return parseCpu(item.usage.cpu) / TO_ONE_CPU;
+    return parseCpu(item.usage.cpu);
   }
 
   function cpuAvailableGetter(item: Node | Pod) {
-    return parseCpu(item.status?.capacity?.cpu) / TO_ONE_CPU;
+    return parseCpu(item.status?.capacity?.cpu);
   }
 
   function getLegend(used: number, available: number) {
@@ -63,12 +64,13 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       return '';
     }
 
-    const availableLabel = t('translation|{{ available }} units', { available });
+    const availableLabel = `${formatK8sResource(available, '', '')} ${t('cores')}`;
     if (noMetrics) {
       return availableLabel;
     }
+    const usedLabel = formatK8sResource(used, '', 'cpu');
 
-    return `${used.toFixed(2)} / ${availableLabel}`;
+    return `${usedLabel} / ${availableLabel}`;
   }
 
   return (

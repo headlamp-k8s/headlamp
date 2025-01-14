@@ -30,6 +30,7 @@ import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import Secret from '../../../lib/k8s/secret';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
+import { divideK8sResources, formatK8sResource } from '../../../lib/units';
 import { localeDate, useId } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
@@ -791,46 +792,6 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       const resourceType = resourceFieldRef.resource;
       const divisor = resourceFieldRef.divisor || '1';
 
-      const BINARY_SUFFIXES = new Map([
-        ['Ki', Math.pow(2, 10)],
-        ['Mi', Math.pow(2, 20)],
-        ['Gi', Math.pow(2, 30)],
-        ['Ti', Math.pow(2, 40)],
-        ['Pi', Math.pow(2, 50)],
-        ['Ei', Math.pow(2, 60)],
-      ]);
-
-      const DECIMAL_SUFFIXES = new Map([
-        ['k', Math.pow(10, 3)],
-        ['M', Math.pow(10, 6)],
-        ['G', Math.pow(10, 9)],
-        ['T', Math.pow(10, 12)],
-        ['P', Math.pow(10, 15)],
-        ['E', Math.pow(10, 18)],
-      ]);
-
-      const parseK8sResource = (value: string): number => {
-        const match = value.match(/^(\d+\.?\d*)(([KMGTPE]i?)|)$/);
-        if (!match) throw new Error('Invalid resource quantity format');
-
-        const [, num, suffix] = match;
-        const quantity = parseFloat(num);
-
-        if (!suffix) return quantity;
-        const multiplier = BINARY_SUFFIXES.get(suffix) || DECIMAL_SUFFIXES.get(suffix);
-        if (!multiplier) throw new Error('Invalid suffix');
-
-        return quantity * multiplier;
-      };
-
-      const divideK8sResources = (a: string, b: string): number => {
-        return parseK8sResource(a) / parseK8sResource(b);
-      };
-
-      const formatK8sResource = (value: number, unit: string = ''): string => {
-        return `${value}${unit}`;
-      };
-
       try {
         // Find the container based on the containerName
         const targetContainer = pod.spec.containers.find(c => c.name === containerName);
@@ -851,7 +812,12 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
         }
 
         // Handle the divisor if it exists (for formatting purposes, e.g., 1k, 1M, etc.
-        value = formatK8sResource(divideK8sResources(resourceValue, divisor));
+        const strippedDivisor = divisor.replace(/\d+/g, '').trim();
+        value = formatK8sResource(
+          divideK8sResources(resourceValue, divisor),
+          strippedDivisor,
+          'binary'
+        );
       } catch (err) {
         isError = true;
         if (err instanceof Error) {
