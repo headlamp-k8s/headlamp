@@ -199,17 +199,20 @@ export function filterSources(
  */
 export function updateSettingsPackages(
   backendPlugins: PluginInfo[],
-  settingsPlugins: PluginInfo[]
+  settingsPlugins: { name: string; isEnabled: boolean }[]
 ): PluginInfo[] {
   if (backendPlugins.length === 0) return [];
 
   const pluginsChanged =
     backendPlugins.length !== settingsPlugins.length ||
-    backendPlugins.map(p => p.name + p.version).join('') !==
-      settingsPlugins.map(p => p.name + p.version).join('');
+    backendPlugins.map(p => p.name) !== settingsPlugins.map(p => p.name);
 
   if (!pluginsChanged) {
-    return settingsPlugins;
+    const updatedPlugins = backendPlugins.filter(plugin =>
+      settingsPlugins.some(setting => setting.name === plugin.name)
+    );
+
+    return updatedPlugins;
   }
 
   return backendPlugins.map(plugin => {
@@ -241,7 +244,7 @@ export function updateSettingsPackages(
  *
  */
 export async function fetchAndExecutePlugins(
-  settingsPackages: PluginInfo[],
+  settingsPackages: { name: string; isEnabled: boolean }[],
   onSettingsChange: (plugins: PluginInfo[]) => void,
   onIncompatible: (plugins: Record<string, PluginInfo>) => void
 ) {
