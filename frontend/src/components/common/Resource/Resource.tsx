@@ -13,7 +13,7 @@ import { useTheme } from '@mui/system';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import { JSONPath } from 'jsonpath-plus';
-import _, { has } from 'lodash';
+import _, { ceil, has } from 'lodash';
 import React, { PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
@@ -30,7 +30,7 @@ import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import Secret from '../../../lib/k8s/secret';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
-import { divideK8sResources, formatK8sResource } from '../../../lib/units';
+import { divideK8sResources } from '../../../lib/units';
 import { localeDate, useId } from '../../../lib/util';
 import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
@@ -764,7 +764,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
       let value: string | undefined;
       let isError = false;
       try {
-        value = JSONPath({ path: '$' + fieldRef.fieldPath, json: pod });
+        value = JSONPath({ path: '$.' + fieldRef.fieldPath, json: pod });
       } catch (err) {
         isError = true;
         if (err instanceof Error) {
@@ -812,12 +812,7 @@ function ContainerEnvironmentVariables(props: EnvironmentVariablesProps) {
         }
 
         // Handle the divisor if it exists (for formatting purposes, e.g., 1k, 1M, etc.
-        const strippedDivisor = divisor.replace(/\d+/g, '').trim();
-        value = formatK8sResource(
-          divideK8sResources(resourceValue, divisor),
-          strippedDivisor,
-          'binary'
-        );
+        value = `${ceil(divideK8sResources(resourceValue, divisor))}`;
       } catch (err) {
         isError = true;
         if (err instanceof Error) {

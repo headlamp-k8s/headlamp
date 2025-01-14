@@ -154,27 +154,26 @@ function formatK8sResource(
   switch (toUnit) {
     case 'binary':
       ({ suffix: toSuffix, multiplier: toMultiplier } = getSuffixAndMultiplier(
-        value,
+        value * fromMultiplier,
         toUnit,
         BINARY_SUFFIXES
       ));
       break;
     case 'decimal':
       ({ suffix: toSuffix, multiplier: toMultiplier } = getSuffixAndMultiplier(
-        value,
+        value * fromMultiplier,
         toUnit,
         DECIMAL_SUFFIXES
       ));
       break;
     case 'cpu':
       ({ suffix: toSuffix, multiplier: toMultiplier } = getSuffixAndMultiplier(
-        value,
+        value * fromMultiplier,
         toUnit,
         CPU_SUFFIXES
       ));
       break;
     default:
-      toSuffix = toUnit;
       toMultiplier = BINARY_SUFFIXES.get(toUnit) || DECIMAL_SUFFIXES.get(toUnit);
       if (!toMultiplier) throw new Error('Invalid toUnit');
       break;
