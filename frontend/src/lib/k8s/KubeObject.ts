@@ -1,4 +1,3 @@
-import { OpPatch } from 'json-patch';
 import { JSONPath } from 'jsonpath-plus';
 import { cloneDeep, unset } from 'lodash';
 import React, { useMemo } from 'react';
@@ -7,6 +6,7 @@ import { getCluster } from '../cluster';
 import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
 import { useClusterGroup, useConnectApi } from '.';
+import { RecursivePartial } from './api/v1/factories';
 import { useKubeObject } from './api/v2/hooks';
 import { makeListRequests, useKubeObjectList } from './api/v2/useKubeObjectList';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
@@ -457,7 +457,7 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
     );
   }
 
-  patch(body: OpPatch[]) {
+  patch(body: RecursivePartial<T>) {
     const args: any[] = [body];
 
     if (this.isNamespaced) {
