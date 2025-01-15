@@ -767,18 +767,21 @@ function getDefaultAppMenu(): AppMenu[] {
         sep,
         {
           label: i18n.t('Reset Zoom'),
-          role: 'resetzoom',
           id: 'original-reset-zoom',
+          accelerator: 'CmdOrCtrl+0',
+          click: () => saveZoomFactor(1.0),
         },
         {
           label: i18n.t('Zoom In'),
-          role: 'zoomin',
           id: 'original-zoom-in',
+          accelerator: 'CmdOrCtrl+Plus',
+          click: () => adjustZoom(0.1),
         },
         {
           label: i18n.t('Zoom Out'),
-          role: 'zoomout',
           id: 'original-zoom-out',
+          accelerator: 'CmdOrCtrl+-',
+          click: () => adjustZoom(-0.1),
         },
         sep,
         {
@@ -1014,6 +1017,37 @@ function killProcess(pid: number) {
   }
 }
 
+const ZOOM_FILE_PATH = path.join(app.getPath('userData'), 'zoomconfig.json');
+
+function saveZoomFactor(factor: number) {
+  try {
+    fs.writeFileSync(ZOOM_FILE_PATH, JSON.stringify({ zoomFactor: factor }), 'utf-8');
+  } catch (err) {
+    console.error(`Failed to save zoom factor:`, err);
+  }
+}
+
+function loadZoomFactor(): number {
+  try {
+    const { zoomFactor = 1.0 } = JSON.parse(fs.readFileSync(ZOOM_FILE_PATH, 'utf-8'));
+    return typeof zoomFactor === 'number' ? zoomFactor : 1.0;
+  } catch {
+    // If the file doesn’t exist or JSON is invalid, fall back to 1.0
+    return 1.0;
+  }
+}
+
+function adjustZoom(delta: number) {
+  if (!mainWindow) {
+    return;
+  }
+
+  const current = mainWindow.webContents.getZoomFactor();
+  const next = Math.min(5.0, Math.max(0.25, current + delta));
+  mainWindow.webContents.setZoomFactor(next);
+  saveZoomFactor(next);
+}
+
 function startElecron() {
   console.info('App starting...');
 
@@ -1065,6 +1099,11 @@ function startElecron() {
       if (!!goForwardMenu) {
         goForwardMenu.enabled = mainWindow?.webContents.canGoForward() || false;
       }
+    });
+
+    mainWindow.webContents.on('did-finish-load', () => {
+      const savedZoomFactor = loadZoomFactor();
+      mainWindow?.webContents.setZoomFactor(savedZoomFactor);
     });
 
     mainWindow.webContents.on('dom-ready', () => {
