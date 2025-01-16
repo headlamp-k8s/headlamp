@@ -16,6 +16,8 @@ import {
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
+import Namespace from '../../lib/k8s/namespace';
+import K8sNode from '../../lib/k8s/node';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NamespacesAutocomplete } from '../common';
 import { GraphNodeDetails } from './details/GraphNodeDetails';
@@ -24,17 +26,18 @@ import {
   collapseGraph,
   findGroupContaining,
   getGraphSize,
-  getParentNode,
   GroupBy,
   groupGraph,
 } from './graph/graphGrouping';
 import { applyGraphLayout } from './graph/graphLayout';
-import { GraphNode, GraphSource, GroupNode, isGroup, KubeObjectNode } from './graph/graphModel';
+import { GraphLookup, makeGraphLookup } from './graph/graphLookup';
+import { forEachNode, GraphEdge, GraphNode, GraphSource } from './graph/graphModel';
 import { GraphControlButton } from './GraphControls';
 import { GraphRenderer } from './GraphRenderer';
-import { NodeHighlight, useNodeHighlight } from './NodeHighlight';
 import { SelectionBreadcrumbs } from './SelectionBreadcrumbs';
-import { allSources, GraphSourceManager, useSources } from './sources/GraphSources';
+import { kubeObjectRelations } from './sources/definitions/relations';
+import { allSources } from './sources/definitions/sources';
+import { GraphSourceManager, useSources } from './sources/GraphSources';
 import { GraphSourcesView } from './sources/GraphSourcesView';
 import { useGraphViewport } from './useGraphViewport';
 import { useQueryParamsState } from './useQueryParamsState';
@@ -42,10 +45,22 @@ import { useQueryParamsState } from './useQueryParamsState';
 interface GraphViewContent {
   setNodeSelection: (nodeId: string) => void;
   nodeSelection?: string;
-  highlights: NodeHighlight;
 }
 export const GraphViewContext = createContext({} as any);
 export const useGraphView = () => useContext<GraphViewContent>(GraphViewContext);
+
+interface FullGraphContent {
+  fullGraph: any;
+  lookup: GraphLookup<GraphNode, GraphEdge>;
+}
+export const FullGraphContext = createContext({} as any);
+export const useFullGraphContext = () => useContext<FullGraphContent>(FullGraphContext);
+
+export const useNode = (id: string) => {
+  const { lookup } = useFullGraphContext();
+
+  return lookup.getNode(id);
+};
 
 interface GraphViewContentProps {
   /** Height of the Map */
@@ -140,15 +155,19 @@ function GraphViewContent({
   }, [nodes, edges, hasErrorsFilter, namespaces, defaultFilters]);
 
   // Group the graph
+  const [allNamespaces] = Namespace.useList();
+  const [allNodes] = K8sNode.useList();
   const { visibleGraph, fullGraph } = useMemo(() => {
-    const graph = groupGraph(filteredGraph.nodes as KubeObjectNode[], filteredGraph.edges, {
+    const graph = groupGraph(filteredGraph.nodes, filteredGraph.edges, {
       groupBy,
+      namespaces: allNamespaces ?? [],
+      k8sNodes: allNodes ?? [],
     });
 
-    const visibleGraph = collapseGraph(graph, { selectedNodeId, expandAll }) as GroupNode;
+    const visibleGraph = collapseGraph(graph, { selectedNodeId, expandAll });
 
     return { visibleGraph, fullGraph: graph };
-  }, [filteredGraph, groupBy, selectedNodeId, expandAll]);
+  }, [filteredGraph, groupBy, selectedNodeId, expandAll, allNamespaces]);
 
   const viewport = useGraphViewport();
 
@@ -168,17 +187,11 @@ function GraphViewContent({
     viewportMovedRef.current = false;
   }, [selectedNodeId, groupBy, expandAll]);
 
-  const selectedNode = useMemo(
-    () => nodes.find((it: GraphNode) => it.id === selectedNodeId),
-    [selectedNodeId, nodes]
-  );
-
   const selectedGroup = useMemo(() => {
     if (selectedNodeId) {
-      return findGroupContaining(visibleGraph, selectedNodeId);
+      return findGroupContaining(visibleGraph, selectedNodeId, true);
     }
   }, [selectedNodeId, visibleGraph, findGroupContaining]);
-  const highlights = useNodeHighlight(selectedNodeId);
 
   const graphSize = getGraphSize(visibleGraph);
   useEffect(() => {
@@ -188,138 +201,157 @@ function GraphViewContent({
   }, [graphSize]);
 
   const contextValue = useMemo(
-    () => ({ nodeSelection: selectedNodeId, highlights, setNodeSelection: setSelectedNodeId }),
-    [selectedNodeId, setSelectedNodeId, highlights]
+    () => ({ nodeSelection: selectedNodeId, setNodeSelection: setSelectedNodeId }),
+    [selectedNodeId, setSelectedNodeId]
   );
+
+  const fullGraphContext = useMemo(() => {
+    let nodes: GraphNode[] = [];
+    let edges: GraphEdge[] = [];
+
+    forEachNode(visibleGraph, node => {
+      if (node.nodes) {
+        nodes = nodes.concat(node.nodes);
+      }
+      if (node.edges) {
+        edges = edges.concat(node.edges);
+      }
+    });
+
+    return {
+      visibleGraph,
+      lookup: makeGraphLookup(nodes, edges),
+    };
+  }, [visibleGraph]);
+
+  const maybeSelectedNode = selectedNodeId
+    ? fullGraphContext.lookup.getNode(selectedNodeId)
+    : undefined;
+
   return (
     <GraphViewContext.Provider value={contextValue}>
-      <Box
-        sx={{
-          position: 'relative',
-          height: height ?? '800px',
-          display: 'flex',
-          flexDirection: 'row',
-          flex: 1,
-        }}
-      >
-        <CustomThemeProvider>
-          <Box
-            sx={{
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
-              position: 'relative',
-              flexGrow: 1,
-              background: '#00000002',
-            }}
-          >
+      <FullGraphContext.Provider value={fullGraphContext}>
+        <Box
+          sx={{
+            position: 'relative',
+            height: height ?? '800px',
+            display: 'flex',
+            flexDirection: 'row',
+            flex: 1,
+          }}
+        >
+          <CustomThemeProvider>
             <Box
-              padding={2}
-              pb={0}
-              display="flex"
-              gap={1}
-              alignItems="center"
-              mb={1}
-              flexWrap="wrap"
+              sx={{
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                flexGrow: 1,
+                background: '#00000002',
+              }}
             >
-              <NamespacesAutocomplete />
-
-              <GraphSourcesView
-                sources={defaultSources}
-                selectedSources={selectedSources}
-                toggleSource={toggleSelection}
-                sourceData={sourceData ?? new Map()}
-              />
-              <Box sx={{ fontSize: '14px', marginLeft: 1 }}>{t('Group By')}</Box>
-              <ChipGroup>
-                {namespaces.size !== 1 && (
-                  <ChipToggleButton
-                    label={t('Namespace')}
-                    isActive={groupBy === 'namespace'}
-                    onClick={() => setGroupBy(groupBy === 'namespace' ? undefined : 'namespace')}
-                  />
-                )}
-                <ChipToggleButton
-                  label={t('Instance')}
-                  isActive={groupBy === 'instance'}
-                  onClick={() => setGroupBy(groupBy === 'instance' ? undefined : 'instance')}
-                />
-                <ChipToggleButton
-                  label={t('Node')}
-                  isActive={groupBy === 'node'}
-                  onClick={() => setGroupBy(groupBy === 'node' ? undefined : 'node')}
-                />
-              </ChipGroup>
-              <ChipToggleButton
-                label={t('Status: Error or Warning')}
-                isActive={hasErrorsFilter}
-                onClick={() => setHasErrorsFilter(!hasErrorsFilter)}
-              />
-
-              {graphSize < 50 && (
-                <ChipToggleButton
-                  label={t('Expand All')}
-                  isActive={expandAll}
-                  onClick={() => setExpandAll(it => !it)}
-                />
-              )}
-            </Box>
-
-            <div style={{ flexGrow: 1 }}>
-              <GraphRenderer
-                nodes={layoutedGraph.nodes}
-                edges={layoutedGraph.edges}
-                isLoading={isLoading}
-                onMoveStart={e => {
-                  if (e === null) return;
-                  viewportMovedRef.current = true;
-                }}
-                onBackgroundClick={() => {
-                  // When node is selected (side panel is open) and user clicks on the background
-                  // We should select parent node, closing the side panel
-                  if (selectedNode && !isGroup(selectedNode)) {
-                    setSelectedNodeId(getParentNode(fullGraph, selectedNode.id)?.id);
-                  }
-                }}
-                controlActions={
-                  <>
-                    <GraphControlButton
-                      title={t('Fit to screen')}
-                      onClick={() => viewport.updateViewport({ mode: 'fit' })}
-                    >
-                      <Icon icon="mdi:fit-to-screen" />
-                    </GraphControlButton>
-                    <GraphControlButton
-                      title={t('Zoom to 100%')}
-                      onClick={() => viewport.updateViewport({ mode: '100%' })}
-                    >
-                      100%
-                    </GraphControlButton>
-                  </>
-                }
+              <Box
+                padding={2}
+                pb={0}
+                display="flex"
+                gap={1}
+                alignItems="center"
+                mb={1}
+                flexWrap="wrap"
               >
-                <Panel position="top-left">
-                  {selectedGroup && (
-                    <SelectionBreadcrumbs
-                      graph={fullGraph}
-                      selectedNodeId={selectedNodeId}
-                      onNodeClick={id => setSelectedNodeId(id)}
+                <NamespacesAutocomplete />
+
+                <GraphSourcesView
+                  sources={defaultSources}
+                  selectedSources={selectedSources}
+                  toggleSource={toggleSelection}
+                  sourceData={sourceData ?? new Map()}
+                />
+                <Box sx={{ fontSize: '14px', marginLeft: 1 }}>{t('Group By')}</Box>
+                <ChipGroup>
+                  {namespaces.size !== 1 && (
+                    <ChipToggleButton
+                      label={t('Namespace')}
+                      isActive={groupBy === 'namespace'}
+                      onClick={() => setGroupBy(groupBy === 'namespace' ? undefined : 'namespace')}
                     />
                   )}
-                </Panel>
-              </GraphRenderer>
-            </div>
-          </Box>
-        </CustomThemeProvider>
-        {selectedNode && (
-          <GraphNodeDetails
-            node={selectedNode}
-            close={() => {
-              setSelectedNodeId(selectedGroup?.id ?? defaultNodeSelection);
-            }}
-          />
-        )}
-      </Box>
+                  <ChipToggleButton
+                    label={t('Instance')}
+                    isActive={groupBy === 'instance'}
+                    onClick={() => setGroupBy(groupBy === 'instance' ? undefined : 'instance')}
+                  />
+                  <ChipToggleButton
+                    label={t('Node')}
+                    isActive={groupBy === 'node'}
+                    onClick={() => setGroupBy(groupBy === 'node' ? undefined : 'node')}
+                  />
+                </ChipGroup>
+                <ChipToggleButton
+                  label={t('Status: Error or Warning')}
+                  isActive={hasErrorsFilter}
+                  onClick={() => setHasErrorsFilter(!hasErrorsFilter)}
+                />
+
+                {graphSize < 50 && (
+                  <ChipToggleButton
+                    label={t('Expand All')}
+                    isActive={expandAll}
+                    onClick={() => setExpandAll(it => !it)}
+                  />
+                )}
+              </Box>
+
+              <div style={{ flexGrow: 1 }}>
+                <GraphRenderer
+                  nodes={layoutedGraph.nodes}
+                  edges={layoutedGraph.edges}
+                  isLoading={isLoading}
+                  onMoveStart={e => {
+                    if (e === null) return;
+                    viewportMovedRef.current = true;
+                  }}
+                  controlActions={
+                    <>
+                      <GraphControlButton
+                        title={t('Fit to screen')}
+                        onClick={() => viewport.updateViewport({ mode: 'fit' })}
+                      >
+                        <Icon icon="mdi:fit-to-screen" />
+                      </GraphControlButton>
+                      <GraphControlButton
+                        title={t('Zoom to 100%')}
+                        onClick={() => viewport.updateViewport({ mode: '100%' })}
+                      >
+                        100%
+                      </GraphControlButton>
+                    </>
+                  }
+                >
+                  <Panel position="top-left">
+                    {selectedGroup && (
+                      <SelectionBreadcrumbs
+                        graph={fullGraph}
+                        selectedNodeId={selectedNodeId}
+                        onNodeClick={id => setSelectedNodeId(id)}
+                      />
+                    )}
+                  </Panel>
+                </GraphRenderer>
+              </div>
+            </Box>
+          </CustomThemeProvider>
+          {maybeSelectedNode && (
+            <GraphNodeDetails
+              node={maybeSelectedNode}
+              close={() => {
+                setSelectedNodeId(selectedGroup?.id ?? defaultNodeSelection);
+              }}
+            />
+          )}
+        </Box>
+      </FullGraphContext.Provider>
     </GraphViewContext.Provider>
   );
 }
@@ -391,7 +423,10 @@ export function GraphView(props: GraphViewContentProps) {
   return (
     <StrictMode>
       <ReactFlowProvider>
-        <GraphSourceManager sources={props.defaultSources ?? allSources}>
+        <GraphSourceManager
+          sources={props.defaultSources ?? allSources}
+          relations={kubeObjectRelations}
+        >
           <GraphViewContent {...props} />
         </GraphSourceManager>
       </ReactFlowProvider>

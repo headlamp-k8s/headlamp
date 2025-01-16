@@ -77,13 +77,17 @@ export function filterGraph(nodes: GraphNode[], edges: GraphEdge[], filters: Gra
 
     filters.forEach(filter => {
       if (filter.type === 'hasErrors') {
-        keep &&= 'resource' in node.data && getStatus(node?.data?.resource) !== 'success';
+        keep &&=
+          'kubeObject' in node &&
+          node.kubeObject !== undefined &&
+          getStatus(node.kubeObject) !== 'success';
       }
       if (filter.type === 'namespace' && filter.namespaces.size > 0) {
         keep &&=
-          'resource' in node.data &&
-          !!node.data?.resource?.metadata?.namespace &&
-          filter.namespaces.has(node.data?.resource?.metadata?.namespace);
+          'kubeObject' in node &&
+          node.kubeObject !== undefined &&
+          !!node.kubeObject.metadata?.namespace &&
+          filter.namespaces.has(node.kubeObject?.metadata?.namespace);
       }
     });
 

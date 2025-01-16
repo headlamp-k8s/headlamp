@@ -1,68 +1,47 @@
 import { ReactNode } from 'react';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeObject } from '../../../lib/k8s/KubeObject';
 
-/**
- * Node representing one Kube resource
- */
-export type KubeObjectNode = {
+export type GraphNode = {
+  /**
+   * Unique ID for this node.
+   * If this node represents a kubernetes object
+   * then uid of that object is preferred.
+   **/
   id: string;
-  type: 'kubeObject';
-  data: {
-    resource: KubeObject;
-  };
+  /** Display label for this node */
+  label?: string;
+  /** Subtitle for this node */
+  subtitle?: string;
+  /** Custom icon for this node */
+  icon?: ReactNode;
+  /**
+   * If this property is set  then it means this graph Node
+   * represents a kubernetes object.
+   * Label and subtitle will be set based on the object's name and kind.
+   */
+  kubeObject?: KubeObject;
+  /** A node may contain children Nodes. */
+  nodes?: GraphNode[];
+  /** A node may containain Edges that connect children Nodes. */
+  edges?: GraphEdge[];
+  /** Whether this Node is collapsed. Only applies to Nodes that have child Nodes. */
+  collapsed?: boolean;
+  /** Any custom data */
+  data?: any;
 };
-
-/**
- * Group of only KubeObjects
- */
-export type KubeGroupNode = {
-  id: string;
-  type: 'kubeGroup';
-  data: {
-    label?: string;
-    nodes: KubeObjectNode[];
-    edges: GraphEdge[];
-    collapsed?: boolean;
-  };
-};
-
-/**
- * Group of any kind of node
- */
-export type GroupNode = {
-  id: string;
-  type: 'group';
-  data: {
-    label?: string;
-    nodes: GraphNode[];
-    edges: GraphEdge[];
-  };
-};
-
-export type GraphNode = KubeObjectNode | KubeGroupNode | GroupNode;
-
-export const isGroupType = (type?: string) => type === 'group' || type === 'kubeGroup';
-
-export function isGroup(node: GraphNode): node is KubeGroupNode | GroupNode {
-  return isGroupType(node.type);
-}
 
 /**
  * Iterates graph, breadth first
  */
 export function forEachNode(graph: GraphNode, cb: (item: GraphNode) => void) {
   cb(graph);
-  if ('nodes' in graph.data) {
-    graph.data.nodes.forEach(it => forEachNode(it, cb));
-  }
+  graph.nodes?.forEach(it => forEachNode(it, cb));
 }
 
 /**
  * Edge connecting two Nodes on Map
  */
 export interface GraphEdge {
-  /** Type of the edge */
-  type: string;
   /** Unique ID */
   id: string;
   /** ID of the source Node */
@@ -71,8 +50,6 @@ export interface GraphEdge {
   target: string;
   /** Optional label */
   label?: ReactNode;
-  /** Animate this edge during transitions */
-  animated?: boolean;
   /** Custom data for this node */
   data?: any;
 }
@@ -115,3 +92,9 @@ export type GraphSource = {
       useData: () => { nodes?: GraphNode[]; edges?: GraphEdge[] } | null;
     }
 );
+
+export interface Relation {
+  fromSource: string;
+  toSource?: string;
+  predicate: (from: GraphNode, to: GraphNode) => boolean;
+}

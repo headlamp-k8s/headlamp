@@ -1,66 +1,58 @@
 import { KubeMetadata } from '../../../lib/k8s/KubeMetadata';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 import { groupGraph } from './graphGrouping';
-import { GraphEdge, GroupNode, KubeObjectNode } from './graphModel';
+import { GraphEdge, GraphNode } from './graphModel';
 
 describe('groupGraph', () => {
-  const nodes: KubeObjectNode[] = [
+  const nodes: GraphNode[] = [
     {
       id: '1',
-      type: 'kubeObject',
-      data: {
-        resource: {
-          kind: 'Pod',
-          metadata: {
-            namespace: 'ns1',
-            name: 'pod1',
-            labels: { 'app.kubernetes.io/instance': 'instance1' },
-          } as any as KubeMetadata,
-        } as KubeObject,
-      },
+      kubeObject: {
+        kind: 'Pod',
+        metadata: {
+          namespace: 'ns1',
+          name: 'pod1',
+          labels: { 'app.kubernetes.io/instance': 'instance1' },
+        } as any as KubeMetadata,
+      } as KubeObject,
     },
     {
       id: '2',
-      type: 'kubeObject',
-      data: {
-        resource: {
-          kind: 'Pod',
-          metadata: { namespace: 'ns2', name: 'pod2' } as KubeMetadata,
-          spec: { nodeName: 'node1' },
-        } as any as KubeObject,
-      },
+      kubeObject: {
+        kind: 'Pod',
+        metadata: { namespace: 'ns2', name: 'pod2' } as KubeMetadata,
+        spec: { nodeName: 'node1' },
+      } as any as KubeObject,
     },
     {
       id: '3',
-      type: 'kubeObject',
-      data: {
-        resource: {
-          kind: 'Pod',
-          metadata: {
-            namespace: 'ns1',
-            name: 'pod3',
-            labels: { 'app.kubernetes.io/instance': 'instance1' },
-          } as any as KubeMetadata,
-        } as KubeObject,
-      },
+      kubeObject: {
+        kind: 'Pod',
+        metadata: {
+          namespace: 'ns1',
+          name: 'pod3',
+          labels: { 'app.kubernetes.io/instance': 'instance1' },
+        } as any as KubeMetadata,
+      } as KubeObject,
     },
     {
       id: '4',
-      type: 'kubeObject',
-      data: {
-        resource: {
-          kind: 'Pod',
-          metadata: { namespace: 'ns2', name: 'pod4' } as KubeMetadata,
-        } as KubeObject,
-      },
+      kubeObject: {
+        kind: 'Pod',
+        metadata: { namespace: 'ns2', name: 'pod4' } as KubeMetadata,
+      } as KubeObject,
     },
   ];
 
   const edges: GraphEdge[] = [];
 
   it('groups nodes by namespace', () => {
-    const groupedGraph = groupGraph(nodes, edges, { groupBy: 'namespace' });
-    const namespaces = groupedGraph.data.nodes.map(node => node.id);
+    const groupedGraph = groupGraph(nodes, edges, {
+      groupBy: 'namespace',
+      namespaces: [],
+      k8sNodes: [],
+    });
+    const namespaces = groupedGraph.nodes?.map(node => node.id);
 
     // Nodes 1 and 3 are grouped into Namespace-ns1 group
     // Nodes 2 and 4 are grouped into Namespace-ns2 group
@@ -68,8 +60,12 @@ describe('groupGraph', () => {
   });
 
   it('groups nodes by node', () => {
-    const groupedGraph = groupGraph(nodes, edges, { groupBy: 'node' });
-    const nodeNames = groupedGraph.data.nodes.map(node => node.id);
+    const groupedGraph = groupGraph(nodes, edges, {
+      groupBy: 'node',
+      namespaces: [],
+      k8sNodes: [],
+    });
+    const nodeNames = groupedGraph.nodes?.map(node => node.id);
 
     // Node 2 is grouped into Node-node1 group
     // Nodes 1, 3 and 4 don't have a node and are not grouped
@@ -77,8 +73,12 @@ describe('groupGraph', () => {
   });
 
   it('groups nodes by instance', () => {
-    const groupedGraph = groupGraph(nodes, edges, { groupBy: 'instance' });
-    const instances = groupedGraph.data.nodes.map(node => node.id);
+    const groupedGraph = groupGraph(nodes, edges, {
+      groupBy: 'instance',
+      namespaces: [],
+      k8sNodes: [],
+    });
+    const instances = groupedGraph.nodes?.map(node => node.id);
 
     // Nodes 1 and 3 have the same instance label and grouped into Instance-instance1 group
     // Nodes 2 and 4 don't have instance label
@@ -86,13 +86,12 @@ describe('groupGraph', () => {
   });
 
   it('group nodes as connected components when no groupBy is specified', () => {
-    const groupedGraph = groupGraph(
-      nodes,
-      [{ id: 'e2', source: '2', target: '4', type: 'kubeRelation' }],
-      {}
-    );
-    const instances = groupedGraph.data.nodes.map(node => node.id);
-    const edgeIds = (groupedGraph.data.nodes[0] as GroupNode).data.edges.map(edge => edge.id);
+    const groupedGraph = groupGraph(nodes, [{ id: 'e2', source: '2', target: '4' }], {
+      namespaces: [],
+      k8sNodes: [],
+    });
+    const instances = groupedGraph.nodes?.map(node => node.id);
+    const edgeIds = (groupedGraph.nodes?.[0] as GraphNode).edges?.map(edge => edge.id);
 
     // Nodes 2 and 4 are connected by the egde and so are grouped together
     // group-2 takes has 2 in it because it's the ID of the first node
