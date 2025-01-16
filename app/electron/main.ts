@@ -568,6 +568,7 @@ async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNul
 
   const options = {
     detached: true,
+    windowsHide: true,
     env: {
       ...extendedEnv,
     },
