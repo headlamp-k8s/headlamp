@@ -1,7 +1,7 @@
 import '@xyflow/react/dist/base.css';
 import './GraphView.css';
 import { Icon } from '@iconify/react';
-import { Box, Chip, Theme, ThemeProvider } from '@mui/material';
+import { Box, Chip, styled, Theme, ThemeProvider } from '@mui/material';
 import { Edge, Node, Panel, ReactFlowProvider } from '@xyflow/react';
 import {
   createContext,
@@ -64,6 +64,20 @@ interface GraphViewContentProps {
 }
 
 const defaultFiltersValue: GraphFilter[] = [];
+
+const ChipGroup = styled(Box)({
+  display: 'flex',
+
+  '.MuiChip-root': {
+    borderRadius: 0,
+  },
+  '.MuiChip-root:first-child': {
+    borderRadius: '16px 0 0 16px',
+  },
+  '.MuiChip-root:last-child': {
+    borderRadius: '0 16px 16px 0',
+  },
+});
 
 function GraphViewContent({
   height,
@@ -216,27 +230,26 @@ function GraphViewContent({
                 toggleSource={toggleSelection}
                 sourceData={sourceData ?? new Map()}
               />
-
-              {namespaces.size !== 1 && (
+              <Box sx={{ fontSize: '14px', marginLeft: 1 }}>{t('Group By')}</Box>
+              <ChipGroup>
+                {namespaces.size !== 1 && (
+                  <ChipToggleButton
+                    label={t('Namespace')}
+                    isActive={groupBy === 'namespace'}
+                    onClick={() => setGroupBy(groupBy === 'namespace' ? undefined : 'namespace')}
+                  />
+                )}
                 <ChipToggleButton
-                  label={t('Group By: {{ name }}', { name: t('Namespace') })}
-                  isActive={groupBy === 'namespace'}
-                  onClick={() => setGroupBy(groupBy === 'namespace' ? undefined : 'namespace')}
+                  label={t('Instance')}
+                  isActive={groupBy === 'instance'}
+                  onClick={() => setGroupBy(groupBy === 'instance' ? undefined : 'instance')}
                 />
-              )}
-
-              <ChipToggleButton
-                label={t('Group By: {{ name }}', { name: t('Instance') })}
-                isActive={groupBy === 'instance'}
-                onClick={() => setGroupBy(groupBy === 'instance' ? undefined : 'instance')}
-              />
-
-              <ChipToggleButton
-                label={t('Group By: {{ name }}', { name: t('Node') })}
-                isActive={groupBy === 'node'}
-                onClick={() => setGroupBy(groupBy === 'node' ? undefined : 'node')}
-              />
-
+                <ChipToggleButton
+                  label={t('Node')}
+                  isActive={groupBy === 'node'}
+                  onClick={() => setGroupBy(groupBy === 'node' ? undefined : 'node')}
+                />
+              </ChipGroup>
               <ChipToggleButton
                 label={t('Status: Error or Warning')}
                 isActive={hasErrorsFilter}

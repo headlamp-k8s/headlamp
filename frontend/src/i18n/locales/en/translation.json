@@ -413,7 +413,7 @@
   "Zoom in": "Zoom in",
   "Zoom out": "Zoom out",
   "No data to be shown. Try to change filters or select a different namespace.": "No data to be shown. Try to change filters or select a different namespace.",
-  "Group By: {{ name }}": "Group By: {{ name }}",
+  "Group By": "Group By",
   "Instance": "Instance",
   "Node": "Node",
   "Status: Error or Warning": "Status: Error or Warning",

@@ -412,7 +412,7 @@
   "Zoom in": "放大",
   "Zoom out": "縮小",
   "No data to be shown. Try to change filters or select a different namespace.": "無數據顯示。嘗試更改篩選器或選擇不同的命名空間。",
-  "Group By: {{ name }}": "分組：{{ name }}",
+  "Group By": "分組",
   "Instance": "實例",
   "Node": "節點",
   "Status: Error or Warning": "狀態：錯誤或警告",

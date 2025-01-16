@@ -107,46 +107,55 @@
             />
           </div>
           <div
-            class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-1373t7a-MuiButtonBase-root-MuiChip-root"
-            role="button"
-            tabindex="0"
+            class="MuiBox-root css-19ideir"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
-            >
-              Group By: Namespace
-            </span>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
+            Group By
           </div>
           <div
-            class="MuiButtonBase-root MuiChip-root MuiChip-outlined MuiChip-sizeMedium MuiChip-colorDefault MuiChip-clickable MuiChip-clickableColorDefault MuiChip-outlinedDefault css-i1f1ux-MuiButtonBase-root-MuiChip-root"
-            role="button"
-            tabindex="0"
+            class="MuiBox-root css-esugir"
           >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-1jzq0dw-MuiChip-label"
+            <div
+              class="MuiButtonBase-root MuiChip-root MuiChip-filled MuiChip-sizeMedium MuiChip-colorPrimary MuiChip-clickable MuiChip-clickableColorPrimary MuiChip-filledPrimary css-1373t7a-MuiButtonBase-root-MuiChip-root"
+              role="button"
+              tabindex="0"
             >
-              Group By: Instance
-            </span>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </div>
-          <div
-            class="MuiButtonBase-root MuiChip-root MuiChip-outlined MuiChip-sizeMedium MuiChip-colorDefault MuiChip-clickable MuiChip-clickableColorDefault MuiChip-outlinedDefault css-i1f1ux-MuiButtonBase-root-MuiChip-root"
-            role="button"
-            tabindex="0"
-          >
-            <span
-              class="MuiChip-label MuiChip-labelMedium css-1jzq0dw-MuiChip-label"
+              <span
+                class="MuiChip-label MuiChip-labelMedium css-6od3lo-MuiChip-label"
+              >
+                Namespace
+              </span>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </div>
+            <div
+              class="MuiButtonBase-root MuiChip-root MuiChip-outlined MuiChip-sizeMedium MuiChip-colorDefault MuiChip-clickable MuiChip-clickableColorDefault MuiChip-outlinedDefault css-i1f1ux-MuiButtonBase-root-MuiChip-root"
+              role="button"
+              tabindex="0"
             >
-              Group By: Node
-            </span>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
+              <span
+                class="MuiChip-label MuiChip-labelMedium css-1jzq0dw-MuiChip-label"
+              >
+                Instance
+              </span>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </div>
+            <div
+              class="MuiButtonBase-root MuiChip-root MuiChip-outlined MuiChip-sizeMedium MuiChip-colorDefault MuiChip-clickable MuiChip-clickableColorDefault MuiChip-outlinedDefault css-i1f1ux-MuiButtonBase-root-MuiChip-root"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                class="MuiChip-label MuiChip-labelMedium css-1jzq0dw-MuiChip-label"
+              >
+                Node
+              </span>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </div>
           </div>
           <div
             class="MuiButtonBase-root MuiChip-root MuiChip-outlined MuiChip-sizeMedium MuiChip-colorDefault MuiChip-clickable MuiChip-clickableColorDefault MuiChip-outlinedDefault css-i1f1ux-MuiButtonBase-root-MuiChip-root"
