@@ -10,55 +10,6 @@
           class="MuiBox-root css-pb8oes"
         >
           <div
-            class="MuiBox-root css-gmuwbf"
-          >
-            <div
-              class="MuiAutocomplete-root css-ka7ti6-MuiAutocomplete-root"
-            >
-              <div
-                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-htvl6i-MuiFormControl-root-MuiTextField-root"
-              >
-                <label
-                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1lb42g7-MuiFormLabel-root-MuiInputLabel-root"
-                  data-shrink="false"
-                  for=":mock-test-id:"
-                  id=":mock-test-id:"
-                >
-                  Search
-                </label>
-                <div
-                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall MuiAutocomplete-inputRoot css-1uwngbu-MuiInputBase-root-MuiOutlinedInput-root"
-                >
-                  <input
-                    aria-autocomplete="list"
-                    aria-expanded="false"
-                    aria-invalid="false"
-                    autocapitalize="none"
-                    autocomplete="off"
-                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall MuiAutocomplete-input MuiAutocomplete-inputFocused css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":mock-test-id:"
-                    role="combobox"
-                    spellcheck="false"
-                    type="text"
-                    value=""
-                  />
-                  <fieldset
-                    aria-hidden="true"
-                    class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                  >
-                    <legend
-                      class="css-yjsfm1"
-                    >
-                      <span>
-                        Search
-                      </span>
-                    </legend>
-                  </fieldset>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
             class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1x6bjyf-MuiAutocomplete-root"
           >
             <div

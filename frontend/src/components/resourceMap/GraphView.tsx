@@ -33,7 +33,6 @@ import { GraphNode, GraphSource, GroupNode, isGroup, KubeObjectNode } from './gr
 import { GraphControlButton } from './GraphControls';
 import { GraphRenderer } from './GraphRenderer';
 import { NodeHighlight, useNodeHighlight } from './NodeHighlight';
-import { ResourceSearch } from './search/ResourceSearch';
 import { SelectionBreadcrumbs } from './SelectionBreadcrumbs';
 import { allSources, GraphSourceManager, useSources } from './sources/GraphSources';
 import { GraphSourcesView } from './sources/GraphSourcesView';
@@ -209,15 +208,6 @@ function GraphViewContent({
               mb={1}
               flexWrap="wrap"
             >
-              <ResourceSearch
-                resources={nodes.flatMap(it =>
-                  it.type === 'kubeObject' ? [it.data.resource] : []
-                )}
-                onSearch={resource => {
-                  setSelectedNodeId(resource.metadata.uid);
-                }}
-              />
-
               <NamespacesAutocomplete />
 
               <GraphSourcesView
