@@ -931,7 +931,27 @@ export interface RouteURLProps {
 
 export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   const storeRoutes = store.getState().routes.routes;
-  const route = (storeRoutes && storeRoutes[routeName]) || getRoute(routeName);
+
+  // First try to find by name
+  const matchingStoredRouteByName =
+    storeRoutes &&
+    Object.entries(storeRoutes).find(
+      ([, route]) => route.name?.toLowerCase() === routeName.toLowerCase()
+    )?.[1];
+
+  // Then try to find by path
+  const matchingStoredRouteByPath =
+    storeRoutes &&
+    Object.entries(storeRoutes).find(([key]) => key.toLowerCase() === routeName.toLowerCase())?.[1];
+
+  if (matchingStoredRouteByPath && !matchingStoredRouteByName) {
+    console.warn(
+      `[Deprecation] Route "${routeName}" was found by path instead of name. ` +
+        'Please use route names instead of paths when calling createRouteURL.'
+    );
+  }
+
+  const route = matchingStoredRouteByName || matchingStoredRouteByPath || getRoute(routeName);
 
   if (!route) {
     return '';
