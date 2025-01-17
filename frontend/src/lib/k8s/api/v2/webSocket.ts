@@ -7,12 +7,12 @@ import { makeUrl } from './makeUrl';
 
 // Constants for WebSocket connection
 export const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
+export const MULTIPLEXER_ENDPOINT = 'wsMultiplexer';
 
 /**
  * Multiplexer endpoint for WebSocket connections
  * This endpoint allows multiple subscriptions over a single connection
  */
-const MULTIPLEXER_ENDPOINT = 'wsMultiplexer';
 
 /**
  * Message format for WebSocket communication between client and server.
@@ -148,8 +148,8 @@ export const WebSocketManager = {
       socket.onmessage = this.handleWebSocketMessage.bind(this);
 
       socket.onerror = event => {
-        console.error('WebSocket error:', event);
         this.connecting = false;
+        console.error('WebSocket error:', event);
         reject(new Error('WebSocket connection failed'));
       };
 
@@ -297,7 +297,7 @@ export const WebSocketManager = {
     this.connecting = false;
     this.completedPaths.clear();
 
-    // Set reconnecting flag if we have active subscriptions
+    // Only log reconnecting if we have active subscriptions
     this.isReconnecting = this.activeSubscriptions.size > 0;
   },
 
@@ -318,6 +318,7 @@ export const WebSocketManager = {
       // Handle COMPLETE messages
       if (data.type === 'COMPLETE') {
         this.completedPaths.add(key);
+        return;
       }
 
       // Parse and validate update data
@@ -333,7 +334,13 @@ export const WebSocketManager = {
       if (update && typeof update === 'object') {
         const listeners = this.listeners.get(key);
         if (listeners) {
-          listeners.forEach(listener => listener(update));
+          for (const listener of listeners) {
+            try {
+              listener(update);
+            } catch (err) {
+              console.error('Failed to process WebSocket message:', err);
+            }
+          }
         }
       }
     } catch (err) {
