@@ -318,6 +318,7 @@ export const WebSocketManager = {
       // Handle COMPLETE messages
       if (data.type === 'COMPLETE') {
         this.completedPaths.add(key);
+        return;
       }
 
       // Parse and validate update data
@@ -333,7 +334,13 @@ export const WebSocketManager = {
       if (update && typeof update === 'object') {
         const listeners = this.listeners.get(key);
         if (listeners) {
-          listeners.forEach(listener => listener(update));
+          for (const listener of listeners) {
+            try {
+              listener(update);
+            } catch (err) {
+              console.error('Failed to process WebSocket message:', err);
+            }
+          }
         }
       }
     } catch (err) {
