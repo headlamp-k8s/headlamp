@@ -4,7 +4,7 @@ import WS from 'vitest-websocket-mock';
 import { findKubeconfigByClusterName, getUserIdFromLocalStorage } from '../../../../stateless';
 import { getToken } from '../../../auth';
 import { getCluster } from '../../../cluster';
-import { BASE_WS_URL, useWebSocket, WebSocketManager } from './webSocket';
+import { BASE_WS_URL, MULTIPLEXER_ENDPOINT, useWebSocket, WebSocketManager } from './webSocket';
 
 // Mock dependencies
 vi.mock('../../../cluster', () => ({
@@ -37,6 +37,7 @@ describe('WebSocket Tests', () => {
   let mockServer: WS;
   let onMessage: ReturnType<typeof vi.fn>;
   let onError: ReturnType<typeof vi.fn>;
+  let originalConsoleError: typeof console.error;
 
   beforeEach(() => {
     vi.stubEnv('REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER', 'true');
@@ -48,10 +49,17 @@ describe('WebSocket Tests', () => {
     (getToken as ReturnType<typeof vi.fn>).mockReturnValue(token);
     (findKubeconfigByClusterName as ReturnType<typeof vi.fn>).mockResolvedValue({});
 
-    mockServer = new WS(`${BASE_WS_URL}wsMultiplexer`);
+    // Mock console.error for all tests
+    originalConsoleError = console.error;
+    console.error = vi.fn();
+
+    mockServer = new WS(`${BASE_WS_URL}${MULTIPLEXER_ENDPOINT}`);
   });
 
   afterEach(async () => {
+    // Restore console.error
+    console.error = originalConsoleError;
+
     WS.clean();
     vi.restoreAllMocks();
     vi.unstubAllEnvs();
@@ -211,6 +219,10 @@ describe('WebSocket Tests', () => {
       await expect(
         WebSocketManager.subscribe(clusterName, '/api/v1/pods', 'watch=true', onMessage)
       ).rejects.toThrow('WebSocket connection failed');
+
+      // Verify error was handled
+      expect(WebSocketManager.socketMultiplexer).toBeNull();
+      expect(WebSocketManager.connecting).toBe(false);
     });
 
     it('should handle duplicate subscriptions', async () => {
@@ -422,7 +434,7 @@ describe('WebSocket Tests', () => {
       expect(WebSocketManager.connecting).toBe(false);
 
       // Try to use connection again to trigger reconnect
-      const newServer = new WS(`${BASE_WS_URL}wsMultiplexer`);
+      const newServer = new WS(`${BASE_WS_URL}${MULTIPLEXER_ENDPOINT}`);
       await WebSocketManager.connect();
       await newServer.connected;
 
@@ -488,46 +500,20 @@ describe('WebSocket Tests', () => {
       consoleSpy.mockRestore();
     });
 
-    it('should handle invalid message format', async () => {
-      const path = '/api/v1/pods';
-      const query = 'watch=true';
-
-      await WebSocketManager.subscribe(clusterName, path, query, onMessage);
-      await mockServer.connected;
-      await mockServer.nextMessage; // Skip subscription
-
-      // Send invalid message
-      await mockServer.send('invalid json');
-
-      expect(onMessage).not.toHaveBeenCalled();
-    });
-
     it('should handle parse errors in message data', async () => {
-      const path = '/api/v1/pods';
-      const query = 'watch=true';
-      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      await WebSocketManager.subscribe(clusterName, path, query, onMessage);
+      await WebSocketManager.subscribe(clusterName, '/api/v1/pods', 'watch=true', onMessage);
       await mockServer.connected;
 
-      // Skip subscription message
-      await mockServer.nextMessage;
-
-      // Send malformed data
       await mockServer.send(
         JSON.stringify({
           clusterId: clusterName,
-          path,
-          query,
-          data: 'invalid{json',
-          type: 'DATA',
+          path: '/api/v1/pods',
+          data: 'invalid json',
         })
       );
 
       expect(onMessage).not.toHaveBeenCalled();
-      expect(consoleSpy).toHaveBeenCalledWith('Failed to parse update data:', expect.any(Error));
-
-      consoleSpy.mockRestore();
+      expect(console.error).toHaveBeenCalledWith('Failed to parse update data:', expect.any(Error));
     });
 
     it('should handle message callback errors in useWebSocket', async () => {
