@@ -47,3 +47,24 @@ We test on MacOS, various flavours of Linux, and Windows. Headlamp runs in the b
 | MacOS (arm, x86)                   |  ✔️   |
 | Ubuntu 20.04, 22.04, 22.10         |  ✔️   |
 | Fedora                             |  ✔️   |
+
+
+## CNCF and Kubernetes Integrations
+
+See these two links up to date lists of plugins which integrate with out cloud native projects:
+- [Artifact Hub plugin list](https://artifacthub.io/packages/search?kind=21&sort=relevance)
+- [Headlamp plugins repo](https://github.com/headlamp-k8s/plugins/)
+
+Here is a list of CNCF project integrations at time of writing:
+
+| Project          |
+| ----------       |
+| Backstage        |
+| Flux             |
+| Inspektor Gadget |
+| Kompose          |
+| KubeScape        |
+| KubeVirt         |
+| OpenCost         |
+| Prometheus       |
+| Trivy            |
