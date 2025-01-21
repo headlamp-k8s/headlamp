@@ -20,9 +20,14 @@ export default {
   parameters: {
     msw: {
       handlers: {
+        story: [],
         storyBase: [
           http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gatewayclasses', () =>
-            HttpResponse.error()
+            HttpResponse.json({})
+          ),
+          http.get(
+            'http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gatewayclasses',
+            () => HttpResponse.error()
           ),
           http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
             HttpResponse.json({
@@ -30,6 +35,10 @@ export default {
               items: [],
               metadata: {},
             })
+          ),
+          http.get(
+            'http://localhost:4466/apis/gateway.networking.k8s.io/v1/gatewayclasses/default-gateway-class',
+            () => HttpResponse.json(DEFAULT_GATEWAY_CLASS)
           ),
         ],
       },
@@ -44,16 +53,4 @@ const Template: StoryFn = () => {
 export const Basic = Template.bind({});
 Basic.args = {
   gatewayJson: DEFAULT_GATEWAY_CLASS,
-};
-Basic.parameters = {
-  msw: {
-    handlers: {
-      story: [
-        http.get(
-          'http://localhost:4466/apis/gateway.networking.k8s.io/v1/gatewayclasses/default-gateway-class',
-          () => HttpResponse.json(DEFAULT_GATEWAY_CLASS)
-        ),
-      ],
-    },
-  },
 };

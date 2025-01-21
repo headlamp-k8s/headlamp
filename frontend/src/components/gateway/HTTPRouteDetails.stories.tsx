@@ -20,7 +20,8 @@ export default {
   parameters: {
     msw: {
       handlers: {
-        baseStory: [
+        story: [],
+        storyBase: [
           http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/httproutes', () =>
             HttpResponse.json({})
           ),

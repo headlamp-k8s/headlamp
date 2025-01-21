@@ -29,7 +29,7 @@ export default {
               items: [DEFAULT_GATEWAY],
             })
           ),
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gateways', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gateways', () =>
             HttpResponse.error()
           ),
         ],

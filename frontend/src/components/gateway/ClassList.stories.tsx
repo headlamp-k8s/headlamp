@@ -20,7 +20,12 @@ export default {
   parameters: {
     msw: {
       handlers: {
+        storyBase: [],
         story: [
+          http.get(
+            'http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gatewayclasses',
+            () => HttpResponse.error()
+          ),
           http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gatewayclasses', () =>
             HttpResponse.json({
               kind: 'GatewayClassList',

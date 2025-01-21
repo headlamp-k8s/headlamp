@@ -20,11 +20,12 @@ export default {
   parameters: {
     msw: {
       handlers: {
-        baseStory: [
+        story: [],
+        storyBase: [
           http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gateways', () =>
             HttpResponse.json({})
           ),
-          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1/gateways', () =>
+          http.get('http://localhost:4466/apis/gateway.networking.k8s.io/v1beta1/gateways', () =>
             HttpResponse.error()
           ),
           http.get('http://localhost:4466/api/v1/namespaces/default/events', () =>
@@ -37,6 +38,10 @@ export default {
           http.post(
             'http://localhost:4466/apis/authorization.k8s.io/v1/selfsubjectaccessreviews',
             () => HttpResponse.json({ status: { allowed: true, reason: '', code: 200 } })
+          ),
+          http.get(
+            'http://localhost:4466/apis/gateway.networking.k8s.io/v1/gateways/default-gateway',
+            () => HttpResponse.json(DEFAULT_GATEWAY)
           ),
         ],
       },
@@ -51,16 +56,4 @@ const Template: StoryFn = () => {
 export const Basic = Template.bind({});
 Basic.args = {
   gatewayJson: DEFAULT_GATEWAY,
-};
-Basic.parameters = {
-  msw: {
-    handlers: {
-      story: [
-        http.get(
-          'http://localhost:4466/apis/gateway.networking.k8s.io/v1/gateways/default-gateway',
-          () => HttpResponse.json(DEFAULT_GATEWAY)
-        ),
-      ],
-    },
-  },
 };
