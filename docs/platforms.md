@@ -47,6 +47,7 @@ We test on MacOS, various flavours of Linux, and Windows. Headlamp runs in the b
 | MacOS (arm, x86)                   |  ✔️   |
 | Ubuntu 20.04, 22.04, 22.10         |  ✔️   |
 | Fedora                             |  ✔️   |
+| Flatpak                            |  ✔️   | When using external tools like `az`, `aws`, `gcloud`, etc., please run `sudo flatpak override --talk-name=org.freedesktop.Flatpak io.kinvolk.Headlamp` before running Headlamp, so those tools can be called from within the sandbox. |
 
 
 ## CNCF and Kubernetes Integrations
