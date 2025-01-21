@@ -80,10 +80,11 @@ our [plugin development guide](https://headlamp.dev/docs/latest/development/plug
 
 ## Get involved
 
-Check out our [guidelines](https://headlamp.dev/docs/latest/contributing/), including our [Code of Conduct](./CODE_OF_CONDUCT.md),
-and join the discussion on the
-[#headlamp](https://kubernetes.slack.com/messages/headlamp) channel
-in the Kubernetes Slack.
+Check out our: 
+- [Guidelines](https://headlamp.dev/docs/latest/contributing/)
+- [Code of Conduct](./CODE_OF_CONDUCT.md),
+- [#headlamp](https://kubernetes.slack.com/messages/headlamp) slack channel in the Kubernetes Slack 
+- [Monthly Community Meeting](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp)
 
 ## Roadmap / Release Planning
 
