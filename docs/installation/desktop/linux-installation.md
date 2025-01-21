@@ -30,6 +30,19 @@ To upgrading Headlamp when it's installed via Flatpak, run:
 flatpak update io.kinvolk.Headlamp
 ```
 
+### Running External Tools
+
+When using tools like `az`, `aws`, `gcloud`, etc. from e.g. kubeconfig user's
+exec, Flatpak will need to run these tools from outside the sandbox. For that
+to work, you need to grant the *talk-name* of *org.freedesktop.Flatpak*. To do
+this, use the [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal)
+application to change Headlamp's permissions, or run the following command
+(before running Headlamp):
+
+```shell
+sudo flatpak override --talk-name=org.freedesktop.Flatpak io.kinvolk.Headlamp
+```
+
 ## AppImage
 
 Headlamp can be used as an [AppImage](https://appimage.org/) by downloading and running it directly.
