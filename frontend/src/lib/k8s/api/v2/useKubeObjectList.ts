@@ -512,6 +512,7 @@ export function useKubeObjectList<K extends KubeObject>({
     items: query.items,
     clusterResults: query.clusterResults,
     clusterErrors: query.clusterErrors,
+    error: query.errors[0] as any as ApiError,
     isError: query.isError,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
