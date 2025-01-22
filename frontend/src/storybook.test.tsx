@@ -49,6 +49,7 @@ const options = {
 vi.mock('@iconify/react', () => ({
   Icon: () => null,
   InlineIcon: () => null,
+  addCollection: () => {},
 }));
 
 vi.mock('@monaco-editor/react', () => ({
