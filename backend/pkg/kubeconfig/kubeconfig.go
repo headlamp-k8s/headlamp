@@ -17,9 +17,12 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/exec"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
+	"k8s.io/client-go/pkg/apis/clientauthentication"
+	rest "k8s.io/client-go/rest"
+	"k8s.io/client-go/transport"
 )
 
 // TODO: Use a different way to avoid name clashes with other clusters.
@@ -185,6 +188,51 @@ func (c *Context) RESTConfig() (*rest.Config, error) {
 	return clientConfig.ClientConfig()
 }
 
+// makeTransportFor creates an HTTP transport configuration with special handling for
+// Windows systems to prevent terminal window flashing during exec-based authentication.
+func makeTransportFor(conf *rest.Config) (http.RoundTripper, error) {
+	if conf == nil {
+		return nil, fmt.Errorf("configuration cannot be nil")
+	}
+
+	// Use standard transport for non-Windows systems or when ExecProvider is not configured
+	if conf.ExecProvider == nil || runtime.GOOS != "windows" {
+		return rest.TransportFor(conf)
+	}
+
+	confNoExec := *conf
+	confNoExec.ExecProvider = nil
+	// Get the Transport Config but without the ExecProvider because we will set
+	// it up with our version.
+	cfg, err := confNoExec.TransportConfig()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get transport config: %w", err)
+	}
+
+	var cluster *clientauthentication.Cluster
+
+	if conf.ExecProvider.ProvideClusterInfo {
+		var err error
+
+		cluster, err = rest.ConfigToExecCluster(conf)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get cluster info: %w", err)
+		}
+	}
+
+	// Configure authentication provider using custom authenticator
+	provider, err := exec.GetAuthenticator(conf.ExecProvider, cluster)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get authenticator: %w", err)
+	}
+
+	if err := provider.UpdateTransportConfig(cfg); err != nil {
+		return nil, fmt.Errorf("failed to update transport config: %w", err)
+	}
+
+	return transport.New(cfg)
+}
+
 // OidcConfig returns the oidc config for the context.
 func (c *Context) OidcConfig() (*OidcConfig, error) {
 	if c.OidcConf != nil {
@@ -256,7 +304,7 @@ func (c *Context) SetupProxy() error {
 
 	restConf, err := c.RESTConfig()
 	if err == nil {
-		roundTripper, err := rest.TransportFor(restConf)
+		roundTripper, err := makeTransportFor(restConf)
 		if err == nil {
 			proxy.Transport = roundTripper
 		}
