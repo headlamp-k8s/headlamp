@@ -23,6 +23,7 @@ import (
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 )
 
@@ -604,6 +605,8 @@ func TestHandleClusterAPI_XForwardedHost(t *testing.T) {
 	assert.Equal(t, "OK", rr.Body.String())
 }
 
+// test for keeping the original name of a cluster
+
 func TestRenameCluster(t *testing.T) {
 	kubeConfigByte, err := os.ReadFile("./headlamp_testdata/kubeconfig")
 	require.NoError(t, err)
@@ -1023,5 +1026,60 @@ func TestHandleClusterHelm(t *testing.T) {
 
 			assert.Equal(t, tc.expectedStatus, w.Code)
 		})
+	}
+}
+
+// test for handleHeadlampInfo, currently checks for headlamp_info field and headlamp_info.originalName field.
+func (c *HeadlampConfig) TestHandleHeadlampInfo(t *testing.T) {
+	// create a temp directory for our test kubeconfig
+	tmpDir := t.TempDir()
+	mockConfigFile := filepath.Join(tmpDir, "config")
+
+	// copy "kubeconfig_headlampinfo" test data to the temp directory
+	testDataPath := filepath.Join("headlamp_testdata", "kubeconfig_headlampinfo")
+	testData, err := os.ReadFile(testDataPath)
+	require.NoError(t, err, "failed to read test data for 'kubeconfig_headlampinfo'")
+
+	err = os.WriteFile(mockConfigFile, testData, 0o600)
+	require.NoError(t, err, "failed to write test kubeconfig")
+
+	// load the kubeconfig file
+	config, err := clientcmd.LoadFromFile(mockConfigFile)
+	require.NoError(t, err, "failed to load kubeconfig")
+
+	// create a slice to hold the kubeconfig.Context objects
+	kubeContexts := make([]*kubeconfig.Context, 0, len(config.Contexts))
+
+	// loop through each context and push the kubeContext object into the slice
+	for contextName, context := range config.Contexts {
+		kubeContext := &kubeconfig.Context{
+			Name:        contextName,
+			KubeContext: context,
+			Cluster:     config.Clusters[context.Cluster],
+			AuthInfo:    config.AuthInfos[context.AuthInfo],
+		}
+		kubeContexts = append(kubeContexts, kubeContext)
+	}
+
+	// use the kubeContexts slice for further processing
+	for _, ctx := range kubeContexts {
+		// Call handleHeadlampInfo
+		err = c.handleHeadlampInfo(ctx)
+		require.NoError(t, err, "failed to handle headlamp_info")
+	}
+
+	// check that the headlamp_info field was correctly handled for each context
+	for _, ctx := range kubeContexts {
+		// Check if the headlamp_info field was correctly handled
+		assert.NotNil(t, ctx.Extensions["headlamp_info"], "headlamp_info field should be present")
+	}
+
+	// check that the headlamp_info.originalName field was correctly handled for each context
+	for _, ctx := range kubeContexts {
+		if headlampInfo, ok := ctx.Extensions["headlamp_info"].(map[string]interface{}); ok {
+			assert.NotNil(t, headlampInfo["originalName"], "headlamp_info.originalName field should be present")
+		} else {
+			t.Errorf("headlamp_info field is not of expected type")
+		}
 	}
 }
