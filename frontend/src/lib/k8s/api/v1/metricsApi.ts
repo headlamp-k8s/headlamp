@@ -1,7 +1,8 @@
 import { isDebugVerbose } from '../../../../helpers';
 import { getCluster } from '../../../cluster';
 import { KubeMetrics } from '../../cluster';
-import { ApiError, clusterRequest } from './clusterRequests';
+import { ApiError } from '../v2/ApiError';
+import { clusterRequest } from './clusterRequests';
 
 /**
  * Gets the metrics for the specified resource. Gets new metrics every 10 seconds.

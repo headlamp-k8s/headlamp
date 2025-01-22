@@ -31,7 +31,6 @@ export {
   put,
   remove,
   request,
-  type ApiError,
   type ClusterRequest,
   type ClusterRequestParams,
   type RequestParams,
@@ -75,3 +74,5 @@ export { deletePlugin } from '../api/v1/pluginsApi';
 export { drainNodeStatus, drainNode } from '../api/v1/drainNode';
 
 export { apply } from '../api/v1/apply';
+
+export { ApiError } from '../api/v2/ApiError';
