@@ -1,8 +1,8 @@
-import { InlineIcon } from '@iconify/react';
-import { Box, Chip, IconButton, TextField, useTheme } from '@mui/material';
+import { Box, Chip, TextField, useTheme } from '@mui/material';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ClusterSettings } from '../../../helpers';
+import { ActionButton } from '../../common';
 import { isValidNamespaceFormat } from './DefaultNamespace';
 
 interface AllowedNamespacesProps {
@@ -55,16 +55,14 @@ export default function AllowedNamespaces(props: AllowedNamespacesProps) {
         }}
         InputProps={{
           endAdornment: (
-            <IconButton
+            <ActionButton
+              description={t('translation|Add namespace')}
               onClick={() => {
                 storeNewAllowedNamespace(newAllowedNamespace);
               }}
-              disabled={!newAllowedNamespace}
-              size="medium"
-              aria-label={t('translation|Add namespace')}
-            >
-              <InlineIcon icon="mdi:plus-circle" />
-            </IconButton>
+              icon="mdi:plus-circle"
+              iconButtonProps={{ size: 'medium', disabled: !newAllowedNamespace }}
+            />
           ),
           onKeyPress: event => {
             if (event.key === 'Enter') {
