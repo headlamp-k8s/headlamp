@@ -140,7 +140,6 @@
   "Finish": "Finish",
   "Load from KubeConfig": "Load from KubeConfig",
   "Overview": "Overview",
-  "No permissions to list pods.": "No permissions to list pods.",
   "Only warnings ({{ numWarnings }})": "Only warnings ({{ numWarnings }})",
   "Type": "Type",
   "Reason": "Reason",

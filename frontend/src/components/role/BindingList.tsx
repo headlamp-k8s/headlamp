@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
-import { combineClusterListErrors, getClusterGroup } from '../../lib/util';
 import { useNamespaces } from '../../redux/filterSlice';
 import { Link } from '../common';
 import LabelListItem from '../common/LabelListItem';
@@ -28,13 +27,10 @@ function RoleLink(props: { role: string; namespace?: string }) {
 
 export default function RoleBindingList() {
   const { t } = useTranslation(['glossary', 'translation']);
-  const { items: roles, clusterErrors: rolesErrors } = RoleBinding.useList({
+  const { items: roles, errors: roleErrors } = RoleBinding.useList({
     namespace: useNamespaces(),
   });
-  const { items: clusterRoles, clusterErrors: clusterRolesErrors } = ClusterRoleBinding.useList();
-  const clusters = getClusterGroup();
-
-  const isMultiCluster = clusters.length > 1;
+  const { items: clusterRoles, errors: clusterRoleErrors } = ClusterRoleBinding.useList();
 
   const allRoles = React.useMemo(() => {
     if (roles === null && clusterRoles === null) {
@@ -45,16 +41,12 @@ export default function RoleBindingList() {
   }, [roles, clusterRoles]);
 
   const allErrors = React.useMemo(() => {
-    return combineClusterListErrors(rolesErrors || null, clusterRolesErrors || null);
-  }, [rolesErrors, clusterRolesErrors]);
-
-  function getErrorMessage() {
-    if (Object.values(allErrors || {}).length === clusters.length && clusters.length > 1) {
-      return RoleBinding.getErrorMessage(Object.values(allErrors!)[0]);
+    if (roleErrors === null && clusterRoleErrors === null) {
+      return null;
     }
 
-    return null;
-  }
+    return [...(roleErrors ?? []), ...(clusterRoleErrors ?? [])];
+  }, [roleErrors, clusterRoleErrors]);
 
   function sortBindings(kind: string) {
     return function (r1: RoleBinding, r2: RoleBinding) {
@@ -79,8 +71,7 @@ export default function RoleBindingList() {
   return (
     <ResourceListView
       title={t('glossary|Role Bindings')}
-      errorMessage={getErrorMessage()}
-      clusterErrors={isMultiCluster ? allErrors : null}
+      errors={allErrors}
       columns={[
         'type',
         'name',

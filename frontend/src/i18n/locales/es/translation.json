@@ -140,7 +140,6 @@
   "Finish": "Finalizar",
   "Load from KubeConfig": "Cargar desde KubeConfig",
   "Overview": "Resumen",
-  "No permissions to list pods.": "Sin permisos para listar pods.",
   "Only warnings ({{ numWarnings }})": "Solo advertencias ({{ numWarnings }})",
   "Type": "Tipo",
   "Reason": "Razón",

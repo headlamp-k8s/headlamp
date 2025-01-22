@@ -140,7 +140,6 @@
   "Finish": "完成",
   "Load from KubeConfig": "從 KubeConfig 讀取",
   "Overview": "概覽",
-  "No permissions to list pods.": "無權列出 pod。",
   "Only warnings ({{ numWarnings }})": "僅警告 ({{ numWarnings }})",
   "Type": "類型",
   "Reason": "原因",

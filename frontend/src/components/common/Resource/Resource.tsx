@@ -975,7 +975,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
     fieldSelector: resource.kind === 'Node' ? `spec.nodeName=${resource.metadata.name}` : undefined,
   };
 
-  const [pods, error] = Pod.useList(queryData);
+  const { items: pods, errors } = Pod.useList(queryData);
   const onlyOneNamespace = !!resource.metadata.namespace || resource.kind === 'Namespace';
   const hideNamespaceFilter = onlyOneNamespace || noSearch;
 
@@ -983,7 +983,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
     <PodListRenderer
       hideColumns={hideColumns || onlyOneNamespace ? ['namespace'] : undefined}
       pods={pods}
-      error={error}
+      errors={errors}
       noNamespaceFilter={hideNamespaceFilter}
     />
   );

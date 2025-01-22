@@ -8,7 +8,6 @@ import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
 import { DateLabel, Link, PageGrid, StatusLabel } from '../common';
-import Empty from '../common/EmptyContent';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
 import ShowHideLabel from '../common/ShowHideLabel';
@@ -19,6 +18,7 @@ import {
   NodesStatusCircleChart,
   PodsStatusCircleChart,
 } from './Charts';
+import { ClusterGroupErrorMessage } from './ClusterGroupErrorMessage';
 
 export default function Overview() {
   const { t } = useTranslation(['translation']);
@@ -35,7 +35,7 @@ export default function Overview() {
     <PageGrid>
       <SectionBox title={t('translation|Overview')} py={2} mt={[4, 0, 0]}>
         {noPermissions ? (
-          <Empty color="error">{t('translation|No permissions to list pods.')}</Empty>
+          <ClusterGroupErrorMessage errors={[metricsError]} />
         ) : (
           <Grid container justifyContent="flex-start" alignItems="stretch" spacing={4}>
             <Grid item xs sx={{ maxWidth: '300px' }}>
@@ -74,7 +74,7 @@ function EventsSection() {
       )
     )
   );
-  const [events, eventsError] = Event.useList({ limit: Event.maxLimit });
+  const { items: events, errors: eventsErrors } = Event.useList({ limit: Event.maxLimit });
 
   const warningActionFilterFunc = (event: Event, search?: string) => {
     if (!filterFunc(event, search)) {
@@ -138,7 +138,7 @@ function EventsSection() {
       }}
       defaultGlobalFilter={eventsFilter ?? undefined}
       data={events}
-      errorMessage={Event.getErrorMessage(eventsError)}
+      errors={eventsErrors}
       columns={[
         {
           label: t('Type'),

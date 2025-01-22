@@ -35,7 +35,7 @@ function KubeObjectLink(props: { kubeObject: KubeObject; [prop: string]: any }) 
 
   const client = useQueryClient();
   const { namespace, name } = kubeObject.metadata;
-  const endpoint = useEndpoints(kubeObject._class().apiEndpoint.apiInfo, kubeObject.cluster);
+  const { endpoint } = useEndpoints(kubeObject._class().apiEndpoint.apiInfo, kubeObject.cluster);
 
   return (
     <MuiLink

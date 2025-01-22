@@ -140,7 +140,6 @@
   "Finish": "Beenden",
   "Load from KubeConfig": "Laden aus KubeConfig",
   "Overview": "Übersicht",
-  "No permissions to list pods.": "Keine Berechtigung zum Auflisten von Pods.",
   "Only warnings ({{ numWarnings }})": "Nur Warnungen ({{ numWarnings }})",
   "Type": "Typ",
   "Reason": "Ereignis",
