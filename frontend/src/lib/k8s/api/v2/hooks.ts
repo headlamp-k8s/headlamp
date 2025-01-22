@@ -209,7 +209,10 @@ export const useEndpoints = (
     queryFn: () =>
       getWorkingEndpoint(endpoints, cluster!, namespace)
         .then(endpoints => endpoints)
-        .catch(() => null),
+        // If none of the endpoints are working return the first one
+        // since it doesn't matter
+        // TODO: refactor this hook so it returns an error
+        .catch(() => endpoints[0]),
   });
 
   if (cluster === null || cluster === undefined) return undefined;
