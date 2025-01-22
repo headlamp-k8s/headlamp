@@ -88,3 +88,5 @@ Absolutely! As an open source project, Headlamp thrives on community contributio
 ### How can I get help or assistance for Headlamp?
 
 For support, refer to the [Headlamp documentation](./development/index.md). For further assistance, join the [Headlamp community on Slack](https://kubernetes.slack.com/messages/headlamp) or file an issue on the [GitHub issues page](https://github.com/headlamp-k8s/headlamp/issues).
+
+Join our [monthly community meeting](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp) if you want to chat in a zoom call.
