@@ -174,7 +174,7 @@
   "Persistent Volumes": "持續性卷",
   "Storage Classes": "儲存類別",
   "Network": "網路",
-  "Gateway": "",
+  "Gateway (beta)": "",
   "HTTP Routes": "",
   "GRPC Routes": "",
   "Security": "安全",
