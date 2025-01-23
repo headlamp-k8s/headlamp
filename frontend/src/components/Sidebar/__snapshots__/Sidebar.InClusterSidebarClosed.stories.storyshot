@@ -602,7 +602,7 @@
                     tabindex="0"
                   >
                     <div
-                      aria-label="Gateway"
+                      aria-label="Gateway (beta)"
                       class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
                       data-mui-internal-clone-element="true"
                     />
