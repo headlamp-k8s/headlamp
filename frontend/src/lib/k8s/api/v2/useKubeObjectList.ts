@@ -348,12 +348,13 @@ export function makeListRequests(
   clusters: string[],
   getAllowedNamespaces: (cluster: string | null) => string[],
   isResourceNamespaced: boolean,
-  requestedNamespaces?: string[]
+  requestedNamespaces: string[] = []
 ): Array<{ cluster: string; namespaces?: string[] }> {
   return clusters.map(cluster => {
     const allowedNamespaces = getAllowedNamespaces(cluster);
 
-    let namespaces = requestedNamespaces ?? allowedNamespaces;
+    let namespaces = requestedNamespaces.length > 0 ? requestedNamespaces : allowedNamespaces;
+
     if (allowedNamespaces.length) {
       namespaces = namespaces.filter(ns => allowedNamespaces.includes(ns));
     }
