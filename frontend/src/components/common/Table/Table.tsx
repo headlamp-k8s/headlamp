@@ -20,7 +20,7 @@ import { MRT_Localization_EN } from 'material-react-table/locales/en';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import { MRT_Localization_PT } from 'material-react-table/locales/pt';
-import { memo, ReactNode, useCallback,useEffect, useMemo, useState } from 'react';
+import { memo, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { useURLState } from '../../../lib/util';
