@@ -20,7 +20,7 @@ import { MRT_Localization_EN } from 'material-react-table/locales/en';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import { MRT_Localization_PT } from 'material-react-table/locales/pt';
-import { memo, ReactNode, useEffect, useMemo, useState } from 'react';
+import { memo, ReactNode, useCallback,useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { useURLState } from '../../../lib/util';
@@ -132,9 +132,28 @@ const tableLocalizationMap: Record<string, MRT_Localization> = {
   pt: MRT_Localization_PT,
 };
 
+// Add new type for column widths state
+type ColumnWidths = Record<string, number>;
+
+// Add resizing styles to StyledHeadRow
 const StyledHeadRow = styled('tr')(({ theme }) => ({
   display: 'contents',
   background: theme.palette.tables.head.background,
+  '& .resizer': {
+    display: 'inline-block',
+    width: '5px',
+    height: '100%',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    transform: 'translateX(50%)',
+    zIndex: 1,
+    touchAction: 'none',
+    cursor: 'col-resize',
+    '&.isResizing': {
+      background: theme.palette.primary.main,
+    },
+  },
 }));
 const StyledRow = styled('tr')(({ theme }) => ({
   display: 'contents',
@@ -199,6 +218,17 @@ export default function Table<RowItem extends Record<string, any>>({
         },
       }
     : undefined;
+
+  // Add state for column widths
+  const [columnWidths, setColumnWidths] = useState<ColumnWidths>({});
+
+  // Add resize handler
+  const handleResize = useCallback((columnId: string, width: number) => {
+    setColumnWidths(prev => ({
+      ...prev,
+      [columnId]: width,
+    }));
+  }, []);
 
   const table = useMaterialReactTable({
     ...tableProps,
@@ -284,6 +314,7 @@ export default function Table<RowItem extends Record<string, any>>({
         width: 'unset',
         minWidth: 'unset',
         paddingTop: '0.5rem',
+        position: 'relative', // Add this for resizer positioning
       },
     },
     muiSelectCheckboxProps: {
@@ -293,6 +324,15 @@ export default function Table<RowItem extends Record<string, any>>({
     muiSelectAllCheckboxProps: {
       size: 'small',
       sx: { padding: 0 },
+    },
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange',
+    onColumnSizingChange: updater => {
+      const newSizing =
+        typeof updater === 'function' ? updater(table.getState().columnSizing) : updater;
+      Object.entries(newSizing).forEach(([columnId, width]) => {
+        handleResize(columnId, width);
+      });
     },
   });
 
@@ -306,6 +346,11 @@ export default function Table<RowItem extends Record<string, any>>({
         return !isHidden;
       })
       .map(it => {
+        const id = it.id!;
+        const width = columnWidths[id];
+        if (width) {
+          return `${width}px`;
+        }
         if (typeof it.gridTemplate === 'number') {
           return `${it.gridTemplate}fr`;
         }
@@ -326,6 +371,7 @@ export default function Table<RowItem extends Record<string, any>>({
     tableProps.state?.columnVisibility,
     tableProps.enableRowActions,
     tableProps.enableRowSelection,
+    columnWidths,
   ]);
 
   const rows = useMRT_Rows(table);
