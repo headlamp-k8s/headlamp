@@ -87,11 +87,18 @@ export type PluginInfo = {
   displaySettingsComponentWithSaveButton?: boolean;
 };
 
+export interface PluginSettings {
+  name: string;
+  isEnabled: boolean;
+  settingsComponent?: PluginSettingsComponentType;
+  displaySettingsComponentWithSaveButton?: boolean;
+}
+
 export interface PluginsState {
   /** Have plugins finished executing? */
   loaded: boolean;
   /** Information stored by settings about plugins. */
-  pluginSettings: { name: string; isEnabled: boolean }[];
+  pluginSettings: PluginSettings[];
 }
 const initialState: PluginsState = {
   /** Once the plugins have been fetched and executed. */
