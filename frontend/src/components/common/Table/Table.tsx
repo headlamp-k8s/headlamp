@@ -139,21 +139,6 @@ type ColumnWidths = Record<string, number>;
 const StyledHeadRow = styled('tr')(({ theme }) => ({
   display: 'contents',
   background: theme.palette.tables.head.background,
-  '& .resizer': {
-    display: 'inline-block',
-    width: '5px',
-    height: '100%',
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    transform: 'translateX(50%)',
-    zIndex: 1,
-    touchAction: 'none',
-    cursor: 'col-resize',
-    '&.isResizing': {
-      background: theme.palette.primary.main,
-    },
-  },
 }));
 const StyledRow = styled('tr')(({ theme }) => ({
   display: 'contents',
@@ -314,7 +299,6 @@ export default function Table<RowItem extends Record<string, any>>({
         width: 'unset',
         minWidth: 'unset',
         paddingTop: '0.5rem',
-        position: 'relative', // Add this for resizer positioning
       },
     },
     muiSelectCheckboxProps: {
