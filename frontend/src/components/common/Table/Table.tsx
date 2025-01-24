@@ -20,7 +20,7 @@ import { MRT_Localization_EN } from 'material-react-table/locales/en';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import { MRT_Localization_PT } from 'material-react-table/locales/pt';
-import { memo, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, ReactNode, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { useURLState } from '../../../lib/util';
@@ -132,10 +132,6 @@ const tableLocalizationMap: Record<string, MRT_Localization> = {
   pt: MRT_Localization_PT,
 };
 
-// Add new type for column widths state
-type ColumnWidths = Record<string, number>;
-
-// Add resizing styles to StyledHeadRow
 const StyledHeadRow = styled('tr')(({ theme }) => ({
   display: 'contents',
   background: theme.palette.tables.head.background,
@@ -203,17 +199,6 @@ export default function Table<RowItem extends Record<string, any>>({
         },
       }
     : undefined;
-
-  // Add state for column widths
-  const [columnWidths, setColumnWidths] = useState<ColumnWidths>({});
-
-  // Add resize handler
-  const handleResize = useCallback((columnId: string, width: number) => {
-    setColumnWidths(prev => ({
-      ...prev,
-      [columnId]: width,
-    }));
-  }, []);
 
   const table = useMaterialReactTable({
     ...tableProps,
@@ -311,13 +296,6 @@ export default function Table<RowItem extends Record<string, any>>({
     },
     enableColumnResizing: true,
     columnResizeMode: 'onChange',
-    onColumnSizingChange: updater => {
-      const newSizing =
-        typeof updater === 'function' ? updater(table.getState().columnSizing) : updater;
-      Object.entries(newSizing).forEach(([columnId, width]) => {
-        handleResize(columnId, width);
-      });
-    },
   });
 
   const gridTemplateColumns = useMemo(() => {
@@ -329,16 +307,12 @@ export default function Table<RowItem extends Record<string, any>>({
           tableProps.state?.columnVisibility?.[id] === false;
         return !isHidden;
       })
-      .map(it => {
-        const id = it.id!;
-        const width = columnWidths[id];
-        if (width) {
-          return `${width}px`;
-        }
-        if (typeof it.gridTemplate === 'number') {
-          return `${it.gridTemplate}fr`;
-        }
-        return it.gridTemplate ?? '1fr';
+      .map((it, index) => {
+        const column = table.getColumn(it.id ?? String(index));
+        const width =
+          column?.getSize() ??
+          (typeof it.gridTemplate === 'number' ? `${it.gridTemplate}fr` : it.gridTemplate ?? '1fr');
+        return typeof width === 'number' ? `${width}px` : width;
       })
       .join(' ');
     if (tableProps.enableRowActions) {
@@ -355,7 +329,7 @@ export default function Table<RowItem extends Record<string, any>>({
     tableProps.state?.columnVisibility,
     tableProps.enableRowActions,
     tableProps.enableRowSelection,
-    columnWidths,
+    table.getState().columnSizing,
   ]);
 
   const rows = useMRT_Rows(table);
