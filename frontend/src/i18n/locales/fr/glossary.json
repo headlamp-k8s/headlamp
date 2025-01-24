@@ -174,7 +174,7 @@
   "Persistent Volumes": "Persistent Volumes",
   "Storage Classes": "Classes de stockage",
   "Network": "Réseau",
-  "Gateway": "",
+  "Gateway (beta)": "",
   "HTTP Routes": "",
   "GRPC Routes": "",
   "Security": "Sécurité",

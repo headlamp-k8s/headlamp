@@ -168,7 +168,7 @@ function prepareRoutes(
     },
     {
       name: 'gatewayapi',
-      label: t('glossary|Gateway'),
+      label: t('glossary|Gateway (beta)'),
       icon: 'mdi:lan-connect',
       subList: [
         {
