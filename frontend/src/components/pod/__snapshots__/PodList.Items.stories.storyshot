@@ -805,7 +805,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/imagepullbackoff"
                 >
                   imagepullbackoff
                 </a>
@@ -944,7 +944,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/successful"
                 >
                   successful
                 </a>
@@ -1081,7 +1081,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/initializing"
                 >
                   initializing
                 </a>
@@ -1220,7 +1220,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/liveness-http"
                 >
                   liveness-http
                 </a>
@@ -1359,7 +1359,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/terminated"
                 >
                   terminated
                 </a>
@@ -1498,7 +1498,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/running"
                 >
                   running
                 </a>
@@ -1637,7 +1637,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/nominated-node"
                 >
                   nominated-node
                 </a>
@@ -1776,7 +1776,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//pods/default/readiness-gate"
                 >
                   readiness-gate
                 </a>

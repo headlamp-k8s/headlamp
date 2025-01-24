@@ -707,7 +707,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//ingresses/default/tls-example-ingress"
                 >
                   tls-example-ingress
                 </a>
@@ -825,7 +825,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//ingresses/default/resource-example-ingress"
                 >
                   resource-example-ingress
                 </a>

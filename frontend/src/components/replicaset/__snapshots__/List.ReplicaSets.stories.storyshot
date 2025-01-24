@@ -875,7 +875,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//replicasets/default/headlamp-release-b123456"
                   >
                     headlamp-release-b123456
                   </a>
@@ -1019,7 +1019,7 @@ pod-template-hash=b123456
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//replicasets/default/headlamp-a123456"
                   >
                     headlamp-a123456
                   </a>

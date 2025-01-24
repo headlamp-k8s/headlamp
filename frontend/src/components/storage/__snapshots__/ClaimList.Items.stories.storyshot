@@ -872,7 +872,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//persistentvolumeclaims/default/my-pvc"
                 >
                   my-pvc
                 </a>
@@ -1027,7 +1027,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//persistentvolumeclaims/default/no-storage-class-name-pvc"
                 >
                   no-storage-class-name-pvc
                 </a>
@@ -1169,7 +1169,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//persistentvolumeclaims/default/no-volume-name-pvc"
                 >
                   no-volume-name-pvc
                 </a>

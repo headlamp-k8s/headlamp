@@ -478,7 +478,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//ingressclasses/resource-example-ingress"
                 >
                   resource-example-ingress
                 </a>
@@ -574,7 +574,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//ingressclasses/resource-example-ingress"
                 >
                   resource-example-ingress
                 </a>

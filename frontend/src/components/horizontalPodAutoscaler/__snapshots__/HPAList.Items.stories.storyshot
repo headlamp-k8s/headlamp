@@ -817,7 +817,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//horizontalpodautoscalers/default/php-apache"
                 >
                   php-apache
                 </a>
@@ -837,7 +837,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//deployments/default/php-apache"
                 >
                   Deployment
                   /
