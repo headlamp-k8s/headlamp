@@ -166,6 +166,11 @@ ingress:
     {}
     # kubernetes.io/tls-acme: "true"
 
+  # -- Additional labels to add to the Ingress resource
+  labels: {}
+    # app.kubernetes.io/part-of: traefik
+    # environment: prod
+
   # -- Ingress class name. replacement for the deprecated "kubernetes.io/ingress.class" annotation
   ingressClassName: ""
 
