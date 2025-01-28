@@ -313,7 +313,7 @@
           "description": "Kubernetes Service loadBalancerSourceRanges"
         },
         "nodePort": {
-          "type": "integer",
+"type": ["integer", "null"],
           "description": "Kubernetes Service Nodeport"
         }
       }
