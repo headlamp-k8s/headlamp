@@ -306,7 +306,10 @@
           "description": "Kubernetes Service loadBalancerIP"
         },
         "loadBalancerSourceRanges": {
-          "type": "string",
+"type": "array",
+    "items": {
+      "type": "string"
+}
           "description": "Kubernetes Service loadBalancerSourceRanges"
         },
         "nodePort": {
