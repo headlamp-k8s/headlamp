@@ -73,6 +73,11 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['monaco-editor'],
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: import.meta.dirname + '/setupTests.js',
+  },
   build: {
     lib: {
       entry: resolve('src/index.tsx'),
