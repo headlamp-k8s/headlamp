@@ -135,13 +135,13 @@ service:
   # -- Kubernetes Service port
   port: 80
   # -- Kubernetes Service clusterIP
-  clusterIP:
+  clusterIP: ""
   # -- Kubernetes Service loadBalancerIP
-  loadBalancerIP:
+  loadBalancerIP: ""
   # -- Kubernetes Service loadBalancerSourceRanges
   loadBalancerSourceRanges: []
   # -- Kubernetes Service Nodeport
-  nodePort:
+  nodePort: null
 
 # -- Headlamp containers volume mounts
 volumeMounts: []
