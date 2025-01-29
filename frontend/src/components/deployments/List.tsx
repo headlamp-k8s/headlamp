@@ -70,19 +70,20 @@ export default function DeploymentsList() {
           getValue: deployment => deployment.status.availableReplicas,
           render: deployment => renderPods(deployment),
           sort: sortByPods,
-          gridTemplate: 0.5,
+          gridTemplate: 'min-content',
         },
         {
           id: 'replicas',
           label: t('Replicas'),
           getValue: deployment => deployment.spec.replicas || 0,
-          gridTemplate: 0.6,
+          gridTemplate: 'min-content',
         },
         {
           id: 'conditions',
           label: t('translation|Conditions'),
           getValue: deployment => deployment.status?.conditions?.map((c: any) => c.type)?.join(''),
           render: deployment => renderConditions(deployment),
+          gridTemplate: 'auto',
           cellProps: {
             sx: {
               flexWrap: 'wrap',
@@ -93,6 +94,7 @@ export default function DeploymentsList() {
         {
           id: 'containers',
           label: t('Containers'),
+          gridTemplate: 'auto',
           getValue: deployment =>
             deployment
               .getContainers()
@@ -112,6 +114,7 @@ export default function DeploymentsList() {
         {
           id: 'images',
           label: t('Images'),
+          gridTemplate: 'auto',
           getValue: deployment =>
             deployment
               .getContainers()

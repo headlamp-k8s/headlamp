@@ -240,7 +240,7 @@
           </div>
         </div>
         <table
-          class="MuiTable-root css-bntpt-MuiTable-root"
+          class="MuiTable-root css-106s9x6-MuiTable-root"
         >
           <thead
             class="MuiTableHead-root css-1tmrira-MuiTableHead-root"
@@ -250,7 +250,7 @@
             >
               <th
                 aria-sort="none"
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-lxlivr-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-fgaj1o-MuiTableCell-root"
                 colspan="1"
                 data-index="-1"
                 scope="col"
@@ -299,7 +299,7 @@
               </th>
               <th
                 aria-sort="none"
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-17lu75z-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edr8hf-MuiTableCell-root"
                 colspan="1"
                 data-can-sort="true"
                 data-index="-1"
@@ -354,7 +354,7 @@
               </th>
               <th
                 aria-sort="none"
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1lpkqw6-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7ggwxf-MuiTableCell-root"
                 colspan="1"
                 data-can-sort="true"
                 data-index="-1"
@@ -409,7 +409,7 @@
               </th>
               <th
                 aria-sort="none"
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-15k3td5-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-kzwkzl-MuiTableCell-root"
                 colspan="1"
                 data-can-sort="true"
                 data-index="-1"
@@ -464,7 +464,7 @@
               </th>
               <th
                 aria-sort="none"
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-shtt0-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1br0m82-MuiTableCell-root"
                 colspan="1"
                 data-can-sort="true"
                 data-index="-1"
@@ -519,7 +519,7 @@
               </th>
               <th
                 aria-sort="ascending"
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1wx6jpk-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-3renc0-MuiTableCell-root"
                 colspan="1"
                 data-can-sort="true"
                 data-index="-1"
@@ -574,7 +574,7 @@
               </th>
               <th
                 aria-sort="none"
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6fwdpz-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1eixrge-MuiTableCell-root"
                 colspan="1"
                 data-index="-1"
                 scope="col"

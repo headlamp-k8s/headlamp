@@ -127,6 +127,7 @@ export default function Overview() {
           {
             id: 'name',
             label: t('translation|Name'),
+            gridTemplate: 'auto',
             getValue: item => item.metadata.name,
             render: item => <Link kubeObject={item} />,
           },
@@ -135,6 +136,7 @@ export default function Overview() {
           {
             id: 'pods',
             label: t('Pods'),
+            gridTemplate: 'min-content',
             getValue: item => item && getPods(item),
             sort: sortByReplicas,
           },

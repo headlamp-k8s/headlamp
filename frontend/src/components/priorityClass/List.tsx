@@ -15,11 +15,13 @@ export default function PriorityClassList() {
         {
           id: 'value',
           label: t('translation|Value'),
+          gridTemplate: 'min-content',
           getValue: item => item.value,
         },
         {
           id: 'globalDefault',
           label: t('translation|Global Default'),
+          gridTemplate: 'min-content',
           getValue: item => String(item.globalDefault || 'False'),
         },
         'age',

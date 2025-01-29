@@ -17,27 +17,32 @@ export default function ServiceList() {
         {
           id: 'type',
           label: t('translation|Type'),
+          gridTemplate: 'min-content',
           getValue: service => service.spec.type,
         },
         {
           id: 'clusterIP',
           label: t('Cluster IP'),
+          gridTemplate: 'min-content',
           getValue: service => service.spec.clusterIP,
         },
         {
           id: 'externalIP',
           label: t('External IP'),
+          gridTemplate: 'min-content',
           getValue: service => service.getExternalAddresses(),
         },
         {
           id: 'ports',
           label: t('Ports'),
+          gridTemplate: 'auto',
           getValue: service => service.getPorts()?.join(', '),
           render: service => <LabelListItem labels={service.getPorts() ?? []} />,
         },
         {
           id: 'selector',
           label: t('Selector'),
+          gridTemplate: 'auto',
           getValue: service => service.getSelector().join(', '),
           render: service => <LabelListItem labels={service.getSelector()} />,
         },

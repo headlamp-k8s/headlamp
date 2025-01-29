@@ -62,6 +62,7 @@ export default function NamespacesList() {
           'cluster',
           {
             id: 'status',
+            gridTemplate: 'auto',
             label: t('translation|Status'),
             getValue: () => 'Unknown',
           },
@@ -81,6 +82,7 @@ export default function NamespacesList() {
         'cluster',
         {
           id: 'status',
+          gridTemplate: 'auto',
           label: t('translation|Status'),
           getValue: ns => ns.status.phase,
           render: makeStatusLabel,
