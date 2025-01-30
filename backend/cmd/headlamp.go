@@ -54,6 +54,8 @@ type HeadlampConfig struct {
 	oidcClientID          string
 	oidcClientSecret      string
 	oidcIdpIssuerURL      string
+	oidcImpersonate       bool
+	oidcImpersonateClaim  string
 	baseURL               string
 	oidcScopes            []string
 	proxyURLs             []string
@@ -359,7 +361,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	if config.useInCluster {
 		context, err := kubeconfig.GetInClusterContext(config.oidcIdpIssuerURL,
 			config.oidcClientID, config.oidcClientSecret,
-			strings.Join(config.oidcScopes, ","))
+			strings.Join(config.oidcScopes, ","), config.oidcImpersonate)
 		if err != nil {
 			logger.Log(logger.LevelError, nil, err, "Failed to get in-cluster context")
 		}
@@ -883,10 +885,76 @@ func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Hand
 	})
 }
 
+func (c *HeadlampConfig) OIDCImpersonateMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// skip if not cluster request
+		if !strings.HasPrefix(r.URL.String(), "/clusters/") {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// parse cluster and token
+		cluster, token := parseClusterAndToken(r)
+		if cluster == "" || token == "" {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		idToken, err := c.getValidToken(r.Context(), token)
+		if err != nil {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		var claims map[string]interface{}
+		if err := idToken.Claims(&claims); err != nil {
+			next.ServeHTTP(w, r)
+			return
+		}
+		user, ok := claims[c.oidcImpersonateClaim].(string)
+		if !ok || user == "" {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		context, err := c.kubeConfigStore.GetContext(cluster)
+		if err != nil {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// User was successfully authenticated, execute request as this user
+		r.Header.Set("Authorization", "Bearer "+context.BearerToken)
+		r.Header.Set("Impersonate-User", user)
+		next.ServeHTTP(w, r)
+	})
+}
+
+func (c *HeadlampConfig) getValidToken(ctx context.Context, token string) (*oidc.IDToken, error) {
+	provider, err := oidc.NewProvider(ctx, c.oidcIdpIssuerURL)
+	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"idpIssuerURL": c.oidcIdpIssuerURL},
+			err, "failed to get oidc provider")
+		return nil, fmt.Errorf("failed to get oidc provider: %w", err)
+	}
+	oidcConfig := &oidc.Config{
+		ClientID: c.oidcClientID,
+	}
+	oauth2Token, err := provider.Verifier(oidcConfig).Verify(ctx, token)
+	if err != nil {
+		return nil, fmt.Errorf("token is not valid: %w", err)
+	}
+	return oauth2Token, nil
+}
+
 func StartHeadlampServer(config *HeadlampConfig) {
 	handler := createHeadlampHandler(config)
 
 	handler = config.OIDCTokenRefreshMiddleware(handler)
+	if config.oidcImpersonate {
+		handler = config.OIDCImpersonateMiddleware(handler)
+		logger.Log(logger.LevelInfo, nil, nil, "OIDC impersonate active")
+	}
 
 	// Start server
 	err := http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler) //nolint:gosec
