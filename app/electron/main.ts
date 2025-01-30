@@ -271,45 +271,46 @@ class PluginManagerEventListeners {
       detail: `You are about to install ${pluginName} plugin from: ${pluginInfo.archiveURL}\nDo you want to proceed?`,
     };
 
-    return dialog
-      .showMessageBox(mainWindow, dialogOptions)
-      .then(({ response }) => {
-        console.log('User response:', response);
-        if (response === 1) {
-          // User clicked "No"
-          this.cache[identifier] = {
-            action: 'INSTALL',
-            progress: { type: 'error', message: 'installation cancelled due to user consent' },
-            percentage: 0,
-            controller,
-          };
-          return { type: 'error', message: 'Installation cancelled due to user consent' };
-        }
+    let userChoice: number;
+    try {
+      const answer = await dialog.showMessageBox(mainWindow, dialogOptions);
+      userChoice = answer.response;
+    } catch (error) {
+      console.error('Error during installation process:', error);
+      return { type: 'error', message: 'An error occurred during the installation process' };
+    }
 
-        // User clicked "Yes", proceed with installation
-        this.cache[identifier] = {
-          action: 'INSTALL',
-          progress: { type: 'info', message: 'installing plugin' },
-          percentage: 10,
-          controller,
-        };
+    console.log('User response:', userChoice);
+    if (userChoice === 1) {
+      // User clicked "No"
+      this.cache[identifier] = {
+        action: 'INSTALL',
+        progress: { type: 'error', message: 'installation cancelled due to user consent' },
+        percentage: 0,
+        controller,
+      };
+      return { type: 'error', message: 'Installation cancelled due to user consent' };
+    }
 
-        PluginManager.installFromPluginPkg(
-          pluginInfo,
-          destinationFolder,
-          headlampVersion,
-          progress => {
-            updateCache(progress);
-          },
-          controller.signal
-        );
+    // User clicked "Yes", proceed with installation
+    this.cache[identifier] = {
+      action: 'INSTALL',
+      progress: { type: 'info', message: 'installing plugin' },
+      percentage: 10,
+      controller,
+    };
 
-        return { type: 'info', message: 'Installation started' };
-      })
-      .catch(error => {
-        console.error('Error during installation process:', error);
-        return { type: 'error', message: 'An error occurred during the installation process' };
-      });
+    PluginManager.installFromPluginPkg(
+      pluginInfo,
+      destinationFolder,
+      headlampVersion,
+      progress => {
+        updateCache(progress);
+      },
+      controller.signal
+    );
+
+    return { type: 'info', message: 'Installation started' };
   }
   /**
    * Handles the update process.
