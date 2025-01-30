@@ -109,6 +109,12 @@ else
 	cd frontend && npm start
 endif
 
+run-app:
+	cd app && npm install && node ./scripts/setup-plugins.js && npm run start
+
+run-only-app:
+	cd app && npm install && node ./scripts/setup-plugins.js && npm run dev-only-app
+
 frontend-lint:
 	cd frontend && npm run lint -- --max-warnings 0 && npm run format-check
 
