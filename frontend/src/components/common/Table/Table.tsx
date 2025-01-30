@@ -452,6 +452,7 @@ const MemoCell = memo(
           whiteSpace: 'normal',
           width: 'unset',
           minWidth: 'unset',
+          wordBreak: 'break-word',
           ...(cell.column.columnDef.muiTableBodyCellProps as TableCellProps)?.sx,
         }}
       />

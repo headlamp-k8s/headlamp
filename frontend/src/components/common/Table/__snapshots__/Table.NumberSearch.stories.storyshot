@@ -417,17 +417,17 @@
           data-selected="false"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jlobuz-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6rae6r-MuiTableCell-root"
           >
             mydefinition.phonyresources0.io
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1b8vqsm-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7lu39a-MuiTableCell-root"
           >
             MyNamespace0
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-t98ysb-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e2ym6r-MuiTableCell-root"
           >
             0
           </td>
@@ -437,17 +437,17 @@
           data-selected="false"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jlobuz-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6rae6r-MuiTableCell-root"
           >
             mydefinition.phonyresources1.io
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1b8vqsm-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7lu39a-MuiTableCell-root"
           >
             MyNamespace1
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-t98ysb-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e2ym6r-MuiTableCell-root"
           >
             10
           </td>
@@ -457,17 +457,17 @@
           data-selected="false"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jlobuz-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6rae6r-MuiTableCell-root"
           >
             mydefinition.phonyresources2.io
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1b8vqsm-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7lu39a-MuiTableCell-root"
           >
             MyNamespace2
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-t98ysb-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e2ym6r-MuiTableCell-root"
           >
             20
           </td>
@@ -477,17 +477,17 @@
           data-selected="false"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jlobuz-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6rae6r-MuiTableCell-root"
           >
             mydefinition.phonyresources3.io
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1b8vqsm-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7lu39a-MuiTableCell-root"
           >
             MyNamespace3
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-t98ysb-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e2ym6r-MuiTableCell-root"
           >
             30
           </td>
