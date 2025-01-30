@@ -264,11 +264,13 @@ class PluginManagerEventListeners {
 
     const dialogOptions: MessageBoxOptions = {
       type: 'question',
-      buttons: ['Yes', 'No'],
+      buttons: [i18n.t('Yes'), i18n.t('No')],
       defaultId: 1,
-      title: 'Plugin Installation',
-      message: 'Do you want to install this plugin?',
-      detail: `You are about to install ${pluginName} plugin from: ${pluginInfo.archiveURL}\nDo you want to proceed?`,
+      title: i18n.t('Plugin Installation'),
+      message: i18n.t('Do you want to install the plugin "{{ pluginName }}"?', { pluginName }),
+      detail: i18n.t('You are about to install a plugin from: {{ url }}\nDo you want to proceed?', {
+        url: pluginInfo.archiveURL,
+      }),
     };
 
     return dialog
