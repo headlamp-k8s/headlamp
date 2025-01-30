@@ -48,6 +48,8 @@ func main() {
 		oidcClientSecret:      conf.OidcClientSecret,
 		oidcIdpIssuerURL:      conf.OidcIdpIssuerURL,
 		oidcScopes:            strings.Split(conf.OidcScopes, ","),
+		oidcImpersonate:       conf.OidcImpersonate,
+		oidcImpersonateClaim:  conf.OidcImpersonateClaim,
 		baseURL:               conf.BaseURL,
 		proxyURLs:             strings.Split(conf.ProxyURLs, ","),
 		enableHelm:            conf.EnableHelm,
