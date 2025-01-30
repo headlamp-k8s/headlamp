@@ -392,7 +392,9 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
   }
 
   const tempDir = await fs.mkdtempSync(path.join(os.tmpdir(), 'headlamp-plugin-temp-'));
-  const tempFolder = fs.mkdirSync(path.join(tempDir, pluginName), { recursive: true });
+  // Defaulting to '' should never happen if recursive is true. So this is for the type
+  // checker only.
+  const tempFolder = fs.mkdirSync(path.join(tempDir, pluginName), { recursive: true }) ?? '';
 
   if (progressCallback) {
     progressCallback({ type: 'info', message: 'Downloading Plugin' });
