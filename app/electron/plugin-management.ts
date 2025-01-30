@@ -52,6 +52,20 @@ interface PluginData {
   artifacthubVersion: string;
 }
 
+interface ArtifactHubHeadlampPkg {
+  name: string;
+  display_name: string;
+  repository: {
+    name: string;
+    user_alias: string;
+  };
+  version: string;
+  archiveURL: string;
+  archiveChecksum: string;
+  distroCompat: string;
+  versionCompat: string;
+}
+
 /**
  * Move directories from currentPath to newPath by copying.
  * @param currentPath from this path
@@ -85,9 +99,45 @@ export class PluginManager {
     progressCallback: null | ProgressCallback = null,
     signal: AbortSignal | null = null
   ) {
+    let pluginInfo;
     try {
-      const [name, tempFolder] = await downloadExtractPlugin(
-        URL,
+      pluginInfo = await fetchPluginInfo(URL, progressCallback, signal);
+    } catch (e) {
+      if (progressCallback) {
+        progressCallback({ type: 'error', message: e.message });
+      } else {
+        throw e;
+      }
+    }
+
+    return this.installFromPluginPkg(
+      pluginInfo,
+      destinationFolder,
+      headlampVersion,
+      progressCallback,
+      signal
+    );
+  }
+
+  /**
+   * Installs a plugin from the given plugin data.
+   * @param {PluginData} pluginData - The plugin data from which to install the plugin.
+   * @param {string} [destinationFolder=defaultPluginsDir()] - The folder where the plugin will be installed.
+   * @param {string} [headlampVersion=""] - The version of Headlamp for compatibility checking.
+   * @param {function} [progressCallback=null] - Optional callback for progress updates.
+   * @param {AbortSignal} [signal=null] - Optional AbortSignal for cancellation.
+   * @returns {Promise<void>} A promise that resolves when the installation is complete.
+   */
+  static async installFromPluginPkg(
+    pluginData: ArtifactHubHeadlampPkg,
+    destinationFolder = defaultPluginsDir(),
+    headlampVersion = '',
+    progressCallback: null | ProgressCallback = null,
+    signal: AbortSignal | null = null
+  ) {
+    try {
+      const [name, tempFolder] = await downloadExtractArchive(
+        pluginData,
         headlampVersion,
         progressCallback,
         signal
@@ -157,8 +207,8 @@ export class PluginManager {
       }
 
       // eslint-disable-next-line no-unused-vars
-      const [_, tempFolder] = await downloadExtractPlugin(
-        plugin.artifacthubURL,
+      const [_, tempFolder] = await downloadExtractArchive(
+        pluginData,
         headlampVersion,
         progressCallback,
         signal
@@ -296,6 +346,14 @@ export class PluginManager {
       }
     }
   }
+
+  static async fetchPluginInfo(
+    URL,
+    options: { progressCallback?: null | ProgressCallback; signal?: AbortSignal | null } = {}
+  ) {
+    const { progressCallback = null, signal = null } = options;
+    return fetchPluginInfo(URL, progressCallback, signal);
+  }
 }
 
 /**
@@ -333,38 +391,35 @@ function validateArchiveURL(archiveURL) {
 }
 
 /**
- * Downloads and extracts a plugin from the specified URL.
- * @param {string} URL - The URL of the plugin to download and extract.
+ * Downloads and extracts a plugin archive from the specified plugin package.
+ * @param {ArtifactHubHeadlampPkg} pluginInfo - The plugin package data.
  * @param {string} headlampVersion - The version of Headlamp for compatibility checking.
  * @param {function} progressCallback - A callback function for reporting progress.
  * @param {AbortSignal} signal - An optional AbortSignal for cancellation.
  * @returns {Promise<[string, string]>} A promise that resolves to an array containing the plugin name and temporary folder path.
  */
-async function downloadExtractPlugin(URL, headlampVersion, progressCallback, signal) {
+async function downloadExtractArchive(
+  pluginInfo: ArtifactHubHeadlampPkg,
+  headlampVersion,
+  progressCallback,
+  signal
+) {
   // fetch plugin metadata
   if (signal && signal.aborted) {
     throw new Error('Download cancelled');
   }
-  const pluginInfo = await fetchPluginInfo(URL, progressCallback, signal);
-  // await sleep(4000);  // comment out for testing
 
-  if (signal && signal.aborted) {
-    throw new Error('Download cancelled');
-  }
-  if (progressCallback) {
-    progressCallback({ type: 'info', message: 'Plugin Metadata Fetched' });
-  }
   const pluginName = pluginInfo.name;
   if (!validatePluginName(pluginName)) {
     throw new Error('Invalid plugin name');
   }
 
-  const archiveURL = pluginInfo.data['headlamp/plugin/archive-url'];
+  const archiveURL = pluginInfo.archiveURL;
   if (!validateArchiveURL(archiveURL)) {
-    throw new Error('Invalid plugin/archive-url');
+    throw new Error('Invalid plugin/archive-url:' + archiveURL);
   }
 
-  let checksum = pluginInfo.data['headlamp/plugin/archive-checksum'];
+  let checksum = pluginInfo.archiveChecksum;
   if (!archiveURL || !checksum) {
     throw new Error('Invalid plugin metadata. Please check the plugin details.');
   }
@@ -378,7 +433,7 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
     if (progressCallback) {
       progressCallback({ type: 'info', message: 'Checking compatibility with Headlamp version' });
     }
-    if (semver.satisfies(headlampVersion, pluginInfo.data['headlamp/plugin/version-compat'])) {
+    if (semver.satisfies(headlampVersion, pluginInfo.versionCompat)) {
       if (progressCallback) {
         progressCallback({ type: 'info', message: 'Headlamp version is compatible' });
       }
@@ -491,9 +546,9 @@ async function downloadExtractPlugin(URL, headlampVersion, progressCallback, sig
  * @param {string} URL - The URL to fetch plugin metadata from.
  * @param {function} progressCallback - A callback function for reporting progress.
  * @param {AbortSignal} signal - An optional AbortSignal for cancellation.
- * @returns {Promise<object>} A promise that resolves to the fetched plugin metadata.
+ * @returns {Promise<ArtifactHubHeadlampPkg>} A promise that resolves to the fetched plugin metadata.
  */
-async function fetchPluginInfo(URL, progressCallback, signal) {
+async function fetchPluginInfo(URL, progressCallback, signal): Promise<ArtifactHubHeadlampPkg> {
   try {
     if (!URL.startsWith('https://artifacthub.io/packages/headlamp/')) {
       throw new Error('Invalid URL. Please provide a valid URL from ArtifactHub.');
@@ -511,7 +566,19 @@ async function fetchPluginInfo(URL, progressCallback, signal) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    const pkgResponse = await response.json();
+    const pkg: ArtifactHubHeadlampPkg = {
+      name: pkgResponse.name,
+      display_name: pkgResponse.display_name,
+      version: pkgResponse.version,
+      repository: pkgResponse.repository,
+      archiveURL: pkgResponse.data['headlamp/plugin/archive-url'],
+      archiveChecksum: pkgResponse.data['headlamp/plugin/archive-checksum'],
+      distroCompat: pkgResponse.data['headlamp/plugin/distro-compat'],
+      versionCompat: pkgResponse.data['headlamp/plugin/version-compat'],
+    };
+
+    return pkg;
   } catch (e) {
     if (progressCallback) {
       progressCallback({ type: 'error', message: e.message });
