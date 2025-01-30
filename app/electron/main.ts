@@ -188,7 +188,7 @@ class PluginManagerEventListeners {
    * @name setupEventHandlers
    */
   setupEventHandlers() {
-    ipcMain.on('plugin-manager', (event, data) => {
+    ipcMain.on('plugin-manager', async (event, data) => {
       const eventData = JSON.parse(data) as Action;
       const { identifier, action } = eventData;
 
@@ -230,15 +230,36 @@ class PluginManagerEventListeners {
    * @name handleInstall
    * @private
    */
-  private handleInstall(eventData: Action, updateCache: (progress: ProgressResp) => void) {
+  private async handleInstall(eventData: Action, updateCache: (progress: ProgressResp) => void) {
     const { identifier, URL, destinationFolder, headlampVersion, pluginName } = eventData;
 
     if (!mainWindow) {
-      return Promise.resolve({ type: 'error', message: 'Main window is not available' });
+      return { type: 'error', message: 'Main window is not available' };
     }
 
     if (!URL) {
-      return Promise.resolve({ type: 'error', message: 'URL is required' });
+      return { type: 'error', message: 'URL is required' };
+    }
+
+    const controller = new AbortController();
+
+    this.cache[identifier] = {
+      action: 'INSTALL',
+      progress: { type: 'info', message: 'waiting for user consent' },
+      percentage: 0,
+      controller,
+    };
+
+    let pluginInfo;
+    try {
+      pluginInfo = await PluginManager.fetchPluginInfo(URL, { signal: controller.signal });
+    } catch (error) {
+      console.error('Error fetching plugin info:', error);
+      dialog.showErrorBox(
+        i18n.t('Failed to fetch plugin info'),
+        i18n.t('An error occurred while fetching plugin info from {{  URL }}.', { URL })
+      );
+      return { type: 'error', message: 'Failed to fetch plugin info' };
     }
 
     const dialogOptions: MessageBoxOptions = {
@@ -247,14 +268,7 @@ class PluginManagerEventListeners {
       defaultId: 1,
       title: 'Plugin Installation',
       message: 'Do you want to install this plugin?',
-      detail: `You are about to install ${pluginName} plugin from: ${URL}\nDo you want to proceed?`,
-    };
-    const controller = new AbortController();
-    this.cache[identifier] = {
-      action: 'INSTALL',
-      progress: { type: 'info', message: 'waiting for user consent' },
-      percentage: 0,
-      controller,
+      detail: `You are about to install ${pluginName} plugin from: ${pluginInfo.archiveURL}\nDo you want to proceed?`,
     };
 
     return dialog
@@ -280,8 +294,8 @@ class PluginManagerEventListeners {
           controller,
         };
 
-        PluginManager.install(
-          URL,
+        PluginManager.installFromPluginPkg(
+          pluginInfo,
           destinationFolder,
           headlampVersion,
           progress => {
