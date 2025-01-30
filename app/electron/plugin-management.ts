@@ -515,9 +515,9 @@ async function fetchPluginInfo(URL, progressCallback, signal) {
   } catch (e) {
     if (progressCallback) {
       progressCallback({ type: 'error', message: e.message });
-    } else {
-      throw e;
     }
+
+    throw e;
   }
 }
 
