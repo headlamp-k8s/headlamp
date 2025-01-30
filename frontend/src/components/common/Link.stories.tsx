@@ -1,9 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import reducers from '../../redux/reducers/reducers';
+import { TestContext } from '../../test';
 import Link, { LinkProps } from './Link';
 
 const store = createStore(reducers);
@@ -13,11 +12,9 @@ export default {
   component: Link,
   decorators: [
     Story => (
-      <Provider store={store}>
-        <MemoryRouter>
-          <Story />
-        </MemoryRouter>
-      </Provider>
+      <TestContext store={store}>
+        <Story />
+      </TestContext>
     ),
   ],
 } as Meta;

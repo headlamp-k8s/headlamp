@@ -96,13 +96,12 @@ export default function Link(props: React.PropsWithChildren<LinkProps | LinkObje
   const name = 'kubeObject' in props ? props.kubeObject?.getName() : props.params?.name;
   const namespace =
     'kubeObject' in props ? props.kubeObject?.getNamespace() : props.params?.namespace;
-  const kind = 'kubeObject' in props ? props.kubeObject?._class().kind : props.routeName;
+  const kind = 'kubeObject' in props ? props.kubeObject?._class().kind : props?.routeName;
 
   let content: any;
 
-  console.log(name, kind, canRenderDetails(kind));
   if (!drawerEnabled || !canRenderDetails(kind)) {
-    content = <PureLink {...otherProps} />;
+    content = <PureLink {...otherProps} kubeObject={kubeObject} />;
   } else {
     content = (
       <MuiLink
