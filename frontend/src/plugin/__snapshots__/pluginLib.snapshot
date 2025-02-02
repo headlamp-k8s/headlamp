@@ -95,6 +95,7 @@
       "ViewButton": [Function],
       "ViewDialog": [Function],
       "addResourceTableColumnsProcessor": [Function],
+      "isRestartableResource": [Function],
       "metadataStyles": [Function],
       "resourceTableSlice": {
         "actions": {
@@ -141,6 +142,7 @@
     "ViewButton": [Function],
     "ViewDialog": [Function],
     "addResourceTableColumnsProcessor": [Function],
+    "isRestartableResource": [Function],
     "makeStatusLabel": [Function],
     "metadataStyles": [Function],
     "resourceTableSlice": {
@@ -197,6 +199,7 @@
     "PLUGIN_LOADING_ERROR": "headlamp.plugin-loading-error",
     "POD_ATTACH": "headlamp.pod-attach",
     "RESTART_RESOURCE": "headlamp.restart-resource",
+    "RESTART_RESOURCES": "headlamp.restart-resources",
     "SCALE_RESOURCE": "headlamp.scale-resource",
     "TERMINAL": "headlamp.terminal",
   },

@@ -31,6 +31,7 @@ const checkExports = [
   'resourceTableSlice',
   'ResourceTableColumnChooser',
   'RestartButton',
+  'RestartMultipleButton',
   'ScaleButton',
   'SimpleEditor',
   'ViewButton',
