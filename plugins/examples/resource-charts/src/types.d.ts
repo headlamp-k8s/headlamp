@@ -23,9 +23,3 @@ declare module '@material-ui/core/styles' {
     };
   }
 }
-
-declare module 'react-i18next' {
-  export function useTranslation(): {
-    t: (key: string, options?: Record<string, any>) => string;
-  };
-}

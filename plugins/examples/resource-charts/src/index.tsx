@@ -1,65 +1,49 @@
-import { registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
-import { CircularChart } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-import Pod from '@kinvolk/headlamp-plugin/lib/lib/k8s/pod';
+import { K8s, registerOverviewChartsProcessor } from '@kinvolk/headlamp-plugin/lib';
+import { TileChart } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 import { Box, Paper } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 function PodFailureChart() {
-  const { t } = useTranslation();
-  const [pods, error] = Pod.useList();
-
+  const [pods, error] = K8s.ResourceClasses.Pod.useList();
+  const theme = useTheme();
   // Calculate failed pods
   const failedPods = (pods || []).filter(pod => {
     const phase = pod.status?.phase;
     return phase === 'Failed' || phase === 'Unknown';
   });
 
-  // Create legend text
-  const getLegend = (used: number, available: number) => {
-    if (available === 0) {
-      return t('No pods found');
-    }
-    return t('{{ failed }} failed / {{ total }} total', {
-      failed: used,
-      total: available,
-    });
-  };
-
   if (error) {
     return (
       <Box p={2}>
         <Paper>
-          <Box p={2}>{t('Error loading pods: {{ error }}', { error: error.message })}</Box>
+          <Box p={2}>{`Error loading pods: ${error}`}</Box>
         </Paper>
       </Box>
     );
   }
 
   const totalPods = pods?.length || 0;
+  const failedCount = failedPods.length;
 
   return (
-    <Box p={2}>
-      <Paper>
-        <Box p={2}>
-          <CircularChart
-            title={t('Pod Health')}
-            items={pods || []}
-            itemsMetrics={null}
-            noMetrics={false}
-            resourceUsedGetter={() => failedPods.length}
-            resourceAvailableGetter={() => totalPods}
-            getLegend={getLegend}
-          />
-        </Box>
-      </Paper>
-    </Box>
+    <TileChart
+      title="Pods Failed"
+      data={[{ name: 'failed', value: failedCount, fill: theme.palette.error.main }]}
+      total={totalPods}
+      label={totalPods === 0 ? '0' : `${((failedCount / totalPods) * 100).toFixed(1)}%`}
+      legend={totalPods === 0 ? 'No pods found' : `${failedCount} failed / ${totalPods} total`}
+    />
   );
 }
 
-// Register the chart as an AppBar action
-registerAppBarAction(() => ({
-  name: 'pod-failure-chart',
-  component: PodFailureChart,
-  priority: 0,
-}));
+// Register the chart using the overview charts processor
+registerOverviewChartsProcessor(function addFailedPodsChart(charts) {
+  return [
+    ...charts,
+    {
+      id: 'pod-failed',
+      component: () => <PodFailureChart />,
+    },
+  ];
+});
