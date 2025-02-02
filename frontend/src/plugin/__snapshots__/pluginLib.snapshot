@@ -16110,6 +16110,7 @@
   "registerDetailsViewSectionsProcessor": [Function],
   "registerGetTokenFunction": [Function],
   "registerHeadlampEventCallback": [Function],
+  "registerOverviewChartsProcessor": [Function],
   "registerPluginSettings": [Function],
   "registerResourceTableColumnsProcessor": [Function],
   "registerRoute": [Function],
