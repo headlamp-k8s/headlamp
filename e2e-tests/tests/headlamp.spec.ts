@@ -29,6 +29,24 @@ test('main page should have Network tab', async ({ page }) => {
   await headlampPage.hasNetworkTab();
 });
 
+test('main page should have global search', async ({ page }) => {
+  const headlampPage = new HeadlampPage(page);
+
+  await headlampPage.authenticate();
+  await headlampPage.hasGlobalSearch();
+});
+
+test('react-hotkey for global search', async ({ page }) => {
+  const headlampPage = new HeadlampPage(page);
+
+  await headlampPage.authenticate();
+  const globalSearch = await headlampPage.hasGlobalSearch();
+
+  await page.keyboard.press('/');
+
+  await expect(globalSearch).toBeFocused();
+});
+
 test('service page should have headlamp service', async ({ page }) => {
   const headlampPage = new HeadlampPage(page);
   const servicesPage = new ServicesPage(page);
