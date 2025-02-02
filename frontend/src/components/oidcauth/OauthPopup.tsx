@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import React, { ReactChild } from 'react';
+import React, { ReactNode } from 'react';
 
 interface OauthPopupProps {
   width?: number;
@@ -8,7 +8,7 @@ interface OauthPopupProps {
   title?: string;
   onClose?: () => any;
   onCode: (params: any) => any;
-  children?: ReactChild;
+  children?: ReactNode;
   button: typeof Button;
 }
 
