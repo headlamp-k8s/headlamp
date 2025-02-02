@@ -1,7 +1,7 @@
 {
   "name": "resource-charts",
   "version": "0.0.1",
-  "description": "Example plugin showing how to add a resource chart to the AppBar.",
+  "description": "Example plugin showing how to add a Resource CircularChart to the Overview page as an example.",
   "scripts": {
     "start": "headlamp-plugin start",
     "build": "headlamp-plugin build",
