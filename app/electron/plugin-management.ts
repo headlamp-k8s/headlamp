@@ -73,6 +73,7 @@ export class PluginManager {
    * Installs a plugin from the specified URL.
    * @param {string} URL - The URL of the plugin to install.
    * @param {string} [destinationFolder=defaultPluginsDir()] - The folder where the plugin will be installed.
+   * @param {string[]} [disabledPlugins = []] - An array of disabled plugins.
    * @param {string} [headlampVersion=""] - The version of Headlamp for compatibility checking.
    * @param {function} [progressCallback=null] - Optional callback for progress updates.
    * @param {AbortSignal} [signal=null] - Optional AbortSignal for cancellation.
@@ -81,6 +82,7 @@ export class PluginManager {
   static async install(
     URL,
     destinationFolder = defaultPluginsDir(),
+    disabledPlugins: string[] = [],
     headlampVersion = '',
     progressCallback: null | ProgressCallback = null,
     signal: AbortSignal | null = null
@@ -92,6 +94,10 @@ export class PluginManager {
         progressCallback,
         signal
       );
+
+      if (disabledPlugins.includes(name)) {
+        throw new Error(`Plugin ${name} is disabled`);
+      }
 
       // sleep(2000);  // comment out for testing
 
@@ -119,6 +125,7 @@ export class PluginManager {
    * Updates an installed plugin to the latest version.
    * @param {string} pluginName - The name of the plugin to update.
    * @param {string} [destinationFolder=defaultPluginsDir()] - The folder where the plugin is installed.
+   * @param {string[]} [disabledPlugins = []] - An array of disabled plugins.
    * @param {string} [headlampVersion=""] - The version of Headlamp for compatibility checking.
    * @param {null | ProgressCallback} [progressCallback=null] - Optional callback for progress updates.
    * @param {AbortSignal} [signal=null] - Optional AbortSignal for cancellation.
@@ -127,11 +134,16 @@ export class PluginManager {
   static async update(
     pluginName,
     destinationFolder = defaultPluginsDir(),
+    disabledPlugins: string[] = [],
     headlampVersion = '',
     progressCallback: null | ProgressCallback = null,
     signal: AbortSignal | null = null
   ): Promise<void> {
     try {
+      if (disabledPlugins.includes(pluginName)) {
+        throw new Error(`Plugin ${pluginName} is disabled`);
+      }
+
       // @todo: should list call take progressCallback?
       const installedPlugins = PluginManager.list(destinationFolder);
       if (!installedPlugins) {
@@ -195,15 +207,21 @@ export class PluginManager {
    * Uninstalls a plugin from the specified folder.
    * @param {string} name - The name of the plugin to uninstall.
    * @param {string} [folder=defaultPluginsDir()] - The folder where the plugin is installed.
+   * @param {string[]} [disabledPlugins = []] - An array of disabled plugins.
    * @param {function} [progressCallback=null] - Optional callback for progress updates.
    * @returns {void}
    */
   static uninstall(
     name,
     folder = defaultPluginsDir(),
+    disabledPlugins: string[] = [],
     progressCallback: null | ProgressCallback = null
   ) {
     try {
+      if (disabledPlugins.includes(name)) {
+        throw new Error(`Plugin ${name} is disabled`);
+      }
+
       // @todo: should list call take progressCallback?
       const installedPlugins = PluginManager.list(folder);
       if (!installedPlugins) {
@@ -239,12 +257,19 @@ export class PluginManager {
   /**
    * Lists all valid plugins in the specified folder.
    * @param {string} [folder=defaultPluginsDir()] - The folder to list plugins from.
+   * @param {string[]} [disabledPlugins = []] - An array of disabled plugins.
    * @param {function} [progressCallback=null] - Optional callback for progress updates.
    * @returns {Array<object>} An array of objects representing valid plugins.
    */
-  static list(folder = defaultPluginsDir(), progressCallback: null | ProgressCallback = null) {
+  static list(
+    folder = defaultPluginsDir(),
+    disabledPlugins: string[] = [],
+    progressCallback: null | ProgressCallback = null
+  ) {
     try {
       const pluginsData: PluginData[] = [];
+
+      const disableAllPlugins = disabledPlugins.length === 0;
 
       // Read all entries in the specified folder
       const entries = fs.readdirSync(folder, { withFileTypes: true });
@@ -260,7 +285,13 @@ export class PluginManager {
           // Read package.json to get the plugin name and version
           const packageJsonPath = path.join(pluginDir, 'package.json');
           const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-          const pluginName = packageJson.name || pluginFolder.name;
+          const pluginName: string = packageJson.name || pluginFolder.name;
+
+          if (disableAllPlugins || disabledPlugins.includes(pluginName)) {
+            console.log(`Plugin ${pluginName} is disabled`);
+            continue;
+          }
+
           const pluginTitle = packageJson.artifacthub.title;
           const pluginVersion = packageJson.version || null;
           const artifacthubURL = packageJson.artifacthub ? packageJson.artifacthub.url : null;
