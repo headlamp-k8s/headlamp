@@ -294,6 +294,8 @@ export default function Table<RowItem extends Record<string, any>>({
       size: 'small',
       sx: { padding: 0 },
     },
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange',
   });
 
   const gridTemplateColumns = useMemo(() => {
@@ -305,11 +307,12 @@ export default function Table<RowItem extends Record<string, any>>({
           tableProps.state?.columnVisibility?.[id] === false;
         return !isHidden;
       })
-      .map(it => {
-        if (typeof it.gridTemplate === 'number') {
-          return `${it.gridTemplate}fr`;
-        }
-        return it.gridTemplate ?? '1fr';
+      .map((it, index) => {
+        const column = table.getColumn(it.id ?? String(index));
+        const width =
+          column?.getSize() ??
+          (typeof it.gridTemplate === 'number' ? `${it.gridTemplate}fr` : it.gridTemplate ?? '1fr');
+        return typeof width === 'number' ? `${width}px` : width;
       })
       .join(' ');
     if (tableProps.enableRowActions) {
@@ -326,6 +329,7 @@ export default function Table<RowItem extends Record<string, any>>({
     tableProps.state?.columnVisibility,
     tableProps.enableRowActions,
     tableProps.enableRowSelection,
+    table.getState().columnSizing,
   ]);
 
   const rows = useMRT_Rows(table);
