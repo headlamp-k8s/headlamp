@@ -37,7 +37,7 @@ import WorkloadDetails from '../../workload/Details';
 
 const kindComponentMap: Record<
   string,
-  (props: { name?: string; namespace?: string }) => ReactElement
+  (props: { name: string; namespace?: string }) => ReactElement
 > = {
   Pod: PodDetails,
   Deployment: props => <WorkloadDetails {...props} workloadKind={Deployment} />,
@@ -90,14 +90,14 @@ export const KubeObjectDetails = memo(({ resource }: { resource: KubeObject }) =
   useEffect(() => {
     if (!kindComponentMap[kind]) {
       console.error(
-        'No details component for kind ${kind} was found. See KubeNodeDetails.tsx for more info'
+        `No details component for kind ${kind} was found. See KubeNodeDetails.tsx for more info`
       );
     }
-  }, [kind, kindComponentMap]);
+  }, [kindComponentMap, kind]);
 
   return (
     <Box sx={{ overflow: 'hidden' }}>
-      <Box sx={{ marginTop: '-70px' }}>
+      <Box sx={{ marginTop: '-50px' }}>
         <Component name={name} namespace={namespace} />
       </Box>
     </Box>
