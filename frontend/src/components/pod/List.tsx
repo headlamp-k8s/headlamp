@@ -4,6 +4,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
+import { METRIC_REFETCH_INTERVAL_MS, PodMetrics } from '../../lib/k8s/PodMetrics';
+import { parseCpu, parseRam, unparseCpu, unparseRam } from '../../lib/units';
 import { timeAgo } from '../../lib/util';
 import { useNamespaces } from '../../redux/filterSlice';
 import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
@@ -62,6 +64,7 @@ function getReadinessGatesStatus(pods: Pod) {
 export interface PodListProps {
   pods: Pod[] | null;
   error: ApiError | null;
+  metrics: PodMetrics[] | null;
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
@@ -72,12 +75,32 @@ export function PodListRenderer(props: PodListProps) {
   const {
     pods,
     error,
+    metrics,
     hideColumns = [],
     reflectTableInURL = 'pods',
     noNamespaceFilter,
     clusterErrors,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
+
+  const getCpuUsage = (pod: Pod) => {
+    const metric = metrics?.find(it => it.getName() === pod.getName());
+    if (!metric) return;
+
+    return (
+      metric?.jsonData.containers.map(it => parseCpu(it.usage.cpu)).reduce((a, b) => a + b, 0) ?? 0
+    );
+  };
+
+  const getMemoryUsage = (pod: Pod) => {
+    const metric = metrics?.find(it => it.getName() === pod.getName());
+    if (!metric) return;
+
+    return (
+      metric?.jsonData.containers.map(it => parseRam(it.usage.memory)).reduce((a, b) => a + b, 0) ??
+      0
+    );
+  };
 
   return (
     <ResourceListView
@@ -117,6 +140,37 @@ export function PodListRenderer(props: PodListProps) {
           getValue: pod => pod.getDetailedStatus().reason,
           render: makePodStatusLabel,
         },
+        ...(metrics?.length
+          ? [
+              {
+                id: 'cpu',
+                label: t('CPU'),
+                gridTemplate: 'min-content',
+                render: (pod: Pod) => {
+                  const cpu = getCpuUsage(pod);
+                  if (!cpu) return;
+
+                  const { value, unit } = unparseCpu(String(cpu));
+
+                  return `${value} ${unit}`;
+                },
+                getValue: (pod: Pod) => getCpuUsage(pod) ?? 0,
+              },
+              {
+                id: 'memory',
+                label: t('Memory'),
+                gridTemplate: 'min-content',
+                render: (pod: Pod) => {
+                  const memory = getMemoryUsage(pod);
+                  if (!memory) return;
+                  const { value, unit } = unparseRam(memory);
+
+                  return `${value} ${unit}`;
+                },
+                getValue: (pod: Pod) => getMemoryUsage(pod) ?? 0,
+              },
+            ]
+          : []),
         {
           id: 'ip',
           label: t('glossary|IP'),
@@ -218,6 +272,10 @@ export function PodListRenderer(props: PodListProps) {
 
 export default function PodList() {
   const { items, error, clusterErrors } = Pod.useList({ namespace: useNamespaces() });
+  const { items: podMetrics } = PodMetrics.useList({
+    namespace: useNamespaces(),
+    refetchInterval: METRIC_REFETCH_INTERVAL_MS,
+  });
 
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
 
@@ -230,6 +288,12 @@ export default function PodList() {
   }, [items, error]);
 
   return (
-    <PodListRenderer pods={items} error={error} clusterErrors={clusterErrors} reflectTableInURL />
+    <PodListRenderer
+      pods={items}
+      error={error}
+      metrics={podMetrics}
+      clusterErrors={clusterErrors}
+      reflectTableInURL
+    />
   );
 }

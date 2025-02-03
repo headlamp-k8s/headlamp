@@ -200,6 +200,18 @@ export default function Table<RowItem extends Record<string, any>>({
       }
     : undefined;
 
+  const columnOrder = useMemo(() => {
+    const ids: string[] = tableProps.columns.map((it, i) => it.id ?? String(i));
+    if (tableProps.enableRowActions) {
+      ids.push('mrt-row-actions');
+    }
+    if (tableProps.enableRowSelection) {
+      ids.unshift('mrt-row-select');
+    }
+
+    return ids;
+  }, [tableProps.columns, tableProps.enableRowActions, tableProps.enableRowSelection]);
+
   const table = useMaterialReactTable({
     ...tableProps,
     columns: tableColumns ?? [],
@@ -233,6 +245,7 @@ export default function Table<RowItem extends Record<string, any>>({
     },
     state: {
       ...(tableProps.state ?? {}),
+      columnOrder: columnOrder,
       pagination: {
         pageIndex: page - 1,
         pageSize: pageSize,
