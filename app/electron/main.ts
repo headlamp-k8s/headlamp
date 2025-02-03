@@ -1211,6 +1211,8 @@ function startElecron() {
      * @param eventData - The data sent from the renderer process.
      */
     function handleRunCommand(event: IpcMainEvent, eventData: CommandData): void {
+      return; // Disable this until we figure out a better way to do this
+
       // Only allow "minikube", and "az" commands
       const validCommands = ['minikube', 'az'];
       if (!validCommands.includes(eventData.command)) {
@@ -1222,11 +1224,10 @@ function startElecron() {
         return;
       }
 
-      const child: ChildProcessWithoutNullStreams = spawn(
-        eventData.command,
-        eventData.args,
-        eventData.options
-      );
+      const child: ChildProcessWithoutNullStreams = spawn(eventData.command, eventData.args, {
+        ...eventData.options,
+        shell: false,
+      });
 
       child.stdout.on('data', (data: string | Buffer) => {
         event.sender.send('command-stdout', eventData.id, data.toString());
