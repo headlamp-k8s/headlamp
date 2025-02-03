@@ -63,13 +63,7 @@ You can build the app for Linux, Windows, or Mac.
 Do so on the platform you are building for. That is build the mac app on a Mac,
 and the linux app on a linux box.
 
-First, we need to
-
-```bash
-make backend frontend
-```
-
-Then choose the relevant command.
+Choose the relevant command:
 
 ```bash
 make app-linux
