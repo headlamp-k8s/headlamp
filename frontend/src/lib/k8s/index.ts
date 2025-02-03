@@ -92,8 +92,12 @@ export const ResourceClasses = {
  * */
 export function useClustersConf(): ConfigState['allClusters'] {
   const state = useTypedSelector(state => state.config);
-  const clusters = _.cloneDeep(state.clusters || {});
+  const clusters = _.cloneDeep(state.clusters);
   const allClusters = _.cloneDeep(state.allClusters || {});
+
+  if (clusters === null) {
+    return null;
+  }
   Object.assign(allClusters, clusters);
 
   if (state.statelessClusters) {
