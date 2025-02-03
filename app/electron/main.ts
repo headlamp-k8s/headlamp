@@ -48,9 +48,9 @@ const startUrl = (
     pathname: frontendPath,
     protocol: 'file:',
     slashes: true,
-    query: {
-      backendToken: backendToken,
-    },
+    // query: {
+    //   backendToken: backendToken,
+    // },
   })
 )
   // Windows paths use backslashes and for consistency we want to use forward slashes.
@@ -549,6 +549,8 @@ async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNul
 
   // Pass a token to the backend that can be used for auth on some routes
   process.env.HEADLAMP_BACKEND_TOKEN = backendToken;
+
+  console.log('+++BACKENDTOKEN:', backendToken);
 
   // Set the bundled plugins in addition to the the user's plugins.
   if (fs.existsSync(bundledPlugins) && !isEmpty(bundledPlugins)) {
@@ -1069,9 +1071,21 @@ function startElecron() {
     });
 
     mainWindow.webContents.on('dom-ready', () => {
+      // Trigger a resize to set the zoom level
+      const [width, height] = mainWindow?.getSize() || [];
+      mainWindow?.setSize(width, height - 1);
+      mainWindow?.setSize(width, height);
+
       const defaultMenu = getDefaultAppMenu();
       const currentMenu = JSON.parse(JSON.stringify(defaultMenu));
       mainWindow?.webContents.send('currentMenu', currentMenu);
+      console.log('+++ Sending backendToken to renderer:', backendToken);
+      mainWindow?.webContents.send('backendToken', backendToken);
+      console.log('+++ Sent backendToken to renderer!');
+      setTimeout(() => {
+        console.log('+++ Resending backendToken after delay:', backendToken);
+        mainWindow?.webContents.send('backendToken', backendToken);
+      }, 2000);
     });
 
     mainWindow.on('closed', () => {

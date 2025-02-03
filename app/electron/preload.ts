@@ -27,10 +27,15 @@ contextBridge.exposeInMainWorld('desktopApi', {
       'command-stderr',
       'command-exit',
       'plugin-manager',
+      'backendToken',
     ];
+    console.log(`+++ Preload: Registering listener for "${channel}"`);
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
-      ipcRenderer.on(channel, (event, ...args) => func(...args));
+      ipcRenderer.on(channel, (event, ...args) => {
+        console.log(`+++ Preload received "${channel}":`, JSON.stringify(args, null, 2));
+        func(...args);
+      });
     }
   },
 

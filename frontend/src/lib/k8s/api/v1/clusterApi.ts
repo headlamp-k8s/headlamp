@@ -182,3 +182,5 @@ export async function parseKubeConfig(clusterReq: ClusterRequest) {
 
   return null;
 }
+
+(window as any).parseKubeConfig = parseKubeConfig;
