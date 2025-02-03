@@ -2,16 +2,12 @@ import { alpha, useTheme } from '@mui/material';
 import { BaseEdge, EdgeProps } from '@xyflow/react';
 import { memo } from 'react';
 import { GraphEdge } from '../graph/graphModel';
-import { useGraphView } from '../GraphView';
 
 /**
  * An edge between Kube Objects
  */
-export const KubeRelationEdge = memo((props: EdgeProps & { data: GraphEdge['data'] }) => {
+export const GraphEdgeComponent = memo((props: EdgeProps & { data: GraphEdge['data'] }) => {
   const theme = useTheme();
-  const graph = useGraphView();
-
-  const isHighlighted = graph.highlights.isEdgeHighlighted(props.id);
 
   const data = props.data;
 
@@ -34,10 +30,7 @@ export const KubeRelationEdge = memo((props: EdgeProps & { data: GraphEdge['data
       id={props.id}
       path={svgPath}
       style={{
-        opacity: isHighlighted ? 1 : 0.2,
-        transition: 'opacity',
-        transitionDuration: '0.1s',
-        stroke: alpha(theme.palette.action.active, 0.35),
+        stroke: alpha(theme.palette.action.active, 0.8),
       }}
     />
   );

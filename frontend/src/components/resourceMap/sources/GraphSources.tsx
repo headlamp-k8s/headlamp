@@ -10,20 +10,7 @@ import {
   useState,
 } from 'react';
 import { KubeObject } from '../../../lib/k8s/cluster';
-import { GraphEdge, GraphNode, GraphSource } from '../graph/graphModel';
-import { configurationSource } from './definitions/configurationSource';
-import { networkSource } from './definitions/networkSource';
-import { securitySource } from './definitions/securitySource';
-import { storageSource } from './definitions/storageSource';
-import { workloadsSource } from './definitions/workloadSource';
-
-export const allSources: GraphSource[] = [
-  workloadsSource,
-  storageSource,
-  networkSource,
-  securitySource,
-  configurationSource,
-];
+import { GraphEdge, GraphNode, GraphSource, Relation } from '../graph/graphModel';
 
 /**
  * Map of nodes and edges where the key is source id
@@ -70,7 +57,6 @@ export const kubeOwnersEdges = (obj: KubeObject): GraphEdge[] => {
   return (
     obj.metadata.ownerReferences?.map(owner => ({
       id: `${obj.metadata.uid}-${owner.uid}`,
-      type: 'kubeRelation',
       source: obj.metadata.uid,
       target: owner.uid,
     })) ?? []
@@ -80,20 +66,18 @@ export const kubeOwnersEdges = (obj: KubeObject): GraphEdge[] => {
 /**
  * Create an object from any Kube object
  */
-export const makeKubeObjectNode = (obj: KubeObject): GraphNode => ({
-  id: obj.metadata.uid,
-  type: 'kubeObject',
-  data: {
-    resource: obj,
-  },
-});
+export const makeKubeObjectNode = (obj: KubeObject): GraphNode => {
+  return {
+    id: obj.metadata.uid,
+    kubeObject: obj,
+  };
+};
 
 /**
  * Make an edge connecting two Kube objects
  */
 export const makeKubeToKubeEdge = (from: KubeObject, to: KubeObject): GraphEdge => ({
   id: `${from.metadata.uid}-${to.metadata.uid}`,
-  type: 'kubeRelation',
   source: from.metadata.uid,
   target: to.metadata.uid,
 });
@@ -139,12 +123,14 @@ export interface GraphSourceManagerProps {
   sources: GraphSource[];
   /** Children to render */
   children: ReactNode;
+  /** Relations between nodes */
+  relations: Relation[];
 }
 
 /**
  * Loads data from all the sources
  */
-export function GraphSourceManager({ sources, children }: GraphSourceManagerProps) {
+export function GraphSourceManager({ sources, children, relations }: GraphSourceManagerProps) {
   const [sourceData, setSourceData] = useState(new Map<string, MaybeNodesAndEdges>());
   const [selectedSources, setSelectedSources] = useState(() => {
     const _selectedSources = new Set<string>();
@@ -235,14 +221,42 @@ export function GraphSourceManager({ sources, children }: GraphSourceManagerProp
       let nodes: GraphNode[] = [];
       let edges: GraphEdge[] = [];
 
+      const enabledRelations = relations.filter(relation => {
+        if (relation.toSource) {
+          return selectedSources.has(relation.fromSource) && selectedSources.has(relation.toSource);
+        }
+        return selectedSources.has(relation.fromSource);
+      });
+
+      const nodesPerSource = new Map<string, GraphNode[]>();
+
       selectedSources.forEach(id => {
         const data = sourceData.get(id);
         if (data?.nodes) {
           nodes = nodes.concat(data.nodes);
+          nodesPerSource.set(id, data.nodes);
         }
         if (data?.edges) {
           edges = edges.concat(data.edges);
         }
+      });
+
+      // Create edges based on Relations
+      enabledRelations.forEach(relation => {
+        const fromNodes = nodesPerSource.get(relation.fromSource) ?? [];
+        const toNodes = relation.toSource ? nodesPerSource.get(relation.toSource) ?? [] : nodes;
+
+        fromNodes.forEach(from => {
+          toNodes.forEach(to => {
+            if (relation.predicate(from, to)) {
+              edges.push({
+                id: from.id + '-' + to.id,
+                source: from.id,
+                target: to.id,
+              });
+            }
+          });
+        });
       });
 
       const isLoading =
@@ -259,7 +273,7 @@ export function GraphSourceManager({ sources, children }: GraphSourceManagerProp
         isLoading,
       };
     },
-    [sources, selectedSources, sourceData, setSelectedSources],
+    [sources, selectedSources, sourceData, setSelectedSources, relations],
     500
   );
 

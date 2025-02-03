@@ -13,7 +13,7 @@ import Fuse from 'fuse.js';
 import { lazy, Suspense, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { generatePath, useHistory, useLocation } from 'react-router';
+import { generatePath, useHistory, useLocation, useRouteMatch } from 'react-router';
 import { FixedSizeList } from 'react-window';
 import { useClusterGroup, useClustersConf } from '../../lib/k8s';
 import ConfigMap from '../../lib/k8s/configMap';
@@ -146,17 +146,22 @@ export function GlobalSearchContent({
   // Resource search items
   const resources = useSearchResources();
   const loading = resources.filter(it => it.isLoading).map(it => it.kind);
+  const isMap = useRouteMatch(getClusterPrefixedPath(getDefaultRoutes().map?.path));
+  const location = useLocation();
   const items = useMemo(
     () =>
-      makeKubeObjectResults(resources, item =>
-        history.push(
-          createRouteURL(item.kind, {
-            name: item.metadata.name,
-            namespace: item.metadata.namespace,
-          })
-        )
-      ),
-    [resources]
+      makeKubeObjectResults(resources, item => {
+        const search = new URLSearchParams(location.search);
+        search.set('node', item.metadata.uid);
+        const url = isMap
+          ? createRouteURL('map') + `?` + search
+          : createRouteURL(item.kind, {
+              name: item.metadata.name,
+              namespace: item.metadata.namespace,
+            });
+        history.push(url);
+      }),
+    [resources, isMap]
   );
 
   // Cluster items
@@ -190,7 +195,6 @@ export function GlobalSearchContent({
           routeFilters.filter(f => f(route)).length !== routeFilters.length
         ) && !route.disabled
     );
-  const location = useLocation();
   const routes: SearchResult[] = useMemo(
     () =>
       filteredRoutes

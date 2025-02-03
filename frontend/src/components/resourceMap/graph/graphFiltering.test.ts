@@ -7,37 +7,29 @@ describe('filterGraph', () => {
   const nodes: GraphNode[] = [
     {
       id: '1',
-      type: 'kubeObject',
-      data: {
-        resource: { metadata: { namespace: 'ns1', name: 'node1' } as KubeMetadata } as KubeObject,
-      },
+      kubeObject: { metadata: { namespace: 'ns1', name: 'node1' } as KubeMetadata } as KubeObject,
     },
     {
       id: '2',
-      type: 'kubeObject',
-      data: {
-        resource: {
-          kind: 'Pod',
-          metadata: { namespace: 'ns2' } as KubeMetadata,
-          status: { phase: 'Failed' },
-        } as any,
-      },
+      kubeObject: {
+        kind: 'Pod',
+        metadata: { namespace: 'ns2' } as KubeMetadata,
+        status: { phase: 'Failed' },
+      } as any,
     },
     {
       id: '3',
-      type: 'kubeObject',
-      data: { resource: { metadata: { namespace: 'ns3' } as KubeMetadata } as KubeObject },
+      kubeObject: { metadata: { namespace: 'ns3' } as KubeMetadata } as KubeObject,
     },
     {
       id: '4',
-      type: 'kubeObject',
-      data: { resource: { metadata: { namespace: 'ns3' } as KubeMetadata } as KubeObject },
+      kubeObject: { metadata: { namespace: 'ns3' } as KubeMetadata } as KubeObject,
     },
   ];
 
   const edges: GraphEdge[] = [
-    { id: 'e1', source: '1', target: '2', type: 'kubeRelation' },
-    { id: 'e2', source: '3', target: '4', type: 'kubeRelation' },
+    { id: 'e1', source: '1', target: '2' },
+    { id: 'e2', source: '3', target: '4' },
   ];
 
   it('filters nodes by namespace', () => {

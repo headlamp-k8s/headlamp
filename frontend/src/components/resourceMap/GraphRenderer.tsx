@@ -14,21 +14,17 @@ import {
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../common';
-import { KubeRelationEdge } from './edges/KubeRelationEdge';
+import { GraphEdgeComponent } from './edges/GraphEdgeComponent';
 import { maxZoom, minZoom } from './graphConstants';
 import { GraphControls } from './GraphControls';
-import { GroupNodeComponent } from './nodes/GroupNode';
-import { KubeGroupNodeComponent } from './nodes/KubeGroupNode';
 import { KubeObjectNodeComponent } from './nodes/KubeObjectNode';
 
 export const nodeTypes = {
-  kubeObject: KubeObjectNodeComponent,
-  kubeGroup: KubeGroupNodeComponent,
-  group: GroupNodeComponent,
+  object: KubeObjectNodeComponent,
 };
 
 const edgeTypes = {
-  kubeRelation: KubeRelationEdge,
+  edge: GraphEdgeComponent,
 };
 
 export interface GraphRendererProps {

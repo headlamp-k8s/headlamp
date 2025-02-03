@@ -1,50 +1,82 @@
 import { Icon } from '@iconify/react';
-import { alpha, Box, styled, useTheme } from '@mui/material';
-import { Handle, NodeProps, Position, useEdges, useNodes } from '@xyflow/react';
-import { memo, startTransition, useEffect, useRef, useState } from 'react';
-import { KubeObjectNode } from '../graph/graphModel';
-import { useGraphView } from '../GraphView';
+import { alpha, styled, useTheme } from '@mui/material';
+import { Handle, NodeProps, Position } from '@xyflow/react';
+import { memo, useEffect, useState } from 'react';
+import { getMainNode } from '../graph/graphGrouping';
+import { useGraphView, useNode } from '../GraphView';
 import { KubeIcon } from '../kubeIcon/KubeIcon';
 import { KubeObjectGlance } from '../KubeObjectGlance/KubeObjectGlance';
+import { GroupNodeComponent } from './GroupNode';
 import { getStatus } from './KubeObjectStatus';
 
 const Container = styled('div')<{
-  isHovered: boolean;
   isExpanded: boolean;
   isFaded: boolean;
   isSelected: boolean;
-}>(({ theme, isHovered, isFaded, isSelected, isExpanded }) => ({
+  childrenCount: number;
+}>(({ theme, isSelected, isExpanded, childrenCount }) => ({
   display: 'flex',
   flexDirection: 'column',
-  zIndex: isHovered ? 1 : undefined,
-  opacity: isFaded && !isHovered ? 0.5 : undefined,
-  filter: isFaded && !isHovered ? 'grayscale(0.0)' : undefined,
-
   width: isExpanded ? 'auto' : '100%!important',
   minWidth: '100%',
+  height: isExpanded ? 'auto' : '100%',
+  minHeight: '100%',
+  boxSizing: 'border-box',
 
-  position: isHovered ? 'absolute' : undefined,
+  position: 'absolute',
   background: theme.palette.background.paper,
   borderRadius: '10px',
-  border: '1px solid #e3e3e3',
+  border: '1px solid',
 
   borderColor: isSelected ? theme.palette.action.active : theme.palette.divider,
 
-  boxShadow: isHovered ? '4px 4px 6px rgba(0,0,0,0.06)' : undefined,
-  transform: isHovered ? 'translateY(-2px)' : undefined,
-  padding: isExpanded ? '16px' : '10px',
-  marginLeft: isExpanded ? '-6px' : 0,
-  marginTop: isExpanded ? '-6px' : 0,
-
-  transition: 'all 0.05s',
+  padding: '10px',
+  willChange: 'width, height, border-color, box-shadow',
 
   ':hover': {
     borderColor: isSelected ? undefined : alpha(theme.palette.action.active, 0.2),
+    boxShadow: '4px 4px 6px rgba(0,0,0,0.06)',
   },
+
+  '::before':
+    childrenCount > 1
+      ? {
+          content: `''`,
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          left: '5px',
+          top: '5px',
+          background: theme.palette.background.paper,
+          border: '1px solid',
+          borderColor: theme.palette.divider,
+          borderRadius: '10px',
+          zIndex: '-1',
+        }
+      : undefined,
+
+  '::after':
+    childrenCount > 2
+      ? {
+          content: `''`,
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          left: '9px',
+          top: '9px',
+          background: theme.palette.background.paper,
+          border: '1px solid',
+          borderColor: theme.palette.divider,
+          borderRadius: '10px',
+          zIndex: '-2',
+        }
+      : undefined,
 }));
 
 const CircleBadge = styled('div')(({ theme }) => ({
   position: 'absolute',
+  right: 0,
+  top: 0,
   width: '32px',
   height: '32px',
   borderRadius: '50%',
@@ -59,131 +91,156 @@ const CircleBadge = styled('div')(({ theme }) => ({
   border: '1px solid #e1e1e1',
   borderColor: theme.palette.divider,
   color: theme.typography.caption.color,
-  top: 0,
-  right: '12px',
 }));
+
+const TextContainer = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  height: '48px',
+});
+
+const LabelContainer = styled('div')<{ isCollapsed?: boolean }>(({ isCollapsed }) => ({
+  display: 'flex',
+  flexDirection: isCollapsed ? 'column' : 'row',
+  overflow: 'hidden',
+  justifyContent: 'center',
+  alignItems: isCollapsed ? undefined : 'center',
+}));
+
+const Subtitle = styled('div')({
+  opacity: 0.8,
+  fontSize: 14,
+});
+
+const Title = styled('div')({
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+});
 
 const EXPAND_DELAY = 450;
 
-export const KubeObjectNodeComponent = memo(
-  ({ data, id }: NodeProps & { data: KubeObjectNode['data'] }) => {
-    const [isHovered, setHovered] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
-    const theme = useTheme();
+export const KubeObjectNodeComponent = memo(({ id }: NodeProps) => {
+  const node = useNode(id);
+  const [isHovered, setHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const theme = useTheme();
+  const graph = useGraphView();
 
-    const graph = useGraphView();
-    const nodes = useNodes();
-    const edges = useEdges();
+  const kubeObject = node?.kubeObject ?? getMainNode(node?.nodes ?? [])?.kubeObject;
 
-    const resource = data.resource;
+  const isSelected = id === graph.nodeSelection;
+  const isCollapsed = node?.nodes?.length ? node?.collapsed : true;
 
-    const isSelected = id === graph.nodeSelection;
-    const isHighlighted = graph.highlights.isNodeHighlighted(id);
+  let status = 'success';
 
-    const status = getStatus(data.resource) ?? 'success';
+  if (kubeObject) {
+    status = getStatus(kubeObject) ?? 'success';
+  }
 
-    const nodeRef = useRef<HTMLDivElement>(null);
+  if (node?.nodes) {
+    const errors =
+      node?.nodes?.filter(it => it.kubeObject && getStatus(it.kubeObject) === 'error')?.length ?? 0;
+    const warnings =
+      node?.nodes?.filter(it => it.kubeObject && getStatus(it.kubeObject) === 'warning')?.length ??
+      0;
 
-    useEffect(() => {
-      if (nodeRef.current && nodeRef.current.parentElement) {
-        let index = '0';
-        if (isSelected) index = '1003';
-        if (isHovered) index = '1004';
-        nodeRef.current.parentElement.style.zIndex = index;
-      }
-    }, [isSelected, isHovered]);
+    if (warnings) {
+      status = 'warning';
+    }
+    if (errors) {
+      status = 'error';
+    }
+  }
 
-    useEffect(() => {
-      if (!isHovered) {
-        setIsExpanded(false);
-        return;
-      }
-
-      const id = setTimeout(() => setIsExpanded(true), EXPAND_DELAY);
-      return () => clearInterval(id);
-    }, [isHovered]);
-
-    const icon = <KubeIcon width="42px" height="42px" kind={resource.kind} />;
-
-    function handleMouseEnter() {
-      const relatedEdges = edges.filter(it => it.source === id || it.target === id);
-      const relatedNodes = nodes.filter(node =>
-        relatedEdges.find(edge => edge.source === node.id || edge.target === node.id)
-      );
-
-      if (relatedNodes.length > 1) {
-        startTransition(() => {
-          graph.highlights.setHighlight({
-            label: undefined,
-            nodeIds: new Set(relatedNodes?.map(it => it.id) ?? []),
-            edgeIds: new Set(relatedEdges?.map(it => it.id) ?? []),
-          });
-        });
-      }
+  useEffect(() => {
+    if (!isHovered) {
+      setIsExpanded(false);
+      return;
     }
 
-    const openDetails = () => {
-      graph.setNodeSelection(id);
-      setHovered(false);
-      graph.highlights.setHighlight(undefined);
-    };
+    const id = setTimeout(() => setIsExpanded(true), EXPAND_DELAY);
+    return () => clearInterval(id);
+  }, [isHovered]);
 
-    return (
-      <Container
-        tabIndex={0}
-        role="button"
-        isHovered={isHovered}
-        isFaded={!isHighlighted}
-        isSelected={isSelected}
-        isExpanded={isExpanded}
-        onClick={openDetails}
-        ref={nodeRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => startTransition(() => graph.highlights.setHighlight(undefined))}
-        onPointerEnter={() => setHovered(true)}
-        onPointerLeave={() => {
-          setHovered(false);
-        }}
-        onKeyDown={e => {
-          if (e.key === 'Enter' || e.key === 'Space') {
-            openDetails();
-          }
-        }}
-      >
-        <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
-        <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
+  const icon = kubeObject ? (
+    <KubeIcon width="42px" height="42px" kind={kubeObject.kind} />
+  ) : (
+    node?.icon ?? null
+  );
 
-        {status !== 'success' && (
-          <CircleBadge>
-            <Icon
-              color={theme.palette[status].main}
-              icon={status === 'error' ? 'mdi:exclamation' : 'mdi:information'}
-              width="22px"
-              height="22px"
-            />
-          </CircleBadge>
-        )}
+  const openDetails = () => {
+    graph.setNodeSelection(id);
+    setHovered(false);
+  };
 
-        <Box display="flex" gap={1}>
-          {icon}
-          <Box display="flex" flexDirection="column" overflow="hidden">
-            <Box sx={{ opacity: 0.7 }} fontSize={14}>
-              {resource.kind}
-            </Box>
-            <Box
-              sx={{
-                textOverflow: 'ellipsis',
-                overflow: 'hidden',
-                whiteSpace: 'nowrap',
-                transition: 'all 0.1s',
-              }}
-            >
-              {resource.metadata.name}
-            </Box>
-          </Box>
-        </Box>
-        {isExpanded && <KubeObjectGlance resource={resource} />}
-      </Container>
-    );
+  const label = node?.label ?? kubeObject?.metadata?.name;
+  const subtitle = node?.subtitle ?? kubeObject?.kind;
+
+  if (!node) {
+    return null;
   }
-);
+
+  if (node?.nodes?.length && !node.collapsed) {
+    return <GroupNodeComponent id={id} />;
+  }
+
+  return (
+    <Container
+      tabIndex={0}
+      role="button"
+      isFaded={false}
+      childrenCount={node.nodes?.length ?? 0}
+      isSelected={isSelected}
+      isExpanded={isExpanded}
+      onClick={openDetails}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => {
+        setHovered(false);
+      }}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === 'Space') {
+          openDetails();
+        }
+      }}
+    >
+      <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
+
+      {isCollapsed && status !== 'success' && (
+        <CircleBadge style={{ right: node.nodes?.length ? '36px' : undefined }}>
+          <Icon
+            color={theme.palette[status].main}
+            icon={status === 'error' ? 'mdi:exclamation' : 'mdi:information'}
+            width="22px"
+            height="22px"
+          />
+        </CircleBadge>
+      )}
+
+      {node.collapsed && (node.nodes?.length ?? 0) > 0 && (
+        <CircleBadge>{node.nodes?.length ?? 0}</CircleBadge>
+      )}
+
+      <TextContainer>
+        {icon}
+        <LabelContainer isCollapsed={isCollapsed}>
+          <Subtitle>{subtitle}</Subtitle>
+          <Title
+            sx={{
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {label}
+          </Title>
+        </LabelContainer>
+      </TextContainer>
+      {isExpanded && kubeObject && <KubeObjectGlance resource={kubeObject} />}
+    </Container>
+  );
+});

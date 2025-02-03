@@ -1,7 +1,7 @@
 import { Edge, EdgeMarker, Node } from '@xyflow/react';
 import { ElkExtendedEdge, ElkNode } from 'elkjs';
 import ELK from 'elkjs';
-import { forEachNode, GraphNode, KubeObjectNode } from './graphModel';
+import { forEachNode, GraphNode } from './graphModel';
 
 type ElkNodeWithData = Omit<ElkNode, 'edges'> & {
   type: string;
@@ -27,19 +27,20 @@ const layoutOptions = {
 
 const partitionLayers = [
   ['Deployment'],
-  ['ReplicaSet', 'ServiceAccount', 'CronJob'],
+  ['ReplicaSet', 'ServiceAccount', 'CronJob', 'DaemonSet', 'StatefulSet'],
   ['Job'],
   ['Pod', 'RoleBinding'],
   ['Service', 'NetworkPolicy', 'Role'],
+  ['Endpoints'],
 ];
 
 /**
  * To increase readability of the graph we can sort nodes left-to-right
  * Where more 'owner' nodes like Deployment or ReplicaSet are on the left
  */
-function getPartitionLayer(node: KubeObjectNode) {
-  if (!('resource' in node.data)) return;
-  const { kind } = node.data.resource;
+function getPartitionLayer(node: GraphNode) {
+  if (!('kubeObject' in node)) return;
+  const kind = node.kubeObject?.kind;
   const partitionLayer = partitionLayers.findIndex(layer => layer.includes(kind));
   return partitionLayer > -1 ? partitionLayer : undefined;
 }
@@ -51,95 +52,96 @@ function getPartitionLayer(node: KubeObjectNode) {
  * @param aspectRatio - aspect ratio of the container
  */
 function convertToElkNode(node: GraphNode, aspectRatio: number): ElkNodeWithData {
-  const isCollapsed = 'collapsed' in node.data && node.data.collapsed;
+  const isCollapsed = node.collapsed;
 
-  const convertedEdges =
-    'edges' in node.data
-      ? (node.data.edges
-          .map(edge => {
-            // Make sure source and target exists
-            let hasSource = false;
-            let hasTarget = false;
-            forEachNode(node, n => {
-              if (n.id === edge.source) {
-                hasSource = true;
-              }
-              if (n.id === edge.target) {
-                hasTarget = true;
-              }
-            });
-
-            if (!hasSource || !hasTarget) {
-              return;
+  const convertedEdges = node.edges
+    ? (node.edges
+        .map(edge => {
+          // Make sure source and target exists
+          let hasSource = false;
+          let hasTarget = false;
+          forEachNode(node, n => {
+            if (n.id === edge.source) {
+              hasSource = true;
             }
+            if (n.id === edge.target) {
+              hasTarget = true;
+            }
+          });
 
-            return {
-              type: edge.type,
-              id: edge.id,
-              sources: [edge.source],
-              targets: [edge.target],
-              label: edge.label,
-              labels: [{ text: edge.label, width: 70, height: 20 }],
-              animated: edge.animated,
-              hidden: false,
-              data: edge.data,
-            };
-          })
-          .filter(Boolean) as ElkEdgeWithData[])
-      : [];
+          if (!hasSource || !hasTarget) {
+            return;
+          }
+
+          return {
+            type: 'edge',
+            id: edge.id,
+            sources: [edge.source],
+            targets: [edge.target],
+            label: edge.label,
+            labels: [{ text: edge.label, width: 70, height: 20 }],
+            hidden: false,
+            data: edge.data,
+          };
+        })
+        .filter(Boolean) as ElkEdgeWithData[])
+    : [];
 
   const elkNode: ElkNodeWithData = {
     id: node.id,
-    type: node.type,
+    type: 'object',
     data: node.data,
   };
 
-  if (node.type === 'kubeObject') {
-    elkNode.layoutOptions = {
-      'partitioning.partition': String(getPartitionLayer(node)),
-    };
+  if (node.nodes) {
+    if (node.collapsed) {
+      elkNode.edges = undefined;
+      elkNode.children = undefined;
+      elkNode.width = layoutOptions.nodeSize.width;
+      elkNode.height = layoutOptions.nodeSize.height;
+      return elkNode;
+    }
+
+    elkNode.layoutOptions =
+      convertedEdges.length > 0
+        ? {
+            'partitioning.activate': 'true',
+            'elk.direction': 'UNDEFINED', // ELK will automatically pick direction
+            'elk.edgeRouting': 'SPLINES',
+            'elk.nodeSize.minimum': '(220.0,70.0)',
+            'elk.nodeSize.constraints': '[MINIMUM_SIZE]',
+            'elk.algorithm': 'layered',
+            'elk.spacing.nodeNode': isCollapsed ? '1' : '60',
+            'elk.layered.spacing.nodeNodeBetweenLayers': '60',
+            'org.eclipse.elk.stress.desiredEdgeLength': isCollapsed ? '20' : '250',
+            'org.eclipse.elk.stress.epsilon': '0.1',
+            'elk.padding': '[left=16, top=16, right=16, bottom=16]',
+          }
+        : {
+            // 'elk.aspectRatio': String(aspectRatio),
+            'elk.algorithm': 'rectpacking',
+            'elk.rectpacking.widthApproximation.optimizationGoal': 'ASPECT_RATIO_DRIVEN',
+            'elk.rectpacking.packing.compaction.rowHeightReevaluation': 'true',
+            'elk.edgeRouting': 'SPLINES',
+            'elk.spacing.nodeNode': '20',
+            'elk.padding': '[left=24, top=24, right=24, bottom=24]',
+          };
+    elkNode.edges = convertedEdges;
+    elkNode.children =
+      'collapsed' in node && node.collapsed
+        ? []
+        : node.nodes.map(node => convertToElkNode(node, aspectRatio));
+
     elkNode.width = layoutOptions.nodeSize.width;
     elkNode.height = layoutOptions.nodeSize.height;
     return elkNode;
   }
 
-  if (node.type === 'kubeGroup') {
-    elkNode.layoutOptions = {
-      'partitioning.activate': 'true',
-      'elk.direction': 'RIGHT',
-      'elk.edgeRouting': 'SPLINES',
-      'elk.nodeSize.minimum': '(220.0,70.0)',
-      'elk.nodeSize.constraints': '[MINIMUM_SIZE]',
-      'elk.algorithm': 'layered',
-      'elk.spacing.nodeNode': isCollapsed ? '1' : '60',
-      'elk.layered.spacing.nodeNodeBetweenLayers': '60',
-      'org.eclipse.elk.stress.desiredEdgeLength': isCollapsed ? '20' : '250',
-      'org.eclipse.elk.stress.epsilon': '0.1',
-      'elk.padding': '[left=16, top=16, right=16, bottom=16]',
-    };
-    elkNode.edges = convertedEdges;
-    elkNode.children =
-      'collapsed' in node.data && node.data.collapsed
-        ? []
-        : node.data.nodes.map(it => convertToElkNode(it, aspectRatio));
-    return elkNode;
-  }
-
-  if (node.type === 'group') {
-    elkNode.layoutOptions = {
-      'elk.aspectRatio': String(aspectRatio),
-      'elk.algorithm': 'rectpacking',
-      'elk.rectpacking.widthApproximation.optimizationGoal': 'ASPECT_RATIO_DRIVEN',
-      'elk.rectpacking.packing.compaction.rowHeightReevaluation': 'true',
-      'elk.edgeRouting': 'SPLINES',
-      'elk.spacing.nodeNode': '20',
-      'elk.padding': '[left=24, top=24, right=24, bottom=24]',
-    };
-    elkNode.edges = convertedEdges;
-    elkNode.children = node.data.nodes.map(it => convertToElkNode(it, aspectRatio));
-
-    return elkNode;
-  }
+  elkNode.layoutOptions = {
+    'partitioning.partition': String(getPartitionLayer(node)),
+  };
+  elkNode.width = layoutOptions.nodeSize.width;
+  elkNode.height = layoutOptions.nodeSize.height;
   return elkNode;
 }
 
