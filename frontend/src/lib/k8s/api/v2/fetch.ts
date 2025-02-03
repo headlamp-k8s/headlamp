@@ -3,6 +3,7 @@ import { findKubeconfigByClusterName, getUserIdFromLocalStorage } from '../../..
 import { getToken, setToken } from '../../../auth';
 import { getClusterAuthType } from '../v1/clusterRequests';
 import { refreshToken } from '../v1/tokenApi';
+import { ApiError } from './ApiError';
 import { makeUrl } from './makeUrl';
 
 export const BASE_HTTP_URL = helpers.getAppUrl();
@@ -27,7 +28,14 @@ async function backendFetch(url: string | URL, init: RequestInit) {
   }
 
   if (!response.ok) {
-    throw new Error('Error: Unreachable');
+    // Try to parse error message from response
+    let maybeErrorMessage: string | undefined;
+    try {
+      const body = await response.json();
+      maybeErrorMessage = body.message;
+    } catch (e) {}
+
+    throw new ApiError(maybeErrorMessage ?? 'Unreachable', { status: response.status });
   }
 
   return response;
@@ -78,7 +86,9 @@ export async function clusterFetch(url: string | URL, init: RequestInit & { clus
 
     return response;
   } catch (e) {
-    console.error(e);
-    throw new Error('Unreachable');
+    if (e instanceof ApiError) {
+      e.cluster = init.cluster;
+    }
+    throw e;
   }
 }

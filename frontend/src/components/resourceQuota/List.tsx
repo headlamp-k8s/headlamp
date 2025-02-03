@@ -24,7 +24,7 @@ const PaddedChip = styled(Chip)({
 
 export interface ResourceQuotaProps {
   resourceQuotas: ResourceQuota[] | null;
-  error: ApiError | null;
+  errors: ApiError[] | null;
   hideColumns?: string[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
@@ -33,7 +33,7 @@ export interface ResourceQuotaProps {
 export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
   const {
     resourceQuotas,
-    error,
+    errors,
     hideColumns = [],
     reflectTableInURL = 'resourcequotas',
     noNamespaceFilter,
@@ -77,7 +77,7 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
       headerProps={{
         noNamespaceFilter,
       }}
-      errorMessage={ResourceQuota.getErrorMessage(error)}
+      errors={errors}
       data={resourceQuotas}
       reflectInURL={reflectTableInURL}
       id="headlamp-resourcequotas"
@@ -86,7 +86,9 @@ export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
 }
 
 export default function ResourceQuotaList() {
-  const [resourceQuotas, error] = ResourceQuota.useList({ namespace: useNamespaces() });
+  const { items: resourceQuotas, errors } = ResourceQuota.useList({ namespace: useNamespaces() });
 
-  return <ResourceQuotaRenderer resourceQuotas={resourceQuotas} error={error} reflectTableInURL />;
+  return (
+    <ResourceQuotaRenderer resourceQuotas={resourceQuotas} errors={errors} reflectTableInURL />
+  );
 }

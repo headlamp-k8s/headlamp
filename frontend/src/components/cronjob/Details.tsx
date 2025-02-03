@@ -124,7 +124,7 @@ export default function CronJobDetails(props: { name?: string; namespace?: strin
   const { t, i18n } = useTranslation('glossary');
   const dispatch: AppDispatch = useDispatch();
 
-  const [jobs, jobsError] = Job.useList({ namespace });
+  const { items: jobs, errors } = Job.useList({ namespace });
   const [cronJob] = CronJob.useGet(name, namespace);
   const [isSpawnDialogOpen, setIsSpawnDialogOpen] = useState(false);
   const [isPendingSuspend, setIsPendingSuspend] = useState(false);
@@ -233,7 +233,7 @@ export default function CronJobDetails(props: { name?: string; namespace?: strin
         cronJob && [
           <JobsListRenderer
             jobs={ownedJobs}
-            error={CronJob.getErrorMessage(jobsError)}
+            errors={errors}
             hideColumns={['namespace']}
             noNamespaceFilter
           />,

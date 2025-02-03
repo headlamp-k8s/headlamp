@@ -7,7 +7,7 @@ import ResourceListView from '../common/Resource/ResourceListView';
 
 export interface LimitRangeProps {
   limitRanges: LimitRange[] | null;
-  error: ApiError | null;
+  errors: ApiError[] | null;
   hideColumns?: string[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
@@ -15,8 +15,8 @@ export interface LimitRangeProps {
 
 export function LimitRangeRenderer(props: LimitRangeProps) {
   const {
+    errors,
     limitRanges,
-    error,
     hideColumns = [],
     reflectTableInURL = 'limitranges',
     noNamespaceFilter,
@@ -31,7 +31,7 @@ export function LimitRangeRenderer(props: LimitRangeProps) {
       headerProps={{
         noNamespaceFilter,
       }}
-      errorMessage={LimitRange.getErrorMessage(error)}
+      errors={errors}
       data={limitRanges}
       reflectInURL={reflectTableInURL}
       id="headlamp-limitranges"
@@ -40,7 +40,7 @@ export function LimitRangeRenderer(props: LimitRangeProps) {
 }
 
 export function LimitRangeList() {
-  const [limitRanges, error] = LimitRange.useList({ namespace: useNamespaces() });
+  const { items: limitRanges, errors } = LimitRange.useList({ namespace: useNamespaces() });
 
-  return <LimitRangeRenderer limitRanges={limitRanges} error={error} reflectTableInURL />;
+  return <LimitRangeRenderer limitRanges={limitRanges} errors={errors} reflectTableInURL />;
 }

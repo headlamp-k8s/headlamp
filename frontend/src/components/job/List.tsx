@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { ApiError } from '../../lib/k8s/api/v2/ApiError';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import Job from '../../lib/k8s/job';
 import { formatDuration } from '../../lib/util';
@@ -54,20 +55,20 @@ export function makeJobStatusLabel(job: Job) {
 }
 
 export default function JobsList() {
-  const [jobs, error] = Job.useList({ namespace: useNamespaces() });
-  return <JobsListRenderer jobs={jobs} error={Job.getErrorMessage(error)} reflectTableInURL />;
+  const { items: jobs, errors } = Job.useList({ namespace: useNamespaces() });
+  return <JobsListRenderer jobs={jobs} errors={errors} reflectTableInURL />;
 }
 
 export interface JobsListRendererProps {
   jobs: Job[] | null;
-  error: string | null;
+  errors?: ApiError[] | null;
   hideColumns?: 'namespace'[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
 }
 
 export function JobsListRenderer(props: JobsListRendererProps) {
-  const { jobs, error, hideColumns = [], reflectTableInURL = 'jobs', noNamespaceFilter } = props;
+  const { jobs, errors, hideColumns = [], reflectTableInURL = 'jobs', noNamespaceFilter } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   function getCompletions(job: Job) {
@@ -89,7 +90,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
         noNamespaceFilter,
       }}
       hideColumns={hideColumns}
-      errorMessage={error}
+      errors={errors}
       columns={[
         'name',
         'namespace',

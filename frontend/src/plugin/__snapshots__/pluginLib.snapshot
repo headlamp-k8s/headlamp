@@ -1,5 +1,6 @@
 {
   "ApiProxy": {
+    "ApiError": [Function],
     "apiFactory": [Function],
     "apiFactoryWithNamespace": [Function],
     "apply": [Function],

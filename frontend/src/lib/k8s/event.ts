@@ -201,13 +201,13 @@ class Event extends KubeObject<KubeEvent> {
     const result = useMemo(() => {
       const res: EventsPerCluster = {};
 
-      Object.entries(queries.clusterErrors ?? {}).forEach(([cluster, error]) => {
-        if (!res[cluster]) {
-          res[cluster] = { warnings: [] };
+      queries.errors?.forEach(error => {
+        if (error.cluster) {
+          res[error.cluster] ??= { warnings: [] };
+          res[error.cluster].error = error;
         }
-
-        res[cluster].error = error;
       });
+
       Object.entries(queries.clusterResults ?? {}).forEach(([cluster, result]) => {
         if (!res[cluster]) {
           res[cluster] = { warnings: [] };

@@ -109,10 +109,10 @@ export interface ResourceTableProps<RowItem> {
   filterFunction?: (item: RowItem) => boolean;
   /** Display an error message. Table will be hidden even if data is present */
   errorMessage?: string | null;
+  /** Display an errors */
+  errors?: ApiError[] | null;
   /** State of the Table (page, rows per page) is reflected in the url */
   reflectInURL?: string | boolean;
-  /** Any errors per cluster (useful when using the table a in a multi-cluster listing) */
-  clusterErrors?: { [cluster: string]: ApiError | null } | null;
 }
 
 export interface ResourceTableFromResourceClassProps<KubeClass extends KubeObjectClass>
@@ -125,27 +125,20 @@ export default function ResourceTable<KubeClass extends KubeObjectClass>(
     | ResourceTableFromResourceClassProps<KubeClass>
     | ResourceTableProps<InstanceType<KubeClass>>
 ) {
-  const { clusterErrors } = props;
-
   if (!!(props as ResourceTableFromResourceClassProps<KubeClass>).resourceClass) {
     const { resourceClass, ...otherProps } =
       props as ResourceTableFromResourceClassProps<KubeClass>;
     return <TableFromResourceClass resourceClass={resourceClass!} {...otherProps} />;
   }
 
-  return (
-    <>
-      <ClusterGroupErrorMessage clusterErrors={clusterErrors ? clusterErrors : undefined} />
-      <ResourceTableContent {...(props as ResourceTableProps<InstanceType<KubeClass>>)} />
-    </>
-  );
+  return <ResourceTableContent {...(props as ResourceTableProps<InstanceType<KubeClass>>)} />;
 }
 
 function TableFromResourceClass<KubeClass extends KubeObjectClass>(
   props: ResourceTableFromResourceClassProps<KubeClass>
 ) {
   const { resourceClass, id, ...otherProps } = props;
-  const { items, error, clusterErrors } = resourceClass.useList({ namespace: useNamespaces() });
+  const { items, errors } = resourceClass.useList({ namespace: useNamespaces() });
 
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);
@@ -155,17 +148,16 @@ function TableFromResourceClass<KubeClass extends KubeObjectClass>(
     dispatchHeadlampEvent({
       resources: items!,
       resourceKind: resourceClass.className,
-      error: error || undefined,
+      error: errors?.[0] || undefined,
     });
-  }, [items, error]);
+  }, [items, errors]);
 
   return (
     <ResourceTableContent
-      errorMessage={resourceClass.getErrorMessage(error)}
+      errors={errors}
       id={id || `headlamp-${resourceClass.pluralName}`}
       {...otherProps}
       data={throttledItems}
-      clusterErrors={clusterErrors}
     />
   );
 }
@@ -257,6 +249,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
     actions,
     enableRowActions = false,
     enableRowSelection = false,
+    errors,
   } = props;
   const { t } = useTranslation(['glossary', 'translation']);
   const theme = useTheme();
@@ -508,6 +501,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
 
   return (
     <>
+      <ClusterGroupErrorMessage errors={errors} />
       <Table
         enableFullScreenToggle={false}
         enableFacetedValues

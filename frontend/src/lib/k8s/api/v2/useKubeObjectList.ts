@@ -2,8 +2,8 @@ import { QueryObserverOptions, useQueries, useQueryClient } from '@tanstack/reac
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getWebsocketMultiplexerEnabled } from '../../../../helpers';
 import { KubeObject, KubeObjectClass } from '../../KubeObject';
-import { ApiError } from '../v1/clusterRequests';
 import { QueryParameters } from '../v1/queryParameters';
+import { ApiError } from './ApiError';
 import { clusterFetch } from './fetch';
 import { QueryListResponse, useEndpoints } from './hooks';
 import { KubeList, KubeListUpdateEvent } from './KubeList';
@@ -25,16 +25,6 @@ export interface ListResponse<K extends KubeObject> {
 }
 
 /**
- * Error thrown when listing Kube objects
- * Contains information about the cluster and namespace
- */
-class ListError extends Error {
-  constructor(public message: any, public cluster: string, public namespace?: string) {
-    super(message);
-  }
-}
-
-/**
  * Query to list Kube objects from a cluster and namespace(optional)
  *
  * @param kubeObjectClass - Class to instantiate the object with
@@ -50,7 +40,7 @@ export function kubeObjectListQuery<K extends KubeObject>(
   namespace: string | undefined,
   cluster: string,
   queryParams: QueryParameters
-): QueryObserverOptions<ListResponse<K> | undefined | null, ListError> {
+): QueryObserverOptions<ListResponse<K> | undefined | null, ApiError> {
   return {
     placeholderData: null,
     queryKey: [
@@ -92,7 +82,11 @@ export function kubeObjectListQuery<K extends KubeObject>(
         return response;
       } catch (e) {
         // Rethrow error with cluster and namespace information
-        throw new ListError(e, cluster, namespace);
+        if (e instanceof ApiError) {
+          e.cluster = cluster;
+          e.namespace = namespace;
+        }
+        throw e;
       }
     },
   };
@@ -387,7 +381,7 @@ export function useKubeObjectList<K extends KubeObject>({
 
   // Get working endpoint from the first cluster
   // Now if clusters have different apiVersions for the same resource for example, this will not work
-  const endpoint = useEndpoints(
+  const { endpoint, error: endpointError } = useEndpoints(
     kubeObjectClass.apiEndpoint.apiInfo,
     requests[0]?.cluster,
     maybeNamespace
@@ -432,7 +426,8 @@ export function useKubeObjectList<K extends KubeObject>({
           if (result.data && result.data.cluster) {
             acc[result.data.cluster] = {
               data: result.data,
-              error: result.error as any as ApiError | null,
+              error: result.error,
+              errors: result.error ? [result.error] : null,
               isError: result.isError,
               isFetching: result.isFetching,
               isLoading: result.isLoading,
@@ -446,15 +441,7 @@ export function useKubeObjectList<K extends KubeObject>({
         items: results.every(result => result.data === null)
           ? null
           : results.flatMap(result => result?.data?.list?.items ?? []),
-        errors: results.map(result => result.error),
-        clusterErrors: results
-          .filter(result => result.error)
-          .reduce((acc, result) => {
-            if (result.error) {
-              acc[result.error.cluster] = result.error as any as ApiError;
-            }
-            return acc;
-          }, {} as Record<string, ApiError>),
+        errors: results.map(result => result.error).filter(Boolean),
         isError: results.some(result => result.isError),
         isLoading: results.some(result => result.isLoading),
         isFetching: results.some(result => result.isFetching),
@@ -508,19 +495,21 @@ export function useKubeObjectList<K extends KubeObject>({
     queryParams: cleanedUpQueryParams,
   });
 
+  const errors = query.errors.filter(it => it !== null);
+
   // @ts-ignore - TS compiler gets confused with iterators
   return {
-    items: query.items,
+    items: endpointError ? [] : query.items,
+    errors: endpointError ? [endpointError] : errors.length > 0 ? errors : null,
+    error: endpointError ?? query.errors.find(it => it !== null) ?? null,
     clusterResults: query.clusterResults,
-    clusterErrors: query.clusterErrors,
-    error: query.errors[0] as any as ApiError,
     isError: query.isError,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
     isSuccess: query.isSuccess,
     *[Symbol.iterator](): ArrayIterator<ApiError | K[] | null> {
       yield query.items;
-      yield query.errors[0] as any as ApiError;
+      yield endpointError ?? query.errors.find(it => it !== null) ?? null;
     },
   };
 }
