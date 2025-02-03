@@ -284,6 +284,15 @@ export default function Table<RowItem extends Record<string, any>>({
         width: 'unset',
         minWidth: 'unset',
         paddingTop: '0.5rem',
+        '.MuiTableSortLabel-icon': {
+          margin: 0,
+          width: '14px',
+          height: '14px',
+          marginTop: '-2px',
+        },
+        ',MuiTableSortLabel-root': {
+          width: 'auto',
+        },
       },
     },
     muiSelectCheckboxProps: {

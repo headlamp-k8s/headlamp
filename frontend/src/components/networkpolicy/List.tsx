@@ -15,6 +15,7 @@ export function NetworkPolicyList() {
         'cluster',
         {
           id: 'type',
+          gridTemplate: 'auto',
           label: t('translation|Type'),
           getValue: networkpolicy => {
             console.log(networkpolicy);
@@ -33,6 +34,7 @@ export function NetworkPolicyList() {
         },
         {
           id: 'podSelector',
+          gridTemplate: 'auto',
           label: t('Pod Selector'),
           getValue: networkpolicy => {
             const podSelector = networkpolicy.jsonData.spec.podSelector;

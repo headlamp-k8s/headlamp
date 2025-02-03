@@ -97,12 +97,14 @@ export function JobsListRenderer(props: JobsListRendererProps) {
         {
           id: 'completions',
           label: t('Completions'),
+          gridTemplate: 'min-content',
           getValue: job => getCompletions(job),
           sort: sortByCompletions,
         },
         {
           id: 'conditions',
           label: t('translation|Conditions'),
+          gridTemplate: 'min-content',
           getValue: job =>
             job.status?.conditions?.find(({ status }: { status: string }) => status === 'True') ??
             null,
@@ -111,6 +113,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
         {
           id: 'duration',
           label: t('translation|Duration'),
+          gridTemplate: 'min-content',
           getValue: job => {
             const duration = job.getDuration();
             if (duration > 0) {
@@ -119,7 +122,6 @@ export function JobsListRenderer(props: JobsListRendererProps) {
             return '-';
           },
           sort: (job1, job2) => job1.getDuration() - job2.getDuration(),
-          gridTemplate: 0.6,
         },
         {
           id: 'containers',
@@ -143,6 +145,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
         {
           id: 'images',
           label: t('Images'),
+          gridTemplate: 'auto',
           getValue: job =>
             job
               .getContainers()

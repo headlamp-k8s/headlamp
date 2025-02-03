@@ -125,7 +125,7 @@
       </div>
     </div>
     <table
-      class="MuiTable-root css-ecj8bu-MuiTable-root"
+      class="MuiTable-root css-1n157o1-MuiTable-root"
     >
       <thead
         class="MuiTableHead-root css-1tmrira-MuiTableHead-root"
@@ -135,7 +135,7 @@
         >
           <th
             aria-sort="none"
-            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-17lu75z-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edr8hf-MuiTableCell-root"
             colspan="1"
             data-can-sort="true"
             data-index="-1"
@@ -190,7 +190,7 @@
           </th>
           <th
             aria-sort="ascending"
-            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1wx6jpk-MuiTableCell-root"
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-3renc0-MuiTableCell-root"
             colspan="1"
             data-can-sort="true"
             data-index="-1"

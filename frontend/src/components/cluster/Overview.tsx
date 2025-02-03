@@ -142,18 +142,20 @@ function EventsSection() {
       columns={[
         {
           label: t('Type'),
+          gridTemplate: 'min-content',
           getValue: event => event.involvedObject.kind,
         },
         {
           label: t('Name'),
           getValue: event => event.involvedObjectInstance?.getName() ?? event.involvedObject.name,
           render: event => makeObjectLink(event),
-          gridTemplate: 1.5,
+          gridTemplate: 'auto',
         },
         'namespace',
         'cluster',
         {
           label: t('Reason'),
+          gridTemplate: 'min-content',
           getValue: event => event.reason,
           render: event => (
             <LightTooltip title={event.reason} interactive>
@@ -167,7 +169,7 @@ function EventsSection() {
           render: event => (
             <ShowHideLabel labelId={event.metadata?.uid || ''}>{event.message || ''}</ShowHideLabel>
           ),
-          gridTemplate: 1.5,
+          gridTemplate: 'auto',
         },
         {
           id: 'last-seen',
