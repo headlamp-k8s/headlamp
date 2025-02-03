@@ -45,6 +45,7 @@ type Context struct {
 	proxy       *httputil.ReverseProxy `json:"-"`
 	Internal    bool                   `json:"internal"`
 	Error       string                 `json:"error"`
+	Extensions  map[string]interface{} `json:"extensions"`
 }
 
 type OidcConfig struct {
@@ -56,9 +57,18 @@ type OidcConfig struct {
 
 // CustomObject represents the custom object that holds the HeadlampInfo regarding custom name.
 type CustomObject struct {
+	// TypeMeta describes the type of the object and its API schema version.
+	// It should have "Kind" set to "HeadlampInfo" and "APIVersion" set to "v1".
+	// +k8s:deepcopy-gen=false
 	metav1.TypeMeta
+	// ObjectMeta contains metadata about the custom object, such as name and labels.
+	// This is used to store additional metadata about the headlamp_info extension.
+	// +optional
 	metav1.ObjectMeta
+	// CustomName is the name the cluster is renamed to.
 	CustomName string `json:"customName"`
+	// originalName is the name the cluster was created with.
+	OriginalName string `json:"originalName"`
 }
 
 // DeepCopyObject returns a copy of the CustomObject.
