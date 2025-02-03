@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../../helpers';
+import { usePlugins } from '../../../lib/k8s/api/v2/plugins';
 import { deletePlugin } from '../../../lib/k8s/apiProxy';
 import { ConfigStore } from '../../../plugin/configStore';
 import { PluginInfo, reloadPage } from '../../../plugin/pluginsSlice';
@@ -54,13 +55,18 @@ const PluginSettingsDetailsInitializer = (props: { plugin: PluginInfo }) => {
 };
 
 export default function PluginSettingsDetails() {
-  const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
   const { name } = useParams<{ name: string }>();
+  const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
+  const { data: plugins } = usePlugins(pluginSettings);
+
+  if (!plugins?.length) {
+    return null;
+  }
 
   const plugin = useMemo(() => {
     const decodedName = decodeURIComponent(name);
-    return pluginSettings.find(plugin => plugin.name === decodedName);
-  }, [pluginSettings, name]);
+    return plugins.find((plugin: PluginInfo) => plugin.name === decodedName);
+  }, [plugins, name]);
 
   if (!plugin) {
     return <NotFoundComponent />;
