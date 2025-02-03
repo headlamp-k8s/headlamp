@@ -1,9 +1,10 @@
-import { Box, Button, Drawer } from '@mui/material';
+import { Box, Drawer } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { setSelectedResource } from '../../redux/drawerModeSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import { ActionButton } from '../common';
 import { KubeObjectDetails } from '../resourceMap/details/KubeNodeDetails';
 
 export default function DetailsDrawer() {
@@ -24,10 +25,16 @@ export default function DetailsDrawer() {
   return (
     <Drawer variant="persistent" anchor="right" open onClose={() => closeDrawer()}>
       <Box width={800}>
-        <Box style={{ marginTop: '5rem', marginBottom: '2rem' }}>
-          <Button variant="outlined" color="primary" onClick={() => closeDrawer()}>
-            {t('Close')}
-          </Button>
+        {/* Note: the top margin is needed to not clip into the topbar */}
+        <Box
+          sx={{
+            marginTop: '4rem',
+            display: 'flex',
+            padding: '1rem',
+            justifyContent: 'right',
+          }}
+        >
+          <ActionButton onClick={() => closeDrawer()} icon="mdi:close" description={t('Close')} />
         </Box>
         <Box>
           <KubeObjectDetails resource={selectedResource} />
