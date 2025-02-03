@@ -53,9 +53,8 @@ Follow these steps when submitting a PR to ensure it meets the project’s stand
 
 ### 1. Run Tests and Format Your Code
 
-Navigate to the `frontend` folder and run the following commands:
+Run the following commands from your project directory:
 
-- `cd frontend`
 - `make frontend-test` - Run the test suite
 - `make frontend-lint` - Format your code to match the project
 
