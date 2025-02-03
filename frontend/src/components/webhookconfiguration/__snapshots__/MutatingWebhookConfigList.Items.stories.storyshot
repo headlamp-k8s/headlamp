@@ -456,7 +456,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//mutatingwebhookconfigurations/mwc-test-0"
                   >
                     mwc-test-0
                   </a>
@@ -543,7 +543,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//mutatingwebhookconfigurations/mwc-test-1"
                   >
                     mwc-test-1
                   </a>
@@ -630,7 +630,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//mutatingwebhookconfigurations/mwc-test-2"
                   >
                     mwc-test-2
                   </a>
@@ -717,7 +717,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//mutatingwebhookconfigurations/mwc-test-with-service-0"
                   >
                     mwc-test-with-service-0
                   </a>
@@ -804,7 +804,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//mutatingwebhookconfigurations/mwc-test-with-service-1"
                   >
                     mwc-test-with-service-1
                   </a>
@@ -891,7 +891,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//mutatingwebhookconfigurations/mwc-test-with-service-2"
                   >
                     mwc-test-with-service-2
                   </a>

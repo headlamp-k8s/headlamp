@@ -4,9 +4,11 @@ import { useDispatch } from 'react-redux';
 import { Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
 import { getToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
+import { redirects } from '../../lib/redirects';
 import {
   createRouteURL,
   getDefaultRoutes,
+  getRoute,
   getRoutePath,
   getRouteUseClusterURL,
   NotFoundRoute,
@@ -38,6 +40,12 @@ export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
   return (
     <Suspense fallback={null}>
       <Switch>
+        {redirects.map(({ fromPath, toRouteName }) => {
+          const targetRoute = getRoute(toRouteName);
+          if (!targetRoute) return null;
+
+          return <Redirect from={fromPath} to={getRoutePath(targetRoute)} exact />;
+        })}
         {filteredRoutes.map((route, index) =>
           route.name === 'OidcAuth' ? (
             <Route

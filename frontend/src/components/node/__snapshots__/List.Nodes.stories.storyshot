@@ -841,7 +841,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//nodes/node"
                   >
                     node
                   </a>
@@ -970,7 +970,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//nodes/node-2"
                   >
                     node-2
                   </a>

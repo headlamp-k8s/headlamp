@@ -3,7 +3,6 @@ import { cloneDeep, unset } from 'lodash';
 import React, { useMemo } from 'react';
 import exportFunctions from '../../helpers';
 import { getCluster } from '../cluster';
-import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
 import { useClusterGroup, useConnectApi } from '.';
 import { RecursivePartial } from './api/v1/factories';
@@ -126,12 +125,17 @@ export class KubeObject<T extends KubeObjectInterface | KubeEvent = any> {
       namespace: this.getNamespace(),
       name: this.getName(),
     };
-    const link = createRouteURL(this.detailsRoute, params);
-    return link;
+    const cluster = this.cluster ?? getCluster();
+    // TODO: Refactor this after #2792 is implemented
+    if (this.isNamespaced) {
+      return `/c/${cluster}/${this._class().apiName}/${params.namespace}/${params.name}`;
+    }
+    return `/c/${cluster}/${this._class().apiName}/${params.name}`;
   }
 
   getListLink() {
-    return createRouteURL(this.listRoute);
+    const cluster = this.cluster ?? getCluster();
+    return `/c/${cluster}/${this._class().apiName}`;
   }
 
   getName() {

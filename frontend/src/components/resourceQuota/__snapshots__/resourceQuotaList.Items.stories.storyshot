@@ -640,7 +640,7 @@
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  href="/c//resourcequotas/test/test-cpu-quota"
                 >
                   test-cpu-quota
                 </a>

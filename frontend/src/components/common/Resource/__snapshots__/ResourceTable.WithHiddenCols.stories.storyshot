@@ -257,7 +257,7 @@
           >
             <a
               class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-              href="/"
+              href="/c//pods/MyNamespace0/mypod0"
             >
               mypod0
             </a>
@@ -283,7 +283,7 @@
           >
             <a
               class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-              href="/"
+              href="/c//pods/MyNamespace1/mypod1"
             >
               mypod1
             </a>
@@ -309,7 +309,7 @@
           >
             <a
               class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-              href="/"
+              href="/c//pods/MyNamespace2/mypod2"
             >
               mypod2
             </a>
@@ -335,7 +335,7 @@
           >
             <a
               class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-              href="/"
+              href="/c//pods/MyNamespace3/mypod3"
             >
               mypod3
             </a>

@@ -456,7 +456,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//validatingwebhookconfigurations/vwc-test-0"
                   >
                     vwc-test-0
                   </a>
@@ -543,7 +543,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//validatingwebhookconfigurations/vwc-test-1"
                   >
                     vwc-test-1
                   </a>
@@ -630,7 +630,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//validatingwebhookconfigurations/vwc-test-2"
                   >
                     vwc-test-2
                   </a>
@@ -717,7 +717,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//validatingwebhookconfigurations/vwc-test-with-service-0"
                   >
                     vwc-test-with-service-0
                   </a>
@@ -804,7 +804,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//validatingwebhookconfigurations/vwc-test-with-service-1"
                   >
                     vwc-test-with-service-1
                   </a>
@@ -891,7 +891,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c//validatingwebhookconfigurations/vwc-test-with-service-2"
                   >
                     vwc-test-with-service-2
                   </a>
