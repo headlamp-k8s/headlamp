@@ -1222,11 +1222,10 @@ function startElecron() {
         return;
       }
 
-      const child: ChildProcessWithoutNullStreams = spawn(
-        eventData.command,
-        eventData.args,
-        eventData.options
-      );
+      const child: ChildProcessWithoutNullStreams = spawn(eventData.command, eventData.args, {
+        ...eventData.options,
+        shell: false,
+      });
 
       child.stdout.on('data', (data: string | Buffer) => {
         event.sender.send('command-stdout', eventData.id, data.toString());
