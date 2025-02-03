@@ -1211,6 +1211,8 @@ function startElecron() {
      * @param eventData - The data sent from the renderer process.
      */
     function handleRunCommand(event: IpcMainEvent, eventData: CommandData): void {
+      return; // Disable this until we figure out a better way to do this
+
       // Only allow "minikube", and "az" commands
       const validCommands = ['minikube', 'az'];
       if (!validCommands.includes(eventData.command)) {
