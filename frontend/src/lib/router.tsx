@@ -22,7 +22,6 @@ import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
 import CronJobDetails from '../components/cronjob/Details';
 import CronJobList from '../components/cronjob/List';
-import DaemonSetDetails from '../components/daemonset/Details';
 import DaemonSetList from '../components/daemonset/List';
 import DeploymentsList from '../components/deployments/List';
 import EndpointDetails from '../components/endpoints/Details';
@@ -76,7 +75,6 @@ import ServiceList from '../components/service/List';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
 import { DefaultSidebars } from '../components/Sidebar';
-import StatefulSetDetails from '../components/statefulset/Details';
 import StatefulSetList from '../components/statefulset/List';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
@@ -96,9 +94,11 @@ import helpers from '../helpers';
 import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import store from '../redux/stores/store';
 import { useCluster } from './k8s';
+import DaemonSet from './k8s/daemonSet';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
 import ReplicaSet from './k8s/replicaSet';
+import StatefulSet from './k8s/statefulSet';
 import { getCluster, getClusterPrefixedPath } from './util';
 
 export interface Route {
@@ -232,13 +232,13 @@ const defaultRoutes: {
     path: '/daemonsets/:namespace/:name',
     exact: true,
     sidebar: 'DaemonSets',
-    component: () => <DaemonSetDetails />,
+    component: () => <WorkloadDetails workloadKind={DaemonSet} />,
   },
   StatefulSet: {
     path: '/statefulsets/:namespace/:name',
     exact: true,
     sidebar: 'StatefulSets',
-    component: () => <StatefulSetDetails />,
+    component: () => <WorkloadDetails workloadKind={StatefulSet} />,
   },
   Deployment: {
     path: '/deployments/:namespace/:name',
