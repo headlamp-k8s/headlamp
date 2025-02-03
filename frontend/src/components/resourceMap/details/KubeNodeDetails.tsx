@@ -1,6 +1,5 @@
 import { Box } from '@mui/system';
 import { memo, ReactElement, useEffect } from 'react';
-import { KubeObject } from '../../../lib/k8s/cluster';
 import Deployment from '../../../lib/k8s/deployment';
 import Job from '../../../lib/k8s/job';
 import ReplicaSet from '../../../lib/k8s/replicaSet';
@@ -74,6 +73,11 @@ const kindComponentMap: Record<
   IngressClass: IngressClassDetails,
 };
 
+export const canRenderDetails = (maybeKind: string) =>
+  Object.entries(kindComponentMap).find(
+    ([key]) => key.toLowerCase() === maybeKind?.toLowerCase()
+  ) !== undefined;
+
 function DetailsNotFound() {
   return null;
 }
@@ -81,25 +85,34 @@ function DetailsNotFound() {
 /**
  * Shows details page for a given Kube resource
  */
-export const KubeObjectDetails = memo(({ resource }: { resource: KubeObject }) => {
-  const kind = resource.kind;
-  const { name, namespace } = resource.metadata;
+export const KubeObjectDetails = memo(
+  ({
+    resource,
+  }: {
+    resource: { kind: string; metadata: { name: string; namespace?: string } };
+  }) => {
+    const kind = resource.kind;
+    const { name, namespace } = resource.metadata;
 
-  const Component = kindComponentMap[kind] ?? DetailsNotFound;
+    const Component =
+      Object.entries(kindComponentMap).find(
+        ([key]) => key.toLowerCase() === kind?.toLowerCase()
+      )?.[1] ?? DetailsNotFound;
 
-  useEffect(() => {
-    if (!kindComponentMap[kind]) {
-      console.error(
-        'No details component for kind ${kind} was found. See KubeNodeDetails.tsx for more info'
-      );
-    }
-  }, [kind, kindComponentMap]);
+    useEffect(() => {
+      if (!kindComponentMap[kind]) {
+        console.error(
+          'No details component for kind ${kind} was found. See KubeNodeDetails.tsx for more info'
+        );
+      }
+    }, [kind, kindComponentMap]);
 
-  return (
-    <Box sx={{ overflow: 'hidden' }}>
-      <Box sx={{ marginTop: '-70px' }}>
-        <Component name={name} namespace={namespace} />
+    return (
+      <Box sx={{ overflow: 'hidden' }}>
+        <Box sx={{ marginTop: '-70px' }}>
+          <Component name={name} namespace={namespace} />
+        </Box>
       </Box>
-    </Box>
-  );
-});
+    );
+  }
+);
