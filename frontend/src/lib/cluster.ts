@@ -20,7 +20,7 @@ export function getClusterPrefixedPath(path?: string | null) {
 export function getCluster(): string | null {
   const prefix = helpers.getBaseUrl();
   const urlPath = helpers.isElectron()
-    ? window.location.hash.substr(1)
+    ? window.location.hash.substring(1)
     : window.location.pathname.slice(prefix.length);
 
   const clusterURLMatch = matchPath<{ cluster?: string }>(urlPath, {
