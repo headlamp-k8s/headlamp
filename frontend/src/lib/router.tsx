@@ -3,7 +3,7 @@ import { generatePath, useHistory } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import Home from '../components/App/Home';
-import NotificationList from '../components/App/Notifications/List';
+import { NotificationList } from '../components/App/Notifications';
 import PluginSettings from '../components/App/PluginSettings';
 import PluginSettingsDetails from '../components/App/PluginSettings/PluginSettingsDetails';
 import Settings from '../components/App/Settings';
