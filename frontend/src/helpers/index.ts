@@ -360,16 +360,11 @@ export function getWebsocketMultiplexerEnabled(): boolean {
   return import.meta.env.REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER !== 'false';
 }
 
-/**
- * The backend token to use when making API calls from Headlamp when running as an app.
- * The app opens the index.html?backendToken=... and passes the token to the frontend
- * in this way. The token is then used in the getHeadlampAPIHeaders function below.
- *
- * The app also passes the token to the headlamp-server via HEADLAMP_BACKEND_TOKEN env var.
- */
-const backendToken =
-  import.meta.env.REACT_APP_HEADLAMP_BACKEND_TOKEN ||
-  new URLSearchParams(window.location.search).get('backendToken');
+let backendToken: string | null = null;
+
+export function setBackendToken(token: string | null) {
+  backendToken = token;
+}
 
 /**
  * Returns headers for making API calls to the headlamp-server backend.
