@@ -161,10 +161,10 @@
     "../app/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
     ],
-    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{ts,tsx}": [
+    "../plugins/headlamp-plugin/{bin,lib}/**/*.{ts,tsx}": [
       "eslint -c package.json --fix"
     ],
-    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "../plugins/headlamp-plugin/{bin,lib}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
     ],
     "../plugins/examples/**/*.{ts,tsx}": [
@@ -189,7 +189,6 @@
   },
   "prettier": "@headlamp-k8s/eslint-config/prettier-config",
   "devDependencies": {
-    "@axe-core/react": "^4.3.2",
     "@storybook/addon-actions": "^8.3.5",
     "@storybook/addon-essentials": "^8.3.5",
     "@storybook/addon-interactions": "^8.3.5",

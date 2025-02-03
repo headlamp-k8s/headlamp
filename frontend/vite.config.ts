@@ -20,6 +20,9 @@ export default defineConfig({
     cors: true,
   },
   plugins: [
+    nodePolyfills({
+      include: ['process', 'buffer', 'stream'],
+    }),
     svgr({
       svgrOptions: {
         prettier: false,
@@ -32,9 +35,6 @@ export default defineConfig({
       },
     }),
     react(),
-    nodePolyfills({
-      include: ['process', 'buffer', 'stream'],
-    }),
   ],
   build: {
     outDir: 'build',
@@ -42,8 +42,6 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
     rollupOptions: {
-      // Exclude @axe-core from production bundle
-      external: ['@axe-core/react'],
       output: {
         manualChunks(id: string) {
           // Build smaller chunks for @mui, lodash, xterm, recharts
