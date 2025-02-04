@@ -1,4 +1,11 @@
 {
+  "Failed to fetch plugin info": "",
+  "An error occurred while fetching plugin info from {{  URL }}.": "",
+  "Yes": "",
+  "No": "",
+  "Plugin Installation": "",
+  "Do you want to install the plugin \"{{ pluginName }}\"?": "",
+  "You are about to install a plugin from: {{ url }}\nDo you want to proceed?": "",
   "About": "Über",
   "Quit": "Beenden",
   "Select All": "Alles auswählen",
