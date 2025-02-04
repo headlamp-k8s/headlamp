@@ -74,9 +74,14 @@ function replaceUseId(node: any) {
   const attributesToReplace = ['id', 'for', 'aria-described', 'aria-labelledby', 'aria-controls'];
   if (node.nodeType === Node.ELEMENT_NODE) {
     for (const attr of node.attributes) {
-      if (attributesToReplace.includes(attr.name) && attr.value.includes(':')) {
-        // Update the attribute value here
-        node.setAttribute(attr.name, ':mock-test-id:');
+      if (attributesToReplace.includes(attr.name)) {
+        if (attr.value.includes(':')) {
+          // Handle React useId generated IDs
+          node.setAttribute(attr.name, ':mock-test-id:');
+        } else if (attr.name === 'id' && attr.value.includes('recharts')) {
+          // Handle recharts generated IDs
+          node.setAttribute(attr.name, 'recharts-id');
+        }
       }
     }
   }

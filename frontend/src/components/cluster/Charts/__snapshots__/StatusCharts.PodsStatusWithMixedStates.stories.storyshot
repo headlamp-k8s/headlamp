@@ -15,13 +15,13 @@
             <p
               class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-16da70x-MuiTypography-root"
             >
-              My chart
+              Pods
             </p>
           </div>
           <p
             class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
           >
-            Progress so far
+            2 / 3 Requested
           </p>
         </div>
         <div
@@ -92,7 +92,7 @@
                       dy="0.355em"
                       x="61"
                     >
-                      10%
+                      66.7 %
                     </tspan>
                   </text>
                 </g>
