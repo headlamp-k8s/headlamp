@@ -140,7 +140,16 @@ func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache
 		p.Port = strconv.Itoa(freePort)
 	}
 
-	kContext, err := kubeConfigStore.GetContext(p.Cluster)
+	// Get user ID from header if present
+	userID := r.Header.Get("X-HEADLAMP-USER-ID")
+
+	// If user ID is present, append it to cluster name
+	clusterName := p.Cluster
+	if userID != "" {
+		clusterName = p.Cluster + userID
+	}
+
+	kContext, err := kubeConfigStore.GetContext(clusterName)
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"cluster": p.Cluster},
 			err, "getting kubeconfig context")
@@ -319,7 +328,16 @@ func StopOrDeletePortForward(cache cache.Cache[interface{}], w http.ResponseWrit
 		return
 	}
 
-	err = stopOrDeletePortForward(cache, p.Cluster, p.ID, p.StopOrDelete)
+	// Get user ID from header if present
+	userID := r.Header.Get("X-HEADLAMP-USER-ID")
+
+	// If user ID is present, append it to cluster name
+	clusterName := p.Cluster
+	if userID != "" {
+		clusterName = p.Cluster + userID
+	}
+
+	err = stopOrDeletePortForward(cache, clusterName, p.ID, p.StopOrDelete)
 	if err == nil {
 		if _, err := w.Write([]byte("stopped")); err != nil {
 			logger.Log(logger.LevelError, nil, err, "writing response")
@@ -342,7 +360,16 @@ func GetPortForwards(cache cache.Cache[interface{}], w http.ResponseWriter, r *h
 		return
 	}
 
-	ports := getPortForwardList(cache, cluster)
+	// Get user ID from header if present
+	userID := r.Header.Get("X-HEADLAMP-USER-ID")
+
+	// If user ID is present, append it to cluster name
+	clusterName := cluster
+	if userID != "" {
+		clusterName = cluster + userID
+	}
+
+	ports := getPortForwardList(cache, clusterName)
 
 	w.Header().Set("Content-Type", "application/json")
 
@@ -372,7 +399,16 @@ func GetPortForwardByID(cache cache.Cache[interface{}], w http.ResponseWriter, r
 		return
 	}
 
-	p, err := getPortForwardByID(cache, cluster, id)
+	// Get user ID from header if present
+	userID := r.Header.Get("X-HEADLAMP-USER-ID")
+
+	// If user ID is present, append it to cluster name
+	clusterName := cluster
+	if userID != "" {
+		clusterName = cluster + userID
+	}
+
+	p, err := getPortForwardByID(cache, clusterName, id)
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "getting portforward by id")
 		http.Error(w, "no portforward running with id "+id, http.StatusNotFound)
