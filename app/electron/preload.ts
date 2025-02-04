@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld('desktopApi', {
       'pluginsLoaded',
       'run-command',
       'plugin-manager',
+      'request-backend-token',
     ];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
@@ -27,6 +28,7 @@ contextBridge.exposeInMainWorld('desktopApi', {
       'command-stderr',
       'command-exit',
       'plugin-manager',
+      'backend-token',
     ];
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`

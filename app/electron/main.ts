@@ -48,9 +48,6 @@ const startUrl = (
     pathname: frontendPath,
     protocol: 'file:',
     slashes: true,
-    query: {
-      backendToken: backendToken,
-    },
   })
 )
   // Windows paths use backslashes and for consistency we want to use forward slashes.
@@ -1198,6 +1195,10 @@ function startElecron() {
       if (!!newLocale && i18n.language !== newLocale) {
         i18n.changeLanguage(newLocale);
       }
+    });
+
+    ipcMain.on('request-backend-token', () => {
+      mainWindow?.webContents.send('backend-token', backendToken);
     });
 
     /**
