@@ -1,13 +1,11 @@
 import { Meta, StoryFn } from '@storybook/react';
 import Deployment from '../../../lib/k8s/deployment';
-import ReplicaSet from '../../../lib/k8s/replicaSet';
 import StatefulSet from '../../../lib/k8s/statefulSet';
 import { TestContext } from '../../../test';
-import ScaleButton from './ScaleButton';
-
+import { RestartButton } from './RestartButton';
 export default {
-  title: 'Resource/ScaleButton',
-  component: ScaleButton,
+  title: 'Resource/RestartButton',
+  component: RestartButton,
   decorators: [
     Story => (
       <TestContext>
@@ -17,7 +15,7 @@ export default {
   ],
 } as Meta;
 
-const Template: StoryFn<typeof ScaleButton> = args => <ScaleButton {...args} />;
+const Template: StoryFn<typeof RestartButton> = args => <RestartButton {...args} />;
 
 const mockDeployment = new Deployment({
   metadata: {
@@ -81,44 +79,6 @@ const mockStatefulSet = new StatefulSet({
   kind: 'StatefulSet',
 });
 
-const mockReplicaSet = new ReplicaSet({
-  metadata: {
-    name: 'mock-statefulset',
-    namespace: 'default',
-    creationTimestamp: new Date().toDateString(),
-    uid: 'mock-uid',
-  },
-  spec: {
-    minReadySeconds: 0,
-    replicas: 3,
-    selector: {
-      matchLabels: { app: 'headlamp' },
-    },
-    template: {
-      spec: {
-        nodeName: 'mock-node',
-        containers: [
-          {
-            name: 'mock-container',
-            image: 'mock-image',
-            ports: [{ containerPort: 80 }],
-            imagePullPolicy: 'Always',
-          },
-        ],
-      },
-    },
-  },
-  status: {
-    availableReplicas: 3,
-    conditions: [],
-    fullyLabeledReplicas: 3,
-    observedGeneration: 3,
-    readyReplicas: 2,
-    replicas: 3,
-  },
-  kind: 'ReplicaSet',
-});
-
 export const DeploymentExample = Template.bind({});
 DeploymentExample.args = {
   item: mockDeployment,
@@ -127,9 +87,4 @@ DeploymentExample.args = {
 export const StatefulSetExample = Template.bind({});
 StatefulSetExample.args = {
   item: mockStatefulSet,
-};
-
-export const ReplicaSetExample = Template.bind({});
-ReplicaSetExample.args = {
-  item: mockReplicaSet,
 };
