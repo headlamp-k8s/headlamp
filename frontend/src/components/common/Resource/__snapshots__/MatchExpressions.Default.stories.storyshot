@@ -1,0 +1,14 @@
+<body>
+  <div>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
+    >
+      env: production
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
+    >
+      tier: frontend
+    </p>
+  </div>
+</body>

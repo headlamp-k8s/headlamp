@@ -1,0 +1,29 @@
+<body>
+  <div>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
+    >
+      env: production
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
+    >
+      tier: frontend
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
+    >
+      version=1.0
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
+    >
+      zone in (us-east-1,us-west-2)
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-165txdq-MuiTypography-root"
+    >
+      !beta
+    </p>
+  </div>
+</body>
