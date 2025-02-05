@@ -50,15 +50,15 @@
           </div>
         </h2>
         <div
-          class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
+          class="MuiDialogContent-root css-9hw3b4-MuiDialogContent-root"
           tabindex="-1"
         >
-          <p
+          <div
             class="MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiDialogContentText-root css-1tmyuhs-MuiTypography-root-MuiDialogContentText-root"
             id="alert-dialog-description"
           >
             A really good description.
-          </p>
+          </div>
         </div>
         <div
           class="MuiDialogActions-root MuiDialogActions-spacing css-knqc4i-MuiDialogActions-root"

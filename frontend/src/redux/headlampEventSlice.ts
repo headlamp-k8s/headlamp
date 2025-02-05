@@ -29,6 +29,8 @@ export enum HeadlampEventType {
   SCALE_RESOURCE = 'headlamp.scale-resource',
   /** Events related to restarting a resource. */
   RESTART_RESOURCE = 'headlamp.restart-resource',
+  /** Events related to restarting multiple resources. */
+  RESTART_RESOURCES = 'headlamp.restart-resources',
   /** Events related to viewing logs. */
   LOGS = 'headlamp.logs',
   /** Events related to opening a terminal. */
@@ -141,12 +143,25 @@ export interface ScaleResourceEvent {
 /**
  * Event fired when restarting a resource.
  */
-export interface RestartResourceEvent {
-  type: HeadlampEventType.RESTART_RESOURCE;
+export interface RestartResourceEvent extends HeadlampEvent<HeadlampEventType.RESTART_RESOURCE> {
   data: {
-    /** The resource for which the deletion was called. */
+    /** The resource for which restart was called. */
     resource: KubeObject;
-    /** What exactly this event represents. 'CONFIRMED' when the restart is selected by the user.
+    /** What exactly this event represents. 'CONFIRMED' when restart is selected by the user.
+     * For now only 'CONFIRMED' is sent.
+     */
+    status: EventStatus.CONFIRMED;
+  };
+}
+
+/**
+ * Event fired when restarting multiple resources.
+ */
+export interface RestartResourcesEvent extends HeadlampEvent<HeadlampEventType.RESTART_RESOURCES> {
+  data: {
+    /** Resources for which restart was called. */
+    resources: KubeObject[];
+    /** What exactly this event represents. 'CONFIRMED' when the user confirms restart of resources.
      * For now only 'CONFIRMED' is sent.
      */
     status: EventStatus.CONFIRMED;
@@ -354,6 +369,9 @@ export function useEventCallback(
 export function useEventCallback(
   eventType: HeadlampEventType.RESTART_RESOURCE
 ): (data: EventDataType<RestartResourceEvent>) => void;
+export function useEventCallback(
+  eventType: HeadlampEventType.RESTART_RESOURCES
+): (data: EventDataType<RestartResourcesEvent>) => void;
 export function useEventCallback(
   eventType: HeadlampEventType.LOGS
 ): (data: EventDataType<LogsEvent>) => void;
