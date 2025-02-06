@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../../helpers';
+import { getCluster } from '../../../lib/cluster';
 import { deletePlugin } from '../../../lib/k8s/apiProxy';
 import { ConfigStore } from '../../../plugin/configStore';
 import { PluginInfo, reloadPage } from '../../../plugin/pluginsSlice';
@@ -16,6 +17,7 @@ import NotFoundComponent from '../../404';
 import { SectionBox } from '../../common';
 import { ConfirmDialog } from '../../common/Dialog';
 import ErrorBoundary from '../../common/ErrorBoundary';
+import { setNotifications } from '../Notifications/notificationsSlice';
 
 const PluginSettingsDetailsInitializer = (props: { plugin: PluginInfo }) => {
   const { plugin } = props;
@@ -28,14 +30,24 @@ const PluginSettingsDetailsInitializer = (props: { plugin: PluginInfo }) => {
   }
 
   function handleDeleteConfirm() {
+    const dispatch = useDispatch();
     const name = plugin.name.split('/').splice(-1)[0];
     deletePlugin(name)
       .then(() => {
         // update the plugin list
-        const dispatch = useDispatch();
         dispatch(reloadPage());
-
-        // @todo error is not handled here.
+      })
+      .catch(error => {
+        dispatch(
+          setNotifications({
+            cluster: getCluster(),
+            date: new Date().toISOString(),
+            deleted: false,
+            id: Math.random().toString(36).substring(2),
+            message: `Failed to delete plugin: ${error.message || 'Unknown error'}`,
+            seen: false,
+          })
+        );
       })
       .finally(() => {
         // redirect /plugins page
