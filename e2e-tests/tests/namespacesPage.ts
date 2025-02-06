@@ -4,7 +4,7 @@ export class NamespacesPage {
   constructor(private page: Page) {}
 
   async navigateToNamespaces() {
-    await this.page.click('span:has-text("Cluster")');
+    await this.page.click('a span:has-text("Cluster")');
     await this.page.waitForLoadState('load');
     await this.page.waitForSelector('span:has-text("Namespaces")');
     await this.page.click('span:has-text("Namespaces")');
@@ -31,8 +31,8 @@ export class NamespacesPage {
       return;
     }
 
-    await expect(page.getByRole('button', { name: 'Create' })).toBeVisible();
-    await page.getByRole('button', { name: 'Create' }).click();
+    await expect(page.getByRole('button', { name: 'Create', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Create', exact: true }).click();
 
     await page.waitForLoadState('load');
 
@@ -50,12 +50,21 @@ export class NamespacesPage {
 
   async deleteNamespace(name) {
     const page = this.page;
+    await page.waitForSelector('span:has-text("Namespaces")');
     await page.click('span:has-text("Namespaces")');
     await page.waitForLoadState('load');
-    await page.waitForSelector(`text=${name}`);
-    await page.click(`a:has-text("${name}")`);
-    await page.click('button[title="Delete"]');
-    await page.waitForSelector('text=Are you sure you want to delete this item?');
+
+    const namespaceLink = page.locator(`a:has-text("${name}")`);
+    try {
+      await namespaceLink.waitFor({ state: 'visible', timeout: 10000 });
+    } catch (error) {
+      await this.page.reload({ waitUntil: 'networkidle' });
+    }
+    await expect(namespaceLink).toBeVisible();
+
+    await namespaceLink.click();
+    await page.getByRole('button', { name: 'Delete' }).click();
+    await page.waitForSelector(`text=Are you sure you want to delete item ${name}?`);
     await page.click('button:has-text("Yes")');
     await page.waitForSelector(`text=Deleted item ${name}`);
   }
