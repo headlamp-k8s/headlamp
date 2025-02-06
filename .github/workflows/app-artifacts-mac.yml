@@ -54,7 +54,11 @@ jobs:
         # This will trigger codesign. See app/mac/scripts/codeSign.js
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
       run: |
-        make app-mac
+        make app-mac 2>&1 | tee build.log
+        if grep -q "Mac codesign: Failed" build.log; then
+          echo "Error: Mac codesign failed"
+          exit 1
+        fi
     - name: Early staple (only if we are not notarizing the app)
       if: ${{ ! inputs.signBinaries }}
       run: |
