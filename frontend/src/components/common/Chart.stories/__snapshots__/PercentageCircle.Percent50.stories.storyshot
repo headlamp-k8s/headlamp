@@ -27,7 +27,7 @@
           <desc />
           <defs>
             <clippath
-              id="recharts15-clip"
+              id="recharts-id"
             >
               <rect
                 height="150"
