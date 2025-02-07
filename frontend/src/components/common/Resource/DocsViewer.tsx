@@ -13,9 +13,15 @@ import Loader from '../Loader';
 // Buffer class is not polyffiled with CRA(v5) so we manually do it here
 // window.Buffer = buffer.Buffer;
 
-// @todo: Declare strict types.
-function DocsViewer(props: { docSpecs: any }) {
-  const { docSpecs } = props;
+export interface DocsViewerProps {
+  // @todo: Declare strict types.
+  docSpecs: any;
+  // An override for testing/mocking purposes.
+  fetchDocDefinitions?: (apiVersion: string, kind: string) => Promise<any>;
+}
+
+function DocsViewer(props: DocsViewerProps) {
+  const { docSpecs, fetchDocDefinitions = getDocDefinitions } = props;
   const [docs, setDocs] = React.useState<
     (
       | {
@@ -39,8 +45,8 @@ function DocsViewer(props: { docSpecs: any }) {
     // fetch docSpecs for all the resources specified
     Promise.allSettled(
       docSpecs.map((docSpec: { apiVersion: string; kind: string }) => {
-        return getDocDefinitions(docSpec.apiVersion, docSpec.kind);
-      }) as PromiseSettledResult<any>[]
+        return fetchDocDefinitions(docSpec.apiVersion, docSpec.kind);
+      })
     )
       .then(values => {
         const docSpecsFromApi = values.map((value, index) => {
