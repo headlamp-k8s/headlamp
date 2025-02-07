@@ -899,13 +899,21 @@ func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Hand
 	})
 }
 
-// OIDCImpersonateMiddleware will validate and exchange the authorization JWT from the header with 
+// OIDCImpersonateMiddleware will validate and exchange the authorization JWT from the header with
 // the kubernetes service account JWT and instead impersonate the user using the `Impersonate-User`
 // header.
 // The headlamp service account must have the corresponding roles, see
 // https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation
-// If the token cannot be validated, the request will be forwarded to the next handler
+// If the token cannot be validated, the request will be forwarded to the next handler.
 func (c *HeadlampConfig) OIDCImpersonateMiddleware(next http.Handler) http.Handler {
+	oidcProvider, err := oidc.NewProvider(context.Background(), c.oidcIdpIssuerURL)
+	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"idpIssuerURL": c.oidcIdpIssuerURL},
+			err, "failed to get oidc provider")
+		return next
+	}
+	c.oidcProvider = oidcProvider
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// skip if not cluster request
 		if !strings.HasPrefix(r.URL.String(), "/clusters/") {
