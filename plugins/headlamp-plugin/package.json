@@ -61,7 +61,6 @@
     "@types/js-yaml": "^4.0.3",
     "@types/json-patch": "0.0.30",
     "@types/lodash": "4.17.7",
-    "@types/nock": "^11.1.0",
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

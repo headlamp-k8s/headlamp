@@ -59,10 +59,7 @@ export interface QueryListResponse<DataType, ItemType, ErrorType>
    * Results from individual clusters. Keyed by cluster name.
    */
   clusterResults?: Record<string, QueryListResponse<DataType, ItemType, ErrorType>>;
-  /**
-   * Errors from individual clusters. Keyed by cluster name.
-   */
-  clusterErrors?: Record<string, ApiError | null> | null;
+  errors: ApiError[] | null;
 }
 
 export const kubeObjectQueryKey = ({
@@ -101,7 +98,10 @@ export function useKubeObject<K extends KubeObject>({
 }): [K | null, ApiError | null] & QueryResponse<K, ApiError> {
   type Instance = K;
   const cluster = maybeCluster ?? getCluster() ?? '';
-  const endpoint = useEndpoints(kubeObjectClass.apiEndpoint.apiInfo, cluster);
+  const { endpoint, error: endpointError } = useEndpoints(
+    kubeObjectClass.apiEndpoint.apiInfo,
+    cluster
+  );
 
   const cleanedUpQueryParams = Object.fromEntries(
     Object.entries(queryParams ?? {}).filter(([, value]) => value !== undefined && value !== '')
@@ -152,7 +152,7 @@ export function useKubeObject<K extends KubeObject>({
   // @ts-ignore
   return {
     data,
-    error: query.error,
+    error: endpointError ?? query.error,
     isError: query.isError,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
@@ -160,7 +160,7 @@ export function useKubeObject<K extends KubeObject>({
     status: query.status,
     *[Symbol.iterator](): ArrayIterator<ApiError | K | null> {
       yield data;
-      yield query.error;
+      yield endpointError ?? query.error;
     },
   };
 }
@@ -183,14 +183,12 @@ const getWorkingEndpoint = async (
     return clusterFetch(KubeObjectEndpoint.toUrl(endpoint, namespace), {
       method: 'GET',
       cluster: cluster ?? getCluster() ?? '',
-    }).then(it => {
-      if (!it.ok) {
-        throw new Error('error');
-      }
-      return endpoint;
-    });
+    }).then(() => endpoint);
   });
-  return Promise.any(promises);
+  return Promise.any(promises).catch((aggregateError: AggregateError) => {
+    // when no endpoint is available, throw an error
+    throw aggregateError.errors[0];
+  });
 };
 
 /**
@@ -200,23 +198,15 @@ const getWorkingEndpoint = async (
  */
 export const useEndpoints = (
   endpoints: KubeObjectEndpoint[],
-  cluster?: string,
+  cluster: string,
   namespace?: string
 ) => {
-  const { data: endpoint } = useQuery({
-    enabled: endpoints.length > 1 && cluster !== undefined,
+  const { data: endpoint, error } = useQuery<KubeObjectEndpoint, ApiError>({
+    enabled: endpoints.length > 1,
     queryKey: ['endpoints', endpoints],
-    queryFn: () =>
-      getWorkingEndpoint(endpoints, cluster!, namespace)
-        .then(endpoints => endpoints)
-        // If none of the endpoints are working return the first one
-        // since it doesn't matter
-        // TODO: refactor this hook so it returns an error
-        .catch(() => endpoints[0]),
+    queryFn: () => getWorkingEndpoint(endpoints, cluster!, namespace),
   });
+  if (endpoints.length === 1) return { endpoint: endpoints[0], error: null };
 
-  if (cluster === null || cluster === undefined) return undefined;
-  if (endpoints.length === 1) return endpoints[0];
-
-  return endpoint;
+  return { endpoint, error };
 };

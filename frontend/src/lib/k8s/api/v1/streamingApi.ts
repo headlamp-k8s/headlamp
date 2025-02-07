@@ -3,7 +3,8 @@ import { findKubeconfigByClusterName, getUserIdFromLocalStorage } from '../../..
 import { getToken } from '../../../auth';
 import { getCluster } from '../../../cluster';
 import { KubeObjectInterface } from '../../KubeObject';
-import { ApiError, clusterRequest } from './clusterRequests';
+import { ApiError } from '../v2/ApiError';
+import { clusterRequest } from './clusterRequests';
 import { BASE_HTTP_URL, CLUSTERS_PREFIX } from './constants';
 import { asQuery, combinePath } from './formatUrl';
 import { QueryParameters } from './queryParameters';

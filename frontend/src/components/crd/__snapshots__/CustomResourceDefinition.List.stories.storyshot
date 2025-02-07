@@ -661,7 +661,7 @@
               data-selected="false"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1pkix5j-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7zkdw1-MuiTableCell-root"
               >
                 <span
                   aria-label="Toggle select row"
@@ -691,7 +691,7 @@
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jlobuz-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-6rae6r-MuiTableCell-root"
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -701,7 +701,7 @@
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1b8vqsm-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-7lu39a-MuiTableCell-root"
               >
                 <a
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
@@ -711,20 +711,20 @@
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-t98ysb-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-e2ym6r-MuiTableCell-root"
               >
                 my.phonyresources.io
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-2cnzn7-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-ussceo-MuiTableCell-root"
               >
                 Namespaced
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1kn8e9-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1fvjjgn-MuiTableCell-root"
               />
               <td
-                class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-um1zlr-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-1icg04k-MuiTableCell-root"
               >
                 <p
                   aria-label="2021-12-15T14:57:13.000Z"
@@ -735,7 +735,7 @@
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-85nbiz-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1xef43u-MuiTableCell-root"
               >
                 <button
                   aria-label="Row Actions"

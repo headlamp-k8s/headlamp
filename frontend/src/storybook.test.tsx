@@ -79,6 +79,14 @@ function replaceUseId(node: any) {
         node.setAttribute(attr.name, ':mock-test-id:');
       }
     }
+
+    if (node.className && typeof node.className === 'string') {
+      // Replace dynamic xterm owner classes with a fixed value
+      node.className = node.className.replace(
+        /xterm-dom-renderer-owner-\d+/g,
+        'xterm-dom-renderer-owner'
+      );
+    }
   }
 
   // Recursively update child nodes

@@ -48,9 +48,6 @@ const startUrl = (
     pathname: frontendPath,
     protocol: 'file:',
     slashes: true,
-    query: {
-      backendToken: backendToken,
-    },
   })
 )
   // Windows paths use backslashes and for consistency we want to use forward slashes.
@@ -188,7 +185,7 @@ class PluginManagerEventListeners {
    * @name setupEventHandlers
    */
   setupEventHandlers() {
-    ipcMain.on('plugin-manager', (event, data) => {
+    ipcMain.on('plugin-manager', async (event, data) => {
       const eventData = JSON.parse(data) as Action;
       const { identifier, action } = eventData;
 
@@ -230,26 +227,19 @@ class PluginManagerEventListeners {
    * @name handleInstall
    * @private
    */
-  private handleInstall(eventData: Action, updateCache: (progress: ProgressResp) => void) {
+  private async handleInstall(eventData: Action, updateCache: (progress: ProgressResp) => void) {
     const { identifier, URL, destinationFolder, headlampVersion, pluginName } = eventData;
 
     if (!mainWindow) {
-      return Promise.resolve({ type: 'error', message: 'Main window is not available' });
+      return { type: 'error', message: 'Main window is not available' };
     }
 
     if (!URL) {
-      return Promise.resolve({ type: 'error', message: 'URL is required' });
+      return { type: 'error', message: 'URL is required' };
     }
 
-    const dialogOptions: MessageBoxOptions = {
-      type: 'question',
-      buttons: ['Yes', 'No'],
-      defaultId: 1,
-      title: 'Plugin Installation',
-      message: 'Do you want to install this plugin?',
-      detail: `You are about to install ${pluginName} plugin from: ${URL}\nDo you want to proceed?`,
-    };
     const controller = new AbortController();
+
     this.cache[identifier] = {
       action: 'INSTALL',
       progress: { type: 'info', message: 'waiting for user consent' },
@@ -257,45 +247,69 @@ class PluginManagerEventListeners {
       controller,
     };
 
-    return dialog
-      .showMessageBox(mainWindow, dialogOptions)
-      .then(({ response }) => {
-        console.log('User response:', response);
-        if (response === 1) {
-          // User clicked "No"
-          this.cache[identifier] = {
-            action: 'INSTALL',
-            progress: { type: 'error', message: 'installation cancelled due to user consent' },
-            percentage: 0,
-            controller,
-          };
-          return { type: 'error', message: 'Installation cancelled due to user consent' };
-        }
+    let pluginInfo;
+    try {
+      pluginInfo = await PluginManager.fetchPluginInfo(URL, { signal: controller.signal });
+    } catch (error) {
+      console.error('Error fetching plugin info:', error);
+      dialog.showErrorBox(
+        i18n.t('Failed to fetch plugin info'),
+        i18n.t('An error occurred while fetching plugin info from {{  URL }}.', { URL })
+      );
+      return { type: 'error', message: 'Failed to fetch plugin info' };
+    }
 
-        // User clicked "Yes", proceed with installation
-        this.cache[identifier] = {
-          action: 'INSTALL',
-          progress: { type: 'info', message: 'installing plugin' },
-          percentage: 10,
-          controller,
-        };
+    const dialogOptions: MessageBoxOptions = {
+      type: 'question',
+      buttons: [i18n.t('Yes'), i18n.t('No')],
+      defaultId: 1,
+      title: i18n.t('Plugin Installation'),
+      message: i18n.t('Do you want to install the plugin "{{ pluginName }}"?', { pluginName }),
+      detail: i18n.t('You are about to install a plugin from: {{ url }}\nDo you want to proceed?', {
+        url: pluginInfo.archiveURL,
+      }),
+    };
 
-        PluginManager.install(
-          URL,
-          destinationFolder,
-          headlampVersion,
-          progress => {
-            updateCache(progress);
-          },
-          controller.signal
-        );
+    let userChoice: number;
+    try {
+      const answer = await dialog.showMessageBox(mainWindow, dialogOptions);
+      userChoice = answer.response;
+    } catch (error) {
+      console.error('Error during installation process:', error);
+      return { type: 'error', message: 'An error occurred during the installation process' };
+    }
 
-        return { type: 'info', message: 'Installation started' };
-      })
-      .catch(error => {
-        console.error('Error during installation process:', error);
-        return { type: 'error', message: 'An error occurred during the installation process' };
-      });
+    console.log('User response:', userChoice);
+    if (userChoice === 1) {
+      // User clicked "No"
+      this.cache[identifier] = {
+        action: 'INSTALL',
+        progress: { type: 'error', message: 'installation cancelled due to user consent' },
+        percentage: 0,
+        controller,
+      };
+      return { type: 'error', message: 'Installation cancelled due to user consent' };
+    }
+
+    // User clicked "Yes", proceed with installation
+    this.cache[identifier] = {
+      action: 'INSTALL',
+      progress: { type: 'info', message: 'installing plugin' },
+      percentage: 10,
+      controller,
+    };
+
+    PluginManager.installFromPluginPkg(
+      pluginInfo,
+      destinationFolder,
+      headlampVersion,
+      progress => {
+        updateCache(progress);
+      },
+      controller.signal
+    );
+
+    return { type: 'info', message: 'Installation started' };
   }
   /**
    * Handles the update process.
@@ -1183,6 +1197,10 @@ function startElecron() {
       }
     });
 
+    ipcMain.on('request-backend-token', () => {
+      mainWindow?.webContents.send('backend-token', backendToken);
+    });
+
     /**
      * Data sent from the renderer process when a 'run-command' event is emitted.
      */
@@ -1211,6 +1229,8 @@ function startElecron() {
      * @param eventData - The data sent from the renderer process.
      */
     function handleRunCommand(event: IpcMainEvent, eventData: CommandData): void {
+      return; // Disable this until we figure out a better way to do this
+
       // Only allow "minikube", and "az" commands
       const validCommands = ['minikube', 'az'];
       if (!validCommands.includes(eventData.command)) {
@@ -1222,11 +1242,10 @@ function startElecron() {
         return;
       }
 
-      const child: ChildProcessWithoutNullStreams = spawn(
-        eventData.command,
-        eventData.args,
-        eventData.options
-      );
+      const child: ChildProcessWithoutNullStreams = spawn(eventData.command, eventData.args, {
+        ...eventData.options,
+        shell: false,
+      });
 
       child.stdout.on('data', (data: string | Buffer) => {
         event.sender.send('command-stdout', eventData.id, data.toString());

@@ -75,6 +75,13 @@ const ContextUpdateChacheTTL = 20 * time.Second // seconds
 
 const JWTExpirationTTL = 10 * time.Second // seconds
 
+const (
+	// TokenCacheFileMode is the file mode for token cache files.
+	TokenCacheFileMode = 0o600 // octal
+	// TokenCacheFileName is the name of the token cache file.
+	TokenCacheFileName = "headlamp-token-cache"
+)
+
 type clientConfig struct {
 	Clusters                []Cluster `json:"clusters"`
 	IsDyanmicClusterEnabled bool      `json:"isDynamicClusterEnabled"`
@@ -764,75 +771,76 @@ func isTokenAboutToExpire(token string) bool {
 	return time.Until(expiryTime) <= JWTExpirationTTL
 }
 
-//nolint:funlen
-func refreshAndCacheNewToken(oidcAuthConfig *kubeconfig.OidcConfig,
-	cache cache.Cache[interface{}], token string,
-) (string, error) {
-	const ExtendRefreshTokenTTL = 10 // seconds
-
+func refreshAndCacheNewToken(clientID, clientSecret, token, issuerURL string) (*oauth2.Token, error) {
 	// get provider
-	provider, err := oidc.NewProvider(context.Background(), oidcAuthConfig.IdpIssuerURL)
+	provider, err := oidc.NewProvider(context.Background(), issuerURL)
 	if err != nil {
-		logger.Log(logger.LevelError, nil, err, "failed to get provider")
-
-		return "", err
+		return nil, fmt.Errorf("getting provider: %v", err)
 	}
 
-	// get refresh token from cache
-	refreshToken, err := cache.Get(context.Background(), fmt.Sprintf("oidc-token-%s", token))
-	if err != nil || refreshToken == "" {
-		logger.Log(logger.LevelError, nil, err, "failed to get refresh token")
-
-		return "", err
+	// get refresh token
+	refreshToken, err := getNewTokenFromRefresh(clientID, clientSecret, token, provider.Endpoint().TokenURL)
+	if err != nil {
+		return nil, fmt.Errorf("refreshing token: %v", err)
 	}
 
-	rToken, ok := refreshToken.(string)
-	if !ok {
-		logger.Log(logger.LevelError, nil, err, "failed to cast refresh token")
-
-		return "", err
+	// cache the refreshed token
+	if err := cacheRefreshedToken(refreshToken); err != nil {
+		return nil, fmt.Errorf("caching refreshed token: %v", err)
 	}
 
-	oauth2Config := oauth2.Config{
-		ClientID:     oidcAuthConfig.ClientID,
-		ClientSecret: oidcAuthConfig.ClientSecret,
-		Endpoint:     provider.Endpoint(),
-		Scopes:       oidcAuthConfig.Scopes,
+	return refreshToken, nil
+}
+
+// getNewTokenFromRefresh uses the provided credentials and refresh token to obtain a new OAuth2 token
+// from the specified token URL endpoint.
+func getNewTokenFromRefresh(clientID, clientSecret, rToken, tokenURL string) (*oauth2.Token, error) {
+	// Create OAuth2 config with client credentials and token endpoint
+	conf := &oauth2.Config{
+		ClientID:     clientID,
+		ClientSecret: clientSecret,
+		Endpoint: oauth2.Endpoint{
+			TokenURL: tokenURL,
+		},
 	}
 
-	// get new token using refresh token
-	ts := oauth2Config.TokenSource(context.Background(), &oauth2.Token{
+	// Request new token using the refresh token
+	token, err := conf.TokenSource(context.Background(), &oauth2.Token{
 		RefreshToken: rToken,
-	})
-
-	tk, err := ts.Token()
+	}).Token()
 	if err != nil {
-		logger.Log(logger.LevelError, nil, err, "failed to get new token")
-
-		return "", err
+		return nil, err
 	}
 
-	idToken, ok := tk.Extra("id_token").(string)
-	if ok {
-		// update cache
-		if err := cache.Set(context.Background(), fmt.Sprintf("oidc-token-%s", idToken), tk.RefreshToken); err != nil {
-			logger.Log(logger.LevelError, nil, err, "failed to cache refresh token")
+	return token, nil
+}
 
-			return "", err
-		}
-
-		// set ttl to 10 seconds for old token to handle case when the new token is not accepted by the client.
-		if err := cache.SetWithTTL(context.Background(), fmt.Sprintf("oidc-token-%s", token),
-			refreshToken, time.Second*ExtendRefreshTokenTTL); err != nil {
-			logger.Log(logger.LevelError, nil, err, "failed to extend refresh token ttl")
-
-			return "", err
-		}
-
-		return idToken, nil
+// cacheRefreshedToken stores the provided OAuth2 token in a temporary file cache.
+// The token is serialized to JSON and written to a file named "headlamp-token-cache"
+// in the system's temporary directory with 0600 permissions.
+func cacheRefreshedToken(token *oauth2.Token) error {
+	tokenBytes, err := json.Marshal(token)
+	if err != nil {
+		return err
 	}
 
-	return "", errors.New("failed to get id token")
+	// Create temp file with pattern to ensure unique name
+	tmpFile, err := os.CreateTemp("", TokenCacheFileName)
+	if err != nil {
+		return err
+	}
+	defer tmpFile.Close()
+
+	// Set correct file permissions
+	if err := os.Chmod(tmpFile.Name(), TokenCacheFileMode); err != nil {
+		return err
+	}
+
+	if _, err := tmpFile.Write(tokenBytes); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Handler {
@@ -874,13 +882,18 @@ func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Hand
 		}
 
 		// refresh and cache new token
-		newToken, err := refreshAndCacheNewToken(oidcAuthConfig, c.cache, token)
+		newToken, err := refreshAndCacheNewToken(
+			oidcAuthConfig.ClientID,
+			oidcAuthConfig.ClientSecret,
+			token,
+			c.oidcIdpIssuerURL,
+		)
 		if err != nil {
 			logger.Log(logger.LevelError, map[string]string{"cluster": cluster},
 				err, "failed to refresh token")
 		}
-		if newToken != "" {
-			w.Header().Set("X-Authorization", newToken)
+		if newToken != nil {
+			w.Header().Set("X-Authorization", newToken.AccessToken)
 		}
 		next.ServeHTTP(w, r)
 	})

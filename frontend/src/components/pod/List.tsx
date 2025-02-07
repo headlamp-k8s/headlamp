@@ -10,7 +10,6 @@ import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSl
 import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
-import { ResourceTableProps } from '../common/Resource/ResourceTable';
 
 export function makePodStatusLabel(pod: Pod) {
   const phase = pod.status.phase;
@@ -61,22 +60,14 @@ function getReadinessGatesStatus(pods: Pod) {
 
 export interface PodListProps {
   pods: Pod[] | null;
-  error: ApiError | null;
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
-  clusterErrors?: ResourceTableProps<Pod>['clusterErrors'];
+  errors?: ApiError[] | null;
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const {
-    pods,
-    error,
-    hideColumns = [],
-    reflectTableInURL = 'pods',
-    noNamespaceFilter,
-    clusterErrors,
-  } = props;
+  const { pods, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter, errors } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (
@@ -86,7 +77,7 @@ export function PodListRenderer(props: PodListProps) {
         noNamespaceFilter,
       }}
       hideColumns={hideColumns}
-      errorMessage={Pod.getErrorMessage(error)}
+      errors={errors}
       columns={[
         'name',
         'namespace',
@@ -210,14 +201,13 @@ export function PodListRenderer(props: PodListProps) {
       ]}
       data={pods}
       reflectInURL={reflectTableInURL}
-      clusterErrors={clusterErrors}
       id="headlamp-pods"
     />
   );
 }
 
 export default function PodList() {
-  const { items, error, clusterErrors } = Pod.useList({ namespace: useNamespaces() });
+  const { items, errors } = Pod.useList({ namespace: useNamespaces() });
 
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
 
@@ -225,11 +215,9 @@ export default function PodList() {
     dispatchHeadlampEvent({
       resources: items ?? [],
       resourceKind: 'Pod',
-      error: error || undefined,
+      error: errors?.[0] || undefined,
     });
-  }, [items, error]);
+  }, [items, errors]);
 
-  return (
-    <PodListRenderer pods={items} error={error} clusterErrors={clusterErrors} reflectTableInURL />
-  );
+  return <PodListRenderer pods={items} errors={errors} reflectTableInURL />;
 }
