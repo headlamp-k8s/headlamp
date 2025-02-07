@@ -23,6 +23,7 @@ jobs:
           token: ${{ secrets.KINVOLK_REPOS_TOKEN }}
           # we need the full history for the git tag command, so fetch all the branches
           fetch-depth: 0
+          ref: main
       - name: Configure Git
         run: |
           user=${{github.actor}}
