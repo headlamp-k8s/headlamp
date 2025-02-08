@@ -723,7 +723,7 @@ func parseClusterAndToken(r *http.Request) (string, string) {
 }
 
 func decodePayload(payload string) (map[string]interface{}, error) {
-	payloadBytes, err := base64.RawStdEncoding.DecodeString(payload)
+	payloadBytes, err := base64.RawURLEncoding.DecodeString(payload)
 	if err != nil {
 		return nil, err
 	}
