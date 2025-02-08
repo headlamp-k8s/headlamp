@@ -1,0 +1,115 @@
+import { configureStore } from '@reduxjs/toolkit';
+import { renderHook } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import reducers from '../../redux/reducers/reducers';
+import { DefaultSidebars, SidebarEntry } from './sidebarSlice';
+import { useSidebarItems } from './useSidebarItems';
+
+describe('useSidebarItems', () => {
+  const mockStore = (
+    customSidebarEntries: { [name: string]: SidebarEntry },
+    customSidebarFilters: ((entry: SidebarEntry) => SidebarEntry | null)[]
+  ) => {
+    return configureStore({
+      reducer: reducers,
+      preloadedState: {
+        sidebar: {
+          entries: customSidebarEntries,
+          filters: customSidebarFilters,
+          selected: { item: null, sidebar: DefaultSidebars.IN_CLUSTER },
+          isVisible: true,
+        },
+      },
+    });
+  };
+
+  const wrapper =
+    (store: any) =>
+    ({ children }: any) =>
+      <Provider store={store}>{children}</Provider>;
+
+  it('should include customSidebarEntries', () => {
+    const customEntries = {
+      custom1: {
+        name: 'custom1',
+        label: 'Custom 1',
+        url: '/custom1',
+      },
+      custom2: {
+        name: 'custom2',
+        label: 'Custom 2',
+        url: '/custom2',
+        parent: 'custom1',
+      },
+      outoforder: {
+        name: 'outoforder',
+        label: 'outoforder',
+        url: '/outoforder',
+        parent: 'custom3',
+      },
+      custom3: {
+        name: 'custom3',
+        label: 'Custom 3',
+        url: '/custom3',
+        parent: 'custom2',
+      },
+    };
+
+    const store = mockStore(customEntries, []);
+    const { result } = renderHook(() => useSidebarItems(), {
+      wrapper: wrapper(store),
+    });
+
+    expect(result.current.find(it => it.name === 'custom1')).toMatchInlineSnapshot(`
+      {
+        "label": "Custom 1",
+        "name": "custom1",
+        "subList": [
+          {
+            "label": "Custom 2",
+            "name": "custom2",
+            "parent": "custom1",
+            "subList": [
+              {
+                "label": "Custom 3",
+                "name": "custom3",
+                "parent": "custom2",
+                "subList": [
+                  {
+                    "label": "outoforder",
+                    "name": "outoforder",
+                    "parent": "custom3",
+                    "url": "/outoforder",
+                  },
+                ],
+                "url": "/custom3",
+              },
+            ],
+            "url": "/custom2",
+          },
+        ],
+        "url": "/custom1",
+      }
+    `);
+  });
+
+  it('should apply customSidebarFilters', () => {
+    const customEntries = {
+      custom1: { name: 'custom1', label: 'Custom 1', url: '/custom1' },
+      custom2: { name: 'custom2', label: 'Custom 2', url: '/custom2' },
+    };
+    const customFilters = [(entry: SidebarEntry) => (entry.name === 'custom2' ? null : entry)];
+
+    const store = mockStore(customEntries, customFilters);
+    const { result } = renderHook(() => useSidebarItems(), {
+      wrapper: wrapper(store),
+    });
+
+    expect(result.current).toEqual(
+      expect.arrayContaining([{ name: 'custom1', label: 'Custom 1', url: '/custom1' }])
+    );
+    expect(result.current).not.toEqual(
+      expect.arrayContaining([{ name: 'custom2', label: 'Custom 2', url: '/custom2' }])
+    );
+  });
+});
