@@ -570,6 +570,7 @@ async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNul
   }
 
   serverArgs = serverArgs.concat(flags);
+  serverArgs = serverArgs.concat('-app');
   console.log('arguments passed to backend server', serverArgs);
 
   let extendedEnv;
