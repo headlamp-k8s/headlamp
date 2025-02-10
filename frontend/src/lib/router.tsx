@@ -2,6 +2,8 @@ import React, { ReactNode } from 'react';
 import { generatePath, useHistory } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
+import AddCluster from '../components/App/CreateCluster/AddCluster';
+import CreateClusterPage from '../components/App/CreateCluster/CreateClusterPage';
 import Home from '../components/App/Home';
 import NotificationList from '../components/App/Notifications/List';
 import PluginSettings from '../components/App/PluginSettings';
@@ -857,6 +859,32 @@ const defaultRoutes: {
     noAuthRequired: true,
     disabled: !helpers.isElectron(),
     component: () => <KubeConfigLoader />,
+  },
+  addCluster: {
+    path: '/add-cluster',
+    exact: true,
+    name: 'Add Cluster',
+    sidebar: {
+      item: 'addCluster',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
+    noAuthRequired: true,
+    disabled: !helpers.isElectron(),
+    component: () => <AddCluster open onChoice={() => {}} />,
+  },
+  createClusterMinikube: {
+    path: '/create-cluster-minikube',
+    exact: true,
+    name: 'Create Cluster',
+    sidebar: {
+      item: 'createCluster',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
+    noAuthRequired: true,
+    disabled: !helpers.isElectron(),
+    component: () => <CreateClusterPage />,
   },
   map: {
     path: '/map',

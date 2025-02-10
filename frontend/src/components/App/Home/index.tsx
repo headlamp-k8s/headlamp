@@ -23,15 +23,16 @@ import { setConfig } from '../../../redux/configSlice';
 import { Link, PageGrid, SectionBox, SectionFilterHeader } from '../../common';
 import { ConfirmDialog } from '../../common';
 import ResourceTable from '../../common/Resource/ResourceTable';
+import CommandCluster from '../CommandCluster/CommandCluster';
 import RecentClusters from './RecentClusters';
 
-function ContextMenu({ cluster }: { cluster: Cluster }) {
+function ContextMenu({ cluster, active }: { cluster: Cluster; active: boolean }) {
   const { t } = useTranslation(['translation']);
   const history = useHistory();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const menuId = useId('context-menu');
-  const [openConfirmDialog, setOpenConfirmDialog] = React.useState(false);
+  const [openConfirmDialog, setOpenConfirmDialog] = React.useState('');
 
   function removeCluster(cluster: Cluster) {
     deleteCluster(cluster.name || '')
@@ -51,6 +52,9 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
   function handleMenuClose() {
     setAnchorEl(null);
   }
+
+  const isMinikube =
+    cluster.meta_data?.extensions?.context_info?.provider === 'minikube.sigs.k8s.io';
 
   return (
     <>
@@ -94,20 +98,50 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
         {helpers.isElectron() && cluster.meta_data?.source === 'dynamic_cluster' && (
           <MenuItem
             onClick={() => {
-              setOpenConfirmDialog(true);
+              setOpenConfirmDialog('deleteDynamic');
               handleMenuClose();
             }}
           >
             <ListItemText>{t('translation|Delete')}</ListItemText>
           </MenuItem>
         )}
+        {helpers.isElectron() && isMinikube && (
+          <MenuItem
+            onClick={() => {
+              setOpenConfirmDialog('deleteMinikube');
+              handleMenuClose();
+            }}
+          >
+            <ListItemText>{t('translation|Delete')}</ListItemText>
+          </MenuItem>
+        )}
+        {helpers.isElectron() && isMinikube && !active && (
+          <MenuItem
+            onClick={() => {
+              setOpenConfirmDialog('startMinikube');
+              handleMenuClose();
+            }}
+          >
+            <ListItemText>{t('translation|Start')}</ListItemText>
+          </MenuItem>
+        )}
+        {helpers.isElectron() && isMinikube && active && (
+          <MenuItem
+            onClick={() => {
+              setOpenConfirmDialog('stopMinikube');
+              handleMenuClose();
+            }}
+          >
+            <ListItemText>{t('translation|Stop')}</ListItemText>
+          </MenuItem>
+        )}
       </Menu>
 
       <ConfirmDialog
-        open={openConfirmDialog}
-        handleClose={() => setOpenConfirmDialog(false)}
+        open={openConfirmDialog === 'deleteDynamic'}
+        handleClose={() => setOpenConfirmDialog('')}
         onConfirm={() => {
-          setOpenConfirmDialog(false);
+          setOpenConfirmDialog('');
           removeCluster(cluster);
         }}
         title={t('translation|Delete Cluster')}
@@ -117,6 +151,39 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
             clusterName: cluster.name,
           }
         )}
+      />
+
+      <CommandCluster
+        initialClusterName={cluster.name}
+        open={openConfirmDialog === 'startMinikube'}
+        handleClose={() => setOpenConfirmDialog('')}
+        onConfirm={() => {
+          setOpenConfirmDialog('');
+        }}
+        command={'start'}
+        finishedText={'Done! kubectl is now configured'}
+      />
+
+      <CommandCluster
+        initialClusterName={cluster.name}
+        open={openConfirmDialog === 'stopMinikube'}
+        handleClose={() => setOpenConfirmDialog('')}
+        onConfirm={() => {
+          setOpenConfirmDialog('');
+        }}
+        command={'stop'}
+        finishedText={'node stopped.'}
+      />
+
+      <CommandCluster
+        initialClusterName={cluster.name}
+        open={openConfirmDialog === 'deleteMinikube'}
+        handleClose={() => setOpenConfirmDialog('')}
+        onConfirm={() => {
+          setOpenConfirmDialog('');
+        }}
+        command={'delete'}
+        finishedText={'Removed all traces of the'}
       />
     </>
   );
@@ -307,11 +374,14 @@ function HomeComponent(props: HomeComponentProps) {
               },
               {
                 label: '',
-                getValue: () => '',
+                getValue: cluster =>
+                  errors[cluster.name] === null ? 'Active' : errors[cluster.name]?.message,
                 cellProps: {
                   align: 'right',
                 },
-                render: cluster => <ContextMenu cluster={cluster} />,
+                render: cluster => {
+                  return <ContextMenu cluster={cluster} active={errors[cluster.name] === null} />;
+                },
               },
             ]}
             data={Object.values(customNameClusters)}
