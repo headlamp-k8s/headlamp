@@ -48,13 +48,10 @@ export default function NavigationTabs() {
   const isSmallSideBar = useMediaQuery(theme.breakpoints.only('sm'));
   const { t } = useTranslation();
 
-  // Always show the navigation tabs when the sidebar is the small version
-  if (!isSmallSideBar && (sidebar.isSidebarOpen || isMobile)) {
-    return null;
-  }
-
   let defaultIndex = null;
-  const listItems = useSidebarItems(sidebar.selected.sidebar ?? undefined);
+  const listItemsOriginal = useSidebarItems(sidebar.selected.sidebar ?? undefined);
+  // Making a copy because we're going to mutate it later in here
+  const listItems = structuredClone(listItemsOriginal);
   let navigationItem = listItems.find(item => item.name === sidebar.selected.item);
   if (!navigationItem) {
     const parent = findParentOfSubList(listItems, sidebar.selected.item);
@@ -62,6 +59,11 @@ export default function NavigationTabs() {
       return null;
     }
     navigationItem = parent;
+  }
+
+  // Always show the navigation tabs when the sidebar is the small version
+  if (!isSmallSideBar && (sidebar.isSidebarOpen || isMobile)) {
+    return null;
   }
 
   const subList = navigationItem.subList;
