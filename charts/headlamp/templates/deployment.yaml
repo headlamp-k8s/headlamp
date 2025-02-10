@@ -6,7 +6,8 @@
 {{- $issuerURL := "" }}
 {{- $scopes := "" }}
 {{- $impersonate := false }}
-{{- $impersonateClaim := "" }}
+{{- $userClaim := "" }}
+{{- $groupsClaim := "" }}
 
 # This block of code is used to extract the values from the env.
 # This is done to check if the values are non-empty and if they are, they are used in the deployment.yaml.
@@ -24,10 +25,13 @@
     {{- $scopes = .value }}
   {{- end }}
   {{- if eq .name "OIDC_IMPERSONATE" }}
-    {{- $impersonate = .value }}
+    {{- $impersonate = (eq .value "true") }}
   {{- end }}
-  {{- if eq .name "OIDC_IMPERSONATE_CLAIM" }}
-    {{- $impersonateClaim = .value }}
+  {{- if eq .name "OIDC_USER_CLAIM" }}
+    {{- $userClaim = .value }}
+  {{- end }}
+  {{- if eq .name "OIDC_GROUPS_CLAIM" }}
+    {{- $groupsClaim = .value }}
   {{- end }}
 {{- end }}
 
@@ -74,9 +78,23 @@ spec:
           envFrom:
           - secretRef:
               name: {{ $oidc.externalSecret.name }}
-          {{- if .Values.env }}
+          {{- if or .Values.env $oidc.impersonate }}
           env:
+            {{- if $oidc.impersonate }}
+            - name: OIDC_IMPERSONATE
+              value: {{ $oidc.impersonate | quote }}
+            {{- end }}
+            {{- if $oidc.userClaim }}
+            - name: OIDC_USER_CLAIM
+              value: {{ $oidc.userClaim }}
+            {{- end }}
+            {{- if $oidc.groupsClaim }}
+            - name: OIDC_GROUPS_CLAIM
+              value: {{ $oidc.groupsClaim }}
+            {{- end }}
+            {{- if .Values.env }}
             {{- toYaml .Values.env | nindent 12 }}
+            {{- end }}
           {{- end }}
           {{- else }}
           env:
@@ -109,20 +127,6 @@ spec:
                   name: {{ $oidc.secret.name }}
                   key: scopes
             {{- end }}
-            {{- if $oidc.impersonate }}
-            - name: OIDC_IMPERSONATE
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $oidc.secret.name }}
-                  key: impersonate
-            {{- end }}
-            {{- if $oidc.scopes }}
-            - name: OIDC_IMPERSONATE_CLAIM
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $oidc.secret.name }}
-                  key: impersonateClaim
-            {{- end }}
             {{- else }}
             {{- if $oidc.clientID }}
             - name: OIDC_CLIENT_ID
@@ -140,14 +144,18 @@ spec:
             - name: OIDC_SCOPES
               value: {{ $oidc.scopes }}
             {{- end }}
+            {{- end }}
             {{- if $oidc.impersonate }}
             - name: OIDC_IMPERSONATE
               value: {{ $oidc.impersonate | quote }}
             {{- end }}
-            {{- if $oidc.impersonateClaim }}
-            - name: OIDC_IMPERSONATE_CLAIM
-              value: {{ $oidc.impersonateClaim }}
+            {{- if $oidc.userClaim }}
+            - name: OIDC_USER_CLAIM
+              value: {{ $oidc.userClaim }}
             {{- end }}
+            {{- if $oidc.groupsClaim }}
+            - name: OIDC_GROUPS_CLAIM
+              value: {{ $oidc.groupsClaim }}
             {{- end }}
             {{- if .Values.env }}
             {{- toYaml .Values.env | nindent 12 }}
@@ -177,21 +185,23 @@ spec:
             # Check if scopes are non empty either from env or oidc.config
             - "-oidc-scopes=$(OIDC_SCOPES)"
             {{- end }}
-            {{- if or ($oidc.impersonate) ($impersonate) }}
-            # Check if impersonate is enabled either from env or oidc.config
-            - "-oidc-impersonate=$(OIDC_IMPERSONATE)"
-            {{- end }}
-            {{- if and (or ($oidc.impersonate) ($impersonate)) (or (ne $oidc.impersonateClaim "") (ne $impersonateClaim "")) }}
-            # Check if impersonate is enabled either from env or oidc.config
-            - "-oidc-impersonate-claim=$(OIDC_IMPERSONATE_CLAIM)"
-            {{- end }}
             {{- else }}
             - "-oidc-client-id=$(OIDC_CLIENT_ID)"
             - "-oidc-client-secret=$(OIDC_CLIENT_SECRET)"
             - "-oidc-idp-issuer-url=$(OIDC_ISSUER_URL)"
             - "-oidc-scopes=$(OIDC_SCOPES)"
+            {{- end }}
+            {{- if or ($oidc.impersonate) ($impersonate) }}
+            # Check if impersonate is enabled either from env or oidc.config
             - "-oidc-impersonate=$(OIDC_IMPERSONATE)"
-            - "-oidc-impersonate-claim=$(OIDC_IMPERSONATE_CLAIM)"
+            {{- end }}
+            {{- if and (or ($oidc.impersonate) ($impersonate)) (or (ne $oidc.userClaim "") (ne $userClaim "")) }}
+            # Check if user claim is non empty either from env or oidc.config
+            - "-oidc-user-claim=$(OIDC_USER_CLAIM)"
+            {{- end }}
+            {{- if and (or ($oidc.impersonate) ($impersonate)) (or (ne $oidc.groupsClaim "") (ne $groupsClaim "")) }}
+            # Check if groups claim is non empty either from env or oidc.config
+            - "-oidc-groups-claim=$(OIDC_GROUPS_CLAIM)"
             {{- end }}
             {{- with .Values.config.baseURL }}
             - "-base-url={{ . }}"

@@ -888,8 +888,10 @@ func GetInClusterContext(oidcIssuerURL string,
 
 	inClusterAuthInfo := &api.AuthInfo{}
 
-	var oidcConf *OidcConfig
-	var bearerToken string
+	var (
+		oidcConf    *OidcConfig
+		bearerToken string
+	)
 
 	if oidcClientID != "" && oidcClientSecret != "" && oidcIssuerURL != "" && oidcScopes != "" {
 		oidcConf = &OidcConfig{
