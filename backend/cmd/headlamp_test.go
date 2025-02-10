@@ -665,6 +665,34 @@ func TestRenameCluster(t *testing.T) {
 	}
 }
 
+func TestRemoveContextFromDefaultKubeConfig(t *testing.T) {
+	// 1) Create a temp directory for our test kubeconfig
+	tmpDir := t.TempDir()
+	mockConfigFile := filepath.Join(tmpDir, "config")
+
+	// 2) Copy "kubeconfig_remove" (which includes 'kubedelta') into that file
+	testDataPath := filepath.Join("headlamp_testdata", "kubeconfig_remove")
+	testData, err := os.ReadFile(testDataPath)
+	require.NoError(t, err, "failed to read test data for 'kubeconfig_remove'")
+
+	err = os.WriteFile(mockConfigFile, testData, 0o600)
+	require.NoError(t, err, "failed to write test kubeconfig")
+
+	// 3) We need a fake http.ResponseWriter
+	w := httptest.NewRecorder()
+
+	// 4) Call removeContextFromDefaultKubeConfig with our mock path as the third param
+	err = removeContextFromDefaultKubeConfig(w, "kubedelta", mockConfigFile)
+	require.NoError(t, err, "removeContextFromDefaultKubeConfig should succeed")
+
+	// 5) Verify 'kubedelta' is removed from the file
+	updatedData, err := os.ReadFile(mockConfigFile)
+	require.NoError(t, err, "failed to read updated kubeconfig")
+
+	require.NotContains(t, string(updatedData), "kubedelta",
+		"Expected 'kubedelta' context to be removed from kubeconfig")
+}
+
 func TestFileExists(t *testing.T) {
 	// Test for existing file
 	assert.True(t, fileExists("./headlamp_testdata/kubeconfig"),

@@ -26,3 +26,19 @@ ConfirmDialogClosed.args = {
   title: 'A fine title',
   description: 'A really good description.',
 };
+
+export const ConfirmDialogWithCheckbox = Template.bind({});
+ConfirmDialogWithCheckbox.args = {
+  open: true,
+  title: 'A fine title',
+  description: 'A really good description, only now we are using a checkbox.',
+  checkboxDescription: 'Click the checkbox.',
+};
+
+export const ConfirmDialogWithCheckboxClosed = Template.bind({});
+ConfirmDialogWithCheckboxClosed.args = {
+  open: false,
+  title: 'A fine title',
+  description: 'A really good description, only now we are using a checkbox.',
+  checkboxDescription: 'Click the checkbox.',
+};

@@ -241,6 +241,18 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 	}
 }
 
+// defaultKubeConfigFile returns the default path to the kubeconfig file.
+func defaultKubeConfigFile() (string, error) {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return "", fmt.Errorf("failed to get user home directory: %v", err)
+	}
+
+	kubeConfigFile := filepath.Join(homeDir, ".kube", "config")
+
+	return kubeConfigFile, nil
+}
+
 // defaultKubeConfigPersistenceDir returns the default directory to store kubeconfig
 // files of clusters that are loaded in Headlamp.
 func defaultKubeConfigPersistenceDir() (string, error) {
@@ -1378,6 +1390,126 @@ func (c *HeadlampConfig) addContextsToStore(contexts []kubeconfig.Context, setup
 	return setupErrors
 }
 
+// collectMultiConfigPaths looks at the default dynamic directory
+// (e.g. ~/.config/Headlamp/kubeconfigs) and returns any files found there.
+// This is called from the 'else' block in deleteCluster().
+func (c *HeadlampConfig) collectMultiConfigPaths() ([]string, error) {
+	dynamicDir, err := defaultKubeConfigPersistenceDir()
+	if err != nil {
+		return nil, fmt.Errorf("getting default kubeconfig persistence dir: %w", err)
+	}
+
+	entries, err := os.ReadDir(dynamicDir)
+	if err != nil {
+		return nil, fmt.Errorf("reading dynamic kubeconfig directory: %w", err)
+	}
+
+	var configPaths []string //nolint:prealloc
+
+	for _, entry := range entries {
+		// Optionally skip directories or non-kubeconfig files, if needed.
+		if entry.IsDir() {
+			continue
+		}
+
+		filePath := filepath.Join(dynamicDir, entry.Name())
+
+		configPaths = append(configPaths, filePath)
+	}
+
+	return configPaths, nil
+}
+
+func removeContextFromDefaultKubeConfig(
+	w http.ResponseWriter,
+	contextName string,
+	configPaths ...string,
+) error {
+	// If no specific paths passed, fallback to the default.
+	if len(configPaths) == 0 {
+		discoveredPath, err := defaultKubeConfigPersistenceFile()
+		if err != nil {
+			logger.Log(
+				logger.LevelError,
+				map[string]string{"cluster": contextName},
+				err,
+				"getting default kubeconfig persistence file",
+			)
+			http.Error(w, "getting default kubeconfig persistence file", http.StatusInternalServerError)
+
+			return err
+		}
+
+		configPaths = []string{discoveredPath}
+	}
+
+	// Hand off to a small helper function that handles multi-file iteration.
+	return removeContextFromConfigs(w, contextName, configPaths)
+}
+
+// removeContextFromConfigs does the real iteration over the configPaths.
+func removeContextFromConfigs(w http.ResponseWriter, contextName string, configPaths []string) error {
+	var removed bool
+
+	for _, filePath := range configPaths {
+		logger.Log(
+			logger.LevelInfo,
+			map[string]string{
+				"cluster":                   contextName,
+				"kubeConfigPersistenceFile": filePath,
+			},
+			nil,
+			"Trying to remove context from kubeconfig",
+		)
+
+		err := kubeconfig.RemoveContextFromFile(contextName, filePath)
+		if err == nil {
+			removed = true
+
+			logger.Log(logger.LevelInfo,
+				map[string]string{"cluster": contextName, "file": filePath},
+				nil, "Removed context from kubeconfig",
+			)
+
+			break
+		}
+
+		if strings.Contains(err.Error(), "context not found") {
+			logger.Log(logger.LevelInfo,
+				map[string]string{"cluster": contextName, "file": filePath},
+				nil, "Context not in this file; checking next.",
+			)
+
+			continue
+		}
+
+		logger.Log(logger.LevelError,
+			map[string]string{"cluster": contextName},
+			err, "removing cluster from kubeconfig",
+		)
+
+		http.Error(w, "removing cluster from kubeconfig", http.StatusInternalServerError)
+
+		return err
+	}
+
+	if !removed {
+		e := fmt.Errorf("context %q not found in any provided kubeconfig file(s)", contextName)
+
+		logger.Log(
+			logger.LevelError,
+			map[string]string{"cluster": contextName},
+			e,
+			"context not found in any file",
+		)
+		http.Error(w, e.Error(), http.StatusBadRequest)
+
+		return e
+	}
+
+	return nil
+}
+
 // deleteCluster deletes the cluster from the store and updates the kubeconfig file.
 func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 	if err := checkHeadlampBackendToken(w, r); err != nil {
@@ -1397,28 +1529,42 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
-	if err != nil {
-		logger.Log(logger.LevelError, map[string]string{"cluster": name},
-			err, "getting default kubeconfig persistence file")
-		http.Error(w, "getting default kubeconfig persistence file", http.StatusInternalServerError)
+	removeKubeConfig := r.URL.Query().Get("removeKubeConfig") == "true"
 
-		return
+	if removeKubeConfig {
+		kubeConfigFile, err := defaultKubeConfigFile()
+		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": name},
+				err, "failed to get default kubeconfig file path")
+			http.Error(w, "failed to get default kubeconfig file path", http.StatusInternalServerError)
+
+			return
+		}
+
+		err = kubeconfig.RemoveContextFromFile(name, kubeConfigFile)
+		if err != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": name},
+				err, "removing context from default kubeconfig file")
+			http.Error(w, "removing context from default kubeconfig file", http.StatusInternalServerError)
+
+			return
+		}
 	}
 
-	logger.Log(logger.LevelInfo, map[string]string{
-		"cluster":                   name,
-		"kubeConfigPersistenceFile": kubeConfigPersistenceFile,
-	},
-		nil, "Removing cluster from kubeconfig")
+	if !removeKubeConfig {
+		configPathsList, pathErr := c.collectMultiConfigPaths()
+		if pathErr != nil {
+			logger.Log(logger.LevelError, map[string]string{"cluster": name},
+				pathErr, "collecting multi config paths")
+			http.Error(w, "collecting multi config paths", http.StatusInternalServerError)
 
-	err = kubeconfig.RemoveContextFromFile(name, kubeConfigPersistenceFile)
-	if err != nil {
-		logger.Log(logger.LevelError, map[string]string{"cluster": name},
-			err, "removing cluster from kubeconfig")
-		http.Error(w, "removing cluster from kubeconfig", http.StatusInternalServerError)
+			return
+		}
 
-		return
+		if err := removeContextFromDefaultKubeConfig(w, name, configPathsList...); err != nil {
+			// removeContextFromDefaultKubeConfig writes any needed http.Error if it fails
+			return
+		}
 	}
 
 	logger.Log(logger.LevelInfo, map[string]string{"cluster": name, "proxy": name},
