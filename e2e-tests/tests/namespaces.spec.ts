@@ -9,7 +9,7 @@ test('create a namespace with the minimal editor then delete it', async ({ page 
 
   // If there's no namespaces permission, then we return
   const content = await page.content();
-  if (!content.includes('Namespaces') || !content.includes('href="/c/main/namespaces')) {
+  if (!content.includes('Namespaces') || !content.includes('href="/c/test/namespaces')) {
     return;
   }
 

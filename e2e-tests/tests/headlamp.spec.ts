@@ -5,7 +5,18 @@ import { ServicesPage } from './servicesPage';
 
 // --- Plugins tests start --- //
 test('GET /plugins/list returns plugins list', async ({ page }) => {
-  const response: any = await page.goto('/plugins');
+  const headlampPage = new HeadlampPage(page);
+
+  const responsePromise = page.waitForResponse(
+    response =>
+      response.request().method() === 'GET' &&
+      response.url().includes('/plugins') &&
+      response.status() === 200
+  );
+
+  await headlampPage.navigateTopage('/plugins');
+
+  const response: any = await responsePromise;
   expect(response).toBeTruthy();
 
   const json = await response.json();
@@ -19,7 +30,7 @@ test('headlamp is there and so is minikube', async ({ page }) => {
   const headlampPage = new HeadlampPage(page);
 
   await headlampPage.authenticate();
-  await headlampPage.hasURLContaining(/.*main/);
+  await headlampPage.hasURLContaining(/.*test/);
 });
 
 test('main page should have Network tab', async ({ page }) => {

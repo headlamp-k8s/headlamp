@@ -14,16 +14,16 @@ test('multi tab create delete pod', async ({ browser }) => {
 
   const page2 = await instance1.newPage();
   const window2 = new HeadlampPage(page2);
-  await window2.navigateTopage('/c/main/pods', /Pods/);
+  await window2.navigateTopage('/c/test/pods', /Pods/);
 
   // if no pod permission, return
   const content1 = await page1.content();
   const content2 = await page2.content();
   if (
     !content1.includes('Pods') ||
-    !content1.includes('href="/c/main/pods') ||
+    !content1.includes('href="/c/test/pods') ||
     !content2.includes('Pods') ||
-    !content2.includes('href="/c/main/pods')
+    !content2.includes('href="/c/test/pods')
   ) {
     return;
   }

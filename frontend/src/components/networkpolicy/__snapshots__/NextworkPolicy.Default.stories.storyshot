@@ -152,7 +152,7 @@
             <div
               class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiAlertTitle-root css-m946el-MuiTypography-root-MuiAlertTitle-root"
             >
-              Failed to load resources
+              Resource not found
             </div>
           </div>
           <div
