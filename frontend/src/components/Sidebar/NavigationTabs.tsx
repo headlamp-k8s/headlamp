@@ -49,7 +49,9 @@ export default function NavigationTabs() {
   const { t } = useTranslation();
 
   let defaultIndex = null;
-  const listItems = useSidebarItems(sidebar.selected.sidebar ?? undefined);
+  const listItemsOriginal = useSidebarItems(sidebar.selected.sidebar ?? undefined);
+  // Making a copy because we're going to mutate it later in here
+  const listItems = structuredClone(listItemsOriginal);
   let navigationItem = listItems.find(item => item.name === sidebar.selected.item);
   if (!navigationItem) {
     const parent = findParentOfSubList(listItems, sidebar.selected.item);
