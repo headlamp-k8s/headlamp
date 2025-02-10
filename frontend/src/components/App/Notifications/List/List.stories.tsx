@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, StoryFn } from '@storybook/react';
-import { initialState as CONFIG_INITIAL_STATE } from '../../../redux/configSlice';
-import { initialState as FILTER_INITIAL_STATE } from '../../../redux/filterSlice';
-import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
-import { TestContext } from '../../../test';
+import { initialState as CONFIG_INITIAL_STATE } from '../../../../redux/configSlice';
+import { initialState as FILTER_INITIAL_STATE } from '../../../../redux/filterSlice';
+import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../../redux/reducers/ui';
+import { TestContext } from '../../../../test';
+import { loadNotifications, Notification, storeNotifications } from '../notificationsSlice';
 import NotificationList from './List';
-import { loadNotifications, Notification, storeNotifications } from './notificationsSlice';
 
 function createNotifications() {
   const notifications = [];

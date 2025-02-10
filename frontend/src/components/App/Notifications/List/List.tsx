@@ -4,15 +4,15 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { DateLabel, Link, SectionBox, SectionFilterHeader, Table } from '../../common';
-import Empty from '../../common/EmptyContent';
+import { useTypedSelector } from '../../../../redux/reducers/reducers';
+import { DateLabel, Link, SectionBox, SectionFilterHeader, Table } from '../../../common';
+import Empty from '../../../common/EmptyContent';
 import {
   Notification,
   NotificationIface,
   setNotifications,
   updateNotifications,
-} from './notificationsSlice';
+} from '../notificationsSlice';
 
 export default function NotificationList() {
   const notifications = useTypedSelector(state => state.notifications.notifications);
