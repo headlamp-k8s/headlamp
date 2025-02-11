@@ -95,6 +95,23 @@ make app-win-msi
 
 See the generated app files in app/dist/ .
 
+### Running the app
+
+If you already have **BOTH** the `backend` and `frontend` up and running, the quickest way to 
+get the `app` running for development is the following:
+
+```bash
+make run-only-app
+```
+
+or else you can simply do
+
+```bash
+make run-app
+```
+
+which runs everything including the `backend`, `frontend` and `app` in parallel.
+
 ### Running the app on Ubuntu WSL
 
 Headlamp on WSL requires some packages installed (maybe it requires more) to run the app.
