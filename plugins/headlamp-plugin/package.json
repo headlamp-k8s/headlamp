@@ -98,6 +98,7 @@
     "file-loader": "^6.2.0",
     "filemanager-webpack-plugin": "^7.0.0",
     "fs-extra": "^9.1.0",
+    "fuse.js": "^7.0.0",
     "https-browserify": "^1.0.0",
     "humanize-duration": "^3.27.2",
     "i18next": "^23.15.1",
