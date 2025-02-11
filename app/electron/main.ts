@@ -1398,9 +1398,14 @@ function attachServerEventHandlers(serverProcess: ChildProcessWithoutNullStreams
 }
 
 if (isHeadlessMode) {
-  serverProcess = startServer(['-html-static-dir', path.join(process.resourcesPath, './frontend')]);
-  attachServerEventHandlers(serverProcess);
-  shell.openExternal(`http://localhost:${defaultPort}`);
+  startServer(['-html-static-dir', path.join(process.resourcesPath, './frontend')]).then(
+    serverProcess => {
+      attachServerEventHandlers(serverProcess);
+
+      // Give 1s for backend to start
+      setTimeout(() => shell.openExternal(`http://localhost:${defaultPort}`), 1000);
+    }
+  );
 } else {
   startElecron();
 }
