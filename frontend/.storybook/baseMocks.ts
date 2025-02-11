@@ -22,6 +22,7 @@ export const baseMocks = [
           metadata: {
             name: 'default',
             creationTimestamp: '2024-08-16T11:12:37.179Z',
+            uid: '123456',
           },
           spec: {
             finalizers: ['kubernetes'],

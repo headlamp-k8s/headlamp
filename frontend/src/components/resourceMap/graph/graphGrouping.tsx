@@ -1,15 +1,9 @@
 import { groupBy } from 'lodash';
+import Namespace from '../../../lib/k8s/namespace';
+import Node from '../../../lib/k8s/node';
 import Pod from '../../../lib/k8s/pod';
 import { makeGraphLookup } from './graphLookup';
-import {
-  forEachNode,
-  GraphEdge,
-  GraphNode,
-  GroupNode,
-  isGroup,
-  KubeGroupNode,
-  KubeObjectNode,
-} from './graphModel';
+import { forEachNode, GraphEdge, GraphNode } from './graphModel';
 
 export type GroupBy = 'node' | 'namespace' | 'instance';
 
@@ -36,8 +30,8 @@ export const getGraphSize = (graph: GraphNode) => {
  * @returns An array of `GraphNode` where each element is either a single node
  *          or a group node containing multiple nodes and edges
  */
-const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): GraphNode[] => {
-  const components: KubeGroupNode[] = [];
+const getConnectedComponents = (nodes: GraphNode[], edges: GraphEdge[]): GraphNode[] => {
+  const components: GraphNode[] = [];
 
   const graphLookup = makeGraphLookup(nodes, edges);
 
@@ -53,8 +47,8 @@ const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): Gr
    * @param componentNodes - An array to store the nodes that are part of the connected component
    */
   const findConnectedComponent = (
-    node: KubeObjectNode,
-    componentNodes: KubeObjectNode[],
+    node: GraphNode,
+    componentNodes: GraphNode[],
     componentEdges: GraphEdge[]
   ) => {
     visitedNodes.add(node.id);
@@ -92,7 +86,7 @@ const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): Gr
   // Iterate over each node and find connected components
   nodes.forEach(node => {
     if (!visitedNodes.has(node.id)) {
-      const componentNodes: KubeObjectNode[] = [];
+      const componentNodes: GraphNode[] = [];
       const componentEdges: GraphEdge[] = [];
       findConnectedComponent(node, componentNodes, componentEdges);
       const mainNode = getMainNode(componentNodes);
@@ -100,31 +94,28 @@ const getConnectedComponents = (nodes: KubeObjectNode[], edges: GraphEdge[]): Gr
       const id = 'group-' + mainNode.id;
       components.push({
         id: id,
-        type: 'kubeGroup',
-        data: {
-          label: mainNode.data.resource.metadata.name,
-          nodes: componentNodes,
-          edges: componentEdges,
-        },
+        nodes: componentNodes,
+        edges: componentEdges,
       });
     }
   });
 
-  return components.map(it => (it.data.nodes.length === 1 ? it.data.nodes[0] : it));
+  return components.map(it => (it.nodes?.length === 1 ? it.nodes[0] : it));
 };
 
 /**
  * Try to find a "main" node in the workload group
  * If can't find anything return the first node
  */
-export const getMainNode = (nodes: KubeObjectNode[]) => {
-  const deployment = nodes.find(it => it.data.resource.kind === 'Deployment');
-  const replicaSet = nodes.find(it => it.data.resource.kind === 'ReplicaSet');
-  const daemonSet = nodes.find(it => it.data.resource.kind === 'DaemonSet');
-  const statefulSet = nodes.find(it => it.data.resource.kind === 'StatefulSet');
-  const job = nodes.find(it => it.data.resource.kind === 'Job');
+export const getMainNode = (nodes: GraphNode[]) => {
+  const deployment = nodes.find(it => it.kubeObject?.kind === 'Deployment');
+  const replicaSet = nodes.find(it => it.kubeObject?.kind === 'ReplicaSet');
+  const daemonSet = nodes.find(it => it.kubeObject?.kind === 'DaemonSet');
+  const statefulSet = nodes.find(it => it.kubeObject?.kind === 'StatefulSet');
+  const job = nodes.find(it => it.kubeObject?.kind === 'Job');
+  const cronJob = nodes.find(it => it.kubeObject?.kind === 'CronJob');
 
-  return deployment ?? replicaSet ?? daemonSet ?? statefulSet ?? job ?? nodes[0];
+  return deployment ?? replicaSet ?? daemonSet ?? statefulSet ?? cronJob ?? job ?? nodes[0];
 };
 
 /**
@@ -153,23 +144,23 @@ const groupByProperty = (
       return accessor(node);
     })
   ).map(
-    ([property, components]): GroupNode => ({
+    ([property, components]): GraphNode => ({
       id: label + '-' + property,
-      type: 'group',
-      data: {
-        nodes: components,
-        edges: [],
-        label: label + ': ' + property,
-      },
+      nodes: components,
+      edges: [],
+      subtitle: label,
+      label: property,
     })
   );
 
-  const result = groups.flatMap(it => {
-    const nonGroup = it.id.includes('undefined');
-    const hasOneMember = it.data.nodes.length === 1;
+  const result = groups
+    .flatMap(it => {
+      const nonGroup = it.id.includes('undefined');
+      const hasOneMember = it.nodes?.length === 1;
 
-    return nonGroup || (hasOneMember && !allowSingleMemberGroup) ? it.data.nodes : [it];
-  });
+      return nonGroup || (hasOneMember && !allowSingleMemberGroup) ? it.nodes : [it];
+    })
+    .filter(Boolean) as GraphNode[];
 
   return result;
 };
@@ -184,18 +175,19 @@ const groupByProperty = (
  * @returns Graph, a single root node with groups as its' children
  */
 export function groupGraph(
-  nodes: KubeObjectNode[],
+  nodes: GraphNode[],
   edges: GraphEdge[],
-  { groupBy }: { groupBy?: GroupBy }
-): GroupNode {
-  const root: GroupNode = {
+  {
+    groupBy,
+    namespaces,
+    k8sNodes,
+  }: { groupBy?: GroupBy; namespaces: Namespace[]; k8sNodes: Node[] }
+): GraphNode {
+  const root: GraphNode = {
     id: 'root',
-    type: 'group',
-    data: {
-      label: 'root',
-      nodes: [],
-      edges: [],
-    },
+    label: 'root',
+    nodes: [],
+    edges: [],
   };
 
   let components: GraphNode[] = getConnectedComponents(nodes, edges);
@@ -205,18 +197,24 @@ export function groupGraph(
     components = groupByProperty(
       components,
       component => {
-        if (component.type === 'kubeGroup') {
-          return component.data.nodes[0].data.resource.metadata.namespace;
+        if (component.nodes) {
+          return component.nodes.find(node => node.kubeObject)?.kubeObject?.metadata?.namespace;
         }
-        if (component.type === 'group') {
-          return null;
-        }
-        if (component.type === 'kubeObject') {
-          return component.data.resource.metadata.namespace;
-        }
+        return component.kubeObject?.metadata?.namespace;
       },
       { label: 'Namespace', allowSingleMemberGroup: true }
     );
+
+    components.forEach(component => {
+      if (!component.kubeObject) {
+        component.kubeObject = namespaces.find(
+          namespace => namespace.metadata.name === component.label
+        );
+        if (component.kubeObject) {
+          component.id = component.kubeObject.metadata.uid;
+        }
+      }
+    });
   }
 
   if (groupBy === 'node') {
@@ -224,20 +222,26 @@ export function groupGraph(
     components = groupByProperty(
       components,
       component => {
-        if (component.type === 'kubeGroup') {
-          const maybePod = component.data.nodes.find(it => it.data.resource?.kind === 'Pod')?.data
-            ?.resource as Pod | undefined;
-          return maybePod?.spec?.nodeName;
+        if (component.nodes) {
+          return (component.nodes.find(node => node.kubeObject?.kind === 'Pod')?.kubeObject as Pod)
+            ?.spec?.nodeName;
         }
-        if (component.type === 'group') {
-          return null;
-        }
-        if (component.type === 'kubeObject') {
-          return (component.data.resource as Pod)?.spec?.nodeName;
-        }
+
+        return (component.kubeObject as Pod)?.spec?.nodeName;
       },
       { label: 'Node', allowSingleMemberGroup: true }
     );
+
+    components.forEach(component => {
+      if (!component.kubeObject) {
+        component.kubeObject = k8sNodes.find(
+          namespace => namespace.metadata.name === component.label
+        );
+        if (component.kubeObject) {
+          component.id = component.kubeObject.metadata.uid;
+        }
+      }
+    });
   }
 
   if (groupBy === 'instance') {
@@ -245,20 +249,17 @@ export function groupGraph(
     components = groupByProperty(
       components,
       node => {
-        if (node.type === 'kubeGroup') {
-          const mainNode = getMainNode(node.data.nodes);
-          return mainNode.data.resource?.metadata?.labels?.['app.kubernetes.io/instance'];
+        if (node.nodes) {
+          const mainNode = getMainNode(node.nodes.filter(node => !node.nodes) as GraphNode[]);
+          return mainNode.kubeObject?.metadata?.labels?.['app.kubernetes.io/instance'];
         }
-        if (node.type === 'kubeObject') {
-          return node.data.resource.metadata?.labels?.['app.kubernetes.io/instance'];
-        }
-        return undefined;
+        return node.kubeObject?.metadata?.labels?.['app.kubernetes.io/instance'];
       },
       { label: 'Instance' }
     );
   }
 
-  root.data.nodes.push(...components);
+  root.nodes?.push(...components);
 
   // Sort nodes within each group node
   forEachNode(root, node => {
@@ -266,15 +267,16 @@ export function groupGraph(
      * Sort elements, giving priority to bigger groups
      */
     const getNodeWeight = (n: GraphNode) => {
-      if (n.type === 'group') {
-        return 100 + n.data.nodes.length;
-      }
-      if (n.type === 'kubeGroup') {
-        return n.data.nodes.length;
+      if (n.edges && n.nodes) {
+        const someEdges = n.edges.length > 0;
+        return 1 + (someEdges ? 100 : 0) + n.nodes.length;
       }
       return 1;
     };
-    'nodes' in node.data && node.data?.nodes?.sort((a, b) => getNodeWeight(b) - getNodeWeight(a));
+
+    if (node.nodes) {
+      node.nodes.sort((a, b) => getNodeWeight(b) - getNodeWeight(a));
+    }
   });
 
   return root;
@@ -287,10 +289,8 @@ export function getParentNode(graph: GraphNode, elementId: string): GraphNode | 
   let result: GraphNode | undefined;
 
   forEachNode(graph, node => {
-    if (isGroup(node)) {
-      if (node.data.nodes.find(it => it.id === elementId)) {
-        result = node;
-      }
+    if (node.nodes?.find(it => it.id === elementId)) {
+      result = node;
     }
   });
 
@@ -301,24 +301,26 @@ export function getParentNode(graph: GraphNode, elementId: string): GraphNode | 
  * Finds a Node with a group type that contains a given node
  * @param graph - graph which contains the Node
  * @param elementId - ID of a given Node
+ * @param strict - If set to false will try to find closest group, if set to true always returns the parent
  * @returns
  */
-export function findGroupContaining(graph: GraphNode, elementId: string): GraphNode | undefined {
-  // Not a group
-  if (!isGroup(graph)) return undefined;
-
+export function findGroupContaining(
+  graph: GraphNode,
+  elementId: string,
+  strict?: boolean
+): GraphNode | undefined {
   // Group is actually selcted, not a node inside a group
-  if (graph.id === elementId) return graph;
+  if (graph.id === elementId && !strict) return graph;
 
   // Node is inside this group
-  if (graph.data.nodes.find(it => it.id === elementId && !isGroup(it))) {
+  if (graph.nodes?.find(it => (strict ? it.id === elementId : it.id === elementId && !it.nodes))) {
     return graph;
   }
 
-  if ('nodes' in graph.data) {
+  if (graph.nodes) {
     let res: GraphNode | undefined;
-    graph.data.nodes?.some(it => {
-      const group = findGroupContaining(it, elementId);
+    graph.nodes?.some(node => {
+      const group = findGroupContaining(node, elementId);
       if (group) {
         res = group;
         return true;
@@ -346,8 +348,8 @@ export function findGroupContaining(graph: GraphNode, elementId: string): GraphN
  * @returns Collapsed graph
  */
 export function collapseGraph(
-  graph: GroupNode | KubeGroupNode,
-  { selectedNodeId, expandAll }: { selectedNodeId?: string; expandAll: boolean }
+  graph: GraphNode,
+  { selectedNodeId = 'root', expandAll }: { selectedNodeId?: string; expandAll: boolean }
 ) {
   let root = { ...graph };
   let selectedGroup: GraphNode | undefined;
@@ -363,31 +365,25 @@ export function collapseGraph(
    * @returns Collapsed node
    */
   const collapseGroup = (group: GraphNode): GraphNode => {
-    if (group.type !== 'kubeGroup' && group.type !== 'group') return group;
+    const isBig = (group.nodes?.length ?? 0) > 10 || (group.edges?.length ?? 0) > 0;
+    const isSelectedGroup = selectedGroup?.id === group.id;
+    const isRoot = group.id === 'root';
 
-    const collapsed = expandAll
-      ? false
-      : group.type === 'kubeGroup' && selectedGroup?.id !== group.id;
+    const collapsed = !expandAll && !isRoot && !isSelectedGroup && isBig;
 
     return {
       ...group,
-      data: {
-        ...group.data,
-        nodes: group.data.nodes?.map(collapseGroup),
-        edges: !collapsed ? group.data.edges : [],
-        collapsed,
-      },
+      nodes: group.nodes?.map(collapseGroup),
+      edges: group.edges,
+      collapsed,
     } as GraphNode;
   };
 
   if (selectedGroup && selectedGroup.id !== 'root') {
-    root.data = {
-      ...root.data,
-      nodes: [selectedGroup],
-    };
+    root.nodes = [selectedGroup];
   }
 
-  root = collapseGroup(root) as GroupNode;
+  root = collapseGroup(root);
 
   return root;
 }

@@ -154,7 +154,7 @@ export function KubeIcon({
         },
       }}
     >
-      <IconComponent style={{ scale: '1.1' }} />
+      <IconComponent style={{ scale: '1.1', width: '100%', height: '100%' }} />
     </Box>
   );
 }
