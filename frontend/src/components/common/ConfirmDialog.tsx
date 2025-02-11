@@ -12,10 +12,12 @@ export interface ConfirmDialogProps extends MuiDialogProps {
   description: ReactNode;
   onConfirm: () => void;
   handleClose: () => void;
+  cancelLabel?: string;
+  confirmLabel?: string;
 }
 
 export function ConfirmDialog(props: ConfirmDialogProps) {
-  const { onConfirm, open, handleClose, title, description } = props;
+  const { onConfirm, open, handleClose, title, description, cancelLabel, confirmLabel } = props;
   const { t } = useTranslation();
 
   function onConfirmationClicked() {
@@ -39,15 +41,17 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent ref={focusedRef}>
-          <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
+        <DialogContent ref={focusedRef} sx={{ py: 1 }}>
+          <DialogContentText id="alert-dialog-description" component="div">
+            {description}
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            {t('No')}
+            {cancelLabel || t('No')}
           </Button>
           <Button onClick={onConfirmationClicked} color="primary">
-            {t('Yes')}
+            {confirmLabel || t('Yes')}
           </Button>
         </DialogActions>
       </MuiDialog>
