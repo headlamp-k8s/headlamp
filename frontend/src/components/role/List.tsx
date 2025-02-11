@@ -41,6 +41,7 @@ export default function RoleList() {
         {
           label: t('translation|Name'),
           getValue: item => item.metadata.name,
+          gridTemplate: 'auto',
           render: item => (
             <Link
               routeName={item.metadata.namespace ? 'role' : 'clusterrole'}

@@ -25,17 +25,18 @@ export default function StatefulSetList() {
           id: 'pods',
           label: t('Pods'),
           getValue: statefulSet => renderPods(statefulSet),
-          gridTemplate: 0.6,
+          gridTemplate: 'min-content',
         },
         {
           id: 'replicas',
           label: t('Replicas'),
           getValue: statefulSet => statefulSet.spec.replicas,
-          gridTemplate: 0.6,
+          gridTemplate: 'min-content',
         },
         {
           id: 'containers',
           label: t('Containers'),
+          gridTemplate: 'auto',
           getValue: statefulSet =>
             statefulSet
               .getContainers()
@@ -56,6 +57,7 @@ export default function StatefulSetList() {
         {
           id: 'images',
           label: t('Images'),
+          gridTemplate: 'auto',
           getValue: statefulSet =>
             statefulSet
               .getContainers()

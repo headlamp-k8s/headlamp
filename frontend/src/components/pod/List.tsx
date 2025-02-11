@@ -84,6 +84,7 @@ export function PodListRenderer(props: PodListProps) {
         'cluster',
         {
           label: t('Restarts'),
+          gridTemplate: 'min-content',
           getValue: pod => {
             const { restarts, lastRestartDate } = pod.getDetailedStatus();
             return lastRestartDate.getTime() !== 0
@@ -96,6 +97,7 @@ export function PodListRenderer(props: PodListProps) {
         },
         {
           id: 'ready',
+          gridTemplate: 'min-content',
           label: t('translation|Ready'),
           getValue: pod => {
             const podRow = pod.getDetailedStatus();
@@ -104,18 +106,21 @@ export function PodListRenderer(props: PodListProps) {
         },
         {
           id: 'status',
+          gridTemplate: 'min-content',
           label: t('translation|Status'),
           getValue: pod => pod.getDetailedStatus().reason,
           render: makePodStatusLabel,
         },
         {
           id: 'ip',
+          gridTemplate: 'min-content',
           label: t('glossary|IP'),
           getValue: pod => pod.status?.podIP ?? '',
         },
         {
           id: 'node',
           label: t('glossary|Node'),
+          gridTemplate: 'auto',
           getValue: pod => pod?.spec?.nodeName,
           render: pod =>
             pod?.spec?.nodeName && (

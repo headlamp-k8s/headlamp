@@ -16,11 +16,13 @@ export default function SecretList() {
         {
           id: 'type',
           label: t('translation|Type'),
+          gridTemplate: 'min-content',
           getValue: secret => secret.type,
         },
         {
           id: 'data',
           label: t('translation|Data'),
+          gridTemplate: 'min-content',
           getValue: (secret: Secret) => Object.keys(secret.data || {}).length || 0,
         },
         'age',

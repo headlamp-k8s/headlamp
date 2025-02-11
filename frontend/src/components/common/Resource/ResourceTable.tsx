@@ -328,7 +328,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
             return {
               id: 'name',
               header: t('translation|Name'),
-              gridTemplate: 1.5,
+              gridTemplate: 'auto',
               accessorFn: (item: RowItem) => item.metadata.name,
               Cell: ({ row }: { row: MRT_Row<RowItem> }) =>
                 row.original && <Link kubeObject={row.original} />,
@@ -356,6 +356,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
             return {
               id: 'namespace',
               header: t('glossary|Namespace'),
+              gridTemplate: 'auto',
               accessorFn: (item: RowItem) => item.getNamespace() ?? '',
               filterVariant: 'multi-select',
               Cell: ({ row }: { row: MRT_Row<RowItem> }) =>
@@ -380,6 +381,7 @@ function ResourceTableContent<RowItem extends KubeObject>(props: ResourceTablePr
               header: t('translation|Type'),
               accessorFn: (resource: RowItem) => String(resource?.kind),
               filterVariant: 'multi-select',
+              gridTemplate: 'min-content',
             };
           default:
             throw new Error(`Unknown column: ${col}`);
