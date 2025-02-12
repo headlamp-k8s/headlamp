@@ -192,6 +192,7 @@
   "Error deleting {{ itemsLength }} items.": "Fehler beim Löschen von {{ itemsLength }} Elementen.",
   "Delete items": "Elemente löschen",
   "Loading documentation": "Dokumentation laden",
+  "No documentation available.": "",
   "No documentation for type {{ docsType }}.": "Keine Dokumentation für Typ {{ docsType }}.",
   "Showing documentation for: {{ docsType }}": "Zeige die Dokumentation für: {{ docsType }}",
   "Applying changes to {{ itemName }}…": "Wende Änderungen an {{ itemName }} an…",

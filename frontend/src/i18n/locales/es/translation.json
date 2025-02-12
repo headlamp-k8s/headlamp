@@ -193,6 +193,7 @@
   "Error deleting {{ itemsLength }} items.": "",
   "Delete items": "",
   "Loading documentation": "Cargando documentación",
+  "No documentation available.": "",
   "No documentation for type {{ docsType }}.": "Sin documentación para el tipo {{ docsType }}.",
   "Showing documentation for: {{ docsType }}": "Mostrando documentación para: {{ docsType }}",
   "Applying changes to {{ itemName }}…": "Aplicando cambios a {{ itemName }}…",
