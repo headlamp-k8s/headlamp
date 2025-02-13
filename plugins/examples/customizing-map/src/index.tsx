@@ -2,6 +2,33 @@ import { registerMapSource } from '@kinvolk/headlamp-plugin/lib';
 import { KubeObject } from '@kinvolk/headlamp-plugin/lib/K8s/cluster';
 import { useMemo } from 'react';
 
+// Example custom details component for our resource
+function MyResourceDetails({ node }: { node: any }) {
+  return (
+    <div style={{ padding: '1rem' }}>
+      <h2 style={{ marginBottom: '1rem' }}>Custom Resource Details</h2>
+      <div style={{ display: 'grid', gap: '0.5rem' }}>
+        <div>
+          <strong>Name:</strong> {node.kubeObject.metadata.name}
+        </div>
+        <div>
+          <strong>Namespace:</strong> {node.kubeObject.metadata.namespace}
+        </div>
+        <div>
+          <strong>Created:</strong> {node.kubeObject.metadata.creationTimestamp}
+        </div>
+        {/* Add any custom visualization or interactive elements here */}
+        <div style={{ marginTop: '1rem' }}>
+          <h3>Resource JSON</h3>
+          <pre style={{ background: '#f5f5f5', padding: '1rem', borderRadius: '4px' }}>
+            {JSON.stringify(node.kubeObject, null, 2)}
+          </pre>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 registerMapSource({
   id: 'my-source', // ID of the source should be unique
   label: 'My Source', // label will be displayed in source picker
@@ -38,6 +65,8 @@ registerMapSource({
             id: myResource.metadata.uid, // ID should be unique
             kubeObject: new KubeObject(myResource),
             icon: <img src="https://headlamp.dev/img/favicon.png" alt="MyResourceKind icon" />,
+            // Add custom details component to show our own view when the node is selected
+            detailsComponent: MyResourceDetails,
           },
         ],
       };

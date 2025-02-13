@@ -65,11 +65,19 @@ const mySource = {
       const edges = []; // no edges in this source
       const nodes = [
         {
-          id: "1234", // ID should be unique
-          type: "kubeObject", // 'kubeObject' type represnets a kubernetes resource
-          data: {
-            // resource field is required and should contain KubeObject
-            resource: new KubeObject(myResource),
+          id: myResource.metadata.uid, // ID should be unique
+          kubeObject: new KubeObject(myResource),
+          // Optionally provide a custom details component to be shown when node is selected
+          detailsComponent: ({ node }) => {
+            return (
+              <div>
+                <h2>Custom Details View</h2>
+                <p>
+                  This is a custom details view for:
+                  {node.kubeObject.metadata.name}
+                </p>
+              </div>
+            );
           },
         },
       ];
@@ -121,3 +129,34 @@ registerKindIcon("MyCustomResource", {
 
 <figcaption>Node with a custom Icon</figcaption>
 </figure>
+
+## Custom Detail Views
+
+When a node is selected on the map, its details are shown in a side panel. By default, if the node represents a Kubernetes resource (has `kubeObject` property), Headlamp will show the standard resource details view.
+
+You can override this behavior by providing a custom details component:
+
+```tsx
+const myNode = {
+  id: "custom-node",
+  label: "Node with custom details",
+  detailsComponent: ({ node }) => {
+    return (
+      <div>
+        <h2>Custom Details</h2>
+        <p>This is a custom details view for: {node.label}</p>
+        {/* You can access any node property here */}
+        <pre>{JSON.stringify(node, null, 2)}</pre>
+      </div>
+    );
+  },
+};
+```
+
+The details component receives the node object as a prop, giving you access to all node properties.
+
+This is useful when you want to:
+
+- Show custom visualizations for your resources
+- Display data from external sources alongside Kubernetes resources
+- Create interactive detail views specific to your use case
