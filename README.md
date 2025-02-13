@@ -82,7 +82,7 @@ our [plugin development guide](https://headlamp.dev/docs/latest/development/plug
 
 Check out our: 
 - [Guidelines](https://headlamp.dev/docs/latest/contributing/)
-- [Code of Conduct](./CODE_OF_CONDUCT.md),
+- [Code of Conduct](./code-of-conduct.md),
 - [#headlamp](https://kubernetes.slack.com/messages/headlamp) slack channel in the Kubernetes Slack 
 - [Monthly Community Meeting](https://zoom-lfx.platform.linuxfoundation.org/meetings/headlamp)
 
