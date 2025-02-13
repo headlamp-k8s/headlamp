@@ -204,7 +204,7 @@
               >
                 <div
                   class="react-flow__viewport xyflow__viewport react-flow__container"
-                  style="transform: translate(116px,56px) scale(1);"
+                  style="transform: translate(50px,56px) scale(1);"
                 >
                   <div
                     class="react-flow__edges"
@@ -634,7 +634,7 @@
                       class="react-flow__node react-flow__node-object selectable"
                       data-id="custom-node-with-icon"
                       data-testid="rf__node-custom-node-with-icon"
-                      style="z-index: 0; transform: translate(24px,342px); pointer-events: all; visibility: visible; width: 220px; height: 70px;"
+                      style="z-index: 0; transform: translate(264px,252px); pointer-events: all; visibility: visible; width: 220px; height: 70px;"
                     >
                       <div
                         class="css-9y15hx"
@@ -675,6 +675,52 @@
                         </div>
                       </div>
                     </div>
+                    <div
+                      aria-describedby="react-flow__node-desc-1"
+                      class="react-flow__node react-flow__node-object selectable"
+                      data-id="custom-node-with-details"
+                      data-testid="rf__node-custom-node-with-details"
+                      style="z-index: 0; transform: translate(24px,342px); pointer-events: all; visibility: visible; width: 220px; height: 70px;"
+                    >
+                      <div
+                        class="css-9y15hx"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <div
+                          class="react-flow__handle react-flow__handle-top nodrag nopan target connectable connectablestart connectableend connectionindicator"
+                          data-handlepos="top"
+                          data-id="1-custom-node-with-details-null-target"
+                          data-nodeid="custom-node-with-details"
+                          style="opacity: 0;"
+                        />
+                        <div
+                          class="react-flow__handle react-flow__handle-bottom nodrag nopan source connectable connectablestart connectableend connectionindicator"
+                          data-handlepos="bottom"
+                          data-id="1-custom-node-with-details-null-source"
+                          data-nodeid="custom-node-with-details"
+                          style="opacity: 0;"
+                        />
+                        <div
+                          class="css-1irety8"
+                        >
+                          <div
+                            class="css-1o5h0m"
+                          >
+                            <div
+                              class="css-x2hlid"
+                            >
+                              Click to see custom details
+                            </div>
+                            <div
+                              class="css-estfx9"
+                            >
+                              Node with custom details
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div
                     class="react-flow__viewport-portal"
@@ -693,7 +739,7 @@
                 patternTransform="translate(-11,-11)"
                 patternUnits="userSpaceOnUse"
                 width="20"
-                x="16"
+                x="10"
                 y="16"
               >
                 <circle

@@ -1,6 +1,11 @@
-# Example Plugin: Customizing Map
+# Customizing Map Example
 
-This shows you how to customize Map view with your own Source, Nodes, Edges and Details.
+This plugin demonstrates how to customize Headlamp's resource map view:
+
+- Adding custom nodes
+- Using custom icons
+- Creating custom detail views
+- Using custom data
 
 ```bash
 cd plugins/examples/customizing-map

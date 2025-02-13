@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ComponentType, ReactNode } from 'react';
 import { KubeObject } from '../../../lib/k8s/KubeObject';
 
 export type GraphNode = {
@@ -26,6 +26,8 @@ export type GraphNode = {
   edges?: GraphEdge[];
   /** Whether this Node is collapsed. Only applies to Nodes that have child Nodes. */
   collapsed?: boolean;
+  /** Custom component to render details for this node */
+  detailsComponent?: ComponentType<{ node: GraphNode }>;
   /** Any custom data */
   data?: any;
 };

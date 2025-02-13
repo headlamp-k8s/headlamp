@@ -29,6 +29,17 @@ const mockNodes: GraphNode[] = [
     icon: <Icon icon="mdi:plus-circle-outline" width="32px" />,
   },
   {
+    id: 'custom-node-with-details',
+    label: 'Node with custom details',
+    subtitle: 'Click to see custom details',
+    detailsComponent: ({ node }) => (
+      <div>
+        <h3>Custom Details View</h3>
+        <p>This is a custom details view for node: {node.label}</p>
+      </div>
+    ),
+  },
+  {
     id: 'custon-node-2',
     label: 'Node with children',
     nodes: [
