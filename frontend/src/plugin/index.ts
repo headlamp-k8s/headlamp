@@ -22,6 +22,7 @@ import semver from 'semver';
 import * as CommonComponents from '../components/common';
 import helpers from '../helpers';
 import * as K8s from '../lib/k8s';
+import { getPlugins } from '../lib/k8s/api/v2/plugins';
 import * as ApiProxy from '../lib/k8s/apiProxy';
 import * as Crd from '../lib/k8s/crd';
 import * as Notification from '../lib/notification';
@@ -199,17 +200,21 @@ export function filterSources(
  */
 export function updateSettingsPackages(
   backendPlugins: PluginInfo[],
-  settingsPlugins: PluginInfo[]
+  settingsPlugins: { name: string; isEnabled: boolean }[]
 ): PluginInfo[] {
   if (backendPlugins.length === 0) return [];
 
   const pluginsChanged =
     backendPlugins.length !== settingsPlugins.length ||
-    backendPlugins.map(p => p.name + p.version).join('') !==
-      settingsPlugins.map(p => p.name + p.version).join('');
+    JSON.stringify(backendPlugins.map(p => p.name).sort()) !==
+      JSON.stringify(settingsPlugins.map(p => p.name).sort());
 
   if (!pluginsChanged) {
-    return settingsPlugins;
+    const updatedPlugins = backendPlugins.filter(plugin =>
+      settingsPlugins.some(setting => setting.name === plugin.name)
+    );
+
+    return updatedPlugins;
   }
 
   return backendPlugins.map(plugin => {
@@ -241,7 +246,7 @@ export function updateSettingsPackages(
  *
  */
 export async function fetchAndExecutePlugins(
-  settingsPackages: PluginInfo[],
+  settingsPackages: { name: string; isEnabled: boolean }[],
   onSettingsChange: (plugins: PluginInfo[]) => void,
   onIncompatible: (plugins: Record<string, PluginInfo>) => void
 ) {
@@ -255,32 +260,7 @@ export async function fetchAndExecutePlugins(
     )
   );
 
-  const packageInfosPromise = await Promise.all<PluginInfo>(
-    pluginPaths.map(path =>
-      fetch(`${helpers.getAppUrl()}${path}/package.json`).then(resp => {
-        if (!resp.ok) {
-          if (resp.status !== 404) {
-            return Promise.reject(resp);
-          }
-          {
-            console.warn(
-              'Missing package.json. ' +
-                `Please upgrade the plugin ${path}` +
-                ' by running "headlamp-plugin extract" again.' +
-                ' Please use headlamp-plugin >= 0.8.0'
-            );
-            return {
-              name: path.split('/').slice(-1)[0],
-              version: '0.0.0',
-              author: 'unknown',
-              description: '',
-            };
-          }
-        }
-        return resp.json();
-      })
-    )
-  );
+  const packageInfosPromise = await getPlugins(settingsPackages);
 
   const sources = await sourcesPromise;
   const packageInfos = await packageInfosPromise;
