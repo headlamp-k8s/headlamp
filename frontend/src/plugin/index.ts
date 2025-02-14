@@ -321,7 +321,10 @@ export async function fetchAndExecutePlugins(
     // Execute plugins inside a context (not in global/window)
     (function (str: string) {
       try {
-        const result = eval(str);
+        const pluginName = packageInfos[index].name.split('/').slice(-1)[0];
+        // Giving an evaled code a filename will make it easier to use source maps
+        const sourceMapPath = `\n//# sourceURL=//${pluginName}/dist/main.js`;
+        const result = eval(str + sourceMapPath);
         return result;
       } catch (e) {
         // We just continue if there is an error.
