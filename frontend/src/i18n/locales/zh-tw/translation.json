@@ -191,6 +191,7 @@
   "Error deleting {{ itemsLength }} items.": "刪除 {{ itemsLength }} 個項目時出錯。",
   "Delete items": "刪除項目",
   "Loading documentation": "讀取文件",
+  "No documentation available.": "",
   "No documentation for type {{ docsType }}.": "類型 {{ docsType }} 沒有文件。",
   "Showing documentation for: {{ docsType }}": "顯示文件：{{ docsType }}",
   "Applying changes to {{ itemName }}…": "正在應用更改到 {{ itemName }}…",
