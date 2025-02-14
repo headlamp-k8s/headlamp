@@ -783,18 +783,24 @@ function getDefaultAppMenu(): AppMenu[] {
         sep,
         {
           label: i18n.t('Reset Zoom'),
-          role: 'resetzoom',
           id: 'original-reset-zoom',
+          accelerator: 'CmdOrCtrl+0',
+          click: () => {
+            saveZoomFactor(1.0);
+            mainWindow?.webContents.setZoomFactor(1.0);
+          },
         },
         {
           label: i18n.t('Zoom In'),
-          role: 'zoomin',
           id: 'original-zoom-in',
+          accelerator: 'CmdOrCtrl+Plus',
+          click: () => adjustZoom(0.1),
         },
         {
           label: i18n.t('Zoom Out'),
-          role: 'zoomout',
           id: 'original-zoom-out',
+          accelerator: 'CmdOrCtrl+-',
+          click: () => adjustZoom(-0.1),
         },
         sep,
         {
@@ -1030,6 +1036,44 @@ function killProcess(pid: number) {
   }
 }
 
+const ZOOM_FILE_PATH = path.join(app.getPath('userData'), 'headlamp-config.json');
+
+function saveZoomFactor(factor: number) {
+  try {
+    fs.writeFileSync(ZOOM_FILE_PATH, JSON.stringify({ zoomFactor: factor }), 'utf-8');
+  } catch (err) {
+    console.error('Failed to save zoom factor:', err);
+  }
+}
+
+function loadZoomFactor() {
+  try {
+    const { zoomFactor = 1.0 } = JSON.parse(fs.readFileSync(ZOOM_FILE_PATH, 'utf-8'));
+    return zoomFactor;
+  } catch (err) {
+    console.error('Failed to load zoom factor, defaulting to 1.0:', err);
+    return 1.0;
+  }
+}
+
+// The zoom factor should respect the fixed limits set by Electron.
+function clampZoom(factor: number) {
+  return Math.min(5.0, Math.max(0.25, factor));
+}
+
+function adjustZoom(delta?: number) {
+  let newZoom: number;
+  if (!!delta) {
+    const current = loadZoomFactor() || 1.0;
+    newZoom = clampZoom(current + delta);
+  } else {
+    newZoom = loadZoomFactor();
+  }
+
+  mainWindow?.webContents.setZoomFactor(newZoom);
+  saveZoomFactor(newZoom);
+}
+
 function startElecron() {
   console.info('App starting...');
 
@@ -1082,6 +1126,8 @@ function startElecron() {
         goForwardMenu.enabled = mainWindow?.webContents.canGoForward() || false;
       }
     });
+
+    mainWindow.webContents.on('did-finish-load', () => adjustZoom());
 
     mainWindow.webContents.on('dom-ready', () => {
       const defaultMenu = getDefaultAppMenu();
