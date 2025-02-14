@@ -17,6 +17,7 @@ func TestParse(t *testing.T) {
 		require.NotNil(t, conf)
 
 		assert.Equal(t, false, conf.DevMode)
+		assert.Equal(t, false, conf.AppMode)
 		assert.Equal(t, uint(4466), conf.Port)
 		assert.Equal(t, "profile,email", conf.OidcScopes)
 	})

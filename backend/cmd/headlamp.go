@@ -42,6 +42,7 @@ import (
 
 type HeadlampConfig struct {
 	useInCluster          bool
+	appMode               bool
 	devMode               bool
 	insecure              bool
 	enableHelm            bool
@@ -901,8 +902,13 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	handler = config.OIDCTokenRefreshMiddleware(handler)
 
+	addr := fmt.Sprintf(":%d", config.port)
+	if config.appMode {
+		addr = fmt.Sprintf("localhost:%d", config.port)
+	}
+
 	// Start server
-	err := http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler) //nolint:gosec
+	err := http.ListenAndServe(addr, handler) //nolint:gosec
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "Failed to start server")
 		os.Exit(1)

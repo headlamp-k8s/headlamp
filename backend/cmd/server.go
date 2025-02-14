@@ -41,6 +41,7 @@ func main() {
 		kubeConfigPath:        conf.KubeConfigPath,
 		port:                  conf.Port,
 		devMode:               conf.DevMode,
+		appMode:               conf.AppMode,
 		staticDir:             conf.StaticDir,
 		insecure:              conf.InsecureSsl,
 		pluginDir:             conf.PluginsDir,
