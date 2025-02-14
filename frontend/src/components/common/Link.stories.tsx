@@ -1,15 +1,20 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
+import React from 'react';
+import { createStore } from 'redux';
+import reducers from '../../redux/reducers/reducers';
+import { TestContext } from '../../test';
 import Link, { LinkProps } from './Link';
+
+const store = createStore(reducers);
 
 export default {
   title: 'Link',
   component: Link,
   decorators: [
     Story => (
-      <MemoryRouter>
+      <TestContext store={store}>
         <Story />
-      </MemoryRouter>
+      </TestContext>
     ),
   ],
 } as Meta;
