@@ -195,25 +195,32 @@ export function GlobalSearchContent({
           routeFilters.filter(f => f(route)).length !== routeFilters.length
         ) && !route.disabled
     );
-  const routes: SearchResult[] = useMemo(
-    () =>
-      filteredRoutes
-        .filter(([, route]) => route.name && !route.path.includes(':'))
-        .filter(([, route]) => {
-          const clusterRoute = route.useClusterURL ?? true;
+  const routes: SearchResult[] = useMemo(() => {
+    let hasClusterSettings = false;
+    return filteredRoutes
+      .filter(([, route]) => route.name && !route.path.includes(':'))
+      .filter(([, route]) => {
+        const clusterRoute = route.useClusterURL ?? true;
 
-          return clusterRoute ? selectedClusters.length > 0 : true;
-        })
-        .map(([name, route]) => ({
-          id: route.path,
-          label: route.name!,
-          subLabel: t('Page'),
-          onClick: () => {
-            history.push(createRouteURL(name));
-          },
-        })),
-    [location.pathname, history, selectedClusters]
-  );
+        // Filter out additional cluster settings routes after the first one
+        if (route.name === 'Cluster Settings') {
+          if (hasClusterSettings) {
+            return false;
+          }
+          hasClusterSettings = true;
+        }
+
+        return clusterRoute ? selectedClusters.length > 0 : true;
+      })
+      .map(([name, route]) => ({
+        id: route.path,
+        label: route.name!,
+        subLabel: t('Page'),
+        onClick: () => {
+          history.push(createRouteURL(name));
+        },
+      }));
+  }, [location.pathname, history, selectedClusters]);
 
   // Custom actions
   const dispatch = useDispatch();
