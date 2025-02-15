@@ -57,6 +57,7 @@ import {
   ScaleResourceEvent,
   TerminalEvent,
 } from '../redux/headlampEventSlice';
+import { addOverviewChartsProcessor, OverviewChartsProcessor } from '../redux/overviewChartsSlice';
 import { setRoute, setRouteFilter } from '../redux/routesSlice';
 import store from '../redux/stores/store';
 import {
@@ -97,6 +98,7 @@ export type {
   EventListEvent,
   PluginSettingsDetailsProps,
   PluginSettingsComponentType,
+  OverviewChartsProcessor,
 };
 export const DefaultHeadlampEvents = HeadlampEventType;
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
@@ -682,6 +684,31 @@ export function registerPluginSettings(
   displaySaveButton: boolean = false
 ) {
   store.dispatch(setPluginSettingsComponent({ name, component, displaySaveButton }));
+}
+
+/**
+ * Add a processor for the overview charts section. Allowing the addition or modification of charts.
+ *
+ * @param processor - The processor to add. Returns the new charts to be displayed.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerOverviewChartsProcessor } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerOverviewChartsProcessor(function addFailedPodsChart(charts) {
+ *   return [
+ *     ...charts,
+ *     {
+ *       id: 'failed-pods',
+ *       component: () => <FailedPodsChart />
+ *     }
+ *   ];
+ * });
+ * ```
+ */
+export function registerOverviewChartsProcessor(processor: OverviewChartsProcessor) {
+  store.dispatch(addOverviewChartsProcessor(processor));
 }
 
 export {
