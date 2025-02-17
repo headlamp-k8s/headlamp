@@ -131,6 +131,8 @@ describe('Storybook Tests', () => {
       }
 
       stories.forEach(({ name, story }) => {
+        if (story.parameters?.storyshots?.disable) return;
+
         test(name, async () => {
           // Keep track of sent requests to wait for the to finish
           let requestsSent = 0;

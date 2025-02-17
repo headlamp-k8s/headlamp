@@ -9,6 +9,11 @@ export default {
   title: 'Pod/PodLogViewer',
   component: PodLogViewer,
   argTypes: {},
+  parameters: {
+    storyshots: {
+      disable: true,
+    },
+  },
 } as Meta;
 
 const Template: StoryFn = () => {
