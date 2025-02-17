@@ -412,11 +412,14 @@ func loadContextsFromData(data []byte, source int, skipProxySetup bool) ([]Conte
 				ContextName: context.Name,
 				Error:       err,
 			})
+
+			// Do not include any contexts with errors, else they may be
+			// processed as valid and make things fail.
+			continue
 		}
 
 		contexts = append(contexts, context)
 	}
-
 	return contexts, contextErrors, nil
 }
 
