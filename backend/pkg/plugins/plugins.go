@@ -71,10 +71,12 @@ func periodicallyWatchSubfolders(watcher *fsnotify.Watcher, path string, interva
 
 					return err
 				}
+
 				for _, entry := range entries {
 					watcher.Events <- fsnotify.Event{Name: filepath.Join(path, entry.Name()), Op: fsnotify.Create}
 				}
 			}
+
 			return nil
 		})
 	}

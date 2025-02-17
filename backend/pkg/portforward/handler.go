@@ -212,7 +212,7 @@ func startPortForward(kContext *kubeconfig.Context, cache cache.Cache[interface{
 	stopChan, readyChan := make(chan struct{}), make(chan struct{}, 1)
 	out, errOut := new(bytes.Buffer), new(bytes.Buffer)
 
-	forwarder, err := portforward.New(dialer, []string{fmt.Sprintf(p.Port + ":" + p.TargetPort)},
+	forwarder, err := portforward.New(dialer, []string{p.Port + ":" + p.TargetPort},
 		stopChan, readyChan, out, errOut)
 	if err != nil {
 		return fmt.Errorf("portforward request: failed to create portforward: %v", err)
