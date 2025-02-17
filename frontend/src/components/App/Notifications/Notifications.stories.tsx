@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, StoryFn } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -45,6 +46,23 @@ export default {
       </MemoryRouter>
     ),
   ],
+  parameters: {
+    msw: {
+      handlers: {
+        storyBase: [
+          http.get('http://localhost:4466/clusters/staging-cluster/api/v1/events', () =>
+            HttpResponse.error()
+          ),
+          http.get('http://localhost:4466/clusters/dev-cluster/api/v1/events', () =>
+            HttpResponse.error()
+          ),
+          http.get('http://localhost:4466/clusters/prod-cluster/api/v1/events', () =>
+            HttpResponse.error()
+          ),
+        ],
+      },
+    },
+  },
 } as Meta;
 
 const Template: StoryFn = () => <Notifications />;

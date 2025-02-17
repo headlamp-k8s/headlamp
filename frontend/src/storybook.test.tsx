@@ -191,7 +191,7 @@ describe('Storybook Tests', () => {
 
           document.body.removeAttribute('style');
 
-          expect(document.body).toMatchFileSnapshot(snapshotPath);
+          await expect(document.body).toMatchFileSnapshot(snapshotPath);
         });
       });
     });
