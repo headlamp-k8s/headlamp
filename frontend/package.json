@@ -42,7 +42,7 @@
     "@types/semver": "^7.3.8",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react": "^4.3.4",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/addon-search": "^0.15.0",
     "@xterm/xterm": "^5.5.0",
@@ -97,8 +97,8 @@
     "url": "^0.11.0",
     "util": "^0.12.4",
     "vite": "^6.1.0",
-    "vite-plugin-node-polyfills": "^0.22.0",
-    "vite-plugin-svgr": "^4.2.0",
+    "vite-plugin-node-polyfills": "^0.23.0",
+    "vite-plugin-svgr": "^4.3.0",
     "web-worker": "^1.3.0"
   },
   "overrides": {
