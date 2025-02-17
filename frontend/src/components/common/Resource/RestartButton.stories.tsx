@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { getTestDate } from '../../../helpers/testHelpers';
 import Deployment from '../../../lib/k8s/deployment';
 import StatefulSet from '../../../lib/k8s/statefulSet';
 import { TestContext } from '../../../test';
@@ -21,7 +22,7 @@ const mockDeployment = new Deployment({
   metadata: {
     name: 'mock-deployment',
     namespace: 'default',
-    creationTimestamp: new Date().toDateString(),
+    creationTimestamp: getTestDate().toDateString(),
     uid: 'mock-uid',
   },
   spec: {
@@ -48,7 +49,7 @@ const mockStatefulSet = new StatefulSet({
   metadata: {
     name: 'mock-statefulset',
     namespace: 'default',
-    creationTimestamp: new Date().toDateString(),
+    creationTimestamp: getTestDate().toDateString(),
     uid: 'mock-uid',
   },
   spec: {

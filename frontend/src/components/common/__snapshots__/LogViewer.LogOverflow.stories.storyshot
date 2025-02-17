@@ -186,7 +186,7 @@
                         class="xterm-char-measure-element"
                         style="font-weight: normal;"
                       >
-                        WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+                                                        
                       </span>
                       <span
                         class="xterm-char-measure-element"
@@ -215,94 +215,214 @@
                   >
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #987): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #988): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #989): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #990): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #991): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #992): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #993): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #994): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #995): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #996): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #997): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #998): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #999): from container 'database' log line log li
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ne log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [2024-01-23T00:00:00.000Z] (log #1000): from container 'database' log line log l
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        ine log line log line log line log line log line log line log line
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                         
+                      </span>
+                    </div>
                   </div>
                   <div
                     aria-hidden="true"
