@@ -2,6 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryFn } from '@storybook/react';
 import { useCallback, useEffect, useState } from 'react';
+import { getTestDate } from '../../helpers/testHelpers';
 import { LogViewer, LogViewerProps } from './LogViewer';
 
 export default {
@@ -54,7 +55,7 @@ LogOverflow.args = {
   logs: Array.from(
     { length: 1000 },
     (_, i) =>
-      `[${new Date().toISOString()}] (log #${
+      `[${new Date('2024-01-23').toISOString()}] (log #${
         i + 1
       }): from container 'database' log line log line log line log line log line log line log line log line log line\n`
   ),
@@ -77,7 +78,7 @@ export const LiveUpdatingLogs = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const timestamp = new Date().toISOString();
+      const timestamp = getTestDate().toISOString();
       setLogs(prevLogs => [...prevLogs, `[${timestamp}] New log entry: #${counter}\n`]);
       setCounter(prevCounter => prevCounter + 1);
     }, 500);
@@ -194,7 +195,7 @@ export const ReconnectToSeeLogs = () => {
     const logInterval = setInterval(() => {
       setLogs(prevLogs => [
         ...prevLogs.slice(-99), // keep last 100 logs
-        `[app] Log entry at ${new Date().toISOString()}\n`,
+        `[app] Log entry at ${getTestDate().toISOString()}\n`,
       ]);
     }, 1500);
 
