@@ -35,10 +35,12 @@ func TestParse(t *testing.T) {
 	t.Run("from_env", func(t *testing.T) {
 		os.Setenv("HEADLAMP_CONFIG_OIDC_CLIENT_SECRET", "superSecretBotsStayAwayPlease")
 		defer os.Unsetenv("HEADLAMP_CONFIG_OIDC_CLIENT_SECRET")
+
 		args := []string{
 			"go run ./cmd", "-in-cluster",
 		}
 		conf, err := config.Parse(args)
+
 		require.NoError(t, err)
 		require.NotNil(t, conf)
 
@@ -48,10 +50,12 @@ func TestParse(t *testing.T) {
 	t.Run("both_args_and_env", func(t *testing.T) {
 		os.Setenv("HEADLAMP_CONFIG_PORT", "1234")
 		defer os.Unsetenv("HEADLAMP_CONFIG_PORT")
+
 		args := []string{
 			"go run ./cmd", "--port=9876",
 		}
 		conf, err := config.Parse(args)
+
 		require.NoError(t, err)
 		require.NotNil(t, conf)
 
@@ -64,6 +68,7 @@ func TestParse(t *testing.T) {
 			"go run ./cmd", "-oidc-client-id=noClient",
 		}
 		conf, err := config.Parse(args)
+
 		require.Error(t, err)
 		require.Nil(t, conf)
 
@@ -75,6 +80,7 @@ func TestParse(t *testing.T) {
 			"go run ./cmd", "--base-url=testingthis",
 		}
 		conf, err := config.Parse(args)
+
 		require.Error(t, err)
 		require.Nil(t, conf)
 
@@ -84,10 +90,12 @@ func TestParse(t *testing.T) {
 	t.Run("kubeconfig_from_default_env", func(t *testing.T) {
 		os.Setenv("KUBECONFIG", "~/.kube/test_config.yaml")
 		defer os.Unsetenv("KUBECONFIG")
+
 		args := []string{
 			"go run ./cmd",
 		}
 		conf, err := config.Parse(args)
+
 		require.NoError(t, err)
 		require.NotNil(t, conf)
 
@@ -99,6 +107,7 @@ func TestParse(t *testing.T) {
 			"go run ./cmd", "--enable-dynamic-clusters",
 		}
 		conf, err := config.Parse(args)
+
 		require.NoError(t, err)
 		require.NotNil(t, conf)
 

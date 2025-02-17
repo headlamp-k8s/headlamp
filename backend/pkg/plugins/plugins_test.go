@@ -16,7 +16,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestWatch(t *testing.T) { //nolint:funlen
+func TestWatch(t *testing.T) {
 	t.Parallel()
 
 	// Create a temporary directory if it doesn't exist

@@ -128,6 +128,7 @@ func TestDialWebSocket(t *testing.T) {
 				return true // Allow all connections for testing
 			},
 		}
+
 		ws, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			t.Logf("Upgrade error: %v", err)
@@ -141,6 +142,7 @@ func TestDialWebSocket(t *testing.T) {
 			if err != nil {
 				break
 			}
+
 			err = ws.WriteMessage(mt, message)
 			if err != nil {
 				break
@@ -235,6 +237,7 @@ func TestUpdateStatus(t *testing.T) {
 			conn.updateStatus(state, nil)
 		}(i)
 	}
+
 	wg.Wait()
 
 	// Verify final state is valid
@@ -312,6 +315,7 @@ func createTestWebSocketConn() (*websocket.Conn, *httptest.Server) {
 				return true
 			},
 		}
+
 		ws, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			return
@@ -324,6 +328,7 @@ func createTestWebSocketConn() (*websocket.Conn, *httptest.Server) {
 			if err != nil {
 				break
 			}
+
 			err = ws.WriteMessage(messageType, message)
 			if err != nil {
 				break
@@ -428,6 +433,7 @@ func createMockKubeAPIServer() *httptest.Server {
 				return true
 			},
 		}
+
 		c, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			return
@@ -441,6 +447,7 @@ func createMockKubeAPIServer() *httptest.Server {
 			if err != nil {
 				break
 			}
+
 			if err := c.WriteMessage(websocket.TextMessage, msg); err != nil {
 				break
 			}
@@ -542,7 +549,6 @@ func TestEstablishClusterConnection(t *testing.T) {
 	assert.Nil(t, conn)
 }
 
-//nolint:funlen
 func TestReconnect(t *testing.T) {
 	store := kubeconfig.NewContextStore()
 	m := NewMultiplexer(store)
@@ -713,6 +719,7 @@ func TestReadClientMessage_InvalidMessage(t *testing.T) {
 			if err != nil {
 				return
 			}
+
 			err = ws.WriteMessage(messageType, p)
 			if err != nil {
 				return
@@ -851,7 +858,6 @@ func TestMonitorConnection_ReconnectFailure(t *testing.T) {
 	<-done
 }
 
-//nolint:funlen
 func TestHandleClientWebSocket_InvalidMessages(t *testing.T) {
 	m := NewMultiplexer(kubeconfig.NewContextStore())
 

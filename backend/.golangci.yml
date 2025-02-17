@@ -42,7 +42,6 @@ linters:
     - whitespace
     - wsl
   disable:
-    - exportloopref
     - gci
     - gochecknoglobals
     - godox

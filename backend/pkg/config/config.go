@@ -193,8 +193,8 @@ func defaultPluginDir() string {
 	}
 
 	fileMode := 0o755
-	err = os.MkdirAll(pluginsConfigDir, fs.FileMode(fileMode))
 
+	err = os.MkdirAll(pluginsConfigDir, fs.FileMode(fileMode))
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "creating plugins directory")
 

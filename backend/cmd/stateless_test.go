@@ -90,7 +90,6 @@ func TestStatelessClustersKubeConfig(t *testing.T) {
 	}
 }
 
-//nolint:funlen
 func TestStatelessClusterApiRequest(t *testing.T) {
 	kubeConfigByte, err := os.ReadFile("./headlamp_testdata/kubeconfig")
 	require.NoError(t, err)

@@ -137,8 +137,8 @@ func (h *Handler) ListRelease(w http.ResponseWriter, r *http.Request) {
 	res := ListReleaseResponse{
 		Releases: releases,
 	}
-	err = json.NewEncoder(w).Encode(res)
 
+	err = json.NewEncoder(w).Encode(res)
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"request": "list_releases"},
 			err, "encoding response")
@@ -257,7 +257,6 @@ func (h *Handler) GetReleaseHistory(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	err = json.NewEncoder(w).Encode(resp)
-
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"request": "get_release_history", "releaseName": req.Name},
 			err, "encoding response")
@@ -319,7 +318,6 @@ func (h *Handler) UninstallRelease(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusAccepted)
 
 	err = json.NewEncoder(w).Encode(response)
-
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"request": "uninstall_release", "releaseName": req.Name},
 			err, "encoding response")
@@ -592,7 +590,6 @@ func (h *Handler) installRelease(req InstallRequest) {
 	}
 
 	err = yaml.Unmarshal(decodedBytes, &values)
-
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"chart": req.Chart, "releaseName": req.Name},
 			err, "unmarshalling values")

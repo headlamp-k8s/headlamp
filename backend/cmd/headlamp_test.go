@@ -243,6 +243,7 @@ func TestDynamicClusters(t *testing.T) {
 			handler := createHeadlampHandler(&c)
 
 			var resp *httptest.ResponseRecorder
+
 			for _, clusterReq := range tc.clusters {
 				r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", clusterReq)
 				if err != nil {
@@ -261,6 +262,7 @@ func TestDynamicClusters(t *testing.T) {
 					}
 
 					configuredClusters := c.getClusters()
+
 					var cluster *Cluster
 
 					// Get cluster we created
@@ -287,11 +289,14 @@ func TestDynamicClusters(t *testing.T) {
 
 			if resp.Code == http.StatusCreated {
 				var clusterConfig clientConfig
+
 				err = json.Unmarshal(resp.Body.Bytes(), &clusterConfig)
 				if err != nil {
 					t.Fatal(err)
 				}
+
 				var config clientConfig
+
 				err = json.Unmarshal(configResp.Body.Bytes(), &config)
 				if err != nil {
 					t.Fatal(err)
@@ -361,6 +366,7 @@ func TestExternalProxy(t *testing.T) {
 	// Create a new server for testing
 	proxyServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
+
 		_, err := w.Write([]byte("OK"))
 		if err != nil {
 			t.Fatal(err)
@@ -855,7 +861,7 @@ func TestParseClusterAndToken(t *testing.T) {
 func TestIsTokenAboutToExpire(t *testing.T) {
 	// Token that expires in 4 minutes
 	header := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-	originalPayload := "eyJleHAiOjE2MTIzNjE2MDB9" //nolint:gosec
+	originalPayload := "eyJleHAiOjE2MTIzNjE2MDB9"
 	signature := ".7vl9iBWGDQdXUTbEsqFHiHoaNWxKn4UwLhO9QDhXrpM"
 
 	token := header + originalPayload + signature
