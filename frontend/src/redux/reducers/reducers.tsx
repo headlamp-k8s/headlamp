@@ -8,6 +8,7 @@ import clusterAction from '../clusterActionSlice';
 import configReducer from '../configSlice';
 import filterReducer from '../filterSlice';
 import eventCallbackReducer from '../headlampEventSlice';
+import overviewChartsReducer from '../overviewChartsSlice';
 import routesReducer from '../routesSlice';
 import resourceTableReducer from './../../components/common/Resource/resourceTableSlice';
 import detailsViewSectionReducer from './../../components/DetailsViewSection/detailsViewSectionSlice';
@@ -31,6 +32,7 @@ const reducers = combineReducers({
   detailsViewSections: detailsViewSectionReducer,
   eventCallbackReducer,
   pluginConfigs: pluginConfigReducer,
+  overviewCharts: overviewChartsReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;

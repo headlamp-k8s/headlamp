@@ -7,6 +7,8 @@ import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
+import { OverviewChart } from '../../redux/overviewChartsSlice';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { DateLabel, Link, PageGrid, StatusLabel } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
@@ -22,14 +24,41 @@ import { ClusterGroupErrorMessage } from './ClusterGroupErrorMessage';
 
 export default function Overview() {
   const { t } = useTranslation(['translation']);
-
   const [pods] = Pod.useList();
   const [nodes] = Node.useList();
-
   const [nodeMetrics, metricsError] = Node.useMetrics();
+  const chartProcessors = useTypedSelector(state => state.overviewCharts.processors);
 
   const noMetrics = metricsError?.status === 404;
   const noPermissions = metricsError?.status === 403;
+
+  // Process the default charts through any registered processors
+  const defaultCharts: OverviewChart[] = [
+    {
+      id: 'cpu',
+      component: () => (
+        <CpuCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
+      ),
+    },
+    {
+      id: 'memory',
+      component: () => (
+        <MemoryCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
+      ),
+    },
+    {
+      id: 'pods',
+      component: () => <PodsStatusCircleChart items={pods} />,
+    },
+    {
+      id: 'nodes',
+      component: () => <NodesStatusCircleChart items={nodes} />,
+    },
+  ];
+  const charts = chartProcessors.reduce(
+    (currentCharts, p) => p.processor(currentCharts),
+    defaultCharts
+  );
 
   return (
     <PageGrid>
@@ -38,18 +67,11 @@ export default function Overview() {
           <ClusterGroupErrorMessage errors={[metricsError]} />
         ) : (
           <Grid container justifyContent="flex-start" alignItems="stretch" spacing={4}>
-            <Grid item xs sx={{ maxWidth: '300px' }}>
-              <CpuCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
-            </Grid>
-            <Grid item xs sx={{ maxWidth: '300px' }}>
-              <MemoryCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
-            </Grid>
-            <Grid item xs sx={{ maxWidth: '300px' }}>
-              <PodsStatusCircleChart items={pods} />
-            </Grid>
-            <Grid item xs sx={{ maxWidth: '300px' }}>
-              <NodesStatusCircleChart items={nodes} />
-            </Grid>
+            {charts.map(chart => (
+              <Grid key={chart.id} item xs sx={{ maxWidth: '300px' }}>
+                <chart.component />
+              </Grid>
+            ))}
           </Grid>
         )}
       </SectionBox>
