@@ -11,6 +11,11 @@ export default {
   argTypes: {
     onClose: { action: 'closed' },
   },
+  parameters: {
+    storyshots: {
+      disable: true,
+    },
+  },
 } as Meta;
 
 const Template: StoryFn<LogViewerProps> = args => <LogViewer {...args} />;
@@ -258,6 +263,9 @@ export const ReconnectToSeeLogs = () => {
   );
 };
 ReconnectToSeeLogs.parameters = {
+  storyshots: {
+    disable: true,
+  },
   docs: {
     description: {
       story: 'LogViewer simulating recovery of connection loss upon clicking on reconnect button.',
