@@ -16114,6 +16114,8 @@
   "registerDetailsViewSectionsProcessor": [Function],
   "registerGetTokenFunction": [Function],
   "registerHeadlampEventCallback": [Function],
+  "registerKindIcon": [Function],
+  "registerMapSource": [Function],
   "registerPluginSettings": [Function],
   "registerResourceTableColumnsProcessor": [Function],
   "registerRoute": [Function],
