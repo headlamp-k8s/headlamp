@@ -385,8 +385,7 @@ func LoadContextsFromMultipleFiles(kubeConfigs string, source int) ([]Context, [
 
 // loadContextsFromData loads contexts from a kubeconfig data.
 // It unmarshals the kubeconfig data, extracts the contexts, and processes each context.
-// It returns all contexts, contextLoadErrors and any errors that occurred during the process.
-// It does not matter if a context has errors, it will be returned.
+// It returns valid contexts, contextLoadErrors and any errors that occurred during the process.
 func loadContextsFromData(data []byte, source int, skipProxySetup bool) ([]Context, []ContextLoadError, error) {
 	var contexts []Context //nolint:prealloc
 
@@ -412,6 +411,10 @@ func loadContextsFromData(data []byte, source int, skipProxySetup bool) ([]Conte
 				ContextName: context.Name,
 				Error:       err,
 			})
+
+			// Do not include any contexts with errors, else they may be
+			// processed as valid and make things fail.
+			continue
 		}
 
 		contexts = append(contexts, context)
