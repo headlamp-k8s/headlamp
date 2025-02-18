@@ -38,7 +38,7 @@ export interface KubeCronJob extends KubeObjectInterface {
 class CronJob extends KubeObject<KubeCronJob> {
   static kind = 'CronJob';
   static apiName = 'cronjobs';
-  static apiVersion = ['batch/v1', 'batch/v1beta1'];
+  static apiVersion = 'batch/v1';
   static isNamespaced = true;
 
   get spec() {
