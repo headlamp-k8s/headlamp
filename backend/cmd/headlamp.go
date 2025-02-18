@@ -1160,6 +1160,13 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 			continue
 		}
 
+		// This should not happen, but it's a defensive check.
+		if context.KubeContext == nil {
+			logger.Log(logger.LevelError, map[string]string{"context": context.Name},
+				errors.New("context.KubeContext is nil"), "error adding context")
+			continue
+		}
+
 		clusters = append(clusters, Cluster{
 			Name:     context.Name,
 			Server:   context.Cluster.Server,

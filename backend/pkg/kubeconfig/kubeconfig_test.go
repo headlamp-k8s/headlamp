@@ -72,7 +72,7 @@ func TestLoadContextsFromKubeConfigFile(t *testing.T) {
 		require.NoError(t, err, "Expected no error for auth error file")
 		require.NotEmpty(t, contextErrors, "Expected context errors for invalid auth file")
 		require.Equal(t, contextErrors[0].ContextName, "invalid-context")
-		require.Equal(t, 2, len(contexts), "Expected 1 context from invalid auth file")
+		require.Equal(t, 0, len(contexts), "Expected no contexts from invalid auth file")
 	})
 
 	t.Run("partially_valid_contexts", func(t *testing.T) {
@@ -81,7 +81,7 @@ func TestLoadContextsFromKubeConfigFile(t *testing.T) {
 		contexts, contextErrors, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
 		require.NoError(t, err, "Expected no error for partially valid file")
 		require.NotEmpty(t, contextErrors, "Expected some context errors for partially valid file")
-		require.Equal(t, 3, len(contexts), "Expected 3 contexts from the partially valid file")
+		require.Equal(t, 1, len(contexts), "Expected 1 contexts from the partially valid file")
 		require.Equal(t, "valid-context", contexts[0].Name, "Expected context name to be 'valid-context'")
 	})
 }
@@ -173,7 +173,7 @@ users:
 		contexts, contextErrors, err := kubeconfig.LoadContextsFromBase64String(base64String, kubeconfig.DynamicCluster)
 		require.NoError(t, err, "Expected no error for partially valid base64")
 		require.NotEmpty(t, contextErrors, "Expected some context errors for partially valid base64")
-		require.Equal(t, 2, len(contexts), "Expected 2 valid contexts from partially valid base64")
+		require.Equal(t, 1, len(contexts), "Expected 1 valid context from partially valid base64")
 		assert.Equal(t, "valid-context", contexts[0].Name, "Expected context name to be 'valid-context'")
 	})
 }

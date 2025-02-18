@@ -361,6 +361,29 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 	assert.Equal(t, "default", minikubeCluster.Metadata["namespace"])
 }
 
+func TestInvalidKubeConfig(t *testing.T) {
+	cache := cache.New[interface{}]()
+	kubeConfigStore := kubeconfig.NewContextStore()
+
+	absPath, err := filepath.Abs("./headlamp_testdata/kubeconfig_partialcontextvalid")
+	assert.NoError(t, err)
+
+	c := HeadlampConfig{
+		useInCluster:          false,
+		kubeConfigPath:        absPath,
+		enableDynamicClusters: true,
+		cache:                 cache,
+		kubeConfigStore:       kubeConfigStore,
+	}
+
+	err = kubeconfig.LoadAndStoreKubeConfigs(kubeConfigStore, absPath, kubeconfig.KubeConfig)
+	assert.Error(t, err)
+
+	clusters := c.getClusters()
+
+	assert.Equal(t, 1, len(clusters))
+}
+
 //nolint:funlen
 func TestExternalProxy(t *testing.T) {
 	// Create a new server for testing
