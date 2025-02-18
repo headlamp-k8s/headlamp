@@ -562,6 +562,11 @@ export default function PodDetails(props: PodDetailsProps) {
             section: (
               <Terminal
                 key="terminal"
+                title={
+                  isAttached
+                    ? t('Attach: {{ itemName }}', { itemName: item.metadata.name })
+                    : t('Terminal: {{ itemName }}', { itemName: item.metadata.name })
+                }
                 open={showTerminal || isAttached}
                 item={item}
                 onClose={() => {
