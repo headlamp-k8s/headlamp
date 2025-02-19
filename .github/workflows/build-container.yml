@@ -43,7 +43,7 @@ jobs:
       run: kubectl get pods -A
     - name: Restore image-cache Folder
       id: cache-image-restore
-      uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+      uses: actions/cache/restore@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
       with:
         path: ~/image-cache
         # cache the container image. All the paths this PR depends on except the e2e-tests folder for the key.
@@ -170,7 +170,7 @@ jobs:
     - name: Cache image-cache Folder
       if: steps.cache-image-restore.outputs.cache-hit != 'true'
       id: cache-image-save
-      uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+      uses: actions/cache/save@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
       with:
         path: ~/image-cache
         key: ${{ steps.cache-image-restore.outputs.cache-primary-key }}
