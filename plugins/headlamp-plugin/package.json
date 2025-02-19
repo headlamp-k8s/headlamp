@@ -111,7 +111,7 @@
     "jest-websocket-mock": "^2.5.0",
     "js-base64": "^3.7.2",
     "js-yaml": "^4.1.0",
-    "jsonpath-plus": "^10.2.0",
+    "jsonpath-plus": "^10.3.0",
     "lint-staged": "^10.5.4",
     "lodash": "^4.17.21",
     "material-react-table": "^2.13.3",
