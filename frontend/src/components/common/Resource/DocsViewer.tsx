@@ -16,12 +16,10 @@ import Loader from '../Loader';
 export interface DocsViewerProps {
   // @todo: Declare strict types.
   docSpecs: any;
-  // An override for testing/mocking purposes.
-  fetchDocDefinitions?: (apiVersion: string, kind: string) => Promise<any>;
 }
 
 function DocsViewer(props: DocsViewerProps) {
-  const { docSpecs, fetchDocDefinitions = getDocDefinitions } = props;
+  const { docSpecs } = props;
   const [docs, setDocs] = React.useState<
     (
       | {
@@ -45,7 +43,7 @@ function DocsViewer(props: DocsViewerProps) {
     // fetch docSpecs for all the resources specified
     Promise.allSettled(
       docSpecs.map((docSpec: { apiVersion: string; kind: string }) => {
-        return fetchDocDefinitions(docSpec.apiVersion, docSpec.kind);
+        return getDocDefinitions(docSpec.apiVersion, docSpec.kind);
       })
     )
       .then(values => {
