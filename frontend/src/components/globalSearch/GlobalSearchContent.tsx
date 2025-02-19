@@ -199,9 +199,12 @@ export function GlobalSearchContent({
     () =>
       filteredRoutes
         .filter(([, route]) => route.name && !route.path.includes(':'))
-        .filter(([, route]) => {
+        .filter(([key, route]) => {
           const clusterRoute = route.useClusterURL ?? true;
-
+          // settingsCluster is an old route that is just a redirect and shouldn't be included in the search results
+          if (key === 'settingsCluster') {
+            return false;
+          }
           return clusterRoute ? selectedClusters.length > 0 : true;
         })
         .map(([name, route]) => ({
