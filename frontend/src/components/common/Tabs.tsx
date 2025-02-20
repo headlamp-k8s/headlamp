@@ -11,15 +11,18 @@ export interface Tab {
   component: ReactNode;
 }
 
+/**
+ * Props interface for the `Tabs` component.
+ */
 export interface TabsProps {
-  tabs: Tab[];
+  tabs: Tab[]; // List of tabs to display
   tabProps?: {
     [propName: string]: any;
-  };
-  defaultIndex?: number | null | boolean;
-  onTabChanged?: (tabIndex: number) => void;
-  sx?: SxProps<Theme>;
-  ariaLabel: string;
+  }; // Optional props for the MuiTabs component
+  defaultIndex?: number | null | boolean; // Default selected tab index
+  onTabChanged?: (tabIndex: number) => void; // Callback for tab change
+  sx?: SxProps<Theme>; // Optional styles
+  ariaLabel: string; // Accessibility label for the Tabs component
 }
 
 export default function Tabs(props: TabsProps) {
