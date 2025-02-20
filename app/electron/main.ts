@@ -83,6 +83,16 @@ const args = yargs(hideBin(process.argv))
       describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
       type: 'boolean',
     },
+    'disable-plugins': {
+      describe: 'Disable specific plugins or all plugins if no argument is provided',
+      type: 'string',
+      coerce: arg => {
+        if (arg === undefined) {
+          return 'all';
+        }
+        return arg.split(',');
+      },
+    },
   })
   .positional('kubeconfig', {
     describe:
@@ -550,6 +560,12 @@ async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNul
   const proxyUrls = !!buildManifest && buildManifest['proxy-urls'];
   if (!!proxyUrls && proxyUrls.length > 0) {
     serverArgs = serverArgs.concat(['--proxy-urls', proxyUrls.join(',')]);
+  }
+  const disablePluginsFlag = args['disable-plugins'];
+  if (disablePluginsFlag.length === 0) {
+    serverArgs.push('--disable-plugins');
+  } else {
+    serverArgs = serverArgs.concat(['--disable-plugins', disablePluginsFlag.join(',')]);
   }
 
   const bundledPlugins = path.join(process.resourcesPath, '.plugins');
