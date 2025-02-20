@@ -534,6 +534,9 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	// Configuration
 	r.HandleFunc("/config", config.getConfig).Methods("GET")
 
+	// Websocket connections
+	r.HandleFunc("/wsMultiplexer", config.multiplexer.HandleClientWebSocket)
+
 	config.addClusterSetupRoute(r)
 
 	oauthRequestMap := make(map[string]*OauthConfig)
@@ -1663,14 +1666,8 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 	// Delete a cluster
 	r.HandleFunc("/cluster/{name}", c.deleteCluster).Methods("DELETE")
 
-	// Websocket connections
-	// r.HandleFunc("/wsMutliplexer", c.multiplexer.HandleClientWebSocket)
-
 	// Rename a cluster
 	r.HandleFunc("/cluster/{name}", c.renameCluster).Methods("PUT")
-
-	// Websocket connections
-	r.HandleFunc("/wsMultiplexer", c.multiplexer.HandleClientWebSocket)
 }
 
 /*
