@@ -32,3 +32,5 @@ export const useMockListQuery = {
       },
     })) as any as typeof KubeObject.useList,
 };
+
+export const getTestDate = () => new Date('2024-02-15');
