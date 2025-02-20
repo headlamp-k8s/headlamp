@@ -119,6 +119,13 @@ export class HeadlampPage {
     expect(rowsDisplayed1).not.toBe(rowsDisplayed2);
   }
 
+  async checkPluginTitle(pluginName: string) {
+    await this.page.waitForLoadState('load');
+    await this.page.waitForSelector(`h2:has-text("${pluginName}")`);
+
+    expect(await this.page.locator('h2').textContent()).toBe(pluginName);
+  }
+
   async getRowsDisplayed() {
     const paginationCaption = this.page.locator("span:has-text(' of ')");
     const captionText = await paginationCaption.textContent();
