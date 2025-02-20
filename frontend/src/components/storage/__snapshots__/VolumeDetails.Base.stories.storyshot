@@ -228,18 +228,14 @@
                   <dd
                     class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 css-1xrovmc-MuiGrid-root"
                   >
-                    <span
+                    <a
                       aria-label="default"
-                      class=""
+                      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                       data-mui-internal-clone-element="true"
+                      href="/"
                     >
-                      <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                        href="/"
-                      >
-                        default
-                      </a>
-                    </span>
+                      default
+                    </a>
                   </dd>
                 </dl>
               </div>

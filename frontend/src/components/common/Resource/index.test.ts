@@ -17,6 +17,7 @@ const checkExports = [
   'CreateButton',
   'DeleteButton',
   'DeleteMultipleButton',
+  'DetailsDrawer',
   'DocsViewer',
   'EditButton',
   'EditorDialog',
