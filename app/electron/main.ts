@@ -30,11 +30,18 @@ import windowSize from './windowSize';
 
 dotenv.config({ path: path.join(process.resourcesPath, '.env') });
 
+let electronStartURL = process.env.ELECTRON_START_URL;
+
 const pathInfoDebug = false;
 let pathInfo;
 
 const isDev = process.env.ELECTRON_DEV || false;
 let frontendPath = '';
+
+const isClusterDev = process.env.CLUSTER_DEV || false;
+if (isClusterDev) {
+  electronStartURL = process.env.HEADLAMP_TEST_URL;
+}
 
 if (isDev) {
   frontendPath = path.resolve('..', 'frontend', 'build', 'index.html');
@@ -44,7 +51,7 @@ if (isDev) {
 const backendToken = randomBytes(32).toString('hex');
 
 const startUrl = (
-  process.env.ELECTRON_START_URL ||
+  electronStartURL ||
   url.format({
     pathname: frontendPath,
     protocol: 'file:',

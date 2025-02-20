@@ -1,12 +1,52 @@
 import { expect, Page } from '@playwright/test';
 
-export class NamespacesPage {
+export class HeadlampAppPage {
   constructor(private page: Page) {}
 
+  // TESTS FOR NAVIGATION FOR FRONTEND ONLY
+  async navHomepage() {
+    // await this.page.goto(`${process.env.HEADLAMP_TEST_URL}`);
+    // await this.page.goto(`${process.env.HEADLAMP_TEST_URL}`);
+    await expect(this.page.getByRole('button', { name: 'Home' })).toBeVisible();
+    await this.page.getByRole('button', { name: 'Home' }).click();
+  }
+
+  async navNotifactions() {
+    // await this.page.goto(`${process.env.HEADLAMP_TEST_URL}`);
+    await expect(this.page.getByRole('button', { name: 'Notifications' })).toBeVisible();
+    await this.page.getByRole('button', { name: 'Notifications' }).click();
+    await expect(this.page.getByRole('heading', { name: 'Notifications' })).toBeVisible();
+  }
+
+  // TEST FOR IN CLUSTER
+
+  async authenticate() {
+    // this may need to be the url from the -n headlamp command
+    // - launch headlamp addon
+    // - get the url
+    // - paste the url into this page.goto
+    // await this.page.goto(`${process.env.HEADLAMP_TEST_URL}`);
+    await this.page.waitForSelector('h1:has-text("Authentication")');
+
+    // Expects the URL to contain c/main/token
+    this.hasURLContaining(/.*token/);
+
+    const token = process.env.HEADLAMP_TOKEN || '';
+    this.hasToken(token);
+
+    // Fill in the token
+    await this.page.locator('#token').fill(token);
+
+    // Click on the "Authenticate" button and wait for navigation
+    await Promise.all([
+      this.page.waitForNavigation(),
+      this.page.click('button:has-text("Authenticate")'),
+    ]);
+  }
+
+  // DEMO CREATE DELETE
   async navigateToNamespaces() {
-    await this.page.waitForLoadState('load');
-    await this.page.waitForSelector('span:has-text("Cluster")');
-    await this.page.getByText('Cluster', { exact: true }).click();
+    await this.page.getByRole('link', { name: 'minikube' }).click();
     await this.page.waitForSelector('span:has-text("Namespaces")');
     await this.page.click('span:has-text("Namespaces")');
     await this.page.waitForLoadState('load');
@@ -31,12 +71,16 @@ export class NamespacesPage {
     if (pageContent.includes(name)) {
       throw new Error(`Test failed: Namespace "${name}" already exists.`);
     }
+    // await expect(page.getByRole('button', { name: 'Create' })).toBeVisible();
 
+    // THIS IS THE NAME INPUT CREATE BUTTON
+    // await page.getByLabel('Create', { exact: true }).click();
+
+    // THIS IS THE SIDE BUTTON CREATE
     await page.getByText('Create', { exact: true }).click();
 
     await page.waitForLoadState('load');
-
-    // this is a workaround for the checked input not having any unique identifier
+    // may not work, this is a work around for the input button as there is no linked attribute
     const checkedSpan = await page.$('span.Mui-checked');
 
     if (!checkedSpan) {
@@ -83,5 +127,17 @@ export class NamespacesPage {
     await page.waitForSelector('td:has-text("Terminating")');
 
     await expect(page.locator(`a:has-text("${name}")`)).toBeHidden();
+  }
+
+  async hasURLContaining(pattern: RegExp) {
+    await expect(this.page).toHaveURL(pattern);
+  }
+
+  async hasTitleContaining(pattern: RegExp) {
+    await expect(this.page).toHaveTitle(pattern);
+  }
+
+  async hasToken(token: string) {
+    expect(token).not.toBe('');
   }
 }
