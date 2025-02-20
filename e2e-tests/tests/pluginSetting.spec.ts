@@ -21,11 +21,12 @@ test('plugin settings page should have a table', async () => {
   await headlampPage.tableHasHeaders('table', expectedHeaders);
 });
 
-test('pod counter plugin should have setting option', async () => {
+test('pod counter plugin should have setting option', async ({ page }) => {
+  const headlampPage = new HeadlampPage(page);
   const pluginName = 'headlamp-pod-counter';
 
   await headlampPage.navigateTopage('/settings/plugins', /Plugin/);
   await headlampPage.clickOnPlugin(pluginName);
-  await headlampPage.hasTitleContaining(/Plugin Details/);
+  await headlampPage.checkPluginTitle(pluginName);
   await headlampPage.checkPageContent('Custom Error Message');
 });
