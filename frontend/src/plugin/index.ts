@@ -134,7 +134,8 @@ export function filterSources(
   sources: string[],
   packageInfos: PluginInfo[],
   appMode: boolean,
-  settingsPackages?: PluginInfo[]
+  settingsPackages?: PluginInfo[],
+  disableCompatibilityCheck?: boolean
 ) {
   const incompatiblePlugins: Record<string, PluginInfo> = {};
 
@@ -162,8 +163,10 @@ export function filterSources(
     return enabledInSettings;
   });
 
+  const checkAllVersion = disableCompatibilityCheck;
+
   const compatible = enabledSourcesAndPackageInfos.filter(({ packageInfo }) => {
-    const isCompatible = checkCompatibleVersion(packageInfo);
+    const isCompatible = checkCompatibleVersion(packageInfo, checkAllVersion);
 
     if (!isCompatible) {
       incompatiblePlugins[packageInfo.name] = packageInfo;

@@ -13,11 +13,12 @@ import { backendFetch } from './fetch';
  *     Can be set to a semver range, e.g. '>= 0.6.0' or '0.6.0 - 0.7.0'.
  *     If set to an empty string, all plugin versions will be loaded.
  */
-export function checkCompatibleVersion(packageInfo: PluginInfo) {
+export function checkCompatibleVersion(packageInfo: PluginInfo, checkAllVersions: boolean = false) {
   /*
    * this is the compatible version of the plugin with the headlamp version
    */
-  const compatibleVersion = '>=0.8.0-alpha.3';
+  const compatibleVersion = !checkAllVersions ? '>=0.8.0-alpha.3' : '';
+
   // Can set this to a semver version range like '>=0.8.0-alpha.3'.
   // '' means all versions.
   const isCompatible = semver.satisfies(
