@@ -1,9 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { renderHook } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import App from '../../App';
 import reducers from '../../redux/reducers/reducers';
+import { TestContext } from '../../test';
 import { DefaultSidebars, SidebarEntry } from './sidebarSlice';
 import { useSidebarItems } from './useSidebarItems';
+
+// Fix for a circular dependency issue
+// App import will load the whole app dependency tree
+// And assigning it to a value will make sure it's not tree-shaken and removed
+// eslint-disable-next-line no-unused-vars
+const DontDeleteMe = App;
 
 describe('useSidebarItems', () => {
   const mockStore = (
@@ -26,7 +34,11 @@ describe('useSidebarItems', () => {
   const wrapper =
     (store: any) =>
     ({ children }: any) =>
-      <Provider store={store}>{children}</Provider>;
+      (
+        <TestContext>
+          <Provider store={store}>{children}</Provider>
+        </TestContext>
+      );
 
   it('should include customSidebarEntries', () => {
     const customEntries = {

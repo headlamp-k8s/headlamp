@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
+import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
-import { getCluster } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { DefaultSidebars, SidebarEntry, SidebarItemProps } from '.';
 
@@ -12,6 +12,7 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
   const customSidebarEntries = useTypedSelector(state => state.sidebar.entries);
   const customSidebarFilters = useTypedSelector(state => state.sidebar.filters);
   const shouldShowHomeItem = helpers.isElectron() || Object.keys(clusters).length !== 1;
+  const cluster = useCluster();
   const { t } = useTranslation();
 
   const sidebars = useMemo(() => {
@@ -67,7 +68,7 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
       {
         name: 'cluster',
         label: t('glossary|Cluster'),
-        subtitle: getCluster() || undefined,
+        subtitle: cluster || undefined,
         icon: 'mdi:hexagon-multiple-outline',
         subList: [
           {
@@ -339,7 +340,7 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
     }
 
     return sidebars;
-  }, [customSidebarEntries, shouldShowHomeItem, Object.keys(clusters).join(',')]);
+  }, [customSidebarEntries, shouldShowHomeItem, Object.keys(clusters).join(','), cluster]);
 
   return sidebars[sidebarName === '' ? DefaultSidebars.IN_CLUSTER : sidebarName] ?? [];
 };
