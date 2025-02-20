@@ -45,6 +45,7 @@ type Context struct {
 	proxy       *httputil.ReverseProxy `json:"-"`
 	Internal    bool                   `json:"internal"`
 	Error       string                 `json:"error"`
+	Extensions  map[string]interface{} `json:"extensions"`
 }
 
 type OidcConfig struct {
@@ -59,6 +60,10 @@ type CustomObject struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
 	CustomName string `json:"customName"`
+	// originalName is the name the cluster was created with.
+	OriginalName string `json:"originalName"`
+	// sourcePath is the path to the source file.
+	SourcePath string `json:"sourcePath"`
 }
 
 // DeepCopyObject returns a copy of the CustomObject.

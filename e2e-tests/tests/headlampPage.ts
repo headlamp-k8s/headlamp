@@ -8,7 +8,9 @@ export class HeadlampPage {
     // Go to the authentication page
     const url = process.env.HEADLAMP_TEST_URL;
     await this.page.goto(url || '/');
-    await this.page.waitForSelector('h1:has-text("Authentication")');
+
+    // experimental: this line may not be needed as the previous line directs the either the home page or the authentication page, this may fail is already authenticated
+    // await this.page.waitForSelector('h1:has-text("Authentication")');
 
     // Check to see if already authenticated
     if (await this.page.isVisible('button:has-text("Authenticate")')) {
