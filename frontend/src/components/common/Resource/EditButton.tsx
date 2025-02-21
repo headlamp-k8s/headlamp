@@ -87,7 +87,7 @@ export default function EditButton(props: EditButtonProps) {
   }
 
   if (isReadOnly) {
-    return <ViewButton item={item} />;
+    return <ViewButton item={item} buttonStyle={buttonStyle} />;
   }
 
   return (
