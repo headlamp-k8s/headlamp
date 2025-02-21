@@ -95,4 +95,4 @@ USER headlamp
 EXPOSE 4466
 
 ENV HEADLAMP_STATIC_PLUGINS_DIR=/headlamp/static-plugins
-ENTRYPOINT ["/headlamp/headlamp-server", "-html-static-dir", "/headlamp/frontend", "-plugins-dir", "/headlamp/plugins"]
+ENTRYPOINT ["/headlamp/headlamp-server", "-html-static-dir", "/headlamp/frontend", "-plugins-dir", "/headlamp/plugins", "-watch-plugins-changes", "false"]
