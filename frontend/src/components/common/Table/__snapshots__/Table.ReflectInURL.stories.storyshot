@@ -152,7 +152,7 @@
           >
             <th
               aria-sort="none"
-              class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jfskpc-MuiTableCell-root"
+              class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-bof02n-MuiTableCell-root"
               colspan="1"
               data-can-sort="true"
               data-index="-1"
@@ -207,7 +207,7 @@
             </th>
             <th
               aria-sort="none"
-              class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1v86lpm-MuiTableCell-root"
+              class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ob5joe-MuiTableCell-root"
               colspan="1"
               data-can-sort="true"
               data-index="-1"
@@ -262,7 +262,7 @@
             </th>
             <th
               aria-sort="none"
-              class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-to7gi-MuiTableCell-root"
+              class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-fju1or-MuiTableCell-root"
               colspan="1"
               data-can-sort="true"
               data-index="-1"

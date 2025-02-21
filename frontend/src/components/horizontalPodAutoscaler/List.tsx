@@ -73,16 +73,19 @@ export default function HpaList() {
         {
           id: 'minReplicas',
           label: t('translation|MinReplicas'),
+          gridTemplate: 'min-content',
           getValue: item => item.spec.minReplicas,
         },
         {
           id: 'maxReplicas',
           label: t('translation|MaxReplicas'),
+          gridTemplate: 'min-content',
           getValue: item => item.spec.maxReplicas,
         },
         {
           id: 'currentReplicas',
           label: t('glossary|Replicas'),
+          gridTemplate: 'min-content',
           getValue: item => item.status.currentReplicas,
         },
         'age',

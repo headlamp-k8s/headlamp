@@ -14,6 +14,7 @@ export default function MutatingWebhookConfigurationList() {
         {
           id: 'webhooks',
           label: t('Webhooks'),
+          gridTemplate: 'min-content',
           getValue: mutatingWebhookConfig => mutatingWebhookConfig.webhooks?.length || 0,
         },
         'age',
