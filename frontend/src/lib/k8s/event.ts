@@ -165,7 +165,9 @@ class Event extends KubeObject<KubeEvent> {
         kind: this.involvedObject.kind,
         metadata: {
           name: this.involvedObject.name,
-          namespace: this.involvedObject.namespace,
+          namespace: InvolvedObjectClass.isNamespaced
+            ? this.involvedObject.namespace ?? this.getNamespace()
+            : undefined,
         } as KubeMetadata,
       });
     }
