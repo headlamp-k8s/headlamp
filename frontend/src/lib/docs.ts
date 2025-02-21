@@ -6,11 +6,15 @@ import Swagger from '@apidevtools/swagger-parser';
 import { OpenAPIV2 } from 'openapi-types';
 import { request } from './k8s/apiProxy';
 
-let docsPromise: ReturnType<typeof getDocs>;
+let docsPromise: ReturnType<typeof getDocs> | null = null;
 
 async function getDocs() {
   const docs = await request('/openapi/v2');
   return Swagger.dereference(docs);
+}
+
+export function resetDocsPromise() {
+  docsPromise = null;
 }
 
 export default async function getDocDefinitions(apiVersion: string, kind: string) {
@@ -18,19 +22,25 @@ export default async function getDocDefinitions(apiVersion: string, kind: string
     docsPromise = getDocs(); // Don't wait here. Just kick off the request
   }
 
-  const { definitions = {} } = (await docsPromise) as OpenAPIV2.Document;
+  try {
+    const { definitions = {} } = (await docsPromise) as OpenAPIV2.Document;
 
-  let [group, version] = apiVersion.split('/');
-  if (!version) {
-    version = group;
-    group = '';
-  }
+    let [group, version] = apiVersion.split('/');
+    if (!version) {
+      version = group;
+      group = '';
+    }
 
-  return Object.values(definitions)
-    .filter(x => !!x['x-kubernetes-group-version-kind'])
-    .find(x => x['x-kubernetes-group-version-kind'].some(comparer));
+    return Object.values(definitions)
+      .filter(x => !!x['x-kubernetes-group-version-kind'])
+      .find(x => x['x-kubernetes-group-version-kind'].some(comparer));
 
-  function comparer(info: OpenAPIV2.SchemaObject) {
-    return info.group === group && info.version === version && info.kind === kind;
+    function comparer(info: OpenAPIV2.SchemaObject) {
+      return info.group === group && info.version === version && info.kind === kind;
+    }
+  } catch (error) {
+    // Reset docsPromise on error so subsequent requests can try again
+    resetDocsPromise();
+    throw error;
   }
 }
