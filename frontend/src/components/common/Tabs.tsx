@@ -15,14 +15,38 @@ export interface Tab {
  * Props interface for the `Tabs` component.
  */
 export interface TabsProps {
-  tabs: Tab[]; // List of tabs to display
+  /**
+   * List of tabs to display.
+   */
+  tabs: Tab[];
+
+  /**
+   * Optional props for the MuiTabs component.
+   */
   tabProps?: {
     [propName: string]: any;
-  }; // Optional props for the MuiTabs component
-  defaultIndex?: number | null | boolean; // Default selected tab index
-  onTabChanged?: (tabIndex: number) => void; // Callback for tab change
-  sx?: SxProps<Theme>; // Optional styles
-  ariaLabel: string; // Accessibility label for the Tabs component
+  };
+
+  /**
+   * Default selected tab index.
+   */
+  defaultIndex?: number | null | boolean;
+
+  /**
+   * Callback for tab change.
+   * @param tabIndex - The index of the selected tab.
+   */
+  onTabChanged?: (tabIndex: number) => void;
+
+  /**
+   * Optional styles.
+   */
+  sx?: SxProps<Theme>;
+
+  /**
+   * Accessibility label for the Tabs component.
+   */
+  ariaLabel: string;
 }
 
 export default function Tabs(props: TabsProps) {
