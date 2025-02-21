@@ -13,7 +13,7 @@ import { has } from 'lodash';
 import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import helpers from '../../helpers';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
@@ -71,6 +71,10 @@ export default function TopBar({}: TopBarProps) {
   const history = useHistory();
   const { appBarActions, appBarActionsProcessors } = useAppBarActionsProcessed();
 
+  // getToken may return stale value so we need to rerender on navigation
+  // TODO: create a useToken hook that always returns latest token
+  // eslint-disable-next-line no-unused-vars
+  const _location = useLocation();
   function hasToken() {
     return !!cluster ? !!getToken(cluster) : false;
   }
