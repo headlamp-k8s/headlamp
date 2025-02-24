@@ -970,18 +970,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
@@ -1117,18 +1113,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
@@ -1262,18 +1254,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
@@ -1407,18 +1395,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
@@ -1552,18 +1536,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
@@ -1697,18 +1677,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
@@ -1842,18 +1818,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
@@ -1987,18 +1959,14 @@
               <td
                 class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1sa0g84-MuiTableCell-root"
               >
-                <span
+                <a
                   aria-label="my-node"
-                  class=""
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   data-mui-internal-clone-element="true"
+                  href="/"
                 >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-node
-                  </a>
-                </span>
+                  my-node
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"

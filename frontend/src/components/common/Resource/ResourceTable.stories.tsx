@@ -1,14 +1,29 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, StoryFn } from '@storybook/react';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+import { createStore } from 'redux';
 import { useMockListQuery } from '../../../helpers/testHelpers';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
+import reducers from '../../../redux/reducers/reducers';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
 import { TestContext } from '../../../test';
 import ResourceTable, { ResourceTableFromResourceClassProps } from './ResourceTable';
 
+const store = createStore(reducers);
+
 export default {
   title: 'ResourceTable',
   component: ResourceTable,
+  decorators: [
+    Story => (
+      <Provider store={store}>
+        <MemoryRouter>
+          <Story />
+        </MemoryRouter>
+      </Provider>
+    ),
+  ],
   argTypes: {},
 } as Meta;
 
@@ -25,6 +40,7 @@ const TemplateWithFilter: StoryFn<{
         filter: { namespaces: new Set<string>(), search: '' },
         config: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
         ui: UI_INITIAL_STATE,
+        drawerMode: { isDetailDrawerEnabled: false },
       }
     ) => state,
     preloadedState: {
@@ -41,6 +57,7 @@ const TemplateWithFilter: StoryFn<{
       resourceTable: {
         tableColumnsProcessors: [],
       },
+      drawerMode: { isDetailDrawerEnabled: false },
     },
   });
 

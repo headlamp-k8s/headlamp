@@ -6,6 +6,7 @@ import pluginsReducer from '../../plugin/pluginsSlice';
 import actionButtons from '../actionButtonsSlice';
 import clusterAction from '../clusterActionSlice';
 import configReducer from '../configSlice';
+import drawerModeSlice from '../drawerModeSlice';
 import filterReducer from '../filterSlice';
 import eventCallbackReducer from '../headlampEventSlice';
 import overviewChartsReducer from '../overviewChartsSlice';
@@ -33,6 +34,7 @@ const reducers = combineReducers({
   eventCallbackReducer,
   pluginConfigs: pluginConfigReducer,
   overviewCharts: overviewChartsReducer,
+  drawerMode: drawerModeSlice,
 });
 
 export type RootState = ReturnType<typeof reducers>;
