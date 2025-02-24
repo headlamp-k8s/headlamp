@@ -1174,6 +1174,11 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 			continue
 		}
 
+		kubeconfigPath, err := c.getKubeConfigPath(context.SourceStr())
+		if err != nil {
+			logger.Log(logger.LevelError, nil, err, "getting kubeconfig path")
+		}
+
 		clusters = append(clusters, Cluster{
 			Name:     context.Name,
 			Server:   context.Cluster.Server,
@@ -1182,6 +1187,10 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 				"source":     context.SourceStr(),
 				"namespace":  context.KubeContext.Namespace,
 				"extensions": context.KubeContext.Extensions,
+				"origin": map[string]interface{}{
+					"kubeconfig": kubeconfigPath,
+				},
+				"originalName": context.Name,
 			},
 		})
 	}
