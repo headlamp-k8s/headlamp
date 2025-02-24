@@ -601,7 +601,7 @@
                       mycustomresource
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-1icg04k-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
                     >
                       <p
                         aria-label="2021-12-15T14:57:13.000Z"
@@ -698,7 +698,7 @@
                       myotherresource
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-1icg04k-MuiTableCell-root"
+                      class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
                     >
                       <p
                         aria-label="2021-12-15T14:57:13.000Z"

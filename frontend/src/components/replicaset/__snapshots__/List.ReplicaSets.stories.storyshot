@@ -943,7 +943,7 @@ pod-template-hash=b123456
                   </span>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-1icg04k-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
                 >
                   <p
                     aria-label="2023-07-07T05:36:02.000Z"
@@ -1085,7 +1085,7 @@ pod-template-hash=a123456
                   </span>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-1icg04k-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
                 >
                   <p
                     aria-label="2023-05-25T05:15:05.000Z"

@@ -464,6 +464,7 @@ const Row = memo(
 
 const MemoCell = memo(
   ({ cell, table }: { cell: MRT_Cell<any, unknown>; table: any; isRowSelected: boolean }) => {
+    const column = cell.column.columnDef as TableColumn<any, unknown>;
     return (
       <MRT_TableBodyCell
         staticRowIndex={-1}
@@ -474,8 +475,8 @@ const MemoCell = memo(
           whiteSpace: 'normal',
           width: 'unset',
           minWidth: 'unset',
-          wordBreak: 'break-word',
-          ...(cell.column.columnDef.muiTableBodyCellProps as TableCellProps)?.sx,
+          wordBreak: column.gridTemplate === 'min-content' ? 'normal' : 'break-word',
+          ...(column.muiTableBodyCellProps as TableCellProps)?.sx,
         }}
       />
     );
