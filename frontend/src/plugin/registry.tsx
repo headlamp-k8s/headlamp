@@ -17,6 +17,8 @@ import {
   DetailsViewsSectionProcessor,
   setDetailsViewSection,
 } from '../components/DetailsViewSection/detailsViewSectionSlice';
+import { GraphSource } from '../components/resourceMap/graph/graphModel';
+import { graphViewSlice, IconDefinition } from '../components/resourceMap/graphViewSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
 import { setSidebarItem, setSidebarItemFilter } from '../components/Sidebar/sidebarSlice';
 import { getHeadlampAPIHeaders } from '../helpers';
@@ -98,6 +100,8 @@ export type {
   EventListEvent,
   PluginSettingsDetailsProps,
   PluginSettingsComponentType,
+  GraphSource,
+  IconDefinition,
   OverviewChartsProcessor,
 };
 export const DefaultHeadlampEvents = HeadlampEventType;
@@ -709,6 +713,49 @@ export function registerPluginSettings(
  */
 export function registerOverviewChartsProcessor(processor: OverviewChartsProcessor) {
   store.dispatch(addOverviewChartsProcessor(processor));
+}
+
+/**
+ * Registers a new graph source in the store.
+ *
+ * @param {GraphSource} source - The graph source to be registered.
+ * @example
+ *
+ * ```tsx
+ * const mySource = {
+ *   id: 'my-source',
+ *   label: 'Sample source',
+ *   useData() {
+ *     return {
+ *       nodes: [{ id: 'my-node', type: 'kubeObject', data: { resource: myCustomResource } }],
+ *       edges: []
+ *     };
+ *   }
+ * }
+ *
+ * registerMapSource(mySource);
+ * ```
+ */
+export function registerMapSource(source: GraphSource) {
+  store.dispatch(graphViewSlice.actions.addGraphSource(source));
+}
+
+/**
+ * Register Icon for a resource kind
+ *
+ * @param kind - Resource kind
+ * @param {IconDefinition} definition - icon definition
+ * @param definition.icon - React Element of the icon
+ * @param definition.color - Color for the icon, optional
+ *
+ * @example
+ *
+ * ```tsx
+ * registerKindIcon("MyCustomResource", { icon: <MyIcon />, color: "#FF0000" })
+ * ```
+ */
+export function registerKindIcon(kind: string, definition: IconDefinition) {
+  store.dispatch(graphViewSlice.actions.addKindIcon({ kind, definition }));
 }
 
 export {
