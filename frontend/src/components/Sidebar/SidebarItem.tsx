@@ -4,8 +4,9 @@ import ListItem, { ListItemProps } from '@mui/material/ListItem';
 import { useTheme } from '@mui/system';
 import React, { memo } from 'react';
 import { generatePath } from 'react-router';
+import { useCluster } from '../../lib/k8s';
 import { createRouteURL, getRoute } from '../../lib/router';
-import { getCluster, getClusterPrefixedPath } from '../../lib/util';
+import { getClusterPrefixedPath } from '../../lib/util';
 import ListItemLink from './ListItemLink';
 import { SidebarEntry } from './sidebarSlice';
 
@@ -45,12 +46,13 @@ const SidebarItem = memo((props: SidebarItemProps) => {
   } = props;
   const hasSubtitle = !!subtitle;
   const theme = useTheme();
+  const cluster = useCluster();
 
   // const classes = useItemStyle({ fullWidth, hasSubtitle: !!subtitle });
 
   let fullURL = url;
-  if (fullURL && useClusterURL && getCluster()) {
-    fullURL = generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! });
+  if (fullURL && useClusterURL && cluster) {
+    fullURL = generatePath(getClusterPrefixedPath(url), { cluster });
   }
 
   if (!fullURL) {

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useMemo } from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
+import { matchPath, useHistory } from 'react-router-dom';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { getCluster, getClusterGroup, getClusterPrefixedPath } from '../util';
@@ -106,15 +106,13 @@ export function useClustersConf(): ConfigState['allClusters'] {
 }
 
 export function useCluster() {
-  // Make sure we update when changing clusters.
-  // @todo: We need a better way to do this.
-  const location = useLocation();
+  const history = useHistory();
 
   // This function is similar to the getCluster() but uses the location
   // meaning it will return the URL from whatever the router used it (which
   // is more accurate than getting it from window.location like the former).
   function getClusterFromLocation(): string | null {
-    const urlPath = location?.pathname;
+    const urlPath = history.location?.pathname;
     const clusterURLMatch = matchPath<{ cluster?: string }>(urlPath, {
       path: getClusterPrefixedPath(),
     });
@@ -124,11 +122,13 @@ export function useCluster() {
   const [cluster, setCluster] = React.useState<string | null>(getClusterFromLocation());
 
   React.useEffect(() => {
-    const currentCluster = getClusterFromLocation();
-    if (cluster !== currentCluster) {
-      setCluster(currentCluster);
-    }
-  }, [cluster, location]);
+    // Listen to route changes
+    return history.listen(() => {
+      const newCluster = getClusterFromLocation();
+      // Update the state only when the cluster changes
+      setCluster(currentCluster => (newCluster !== currentCluster ? newCluster : currentCluster));
+    });
+  }, [history]);
 
   return cluster;
 }
