@@ -836,12 +836,12 @@
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1jzgucv-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-11bde8u-MuiTableCell-root"
                 >
                   0/1
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ce2yy2-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ugiodz-MuiTableCell-root"
                 >
                   1
                 </td>
@@ -884,7 +884,7 @@
                   </span>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-1icg04k-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
                 >
                   <p
                     aria-label="2025-02-03T09:00:00.000Z"
@@ -976,12 +976,12 @@
                   </a>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1jzgucv-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-11bde8u-MuiTableCell-root"
                 >
                   2/2
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ce2yy2-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ugiodz-MuiTableCell-root"
                 >
                   2
                 </td>
@@ -1024,7 +1024,7 @@
                   </span>
                 </td>
                 <td
-                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-1icg04k-MuiTableCell-root"
+                  class="MuiTableCell-root MuiTableCell-alignRight MuiTableCell-sizeMedium css-f23cwk-MuiTableCell-root"
                 >
                   <p
                     aria-label="2025-02-01T10:00:00.000Z"
