@@ -45,6 +45,7 @@ type Context struct {
 	proxy       *httputil.ReverseProxy `json:"-"`
 	Internal    bool                   `json:"internal"`
 	Error       string                 `json:"error"`
+	Extensions  map[string]interface{} `json:"extensions"`
 }
 
 type OidcConfig struct {
