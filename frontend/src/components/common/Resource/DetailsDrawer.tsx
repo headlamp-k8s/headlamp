@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
+import helpers from '../../../helpers';
 import { setSelectedResource } from '../../../redux/drawerModeSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { KubeObjectDetails } from '../../resourceMap/details/KubeNodeDetails';
@@ -18,6 +19,8 @@ export default function DetailsDrawer() {
   const isDetailDrawerEnabled = useTypedSelector(state => state.drawerMode.isDetailDrawerEnabled);
 
   function handleCloseDrawerReset() {
+    if (helpers.isElectron()) return;
+
     const currentPlacement = location.pathname;
     const pathname = currentPlacement;
 
