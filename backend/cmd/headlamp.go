@@ -937,8 +937,6 @@ func StartHeadlampServer(config *HeadlampConfig) {
 			os.Exit(1)
 		}
 
-		defer os.RemoveAll(dir)
-
 		err = os.CopyFS(dir, os.DirFS(config.staticDir))
 		if err != nil {
 			logger.Log(logger.LevelError, nil, err, "Failed to copy files from static dir")
