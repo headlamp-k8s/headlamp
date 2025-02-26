@@ -7,17 +7,18 @@
  *
  * Author: Joaquim Rocha <joaquim.rocha@microsoft.com>
  */
-const crypto = require('crypto');
-const fs = require('fs');
-const octokit = require('octokit');
-const mime = require('mime-types');
-const path = require('path');
-const process = require('process');
-const yargs = require('yargs');
+import crypto from 'crypto';
+import fs from 'fs';
+import { Octokit } from 'octokit';
+import mime from 'mime-types';
+import path from 'path';
+import process from 'process';
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 
 const owner = 'headlamp-k8s';
 const repo = 'headlamp';
-const client = new octokit.Octokit({ auth: process.env.GITHUB_TOKEN });
+const client = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 const args = yargs
   .command('$0 <release-name> <asset1> [asset2...]', '', yargs => {
