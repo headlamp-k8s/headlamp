@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
@@ -931,7 +930,7 @@ func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Hand
 func StartHeadlampServer(config *HeadlampConfig) {
 	// Copy static files as squashFS is read-only (AppImage)
 	if config.staticDir != "" {
-		dir, err := ioutil.TempDir(os.TempDir(), ".headlamp")
+		dir, err := os.MkdirTemp(os.TempDir(), ".headlamp")
 		if err != nil {
 			logger.Log(logger.LevelError, nil, err, "Failed to create static dir")
 			os.Exit(1)
