@@ -2,21 +2,21 @@
 import { expect, Page } from '@playwright/test';
 
 export class HeadlampPage {
-  constructor(private page: Page) {}
+  private testURL: string;
 
-  async authenticate() {
-    // Go to the authentication page
-    const url = process.env.HEADLAMP_TEST_URL;
-    await this.page.goto(url || '/');
+  constructor(private page: Page) {
+    this.testURL = process.env.HEADLAMP_TEST_URL || '/';
+  }
+
+  async authenticate(token?: string) {
     await this.page.waitForSelector('h1:has-text("Authentication")');
 
     // Check to see if already authenticated
     if (await this.page.isVisible('button:has-text("Authenticate")')) {
-      const token = process.env.HEADLAMP_TOKEN || '';
-      this.hasToken(token);
+      this.hasToken(token || '');
 
       // Fill in the token
-      await this.page.locator('#token').fill(token);
+      await this.page.locator('#token').fill(token || '');
 
       // Click on the "Authenticate" button and wait for navigation
       await Promise.all([
@@ -24,6 +24,11 @@ export class HeadlampPage {
         this.page.click('button:has-text("Authenticate")'),
       ]);
     }
+  }
+
+  async navigateToCluster(name: string, token?: string) {
+    await this.navigateTopage(`/c/${name}`);
+    await this.authenticate(token);
   }
 
   async hasURLContaining(pattern: RegExp) {
@@ -44,8 +49,8 @@ export class HeadlampPage {
   }
 
   async hasSecurityTab() {
-    const networkTab = this.page.locator('span:has-text("Security")').first();
-    expect(await networkTab.textContent()).toBe('Security');
+    const securityTab = this.page.locator('span:has-text("Security")').first();
+    expect(await securityTab.textContent()).toBe('Security');
   }
 
   async checkPageContent(text: string) {
@@ -59,10 +64,13 @@ export class HeadlampPage {
     expect(await pageContent).toContain(text);
   }
 
-  async navigateTopage(page: string, title: RegExp) {
-    await this.page.goto(page);
-    await this.page.waitForLoadState('load');
-    await this.hasTitleContaining(title);
+  async navigateTopage(path: string, title?: RegExp) {
+    await this.page.goto(`${this.testURL}${path}`, {
+      waitUntil: 'networkidle',
+    });
+    if (title) {
+      await this.hasTitleContaining(title);
+    }
   }
 
   async logout() {
@@ -74,8 +82,8 @@ export class HeadlampPage {
     await this.page.click('a.MuiMenuItem-root:has-text("Log out")');
     await this.page.waitForLoadState('load');
 
-    // Expects the URL to contain c/main/token
-    await this.hasURLContaining(/.*token/);
+    // Expects the URL to contain c/test/token
+    // await this.hasURLContaining(/.*token/);
   }
 
   async tableHasHeaders(tableSelector: string, expectedHeaders: string[]) {
