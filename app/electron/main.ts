@@ -543,7 +543,7 @@ async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNul
     ? path.resolve('../backend/headlamp-server')
     : path.join(process.resourcesPath, './headlamp-server');
 
-  let serverArgs: string[] = [];
+  let serverArgs: string[] = ['--listen-addr=localhost'];
   if (!!args.kubeconfig) {
     serverArgs = serverArgs.concat(['--kubeconfig', args.kubeconfig]);
   }

@@ -39,6 +39,7 @@ func main() {
 	StartHeadlampServer(&HeadlampConfig{
 		useInCluster:          conf.InCluster,
 		kubeConfigPath:        conf.KubeConfigPath,
+		listenAddr:            conf.ListenAddr,
 		port:                  conf.Port,
 		devMode:               conf.DevMode,
 		staticDir:             conf.StaticDir,

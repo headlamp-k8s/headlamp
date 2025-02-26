@@ -25,6 +25,7 @@ type Config struct {
 	InsecureSsl           bool   `koanf:"insecure-ssl"`
 	EnableHelm            bool   `koanf:"enable-helm"`
 	EnableDynamicClusters bool   `koanf:"enable-dynamic-clusters"`
+	ListenAddr            string `koanf:"listen-addr"`
 	Port                  uint   `koanf:"port"`
 	KubeConfigPath        string `koanf:"kubeconfig"`
 	StaticDir             string `koanf:"html-static-dir"`
@@ -39,7 +40,7 @@ type Config struct {
 
 func (c *Config) Validate() error {
 	if !c.InCluster && (c.OidcClientID != "" || c.OidcClientSecret != "" || c.OidcIdpIssuerURL != "") {
-		return errors.New(`oidc-client-id, oidc-client-secret, oidc-idp-issuer-url flags 
+		return errors.New(`oidc-client-id, oidc-client-secret, oidc-idp-issuer-url flags
 		are only meant to be used in inCluster mode`)
 	}
 
@@ -158,6 +159,7 @@ func flagset() *flag.FlagSet {
 	f.String("html-static-dir", "", "Static HTML directory to serve")
 	f.String("plugins-dir", defaultPluginDir(), "Specify the plugins directory to build the backend with")
 	f.String("base-url", "", "Base URL path. eg. /headlamp")
+	f.String("listen-addr", "", "Address to listen on; default is empty, which means listening to any address")
 	f.Uint("port", defaultPort, "Port to listen from")
 	f.String("proxy-urls", "", "Allow proxy requests to specified URLs")
 

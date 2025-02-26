@@ -42,6 +42,7 @@ import (
 
 type HeadlampConfig struct {
 	useInCluster          bool
+	listenAddr            string
 	devMode               bool
 	insecure              bool
 	enableHelm            bool
@@ -344,6 +345,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	config.staticPluginDir = os.Getenv("HEADLAMP_STATIC_PLUGINS_DIR")
 
 	logger.Log(logger.LevelInfo, nil, nil, "Creating Headlamp handler")
+	logger.Log(logger.LevelInfo, nil, nil, "Listen address: "+fmt.Sprintf("%s:%d", config.listenAddr, config.port))
 	logger.Log(logger.LevelInfo, nil, nil, "Kubeconfig path: "+kubeConfigPath)
 	logger.Log(logger.LevelInfo, nil, nil, "Static plugin dir: "+config.staticPluginDir)
 	logger.Log(logger.LevelInfo, nil, nil, "Plugins dir: "+config.pluginDir)
@@ -932,8 +934,10 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	handler = config.OIDCTokenRefreshMiddleware(handler)
 
+	addr := fmt.Sprintf("%s:%d", config.listenAddr, config.port)
+
 	// Start server
-	err := http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler) //nolint:gosec
+	err := http.ListenAndServe(addr, handler) //nolint:gosec
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "Failed to start server")
 		os.Exit(1)
