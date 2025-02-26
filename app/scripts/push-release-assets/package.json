@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A script to push assets to a release on GitHub.",
   "main": "push-release-assets.js",
+  "type": "module",
   "scripts": {
     "start": "node push-release-assets.js"
   },
