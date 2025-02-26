@@ -105,6 +105,28 @@ describe('useSidebarItems', () => {
     `);
   });
 
+  it('should add entries to existing items', () => {
+    const customEntries = {
+      custom1: {
+        name: 'custom1',
+        label: 'Custom 1',
+        url: '/custom1',
+        parent: 'storage',
+      },
+    };
+
+    const store = mockStore(customEntries, []);
+    const { result } = renderHook(() => useSidebarItems(), {
+      wrapper: wrapper(store),
+    });
+
+    expect(
+      result.current
+        .find(it => it.name === customEntries.custom1.parent)
+        ?.subList?.find(it => it.name === customEntries.custom1.name)
+    ).toBeDefined();
+  });
+
   it('should apply customSidebarFilters', () => {
     const customEntries = {
       custom1: { name: 'custom1', label: 'Custom 1', url: '/custom1' },

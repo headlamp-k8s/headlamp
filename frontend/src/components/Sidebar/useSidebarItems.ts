@@ -5,7 +5,17 @@ import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { DefaultSidebars, SidebarEntry, SidebarItemProps } from '.';
+import { DefaultSidebars, SidebarItemProps } from '.';
+
+/** Iterates over every entry in the list, including children */
+const forEachEntry = (items: SidebarItemProps[], cb: (item: SidebarItemProps) => void) => {
+  items.forEach(it => {
+    cb(it);
+    if (it.subList) {
+      forEachEntry(it.subList, cb);
+    }
+  });
+};
 
 export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER) => {
   const clusters = useTypedSelector(state => state.config.clusters) ?? {};
@@ -282,44 +292,47 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
       },
     ];
 
-    const sidebars: Record<string, SidebarItemProps[]> = {
-      [DefaultSidebars.HOME]: homeItems,
-      [DefaultSidebars.IN_CLUSTER]: inClusterItems,
-    };
+    // List of sidebars, they act as roots for the sidebar tree
+    const sidebarsList: SidebarItemProps[] = [
+      { name: DefaultSidebars.HOME, subList: homeItems, label: '' },
+      { name: DefaultSidebars.IN_CLUSTER, subList: inClusterItems, label: '' },
+    ];
 
-    // Set of all the entries that need to be added
-    const entriesToAdd = new Set<SidebarEntry>(_.cloneDeep(Object.values(customSidebarEntries)));
+    // Create a copy of all the custom entries so we don't accidentaly mutate them
+    const customEntries = _.cloneDeep(Object.values(customSidebarEntries));
 
-    // Takes entry from the set and places it in the appropriate sidebar or a parent item
-    // Recursively looks for child items
-    const placeSidebarEntry = (entry: SidebarItemProps, parentEntry?: SidebarItemProps) => {
-      // Skip entries with parents, they're handled in a separate loop
-      if (entry.parent && !parentEntry) return;
+    // Lookup map of every sidebar entry
+    const entryLookup = new Map<string, SidebarItemProps>();
 
-      // Add entry to the sidebar or parent item
-      if (parentEntry) {
-        parentEntry.subList ??= [];
-        parentEntry.subList.push(entry);
-      } else {
-        const entrySidebarName = entry.sidebar ?? DefaultSidebars.IN_CLUSTER;
-        sidebars[entrySidebarName] ??= [];
-        sidebars[entrySidebarName].push(entry);
-      }
-      entriesToAdd.delete(entry);
+    // Put all the entries in the map
+    forEachEntry(sidebarsList, item => entryLookup.set(item.name, item));
+    forEachEntry(customEntries, item => entryLookup.set(item.name, item));
 
-      // Find and place all child entries
-      entriesToAdd.forEach(maybeChildEntry => {
-        if (maybeChildEntry.parent === entry.name) {
-          placeSidebarEntry(maybeChildEntry, entry);
+    // Place all custom entries in the tree
+    customEntries.forEach(item => {
+      if (item.parent) {
+        const parentEntry = entryLookup.get(item.parent);
+        if (!parentEntry) {
+          return;
         }
-      });
-    };
+        parentEntry.subList ??= [];
+        parentEntry?.subList?.push(item);
+      } else {
+        const sidebar = item.sidebar ?? DefaultSidebars.IN_CLUSTER;
+        let sidebarEntry = entryLookup.get(sidebar);
 
-    entriesToAdd.forEach(entry => placeSidebarEntry(entry));
+        // Create the sidebar entry if it doesn't exist
+        if (!sidebarEntry) {
+          sidebarEntry = { name: sidebar, subList: [], label: '' };
+          sidebarsList.push(sidebarEntry);
+          entryLookup.set(sidebar, sidebarEntry);
+        }
 
-    if (entriesToAdd.size > 0) {
-      console.error(`Couldn't find where to put some sidebar entries`, entriesToAdd.values());
-    }
+        sidebarEntry.subList?.push(item);
+      }
+    });
+
+    const sidebars = Object.fromEntries(sidebarsList.map(item => [item.name, item.subList]));
 
     // Filter in-cluster sidebar
     if (customSidebarFilters.length > 0) {
@@ -333,9 +346,9 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
       };
 
       customSidebarFilters.forEach(customFilter => {
-        sidebars[DefaultSidebars.IN_CLUSTER] = sidebars[DefaultSidebars.IN_CLUSTER]
-          .filter(it => customFilter(it))
-          .map(it => filterSublist(it, customFilter));
+        sidebars[DefaultSidebars.IN_CLUSTER] = sidebars[DefaultSidebars.IN_CLUSTER]!.filter(it =>
+          customFilter(it)
+        ).map(it => filterSublist(it, customFilter));
       });
     }
 
