@@ -1182,6 +1182,13 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 				"source":     context.SourceStr(),
 				"namespace":  context.KubeContext.Namespace,
 				"extensions": context.KubeContext.Extensions,
+				"origin": map[string]interface{}{
+					"kubeconfig": func() string {
+						path, _ := c.getKubeConfigPath(context.SourceStr())
+						return path
+					}(),
+				},
+				"originalName": context.Name,
 			},
 		})
 	}

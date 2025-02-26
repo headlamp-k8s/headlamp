@@ -246,7 +246,8 @@ function HomeComponent(props: HomeComponentProps) {
    */
   function getOrigin(cluster: Cluster): string {
     if (cluster.meta_data?.source === 'kubeconfig') {
-      const kubeconfigPath = process.env.KUBECONFIG ?? '~/.kube/config';
+      const sourcePath = cluster.meta_data?.origin?.kubeconfig;
+      const kubeconfigPath = process.env.KUBECONFIG ?? sourcePath;
       return `Kubeconfig: ${kubeconfigPath}`;
     } else if (cluster.meta_data?.source === 'dynamic_cluster') {
       return t('translation|Plugin');
