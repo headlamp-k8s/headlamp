@@ -99,7 +99,7 @@
                     Container
                   </label>
                   <div
-                    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+                    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
                   >
                     <div
                       aria-controls=":mock-test-id:"
@@ -148,7 +148,7 @@
                     Lines
                   </label>
                   <div
-                    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl  css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
+                    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-16kq2pe-MuiInputBase-root-MuiInput-root-MuiSelect-root"
                   >
                     <div
                       aria-controls=":mock-test-id:"
@@ -188,7 +188,7 @@
               >
                 <label
                   aria-label="You can only select this option for containers that have been restarted."
-                  class="MuiFormControlLabel-root Mui-disabled MuiFormControlLabel-labelPlacementEnd  css-xfd7qn-MuiFormControlLabel-root"
+                  class="MuiFormControlLabel-root Mui-disabled MuiFormControlLabel-labelPlacementEnd css-xfd7qn-MuiFormControlLabel-root"
                   data-mui-internal-clone-element="true"
                 >
                   <span
