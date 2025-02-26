@@ -88,6 +88,7 @@ describe('WebSocket Tests', () => {
         path,
         query,
         userId,
+        token: 'test-token',
         type: 'REQUEST',
       });
 
@@ -130,6 +131,7 @@ describe('WebSocket Tests', () => {
           path: sub.path,
           query: sub.query,
           userId,
+          token: 'test-token',
           type: 'REQUEST',
         });
 

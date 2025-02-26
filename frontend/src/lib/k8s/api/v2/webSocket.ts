@@ -50,6 +50,9 @@ interface WebSocketMessage {
    * - COMPLETE: Server indicates the watch request has completed (e.g., due to timeout or error)
    */
   type: 'REQUEST' | 'CLOSE' | 'COMPLETE';
+
+  /** Authentication token */
+  token?: string;
 }
 
 /**
@@ -210,6 +213,7 @@ export const WebSocketManager = {
       query,
       userId: userId || '',
       type: 'REQUEST',
+      token: getToken(clusterId),
     };
     socket.send(JSON.stringify(requestMsg));
 

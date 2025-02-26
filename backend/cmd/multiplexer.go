@@ -72,6 +72,8 @@ type Connection struct {
 	writeMu sync.Mutex
 	// closed is a flag to indicate if the connection is closed.
 	closed bool
+	// Authentication token.
+	Token *string
 }
 
 // Message represents a WebSocket message structure.
@@ -90,6 +92,8 @@ type Message struct {
 	Binary bool `json:"binary,omitempty"`
 	// Type is the type of the message.
 	Type string `json:"type"`
+	// Authentication token.
+	Token *string `json:"token"`
 }
 
 // Multiplexer manages multiple WebSocket connections.
@@ -246,6 +250,7 @@ func (m *Multiplexer) establishClusterConnection(
 	path,
 	query string,
 	clientConn *WSConnLock,
+	token *string,
 ) (*Connection, error) {
 	config, err := m.getClusterConfigWithFallback(clusterID, userID)
 	if err != nil {
@@ -253,7 +258,7 @@ func (m *Multiplexer) establishClusterConnection(
 		return nil, err
 	}
 
-	connection := m.createConnection(clusterID, userID, path, query, clientConn)
+	connection := m.createConnection(clusterID, userID, path, query, clientConn, token)
 
 	wsURL := createWebSocketURL(config.Host, path, query)
 
@@ -264,7 +269,7 @@ func (m *Multiplexer) establishClusterConnection(
 		return nil, fmt.Errorf("failed to get TLS config: %v", err)
 	}
 
-	conn, err := m.dialWebSocket(wsURL, tlsConfig, config.Host)
+	conn, err := m.dialWebSocket(wsURL, tlsConfig, config.Host, token)
 	if err != nil {
 		connection.updateStatus(StateError, err)
 
@@ -309,6 +314,7 @@ func (m *Multiplexer) createConnection(
 	path,
 	query string,
 	clientConn *WSConnLock,
+	token *string,
 ) *Connection {
 	return &Connection{
 		ClusterID: clusterID,
@@ -321,14 +327,27 @@ func (m *Multiplexer) createConnection(
 			State:   StateConnecting,
 			LastMsg: time.Now(),
 		},
+		Token: token,
 	}
 }
 
 // dialWebSocket establishes a WebSocket connection.
-func (m *Multiplexer) dialWebSocket(wsURL string, tlsConfig *tls.Config, host string) (*websocket.Conn, error) {
+func (m *Multiplexer) dialWebSocket(
+	wsURL string,
+	tlsConfig *tls.Config,
+	host string,
+	token *string,
+) (*websocket.Conn, error) {
 	dialer := websocket.Dialer{
 		TLSClientConfig:  tlsConfig,
 		HandshakeTimeout: HandshakeTimeout,
+	}
+
+	if token != nil {
+		dialer.Subprotocols = []string{
+			"base64.binary.k8s.io",
+			"base64url.bearer.authorization.k8s.io." + base64.RawStdEncoding.EncodeToString([]byte(*token)),
+		}
 	}
 
 	conn, resp, err := dialer.Dial(
@@ -339,6 +358,7 @@ func (m *Multiplexer) dialWebSocket(wsURL string, tlsConfig *tls.Config, host st
 	)
 	if err != nil {
 		logger.Log(logger.LevelError, nil, err, "dialing WebSocket")
+		logger.Log(logger.LevelError, nil, resp, "WebSocket response")
 		// We only attempt to close the response body if there was an error and resp is not nil.
 		// In the successful case (when err is nil), the resp will actually be nil for WebSocket connections,
 		// so we don't need to close anything.
@@ -393,6 +413,7 @@ func (m *Multiplexer) reconnect(conn *Connection) (*Connection, error) {
 		conn.Path,
 		conn.Query,
 		conn.Client,
+		conn.Token,
 	)
 	if err != nil {
 		logger.Log(logger.LevelError, map[string]string{"clusterID": conn.ClusterID}, err, "reconnecting to cluster")
@@ -482,7 +503,7 @@ func (m *Multiplexer) getOrCreateConnection(msg Message, clientConn *WSConnLock)
 	if !exists {
 		var err error
 
-		conn, err = m.establishClusterConnection(msg.ClusterID, msg.UserID, msg.Path, msg.Query, clientConn)
+		conn, err = m.establishClusterConnection(msg.ClusterID, msg.UserID, msg.Path, msg.Query, clientConn, msg.Token)
 		if err != nil {
 			logger.Log(
 				logger.LevelError,
