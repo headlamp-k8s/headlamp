@@ -4,6 +4,7 @@ import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { getTestDate } from '../../../helpers/testHelpers';
 import Notifications from './Notifications';
 import { Notification } from './notificationsSlice';
 
@@ -15,7 +16,7 @@ const createTestNotification = (
 ) => {
   const notification = new Notification({
     message,
-    date: new Date().getTime(),
+    date: getTestDate().getTime(),
     cluster,
   });
   notification.seen = seen;

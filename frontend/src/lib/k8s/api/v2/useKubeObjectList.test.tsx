@@ -252,6 +252,11 @@ describe('useWatchKubeObjectLists', () => {
 });
 
 describe('useKubeObjectList', () => {
+  beforeEach(() => {
+    vi.stubEnv('REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER', 'false');
+    vi.clearAllMocks();
+  });
+
   it('should call useKubeObjectList with 1 namespace after reducing amount of namespaces', async () => {
     const spy = vi.spyOn(websocket, 'useWebSockets');
     const queryClient = new QueryClient();
