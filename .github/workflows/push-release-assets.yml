@@ -1,0 +1,110 @@
+name: Upload Release Assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_name:
+        description: 'The release version to upload to (e.g. 0.9.0)'
+        required: true
+      windows_run_id:
+        description: 'Run ID of the Windows artifacts workflow'
+        required: false
+      mac_run_id:
+        description: 'Run ID of the Mac artifacts workflow'
+        required: false
+      linux_run_id:
+        description: 'Run ID of the Linux artifacts workflow'
+        required: false
+      force:
+        description: 'Force upload even if the release is no longer a draft'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Publish Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install script dependencies
+        working-directory: ./app/scripts/push-release-assets
+        run: npm ci
+
+      - name: Create artifacts directory
+        run: mkdir -p ./artifacts
+
+      - name: Download Windows artifacts
+        if: ${{ inputs.windows_run_id != '' }}
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: app-artifacts-win.yml
+          run_id: ${{ inputs.windows_run_id }}
+          path: ./artifacts/windows
+
+      - name: Download Mac artifacts
+        if: ${{ inputs.mac_run_id != '' }}
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: app-artifacts-mac.yml
+          run_id: ${{ inputs.mac_run_id }}
+          path: ./artifacts/mac
+
+      - name: Download Linux artifacts
+        if: ${{ inputs.linux_run_id != '' }}
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: app-artifacts-linux.yml
+          run_id: ${{ inputs.linux_run_id }}
+          path: ./artifacts/linux
+
+      - name: List artifacts
+        run: |
+          echo "Downloaded artifacts:"
+          find ./artifacts -type f -not -path "*/\.*" | sort
+
+      # Flatten directory structure for easier upload
+      - name: Prepare artifacts for upload
+        run: |
+          mkdir -p ./flattened-artifacts
+          find ./artifacts -type f -not -path "*/\.*" -exec cp {} ./flattened-artifacts/ \;
+          echo "Files prepared for upload:"
+          ls -la ./flattened-artifacts/
+
+      - name: Upload assets to release
+        working-directory: ./app/scripts/push-release-assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FORCE_FLAG=""
+          if [ "${{ github.event.inputs.force }}" == "true" ]; then
+            FORCE_FLAG="--force"
+          fi
+
+          ARTIFACTS_PATH="../../flattened-artifacts"
+          ASSETS=($(ls -1 $ARTIFACTS_PATH))
+
+          if [ ${#ASSETS[@]} -eq 0 ]; then
+            echo "No artifacts found to upload!"
+            exit 1
+          fi
+
+          # Create the command with all artifact paths
+          CMD="node push-release-assets.js $FORCE_FLAG ${{ inputs.release_name }}"
+
+          for asset in "${ASSETS[@]}"; do
+            CMD+=" $ARTIFACTS_PATH/$asset"
+          done
+
+          echo "Executing: $CMD"
+          eval $CMD
