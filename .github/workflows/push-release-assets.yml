@@ -76,7 +76,6 @@ jobs:
           ls -la ./flattened-artifacts/
 
       - name: Upload assets to release
-        working-directory: ./app/scripts/push-release-assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -85,7 +84,7 @@ jobs:
             FORCE_FLAG="--force"
           fi
 
-          ARTIFACTS_PATH="../../flattened-artifacts"
+          ARTIFACTS_PATH="$(pwd)/flattened-artifacts"
           ASSETS=($(ls -1 $ARTIFACTS_PATH))
 
           if [ ${#ASSETS[@]} -eq 0 ]; then
@@ -94,6 +93,7 @@ jobs:
           fi
 
           # Create the command with all artifact paths
+          cd ./app/scripts/push-release-assets/
           CMD="node push-release-assets.js $FORCE_FLAG ${{ inputs.release_name }}"
 
           for asset in "${ASSETS[@]}"; do
