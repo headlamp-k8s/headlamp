@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { getTestDate } from '../../helpers/testHelpers';
 import { StreamResultsCb } from '../../lib/k8s/apiProxy';
 import { LogOptions } from '../../lib/k8s/pod';
 import { TestContext } from '../../test';
@@ -8,6 +9,11 @@ export default {
   title: 'Pod/PodLogViewer',
   component: PodLogViewer,
   argTypes: {},
+  parameters: {
+    storyshots: {
+      disable: true,
+    },
+  },
 } as Meta;
 
 const Template: StoryFn = () => {
@@ -42,7 +48,7 @@ function getLogs(container: string, onLogs: StreamResultsCb, logsOptions: LogOpt
     for (let i = 0; i < linesToShow; i++) {
       logs.push(
         `${
-          showTimestamps ? new Date().toISOString() + ' ' : ''
+          showTimestamps ? getTestDate().toISOString() + ' ' : ''
         }(log #${i}): from container ${container} log line log line log line log line log line log line log line log line log line\n`
       );
     }

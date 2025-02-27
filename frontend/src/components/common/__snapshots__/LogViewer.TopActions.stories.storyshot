@@ -235,7 +235,7 @@
                         class="xterm-char-measure-element"
                         style="font-weight: normal;"
                       >
-                        WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+                                                        
                       </span>
                       <span
                         class="xterm-char-measure-element"
@@ -264,16 +264,32 @@
                   >
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [web-server] Server starting on port 3000
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [web-server] Connected to database
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                        [web-server] Handling incoming request
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
-                    />
+                    >
+                      <span>
+                         
+                      </span>
+                    </div>
                     <div
                       style="width: 0px; height: 0px; line-height: 0px; overflow: hidden;"
                     />
