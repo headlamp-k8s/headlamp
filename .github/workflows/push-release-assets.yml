@@ -75,6 +75,12 @@ jobs:
           echo "Files prepared for upload:"
           ls -la ./flattened-artifacts/
 
+          # Exit if no files are found
+          if [ -z "$(ls -A ./flattened-artifacts)" ]; then
+            echo "No artifacts found to upload!"
+            exit 0
+          fi
+
       - name: Upload assets to release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -86,11 +92,6 @@ jobs:
 
           ARTIFACTS_PATH="$(pwd)/flattened-artifacts"
           ASSETS=($(ls -1 $ARTIFACTS_PATH))
-
-          if [ ${#ASSETS[@]} -eq 0 ]; then
-            echo "No artifacts found to upload!"
-            exit 1
-          fi
 
           # Create the command with all artifact paths
           cd ./app/scripts/push-release-assets/
