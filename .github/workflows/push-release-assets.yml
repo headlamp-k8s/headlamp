@@ -31,10 +31,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install script dependencies
-        working-directory: ./app/scripts/push-release-assets
-        run: npm ci
-
       - name: Create artifacts directory
         run: mkdir -p ./artifacts
 
@@ -80,6 +76,10 @@ jobs:
             echo "No artifacts found to upload!"
             exit 0
           fi
+
+      - name: Install script dependencies
+        working-directory: ./app/scripts/push-release-assets
+        run: npm ci
 
       - name: Upload assets to release
         env:
