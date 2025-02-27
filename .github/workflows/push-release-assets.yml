@@ -46,7 +46,7 @@ jobs:
 
       - name: Download Windows artifacts
         if: ${{ inputs.windows_run_id != '' }}
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v6
         with:
           workflow: app-artifacts-win.yml
           run_id: ${{ inputs.windows_run_id }}
@@ -54,7 +54,7 @@ jobs:
 
       - name: Download Mac artifacts
         if: ${{ inputs.mac_run_id != '' }}
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v6
         with:
           workflow: app-artifacts-mac.yml
           run_id: ${{ inputs.mac_run_id }}
@@ -62,7 +62,7 @@ jobs:
 
       - name: Download Linux artifacts
         if: ${{ inputs.linux_run_id != '' }}
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v6
         with:
           workflow: app-artifacts-linux.yml
           run_id: ${{ inputs.linux_run_id }}
