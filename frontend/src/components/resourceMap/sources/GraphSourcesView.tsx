@@ -208,7 +208,14 @@ export const GraphSourcesView = memo(
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column', width: '300px', padding: 1.5 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: 'fit-content(300px)',
+              padding: 1.5,
+            }}
+          >
             {sources.map((source, index) => (
               <GraphSourceView
                 source={source}
