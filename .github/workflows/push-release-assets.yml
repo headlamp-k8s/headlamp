@@ -6,14 +6,8 @@ on:
       release_name:
         description: 'The release version to upload to (e.g. 0.9.0)'
         required: true
-      windows_run_id:
-        description: 'Run ID of the Windows artifacts workflow'
-        required: false
-      mac_run_id:
-        description: 'Run ID of the Mac artifacts workflow'
-        required: false
-      linux_run_id:
-        description: 'Run ID of the Linux artifacts workflow'
+      run_ids:
+        description: 'Comma-separated run IDs of workflows with artifacts to download'
         required: false
       force:
         description: 'Force upload even if the release is no longer a draft'
@@ -44,29 +38,29 @@ jobs:
       - name: Create artifacts directory
         run: mkdir -p ./artifacts
 
-      - name: Download Windows artifacts
-        if: ${{ inputs.windows_run_id != '' }}
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: app-artifacts-win.yml
-          run_id: ${{ inputs.windows_run_id }}
-          path: ./artifacts/windows
+      - name: Download artifacts from workflow runs
+        if: ${{ inputs.run_ids != '' }}
+        run: |
+          mkdir -p ./artifacts
 
-      - name: Download Mac artifacts
-        if: ${{ inputs.mac_run_id != '' }}
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: app-artifacts-mac.yml
-          run_id: ${{ inputs.mac_run_id }}
-          path: ./artifacts/mac
+          # Split the run_ids input by comma and process each run ID
+          IFS=',' read -ra RUN_IDS <<< "${{ inputs.run_ids }}"
 
-      - name: Download Linux artifacts
-        if: ${{ inputs.linux_run_id != '' }}
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: app-artifacts-linux.yml
-          run_id: ${{ inputs.linux_run_id }}
-          path: ./artifacts/linux
+          for run_id in "${RUN_IDS[@]}"; do
+            run_id=$(echo $run_id | xargs)  # Trim whitespace
+            if [ -n "$run_id" ]; then
+              echo "Downloading artifacts from run ID: $run_id"
+
+              # Create a subdirectory for this run
+              mkdir -p "./artifacts/run-$run_id"
+
+              # Download artifacts for this run ID
+              # Note: This action will automatically download all artifacts from the run
+              gh run download $run_id --dir "./artifacts/run-$run_id"
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List artifacts
         run: |
