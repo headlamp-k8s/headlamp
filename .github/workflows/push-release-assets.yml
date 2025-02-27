@@ -83,7 +83,7 @@ jobs:
 
       - name: Upload assets to release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
         run: |
           FORCE_FLAG=""
           if [ "${{ github.event.inputs.force }}" == "true" ]; then
