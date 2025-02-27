@@ -125,7 +125,9 @@ spec:
           {{- end }}
           {{- end }}
           args:
+            {{- if .Values.config.inCluster }}
             - "-in-cluster"
+            {{- end }}
             {{- with .Values.config.pluginsDir}}
             - "-plugins-dir={{ . }}"
             {{- end }}

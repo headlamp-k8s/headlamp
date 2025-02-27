@@ -69,6 +69,7 @@ $ helm install my-headlamp headlamp/headlamp \
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| config.inCluster | bool | `true` | Run Headlamp in-cluster |
 | config.baseURL | string | `""` | Base URL path for Headlamp UI |
 | config.pluginsDir | string | `"/headlamp/plugins"` | Directory to load Headlamp plugins from |
 | config.extraArgs | array | `[]` | Additional arguments for Headlamp server |
