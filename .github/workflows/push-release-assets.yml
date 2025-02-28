@@ -15,9 +15,6 @@ on:
         required: false
         default: false
 
-permissions:
-  contents: write
-
 jobs:
   publish:
     name: Publish Assets
