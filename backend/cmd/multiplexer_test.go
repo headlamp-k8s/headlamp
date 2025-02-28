@@ -112,7 +112,7 @@ func TestCreateConnection(t *testing.T) {
 	clientConn, _ := createTestWebSocketConnection()
 
 	// Add RequestID to the createConnection call
-	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
+	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn, nil)
 	assert.NotNil(t, conn)
 	assert.Equal(t, "test-cluster", conn.ClusterID)
 	assert.Equal(t, "test-user", conn.UserID)
@@ -153,7 +153,7 @@ func TestDialWebSocket(t *testing.T) {
 	defer server.Close()
 
 	wsURL := "ws" + strings.TrimPrefix(server.URL, "http")
-	conn, err := m.dialWebSocket(wsURL, &tls.Config{InsecureSkipVerify: true}, server.URL) //nolint:gosec
+	conn, err := m.dialWebSocket(wsURL, &tls.Config{InsecureSkipVerify: true}, server.URL, nil) //nolint:gosec
 
 	assert.NoError(t, err)
 	assert.NotNil(t, conn)
@@ -170,12 +170,12 @@ func TestDialWebSocket_Errors(t *testing.T) {
 	// Test invalid URL
 	tlsConfig := &tls.Config{InsecureSkipVerify: true} //nolint:gosec
 
-	ws, err := m.dialWebSocket("invalid-url", tlsConfig, "")
+	ws, err := m.dialWebSocket("invalid-url", tlsConfig, "", nil)
 	assert.Error(t, err)
 	assert.Nil(t, ws)
 
 	// Test unreachable URL
-	ws, err = m.dialWebSocket("ws://localhost:12345", tlsConfig, "")
+	ws, err = m.dialWebSocket("ws://localhost:12345", tlsConfig, "", nil)
 	assert.Error(t, err)
 	assert.Nil(t, ws)
 }
@@ -535,7 +535,7 @@ func TestEstablishClusterConnection(t *testing.T) {
 	defer clientServer.Close()
 
 	// Test successful connection establishment
-	conn, err := m.establishClusterConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn)
+	conn, err := m.establishClusterConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn, nil)
 	assert.NoError(t, err)
 	assert.NotNil(t, conn)
 	assert.Equal(t, "test-cluster", conn.ClusterID)
@@ -544,7 +544,7 @@ func TestEstablishClusterConnection(t *testing.T) {
 	assert.Equal(t, "watch=true", conn.Query)
 
 	// Test with invalid cluster
-	conn, err = m.establishClusterConnection("non-existent", "test-user", "/api/v1/pods", "watch=true", clientConn)
+	conn, err = m.establishClusterConnection("non-existent", "test-user", "/api/v1/pods", "watch=true", clientConn, nil)
 	assert.Error(t, err)
 	assert.Nil(t, conn)
 }
@@ -572,7 +572,7 @@ func TestReconnect(t *testing.T) {
 	defer clientServer.Close()
 
 	// Create initial connection
-	conn := m.createConnection("test-cluster", "test-user", "/api/v1/services", "watch=true", clientConn)
+	conn := m.createConnection("test-cluster", "test-user", "/api/v1/services", "watch=true", clientConn, nil)
 	wsConn, wsServer := createTestWebSocketConnection()
 
 	defer wsServer.Close()
@@ -598,7 +598,7 @@ func TestReconnect(t *testing.T) {
 	assert.Contains(t, err.Error(), "getting context: key not found")
 
 	// Test reconnection with closed connection
-	conn = m.createConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn)
+	conn = m.createConnection("test-cluster", "test-user", "/api/v1/pods", "watch=true", clientConn, nil)
 	wsConn2, wsServer2 := createTestWebSocketConnection()
 
 	defer wsServer2.Close()
@@ -829,7 +829,7 @@ func TestMonitorConnection_ReconnectFailure(t *testing.T) {
 	clientConn, clientServer := createTestWebSocketConnection()
 	defer clientServer.Close()
 
-	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn)
+	conn := m.createConnection("test-cluster", "test-user", "/api/v1/pods", "", clientConn, nil)
 	wsConn, wsServer := createTestWebSocketConn()
 
 	defer wsServer.Close()
@@ -1097,7 +1097,7 @@ func TestMonitorConnection_Reconnect(t *testing.T) {
 	wsURL := "ws" + strings.TrimPrefix(server.URL, "http")
 	tlsConfig := &tls.Config{InsecureSkipVerify: true} //nolint:gosec
 
-	ws, err := m.dialWebSocket(wsURL, tlsConfig, "")
+	ws, err := m.dialWebSocket(wsURL, tlsConfig, "", nil)
 	require.NoError(t, err)
 
 	conn.WSConn = ws
