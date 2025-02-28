@@ -26,6 +26,7 @@ fullnameOverride: ""
 initContainers: []
 
 config:
+  inCluster: true
   # -- base url path at which headlamp should run
   baseURL: ""
   oidc:
