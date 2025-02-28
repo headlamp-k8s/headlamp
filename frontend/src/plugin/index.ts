@@ -321,7 +321,7 @@ export async function fetchAndExecutePlugins(
     // Execute plugins inside a context (not in global/window)
     (function (str: string) {
       try {
-        const result = eval(str);
+        const result = eval(str + `\n//# sourceURL=main.js`);
         return result;
       } catch (e) {
         // We just continue if there is an error.
