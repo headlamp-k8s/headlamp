@@ -143,6 +143,7 @@ jobs:
         envsubst < e2e-tests/kubernetes-headlamp-ci.yaml | kubectl --context=test apply -f -
     - name: Run e2e tests
       run: |
+        set -e
         echo "------------------------------------sleeping 12...------------------------------------"
         sleep 12
         kubectl config use-context test
