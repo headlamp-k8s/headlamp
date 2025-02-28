@@ -179,14 +179,7 @@ jobs:
         cd e2e-tests
         npm ci
         npx playwright install --with-deps
-        HEADLAMP_TEST_URL=$SERVICE_URL npx playwright test
-        exit_code=$?
-        if [ $exit_code -ne 0 ]; then
-          echo "Playwright tests failed with exit code $exit_code"
-          exit 1
-        else
-          echo "Playwright tests passed successfully"
-        fi
+        HEADLAMP_TEST_URL=$SERVICE_URL npx playwright test || exit 1
     - name: Save Docker Images to Tar files in image-cache Folder
       if: steps.cache-image-restore.outputs.cache-hit != 'true'
       run: |
