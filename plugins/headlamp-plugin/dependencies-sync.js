@@ -26,6 +26,7 @@ const dependenciesFrontDoesNotHave = new Set([
   'tmp',
   'vite-plugin-css-injected-by-js',
   'vite-plugin-static-copy',
+  '@kinvolk/eslint-config',
 ]);
 
 // Dependencies from frontend/package.json that aren't wanted by headlamp-plugin.
@@ -37,6 +38,17 @@ const dependenciesToNotCopy = [
   'typedoc-hugo-theme',
   'typedoc-plugin-markdown',
   'typedoc-plugin-rename-defaults',
+  '@headlamp-k8s/eslint-config',
+  '@typescript-eslint/eslint-plugin',
+  '@typescript-eslint/parser',
+  'eslint',
+  'eslint-config-prettier',
+  'eslint-plugin-import',
+  'eslint-plugin-jsx-a11y',
+  'eslint-plugin-react',
+  'eslint-plugin-react-hooks',
+  'eslint-plugin-simple-import-sort',
+  'eslint-plugin-unused-imports',
 ];
 
 const yargs = require('yargs/yargs');
