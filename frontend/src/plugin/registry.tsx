@@ -909,6 +909,58 @@ export function clusterAction(
   store.dispatch(sendClusterAction(callback, actionOptions));
 }
 
+/**
+ * Check if specific commands are available on the system.
+ * It will only return true for commands that the user has authorized to run.
+ *
+ * @param commands - Array of command names to check
+ * @returns Promise that resolves to an object with command names as keys and boolean values
+ *
+ * @example
+ * ```ts
+ * import { checkCommands } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * async function checkAvailableTools() {
+ *   const result = await checkCommands(['minikube', 'az']);
+ *   if (result['minikube']) {
+ *     console.log('Minikube is available');
+ *   }
+ *   if (!result['az']) {
+ *     console.log('Azure CLI is not available');
+ *   }
+ * }
+ * ```
+ */
+export function checkCommands(commands: string[]): Promise<Record<string, boolean>> {
+  return new Promise(resolve => {
+    const id = Math.random().toString(36).substring(2, 15);
+
+    // Function to handle the response from the main process
+    const listener = (responseId: string, results: Record<string, boolean>) => {
+      if (responseId === id) {
+        // Clean up the listener once we get our response
+        if (window.desktopApi) {
+          window.desktopApi.removeListener('check-commands-result', listener);
+        }
+        resolve(results);
+      }
+    };
+
+    // Listen for the response
+    if (window.desktopApi) {
+      window.desktopApi.receive('check-commands-result', listener);
+      window.desktopApi.send('check-commands', JSON.stringify({ id, commands }));
+    } else {
+      // If we're not in electron, just resolve with all commands being unavailable
+      const results: Record<string, boolean> = {};
+      commands.forEach(command => {
+        results[command] = false;
+      });
+      resolve(results);
+    }
+  });
+}
+
 export {
   DefaultAppBarAction,
   DefaultDetailsViewSection,

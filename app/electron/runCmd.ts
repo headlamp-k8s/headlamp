@@ -1,4 +1,5 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
+import { execSync } from 'child_process';
 import { app, BrowserWindow, dialog } from 'electron';
 import { IpcMainEvent } from 'electron/main';
 import fs from 'node:fs';
@@ -20,6 +21,16 @@ interface CommandData {
    * See https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
    */
   options: {};
+}
+
+/**
+ * Data sent from the renderer process when a 'check-commands' event is emitted.
+ */
+interface CheckCommandsData {
+  /** The unique ID of the request. */
+  id: string;
+  /** The commands to check if they exist. */
+  commands: string[];
 }
 
 /**
@@ -99,6 +110,61 @@ function checkCommandConsent(command: string, mainWindow: BrowserWindow): boolea
 }
 
 /**
+ * Checks if the given command is available in the system.
+ *
+ * @param command - The command to check.
+ * @returns true if the command exists and is executable, false otherwise.
+ */
+function commandExists(command: string): boolean {
+  try {
+    const isWin = process.platform === 'win32';
+    if (isWin) {
+      // On Windows, use 'where' command
+      execSync(`where ${command}`, { stdio: 'ignore' });
+    } else {
+      // On Unix-like systems, use 'which' command
+      execSync(`which ${command}`, { stdio: 'ignore' });
+    }
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Handles 'check-commands' events from the renderer process.
+ *
+ * Checks if the requested commands exist and are executable.
+ *
+ * @param event - The event object.
+ * @param eventData - The data sent from the renderer process.
+ */
+export function handleCheckCommands(event: IpcMainEvent, eventData: CheckCommandsData): void {
+  const { id, commands } = eventData;
+  const validCommands = ['minikube', 'az']; // Same list as in handleRunCommand
+  const results: Record<string, boolean> = {};
+
+  // Only check commands that are in the valid commands list
+  commands.forEach(command => {
+    if (validCommands.includes(command)) {
+      // Check if the command exists and the user has consented to it
+      const settings = loadSettings();
+      const confirmedCommands = settings?.confirmedCommands || {};
+
+      // Only report as available if the user has consented (value is true)
+      // and the command actually exists on the system
+      results[command] = confirmedCommands[command] === true && commandExists(command);
+    } else {
+      // For invalid commands, always return false
+      results[command] = false;
+    }
+  });
+
+  // Send the results back to the renderer
+  event.sender.send('check-commands-result', id, results);
+}
+
+/**
  * Handles 'run-command' events from the renderer process.
  *
  * Spawns the requested command and sends 'command-stdout',
@@ -129,7 +195,7 @@ export function handleRunCommand(
     );
     return;
   }
-  if (!checkCommandConsent(eventData.command, mainWindow)) {
+  if (!checkCommandConsent(eventData.command, mainWindow!)) {
     return;
   }
 

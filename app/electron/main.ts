@@ -25,7 +25,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import i18n from './i18next.config';
 import { PluginManager } from './plugin-management';
-import { handleRunCommand } from './runCmd';
+import { handleCheckCommands, handleRunCommand } from './runCmd';
 import windowSize from './windowSize';
 
 dotenv.config({ path: path.join(process.resourcesPath, '.env') });
@@ -1247,6 +1247,16 @@ function startElecron() {
     });
 
     ipcMain.on('run-command', (event, eventData) => handleRunCommand(event, eventData, mainWindow));
+
+    ipcMain.on('check-commands', (event, data) => {
+      try {
+        const eventData = JSON.parse(data);
+        handleCheckCommands(event, eventData, mainWindow);
+      } catch (e) {
+        console.error('Failed to parse check-commands data', e);
+        event.sender.send('check-commands-result', 'error', {});
+      }
+    });
 
     new PluginManagerEventListeners().setupEventHandlers();
 
