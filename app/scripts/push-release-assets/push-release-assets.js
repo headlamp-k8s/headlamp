@@ -20,7 +20,7 @@ const owner = 'headlamp-k8s';
 const repo = 'headlamp';
 const client = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-const args = yargs
+const args = yargs(hideBin(process.argv))
   .command('$0 <release-name> <asset1> [asset2...]', '', yargs => {
     yargs
       .option('force', {
