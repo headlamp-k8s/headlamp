@@ -22,6 +22,7 @@ import { findKubeconfigByClusterName, updateStatelessClusterKubeconfig } from '.
 import { Link, Loader, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 import Empty from '../../common/EmptyContent';
+import { ClusterNameEditor } from './ClusterNameEditor';
 
 function isValidNamespaceFormat(namespace: string) {
   // We allow empty strings just because that's the default value in our case.
@@ -272,10 +273,6 @@ export default function SettingsCluster() {
     "translation|Namespaces must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
   );
 
-  const invalidClusterNameMessage = t(
-    "translation|Cluster name must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
-  );
-
   // If we don't have yet a cluster name from the URL, we are still loading.
   if (!clusterFromURLRef.current) {
     return <Loader title="Loading" />;
@@ -333,59 +330,13 @@ export default function SettingsCluster() {
           </Link>
         </Box>
         {helpers.isElectron() && (
-          <NameValueTable
-            rows={[
-              {
-                name: t('translation|Name'),
-                value: (
-                  <TextField
-                    onChange={event => {
-                      let value = event.target.value;
-                      value = value.replace(' ', '');
-                      setNewClusterName(value);
-                    }}
-                    value={newClusterName}
-                    placeholder={cluster}
-                    error={!isValidCurrentName}
-                    helperText={
-                      isValidCurrentName
-                        ? t(
-                            'translation|The current name of cluster. You can define custom modified name.'
-                          )
-                        : invalidClusterNameMessage
-                    }
-                    InputProps={{
-                      endAdornment: (
-                        <Box pt={2} textAlign="right">
-                          <ConfirmButton
-                            onConfirm={() => {
-                              if (isValidCurrentName) {
-                                handleUpdateClusterName(source);
-                              }
-                            }}
-                            confirmTitle={t('translation|Change name')}
-                            confirmDescription={t(
-                              'translation|Are you sure you want to change the name for "{{ clusterName }}"?',
-                              { clusterName: cluster }
-                            )}
-                            disabled={!newClusterName || !isValidCurrentName}
-                          >
-                            {t('translation|Apply')}
-                          </ConfirmButton>
-                        </Box>
-                      ),
-                      onKeyPress: event => {
-                        if (event.key === 'Enter' && isValidCurrentName) {
-                          handleUpdateClusterName(source);
-                        }
-                      },
-                      autoComplete: 'off',
-                      sx: { maxWidth: 250 },
-                    }}
-                  />
-                ),
-              },
-            ]}
+          <ClusterNameEditor
+            cluster={cluster}
+            newClusterName={newClusterName}
+            isValidCurrentName={isValidCurrentName}
+            source={source}
+            onClusterNameChange={setNewClusterName}
+            onUpdateClusterName={handleUpdateClusterName}
           />
         )}
         <NameValueTable
