@@ -1,5 +1,5 @@
 import { InlineIcon } from '@iconify/react';
-import { Button } from '@mui/material';
+import { Button, DialogContent } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
@@ -12,7 +12,8 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { createRouteURL } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { ActionButton } from '../common';
+import CreateCluster from '../App/CreateCluster/CreateCluster';
+import { ActionButton, Dialog, DialogProps } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
 import SidebarItem, { SidebarItemProps } from './SidebarItem';
@@ -52,29 +53,68 @@ export function useSidebarInfo() {
   };
 }
 
-function AddClusterButton() {
+//@todo: Extract cluster creation logic into their own components
+function ClusterAdditionDialog(props: DialogProps & { onChoice: () => void }) {
+  const { open, onChoice } = props;
+  const { t } = useTranslation(['translation']);
   const history = useHistory();
+
+  return (
+    <>
+      <Dialog
+        open={open}
+        onClose={() => onChoice()}
+        title={t('translation|Add Cluster')}
+        keepMounted
+        fullWidth={false}
+      >
+        <DialogContent>
+          <Grid container direction="column">
+            <Grid item>
+              <CreateCluster onClusterCreationStarted={() => onChoice()} />
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+                startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
+              >
+                {t('translation|Load from KubeConfig')}
+              </Button>
+            </Grid>
+          </Grid>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+function AddClusterButton() {
   const { t } = useTranslation(['translation']);
   const { isOpen } = useSidebarInfo();
+  const [showAdditionDialog, setShowAdditionDialog] = React.useState(false);
 
   return (
     <Box pb={2}>
       {isOpen ? (
         <Button
-          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          onClick={() => setShowAdditionDialog(true)}
           startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
         >
           {t('translation|Add Cluster')}
         </Button>
       ) : (
         <ActionButton
-          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          onClick={() => setShowAdditionDialog(true)}
           icon="mdi:plus-box-outline"
           description={t('translation|Add Cluster')}
           color="#adadad"
           width={38}
         />
       )}
+      <ClusterAdditionDialog
+        open={showAdditionDialog}
+        onChoice={() => setShowAdditionDialog(false)}
+      />
     </Box>
   );
 }
@@ -111,18 +151,25 @@ const DefaultLinkArea = memo((props: { sidebarName: string; isOpen: boolean }) =
 
   if (sidebarName === DefaultSidebars.HOME) {
     return (
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        flexDirection={isOpen ? 'row' : 'column'}
-        p={1}
-      >
-        <Box>{helpers.isElectron() && <AddClusterButton />}</Box>
-        <Box>
-          <SidebarToggleButton />
+      <>
+        {/* {helpers.isElectron() && (
+          <Box p={1} display="flex" alignItems="left">
+            <CreateCluster />
+          </Box>
+        )} */}
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          flexDirection={isOpen ? 'row' : 'column'}
+          p={1}
+        >
+          <Box>{helpers.isElectron() && <AddClusterButton />}</Box>
+          <Box>
+            <SidebarToggleButton />
+          </Box>
         </Box>
-      </Box>
+      </>
     );
   }
 
