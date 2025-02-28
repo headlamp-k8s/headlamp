@@ -54,31 +54,37 @@ const getConnectedComponents = (nodes: GraphNode[], edges: GraphEdge[]): GraphNo
     visitedNodes.add(node.id);
     componentNodes.push(node);
 
+    // Outgoing edges
     graphLookup.getOutgoingEdges(node.id)?.forEach(edge => {
-      if (visitedNodes.has(edge.target)) return;
-
+      // Always collect the edge if we haven't yet
       if (!visitedEdges.has(edge.id)) {
         visitedEdges.add(edge.id);
         componentEdges.push(edge);
       }
 
-      const targetNode = graphLookup.getNode(edge.target);
-      if (targetNode) {
-        findConnectedComponent(targetNode, componentNodes, componentEdges);
+      // Only recurse further if we haven't visited the target node
+      if (!visitedNodes.has(edge.target)) {
+        const targetNode = graphLookup.getNode(edge.target);
+        if (targetNode) {
+          findConnectedComponent(targetNode, componentNodes, componentEdges);
+        }
       }
     });
 
+    // Incoming edges
     graphLookup.getIncomingEdges(node.id)?.forEach(edge => {
-      if (visitedNodes.has(edge.source)) return;
-
+      // Always collect the edge if we haven't yet
       if (!visitedEdges.has(edge.id)) {
         visitedEdges.add(edge.id);
         componentEdges.push(edge);
       }
 
-      const sourceNode = graphLookup.getNode(edge.source);
-      if (sourceNode) {
-        findConnectedComponent(sourceNode, componentNodes, componentEdges);
+      // Only recurse further if we haven't visited the source node
+      if (!visitedNodes.has(edge.source)) {
+        const sourceNode = graphLookup.getNode(edge.source);
+        if (sourceNode) {
+          findConnectedComponent(sourceNode, componentNodes, componentEdges);
+        }
       }
     });
   };
