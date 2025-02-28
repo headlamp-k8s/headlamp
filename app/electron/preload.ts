@@ -11,6 +11,7 @@ contextBridge.exposeInMainWorld('desktopApi', {
       'appConfig',
       'pluginsLoaded',
       'run-command',
+      'check-commands',
       'plugin-manager',
       'request-backend-token',
     ];
@@ -27,6 +28,7 @@ contextBridge.exposeInMainWorld('desktopApi', {
       'command-stdout',
       'command-stderr',
       'command-exit',
+      'check-commands-result',
       'plugin-manager',
       'backend-token',
     ];
