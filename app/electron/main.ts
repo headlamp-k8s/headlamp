@@ -83,6 +83,10 @@ const args = yargs(hideBin(process.argv))
       describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
       type: 'boolean',
     },
+    'watch-plugins-changes': {
+      describe: 'Reloads plugins when there are changes to them or their directory',
+      type: 'boolean',
+    },
   })
   .positional('kubeconfig', {
     describe:
@@ -550,6 +554,9 @@ async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNul
   const proxyUrls = !!buildManifest && buildManifest['proxy-urls'];
   if (!!proxyUrls && proxyUrls.length > 0) {
     serverArgs = serverArgs.concat(['--proxy-urls', proxyUrls.join(',')]);
+  }
+  if (args.watchPluginsChanges) {
+    serverArgs.push('--watch-plugins-changes');
   }
 
   const bundledPlugins = path.join(process.resourcesPath, '.plugins');
