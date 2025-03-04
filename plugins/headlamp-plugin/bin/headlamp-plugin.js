@@ -532,9 +532,9 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
     };
   }
 
-  const err = runOnPackage(packageFolder);
+  const exitCode = runOnPackage(packageFolder);
 
-  if (err === runOnPackageReturn.notThere) {
+  if (exitCode === runOnPackageReturn.notThere) {
     const folderErr = runOnFolderOfPackages(packageFolder);
     if (folderErr.error === runOnPackageReturn.notThere) {
       console.error(
@@ -551,7 +551,7 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
     }
   }
 
-  return 0; // success
+  return exitCode > 0 ? 1 : 0;
 }
 
 /**
