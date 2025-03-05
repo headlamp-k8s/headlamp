@@ -25,7 +25,7 @@
   "prettier": "@headlamp-k8s/eslint-config/prettier-config",
   "eslintConfig": {
     "extends": [
-      "@kinvolk",
+      "@headlamp-k8s",
       "prettier",
       "plugin:jsx-a11y/recommended"
     ]
