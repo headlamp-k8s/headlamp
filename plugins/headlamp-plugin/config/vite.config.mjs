@@ -98,6 +98,8 @@ export default defineConfig({
       formats: ['umd'],
     },
     rollupOptions: {
+      // Workaround for https://github.com/vitejs/vite/issues/19410
+      maxParallelFileOps: 500,
       external: Object.keys(externalModules).map(key =>
         noSubmodules.includes(key) ? key : new RegExp(`^${key}`)
       ),
