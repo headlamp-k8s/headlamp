@@ -63,6 +63,12 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
             label: t('glossary|Cluster'),
             url: '/settings/cluster',
           },
+          {
+            name: 'externalTools',
+            label: t('translation|External Tools'),
+            url: '/settings/tools',
+            hide: !helpers.isElectron(),
+          },
         ],
       },
     ];
