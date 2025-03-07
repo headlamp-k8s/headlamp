@@ -26,6 +26,7 @@ type Config struct {
 	EnableHelm            bool   `koanf:"enable-helm"`
 	EnableDynamicClusters bool   `koanf:"enable-dynamic-clusters"`
 	ListenAddr            string `koanf:"listen-addr"`
+	WatchPluginsChanges   bool   `koanf:"watch-plugins-changes"`
 	Port                  uint   `koanf:"port"`
 	KubeConfigPath        string `koanf:"kubeconfig"`
 	StaticDir             string `koanf:"html-static-dir"`
@@ -154,6 +155,7 @@ func flagset() *flag.FlagSet {
 	f.Bool("dev", false, "Allow connections from other origins")
 	f.Bool("insecure-ssl", false, "Accept/Ignore all server SSL certificates")
 	f.Bool("enable-dynamic-clusters", false, "Enable dynamic clusters, which stores stateless clusters in the frontend.")
+	f.Bool("watch-plugins-changes", true, "Reloads plugins when there are changes to them or their directory")
 
 	f.String("kubeconfig", "", "Absolute path to the kubeconfig file")
 	f.String("html-static-dir", "", "Static HTML directory to serve")
