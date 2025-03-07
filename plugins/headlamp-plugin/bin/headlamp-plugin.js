@@ -15,6 +15,7 @@ const headlampPluginPkg = require('../package.json');
 const PluginManager = require('../plugin-management/plugin-management').PluginManager;
 const { table } = require('table');
 const tar = require('tar');
+const MultiPluginManager = require('../plugin-management/multi-plugin-management');
 
 // ES imports
 const viteCopyPluginPromise = import('vite-plugin-static-copy');
@@ -1401,12 +1402,13 @@ yargs(process.argv.slice(2))
     }
   )
   .command(
-    'install <URL>',
-    'Install a plugin from the Artiface Hub URL',
+    'install',
+    'Install plugin(s) from a configuration file or a plugin artifact Hub URL',
     yargs => {
-      yargs
-        .positional('URL', {
-          describe: 'URL of the plugin to install',
+      return yargs
+        .option('config', {
+          alias: 'c',
+          describe: 'Path to plugin configuration file',
           type: 'string',
         })
         .option('folderName', {
@@ -1421,22 +1423,65 @@ yargs(process.argv.slice(2))
           alias: 'q',
           describe: 'Do not print logs',
           type: 'boolean',
+        })
+        .option('source', {
+          alias: 's',
+          describe: 'Plugin artifact Hub URL (for single plugin installation)',
+          type: 'string',
+        })
+        .option('config-json', {
+          describe:
+            'A JSON string containing plugin configuration (for single plugin installation)',
+          type: 'string',
         });
     },
     async argv => {
-      const { URL, folderName, headlampVersion, quiet } = argv;
-      const progressCallback = quiet
-        ? null
-        : data => {
-            if (data.type === 'error' || data.type === 'success') {
-              console.error(data.type, ':', data.message);
-            }
-          }; // Use console.log for logs if not in quiet mode
       try {
-        await PluginManager.install(URL, folderName, headlampVersion, progressCallback);
-      } catch (e) {
-        console.error(e.message);
-        process.exit(1); // Exit with error status
+        const { source, config, folderName, headlampVersion, quiet } = argv;
+        const progressCallback = quiet
+          ? () => {}
+          : data => {
+              if (data.type === 'error' || data.type === 'success') {
+                console.error(data.type, ':', data.message);
+              }
+            }; // Use console.log for logs if not in quiet mode
+        if (source) {
+          // Single plugin installation
+          try {
+            await PluginManager.install(source, folderName, headlampVersion, progressCallback);
+          } catch (e) {
+            console.error(e.message);
+            process.exit(1); // Exit with error status
+          }
+        } else if (config) {
+          const installer = new MultiPluginManager(folderName, headlampVersion, progressCallback);
+          // Bulk installation from config
+          console.log('Starting bulk plugin installation', { configPath: config });
+          const results = await installer.installFromConfig(config);
+          // Log results summary
+          const successful = results.filter(r => r.status === 'success').length;
+          const failed = results.filter(r => r.status === 'error').length;
+
+          console.log('Bulk installation completed', {
+            total: results.length,
+            successful,
+            failed,
+          });
+
+          // Exit with error if any plugins failed to install
+          if (failed > 0) {
+            process.exit(1);
+          }
+        } else {
+          console.error('Either --config or --source must be specified');
+          process.exit(1);
+        }
+      } catch (error) {
+        console.error('Installation failed', {
+          error: error.message,
+          stack: error.stack,
+        });
+        process.exit(1);
       }
     }
   )
