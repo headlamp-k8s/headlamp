@@ -1,28 +1,10 @@
 import { Box, Card } from '@mui/material';
-import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActionButton } from '../../common';
 import { GraphNode } from '../graph/graphModel';
 import { KubeObjectDetails } from './KubeNodeDetails';
 
-interface GraphNodeDetailsSection {
-  id: string;
-  render: (node: GraphNode) => ReactNode;
-}
-
-const kubeNodeDetailsSection: GraphNodeDetailsSection = {
-  id: 'kubeObjectDetails',
-  render: node =>
-    node.kubeObject ? (
-      <KubeObjectDetails key={node.id} resource={(node as GraphNode).kubeObject!} />
-    ) : null,
-};
-
-const defaultSections = [kubeNodeDetailsSection];
-
 export interface GraphNodeDetailsProps {
-  /** Sections to render */
-  sections?: GraphNodeDetailsSection[];
   /** Node to display */
   node?: GraphNode;
   /** Callback when the panel is closed */
@@ -32,18 +14,13 @@ export interface GraphNodeDetailsProps {
 /**
  * Side panel display information about a selected Node
  */
-export function GraphNodeDetails({
-  sections = defaultSections,
-  node,
-  close,
-}: GraphNodeDetailsProps) {
+export function GraphNodeDetails({ node, close }: GraphNodeDetailsProps) {
   const { t } = useTranslation();
 
   if (!node) return null;
 
-  const renderedSections = sections.map(it => it.render(node)).filter(Boolean);
-
-  if (renderedSections.length === 0) return null;
+  const hasContent = node.detailsComponent || node.kubeObject;
+  if (!hasContent) return null;
 
   return (
     <Card
@@ -76,7 +53,8 @@ export function GraphNodeDetails({
         />
       </Box>
 
-      {renderedSections}
+      {node.detailsComponent && <node.detailsComponent node={node} />}
+      {node.kubeObject && <KubeObjectDetails resource={node.kubeObject} />}
     </Card>
   );
 }

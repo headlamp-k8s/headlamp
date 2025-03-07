@@ -1,4 +1,5 @@
-import { Box } from '@mui/material';
+import { alpha, Box } from '@mui/material';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
 import CRoleIcon from './img/c-role.svg?react';
 import CmIcon from './img/cm.svg?react';
 import CrbIcon from './img/crb.svg?react';
@@ -133,19 +134,23 @@ export function KubeIcon({
   width?: string;
   height?: string;
 }) {
-  const IconComponent = kindToIcon[kind] ?? kindToIcon['Pod'];
+  const pluginDefinedIcons = useTypedSelector(state => state.graphView.kindIcons);
 
-  const color = getKindColor(kind);
+  const IconComponent = kindToIcon[kind] ?? kindToIcon['Pod'];
+  const icon = pluginDefinedIcons[kind]?.icon ?? (
+    <IconComponent style={{ scale: '1.1', width: '100%', height: '100%' }} />
+  );
+  const color = pluginDefinedIcons[kind]?.color ?? getKindColor(kind);
 
   return (
     <Box
-      style={{ color }}
       sx={{
+        color,
         flexShrink: 0,
         borderRadius: '50%',
         width: width ?? '100%',
         height: height ?? '100%',
-        background: color.replace(')', ' / 12%)'),
+        background: color.includes('oklch') ? color.replace(')', ' / 12%)') : alpha(color, 0.12),
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -154,7 +159,7 @@ export function KubeIcon({
         },
       }}
     >
-      <IconComponent style={{ scale: '1.1', width: '100%', height: '100%' }} />
+      {icon}
     </Box>
   );
 }
