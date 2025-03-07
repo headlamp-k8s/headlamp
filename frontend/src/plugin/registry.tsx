@@ -22,6 +22,13 @@ import { graphViewSlice, IconDefinition } from '../components/resourceMap/graphV
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
 import { setSidebarItem, setSidebarItemFilter } from '../components/Sidebar/sidebarSlice';
 import { getHeadlampAPIHeaders } from '../helpers';
+import {
+  changeExternalToolConsent,
+  ExternalTool,
+  getExternalTools,
+  installExternalTool,
+  installExternalTools,
+} from '../lib/externalTools';
 import { KubeObject } from '../lib/k8s/KubeObject';
 import { Route } from '../lib/router';
 import {
@@ -116,6 +123,7 @@ export type {
   GraphSource,
   IconDefinition,
   OverviewChartsProcessor,
+  ExternalTool,
 };
 export const DefaultHeadlampEvents = HeadlampEventType;
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
@@ -967,4 +975,8 @@ export {
   getHeadlampAPIHeaders,
   runCommand,
   PluginManager,
+  installExternalTool,
+  installExternalTools,
+  getExternalTools,
+  changeExternalToolConsent,
 };

@@ -4,6 +4,7 @@ import { app, BrowserWindow, dialog } from 'electron';
 import { IpcMainEvent } from 'electron/main';
 import fs from 'node:fs';
 import path from 'path';
+import { BINARY_MANIFESTS, binaryManager } from './binaries';
 import i18n from './i18next.config';
 
 /**
@@ -56,14 +57,14 @@ function confirmCommandDialog(command: string, mainWindow: BrowserWindow): boole
   return resp === 0;
 }
 
-const SETTINGS_PATH = path.join(app.getPath('userData'), 'settings.json');
+export const SETTINGS_PATH = path.join(app.getPath('userData'), 'settings.json');
 
 /**
  * Loads the user settings.
  * If the settings file does not exist, an empty object is returned.
  * @returns The settings object.
  */
-function loadSettings() {
+export function loadSettings() {
   try {
     const data = fs.readFileSync(SETTINGS_PATH, 'utf-8');
     return JSON.parse(data);
@@ -76,7 +77,7 @@ function loadSettings() {
  * Saves the user settings.
  * @param settings - The settings object to save.
  */
-function saveSettings(settings) {
+export function saveSettings(settings) {
   fs.writeFileSync(SETTINGS_PATH, JSON.stringify(settings), 'utf-8');
 }
 
@@ -86,37 +87,90 @@ function saveSettings(settings) {
  * If the user has not consented, a dialog is shown to ask for consent.
  *
  * @param command - The command to check.
+ * @param mainWindow - The main window to show the dialog on.
  * @returns true if the user has consented to running the command, false otherwise.
  */
-function checkCommandConsent(command: string, mainWindow: BrowserWindow): boolean {
+export function checkCommandConsent(
+  command: string,
+  mainWindow: BrowserWindow,
+  forceCheck: boolean = false
+): boolean {
   const settings = loadSettings();
   const confirmedCommands = settings?.confirmedCommands;
   const savedCommand: boolean | undefined = confirmedCommands
     ? confirmedCommands[command]
     : undefined;
 
-  if (savedCommand === false) {
+  if (!forceCheck && savedCommand === false) {
     console.error(`Invalid command: ${command}, command not allowed by users choice`);
     return false;
-  } else if (savedCommand === undefined) {
-    const commandChoice = confirmCommandDialog(command, mainWindow);
-    if (settings?.confirmedCommands === undefined) {
-      settings.confirmedCommands = {};
-    }
-    settings.confirmedCommands[command] = commandChoice;
-    saveSettings(settings);
   }
-  return true;
+
+  if (!!savedCommand) {
+    return true;
+  }
+
+  const commandChoice = confirmCommandDialog(command, mainWindow);
+  if (settings?.confirmedCommands === undefined) {
+    settings.confirmedCommands = {};
+  }
+  settings.confirmedCommands[command] = commandChoice;
+  saveSettings(settings);
+  return commandChoice;
 }
 
 /**
- * Checks if the given command is available in the system.
+ * Sets the consent status for a command without showing a dialog
+ *
+ * @param command - The command to set consent for
+ * @param consent - Whether to consent to the command or not
+ * @returns true if the operation was successful
+ */
+export function setCommandConsent(command: string, consent: boolean): boolean {
+  try {
+    const settings = loadSettings();
+    if (!settings.confirmedCommands) {
+      settings.confirmedCommands = {};
+    }
+
+    settings.confirmedCommands[command] = consent;
+    saveSettings(settings);
+    return true;
+  } catch (error) {
+    console.error(`Failed to set command consent: ${error}`);
+    return false;
+  }
+}
+
+/**
+ * Gets the consent status for a command
+ *
+ * @param command - The command to get consent status for
+ * @returns true if consented, false if denied, undefined if not set
+ */
+export function getCommandConsent(command: string): boolean | undefined {
+  const settings = loadSettings();
+  const confirmedCommands = settings?.confirmedCommands;
+  return confirmedCommands ? confirmedCommands[command] : undefined;
+}
+
+/**
+ * Checks if the given command is available in the system or in the Headlamp binary directory.
  *
  * @param command - The command to check.
  * @returns true if the command exists and is executable, false otherwise.
  */
 function commandExists(command: string): boolean {
   try {
+    // First check if the command is one of our managed binaries and is installed
+    if (
+      Object.keys(BINARY_MANIFESTS).includes(command) &&
+      binaryManager.isBinaryInstalled(command)
+    ) {
+      return true;
+    }
+
+    // Otherwise check if it's available in the system PATH
     const isWin = process.platform === 'win32';
     if (isWin) {
       // On Windows, use 'where' command
@@ -141,7 +195,8 @@ function commandExists(command: string): boolean {
  */
 export function handleCheckCommands(event: IpcMainEvent, eventData: CheckCommandsData): void {
   const { id, commands } = eventData;
-  const validCommands = ['minikube', 'az']; // Same list as in handleRunCommand
+  // Include all commands from BINARY_MANIFESTS plus minikube and az
+  const validCommands = [...Object.keys(BINARY_MANIFESTS), 'minikube', 'az', 'kubectl', 'helm'];
   const results: Record<string, boolean> = {};
 
   // Only check commands that are in the valid commands list
@@ -184,8 +239,8 @@ export function handleRunCommand(
     return;
   }
 
-  // Only allow "minikube", and "az" commands
-  const validCommands = ['minikube', 'az'];
+  // Allow commands from our binary manifests plus minikube and az
+  const validCommands = [...Object.keys(BINARY_MANIFESTS), 'minikube', 'az'];
 
   if (!validCommands.includes(eventData.command)) {
     console.error(
@@ -199,7 +254,105 @@ export function handleRunCommand(
     return;
   }
 
-  const child: ChildProcessWithoutNullStreams = spawn(eventData.command, eventData.args, {
+  // Check if it's a managed binary that needs installation
+  const isManagedBinary = Object.keys(BINARY_MANIFESTS).includes(eventData.command);
+  if (isManagedBinary && !binaryManager.isBinaryInstalled(eventData.command)) {
+    // Ask user if they want to install the binary
+    const resp = dialog.showMessageBoxSync(mainWindow, {
+      title: i18n.t('Install required binary'),
+      message: i18n.t(
+        'The command "{{ command }}" is not installed. Would you like to install it now?',
+        {
+          command: eventData.command,
+        }
+      ),
+      type: 'question',
+      buttons: [i18n.t('Install'), i18n.t('Cancel')],
+    });
+
+    if (resp === 0) {
+      // Show installation progress
+      const progressDialog = new BrowserWindow({
+        parent: mainWindow,
+        modal: true,
+        width: 400,
+        height: 150,
+        autoHideMenuBar: true,
+        minimizable: false,
+        maximizable: false,
+        resizable: false,
+        webPreferences: {
+          nodeIntegration: true,
+          contextIsolation: false,
+        },
+      });
+
+      // Create a simple HTML for the progress dialog
+      progressDialog.loadURL(
+        `data:text/html,
+        <html>
+          <head>
+            <style>
+              body { font-family: sans-serif; padding: 20px; }
+              progress { width: 100%; margin-top: 15px; }
+            </style>
+          </head>
+          <body>
+            <h3>Installing ${eventData.command}...</h3>
+            <progress></progress>
+            <p id="status">Downloading...</p>
+          </body>
+        </html>`
+      );
+
+      // Install the binary
+      binaryManager
+        .installBinaryByName(eventData.command)
+        .then(success => {
+          progressDialog.close();
+          if (success) {
+            // Now run the command
+            executeCommand(event, eventData);
+          } else {
+            dialog.showErrorBox(
+              i18n.t('Installation Failed'),
+              i18n.t('Failed to install {{ command }}. Please try again later.', {
+                command: eventData.command,
+              })
+            );
+          }
+        })
+        .catch(error => {
+          progressDialog.close();
+          dialog.showErrorBox(
+            i18n.t('Installation Error'),
+            i18n.t('Error installing {{ command }}: {{ error }}', {
+              command: eventData.command,
+              error: error.message,
+            })
+          );
+        });
+    }
+  } else {
+    // Binary is already installed or it's a system command, run it directly
+    executeCommand(event, eventData);
+  }
+}
+
+/**
+ * Execute a command with the given event data
+ */
+function executeCommand(event: IpcMainEvent, eventData: CommandData): void {
+  // Check if it's one of our managed binaries
+  let commandPath = eventData.command;
+  if (Object.keys(BINARY_MANIFESTS).includes(eventData.command)) {
+    if (binaryManager.isBinaryInstalledByHeadlamp(eventData.command)) {
+      commandPath = binaryManager.getBinaryPath(eventData.command);
+    } else if (binaryManager.isBinaryInSystemPath(eventData.command)) {
+      commandPath = binaryManager.getSystemBinaryPath(eventData.command) ?? eventData.command;
+    }
+  }
+  const child: ChildProcessWithoutNullStreams = spawn(commandPath, eventData.args, {
     ...eventData.options,
     shell: false,
   });
