@@ -306,6 +306,7 @@ function HomeComponent(props: HomeComponentProps) {
                 getValue: ({ name }) => versions[name]?.gitVersion || '⋯',
               },
               {
+                id: 'actions',
                 label: '',
                 getValue: () => '',
                 cellProps: {
