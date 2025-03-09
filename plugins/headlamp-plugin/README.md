@@ -65,6 +65,24 @@ headlamp-plugin --help
   headlamp-plugin.js uninstall [pluginName] Uninstall the plugin.
 ```
 
+
+## Template for installing plugins from a configuration file
+
+plugins.yaml:
+
+```yaml
+plugins:
+- name: my-plugin
+  source: https://example.com/plugin.tar.gz
+  version: 1.0.0
+  config:
+    key1: value1
+    key2: value2
+- name: another-plugin
+  source: https://github.com/org/plugin/releases/download/v1.0.0/plugin.tar.gz
+  version: latest
+```
+
 ## Development notes
 
 ### Generate types
