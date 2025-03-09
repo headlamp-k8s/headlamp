@@ -34,13 +34,13 @@ const validate = ajv.compile(pluginConfigSchema);
 /**
  * Manages multiple plugins from a configuration file.
  *
- * @param {string} [pluginsDir=process.env.PLUGINS_DIR || '/headlamp/plugins'] - The directory to install plugins to.
+ * @param {string} [pluginsDir=''] - The directory to install plugins to.
  * @param {string} [headlampVersion=''] - The version of Headlamp for compatibility checking.
  * @param {function} [progressCallback=null] - A callback function to receive progress updates.
  */
 class MultiPluginManager {
   constructor(
-    pluginsDir = process.env.PLUGINS_DIR || '/headlamp/plugins',
+    pluginsDir = '',
     headlampVersion = '',
     progressCallback = null
   ) {
@@ -61,12 +61,10 @@ class MultiPluginManager {
    * @throws {Error} If the configuration file does not exist or is invalid.
    */
   async installFromConfig(configPath) {
-    // Check if config file exists
     if (!fs.existsSync(configPath)) {
       throw new Error('Configuration file not found');
     }
 
-    // console.log('Reading configuration file', { configPath }); // enable for debugging
     const config = await this.validateConfig(configPath);
 
     const results = [];
@@ -115,12 +113,15 @@ class MultiPluginManager {
    * @returns {Promise<void>}
    */
   async installPlugin(plugin) {
-    // console.log('Installing plugin', { plugin: plugin.name }); // enable for debugging
 
-    // Install plugin
-    const params = [plugin.source, this.pluginsDir];
-    if (this.headlampVersion) params.push(this.headlampVersion);
-    if (this.progressCallback) params.push(this.progressCallback);
+    // used undefined for optional parameters if not provided,
+    // this will trigger the default values in the install function
+    const params = [
+      plugin.source, 
+      this.pluginsDir === '' ? undefined : this.pluginsDir, 
+      this.headlampVersion === '' ? undefined : this.headlampVersion, 
+      this.progressCallback === null ? undefined : this.progressCallback, 
+    ];
     await PluginManager.install(...params);
     // Apply plugin configuration if provided
     if (plugin.config) {
@@ -130,7 +131,6 @@ class MultiPluginManager {
         fs.mkdirSync(configDir, { recursive: true });
       }
       fs.writeFileSync(configPath, JSON.stringify(plugin.config, null, 2));
-      // console.log('Applied plugin configuration', { plugin: plugin.name }); // enable for debugging
     }
   }
 }
