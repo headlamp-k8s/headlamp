@@ -31,11 +31,18 @@ const pluginConfigSchema = {
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(pluginConfigSchema);
 
+/**
+ * Manages multiple plugins from a configuration file.
+ *
+ * @param {string} [pluginsDir=process.env.PLUGINS_DIR || '/headlamp/plugins'] - The directory to install plugins to.
+ * @param {string} [headlampVersion=''] - The version of Headlamp for compatibility checking.
+ * @param {function} [progressCallback=null] - A callback function to receive progress updates.
+ */
 class MultiPluginManager {
   constructor(
     pluginsDir = process.env.PLUGINS_DIR || '/headlamp/plugins',
     headlampVersion = '',
-    progressCallback = () => {}
+    progressCallback = null
   ) {
     this.pluginsDir = pluginsDir;
     this.headlampVersion = headlampVersion;
@@ -43,9 +50,15 @@ class MultiPluginManager {
   }
 
   /**
-   * Install plugins from a configuration file
-   * @param {string} configPath - Path to the configuration file
-   * @returns {Promise<Array>} Array of installation results
+   * Installs plugins from a configuration file.
+   *
+   * @param {string} configPath - Path to yaml configuration file.
+   * @returns {Promise<Array<{ name: string, status: 'success' | 'error', error?: string }>>} 
+   *          A promise resolving to an array of installation results, where each entry contains:
+   *          - `name`: Plugin name.
+   *          - `status`: `"success"` if installed successfully, `"error"` if installation failed.
+   *          - `error` (optional): Error message if installation failed.
+   * @throws {Error} If the configuration file does not exist or is invalid.
    */
   async installFromConfig(configPath) {
     // Check if config file exists
