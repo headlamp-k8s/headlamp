@@ -1458,6 +1458,15 @@ yargs(process.argv.slice(2))
           // Bulk installation from config
           console.log('Starting bulk plugin installation', { configPath: config });
           const results = await installer.installFromConfig(config);
+          if (!quiet) {
+            for (const result of results) {
+              if (result.status === 'success') {
+                console.log('Plugin installed successfully', result);
+              } else {
+                console.error('Plugin installation failed', result);
+              }
+            }
+          }
           // Log results summary
           const successful = results.filter(r => r.status === 'success').length;
           const failed = results.filter(r => r.status === 'error').length;
