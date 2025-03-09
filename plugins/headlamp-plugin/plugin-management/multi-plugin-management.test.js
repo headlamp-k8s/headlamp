@@ -1,9 +1,8 @@
 const path = require('path');
-const fs = require('fs').promises;
+const fs = require('fs');
+const fsp = require('fs').promises;
 const os = require('os');
 const MultiPluginManagement = require('./multi-plugin-management');
-const PluginManagement = require('./plugin-management');
-const PluginManager = PluginManagement.PluginManager;
 
 describe('MultiPluginManagement', () => {
   let tempDir;
@@ -12,14 +11,14 @@ describe('MultiPluginManagement', () => {
 
   beforeEach(async () => {
     // Create temporary directory for tests
-    tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'headlamp-test-'));
+    tempDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'headlamp-test-'));
     configPath = path.join(tempDir, 'plugins.yaml');
     installer = new MultiPluginManagement(tempDir);
   });
 
   afterEach(async () => {
     // Clean up temporary directory
-    await fs.rm(tempDir, { recursive: true, force: true });
+    await fsp.rm(tempDir, { recursive: true, force: true });
   });
 
   describe('validateConfig', () => {
@@ -32,8 +31,8 @@ plugins:
     config:
       key: value
 `;
-      await fs.writeFile(configPath, config);
-      
+      await fsp.writeFile(configPath, config);
+
       const result = await installer.validateConfig(configPath);
       expect(result).toBeDefined();
       expect(result.plugins).toHaveLength(1);
@@ -45,17 +44,47 @@ plugins:
 plugins:
   - source: https://example.com/plugin.tar.gz
 `;
-      await fs.writeFile(configPath, config);
-      
-      await expect(installer.validateConfig(configPath))
-        .rejects.toThrow('Configuration validation failed');
+      await fsp.writeFile(configPath, config);
+
+      await expect(installer.validateConfig(configPath)).rejects.toThrow(
+        'Configuration validation failed'
+      );
     });
   });
 
   describe('installFromConfig', () => {
+    it('should installs plugins from a configuration file', async () => {
+      const config = `
+plugins:
+  - name: test-app-catalog
+    source: https://artifacthub.io/packages/headlamp/test-123/appcatalog_headlamp_plugin
+    version: 0.5.0
+    config:
+      key: value
+`;
+      await fsp.writeFile(configPath, config);
+
+      const result = await installer.installFromConfig(configPath);
+      expect(result).toEqual([
+        {
+          name: 'test-app-catalog',
+          status: 'success',
+          error: undefined,
+        },
+      ]);
+      expect(fs.existsSync(path.join(tempDir, 'test-app-catalog'))).toBe(true);
+      expect(fs.existsSync(path.join(tempDir, 'test-app-catalog', 'config.json'))).toBe(true);
+      const configContent = JSON.parse(
+        await fsp.readFile(path.join(tempDir, 'test-app-catalog', 'config.json'), 'utf8')
+      );
+      expect(configContent).toEqual({
+        key: 'value',
+      });
+    });
     it('should handle missing configuration file', async () => {
-      await expect(installer.installFromConfig('/nonexistent/config.yaml'))
-        .rejects.toThrow('Configuration file not found');
+      await expect(installer.installFromConfig('/nonexistent/config.yaml')).rejects.toThrow(
+        'Configuration file not found'
+      );
     });
 
     it('should handle invalid source URLs', async () => {
@@ -64,14 +93,16 @@ plugins:
   - name: test-plugin
     source: invalid-url
 `;
-      await fs.writeFile(configPath, config);
-      
+      await fsp.writeFile(configPath, config);
+
       const result = await installer.installFromConfig(configPath);
-      expect(result).toEqual([{
-        name: 'test-plugin',
-        status: 'error',
-        error: 'Invalid URL. Please provide a valid URL from ArtifactHub.'
-      }]);
+      expect(result).toEqual([
+        {
+          name: 'test-plugin',
+          status: 'error',
+          error: 'Invalid URL. Please provide a valid URL from ArtifactHub.',
+        },
+      ]);
     });
   });
 
@@ -79,11 +110,10 @@ plugins:
     it('should handle plugin installation errors', async () => {
       const plugin = {
         name: 'test-plugin',
-        source: 'https://example.com/nonexistent.tar.gz'
+        source: 'https://example.com/nonexistent.tar.gz',
       };
 
-      await expect(installer.installPlugin(plugin))
-        .rejects.toThrow();
+      await expect(installer.installPlugin(plugin)).rejects.toThrow();
     });
   });
 
@@ -94,10 +124,9 @@ plugins:
   - name: test-plugin
     source: [invalid yaml
 `;
-      await fs.writeFile(configPath, invalidYaml);
-      
-      await expect(installer.installFromConfig(configPath))
-        .rejects.toThrow();
+      await fsp.writeFile(configPath, invalidYaml);
+
+      await expect(installer.installFromConfig(configPath)).rejects.toThrow();
     });
 
     it('should handle file system errors', async () => {
@@ -105,15 +134,14 @@ plugins:
         name: 'test-plugin',
         source: 'https://example.com/plugin.tar.gz',
         config: {
-          key: 'value'
-        }
+          key: 'value',
+        },
       };
 
       // Make plugins directory read-only
-      await fs.chmod(tempDir, 0o444);
-      
-      await expect(installer.installPlugin(plugin))
-        .rejects.toThrow();
+      await fsp.chmod(tempDir, 0o444);
+
+      await expect(installer.installPlugin(plugin)).rejects.toThrow();
     });
   });
 });
