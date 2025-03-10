@@ -314,6 +314,27 @@ export default function SettingsCluster() {
     );
   }
 
+  // Display the original name of the cluster if it was loaded from a kubeconfig file.
+  function ClusterName() {
+    const originalName = clusterInfo?.meta_data?.originalName;
+    const source = clusterInfo?.meta_data?.source;
+    // Note: display original name is currently only supported for non dynamic clusters from kubeconfig sources.
+    const displayOriginalName = source === 'kubeconfig' && originalName;
+
+    return (
+      <>
+        <Typography>{t('translation|Name')}</Typography>
+        {displayOriginalName && (
+          <Typography variant="body2" color="textSecondary">
+            {t('translation|Original name: {{ originalName }}', {
+              originalName: originalName,
+            })}
+          </Typography>
+        )}
+      </>
+    );
+  }
+
   return (
     <>
       <SectionBox
@@ -336,7 +357,7 @@ export default function SettingsCluster() {
           <NameValueTable
             rows={[
               {
-                name: t('translation|Name'),
+                name: <ClusterName />,
                 value: (
                   <TextField
                     onChange={event => {

@@ -73,6 +73,7 @@
   "Cluster Settings": "Impostazioni Cluster",
   "There seem to be no clusters configured…": "Sembra che non ci siano cluster configurati…",
   "Cluster {{ clusterName }} does not exist. Please select a valid cluster:": "Il cluster {{ clusterName }} non esiste. Seleziona un cluster valido:",
+  "Original name: {{ originalName }}": "",
   "Cluster Settings ({{ clusterName }})": "Impostazioni Cluster ({{ clusterName }})",
   "Go to cluster": "Vai al cluster",
   "The current name of cluster. You can define custom modified name.": "Il nome attuale del cluster. Puoi definire un nome modificato personalizzato.",

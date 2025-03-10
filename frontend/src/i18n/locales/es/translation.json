@@ -73,6 +73,7 @@
   "Cluster Settings": "",
   "There seem to be no clusters configured…": "",
   "Cluster {{ clusterName }} does not exist. Please select a valid cluster:": "",
+  "Original name: {{ originalName }}": "",
   "Cluster Settings ({{ clusterName }})": "Configuración del cluster ({{ clusterName }})",
   "Go to cluster": "",
   "The current name of cluster. You can define custom modified name.": "",
