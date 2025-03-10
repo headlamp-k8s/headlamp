@@ -18,7 +18,7 @@ const Template: StoryFn<typeof TimezoneSelect> = args => <TimezoneSelect {...arg
 
 export const Default = Template.bind({});
 Default.args = {
-  initialTimezone: 'America/New_York',
+  initialTimezone: 'Etc/Utc',
   onChange: (timezone: string) => {
     console.log(`Timezone changed to: ${timezone}`);
   },
