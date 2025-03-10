@@ -21,7 +21,7 @@
             role="combobox"
             spellcheck="false"
             type="text"
-            value="(UTC-5) America/New_York"
+            value="(UTC+0) Etc/Utc"
           />
           <div
             class="MuiAutocomplete-endAdornment css-p1olib-MuiAutocomplete-endAdornment"
