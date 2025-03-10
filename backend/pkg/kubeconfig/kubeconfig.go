@@ -45,6 +45,7 @@ type Context struct {
 	proxy       *httputil.ReverseProxy `json:"-"`
 	Internal    bool                   `json:"internal"`
 	Error       string                 `json:"error"`
+	PathName    string                 `json:"pathName"`
 }
 
 type OidcConfig struct {
@@ -345,7 +346,17 @@ func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, []Conte
 
 	skipProxySetup := source != KubeConfig
 
-	return loadContextsFromData(data, source, skipProxySetup)
+	contexts, contextErrors, err := loadContextsFromData(data, source, skipProxySetup)
+	if err != nil {
+		return nil, nil, fmt.Errorf("error loading contexts from file: %v", err)
+	}
+
+	// add the PathName to each context
+	for i := range contexts {
+		contexts[i].PathName = kubeConfigPath
+	}
+
+	return contexts, contextErrors, nil
 }
 
 // LoadContextsFromBase64String loads contexts from a base64 encoded kubeconfig string.
