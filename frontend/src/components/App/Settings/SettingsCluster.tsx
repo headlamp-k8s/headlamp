@@ -18,8 +18,12 @@ import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster, parseKubeConfig, renameCluster } from '../../../lib/k8s/apiProxy';
 import { setConfig, setStatelessConfig } from '../../../redux/configSlice';
-import { findKubeconfigByClusterName, updateStatelessClusterKubeconfig } from '../../../stateless/';
-import { Link, Loader, NameValueTable, SectionBox } from '../../common';
+import {
+  findKubeconfigByClusterName,
+  findKubeconfigByClusterPathID,
+  updateStatelessClusterKubeconfig,
+} from '../../../stateless/';
+import { ConfirmDialog, Link, Loader, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 import Empty from '../../common/EmptyContent';
 
@@ -90,6 +94,8 @@ export default function SettingsCluster() {
   const [cluster, setCluster] = React.useState(useCluster() || '');
   const clusterFromURLRef = React.useRef('');
   const [newClusterName, setNewClusterName] = React.useState(cluster || '');
+  const [clusterErrorDialogOpen, setClusterErrorDialogOpen] = React.useState(false);
+
   const theme = useTheme();
 
   const history = useHistory();
@@ -97,18 +103,30 @@ export default function SettingsCluster() {
   const location = useLocation();
 
   const clusterInfo = (clusterConf && clusterConf[cluster || '']) || null;
-  const source = clusterInfo?.meta_data?.source || '';
+  const originalName = clusterInfo?.meta_data?.originalName;
+  const displayName = originalName || (clusterInfo ? clusterInfo.name : '');
+  const source = clusterInfo?.meta_data?.source;
+  // Note: display original name is currently only supported for non dynamic clusters from kubeconfig sources.
+  const pathID = clusterInfo?.meta_data?.pathID || '';
+
+  console.log('cluster conf: ', clusterConf);
 
   const handleUpdateClusterName = (source: string) => {
     try {
-      renameCluster(cluster || '', newClusterName, source)
+      renameCluster(cluster || '', newClusterName, source, pathID)
         .then(async config => {
           if (cluster) {
-            const kubeconfig = await findKubeconfigByClusterName(cluster);
+            const kubeconfig =
+              source === 'kubeconfig'
+                ? await findKubeconfigByClusterPathID(pathID)
+                : await findKubeconfigByClusterName(cluster);
             if (kubeconfig !== null) {
               await updateStatelessClusterKubeconfig(kubeconfig, newClusterName, cluster);
               // Make another request for updated kubeconfig
-              const updatedKubeconfig = await findKubeconfigByClusterName(cluster);
+              const updatedKubeconfig =
+                source === 'kubeconfig'
+                  ? await findKubeconfigByClusterPathID(pathID)
+                  : await findKubeconfigByClusterName(cluster);
               if (updatedKubeconfig !== null) {
                 parseKubeConfig({ kubeconfig: updatedKubeconfig })
                   .then((config: any) => {
@@ -127,6 +145,7 @@ export default function SettingsCluster() {
           window.location.reload();
         })
         .catch((err: Error) => {
+          setClusterErrorDialogOpen(true);
           console.error('Error updating cluster name:', err.message);
         });
     } catch (error) {
@@ -314,20 +333,38 @@ export default function SettingsCluster() {
     );
   }
 
+  function ClusterErrorDialog() {
+    return (
+      <ConfirmDialog
+        onConfirm={() => {
+          setClusterErrorDialogOpen(false);
+        }}
+        handleClose={() => {
+          setClusterErrorDialogOpen(false);
+        }}
+        disableNoButton
+        open={clusterErrorDialogOpen}
+        title={t('translation|Invalid custom name')}
+        description={t(
+          'translation|Custom names must be unique and follow valid format for cluster rename. '
+        )}
+        confirmLabel={t('translation|Okay')}
+      >
+        {t('translation|Close')}
+      </ConfirmDialog>
+    );
+  }
+
   // Display the original name of the cluster if it was loaded from a kubeconfig file.
   function ClusterName() {
-    const originalName = clusterInfo?.meta_data?.originalName;
-    const source = clusterInfo?.meta_data?.source;
-    // Note: display original name is currently only supported for non dynamic clusters from kubeconfig sources.
-    const displayOriginalName = source === 'kubeconfig' && originalName;
-
     return (
       <>
+        {clusterErrorDialogOpen && <ClusterErrorDialog />}
         <Typography>{t('translation|Name')}</Typography>
-        {displayOriginalName && (
+        {displayName && (
           <Typography variant="body2" color="textSecondary">
-            {t('translation|Original name: {{ originalName }}', {
-              originalName: originalName,
+            {t('translation|Original name: {{ displayName }}', {
+              displayName: displayName,
             })}
           </Typography>
         )}
@@ -387,7 +424,7 @@ export default function SettingsCluster() {
                             confirmTitle={t('translation|Change name')}
                             confirmDescription={t(
                               'translation|Are you sure you want to change the name for "{{ clusterName }}"?',
-                              { clusterName: cluster }
+                              { clusterName: displayName }
                             )}
                             disabled={!newClusterName || !isValidCurrentName}
                           >

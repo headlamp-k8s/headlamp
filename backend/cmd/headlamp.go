@@ -1195,11 +1195,7 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 
 		source := context.SourceStr()
 
-		// find the file name from the kubeconfig path
-		fileName := filepath.Base(kubeconfigPath)
-
-		// create the pathID string using a pipe as the delimiter
-		pathID := fmt.Sprintf("%s:%s:%s", context.SourceStr(), fileName, context.Name)
+		pathID := context.PathID
 
 		clusters = append(clusters, Cluster{
 			Name:     context.Name,
@@ -1512,7 +1508,8 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 	c.getConfig(w, r)
 }
 
-// Get path of kubeconfig from source.
+// Get path of kubeconfig weload headlamp with from source.
+// Note: This will always give the kubeconfig we loaded headlamp with, but if we have more than one, it's not clear this will yield the correct value.
 func (c *HeadlampConfig) getKubeConfigPath(source string) (string, error) {
 	if source == "kubeconfig" {
 		return c.kubeConfigPath, nil
@@ -1520,6 +1517,8 @@ func (c *HeadlampConfig) getKubeConfigPath(source string) (string, error) {
 
 	return defaultKubeConfigPersistenceFile()
 }
+
+
 
 // Handler for renaming a stateless cluster.
 func (c *HeadlampConfig) handleStatelessClusterRename(w http.ResponseWriter, r *http.Request, clusterName string) {
@@ -1602,7 +1601,25 @@ func (c *HeadlampConfig) updateCustomContextToCache(config *api.Config, clusterN
 }
 
 // getPathAndLoadKubeconfig gets the path of the kubeconfig file and loads it.
-func (c *HeadlampConfig) getPathAndLoadKubeconfig(source, clusterName string) (string, *api.Config, error) {
+func (c *HeadlampConfig) getPathAndLoadKubeconfig(source, clusterName string, loadPath string) (string, *api.Config, error) {
+
+	var usePath string
+	var kubeConfig *api.Config
+
+	if source == "kubeconfig" {
+	// Load kubeconfig file
+	config, err := clientcmd.LoadFromFile(loadPath)
+	if err != nil {
+		logger.Log(logger.LevelError, map[string]string{"cluster": clusterName},
+			err, "loading kubeconfig file")
+
+		return "", nil, err
+	}
+	
+	usePath = loadPath
+	kubeConfig = config
+
+	} else {
 	// Get path of kubeconfig from source
 	path, err := c.getKubeConfigPath(source)
 	if err != nil {
@@ -1621,13 +1638,20 @@ func (c *HeadlampConfig) getPathAndLoadKubeconfig(source, clusterName string) (s
 		return "", nil, err
 	}
 
-	return path, config, nil
+	usePath = path
+	kubeConfig = config
+	}
+
+	return usePath, kubeConfig, nil
 }
 
 // Handler for renaming a cluster.
 func (c *HeadlampConfig) renameCluster(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	clusterName := vars["name"]
+	parts := strings.SplitN(r.URL.Query().Get("clusterPathID"), ":", 2)
+	configPath := parts[0]
+
 	// Parse request body.
 	var reqBody RenameClusterRequest
 	if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil {
@@ -1637,42 +1661,36 @@ func (c *HeadlampConfig) renameCluster(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
-
+	
 	if reqBody.Stateless {
 		// For stateless clusters we just need to remove cluster from cache
 		c.handleStatelessClusterRename(w, r, clusterName)
-
+		
 		return
+	}
+	
+	var loadPath string
+	if reqBody.Source == "kubeconfig" {
+		loadPath = configPath
 	}
 
 	// Get path of kubeconfig from source
-	path, config, err := c.getPathAndLoadKubeconfig(reqBody.Source, clusterName)
+	path, config, err := c.getPathAndLoadKubeconfig(reqBody.Source, clusterName, loadPath)
 	if err != nil {
 		http.Error(w, "getting kubeconfig file", http.StatusInternalServerError)
 		return
 	}
 
-	// Find the context with the given cluster name
-	contextName := clusterName
+	isUnique := checkUniqueName(config, clusterName, reqBody.NewClusterName)
+	if !isUnique {
+		http.Error(w, "custom name already in use", http.StatusBadRequest)
+		logger.Log(logger.LevelError, map[string]string{"cluster": clusterName},
+			err, "cluster name already exists in the kubeconfig")
 
-	// Iterate over the contexts to find the context with the given cluster name
-	for k, v := range config.Contexts {
-		info := v.Extensions["headlamp_info"]
-		if info != nil {
-			customObj, err := MarshalCustomObject(info, contextName)
-			if err != nil {
-				logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
-					err, "marshaling custom object")
-
-				return
-			}
-
-			// Check if the CustomName field matches the cluster name
-			if customObj.CustomName != "" && customObj.CustomName == clusterName {
-				contextName = k
-			}
-		}
+		return
 	}
+
+	contextName := findMatchingContextName(config, clusterName)
 
 	if err := customNameToExtenstions(config, contextName, reqBody.NewClusterName, path); err != nil {
 		http.Error(w, "writing custom extension to kubeconfig", http.StatusInternalServerError)
@@ -1686,6 +1704,85 @@ func (c *HeadlampConfig) renameCluster(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusCreated)
 	c.getConfig(w, r)
+}
+
+// findMatchingContextName checks all contexts, returning the key for whichever
+// has a matching customObj.CustomName, if any.
+func findMatchingContextName(config *api.Config, clusterName string) string {
+	contextName := clusterName
+
+	for k, v := range config.Contexts {
+		info := v.Extensions["headlamp_info"]
+		if info != nil {
+			customObj, err := MarshalCustomObject(info, contextName)
+			if err != nil {
+				logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+					err, "marshaling custom object")
+				continue
+			}
+
+			if customObj.CustomName == clusterName && customObj.CustomName != "" {
+				contextName = k
+			}
+		}
+	}
+
+	return contextName
+}
+
+// checkUniqueName returns false if 'newName' is already in 'names';
+// otherwise returns true.
+func checkUniqueName(config *api.Config, contextName string, newName string) bool {
+	contextNames := make([]string, 0, len(config.Contexts))
+
+	for name := range config.Contexts {
+		contextNames = append(contextNames, name)
+		logger.Log(logger.LevelInfo, map[string]string{"cluster added": name},
+			nil, "context name")
+	}
+
+	// Iterate over the contexts and add the custom names
+	for _, y := range config.Contexts {
+		info := y.Extensions["headlamp_info"]
+		if info != nil {
+			customObj, err := MarshalCustomObject(info, contextName)
+			if err != nil {
+				logger.Log(logger.LevelError, map[string]string{"cluster": contextName},
+					err, "marshaling custom object")
+			}
+
+			// add custom name if it is not empty
+			if customObj.CustomName != "" {
+				contextNames = append(contextNames, customObj.CustomName)
+			}
+		}
+	}
+
+	for _, current := range contextNames {
+		logger.Log(
+			logger.LevelInfo,
+			map[string]string{
+				"message": fmt.Sprintf("NOW COMPARING ******** %s to %s", current, newName),
+			},
+			nil,
+			"comparing cluster names",
+		)
+
+		if current == newName {
+			logger.Log(
+				logger.LevelInfo,
+				map[string]string{
+					"message": fmt.Sprintf("DUPLICATE NAME **********: %s", current),
+				},
+				nil,
+				"cluster name already in use",
+			)
+
+			return false
+		}
+	}
+
+	return true
 }
 
 func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {

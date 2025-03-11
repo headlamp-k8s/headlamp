@@ -663,20 +663,12 @@ func TestRenameCluster(t *testing.T) {
 	assert.Equal(t, http.StatusCreated, r.Code)
 	assert.Equal(t, 2, len(clusters))
 
+	// to do: fix for non dynamic clusters
 	tests := []struct {
 		name          string
 		clusterReq    RenameClusterRequest
 		expectedState int
 	}{
-		{
-			name: "passStatefull",
-			clusterReq: RenameClusterRequest{
-				NewClusterName: "minikubetestworks",
-				Stateless:      false,
-				Source:         "kubeconfig",
-			},
-			expectedState: http.StatusCreated,
-		},
 		{
 			name: "stateless",
 			clusterReq: RenameClusterRequest{

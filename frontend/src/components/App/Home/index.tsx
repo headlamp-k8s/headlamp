@@ -230,6 +230,7 @@ function HomeComponent(props: HomeComponentProps) {
   }, [customNameClusters]);
 
   function getClusterNames() {
+    console.log('$$$$$$$$$$', clusters);
     return Object.values(clusters)
       .map(c => ({
         ...c,
@@ -245,6 +246,7 @@ function HomeComponent(props: HomeComponentProps) {
    * @returns A description of where the cluster is picked up from: dynamic, in-cluster, or from a kubeconfig file.
    */
   function getOrigin(cluster: Cluster): string {
+    console.log('origin cluster: ', cluster);
     if (cluster.meta_data?.source === 'kubeconfig') {
       const sourcePath = cluster.meta_data?.origin?.kubeconfig;
       return `Kubeconfig: ${sourcePath}`;
@@ -254,6 +256,34 @@ function HomeComponent(props: HomeComponentProps) {
       return t('translation|In-cluster');
     }
     return 'Unknown';
+  }
+
+  function getDisplayName(cluster: Cluster) {
+    console.log('other cluster: ', cluster);
+
+    if (cluster.meta_data?.extensions?.headlamp_info?.customName) {
+      return cluster.meta_data.extensions.headlamp_info.customName + '#';
+    } else {
+      return cluster.name;
+    }
+  }
+
+  function ClusterName(cluster: any) {
+    console.log('READ CLUSTER: ', cluster);
+
+    if (!cluster) {
+      return null;
+    }
+
+    // const isRenamed = !!cluster.meta_data?.extensions?.headlamp_info?.customName;
+    // const displayName = cluster.meta_data?.extensions?.headlamp_info?.customName || cluster.name;
+    // const pathID = cluster.meta_data?.origin?.kubeconfig || cluster.name;
+
+    // return (
+    //   <Link routeName="cluster" params={{ cluster: cluster.name }}>
+    //     {displayName} - {pathID} {isRenamed ? '(renamed)' : ''}
+    //   </Link>
+    // )
   }
 
   const memoizedComponent = React.useMemo(
@@ -283,6 +313,12 @@ function HomeComponent(props: HomeComponentProps) {
                     {name}
                   </Link>
                 ),
+              },
+              {
+                id: 'name',
+                label: t('Name'),
+                getValue: cluster => getDisplayName(cluster),
+                render: ({ cluster }) => <ClusterName cluster={cluster} />,
               },
               {
                 label: t('Origin'),
