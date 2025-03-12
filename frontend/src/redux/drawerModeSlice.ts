@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface DrawerModeState {
+export interface DrawerModeState {
   isDetailDrawerEnabled: boolean;
   selectedResource: { kind: string; metadata: { name: string; namespace?: string } } | undefined;
 }
