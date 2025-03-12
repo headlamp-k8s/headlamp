@@ -19,7 +19,7 @@ export interface IconDefinition {
   color?: string;
 }
 
-interface GraphViewSliceState {
+export interface GraphViewSliceState {
   graphSources: GraphSource[];
   kindIcons: Record<string, IconDefinition>;
 }
