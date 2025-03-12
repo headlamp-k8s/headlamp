@@ -11,7 +11,7 @@ export interface OverviewChartsProcessor {
   processor: (charts: OverviewChart[]) => OverviewChart[];
 }
 
-interface OverviewChartsState {
+export interface OverviewChartsState {
   processors: OverviewChartsProcessor[];
 }
 

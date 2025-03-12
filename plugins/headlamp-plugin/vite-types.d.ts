@@ -9,6 +9,8 @@ declare module '*.svg?react' {
 
 declare const vi: any;
 
+declare module 'vitest';
+
 interface ImportMeta {
   env: any;
   glob: any;
