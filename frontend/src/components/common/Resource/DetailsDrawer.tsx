@@ -51,7 +51,14 @@ export default function DetailsDrawer() {
           >
             <ActionButton onClick={() => closeDrawer()} icon="mdi:close" description={t('Close')} />
           </Box>
-          <Box>{selectedResource && <KubeObjectDetails resource={selectedResource} />}</Box>
+          <Box>
+            {selectedResource && (
+              <KubeObjectDetails
+                resource={{ kind: selectedResource.kind, metadata: selectedResource.metadata }}
+                customResourceDefinition={selectedResource.customResourceDefinition}
+              />
+            )}
+          </Box>
         </Box>
       </Drawer>
     )
