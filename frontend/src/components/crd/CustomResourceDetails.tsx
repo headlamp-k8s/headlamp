@@ -2,10 +2,7 @@ import { JSONPath } from 'jsonpath-plus';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { ResourceClasses } from '../../lib/k8s';
-import { ApiError } from '../../lib/k8s/apiProxy';
 import CustomResourceDefinition, { KubeCRD } from '../../lib/k8s/crd';
-import { KubeObject } from '../../lib/k8s/KubeObject';
 import { localeDate } from '../../lib/util';
 import { HoverInfoLabel, Link, NameValueTableRow, ObjectEventList, SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
@@ -25,17 +22,15 @@ export interface CustomResourceDetailsProps {
   namespace: string;
 }
 
-export function CustomResourceDetails(props: CustomResourceDetailsProps) {
-  const { crd: crdName, crName, namespace: ns } = props;
-  const [crd, setCRD] = React.useState<CustomResourceDefinition | null>(null);
-  const [error, setError] = React.useState<ApiError | null>(null);
-
+export function CustomResourceDetails({
+  crd: crdName,
+  crName,
+  namespace: ns,
+}: CustomResourceDetailsProps) {
   const { t } = useTranslation('glossary');
+  const [crd, error] = CustomResourceDefinition.useGet(crdName);
 
   const namespace = ns === '-' ? undefined : ns;
-  const CRD = ResourceClasses.CustomResourceDefinition;
-
-  CRD.useApiGet(setCRD, crdName, undefined, setError);
 
   return !crd ? (
     !!error ? (
@@ -110,16 +105,11 @@ export interface CustomResourceDetailsRendererProps {
 
 function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps) {
   const { crd, crName, namespace } = props;
-  const [item, setItem] = React.useState<KubeObject | null>(null);
-  const [error, setError] = React.useState<ApiError | null>(null);
 
   const { t } = useTranslation('glossary');
 
-  const CRClass = React.useMemo(() => {
-    return crd.makeCRClass();
-  }, [crd]);
-
-  CRClass.useApiGet(setItem, crName, namespace, setError);
+  const CRClass = React.useMemo(() => crd.makeCRClass(), [crd]);
+  const [item, error] = CRClass.useGet(crName, namespace);
 
   const apiVersion = item?.jsonData.apiVersion?.split('/')[1] || '';
   const extraColumns: AdditionalPrinterColumns = getExtraColumns(crd, apiVersion) || [];
