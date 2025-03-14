@@ -28,8 +28,6 @@ plugins:
   - name: test-plugin
     source: https://example.com/plugin.tar.gz
     version: 1.0.0
-    config:
-      key: value
 `;
       await fsp.writeFile(configPath, config);
 
@@ -56,11 +54,9 @@ plugins:
     it('should installs plugins from a configuration file', async () => {
       const config = `
 plugins:
-  - name: test-app-catalog
+  - name: test-app-catalog  
     source: https://artifacthub.io/packages/headlamp/test-123/appcatalog_headlamp_plugin
     version: 0.5.0
-    config:
-      key: value
 `;
       await fsp.writeFile(configPath, config);
 
@@ -73,13 +69,6 @@ plugins:
         },
       ]);
       expect(fs.existsSync(path.join(tempDir, 'test-app-catalog'))).toBe(true);
-      expect(fs.existsSync(path.join(tempDir, 'test-app-catalog', 'config.json'))).toBe(true);
-      const configContent = JSON.parse(
-        await fsp.readFile(path.join(tempDir, 'test-app-catalog', 'config.json'), 'utf8')
-      );
-      expect(configContent).toEqual({
-        key: 'value',
-      });
     });
     it('should handle missing configuration file', async () => {
       await expect(installer.installFromConfig('/nonexistent/config.yaml')).rejects.toThrow(
@@ -133,9 +122,6 @@ plugins:
       const plugin = {
         name: 'test-plugin',
         source: 'https://example.com/plugin.tar.gz',
-        config: {
-          key: 'value',
-        },
       };
 
       // Make plugins directory read-only

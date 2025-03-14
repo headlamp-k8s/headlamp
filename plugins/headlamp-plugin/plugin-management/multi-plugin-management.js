@@ -125,12 +125,7 @@ class MultiPluginManager {
     await PluginManager.install(...params);
     // Apply plugin configuration if provided
     if (plugin.config) {
-      const configPath = path.join(this.pluginsDir, plugin.name, 'config.json');
-      const configDir = path.dirname(configPath);
-      if (!fs.existsSync(configDir)) {
-        fs.mkdirSync(configDir, { recursive: true });
-      }
-      fs.writeFileSync(configPath, JSON.stringify(plugin.config, null, 2));
+      // TODO: add plugin level config support
     }
   }
 }
