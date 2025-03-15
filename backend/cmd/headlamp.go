@@ -32,6 +32,7 @@ import (
 	"github.com/headlamp-k8s/headlamp/backend/pkg/logger"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/plugins"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/portforward"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/telemetry"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -48,6 +49,8 @@ type HeadlampConfig struct {
 	enableHelm            bool
 	enableDynamicClusters bool
 	port                  uint
+	telemetry             *telemetry.Telemetry
+	metrics               *telemetry.Metrics
 	kubeConfigPath        string
 	staticDir             string
 	pluginDir             string
@@ -929,7 +932,56 @@ func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Hand
 	})
 }
 
+func initializeTelemetry(config *HeadlampConfig) {
+	telemetryCfg := telemetry.DefaultConfig()
+	telemetryCfg.ServiceName = "headlamp-server"
+	telemetryCfg.ServiceVersion = "1.0.0"
+
+	if config.devMode {
+		telemetryCfg.StdoutTraceEnabled = true
+	}
+
+	tel, err := telemetry.NewTelemetry(telemetryCfg)
+	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "Failed to initialize telemetry")
+	}
+
+	config.telemetry = tel
+
+	if telemetryCfg.MetricsEnabled && telemetryCfg.PrometheusPort > 0 {
+		_, err := telemetry.StartMetricsServer(telemetryCfg.PrometheusPort)
+		if err != nil {
+			logger.Log(logger.LevelError, nil, err, "Failed to start metrics server")
+		}
+	}
+
+	metrics, err := telemetry.NewMetrics()
+	if err != nil {
+		logger.Log(logger.LevelError, nil, err, "Failed to initialize metrics")
+	} else {
+		config.metrics = metrics
+	}
+
+	defer func() {
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+
+		if err := tel.Shutdown(shutdownCtx); err != nil {
+			logger.Log(logger.LevelError, nil, err, "Failed to properly shutdown telemetry")
+		}
+	}()
+}
+
 func StartHeadlampServer(config *HeadlampConfig) {
+	initializeTelemetry(config)
+
+	router := mux.NewRouter()
+
+	if config.telemetry != nil && config.metrics != nil {
+		router.Use(telemetry.TracingMiddleware("headlamp-server"))
+		router.Use(config.metrics.RequestCounterMiddleware)
+	}
+
 	// Copy static files as squashFS is read-only (AppImage)
 	if config.staticDir != "" {
 		dir, err := os.MkdirTemp(os.TempDir(), ".headlamp")
