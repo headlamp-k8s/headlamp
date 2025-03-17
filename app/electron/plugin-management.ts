@@ -378,6 +378,8 @@ function validateArchiveURL(archiveURL) {
   const githubRegex = /^https:\/\/github\.com\/[^/]+\/[^/]+\/(releases|archive)\/.*$/;
   const bitbucketRegex = /^https:\/\/bitbucket\.org\/[^/]+\/[^/]+\/(downloads|get)\/.*$/;
   const gitlabRegex = /^https:\/\/gitlab\.com\/[^/]+\/[^/]+\/(-\/archive|releases)\/.*$/;
+  // For testing purposes, we allow localhost URLs.
+  const localRegex = /^https?:\/\/localhost(:\d+)?\/.*$/;
 
   // @todo There is a test plugin at https://github.com/yolossn/headlamp-plugins/
   // need to move that somewhere else, or test differently.
@@ -386,6 +388,7 @@ function validateArchiveURL(archiveURL) {
     githubRegex.test(archiveURL) ||
     bitbucketRegex.test(archiveURL) ||
     gitlabRegex.test(archiveURL) ||
+    localRegex.test(archiveURL) ||
     archiveURL.startsWith('https://github.com/yolossn/headlamp-plugins/')
   );
 }
