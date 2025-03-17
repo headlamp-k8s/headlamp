@@ -52,10 +52,30 @@ headlamp-plugin --help
                                             working directory. Can also be a
                                             folder of packages.
   headlamp-plugin.js list                   List installed plugins.
-  headlamp-plugin.js install [URL]          Install a plugin from the specified
-                                            Artifact Hub URL.
+  headlamp-plugin.js Install                Install plugin(s) from a configuration
+                                            file or a plugin Artifact Hub URL.
+                                            Options:
+                                            -c, --config: Path to config file
+                                            -s, --source: Plugin Artifact Hub URL
+                                            --folderName: Install folder name
+                                            --headlampVersion: Target version
+                                            -q, --quiet: Suppress logs
   headlamp-plugin.js update [pluginName]    Update the plugin to the latest version.
   headlamp-plugin.js uninstall [pluginName] Uninstall the plugin.
+```
+
+
+## Template for installing plugins from a configuration file
+
+plugins.yaml:
+
+```yaml
+plugins:
+- name: my-plugin
+  source: https://example.com/plugin.tar.gz
+  version: 1.0.0
+- name: another-plugin
+  source: https://github.com/org/plugin/releases/download/v1.0.0/plugin.tar.gz
 ```
 
 ## Development notes
