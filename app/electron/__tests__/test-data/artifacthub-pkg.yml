@@ -1,0 +1,32 @@
+version: 0.1.0
+name: headlamp_minikube
+displayName: Minikube
+createdAt: '2024-11-08T10:00:00Z'
+logoURL: 'https://minikube.sigs.k8s.io/images/logo/logo.png'
+description: A Headlamp plugin for managing Minikube clusters
+annotations:
+  headlamp/plugin/archive-url: 'https://github.com/headlamp-k8s/plugins/releases/download/example-change-logo-0.0.1/change-logo-0.0.1.tar.gz'
+  headlamp/plugin/archive-checksum: 'SHA256:8a2a23d116fe175b4350ffc6cc259781ed98d943f932e30fc5c8fe4e07b86e89'
+  headlamp/plugin/version-compat: '>=0.30'
+  headlamp/plugin/distro-compat: 'in-cluster,web,docker-desktop,desktop'
+
+  # Platform-specific archives contain the minikube binary for each platform
+  # Linux x64
+  headlamp/plugin/archive-url:linux:x64: 'https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64.tar.gz'
+  headlamp/plugin/archive-checksum:linux:x64: 'SHA256:a2bbc6e3d6e9ae26e2e7ff82d6a0e35e2343e43db75b79ab70788d3268599bbc'
+
+  # Linux arm64
+  headlamp/plugin/archive-url:linux:arm64: 'https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64.tar.gz'
+  headlamp/plugin/archive-checksum:linux:arm64: 'SHA256:87e7eba3e546f0a27c15bac5dd7996a1a4b1b87c99e4f10f539ab6b8bb82b82e'
+
+  # macOS x64
+  headlamp/plugin/archive-url:darwin:x64: 'https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64.tar.gz'
+  headlamp/plugin/archive-checksum:darwin:x64: 'SHA256:f245a018ae8a25edbb91fb7b2c33be57a1aa82a51c7d9a7173d3c2d59ea49e0b'
+
+  # macOS arm64
+  headlamp/plugin/archive-url:darwin:arm64: 'https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64.tar.gz'
+  headlamp/plugin/archive-checksum:darwin:arm64: 'SHA256:aaccb51710457ac2ac49c7fe8b679ebd5e8078ad9fd23b57a9f1bf9cb0b15c63'
+
+  # Windows x64
+  headlamp/plugin/archive-url:win32:x64: 'https://storage.googleapis.com/minikube/releases/latest/minikube-windows-amd64.tar.gz'
+  headlamp/plugin/archive-checksum:win32:x64: 'SHA256:da908de5029e09de354ad343006648b830c36162514246b0ac2f99a2b79fef96'
