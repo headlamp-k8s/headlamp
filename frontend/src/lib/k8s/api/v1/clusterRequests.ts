@@ -76,7 +76,7 @@ export async function request(
   path: string,
   params: RequestParams = {},
   autoLogoutOnAuthError: boolean = true,
-  useCluster: boolean = true,
+  useCluster: boolean = false,
   queryParams?: QueryParameters
 ): Promise<any> {
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
