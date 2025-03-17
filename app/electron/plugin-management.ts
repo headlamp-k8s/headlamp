@@ -462,7 +462,14 @@ async function downloadExtractArchive(
   }
 
   // await sleep(4000); // comment out for testing
-  const archResponse = await fetch(archiveURL, { redirect: 'follow', signal });
+  let archResponse;
+
+  try {
+    archResponse = await fetch(archiveURL, { redirect: 'follow', signal });
+  } catch (err) {
+    throw new Error('Failed to fetch archive. Please check the URL and your network connection.');
+  }
+
   if (!archResponse.ok) {
     throw new Error(`Failed to download tarball. Status code: ${archResponse.status}`);
   }
