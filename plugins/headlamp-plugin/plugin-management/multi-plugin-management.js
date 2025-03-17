@@ -1,4 +1,3 @@
-const path = require('path');
 const fs = require('fs');
 const PluginManagement = require('./plugin-management');
 const  PluginManager = PluginManagement.PluginManager;
@@ -19,10 +18,6 @@ const pluginConfigSchema = {
           name: { type: 'string' },
           source: { type: 'string' },
           version: { type: 'string' }, // Defaults to latest
-          config: {
-            type: 'object',
-            additionalProperties: true,
-          },
         },
       },
     },
@@ -36,7 +31,7 @@ const validate = ajv.compile(pluginConfigSchema);
  *
  * @param {string} [pluginsDir=''] - The directory to install plugins to.
  * @param {string} [headlampVersion=''] - The version of Headlamp for compatibility checking.
- * @param {function} [progressCallback=null] - A callback function to receive progress updates.
+ * @param {function} [progressCallback=null] - Optional callback for progress updates.
  */
 class MultiPluginManager {
   constructor(
@@ -120,13 +115,10 @@ class MultiPluginManager {
       plugin.source, 
       this.pluginsDir === '' ? undefined : this.pluginsDir, 
       this.headlampVersion === '' ? undefined : this.headlampVersion, 
-      this.progressCallback === null ? undefined : this.progressCallback, 
+      this.progressCallback === null ? undefined : this.progressCallback,
+      plugin.version === '' ? undefined : plugin.version,
     ];
     await PluginManager.install(...params);
-    // Apply plugin configuration if provided
-    if (plugin.config) {
-      // TODO: add plugin level config support
-    }
   }
 }
 
