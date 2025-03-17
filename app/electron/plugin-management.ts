@@ -483,7 +483,7 @@ async function downloadExtractArchive(
   }
 
   const archChunks: Uint8Array[] = [];
-  let archBufferLengeth = 0;
+  let archBufferLength = 0;
 
   if (!archResponse.body) {
     throw new Error('Download empty');
@@ -491,10 +491,10 @@ async function downloadExtractArchive(
 
   for await (const chunk of archResponse.body) {
     archChunks.push(chunk);
-    archBufferLengeth += chunk.length;
+    archBufferLength += chunk.length;
   }
 
-  const archBuffer = Buffer.concat(archChunks, archBufferLengeth);
+  const archBuffer = Buffer.concat(archChunks, archBufferLength);
 
   const archiveChecksum = crypto.createHash('sha256').update(archBuffer).digest('hex');
 
