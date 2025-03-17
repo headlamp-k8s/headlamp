@@ -479,7 +479,6 @@ async function fetchPluginInfo(URL, progressCallback, signal, pluginVersion) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     let pluginInfo = await response.json();
-
     if (pluginVersion && pluginVersion !== pluginInfo.version) {
       if (!pluginInfo.available_versions.map(v => v.version).includes(pluginVersion)) {
         throw new Error(

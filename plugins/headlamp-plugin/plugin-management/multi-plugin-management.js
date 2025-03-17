@@ -116,6 +116,7 @@ class MultiPluginManager {
       this.pluginsDir === '' ? undefined : this.pluginsDir, 
       this.headlampVersion === '' ? undefined : this.headlampVersion, 
       this.progressCallback === null ? undefined : this.progressCallback,
+      null, // signal
       plugin.version === '' ? undefined : plugin.version,
     ];
     await PluginManager.install(...params);
