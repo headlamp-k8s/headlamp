@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const fsp = require('fs').promises;
 const os = require('os');
-const MultiPluginManagement = require('./multi-plugin-management');
+const MultiPluginManager = require('./multi-plugin-management');
 
 describe('MultiPluginManagement', () => {
   let tempDir;
@@ -13,7 +13,7 @@ describe('MultiPluginManagement', () => {
     // Create temporary directory for tests
     tempDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'headlamp-test-'));
     configPath = path.join(tempDir, 'plugins.yaml');
-    installer = new MultiPluginManagement(tempDir);
+    installer = new MultiPluginManager(tempDir);
   });
 
   afterEach(async () => {

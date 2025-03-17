@@ -57,7 +57,6 @@ headlamp-plugin --help
                                             Options:
                                             -c, --config: Path to config file
                                             -s, --source: Plugin Artifact Hub URL
-                                            --config-json: JSON config string
                                             --folderName: Install folder name
                                             --headlampVersion: Target version
                                             -q, --quiet: Suppress logs
@@ -75,12 +74,8 @@ plugins:
 - name: my-plugin
   source: https://example.com/plugin.tar.gz
   version: 1.0.0
-  config:
-    key1: value1
-    key2: value2
 - name: another-plugin
   source: https://github.com/org/plugin/releases/download/v1.0.0/plugin.tar.gz
-  version: latest
 ```
 
 ## Development notes

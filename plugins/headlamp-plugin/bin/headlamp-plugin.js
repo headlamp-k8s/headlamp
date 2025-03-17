@@ -1428,11 +1428,6 @@ yargs(process.argv.slice(2))
           alias: 's',
           describe: 'Plugin artifact Hub URL (for single plugin installation)',
           type: 'string',
-        })
-        .option('config-json', {
-          describe:
-            'A JSON string containing plugin configuration (for single plugin installation)',
-          type: 'string',
         });
     },
     async argv => {
@@ -1454,7 +1449,7 @@ yargs(process.argv.slice(2))
             process.exit(1); // Exit with error status
           }
         } else if (config) {
-          const installer = new MultiPluginManager(folderName, headlampVersion, progressCallback);
+          const installer = new MultiPluginManager(folderName, headlampVersion);
           // Bulk installation from config
           console.log('Starting bulk plugin installation', { configPath: config });
           const results = await installer.installFromConfig(config);
