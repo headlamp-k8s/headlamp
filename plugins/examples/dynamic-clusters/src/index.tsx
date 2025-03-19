@@ -42,7 +42,7 @@ function ClusterCreationButton() {
       const isValidKubeconfig = (base64Kubeconfig: string): string | null => {
         try {
           // Decode the base64-encoded kubeconfig
-          const kubeconfig = Buffer.from(base64Kubeconfig, 'base64').toString('utf-8');
+          const kubeconfig = atob(base64Kubeconfig);
 
           // Attempt to parse the kubeconfig as YAML
           const kubeconfigObject: any = yaml.load(kubeconfig);
