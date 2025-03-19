@@ -838,7 +838,13 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
   function resetPackageLock() {
     if (fs.existsSync('node_modules')) {
       console.log(`Resetting node_modules folder for more robust package upgrade...`);
-      fs.rm('node_modules', { recursive: true });
+      // Remove the node_modules folder
+      fs.rmSync('node_modules', { recursive: true });
+
+      if (fs.existsSync('node_modules')) {
+        console.error(`Failed to remove node_modules folder.`);
+        return false;
+      }
     }
     if (fs.existsSync('package-lock.json')) {
       console.log(`Resetting package-lock.json file for more robust package upgrade...`);
@@ -919,6 +925,10 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
     let failed = false;
     let reason = '';
     if (skipPackageUpdates !== true) {
+      if (!failed && !removeEslintConfig()) {
+        failed = true;
+        reason = 'removing @headlamp-k8s/eslint-config failed.';
+      }
       if (!failed && !resetPackageLock()) {
         failed = true;
         reason = 'resetting package-lock.json and node_modules failed.';
@@ -926,10 +936,6 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
       if (!failed && !upgradeHeadlampPlugin()) {
         failed = true;
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
-      }
-      if (!failed && !removeEslintConfig()) {
-        failed = true;
-        reason = 'removing @headlamp-k8s/eslint-config failed.';
       }
       if (!failed && !upgradeMui()) {
         failed = true;
