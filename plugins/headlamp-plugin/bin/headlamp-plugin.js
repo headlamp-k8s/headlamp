@@ -871,12 +871,14 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
   }
 
   /**
-   * Upgrades "@headlamp-k8s/eslint-config" dependency to latest or given version.
+   * Removes "@headlamp-k8s/eslint-config" dependency if it is there.
+   *
+   * It is a transitive dependency of "@kinvolk/headlamp-plugin", and
+   * does not need to be there anymore.
    *
    * @returns true unless there is a problem with the upgrade.
    */
-  function upgradeEslintConfig() {
-    const theTag = 'latest';
+  function removeEslintConfig() {
     const packageJsonPath = path.join('.', 'package.json');
     let packageJson = {};
     try {
@@ -886,12 +888,9 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
       return false;
     }
     const oldVersion = packageJson.devDependencies['@headlamp-k8s/eslint-config'];
-    if (
-      oldVersion === undefined ||
-      '@headlamp-k8s/eslint-config' in getNpmOutdated() ||
-      !fs.existsSync('node_modules')
-    ) {
-      const cmd = `npm install -D @headlamp-k8s/eslint-config@${theTag} --save`;
+    // remove @headlamp-k8s/eslint-config if it is there
+    if (oldVersion) {
+      const cmd = `npm remove @headlamp-k8s/eslint-config --save`;
       if (runCmd(cmd, '.')) {
         return false;
       }
@@ -928,9 +927,9 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
         failed = true;
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
       }
-      if (!failed && !upgradeEslintConfig()) {
+      if (!failed && !removeEslintConfig()) {
         failed = true;
-        reason = 'upgrading @headlamp-k8s/eslint-config failed.';
+        reason = 'removing @headlamp-k8s/eslint-config failed.';
       }
       if (!failed && !upgradeMui()) {
         failed = true;
