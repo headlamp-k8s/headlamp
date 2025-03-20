@@ -6,6 +6,7 @@ describe('themeSlice', () => {
   const initialState: ThemeState = {
     logo: null,
     name: '',
+    appThemes: [],
   };
 
   it('should handle initial state', () => {
