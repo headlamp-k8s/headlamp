@@ -35,7 +35,7 @@ const headlampClassicLightTheme: AppTheme = {
   radius: 4,
 };
 
-const darkTheme: AppTheme = {
+export const darkTheme: AppTheme = {
   name: 'dark',
   base: 'dark',
   primary: '#1f6feb',
@@ -63,7 +63,7 @@ const darkTheme: AppTheme = {
   radius: 6,
 };
 
-const lightTheme: AppTheme = {
+export const lightTheme: AppTheme = {
   name: 'light',
   primary: '#44444f',
   secondary: '#eff2f5',
