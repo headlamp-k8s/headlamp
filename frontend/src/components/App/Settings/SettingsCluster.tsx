@@ -350,7 +350,7 @@ export default function SettingsCluster() {
                     helperText={
                       isValidCurrentName
                         ? t(
-                            'translation|The current name of cluster. You can define custom modified name.'
+                            'translation|The current name of the cluster. You can define a custom name.'
                           )
                         : invalidClusterNameMessage
                     }
