@@ -18,7 +18,7 @@ import helpers from '../../../helpers';
 import { defaultTableRowsPerPageOptions, setAppSettings } from '../../../redux/configSlice';
 
 export default function NumRowsInput(props: { defaultValue: number[] }) {
-  const { t } = useTranslation(['frequent', 'settings']);
+  const { t } = useTranslation(['frequent']);
   const { defaultValue } = props;
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [options, setOptions] = useState(defaultValue);
