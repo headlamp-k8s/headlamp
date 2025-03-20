@@ -12,6 +12,7 @@ export const supportedLanguages: { [langCode: string]: string } = {
   pt: 'Português',
   de: 'Deutsch',
   it: 'Italiano',
+  'zh-TW': '繁體中文',
 };
 
 i18next
@@ -28,7 +29,7 @@ i18next
       namespace: Namespace,
       callback: (errorValue: unknown, translations: null | (typeof en)[Namespace]) => void
     ) {
-      import(`./locales/${language}/${namespace}.json?import=default`)
+      import(`./locales/${language.toLowerCase()}/${namespace}.json?import=default`)
         .then(resources => {
           callback(null, resources.default);
         })
