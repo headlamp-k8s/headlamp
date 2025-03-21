@@ -61,14 +61,14 @@ function AddClusterButton() {
     <Box pb={2}>
       {isOpen ? (
         <Button
-          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          onClick={() => history.push(createRouteURL('addCluster'))}
           startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
         >
           {t('translation|Add Cluster')}
         </Button>
       ) : (
         <ActionButton
-          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          onClick={() => history.push(createRouteURL('addCluster'))}
           icon="mdi:plus-box-outline"
           description={t('translation|Add Cluster')}
           color="#adadad"
