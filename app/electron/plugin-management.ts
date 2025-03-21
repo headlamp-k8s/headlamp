@@ -64,6 +64,8 @@ interface ArtifactHubHeadlampPkg {
   archiveChecksum: string;
   distroCompat: string;
   versionCompat: string;
+  // Add index signature to support platform-specific keys
+  [key: string]: any;
 }
 
 /**
@@ -378,6 +380,8 @@ function validateArchiveURL(archiveURL) {
   const githubRegex = /^https:\/\/github\.com\/[^/]+\/[^/]+\/(releases|archive)\/.*$/;
   const bitbucketRegex = /^https:\/\/bitbucket\.org\/[^/]+\/[^/]+\/(downloads|get)\/.*$/;
   const gitlabRegex = /^https:\/\/gitlab\.com\/[^/]+\/[^/]+\/(-\/archive|releases)\/.*$/;
+  // For testing purposes, we allow localhost URLs.
+  const localRegex = /^https?:\/\/localhost(:\d+)?\/.*$/;
 
   // @todo There is a test plugin at https://github.com/yolossn/headlamp-plugins/
   // need to move that somewhere else, or test differently.
@@ -386,8 +390,29 @@ function validateArchiveURL(archiveURL) {
     githubRegex.test(archiveURL) ||
     bitbucketRegex.test(archiveURL) ||
     gitlabRegex.test(archiveURL) ||
+    localRegex.test(archiveURL) ||
     archiveURL.startsWith('https://github.com/yolossn/headlamp-plugins/')
   );
+}
+
+/**
+ * Gets the platform-specific archive URL key for the given platform and architecture.
+ * @param {string} platform - The platform (e.g., 'darwin', 'linux', 'win32')
+ * @param {string} arch - The architecture (e.g., 'x64', 'arm64')
+ * @returns {string} The key to lookup platform-specific URL in plugin data
+ */
+function getPlatformArchKey(platform: string, arch: string): string {
+  return `headlamp/plugin/archive-url:${platform}:${arch}`;
+}
+
+/**
+ * Gets the platform-specific archive checksum key for the given platform and architecture.
+ * @param {string} platform - The platform (e.g., 'darwin', 'linux', 'win32')
+ * @param {string} arch - The architecture (e.g., 'x64', 'arm64')
+ * @returns {string} The key to lookup platform-specific checksum in plugin data
+ */
+function getPlatformArchChecksumKey(platform: string, arch: string): string {
+  return `headlamp/plugin/archive-checksum:${platform}:${arch}`;
 }
 
 /**
@@ -414,21 +439,7 @@ async function downloadExtractArchive(
     throw new Error('Invalid plugin name');
   }
 
-  const archiveURL = pluginInfo.archiveURL;
-  if (!validateArchiveURL(archiveURL)) {
-    throw new Error('Invalid plugin/archive-url:' + archiveURL);
-  }
-
-  let checksum = pluginInfo.archiveChecksum;
-  if (!archiveURL || !checksum) {
-    throw new Error('Invalid plugin metadata. Please check the plugin details.');
-  }
-  if (checksum.startsWith('sha256:') || checksum.startsWith('SHA256:')) {
-    checksum = checksum.replace('sha256:', '');
-    checksum = checksum.replace('SHA256:', '');
-  }
-
-  // check if the plugin is compatible with the current Headlamp version
+  // Check if the plugin is compatible with the current Headlamp version
   if (headlampVersion) {
     if (progressCallback) {
       progressCallback({ type: 'info', message: 'Checking compatibility with Headlamp version' });
@@ -446,20 +457,111 @@ async function downloadExtractArchive(
     throw new Error('Download cancelled');
   }
 
+  // Create temporary folder for extraction
   const tempDir = await fs.mkdtempSync(path.join(os.tmpdir(), 'headlamp-plugin-temp-'));
   // Defaulting to '' should never happen if recursive is true. So this is for the type
   // checker only.
   const tempFolder = fs.mkdirSync(path.join(tempDir, pluginName), { recursive: true }) ?? '';
 
+  // First, download and extract the main archive
   if (progressCallback) {
-    progressCallback({ type: 'info', message: 'Downloading Plugin' });
+    progressCallback({ type: 'info', message: 'Downloading main plugin archive' });
   }
+
+  await downloadAndExtractSingleArchive(
+    pluginInfo.archiveURL,
+    pluginInfo.archiveChecksum,
+    tempFolder,
+    progressCallback,
+    signal
+  );
+
+  // Check if there's also a platform-specific archive
+  const platform = os.platform();
+  const arch = os.arch();
+  const platformArchKey = getPlatformArchKey(platform, arch);
+  const platformArchChecksumKey = getPlatformArchChecksumKey(platform, arch);
+
+  // If platform-specific archive exists, download and extract it too
+  if (pluginInfo[platformArchKey]) {
+    if (progressCallback) {
+      progressCallback({
+        type: 'info',
+        message: `Downloading platform-specific archive for ${platform}:${arch}`,
+      });
+    }
+
+    await downloadAndExtractSingleArchive(
+      pluginInfo[platformArchKey],
+      pluginInfo[platformArchChecksumKey],
+      tempFolder,
+      progressCallback,
+      signal,
+      true // isPlatformSpecific
+    );
+  }
+
+  // Add artifacthub metadata to the plugin
+  const packageJSON = JSON.parse(fs.readFileSync(`${tempFolder}/package.json`, 'utf8'));
+  packageJSON.artifacthub = {
+    name: pluginName,
+    title: pluginInfo.display_name,
+    url: `https://artifacthub.io/packages/headlamp/${pluginInfo.repository.name}/${pluginName}`,
+    version: pluginInfo.version,
+    repoName: pluginInfo.repository.name,
+    author: pluginInfo.repository.user_alias,
+  };
+  packageJSON.isManagedByHeadlampPlugin = true;
+  fs.writeFileSync(`${tempFolder}/package.json`, JSON.stringify(packageJSON, null, 2));
+
+  return [pluginName, tempFolder];
+}
+
+/**
+ * Downloads and extracts a single archive file.
+ * @param {string} archiveURL - URL of the archive to download
+ * @param {string} checksum - Expected checksum of the archive
+ * @param {string} extractFolder - Folder where the archive should be extracted
+ * @param {function} progressCallback - Callback for progress updates
+ * @param {AbortSignal} signal - Signal for cancellation
+ * @param {boolean} isPlatformSpecific - Whether this is a platform-specific archive
+ * @returns {Promise<void>}
+ */
+async function downloadAndExtractSingleArchive(
+  archiveURL: string,
+  archiveChecksum: string,
+  extractFolder: string,
+  progressCallback: null | ProgressCallback,
+  signal: AbortSignal | null,
+  isPlatformSpecific = false
+): Promise<void> {
+  if (!validateArchiveURL(archiveURL)) {
+    throw new Error('Invalid plugin/archive-url:' + archiveURL);
+  }
+
+  if (!archiveURL || !archiveChecksum) {
+    throw new Error('Invalid plugin metadata. Please check the plugin details.');
+  }
+
+  let checksum = archiveChecksum;
+  if (checksum.startsWith('sha256:') || checksum.startsWith('SHA256:')) {
+    checksum = checksum.replace('sha256:', '');
+    checksum = checksum.replace('SHA256:', '');
+  }
+
   if (signal && signal.aborted) {
     throw new Error('Download cancelled');
   }
 
   // await sleep(4000); // comment out for testing
-  const archResponse = await fetch(archiveURL, { redirect: 'follow', signal });
+  let archResponse;
+
+  try {
+    archResponse = await fetch(archiveURL, { redirect: 'follow', signal });
+  } catch (err) {
+    throw new Error('Failed to fetch archive. Please check the URL and your network connection.');
+  }
+
   if (!archResponse.ok) {
     throw new Error(`Failed to download tarball. Status code: ${archResponse.status}`);
   }
@@ -468,12 +570,8 @@ async function downloadExtractArchive(
     throw new Error('Download cancelled');
   }
 
-  if (progressCallback) {
-    progressCallback({ type: 'info', message: 'Plugin Downloaded' });
-  }
-
   const archChunks: Uint8Array[] = [];
-  let archBufferLengeth = 0;
+  let archBufferLength = 0;
 
   if (!archResponse.body) {
     throw new Error('Download empty');
@@ -481,14 +579,13 @@ async function downloadExtractArchive(
 
   for await (const chunk of archResponse.body) {
     archChunks.push(chunk);
-    archBufferLengeth += chunk.length;
+    archBufferLength += chunk.length;
   }
 
-  const archBuffer = Buffer.concat(archChunks, archBufferLengeth);
+  const archBuffer = Buffer.concat(archChunks, archBufferLength);
 
-  const archiveChecksum = crypto.createHash('sha256').update(archBuffer).digest('hex');
-
-  if (archiveChecksum !== checksum) {
+  const computedChecksum = crypto.createHash('sha256').update(archBuffer).digest('hex');
+  if (computedChecksum !== checksum) {
     throw new Error('Checksum mismatch.');
   }
 
@@ -497,14 +594,19 @@ async function downloadExtractArchive(
   }
 
   if (progressCallback) {
-    progressCallback({ type: 'info', message: 'Extracting Plugin' });
+    progressCallback({
+      type: 'info',
+      message: isPlatformSpecific ? 'Extracting platform-specific plugin' : 'Extracting plugin',
+    });
   }
+
+  // Extract the archive
   const archStream = new stream.PassThrough();
   archStream.end(archBuffer);
 
   const extractStream: stream.Writable = archStream.pipe(zlib.createGunzip()).pipe(
     tar.extract({
-      cwd: tempFolder,
+      cwd: extractFolder,
       strip: 1,
       sync: true,
     }) as unknown as stream.Writable
@@ -524,21 +626,11 @@ async function downloadExtractArchive(
   }
 
   if (progressCallback) {
-    progressCallback({ type: 'info', message: 'Plugin Extracted' });
+    progressCallback({
+      type: 'info',
+      message: isPlatformSpecific ? 'Platform-specific plugin extracted' : 'Plugin extracted',
+    });
   }
-  // add artifacthub metadata to the plugin
-  const packageJSON = JSON.parse(fs.readFileSync(`${tempFolder}/package.json`, 'utf8'));
-  packageJSON.artifacthub = {
-    name: pluginName,
-    title: pluginInfo.display_name,
-    url: `https://artifacthub.io/packages/headlamp/${pluginInfo.repository.name}/${pluginName}`,
-    version: pluginInfo.version,
-    repoName: pluginInfo.repository.name,
-    author: pluginInfo.repository.user_alias,
-  };
-  packageJSON.isManagedByHeadlampPlugin = true;
-  fs.writeFileSync(`${tempFolder}/package.json`, JSON.stringify(packageJSON, null, 2));
-  return [pluginName, tempFolder];
 }
 
 /**
@@ -578,6 +670,34 @@ async function fetchPluginInfo(URL, progressCallback, signal): Promise<ArtifactH
       versionCompat: pkgResponse.data['headlamp/plugin/version-compat'],
     };
 
+    // Add platform-specific URLs and checksums to the package
+    const platforms = ['darwin', 'linux', 'win32'];
+    const architectures = ['x64', 'arm64', 'ia32'];
+
+    for (const platform of platforms) {
+      for (const arch of architectures) {
+        const platformArchKey = getPlatformArchKey(platform, arch);
+        const platformArchChecksumKey = getPlatformArchChecksumKey(platform, arch);
+
+        if (pkgResponse.data[platformArchKey]) {
+          pkg[platformArchKey] = pkgResponse.data[platformArchKey];
+          pkg[platformArchChecksumKey] = pkgResponse.data[platformArchChecksumKey];
+        }
+      }
+    }
+
+    // Log if we found a platform-specific archive for the current platform
+    const currentPlatform = os.platform();
+    const currentArch = os.arch();
+    const currentPlatformKey = getPlatformArchKey(currentPlatform, currentArch);
+
+    if (pkg[currentPlatformKey] && progressCallback) {
+      progressCallback({
+        type: 'info',
+        message: `Found platform-specific archive for ${currentPlatform}:${currentArch}`,
+      });
+    }
+
     return pkg;
   } catch (e) {
     if (progressCallback) {
@@ -600,14 +720,11 @@ function checkValidPluginFolder(folder) {
   if (!fs.existsSync(folder)) {
     return false;
   }
-  // Check if the folder contains main.js and package.json
   const mainJsPath = path.join(folder, 'main.js');
   const packageJsonPath = path.join(folder, 'package.json');
   if (!fs.existsSync(mainJsPath) || !fs.existsSync(packageJsonPath)) {
     return false;
   }
-
-  // Read package.json and check isManagedByHeadlampPlugin is set to true
   const packageJSON = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
   if (packageJSON.isManagedByHeadlampPlugin) {
     return true;
