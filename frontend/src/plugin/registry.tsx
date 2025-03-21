@@ -45,6 +45,14 @@ import {
   clusterAction as sendClusterAction,
 } from '../redux/clusterActionSlice';
 import {
+  addAddClusterProvider,
+  AddClusterProviderComponent,
+  addDialog,
+  addMenuItem,
+  DialogComponent,
+  MenuItemComponent,
+} from '../redux/clusterProviderSlice';
+import {
   addEventCallback,
   CreateResourceEvent,
   DeleteResourceEvent,
@@ -761,6 +769,117 @@ export function registerMapSource(source: GraphSource) {
  */
 export function registerKindIcon(kind: string, definition: IconDefinition) {
   store.dispatch(graphViewSlice.actions.addKindIcon({ kind, definition }));
+}
+
+/**
+ * Register a new cluster action menu item.
+ * @param item - The item to add to the cluster action menu.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerClusterProviderMenuItem } from '@kinvolk/headlamp-plugin/lib';
+ * import { MenuItem, ListItemText } from '@mui/material';
+ * registerClusterProviderMenuItem(({cluster, setOpenConfirmDialog, handleMenuClose}) => {
+ *  const isMinikube =
+ *   cluster.meta_data?.extensions?.context_info?.provider === 'minikube.sigs.k8s.io';
+ *   if (!helpers.isElectron() !! !isMinikube) {
+ *     return null;
+ *   }
+ *   return (
+ *     <MenuItem
+ *       onClick={() => {
+ *        setOpenConfirmDialog('deleteMinikube');
+ *        handleMenuClose();
+ *       }}
+ *     >
+ *       <ListItemText>{t('translation|Delete')}</ListItemText>
+ *     </MenuItem>
+ *   );
+ * )}
+ * ```
+ *
+ */
+export function registerClusterProviderMenuItem(item: MenuItemComponent) {
+  store.dispatch(addMenuItem(item));
+}
+
+/**
+ * Register a new cluster provider dialog.
+ * @param item - The item to add to the cluster action dialog.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerClusterProviderDialog } from '@kinvolk/headlamp-plugin/lib';
+ * import { CommandCluster } from './CommandCluster';
+ *
+ * registerClusterProviderDialog(({cluster, active, openConfirmDialog, setOpenConfirmDialog}) => {
+ *
+ *   const isMinikube =
+ *   cluster.meta_data?.extensions?.context_info?.provider === 'minikube.sigs.k8s.io';
+ *   if (!helpers.isElectron() !! !isMinikube) {
+ *     return null;
+ *   }
+ *
+ *   return (
+ *     <CommandCluster
+ *       initialClusterName={cluster.name}
+ *       open={openConfirmDialog === 'startMinikube'}
+ *       handleClose={() => setOpenConfirmDialog('')}
+ *       onConfirm={() => {
+ *         setOpenConfirmDialog('');
+ *       }}
+ *       command={'start'}
+ *       finishedText={'Done! kubectl is now configured'}
+ *     />
+ *   );
+ * });
+ *
+ * ``
+ */
+export function registerClusterProviderDialog(item: DialogComponent) {
+  store.dispatch(addDialog(item));
+}
+
+/**
+ * For adding a card to the Add Cluster page in the providers list.
+ * @param item - The card item to add to the Add Cluster page.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { useTranslation } from 'react-i18next';
+ * import { registerAddClusterProvider } from '@kinvolk/headlamp-plugin/lib';
+ * import { Card, CardHeader, CardContent, Typography, Button } from '@mui/material';
+ * import { MinikubeIcon } from './MinikubeIcon';
+ * const { t } = useTranslation();
+ *
+ * registerAddClusterProvider(() => {
+ *   return (
+ *     <Card variant="outlined">
+ *       <CardHeader title="Minikube" avatar={<MinikubeIcon width={24} height={24} />} />
+ *       <CardContent>
+ *         <Typography>
+ *           {t(
+ *             'Minikube is a lightweight tool that simplifies the process of setting up a Kubernetes environment on your local PC. It provides a localStorage, single-node Kubernetes cluster that you can use for learning, development, and testing purposes.'
+ *           )}
+ *         </Typography>
+ *         <Button
+ *           variant="contained"
+ *           onClick={() => history.push('/create-cluster-minikube'))}
+ *           sx={{ mt: 2 }}
+ *         >
+ *           {t('Add')}
+ *         </Button>
+ *       </CardContent>
+ *     </Card>
+ *   );
+ * });
+ *
+ */
+export function registerAddClusterProvider(item: AddClusterProviderComponent) {
+  store.dispatch(addAddClusterProvider(item));
 }
 
 /**
