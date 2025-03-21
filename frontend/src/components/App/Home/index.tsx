@@ -20,18 +20,27 @@ import Event from '../../../lib/k8s/event';
 import { createRouteURL } from '../../../lib/router';
 import { useId } from '../../../lib/util';
 import { setConfig } from '../../../redux/configSlice';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { Link, PageGrid, SectionBox, SectionFilterHeader } from '../../common';
 import { ConfirmDialog } from '../../common';
+import ErrorBoundary from '../../common/ErrorBoundary/ErrorBoundary';
 import ResourceTable from '../../common/Resource/ResourceTable';
 import RecentClusters from './RecentClusters';
 
-function ContextMenu({ cluster }: { cluster: Cluster }) {
+interface ContextMenuProps {
+  /** The cluster for the context menu to act on. */
+  cluster: Cluster;
+}
+
+function ContextMenu({ cluster }: ContextMenuProps) {
   const { t } = useTranslation(['translation']);
   const history = useHistory();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const menuId = useId('context-menu');
-  const [openConfirmDialog, setOpenConfirmDialog] = React.useState(false);
+  const [openConfirmDialog, setOpenConfirmDialog] = React.useState<string | null>(null);
+  const dialogs = useTypedSelector(state => state.clusterProvider.dialogs);
+  const menuItems = useTypedSelector(state => state.clusterProvider.menuItems);
 
   function removeCluster(cluster: Cluster) {
     deleteCluster(cluster.name || '')
@@ -94,20 +103,30 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
         {helpers.isElectron() && cluster.meta_data?.source === 'dynamic_cluster' && (
           <MenuItem
             onClick={() => {
-              setOpenConfirmDialog(true);
+              setOpenConfirmDialog('deleteDynamic');
               handleMenuClose();
             }}
           >
             <ListItemText>{t('translation|Delete')}</ListItemText>
           </MenuItem>
         )}
-      </Menu>
 
+        {menuItems.map((Item, index) => {
+          return (
+            <Item
+              cluster={cluster}
+              setOpenConfirmDialog={setOpenConfirmDialog}
+              handleMenuClose={handleMenuClose}
+              key={index}
+            />
+          );
+        })}
+      </Menu>
       <ConfirmDialog
-        open={openConfirmDialog}
-        handleClose={() => setOpenConfirmDialog(false)}
+        open={openConfirmDialog === 'deleteDynamic'}
+        handleClose={() => setOpenConfirmDialog('')}
         onConfirm={() => {
-          setOpenConfirmDialog(false);
+          setOpenConfirmDialog('');
           removeCluster(cluster);
         }}
         title={t('translation|Delete Cluster')}
@@ -118,6 +137,19 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
           }
         )}
       />
+      {openConfirmDialog !== null &&
+        dialogs.map((Dialog, index) => {
+          return (
+            <ErrorBoundary>
+              <Dialog
+                cluster={cluster}
+                openConfirmDialog={openConfirmDialog}
+                setOpenConfirmDialog={setOpenConfirmDialog}
+                key={index}
+              />
+            </ErrorBoundary>
+          );
+        })}
     </>
   );
 }
@@ -307,11 +339,14 @@ function HomeComponent(props: HomeComponentProps) {
               },
               {
                 label: '',
-                getValue: () => '',
+                getValue: cluster =>
+                  errors[cluster.name] === null ? 'Active' : errors[cluster.name]?.message,
                 cellProps: {
                   align: 'right',
                 },
-                render: cluster => <ContextMenu cluster={cluster} />,
+                render: cluster => {
+                  return <ContextMenu cluster={cluster} />;
+                },
               },
             ]}
             data={Object.values(customNameClusters)}
