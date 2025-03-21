@@ -92,6 +92,11 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
         ],
       },
       {
+        name: 'map',
+        icon: 'mdi:map',
+        label: t('glossary|Map'),
+      },
+      {
         name: 'workloads',
         label: t('glossary|Workloads'),
         icon: 'mdi:circle-slice-2',
@@ -284,11 +289,6 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
             label: t('translation|Instances'),
           },
         ],
-      },
-      {
-        name: 'map',
-        icon: 'mdi:map',
-        label: t('glossary|Map (beta)'),
       },
     ];
 

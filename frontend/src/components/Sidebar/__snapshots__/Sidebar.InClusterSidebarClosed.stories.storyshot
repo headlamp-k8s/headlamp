@@ -137,6 +137,25 @@
                     tabindex="0"
                   >
                     <div
+                      aria-label="Map"
+                      class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
+                      data-mui-internal-clone-element="true"
+                    />
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </a>
+                </li>
+                <li
+                  class="css-1lee0ix"
+                >
+                  <a
+                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                    href="/"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <div
                       aria-label="Workloads"
                       class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
                       data-mui-internal-clone-element="true"
@@ -1211,25 +1230,6 @@
                       </div>
                     </div>
                   </div>
-                </li>
-                <li
-                  class="css-1lee0ix"
-                >
-                  <a
-                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                    href="/"
-                    role="button"
-                    tabindex="0"
-                  >
-                    <div
-                      aria-label="Map (beta)"
-                      class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
-                      data-mui-internal-clone-element="true"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </a>
                 </li>
               </ul>
             </div>
