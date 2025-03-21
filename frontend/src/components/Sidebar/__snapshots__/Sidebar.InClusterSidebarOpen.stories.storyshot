@@ -159,6 +159,32 @@
                       <span
                         class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                       >
+                        Map
+                      </span>
+                    </div>
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </a>
+                </li>
+                <li
+                  class="css-1icvoo8"
+                >
+                  <a
+                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                    href="/"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <div
+                      class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
+                    />
+                    <div
+                      class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                      >
                         Workloads
                       </span>
                     </div>
@@ -1274,32 +1300,6 @@
                       </div>
                     </div>
                   </div>
-                </li>
-                <li
-                  class="css-1icvoo8"
-                >
-                  <a
-                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                    href="/"
-                    role="button"
-                    tabindex="0"
-                  >
-                    <div
-                      class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
-                    />
-                    <div
-                      class="MuiListItemText-root css-tlelie-MuiListItemText-root"
-                    >
-                      <span
-                        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
-                      >
-                        Map (beta)
-                      </span>
-                    </div>
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </a>
                 </li>
               </ul>
             </div>

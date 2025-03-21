@@ -861,7 +861,7 @@ const defaultRoutes: {
   map: {
     path: '/map',
     exact: true,
-    name: 'Map (beta)',
+    name: 'Map',
     sidebar: 'map',
     isFullWidth: true,
     component: () => <LazyGraphView height="calc(100vh - 64px)" />,
