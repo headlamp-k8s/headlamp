@@ -71,7 +71,15 @@ function PureLink(props: React.PropsWithChildren<LinkProps | LinkObjectProps>) {
     const { kubeObject, ...otherProps } = props as LinkObjectProps;
     return <KubeObjectLink kubeObject={kubeObject!} {...otherProps} />;
   }
-  const { routeName, params = {}, search, state, ...otherProps } = props as LinkObjectProps;
+  const {
+    routeName,
+    params = {},
+    search,
+    state,
+    // eslint-disable-next-line no-unused-vars -- make sure not to pass it to the link
+    kubeObject,
+    ...otherProps
+  } = props as LinkObjectProps;
 
   return (
     <MuiLink
