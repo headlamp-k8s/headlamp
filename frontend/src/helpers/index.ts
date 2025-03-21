@@ -357,7 +357,8 @@ function loadTableSettings(tableId: string): { id: string; show: boolean }[] {
  * defaults to true. This is a feature flag to enable the websocket multiplexer.
  */
 export function getWebsocketMultiplexerEnabled(): boolean {
-  return import.meta.env.REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER !== 'false';
+  // TODO Reenable after #2805 and #2970 are fixed
+  return import.meta.env.REACT_APP_ENABLE_WEBSOCKET_MULTIPLEXER === 'true';
 }
 
 /**
