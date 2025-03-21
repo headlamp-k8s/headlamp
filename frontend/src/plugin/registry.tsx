@@ -40,6 +40,11 @@ import {
 } from '../redux/actionButtonsSlice';
 import { setClusterChooserButtonComponent, setFunctionsToOverride } from '../redux/actions/actions';
 import {
+  CallbackAction,
+  CallbackActionOptions,
+  clusterAction as sendClusterAction,
+} from '../redux/clusterActionSlice';
+import {
   addEventCallback,
   CreateResourceEvent,
   DeleteResourceEvent,
@@ -756,6 +761,36 @@ export function registerMapSource(source: GraphSource) {
  */
 export function registerKindIcon(kind: string, definition: IconDefinition) {
   store.dispatch(graphViewSlice.actions.addKindIcon({ kind, definition }));
+}
+
+/**
+ * Starts an action after a period of time giving the user an opportunity to cancel the action.
+ *
+ * @param callback - called after some time.
+ * @param actionOptions - options for text messages and callbacks.
+ *
+ * @example
+ *
+ * ```tsx
+ *   clusterAction(() => runFunc(clusterName), {
+ *     startMessage: `About to "${command}" cluster "${clusterName}"…`,
+ *     cancelledMessage: `Cancelled "${command}" cluster "${clusterName}".`,
+ *     successMessage: `Cluster "${command}" of "${clusterName}" begun.`,
+ *     errorMessage: `Failed to "${command}" ${clusterName}.`,
+ *     cancelCallback: () => {
+ *       setActing(false);
+ *       setRunning(false);
+ *       handleClose();
+ *       setOpenDialog(false);
+ *   })
+ * ```
+ *
+ */
+export function clusterAction(
+  callback: CallbackAction['callback'],
+  actionOptions: CallbackActionOptions = {}
+) {
+  store.dispatch(sendClusterAction(callback, actionOptions));
 }
 
 export {

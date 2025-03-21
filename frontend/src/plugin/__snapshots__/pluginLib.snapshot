@@ -16105,6 +16105,7 @@
     "useId": [Function],
     "useURLState": [Function],
   },
+  "clusterAction": [Function],
   "default": [Function],
   "getHeadlampAPIHeaders": [Function],
   "registerAppBarAction": [Function],
