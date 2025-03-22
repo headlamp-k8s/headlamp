@@ -64,8 +64,12 @@ interface ArtifactHubHeadlampPkg {
   archiveChecksum: string;
   distroCompat: string;
   versionCompat: string;
-  // Add index signature to support platform-specific keys
-  [key: string]: any;
+  // Add extra-files support
+  extraFiles?: Array<{
+    url: string;
+    checksum: string;
+    arch: string;
+  }>;
 }
 
 /**
@@ -396,26 +400,6 @@ function validateArchiveURL(archiveURL) {
 }
 
 /**
- * Gets the platform-specific archive URL key for the given platform and architecture.
- * @param {string} platform - The platform (e.g., 'darwin', 'linux', 'win32')
- * @param {string} arch - The architecture (e.g., 'x64', 'arm64')
- * @returns {string} The key to lookup platform-specific URL in plugin data
- */
-function getPlatformArchKey(platform: string, arch: string): string {
-  return `headlamp/plugin/archive-url:${platform}:${arch}`;
-}
-
-/**
- * Gets the platform-specific archive checksum key for the given platform and architecture.
- * @param {string} platform - The platform (e.g., 'darwin', 'linux', 'win32')
- * @param {string} arch - The architecture (e.g., 'x64', 'arm64')
- * @returns {string} The key to lookup platform-specific checksum in plugin data
- */
-function getPlatformArchChecksumKey(platform: string, arch: string): string {
-  return `headlamp/plugin/archive-checksum:${platform}:${arch}`;
-}
-
-/**
  * Downloads and extracts a plugin archive from the specified plugin package.
  * @param {ArtifactHubHeadlampPkg} pluginInfo - The plugin package data.
  * @param {string} headlampVersion - The version of Headlamp for compatibility checking.
@@ -476,29 +460,9 @@ async function downloadExtractArchive(
     signal
   );
 
-  // Check if there's also a platform-specific archive
-  const platform = os.platform();
-  const arch = os.arch();
-  const platformArchKey = getPlatformArchKey(platform, arch);
-  const platformArchChecksumKey = getPlatformArchChecksumKey(platform, arch);
-
-  // If platform-specific archive exists, download and extract it too
-  if (pluginInfo[platformArchKey]) {
-    if (progressCallback) {
-      progressCallback({
-        type: 'info',
-        message: `Downloading platform-specific archive for ${platform}:${arch}`,
-      });
-    }
-
-    await downloadAndExtractSingleArchive(
-      pluginInfo[platformArchKey],
-      pluginInfo[platformArchChecksumKey],
-      tempFolder,
-      progressCallback,
-      signal,
-      true // isPlatformSpecific
-    );
+  // Check if there are extra files to download
+  if (pluginInfo.extraFiles && pluginInfo.extraFiles.length > 0) {
+    await downloadExtraFiles(pluginInfo.extraFiles, tempFolder, progressCallback, signal);
   }
 
   // Add artifacthub metadata to the plugin
@@ -515,6 +479,100 @@ async function downloadExtractArchive(
   fs.writeFileSync(`${tempFolder}/package.json`, JSON.stringify(packageJSON, null, 2));
 
   return [pluginName, tempFolder];
+}
+
+/**
+ * Downloads and extracts platform-specific extra files if they match the current platform and architecture.
+ * @param {Array<{url: string, checksum: string, arch: string}>} extraFiles - List of extra files
+ * @param {string} extractFolder - Folder where files should be extracted
+ * @param {function} progressCallback - Callback for progress updates
+ * @param {AbortSignal} signal - Signal for cancellation
+ * @returns {Promise<void>}
+ */
+async function downloadExtraFiles(
+  extraFiles: Array<{ url: string; checksum: string; arch: string }>,
+  extractFolder: string,
+  progressCallback: null | ProgressCallback,
+  signal: AbortSignal | null
+): Promise<void> {
+  const currentPlatform = os.platform();
+  const currentArch = os.arch();
+
+  // Map OS and architecture values to the format used in extraFiles
+  const platformMap: { [key: string]: string } = {
+    darwin: 'mac',
+    win32: 'windows',
+    linux: 'linux',
+  };
+
+  const archMap: { [key: string]: string } = {
+    x64: 'amd64',
+    arm64: 'arm64',
+  };
+
+  // Convert Electron/Node platform and arch to the format used in extraFiles
+  const mappedPlatform = platformMap[currentPlatform] || currentPlatform;
+  const mappedArch = archMap[currentArch] || currentArch;
+  const currentArchString = `${mappedPlatform}/${mappedArch}`;
+
+  // Find matching extra files for current platform/architecture
+  const matchingExtraFiles = extraFiles.filter(file => file.arch === currentArchString);
+  if (matchingExtraFiles.length === 0) {
+    if (progressCallback) {
+      progressCallback({
+        type: 'info',
+        message: `No extra files found for platform ${currentArchString}`,
+      });
+    }
+    return;
+  }
+
+  // Make sure bin directory exists
+  const binDir = path.join(extractFolder, 'bin');
+  if (!fs.existsSync(binDir)) {
+    fs.mkdirSync(binDir, { recursive: true });
+  }
+
+  // Download and extract each matching file
+  for (const file of matchingExtraFiles) {
+    if (signal && signal.aborted) {
+      throw new Error('Download cancelled');
+    }
+
+    if (progressCallback) {
+      progressCallback({
+        type: 'info',
+        message: `Downloading platform-specific file for ${file.arch}: ${path.basename(file.url)}`,
+      });
+    }
+
+    try {
+      await downloadAndExtractSingleArchive(
+        file.url,
+        file.checksum,
+        binDir, // Extract directly to bin directory
+        progressCallback,
+        signal,
+        true // isPlatformSpecific
+      );
+    } catch (error) {
+      if (progressCallback) {
+        progressCallback({
+          type: 'error',
+          message: `Failed to download extra file ${file.url}: ${error.message}`,
+        });
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  if (progressCallback) {
+    progressCallback({
+      type: 'info',
+      message: `Downloaded ${matchingExtraFiles.length} extra files for ${currentArchString}`,
+    });
+  }
 }
 
 /**
@@ -670,32 +728,15 @@ async function fetchPluginInfo(URL, progressCallback, signal): Promise<ArtifactH
       versionCompat: pkgResponse.data['headlamp/plugin/version-compat'],
     };
 
-    // Add platform-specific URLs and checksums to the package
-    const platforms = ['darwin', 'linux', 'win32'];
-    const architectures = ['x64', 'arm64', 'ia32'];
-
-    for (const platform of platforms) {
-      for (const arch of architectures) {
-        const platformArchKey = getPlatformArchKey(platform, arch);
-        const platformArchChecksumKey = getPlatformArchChecksumKey(platform, arch);
-
-        if (pkgResponse.data[platformArchKey]) {
-          pkg[platformArchKey] = pkgResponse.data[platformArchKey];
-          pkg[platformArchChecksumKey] = pkgResponse.data[platformArchChecksumKey];
-        }
+    // Get extra-files format
+    if (pkgResponse.data['headlamp/plugin/extra-files']) {
+      pkg.extraFiles = pkgResponse.data['headlamp/plugin/extra-files'];
+      if (progressCallback) {
+        progressCallback({
+          type: 'info',
+          message: `Found ${pkg.extraFiles.length} platform-specific extra files`,
+        });
       }
-    }
-
-    // Log if we found a platform-specific archive for the current platform
-    const currentPlatform = os.platform();
-    const currentArch = os.arch();
-    const currentPlatformKey = getPlatformArchKey(currentPlatform, currentArch);
-
-    if (pkg[currentPlatformKey] && progressCallback) {
-      progressCallback({
-        type: 'info',
-        message: `Found platform-specific archive for ${currentPlatform}:${currentArch}`,
-      });
     }
 
     return pkg;
@@ -740,7 +781,7 @@ function checkValidPluginFolder(folder) {
  *
  * @returns {string} The path to the default plugins directory.
  */
-function defaultPluginsDir() {
+export function defaultPluginsDir() {
   const paths = envPaths('Headlamp', { suffix: '' });
   const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
   return path.join(configDir, 'plugins');

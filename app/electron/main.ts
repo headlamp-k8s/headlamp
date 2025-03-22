@@ -24,7 +24,7 @@ import url from 'url';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import i18n from './i18next.config';
-import { PluginManager } from './plugin-management';
+import { defaultPluginsDir, PluginManager } from './plugin-management';
 import { handleRunCommand } from './runCmd';
 import windowSize from './windowSize';
 
@@ -444,6 +444,65 @@ class PluginManagerEventListeners {
 }
 
 /**
+ * Collects bin directories from all installed plugins.
+ * @param {string} pluginsDir - The directory containing plugins
+ * @returns {string[]} Array of plugin bin directory paths
+ */
+function getPluginBinDirectories(pluginsDir: string): string[] {
+  if (!fs.existsSync(pluginsDir)) {
+    return [];
+  }
+
+  const binDirs: string[] = [];
+
+  try {
+    const entries = fs.readdirSync(pluginsDir, { withFileTypes: true });
+    const pluginFolders = entries.filter(entry => entry.isDirectory());
+
+    for (const pluginFolder of pluginFolders) {
+      const binDir = path.join(pluginsDir, pluginFolder.name, 'bin');
+      if (fs.existsSync(binDir)) {
+        // Make sure binaries are executable
+        if (process.platform !== 'win32') {
+          try {
+            const files = fs.readdirSync(binDir);
+            for (const file of files) {
+              const filePath = path.join(binDir, file);
+              // Skip directories
+              if (fs.statSync(filePath).isDirectory()) {
+                continue;
+              }
+              fs.chmodSync(filePath, 0o755); // rwx r-x r-x
+            }
+          } catch (err) {
+            console.error(`Error setting executable permissions in ${binDir}:`, err);
+          }
+        }
+        binDirs.push(binDir);
+      }
+    }
+  } catch (err) {
+    console.error(`Error scanning plugin directories in ${pluginsDir}:`, err);
+  }
+
+  return binDirs;
+}
+
+/**
+ * Adds directories to the PATH environment variable
+ * @param {string[]} dirs - Directories to add to PATH
+ * @param {string} description - Description for logging (e.g., "plugin", "bundled plugin")
+ */
+function addToPath(dirs: string[], description: string): void {
+  if (dirs.length === 0) return;
+
+  const pathSeparator = process.platform === 'win32' ? ';' : ':';
+  const existingPath = process.env.PATH || '';
+  process.env.PATH = [...dirs, existingPath].join(pathSeparator);
+  console.info(`Added ${dirs.length} ${description} bin directories to PATH`);
+}
+
+/**
  * Returns the user's preferred shell or a fallback shell.
  * @returns A promise that resolves to the shell path.
  */
@@ -529,8 +588,16 @@ async function getShellEnv(): Promise<NodeJS.ProcessEnv> {
     };
 
     const envVars = isEnvNull ? processLines('\0') : processLines('\n');
-
     const mergedEnv = { ...process.env, ...envVars };
+
+    // Add plugin bin directories to PATH
+    const pluginsDir = defaultPluginsDir();
+    const pluginBinDirs = getPluginBinDirectories(pluginsDir);
+
+    if (pluginBinDirs.length > 0) {
+      addToPath(pluginBinDirs, 'plugin');
+    }
+
     return mergedEnv;
   } catch (error) {
     console.error('Failed to get shell environment:', error);
@@ -568,6 +635,12 @@ async function startServer(flags: string[] = []): Promise<ChildProcessWithoutNul
   // Set the bundled plugins in addition to the the user's plugins.
   if (fs.existsSync(bundledPlugins) && !isEmpty(bundledPlugins)) {
     process.env.HEADLAMP_STATIC_PLUGINS_DIR = bundledPlugins;
+
+    // Also add bundled plugin bin directories to PATH
+    const bundledPluginBinDirs = getPluginBinDirectories(bundledPlugins);
+    if (bundledPluginBinDirs.length > 0) {
+      addToPath(bundledPluginBinDirs, 'bundled plugin');
+    }
   }
 
   serverArgs = serverArgs.concat(flags);

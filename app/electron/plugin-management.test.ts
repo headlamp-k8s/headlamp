@@ -131,9 +131,9 @@ describe('PluginManager', () => {
 
     // No platform-specific progress messages
     const platformMessages = progress.filter(
-      p => p.message && p.message.includes('platform-specific')
+      p => p.message && p.message.includes('0 platform-specific')
     );
-    expect(platformMessages.length).toBe(0);
+    expect(platformMessages.length).toBe(1);
 
     // Clean up this specific test's directories
     if (fs.existsSync(pluginDestDir)) {
@@ -263,7 +263,12 @@ function mockArtifactHubAPI(testDataDir: string) {
     // Clean any existing mocks
     nock.cleanAll();
 
-    // Mock the ArtifactHub API response
+    // Map platform and architecture to the format used in extraFiles
+    const platform =
+      os.platform() === 'win32' ? 'windows' : os.platform() === 'darwin' ? 'mac' : 'linux';
+    const arch = os.arch() === 'x64' ? 'amd64' : os.arch() === 'arm64' ? 'arm64' : '386';
+
+    // Mock the ArtifactHub API response with the new extra-files format
     nock('https://artifacthub.io')
       .get('/api/v1/packages/headlamp/test-repo/headlamp_minikube')
       .reply(200, {
@@ -279,8 +284,19 @@ function mockArtifactHubAPI(testDataDir: string) {
           'headlamp/plugin/archive-checksum': `sha256:${pluginChecksum}`,
           'headlamp/plugin/version-compat': '>=0.22',
           'headlamp/plugin/distro-compat': 'in-cluster,web,docker-desktop,desktop',
-          [`headlamp/plugin/archive-url:${os.platform()}:${os.arch()}`]: platformSpecificArchiveURL,
-          [`headlamp/plugin/archive-checksum:${os.platform()}:${os.arch()}`]: `sha256:${platformSpecificChecksum}`,
+          'headlamp/plugin/extra-files': [
+            {
+              url: platformSpecificArchiveURL,
+              checksum: `SHA256:${platformSpecificChecksum}`,
+              arch: `${platform}/${arch}`,
+            },
+            // Add dummy entries for other platforms to ensure we only download the correct one
+            {
+              url: 'http://localhost/dummy.tar.gz',
+              checksum: 'SHA256:dummy',
+              arch: 'other/platform',
+            },
+          ],
         },
       });
 
@@ -336,6 +352,8 @@ function mockArtifactHubAPIWithoutPlatformSpecific(testDataDir: string) {
           'headlamp/plugin/archive-checksum': `sha256:${pluginChecksum}`,
           'headlamp/plugin/version-compat': '>=0.22',
           'headlamp/plugin/distro-compat': 'in-cluster,web,docker-desktop,desktop',
+          // Empty extra-files to indicate no platform-specific files
+          'headlamp/plugin/extra-files': [],
         },
       });
 
