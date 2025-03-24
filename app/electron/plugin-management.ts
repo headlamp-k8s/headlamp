@@ -498,22 +498,9 @@ async function downloadExtraFiles(
   const currentPlatform = os.platform();
   const currentArch = os.arch();
 
-  // Map OS and architecture values to the format used in extraFiles
-  const platformMap: { [key: string]: string } = {
-    darwin: 'mac',
-    win32: 'windows',
-    linux: 'linux',
-  };
-
-  const archMap: { [key: string]: string } = {
-    x64: 'amd64',
-    arm64: 'arm64',
-  };
-
-  // Convert Electron/Node platform and arch to the format used in extraFiles
-  const mappedPlatform = platformMap[currentPlatform] || currentPlatform;
-  const mappedArch = archMap[currentArch] || currentArch;
-  const currentArchString = `${mappedPlatform}/${mappedArch}`;
+  // Find matching extra files for current platform/architecture
+  // Format in extraFiles is typically "os/arch" like "linux/amd64"
+  const currentArchString = `${currentPlatform}/${currentArch}`;
 
   // Find matching extra files for current platform/architecture
   const matchingExtraFiles = extraFiles.filter(file => file.arch === currentArchString);
@@ -734,7 +721,7 @@ async function fetchPluginInfo(URL, progressCallback, signal): Promise<ArtifactH
       if (progressCallback) {
         progressCallback({
           type: 'info',
-          message: `Found ${pkg.extraFiles.length} platform-specific extra files`,
+          message: `Found ${pkg.extraFiles!.length} platform-specific extra files`,
         });
       }
     }

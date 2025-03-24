@@ -78,7 +78,7 @@ describe('PluginManager', () => {
       p => p.message && p.message.includes('platform-specific')
     );
     expect(platformMessages.length).toBeGreaterThan(0);
-    expect(platformMessages.some(p => p.message.includes(`${platform}:${arch}`))).toBe(true);
+    expect(platformMessages.some(p => p.message.includes(`${platform}/${arch}`))).toBe(true);
 
     // Clean up this specific test's directories
     if (fs.existsSync(pluginDestDir)) {
@@ -206,19 +206,16 @@ async function createPlatformSpecificTarball(testDataDir: string) {
   if (fs.existsSync(tempDir)) {
     fs.rmSync(tempDir, { recursive: true });
   }
-  fs.mkdirSync(path.join(tempDir, 'bin'), { recursive: true });
+  fs.mkdirSync(tempDir, { recursive: true });
 
   // Create a mock minikube binary
   const platform = os.platform();
   const minikubeBinary = platform === 'win32' ? 'minikube.exe' : 'minikube';
-  fs.writeFileSync(
-    path.join(tempDir, 'bin', minikubeBinary),
-    '#!/bin/sh\necho "Mock minikube binary"'
-  );
+  fs.writeFileSync(path.join(tempDir, minikubeBinary), '#!/bin/sh\necho "Mock minikube binary"');
 
   if (platform !== 'win32') {
     // Make it executable
-    fs.chmodSync(path.join(tempDir, 'bin', minikubeBinary), 0o755);
+    fs.chmodSync(path.join(tempDir, minikubeBinary), 0o755);
   }
 
   // Create a tarball
@@ -264,9 +261,8 @@ function mockArtifactHubAPI(testDataDir: string) {
     nock.cleanAll();
 
     // Map platform and architecture to the format used in extraFiles
-    const platform =
-      os.platform() === 'win32' ? 'windows' : os.platform() === 'darwin' ? 'mac' : 'linux';
-    const arch = os.arch() === 'x64' ? 'amd64' : os.arch() === 'arm64' ? 'arm64' : '386';
+    const platform = os.platform();
+    const arch = os.arch();
 
     // Mock the ArtifactHub API response with the new extra-files format
     nock('https://artifacthub.io')
