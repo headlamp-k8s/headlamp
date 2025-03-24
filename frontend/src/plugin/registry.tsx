@@ -40,6 +40,19 @@ import {
 } from '../redux/actionButtonsSlice';
 import { setClusterChooserButtonComponent, setFunctionsToOverride } from '../redux/actions/actions';
 import {
+  CallbackAction,
+  CallbackActionOptions,
+  clusterAction as sendClusterAction,
+} from '../redux/clusterActionSlice';
+import {
+  addAddClusterProvider,
+  addDialog,
+  addMenuItem,
+  ClusterProviderInfo,
+  DialogComponent,
+  MenuItemComponent,
+} from '../redux/clusterProviderSlice';
+import {
   addEventCallback,
   CreateResourceEvent,
   DeleteResourceEvent,
@@ -756,6 +769,144 @@ export function registerMapSource(source: GraphSource) {
  */
 export function registerKindIcon(kind: string, definition: IconDefinition) {
   store.dispatch(graphViewSlice.actions.addKindIcon({ kind, definition }));
+}
+
+/**
+ * Register a new cluster action menu item.
+ * @param item - The item to add to the cluster action menu.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerClusterProviderMenuItem } from '@kinvolk/headlamp-plugin/lib';
+ * import { MenuItem, ListItemText } from '@mui/material';
+ * registerClusterProviderMenuItem(({cluster, setOpenConfirmDialog, handleMenuClose}) => {
+ *  const isMinikube =
+ *   cluster.meta_data?.extensions?.context_info?.provider === 'minikube.sigs.k8s.io';
+ *   if (!helpers.isElectron() !! !isMinikube) {
+ *     return null;
+ *   }
+ *   return (
+ *     <MenuItem
+ *       onClick={() => {
+ *        setOpenConfirmDialog('deleteMinikube');
+ *        handleMenuClose();
+ *       }}
+ *     >
+ *       <ListItemText>{t('translation|Delete')}</ListItemText>
+ *     </MenuItem>
+ *   );
+ * )}
+ * ```
+ *
+ */
+export function registerClusterProviderMenuItem(item: MenuItemComponent) {
+  store.dispatch(addMenuItem(item));
+}
+
+/**
+ * Register a new cluster provider dialog.
+ *
+ * These dialogs are used to show actions that can be performed on a cluster.
+ * For example, starting, stopping, or deleting a cluster.
+ *
+ * @param item - The item to add to the cluster provider dialog.
+ * @param item.cluster - The cluster to show the dialog for.
+ * @param item.openConfirmDialog - The name of the dialog to open. Null if no dialog is open.
+ * @param item.setOpenConfirmDialog - The function to set the dialog to open.
+ *                                    Call it with null when dialog is closed.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerClusterProviderDialog } from '@kinvolk/headlamp-plugin/lib';
+ * import { CommandCluster } from './CommandCluster';
+ *
+ * registerClusterProviderDialog(({cluster, openConfirmDialog, setOpenConfirmDialog}) => {
+ *
+ *   const isMinikube =
+ *   cluster.meta_data?.extensions?.context_info?.provider === 'minikube.sigs.k8s.io';
+ *   if (!helpers.isElectron() !! !isMinikube) {
+ *     return null;
+ *   }
+ *
+ *   return (
+ *     <CommandCluster
+ *       initialClusterName={cluster.name}
+ *       open={openConfirmDialog === 'startMinikube'}
+ *       handleClose={() => setOpenConfirmDialog(null)}
+ *       onConfirm={() => {
+ *         setOpenConfirmDialog(null);
+ *       }}
+ *       command={'start'}
+ *       finishedText={'Done! kubectl is now configured'}
+ *     />
+ *   );
+ * });
+ *
+ * ```
+ *
+ */
+export function registerClusterProviderDialog(item: DialogComponent) {
+  store.dispatch(addDialog(item));
+}
+
+/**
+ * For adding a card to the Add Cluster page in the providers list.
+ * @param item - The iformation to add to the Add Cluster page.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { useTranslation } from 'react-i18next';
+ * import { registerAddClusterProvider } from '@kinvolk/headlamp-plugin/lib';
+ * import { Card, CardHeader, CardContent, Typography, Button } from '@mui/material';
+ * import { MinikubeIcon } from './MinikubeIcon';
+ * const { t } = useTranslation();
+ *
+ * registerAddClusterProvider({
+ *   title: 'Minikube',
+ *   icon: MinikubeIcon,
+ *   description:
+ *     'Minikube is a lightweight tool that simplifies the process of setting up a Kubernetes environment on your local PC. It provides a localStorage, single-node Kubernetes cluster that you can use for learning, development, and testing purposes.',
+ *   url: '/create-cluster-minikube',
+ * });
+ *
+ * ```
+ *
+ */
+export function registerAddClusterProvider(item: ClusterProviderInfo) {
+  store.dispatch(addAddClusterProvider(item));
+}
+
+/**
+ * Starts an action after a period of time giving the user an opportunity to cancel the action.
+ *
+ * @param callback - called after some time.
+ * @param actionOptions - options for text messages and callbacks.
+ *
+ * @example
+ *
+ * ```tsx
+ *   clusterAction(() => runFunc(clusterName), {
+ *     startMessage: `About to "${command}" cluster "${clusterName}"…`,
+ *     cancelledMessage: `Cancelled "${command}" cluster "${clusterName}".`,
+ *     successMessage: `Cluster "${command}" of "${clusterName}" begun.`,
+ *     errorMessage: `Failed to "${command}" ${clusterName}.`,
+ *     cancelCallback: () => {
+ *       setActing(false);
+ *       setRunning(false);
+ *       handleClose();
+ *       setOpenDialog(false);
+ *   })
+ * ```
+ *
+ */
+export function clusterAction(
+  callback: CallbackAction['callback'],
+  actionOptions: CallbackActionOptions = {}
+) {
+  store.dispatch(sendClusterAction(callback, actionOptions));
 }
 
 export {

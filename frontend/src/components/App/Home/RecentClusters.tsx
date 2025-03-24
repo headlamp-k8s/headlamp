@@ -106,7 +106,7 @@ export default function RecentClusters(props: RecentClustersProps) {
         <Grid item>
           <SquareButton
             onClick={() => {
-              history.push(createRouteURL('loadKubeConfig'));
+              history.push(createRouteURL('addCluster'));
             }}
             label={t('Load cluster')}
             icon="mdi:plus-circle-outline"
