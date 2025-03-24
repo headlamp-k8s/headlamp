@@ -38,20 +38,37 @@ export default function DetailsDrawer() {
 
   return (
     isDetailDrawerEnabled && (
-      <Drawer variant="persistent" anchor="right" open onClose={() => closeDrawer()}>
-        <Box width={'45vw'}>
-          {/* Note: the top margin is needed to not clip into the topbar */}
-          <Box
-            sx={{
-              marginTop: '4rem',
-              display: 'flex',
-              padding: '1rem',
-              justifyContent: 'right',
-            }}
-          >
-            <ActionButton onClick={() => closeDrawer()} icon="mdi:close" description={t('Close')} />
-          </Box>
-          <Box>{selectedResource && <KubeObjectDetails resource={selectedResource} />}</Box>
+      <Drawer
+        variant="persistent"
+        anchor="right"
+        open
+        onClose={closeDrawer}
+        PaperProps={{
+          sx: {
+            marginTop: '64px',
+            boxShadow: '-5px 0 20px rgba(0,0,0,0.08)',
+            borderRadius: '10px',
+            width: '45vw',
+          },
+        }}
+      >
+        {/* Note: the top margin is needed to not clip into the topbar */}
+        <Box
+          sx={{
+            display: 'flex',
+            padding: '1rem',
+            justifyContent: 'right',
+          }}
+        >
+          <ActionButton onClick={() => closeDrawer()} icon="mdi:close" description={t('Close')} />
+        </Box>
+        <Box>
+          {selectedResource && (
+            <KubeObjectDetails
+              resource={{ kind: selectedResource.kind, metadata: selectedResource.metadata }}
+              customResourceDefinition={selectedResource.customResourceDefinition}
+            />
+          )}
         </Box>
       </Drawer>
     )
