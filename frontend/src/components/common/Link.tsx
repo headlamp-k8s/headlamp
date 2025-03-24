@@ -3,7 +3,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import helpers from '../../helpers';
 import { kubeObjectQueryKey, useEndpoints } from '../../lib/k8s/api/v2/hooks';
 import { KubeObject } from '../../lib/k8s/KubeObject';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
@@ -140,16 +139,6 @@ export default function Link(props: React.PropsWithChildren<LinkProps | LinkObje
               : { kind, metadata: { name, namespace } };
 
           dispatch(setSelectedResource(selectedResource));
-
-          /**
-           * NOTE: we are using window.history.pushState to update the URL without causing a page reload.
-           * currently there is no way to update the URL without navigation to the details page which would make the drawer redundant.
-           *
-           * also note that this currently only works in the browser, not in electron.
-           */
-          if (!helpers.isElectron()) {
-            window.history.pushState({}, '', createRouteURL(kind, { name, namespace }));
-          }
         }
       : undefined;
 
