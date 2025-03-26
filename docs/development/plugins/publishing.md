@@ -10,7 +10,6 @@ This section of the docs is a guide for how to publish a Headlamp plugin to Arti
 ## Prerequisites
 
 * A GitHub repository containing your Headlamp plugin code. See the [building](./building.md) section to learn how to implement a Headlamp plugin.
-* The [headlamp-plugin](https://www.npmjs.com/package/@kinvolk/headlamp-plugin) NPM package version 0.10.0 (or higher) installed: you can do this by running `npm install -g @kinvolk/headlamp-plugin@^0.10`.
 
 ## Step 1: Create an ArtifactHub repository file
 
@@ -30,7 +29,7 @@ Replace `<Your Name>` and `<your-email@example.com>` with your name and email, r
   ```bash
   npm install
   npm run build
-  healdamp-plugin package
+  npm run package
   ```
   It will create a tarball of the plugin in a Headlamp-accepted format and also print the checksum of the tarball that we will use in the next step.
 
