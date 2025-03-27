@@ -73,6 +73,22 @@ func createResource(cfg Config) (*resource.Resource, error) {
 	return res, nil
 }
 
+// createSampler creates a sampling strategy based on the configured sampling rate.
+// - 1.0 or greater: sample every trace (AlwaysSample)
+// - 0.0 or lower: sample no traces (NeverSample)
+// - Between 0 and 1: sample the specified fraction of traces
+func createSampler(samplingRate float64) trace.Sampler {
+	if samplingRate >= 1.0 {
+		return trace.AlwaysSample()
+	}
+
+	if samplingRate <= 0.0 {
+		return trace.NeverSample()
+	}
+
+	return trace.TraceIDRatioBased(samplingRate)
+}
+
 // createTracingExporter creates an appropriate span exporter based on configuration.
 // It prioritizes exporters in the following order:
 // 1. Stdout exporter (if StdoutTraceEnabled is true)

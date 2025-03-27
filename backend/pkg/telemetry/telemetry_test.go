@@ -11,6 +11,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/stdout/stdouttrace"
+	"go.opentelemetry.io/otel/sdk/trace"
+	"go.opentelemetry.io/otel/sdk/trace/tracetest"
 	semconv "go.opentelemetry.io/otel/semconv/v1.17.0"
 )
 
@@ -166,4 +168,59 @@ func TestCreateStdoutExporter(t *testing.T) {
 	defer cancel()
 	err = exporter.Shutdown(ctx)
 	assert.NoError(t, err)
+}
+
+func TestCreateSampler(t *testing.T) {
+	tests := []struct {
+		rate          float64
+		expectedType  string
+		alwaysOn      bool
+		alwaysOff     bool
+		ratioSampling bool
+	}{
+		{1.5, "AlwaysSample", true, false, false},
+		{1.0, "AlwaysSample", true, false, false},
+		{0.5, "TraceIDRatioBased", false, false, true},
+		{0.0, "NeverSample", false, true, false},
+		{-1.0, "NeverSample", false, true, false},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.expectedType, func(t *testing.T) {
+			sampler := createSampler(tc.rate)
+			assert.NotNil(t, sampler)
+
+			// Test the behavior of the sampler indirectly
+			// through a tracing setup
+			exporter := tracetest.NewInMemoryExporter()
+			tp := trace.NewTracerProvider(
+				trace.WithSampler(sampler),
+				trace.WithBatcher(exporter),
+			)
+
+			tracer := tp.Tracer("test")
+			_, span := tracer.Start(context.Background(), "test-span")
+			span.End()
+
+			// Force flush
+			require.NoError(t, tp.ForceFlush(context.Background()))
+
+			spans := exporter.GetSpans()
+
+			if tc.alwaysOn {
+				assert.Len(t, spans, 1, "AlwaysSample should record the span")
+			} else if tc.alwaysOff {
+				assert.Len(t, spans, 0, "NeverSample should not record any spans")
+			} else if tc.ratioSampling {
+				// For ratio-based sampling, we can't predict the exact behavior
+				// in a single test without controlling the trace ID
+				// But the sampler should be properly configured
+				desc := sampler.Description()
+				assert.Contains(t, desc, "TraceIDRatioBased")
+			}
+
+			// Clean up
+			_ = tp.Shutdown(context.Background())
+		})
+	}
 }
