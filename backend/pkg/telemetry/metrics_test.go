@@ -43,6 +43,18 @@ func TestStartMetricsServer(t *testing.T) {
 	assert.NoError(t, server.Shutdown(ctx))
 }
 
+func TestStartMetricsServerInvalidPort(t *testing.T) {
+	server, err := StartMetricsServer(0)
+	assert.Error(t, err)
+	assert.Nil(t, server)
+	assert.Contains(t, err.Error(), "invalid port")
+
+	server, err = StartMetricsServer(-1)
+	assert.Error(t, err)
+	assert.Nil(t, server)
+	assert.Contains(t, err.Error(), "invalid port")
+}
+
 func TestResponseWriter(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
