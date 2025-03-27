@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { isEqual } from 'lodash';
+import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -41,6 +42,7 @@ function ContextMenu({ cluster }: ContextMenuProps) {
   const [openConfirmDialog, setOpenConfirmDialog] = React.useState<string | null>(null);
   const dialogs = useTypedSelector(state => state.clusterProvider.dialogs);
   const menuItems = useTypedSelector(state => state.clusterProvider.menuItems);
+  const { enqueueSnackbar } = useSnackbar();
 
   function removeCluster(cluster: Cluster) {
     deleteCluster(cluster.name || '')
@@ -49,7 +51,7 @@ function ContextMenu({ cluster }: ContextMenuProps) {
       })
       .catch((err: Error) => {
         if (err.message === 'Not Found') {
-          // TODO: create notification with error message
+          enqueueSnackbar(t('translation|Cluster not found'), { variant: 'error' });
         }
       })
       .finally(() => {

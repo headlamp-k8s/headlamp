@@ -23,9 +23,16 @@ import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import { binaryManager } from './binaries';
 import i18n from './i18next.config';
 import { PluginManager } from './plugin-management';
-import { handleRunCommand } from './runCmd';
+import {
+  checkCommandConsent,
+  getCommandConsent,
+  handleCheckCommands,
+  handleRunCommand,
+  setCommandConsent,
+} from './runCmd';
 import windowSize from './windowSize';
 
 dotenv.config({ path: path.join(process.resourcesPath, '.env') });
@@ -1248,7 +1255,90 @@ function startElecron() {
 
     ipcMain.on('run-command', (event, eventData) => handleRunCommand(event, eventData, mainWindow));
 
+    ipcMain.on('check-commands', (event, data) => {
+      try {
+        const eventData = JSON.parse(data);
+        handleCheckCommands(event, eventData, mainWindow);
+      } catch (e) {
+        console.error('Failed to parse check-commands data', e);
+        event.sender.send('check-commands-result', 'error', {});
+      }
+    });
+
     new PluginManagerEventListeners().setupEventHandlers();
+
+    // Register binary management events
+    ipcMain.handle('get-available-binaries', () => {
+      const binaries = binaryManager.getAvailableBinaries();
+
+      return binaries.map(binary => ({
+        name: binary.name,
+        displayName: binary.displayName,
+        version: binary.version,
+        installed: binary.installed,
+        headlampInstalled: binary.headlampInstalled || false,
+        systemInstalled: binary.systemInstalled || false,
+        systemPath: binary.systemPath || null,
+        systemVersion: binary.systemVersion || null,
+        // Check if this command is consented to run
+        consented: !!getCommandConsent(binary.name),
+      }));
+    });
+
+    ipcMain.handle('toggle-binary-consent', async (_, name, enabled) => {
+      try {
+        if (enabled) {
+          // If enabling, we need to check for command consent
+          const isConsented = checkCommandConsent(name, mainWindow!, true);
+          return isConsented;
+        } else {
+          // If disabling, just set it directly
+          return setCommandConsent(name, false);
+        }
+      } catch (error) {
+        console.error('Failed to toggle binary consent:', error);
+        return false;
+      }
+    });
+
+    ipcMain.handle('install-binary', async (_, name) => {
+      try {
+        const result = await binaryManager.installBinaryByName(name);
+        return { success: result };
+      } catch (error) {
+        console.error(`Failed to install binary ${name}:`, error);
+        return { success: false, error: error.message };
+      }
+    });
+
+    ipcMain.handle('get-binary-path', (_, name) => {
+      if (binaryManager.isBinaryInstalled(name)) {
+        return binaryManager.getBinaryPath(name);
+      }
+      return null;
+    });
+
+    ipcMain.handle('open-tools-directory', async () => {
+      try {
+        const binDirectory = binaryManager.getBinDirectory();
+        console.log('Opening tools directory:', binDirectory);
+        await shell.openPath(binDirectory);
+        return true;
+      } catch (error) {
+        console.error('Failed to open tools directory:', error);
+        throw error;
+      }
+    });
+
+    ipcMain.handle('uninstall-binary', async (_, name) => {
+      try {
+        const result = await binaryManager.uninstallBinaryByName(name);
+        return { success: result };
+      } catch (error) {
+        console.error(`Failed to uninstall binary ${name}:`, error);
+        return { success: false, error: error.message };
+      }
+    });
 
     if (!useExternalServer) {
       const runningHeadlamp = await getRunningHeadlampPIDs();

@@ -8,6 +8,7 @@ import NotificationList from '../components/App/Notifications/List';
 import PluginSettings from '../components/App/PluginSettings';
 import PluginSettingsDetails from '../components/App/PluginSettings/PluginSettingsDetails';
 import Settings from '../components/App/Settings';
+import ExternalTools from '../components/App/Settings/ExternalTools';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
 import AuthChooser from '../components/authchooser';
@@ -776,6 +777,22 @@ const defaultRoutes: {
     component: () => (
       <PageGrid>
         <SettingsClusters />
+      </PageGrid>
+    ),
+  },
+  externalTools: {
+    path: '/settings/tools',
+    exact: true,
+    name: 'External Tools',
+    sidebar: {
+      item: 'externalTools',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => (
+      <PageGrid>
+        <ExternalTools />
       </PageGrid>
     ),
   },
