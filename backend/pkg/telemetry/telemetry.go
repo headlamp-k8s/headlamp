@@ -11,8 +11,8 @@ import (
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
 	"go.opentelemetry.io/otel/exporters/stdout/stdouttrace"
-	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/propagation"
+	"go.opentelemetry.io/otel/sdk/metric"
 	"go.opentelemetry.io/otel/sdk/resource"
 	"go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.17.0"
@@ -194,6 +194,28 @@ func createOTLPExporter(cfg Config) (trace.SpanExporter, error) {
 // This is primarily useful for debugging or development environments.
 func createStdoutExporter() (trace.SpanExporter, error) {
 	return stdouttrace.New(stdouttrace.WithPrettyPrint())
+}
+
+// setupShutdownFunction prepares a function that will properly shut down
+// all telemetry components when called. This ensures that all pending
+// data is flushed to exporters before the application exits.
+func setupShutdownFunction(t *Telemetry) {
+	t.shutdown = func(ctx context.Context) error {
+		var err1, err2 error
+		if t.tracerProvider != nil {
+			err1 = t.tracerProvider.Shutdown(ctx)
+		}
+
+		if t.meterProvider != nil {
+			err2 = t.meterProvider.Shutdown(ctx)
+		}
+
+		if err1 != nil {
+			return err1
+		}
+
+		return err2
+	}
 }
 
 // Shutdown gracefully terminates all telemetry components,
