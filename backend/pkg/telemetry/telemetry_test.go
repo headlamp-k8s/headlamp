@@ -372,3 +372,16 @@ func TestShutDown(t *testing.T) {
 	err := telemetry.Shutdown(ctx)
 	assert.NoError(t, err)
 }
+
+func TestDefaultConfig(t *testing.T) {
+	cfg := DefaultConfig()
+
+	assert.Equal(t, "headlamp", cfg.ServiceName)
+	assert.Equal(t, "1.0.0", cfg.ServiceVersion)
+	assert.True(t, cfg.TracingEnabled)
+	assert.True(t, cfg.MetricsEnabled)
+	assert.Equal(t, "localhost:4317", cfg.OTLPEndpoint)
+	assert.True(t, cfg.StdoutTraceEnabled)
+	assert.Equal(t, 9090, cfg.PrometheusPort)
+	assert.Equal(t, 1.0, cfg.SamplingRate)
+}
