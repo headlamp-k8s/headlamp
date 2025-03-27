@@ -7,6 +7,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 )
 
@@ -38,6 +39,24 @@ func StartMetricsServer(port int) (*http.Server, error) {
 	fmt.Printf("Metrics server started on port %d\n", port)
 
 	return server, nil
+}
+
+// Metrics represents a collection of standardized application metrics.
+// It encapsulates various counters, gauges, and histograms for tracking
+// application performance and behavior.
+type Metrics struct {
+	// RequestCounter tracks the total number of HTTP requests
+	RequestCounter metric.Int64Counter
+	// RequestDuration measures the distribution of HTTP request durations
+	RequestDuration metric.Float64Histogram
+	// ActiveRequestsGauge tracks the number of currently active HTTP requests
+	ActiveRequestsGauge metric.Int64UpDownCounter
+	// ClusterProxyRequests counts requests made through the cluster proxy
+	ClusterProxyRequests metric.Int64Counter
+	// PluginLoadCount tracks the number of plugin loads
+	PluginLoadCount metric.Int64Counter
+	// ErrorCounter counts application errors by category
+	ErrorCounter metric.Int64Counter
 }
 
 // NewMetrics creates and registers a set of common application metrics.
@@ -106,22 +125,32 @@ func NewMetrics() (*Metrics, error) {
 	}, nil
 }
 
-// Metrics represents a collection of standardized application metrics.
-// It encapsulates various counters, gauges, and histograms for tracking
-// application performance and behavior.
-type Metrics struct {
-	// RequestCounter tracks the total number of HTTP requests
-	RequestCounter metric.Int64Counter
-	// RequestDuration measures the distribution of HTTP request durations
-	RequestDuration metric.Float64Histogram
-	// ActiveRequestsGauge tracks the number of currently active HTTP requests
-	ActiveRequestsGauge metric.Int64UpDownCounter
-	// ClusterProxyRequests counts requests made through the cluster proxy
-	ClusterProxyRequests metric.Int64Counter
-	// PluginLoadCount tracks the number of plugin loads
-	PluginLoadCount metric.Int64Counter
-	// ErrorCounter counts application errors by category
-	ErrorCounter metric.Int64Counter
+// RequestCounterMiddleware creates HTTP middleware that tracks request metrics.
+// The middleware:
+// 1. Increments the active requests gauge when a request starts
+// 2. Records the request count with method and path attributes
+// 3. Captures the response status code
+// 4. Decrements the active requests gauge when the request completes
+func (m *Metrics) RequestCounterMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		m.ActiveRequestsGauge.Add(r.Context(), 1)
+
+		attrs := []attribute.KeyValue{
+			attribute.String("http.method", r.Method),
+			attribute.String("http.target", r.URL.Path),
+		}
+
+		m.RequestCounter.Add(r.Context(), 1, metric.WithAttributes(attrs...))
+
+		wrapper := newResponseWriter(w)
+
+		next.ServeHTTP(wrapper, r)
+
+		statusAttr := attribute.Int("http.status_code", wrapper.statusCode)
+		m.RequestCounter.Add(r.Context(), 1, metric.WithAttributes(append(attrs, statusAttr)...))
+
+		m.ActiveRequestsGauge.Add(r.Context(), -1)
+	})
 }
 
 // responseWriter is a custom implementation of http.ResponseWriter that
