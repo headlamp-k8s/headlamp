@@ -24,7 +24,14 @@ import url from 'url';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import i18n from './i18next.config';
-import { PluginManager } from './plugin-management';
+import {
+  addToPath,
+  ArtifactHubHeadlampPkg,
+  defaultPluginsDir,
+  getMatchingExtraFiles,
+  getPluginBinDirectories,
+  PluginManager,
+} from './plugin-management';
 import { handleRunCommand } from './runCmd';
 import windowSize from './windowSize';
 
@@ -189,7 +196,6 @@ class PluginManagerEventListeners {
     ipcMain.on('plugin-manager', async (event, data) => {
       const eventData = JSON.parse(data) as Action;
       const { identifier, action } = eventData;
-
       const updateCache = (progress: ProgressResp) => {
         const percentage = this.convertProgressToPercentage(progress);
         this.cache[identifier].progress = progress;
@@ -248,7 +254,7 @@ class PluginManagerEventListeners {
       controller,
     };
 
-    let pluginInfo;
+    let pluginInfo: ArtifactHubHeadlampPkg | undefined = undefined;
     try {
       pluginInfo = await PluginManager.fetchPluginInfo(URL, { signal: controller.signal });
     } catch (error) {
@@ -260,6 +266,12 @@ class PluginManagerEventListeners {
       return { type: 'error', message: 'Failed to fetch plugin info' };
     }
 
+    const { matchingExtraFiles } = getMatchingExtraFiles(
+      pluginInfo?.extraFiles ? pluginInfo?.extraFiles : {}
+    );
+    const extraUrls = matchingExtraFiles.map(file => file.url);
+    const allUrls = [pluginInfo.archiveURL, ...extraUrls].join(', ');
+
     const dialogOptions: MessageBoxOptions = {
       type: 'question',
       buttons: [i18n.t('Yes'), i18n.t('No')],
@@ -267,7 +279,7 @@ class PluginManagerEventListeners {
       title: i18n.t('Plugin Installation'),
       message: i18n.t('Do you want to install the plugin "{{ pluginName }}"?', { pluginName }),
       detail: i18n.t('You are about to install a plugin from: {{ url }}\nDo you want to proceed?', {
-        url: pluginInfo.archiveURL,
+        url: allUrls,
       }),
     };
 
@@ -529,7 +541,6 @@ async function getShellEnv(): Promise<NodeJS.ProcessEnv> {
     };
 
     const envVars = isEnvNull ? processLines('\0') : processLines('\n');
-
     const mergedEnv = { ...process.env, ...envVars };
     return mergedEnv;
   } catch (error) {
@@ -1322,6 +1333,19 @@ function startElecron() {
 
       serverProcess = await startServer();
       attachServerEventHandlers(serverProcess);
+    }
+
+    // Also add bundled plugin bin directories to PATH
+    const bundledPlugins = path.join(process.resourcesPath, '.plugins');
+    const bundledPluginBinDirs = getPluginBinDirectories(bundledPlugins);
+    if (bundledPluginBinDirs.length > 0) {
+      addToPath(bundledPluginBinDirs, 'bundled plugin');
+    }
+
+    // Add the installed plugins as well
+    const userPluginBinDirs = getPluginBinDirectories(defaultPluginsDir());
+    if (userPluginBinDirs.length > 0) {
+      addToPath(userPluginBinDirs, 'userPluginBinDirs plugin');
     }
 
     // Finally load the frontend
