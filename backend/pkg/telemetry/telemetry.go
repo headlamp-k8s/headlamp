@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"time"
 
+	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
 	"go.opentelemetry.io/otel/exporters/stdout/stdouttrace"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/sdk/resource"
 	"go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.17.0"
@@ -71,6 +73,45 @@ func createResource(cfg Config) (*resource.Resource, error) {
 	}
 
 	return res, nil
+}
+
+// setupTracing initializes and configures the tracing components.
+// It creates the appropriate exporter based on configuration,
+// sets up a tracer provider with the configured sampling rate,
+// and registers it with the global OpenTelemetry instance.
+func setupTracing(t *Telemetry, res *resource.Resource, cfg Config) error {
+	exporter, err := createTracingExporter(cfg)
+	if err != nil {
+		return err
+	}
+
+	sampler := createSampler(cfg.SamplingRate)
+
+	tp := trace.NewTracerProvider(
+		trace.WithSampler(sampler),
+		trace.WithBatcher(exporter),
+		trace.WithResource(res),
+	)
+
+	if tp == nil {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+
+		_ = exporter.Shutdown(ctx)
+
+		return fmt.Errorf("tracer provider initialization returned nil")
+	}
+
+	t.tracerProvider = tp
+	otel.SetTracerProvider(tp)
+
+	// Configure context propagation for distributed tracing across service boundaries
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(
+		propagation.TraceContext{},
+		propagation.Baggage{},
+	))
+
+	return nil
 }
 
 // createSampler creates a sampling strategy based on the configured sampling rate.
@@ -154,3 +195,5 @@ func createOTLPExporter(cfg Config) (trace.SpanExporter, error) {
 func createStdoutExporter() (trace.SpanExporter, error) {
 	return stdouttrace.New(stdouttrace.WithPrettyPrint())
 }
+
+
