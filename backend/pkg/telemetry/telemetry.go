@@ -10,6 +10,7 @@ import (
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
+	"go.opentelemetry.io/otel/exporters/prometheus"
 	"go.opentelemetry.io/otel/exporters/stdout/stdouttrace"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/sdk/metric"
@@ -73,6 +74,29 @@ func createResource(cfg Config) (*resource.Resource, error) {
 	}
 
 	return res, nil
+}
+
+// setupMetrics initializes and configures the metrics components.
+// It creates a Prometheus exporter and sets up a meter provider,
+// registering it with the global OpenTelemetry instance.
+func setupMetrics(t *Telemetry, res *resource.Resource) error {
+	promExporter, err := prometheus.New()
+	if err != nil {
+		return fmt.Errorf("failed to initialize Prometheus exporter: %w", err)
+	}
+
+	mp := metric.NewMeterProvider(
+		metric.WithReader(promExporter),
+		metric.WithResource(res),
+	)
+	if mp == nil {
+		return fmt.Errorf("meter provider initialization returned nil")
+	}
+
+	t.meterProvider = mp
+	otel.SetMeterProvider(mp)
+
+	return nil
 }
 
 // setupTracing initializes and configures the tracing components.
