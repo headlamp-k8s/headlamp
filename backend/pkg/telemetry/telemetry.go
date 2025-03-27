@@ -196,4 +196,14 @@ func createStdoutExporter() (trace.SpanExporter, error) {
 	return stdouttrace.New(stdouttrace.WithPrettyPrint())
 }
 
+// Shutdown gracefully terminates all telemetry components,
+// ensuring that any buffered data is flushed to exporters.
+// This method should be called during application shutdown.
+// The provided context controls the maximum time allowed for shutdown operations.
+func (t *Telemetry) Shutdown(ctx context.Context) error {
+	if t.shutdown != nil {
+		return t.shutdown(ctx)
+	}
 
+	return nil
+}

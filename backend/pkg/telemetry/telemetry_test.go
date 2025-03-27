@@ -250,8 +250,22 @@ func TestSetupTracing(t *testing.T) {
 	_, span := tracer.Start(context.Background(), "test-span")
 	span.End()
 
-	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	// defer cancel()
-	// err = telemetry.Shutdown(ctx)
-	// assert.NoError(t, err)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	err = telemetry.Shutdown(ctx)
+	assert.NoError(t, err)
+}
+
+func TestShutDown(t *testing.T) {
+	telemetry := &Telemetry{
+		config: Config{
+			ServiceName: "test-service",
+		},
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	err := telemetry.Shutdown(ctx)
+	assert.NoError(t, err)
 }
