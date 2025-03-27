@@ -73,6 +73,45 @@ func createResource(cfg Config) (*resource.Resource, error) {
 	return res, nil
 }
 
+// createTracingExporter creates an appropriate span exporter based on configuration.
+// It prioritizes exporters in the following order:
+// 1. Stdout exporter (if StdoutTraceEnabled is true)
+// 2. OTLP exporter (if OTLPEndpoint is set)
+// 3. Defaults to stdout exporter if no other options are available
+func createTracingExporter(cfg Config) (trace.SpanExporter, error) {
+	if cfg.StdoutTraceEnabled {
+		exporter, err := createStdoutExporter()
+		if err != nil {
+			return nil, fmt.Errorf("failed to create stdout exporter: %w", err)
+		}
+
+		return exporter, nil
+	}
+
+	if cfg.JaegerEndpoint != "" {
+		if cfg.OTLPEndpoint == "" {
+			cfg.OTLPEndpoint = "localhost:4317"
+		}
+	}
+
+	if cfg.OTLPEndpoint != "" {
+		exporter, err := createOTLPExporter(cfg)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create OTLP exporter with endpoint %s: %w",
+				cfg.OTLPEndpoint, err)
+		}
+
+		return exporter, nil
+	}
+
+	exporter, err := createStdoutExporter()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create default stdout exporter: %w", err)
+	}
+
+	return exporter, nil
+}
+
 // createOTLPExporter creates an OpenTelemetry Protocol (OTLP) exporter
 // that can send traces to compatible backends like Jaeger, etc
 // OTLP-compatible systems. It supports both HTTP and gRPC transport protocols.

@@ -50,18 +50,63 @@ func TestCreateReosurce(t *testing.T) {
 	assert.True(t, environmentFound, "Environment attribute not found")
 }
 
-func TestCreateStdoutExporter(t *testing.T) {
-	exporter, err := createStdoutExporter()
-	assert.NoError(t, err)
-	assert.NotNil(t, exporter)
+func TestCreateTracingExporter(t *testing.T) {
+	tests := []struct {
+		name         string
+		config       Config
+		expectError  bool
+		exporterType string
+	}{
+		{
+			name: "stdout exporter",
+			config: Config{
+				StdoutTraceEnabled: true,
+			},
+			expectError:  false,
+			exporterType: "*stdouttrace.Exporter",
+		},
+		{
+			name: "OTLP exporter",
+			config: Config{
+				OTLPEndpoint: "localhost:4317",
+			},
+			expectError:  false,
+			exporterType: "otlptrace.Exporter",
+		},
+		{
+			name: "jaeger fallback to OTLP",
+			config: Config{
+				JaegerEndpoint: "http://localhost:14268/api/traces",
+			},
+			expectError:  false,
+			exporterType: "otlptrace.Exporter",
+		},
+		{
+			name:         "default to stdout",
+			config:       Config{},
+			expectError:  false,
+			exporterType: "*stdouttrace.Exporter",
+		},
+	}
 
-	_, ok := exporter.(*stdouttrace.Exporter)
-	assert.True(t, ok, "Expected a stdouttrace.Exporter")
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			exporter, err := createTracingExporter(tc.config)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	err = exporter.Shutdown(ctx)
-	assert.NoError(t, err)
+			if tc.expectError {
+				assert.Error(t, err)
+				assert.Nil(t, exporter)
+			} else {
+				assert.NoError(t, err)
+				assert.NotNil(t, exporter)
+
+				ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+				defer cancel()
+				err = exporter.Shutdown(ctx)
+				assert.NoError(t, err)
+			}
+		})
+	}
 }
 
 func TestCreateOTLPExporter(t *testing.T) {
@@ -107,4 +152,18 @@ func TestCreateOTLPExporter(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestCreateStdoutExporter(t *testing.T) {
+	exporter, err := createStdoutExporter()
+	assert.NoError(t, err)
+	assert.NotNil(t, exporter)
+
+	_, ok := exporter.(*stdouttrace.Exporter)
+	assert.True(t, ok, "Expected a stdouttrace.Exporter")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	err = exporter.Shutdown(ctx)
+	assert.NoError(t, err)
 }
