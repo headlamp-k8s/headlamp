@@ -22,7 +22,7 @@ const pluginConfigSchema = {
           },
           source: {
             type: 'string',
-            pattern: '^https://artifacthub\\.io/packages/headlamp/[^\\s]+$',
+            pattern: '^https://artifacthub\\.io/packages/[^\\s]+$',
           },
           version: {
             type: 'string',
