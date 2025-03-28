@@ -435,8 +435,6 @@ async function start() {
   const config = (await viteConfigPromise).default;
   const vite = await vitePromise;
 
-  await copyToPluginsFolder(config);
-
   if (config.build) {
     config.build.watch = {};
     config.build.sourcemap = 'inline';
@@ -446,11 +444,14 @@ async function start() {
   if (config.plugins) {
     config.plugins.push({
       name: 'headlamp-copy-extra-dist',
-      closeBundle: async () => {
+      buildEnd: async () => {
         await copyExtraDistFiles();
       },
     });
   }
+
+  // Then add the plugins from copyToPluginsFolder which includes ViteStaticCopy
+  await copyToPluginsFolder(config);
 
   try {
     await vite.build(config);
