@@ -153,3 +153,45 @@ func TestStartSpan(t *testing.T) {
 	}
 	assert.True(t, found, "Expected to find attribute test.key=test-value")
 }
+
+func TestAddSpanAttributes(t *testing.T) {
+	sr, tp := setupTracingProvider(t)
+
+	ctx, span := tp.Tracer("test").Start(context.Background(), "test-span")
+
+	AddSpanAttributes(ctx,
+		attribute.String("string.attr", "string-value"),
+		attribute.Int("int.attr", 42),
+		attribute.Bool("bool.attr", true),
+	)
+
+	span.End()
+
+	spans := sr.Ended()
+	require.Len(t, spans, 1, "Expected one spans to be created")
+
+	roSpan := spans[0]
+	attrs := roSpan.Attributes()
+
+	findAttr := func(key string) (attribute.KeyValue, bool) {
+		for _, attr := range attrs {
+			if string(attr.Key) == key {
+				return attr, true
+			}
+		}
+
+		return attribute.KeyValue{}, false
+	}
+
+	stringAttr, found := findAttr("string.attr")
+	assert.True(t, found, "Expected to find string.attr")
+	assert.Equal(t, "string-value", stringAttr.Value.AsString())
+
+	intAttr, found := findAttr("int.attr")
+	assert.True(t, found, "Expected to find int.attr")
+	assert.Equal(t, int64(42), intAttr.Value.AsInt64())
+
+	boolAttr, found := findAttr("bool.attr")
+	assert.True(t, found, "Expected to find bool.attr")
+	assert.Equal(t, true, boolAttr.Value.AsBool())
+}
