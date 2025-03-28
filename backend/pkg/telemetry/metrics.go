@@ -127,10 +127,10 @@ func NewMetrics() (*Metrics, error) {
 
 // RequestCounterMiddleware creates HTTP middleware that tracks request metrics.
 // The middleware:
-// 1. Increments the active requests gauge when a request starts
-// 2. Records the request count with method and path attributes
-// 3. Captures the response status code
-// 4. Decrements the active requests gauge when the request completes
+// 1. Increments the active requests gauge when a request starts.
+// 2. Records the request count with method and path attributes.
+// 3. Captures the response status code.
+// 4. Decrements the active requests gauge when the request completes.
 func (m *Metrics) RequestCounterMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		m.ActiveRequestsGauge.Add(r.Context(), 1)

@@ -1,3 +1,4 @@
+//nolint:testpackage
 package telemetry
 
 import (
@@ -17,7 +18,7 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 )
 
-func TestNewTelemetry(t *testing.T) {
+func TestNewTelemetry(t *testing.T) { //nolint:funlen
 	tests := []struct {
 		name          string
 		config        Config
@@ -70,17 +71,19 @@ func TestNewTelemetry(t *testing.T) {
 
 			if tc.expectError {
 				assert.Error(t, err)
+
 				if tc.errorContains != "" {
 					assert.Contains(t, err.Error(), tc.errorContains)
 				}
+
 				assert.Nil(t, telemetry)
 			} else {
 				assert.NoError(t, err)
 				assert.NotNil(t, telemetry)
 
-				// clean up
 				ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 				defer cancel()
+
 				err = telemetry.Shutdown(ctx)
 				assert.NoError(t, err)
 			}
@@ -88,7 +91,7 @@ func TestNewTelemetry(t *testing.T) {
 	}
 }
 
-func TestCreateReosurce(t *testing.T) {
+func TestCreateResource(t *testing.T) {
 	cfg := Config{
 		ServiceName:    "test-service",
 		ServiceVersion: "1.0.0",
@@ -98,23 +101,23 @@ func TestCreateReosurce(t *testing.T) {
 	require.NoError(t, err)
 	assert.NotNil(t, res)
 
-	// Verify resource attributes
 	attrs := res.Attributes()
 
 	var serviceNameFound, serviceVersionFound, environmentFound bool
-
-	// Check for expected attributes
 
 	for _, attr := range attrs {
 		switch attr.Key {
 		case semconv.ServiceNameKey:
 			assert.Equal(t, "test-service", attr.Value.AsString())
+
 			serviceNameFound = true
 		case semconv.ServiceVersionKey:
 			assert.Equal(t, "1.0.0", attr.Value.AsString())
+
 			serviceVersionFound = true
 		case attribute.Key("environment"):
 			assert.Equal(t, "production", attr.Value.AsString())
+
 			environmentFound = true
 		}
 	}
@@ -176,6 +179,7 @@ func TestCreateTracingExporter(t *testing.T) {
 
 				ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 				defer cancel()
+
 				err = exporter.Shutdown(ctx)
 				assert.NoError(t, err)
 			}
@@ -222,6 +226,7 @@ func TestCreateOTLPExporter(t *testing.T) {
 			if exporter != nil {
 				ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 				defer cancel()
+
 				_ = exporter.Shutdown(ctx)
 			}
 		})
@@ -238,6 +243,7 @@ func TestCreateStdoutExporter(t *testing.T) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+
 	err = exporter.Shutdown(ctx)
 	assert.NoError(t, err)
 }
@@ -262,8 +268,6 @@ func TestCreateSampler(t *testing.T) {
 			sampler := createSampler(tc.rate)
 			assert.NotNil(t, sampler)
 
-			// Test the behavior of the sampler indirectly
-			// through a tracing setup
 			exporter := tracetest.NewInMemoryExporter()
 			tp := trace.NewTracerProvider(
 				trace.WithSampler(sampler),
@@ -274,31 +278,26 @@ func TestCreateSampler(t *testing.T) {
 			_, span := tracer.Start(context.Background(), "test-span")
 			span.End()
 
-			// Force flush
 			require.NoError(t, tp.ForceFlush(context.Background()))
 
 			spans := exporter.GetSpans()
 
-			if tc.alwaysOn {
+			switch {
+			case tc.alwaysOn:
 				assert.Len(t, spans, 1, "AlwaysSample should record the span")
-			} else if tc.alwaysOff {
+			case tc.alwaysOff:
 				assert.Len(t, spans, 0, "NeverSample should not record any spans")
-			} else if tc.ratioSampling {
-				// For ratio-based sampling, we can't predict the exact behavior
-				// in a single test without controlling the trace ID
-				// But the sampler should be properly configured
+			case tc.ratioSampling:
 				desc := sampler.Description()
 				assert.Contains(t, desc, "TraceIDRatioBased")
 			}
 
-			// Clean up
 			_ = tp.Shutdown(context.Background())
 		})
 	}
 }
 
 func TestSetupTracing(t *testing.T) {
-
 	oldTP := otel.GetTracerProvider()
 	defer otel.SetTracerProvider(oldTP)
 
@@ -323,6 +322,7 @@ func TestSetupTracing(t *testing.T) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+
 	err = telemetry.Shutdown(ctx)
 	assert.NoError(t, err)
 }
@@ -356,7 +356,6 @@ func TestSetupShutdownFunction(t *testing.T) {
 	setupShutdownFunction(telemetry)
 	err = telemetry.shutdown(ctx)
 	assert.NoError(t, err)
-
 }
 
 func TestShutDown(t *testing.T) {

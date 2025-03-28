@@ -185,10 +185,7 @@ func setupTracing(t *Telemetry, res *resource.Resource, cfg Config) error {
 	return nil
 }
 
-// createSampler creates a sampling strategy based on the configured sampling rate.
-// - 1.0 or greater: sample every trace (AlwaysSample)
-// - 0.0 or lower: sample no traces (NeverSample)
-// - Between 0 and 1: sample the specified fraction of traces
+// - Between 0 and 1: sample the specified fraction of traces.
 func createSampler(samplingRate float64) trace.Sampler {
 	if samplingRate >= 1.0 {
 		return trace.AlwaysSample()
@@ -201,11 +198,7 @@ func createSampler(samplingRate float64) trace.Sampler {
 	return trace.TraceIDRatioBased(samplingRate)
 }
 
-// createTracingExporter creates an appropriate span exporter based on configuration.
-// It prioritizes exporters in the following order:
-// 1. Stdout exporter (if StdoutTraceEnabled is true)
-// 2. OTLP exporter (if OTLPEndpoint is set)
-// 3. Defaults to stdout exporter if no other options are available
+// 3. Defaults to stdout exporter if no other options are available.
 func createTracingExporter(cfg Config) (trace.SpanExporter, error) {
 	if cfg.StdoutTraceEnabled {
 		exporter, err := createStdoutExporter()

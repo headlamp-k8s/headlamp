@@ -1,4 +1,4 @@
-package telemetry
+package telemetry_test
 
 import (
 	"context"
@@ -8,6 +8,7 @@ import (
 	"strings"
 	"testing"
 
+	tel "github.com/headlamp-k8s/headlamp/backend/pkg/telemetry"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel"
@@ -37,6 +38,7 @@ func TestTracingMiddleware(t *testing.T) {
 	sr, tp := setupTracingProvider(t)
 	originalTP := otel.GetTracerProvider()
 	otel.SetTracerProvider(tp)
+
 	defer otel.SetTracerProvider(originalTP)
 
 	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -44,7 +46,7 @@ func TestTracingMiddleware(t *testing.T) {
 		_, _ = w.Write([]byte("test response"))
 	})
 
-	middleware := TracingMiddleware("test-service")
+	middleware := tel.TracingMiddleware("test-service")
 
 	handler := middleware(testHandler)
 
@@ -75,6 +77,7 @@ func TestTracingMiddleware(t *testing.T) {
 				}
 			}
 		}
+
 		return false
 	}
 
@@ -87,6 +90,7 @@ func TestTracingMiddlewareWithPropagation(t *testing.T) {
 	sr, tp := setupTracingProvider(t)
 	originalTP := otel.GetTracerProvider()
 	otel.SetTracerProvider(tp)
+
 	defer otel.SetTracerProvider(originalTP)
 
 	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -96,11 +100,12 @@ func TestTracingMiddlewareWithPropagation(t *testing.T) {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	middleware := TracingMiddleware("test-service")
+	middleware := tel.TracingMiddleware("test-service")
 
 	handler := middleware(testHandler)
 
 	req := httptest.NewRequest("GET", "/test-path", nil)
+
 	ctx, parentSpan := otel.Tracer("test").Start(context.Background(), "parent-span")
 	defer parentSpan.End()
 
@@ -116,6 +121,7 @@ func TestTracingMiddlewareWithPropagation(t *testing.T) {
 	require.GreaterOrEqual(t, len(spans), 2, "Expected at least two spans to be created")
 
 	var middlewareSpan sdktrace.ReadOnlySpan
+
 	var innerSpan sdktrace.ReadOnlySpan
 
 	for _, s := range spans {
@@ -136,9 +142,9 @@ func TestTracingMiddlewareWithPropagation(t *testing.T) {
 func TestStartSpan(t *testing.T) {
 	sr, tp := setupTracingProvider(t)
 
-	ctx, span := StartSpan(tp, "test-span")
+	ctx, span := tel.StartSpan(tp, "test-span")
 
-	AddSpanAttributes(ctx, attribute.String("test.key", "test-value"))
+	tel.AddSpanAttributes(ctx, attribute.String("test.key", "test-value"))
 
 	span.End()
 
@@ -149,12 +155,14 @@ func TestStartSpan(t *testing.T) {
 	assert.Equal(t, "test-span", roSpan.Name())
 
 	found := false
+
 	for _, attr := range roSpan.Attributes() {
 		if attr.Key == attribute.Key("test.key") && attr.Value.AsString() == "test-value" {
 			found = true
 			break
 		}
 	}
+
 	assert.True(t, found, "Expected to find attribute test.key=test-value")
 }
 
@@ -163,7 +171,7 @@ func TestAddSpanAttributes(t *testing.T) {
 
 	ctx, span := tp.Tracer("test").Start(context.Background(), "test-span")
 
-	AddSpanAttributes(ctx,
+	tel.AddSpanAttributes(ctx,
 		attribute.String("string.attr", "string-value"),
 		attribute.Int("int.attr", 42),
 		attribute.Bool("bool.attr", true),
@@ -205,7 +213,7 @@ func TestEndSpan(t *testing.T) {
 
 	ctx, _ := tp.Tracer("test").Start(context.Background(), "test-span")
 
-	EndSpan(ctx, nil)
+	tel.EndSpan(ctx, nil)
 
 	spans := sr.Ended()
 	require.Len(t, spans, 1, "Expected one span to be created and ended")
@@ -217,7 +225,7 @@ func TestEndSpan(t *testing.T) {
 
 	ctx, _ = tp.Tracer("test").Start(context.Background(), "error-span")
 	testErr := errors.New("test error")
-	EndSpan(ctx, testErr)
+	tel.EndSpan(ctx, testErr)
 
 	spans = sr.Ended()
 	require.Len(t, spans, 2, "Expected two spans to be created and ended")
@@ -238,14 +246,17 @@ func TestEndSpan(t *testing.T) {
 					strings.Contains(attr.Value.AsString(), "test error") {
 					errorMsgFound = true
 				}
+
 				if attr.Key == semconv.ExceptionTypeKey {
 					errorTypeFound = true
 				}
 			}
+
 			assert.True(t, errorMsgFound, "Error message should be recorded in event")
 			assert.True(t, errorTypeFound, "Error type should be recorded in event")
 		}
 	}
+
 	assert.True(t, errorEventFound, "Exception event should be recorded when error is provided")
 }
 
@@ -253,9 +264,10 @@ func TestGetTracer(t *testing.T) {
 	_, tp := setupTracingProvider(t)
 	orginalTP := otel.GetTracerProvider()
 	otel.SetTracerProvider(tp)
+
 	defer otel.SetTracerProvider(orginalTP)
 
-	tracer := GetTracer("test-component")
+	tracer := tel.GetTracer("test-component")
 
 	ctx, span := tracer.Start(context.Background(), "test-span")
 	defer span.End()

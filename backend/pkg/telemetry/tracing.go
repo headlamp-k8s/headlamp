@@ -29,7 +29,8 @@ func TracingMiddleware(serviceName string) func(http.Handler) http.Handler {
 
 // StartSpan starts a new span with the given name and returns the context with the span.
 // This function creates a span using the specified TracerProvider, which enables proper
-// span attribution to the correct service or component. The context returned contains the created span, which can be used for further tracing operations.
+// span attribution to the correct service or component. The context returned contains the created span,
+// which can be used for further tracing operations.
 func StartSpan(tp trace.TracerProvider, name string, opts ...trace.SpanStartOption) (context.Context, trace.Span) {
 	tracer := tp.Tracer("headlamp")
 	return tracer.Start(context.Background(), name, opts...)
