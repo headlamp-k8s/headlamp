@@ -43,3 +43,16 @@ func AddSpanAttributes(ctx context.Context, attributes ...attribute.KeyValue) {
 	span := trace.SpanFromContext(ctx)
 	span.SetAttributes(attributes...)
 }
+
+// EndSpan ends the current span in the context.
+// This function should be called when an operation completes to finalize the span.
+// If an error is provided, it will be recorded in the span with appropriate attributes.
+// Typically used in a defer statement following StartSpan.
+func EndSpan(ctx context.Context, err error) {
+	span := trace.SpanFromContext(ctx)
+	if err != nil {
+		span.RecordError(err)
+	}
+
+	span.End()
+}

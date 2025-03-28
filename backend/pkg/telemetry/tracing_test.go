@@ -2,8 +2,10 @@ package telemetry
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,6 +15,7 @@ import (
 	"go.opentelemetry.io/otel/propagation"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/sdk/trace/tracetest"
+	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 )
 
 func setupTracingProvider(t *testing.T) (*tracetest.SpanRecorder, *sdktrace.TracerProvider) {
@@ -194,4 +197,54 @@ func TestAddSpanAttributes(t *testing.T) {
 	boolAttr, found := findAttr("bool.attr")
 	assert.True(t, found, "Expected to find bool.attr")
 	assert.Equal(t, true, boolAttr.Value.AsBool())
+}
+
+func TestEndSpan(t *testing.T) {
+	sr, tp := setupTracingProvider(t)
+
+	ctx, _ := tp.Tracer("test").Start(context.Background(), "test-span")
+
+	EndSpan(ctx, nil)
+
+	spans := sr.Ended()
+	require.Len(t, spans, 1, "Expected one span to be created and ended")
+
+	events := spans[0].Events()
+	for _, event := range events {
+		assert.NotEqual(t, semconv.ExceptionEventName, event.Name, "Should not have exception event when error is nil")
+	}
+
+	ctx, _ = tp.Tracer("test").Start(context.Background(), "error-span")
+	testErr := errors.New("test error")
+	EndSpan(ctx, testErr)
+
+	spans = sr.Ended()
+	require.Len(t, spans, 2, "Expected two spans to be created and ended")
+
+	errorSpan := spans[1]
+
+	events = errorSpan.Events()
+	errorEventFound := false
+
+	for _, event := range events {
+		if event.Name == semconv.ExceptionEventName {
+			errorEventFound = true
+			errorMsgFound := false
+			errorTypeFound := false
+
+			for _, attr := range event.Attributes {
+				if attr.Key == semconv.ExceptionMessageKey &&
+					strings.Contains(attr.Value.AsString(), "test error") {
+					errorMsgFound = true
+				}
+				if attr.Key == semconv.ExceptionTypeKey {
+					errorTypeFound = true
+				}
+			}
+			assert.True(t, errorMsgFound, "Error message should be recorded in event")
+			assert.True(t, errorTypeFound, "Error type should be recorded in event")
+		}
+	}
+	assert.True(t, errorEventFound, "Exception event should be recorded when error is provided")
+
 }
