@@ -16,6 +16,7 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/sdk/trace/tracetest"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
+	"go.opentelemetry.io/otel/trace"
 )
 
 func setupTracingProvider(t *testing.T) (*tracetest.SpanRecorder, *sdktrace.TracerProvider) {
@@ -246,5 +247,20 @@ func TestEndSpan(t *testing.T) {
 		}
 	}
 	assert.True(t, errorEventFound, "Exception event should be recorded when error is provided")
+}
 
+func TestGetTracer(t *testing.T) {
+	_, tp := setupTracingProvider(t)
+	orginalTP := otel.GetTracerProvider()
+	otel.SetTracerProvider(tp)
+	defer otel.SetTracerProvider(orginalTP)
+
+	tracer := GetTracer("test-component")
+
+	ctx, span := tracer.Start(context.Background(), "test-span")
+	defer span.End()
+
+	retrievedSpan := trace.SpanFromContext(ctx)
+	assert.NotNil(t, retrievedSpan)
+	assert.Equal(t, span.SpanContext().TraceID(), retrievedSpan.SpanContext().TraceID())
 }

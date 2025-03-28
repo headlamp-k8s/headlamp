@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
@@ -55,4 +56,12 @@ func EndSpan(ctx context.Context, err error) {
 	}
 
 	span.End()
+}
+
+// GetTracer returns a named tracer.
+// A tracer is used to create spans for tracing operations. Each tracer can be
+// named to indicate which component or module is creating the spans, allowing
+// for better organization in tracing backends.
+func GetTracer(name string) trace.Tracer {
+	return otel.Tracer(name)
 }
