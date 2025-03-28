@@ -280,7 +280,8 @@ export default function EditorDialog(props: EditorDialogProps) {
                 apiVersion,
               });
             }
-            setError(msg);
+            const errorDetail = value.reason?.message || msg;
+            setError(errorDetail);
             setOpen?.(true);
             // throw msg;
             throw new Error(msg);
