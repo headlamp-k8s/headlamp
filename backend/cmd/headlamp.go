@@ -154,7 +154,11 @@ type embeddedSpaHandler struct {
 }
 
 func (h embeddedSpaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("*** embeddedSpaHandler ServeHTTP ***")
+	fmt.Println("  Base URL: ", h.baseURL)
+	fmt.Println("  Before Request URL: ", r.URL.Path)
 	path := strings.TrimPrefix(r.URL.Path, h.baseURL)
+	fmt.Println("  After Request URL: ", path)
 
 	if path == "" || path == "/" {
 		path = h.indexPath
@@ -171,6 +175,13 @@ func (h embeddedSpaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Unable to read index file", http.StatusInternalServerError)
 			return
 		}
+	}
+
+	// if request is for / or index.html replace the headlampBaseUrl with the baseURL
+	fmt.Println("*** path ***", path, "*** indexPath ***", h.indexPath)
+	if path == h.indexPath || path == "/"+h.indexPath {
+		fmt.Println("*** replacing headlampBaseUrl ***")
+		content = bytes.ReplaceAll(content, []byte("headlampBaseUrl = './'"), []byte("headlampBaseUrl = '"+h.baseURL+"'"))
 	}
 
 	// Set the correct Content-Type header

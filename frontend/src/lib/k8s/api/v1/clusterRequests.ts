@@ -81,6 +81,7 @@ export async function request(
 ): Promise<any> {
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = (useCluster && getCluster()) || '';
+  console.log('=== request ===', path, cluster);
 
   if (isDebugVerbose('k8s/apiProxy@request')) {
     console.debug('k8s/apiProxy@request', { path, params, useCluster, queryParams });
@@ -124,6 +125,7 @@ export async function clusterRequest(
   const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
   const cluster = paramsCluster || '';
 
+  console.log('=== clusterRequest ===', path, cluster);
   let fullPath = path;
   if (cluster) {
     const token = getToken(cluster);
@@ -147,10 +149,12 @@ export async function clusterRequest(
 
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
-
+  console.log('=== clusterRequest ===', BASE_HTTP_URL, fullPath);
   let url = combinePath(BASE_HTTP_URL, fullPath);
   url += asQuery(queryParams);
   const requestData = { signal: controller.signal, ...opts };
+  // add backstage token to the request
+  requestData.headers['X-Backstage-Token'] = 'backstage-token';
   let response: Response = new Response(undefined, { status: 502, statusText: 'Unreachable' });
   try {
     response = await fetch(url, requestData);
