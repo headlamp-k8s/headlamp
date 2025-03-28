@@ -8,12 +8,41 @@ describe('MultiPluginManagement', () => {
   let tempDir;
   let configPath;
   let installer;
-
+  const PLUGIN_DATA = [
+    {
+      name: 'appcatalog_headlamp_plugin',
+      source: 'https://artifacthub.io/packages/headlamp/test-123/appcatalog_headlamp_plugin',
+      version: '0.0.3',
+    },
+    {
+      name: 'ai_plugin',
+      source: 'https://artifacthub.io/packages/headlamp/test-123/ai_plugin',
+      version: '0.0.2',
+    },
+    {
+      name: 'prometheus_headlamp_plugin',
+      source: 'https://artifacthub.io/packages/headlamp/test-123/prometheus_headlamp_plugin',
+      version: '0.0.3',
+    },
+  ];
   beforeEach(async () => {
     // Create temporary directory for tests
     tempDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'headlamp-test-'));
     configPath = path.join(tempDir, 'plugins.yaml');
-    installer = new MultiPluginManager(tempDir);
+
+    const progressCallback = data => {
+      const { type = 'info', message, raise = true } = data;
+      const prefix = `${data.current} of ${data.total} (${data.plugin})`;
+
+      if (type === 'success') {
+        console.log(`${prefix}: ${type}: ${message}`);
+      } else if (type === 'error' && raise) {
+        throw new Error(message);
+      } else {
+        console.error(`${prefix}: ${type}: ${message}`);
+      }
+    };
+    installer = new MultiPluginManager(tempDir, '', progressCallback);
   });
 
   afterEach(async () => {
@@ -25,16 +54,16 @@ describe('MultiPluginManagement', () => {
     it('should validate a valid configuration', async () => {
       const config = `
 plugins:
-  - name: test-plugin
-    source: https://example.com/plugin.tar.gz
-    version: 1.0.0
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+    version: ${PLUGIN_DATA[1].version}
 `;
       await fsp.writeFile(configPath, config);
 
       const result = await installer.validateConfig(configPath);
       expect(result).toBeDefined();
       expect(result.plugins).toHaveLength(1);
-      expect(result.plugins[0].name).toBe('test-plugin');
+      expect(result.plugins[0].name).toBe(PLUGIN_DATA[1].name);
     });
 
     it('should reject invalid configuration', async () => {
@@ -48,28 +77,157 @@ plugins:
         'Configuration validation failed'
       );
     });
+
+    it('should reject duplicate plugin names', async () => {
+      const config = `
+plugins:
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+`;
+      await fsp.writeFile(configPath, config);
+
+      await expect(installer.validateConfig(configPath)).rejects.toThrow(
+        `Duplicate plugin names found: ${PLUGIN_DATA[1].name}`
+      );
+    });
+
+    it('should reject duplicate plugin sources', async () => {
+      const config = `
+plugins:
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+  - name: ${PLUGIN_DATA[2].name}
+    source: ${PLUGIN_DATA[1].source}
+`;
+      await fsp.writeFile(configPath, config);
+
+      await expect(installer.validateConfig(configPath)).rejects.toThrow(
+        `Duplicate plugin sources found: ${PLUGIN_DATA[1].source}`
+      );
+    });
+  });
+
+  describe('dependency handling', () => {
+    it('should detect circular dependencies', async () => {
+      const config = `
+plugins:
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+    dependencies:
+      - ${PLUGIN_DATA[2].name}
+  - name: ${PLUGIN_DATA[2].name}
+    source: ${PLUGIN_DATA[2].source}
+    dependencies:
+      - ${PLUGIN_DATA[1].name}
+`;
+      await fsp.writeFile(configPath, config);
+
+      await expect(installer.installFromConfig(configPath)).rejects.toThrow(
+        `Circular dependencies found for plugin ${PLUGIN_DATA[1].name}`
+      );
+    });
+
+    it('should skip plugins with failed dependencies', async () => {
+      const config = `
+plugins:
+  - name: invalid-plugin
+    source: https://artifacthub.io/packages/headlamp/test-123/invalid-plugin
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+    dependencies:
+      - invalid-plugin
+installOptions:
+  parallel: false
+`;
+      await fsp.writeFile(configPath, config);
+
+      const result = await installer.installFromConfig(configPath);
+      expect(result.failed).toBe(1);
+      expect(result.skipped).toBe(1);
+      expect(result.successful).toBe(0);
+    });
+  });
+
+  describe('parallel installation', () => {
+    it('should respect maxConcurrent setting', async () => {
+      const config = `
+plugins:
+  - name: ${PLUGIN_DATA[0].name}
+    source: ${PLUGIN_DATA[0].source}
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+  - name: ${PLUGIN_DATA[2].name}
+    source: ${PLUGIN_DATA[2].source}
+installOptions:
+  parallel: true
+  maxConcurrent: 2
+`;
+      await fsp.writeFile(configPath, config);
+
+      // Mock installer._createOptimalChunks to verify chunk sizes
+      const createOptimalChunksSpy = jest.spyOn(installer, '_createOptimalChunks');
+      await installer.installFromConfig(configPath);
+
+      const chunks = createOptimalChunksSpy.mock.results[0].value;
+      expect(chunks.every(chunk => chunk.length <= 2)).toBe(true);
+    }, 10000); // Increase timeout to 10 seconds
+
+    it('should not install dependent plugins in parallel', async () => {
+      const config = `
+plugins:
+  - name: ${PLUGIN_DATA[0].name}
+    source: ${PLUGIN_DATA[0].source}
+  - name: ${PLUGIN_DATA[1].name}
+    source: ${PLUGIN_DATA[1].source}
+    dependencies:
+      - ${PLUGIN_DATA[0].name}
+  - name: ${PLUGIN_DATA[2].name}
+    source: ${PLUGIN_DATA[2].source}
+installOptions:
+  parallel: true
+  maxConcurrent: 3
+`;
+      await fsp.writeFile(configPath, config);
+
+      const createOptimalChunksSpy = jest.spyOn(installer, '_createOptimalChunks');
+      await installer.installFromConfig(configPath);
+
+      const chunks = createOptimalChunksSpy.mock.results[0].value;
+
+      // Verify that base-plugin and dependent-plugin are not in the same chunk
+      const hasInvalidChunk = chunks.some(
+        chunk => chunk.includes(PLUGIN_DATA[0].name) && chunk.includes(PLUGIN_DATA[1].name)
+      );
+      expect(hasInvalidChunk).toBe(false);
+
+      // Verify that independent-plugin can be installed in parallel with base-plugin
+      const hasValidParallelChunk = chunks.some(
+        chunk => chunk.length > 1 && chunk.includes(PLUGIN_DATA[2].name)
+      );
+      expect(hasValidParallelChunk).toBe(true);
+    }, 10000); // Increase timeout to 10 seconds
   });
 
   describe('installFromConfig', () => {
     it('should installs plugins from a configuration file', async () => {
       const config = `
 plugins:
-  - name: test-app-catalog  
-    source: https://artifacthub.io/packages/headlamp/test-123/appcatalog_headlamp_plugin
-    version: 0.5.0
+  - name: ${PLUGIN_DATA[0].name}
+    source: ${PLUGIN_DATA[0].source}
+    version: ${PLUGIN_DATA[0].version}
 `;
       await fsp.writeFile(configPath, config);
 
       const result = await installer.installFromConfig(configPath);
-      expect(result).toEqual([
-        {
-          name: 'test-app-catalog',
-          status: 'success',
-          error: undefined,
-        },
-      ]);
-      expect(fs.existsSync(path.join(tempDir, 'test-app-catalog'))).toBe(true);
-    });
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Add delay to ensure all logs are processed
+
+      expect(result.successful).toEqual(1);
+      expect(result.failed).toEqual(0);
+      expect(fs.existsSync(path.join(tempDir, PLUGIN_DATA[0].name))).toBe(true);
+    }, 10000); // Increase timeout to 10 seconds
+
     it('should handle missing configuration file', async () => {
       await expect(installer.installFromConfig('/nonexistent/config.yaml')).rejects.toThrow(
         'Configuration file not found'
@@ -83,15 +241,9 @@ plugins:
     source: invalid-url
 `;
       await fsp.writeFile(configPath, config);
-
-      const result = await installer.installFromConfig(configPath);
-      expect(result).toEqual([
-        {
-          name: 'test-plugin',
-          status: 'error',
-          error: 'Invalid URL. Please provide a valid URL from ArtifactHub.',
-        },
-      ]);
+      await expect(installer.installFromConfig(configPath)).rejects.toThrow(
+        'Configuration validation failed'
+      );
     });
   });
 

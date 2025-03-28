@@ -1436,10 +1436,24 @@ yargs(process.argv.slice(2))
         const progressCallback = quiet
           ? () => {}
           : data => {
-              if (data.type === 'error' || data.type === 'success') {
-                console.error(data.type, ':', data.message);
+              const { type = 'info', message, raise = true } = data;
+              if (config && !source) {
+                // bulk installation
+                const prefix = `${data.current} of ${data.total} (${data.plugin})`;
+
+                if (type === 'success') {
+                  console.log(`${prefix}: ${type}: ${message}`);
+                } else if (type === 'error' && raise) {
+                  throw new Error(message);
+                } else {
+                  console.error(`${prefix}: ${type}: ${message}`);
+                }
+              } else {
+                if (type === 'error' || type === 'success') {
+                  console.error(`${type}: ${message}`);
+                }
               }
-            }; // Use console.log for logs if not in quiet mode
+            };
         if (source) {
           // Single plugin installation
           try {
@@ -1449,31 +1463,11 @@ yargs(process.argv.slice(2))
             process.exit(1); // Exit with error status
           }
         } else if (config) {
-          const installer = new MultiPluginManager(folderName, headlampVersion);
+          const installer = new MultiPluginManager(folderName, headlampVersion, progressCallback);
           // Bulk installation from config
-          console.log('Starting bulk plugin installation', { configPath: config });
-          const results = await installer.installFromConfig(config);
-          if (!quiet) {
-            for (const result of results) {
-              if (result.status === 'success') {
-                console.log('Plugin installed successfully', result);
-              } else {
-                console.error('Plugin installation failed', result);
-              }
-            }
-          }
-          // Log results summary
-          const successful = results.filter(r => r.status === 'success').length;
-          const failed = results.filter(r => r.status === 'error').length;
-
-          console.log('Bulk installation completed', {
-            total: results.length,
-            successful,
-            failed,
-          });
-
+          const result = await installer.installFromConfig(config);
           // Exit with error if any plugins failed to install
-          if (failed > 0) {
+          if (result.failed > 0) {
             process.exit(1);
           }
         } else {
