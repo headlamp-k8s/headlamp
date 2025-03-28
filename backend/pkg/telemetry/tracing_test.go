@@ -9,6 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/sdk/trace/tracetest"
 )
@@ -77,3 +78,27 @@ func TestTracingMiddleware(t *testing.T) {
 	assert.True(t, containsAttribute("http.status_code", 200))
 }
 
+func TestStartSpan(t *testing.T) {
+	sr, tp := setupTracingProvider(t)
+
+	ctx, span := StartSpan(tp, "test-span")
+
+	AddSpanAttributes(ctx, attribute.String("test.key", "test-value"))
+
+	span.End()
+
+	spans := sr.Ended()
+	require.Len(t, spans, 1, "Expected one span to be created")
+
+	roSpan := spans[0]
+	assert.Equal(t, "test-span", roSpan.Name())
+
+	found := false
+	for _, attr := range roSpan.Attributes() {
+		if attr.Key == attribute.Key("test.key") && attr.Value.AsString() == "test-value" {
+			found = true
+			break
+		}
+	}
+	assert.True(t, found, "Expected to find attribute test.key=test-value")
+}
