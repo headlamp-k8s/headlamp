@@ -10,6 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/propagation"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/sdk/trace/tracetest"
 )
@@ -76,6 +77,56 @@ func TestTracingMiddleware(t *testing.T) {
 	assert.True(t, containsAttribute("http.method", "GET"))
 	assert.True(t, containsAttribute("http.target", "/test-path"))
 	assert.True(t, containsAttribute("http.status_code", 200))
+}
+
+func TestTracingMiddlewareWithPropagation(t *testing.T) {
+	sr, tp := setupTracingProvider(t)
+	originalTP := otel.GetTracerProvider()
+	otel.SetTracerProvider(tp)
+	defer otel.SetTracerProvider(originalTP)
+
+	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_, span := otel.GetTracerProvider().Tracer("test").Start(r.Context(), "inner-span")
+		span.End()
+
+		w.WriteHeader(http.StatusOK)
+	})
+
+	middleware := TracingMiddleware("test-service")
+
+	handler := middleware(testHandler)
+
+	req := httptest.NewRequest("GET", "/test-path", nil)
+	ctx, parentSpan := otel.Tracer("test").Start(context.Background(), "parent-span")
+	defer parentSpan.End()
+
+	otel.GetTextMapPropagator().Inject(ctx, propagation.HeaderCarrier(req.Header))
+
+	w := httptest.NewRecorder()
+
+	handler.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	spans := sr.Ended()
+	require.GreaterOrEqual(t, len(spans), 2, "Expected at least two spans to be created")
+
+	var middlewareSpan sdktrace.ReadOnlySpan
+	var innerSpan sdktrace.ReadOnlySpan
+
+	for _, s := range spans {
+		if s.Name() == "test-service" {
+			middlewareSpan = s
+		} else if s.Name() == "inner-span" {
+			innerSpan = s
+		}
+	}
+
+	require.NotNil(t, middlewareSpan, "Middleware span not found")
+	require.NotNil(t, innerSpan, "Inner span not found")
+
+	assert.Equal(t, middlewareSpan.SpanContext().TraceID(), innerSpan.SpanContext().TraceID(),
+		"Inner span should share trace ID with middleware span")
 }
 
 func TestStartSpan(t *testing.T) {
