@@ -68,6 +68,13 @@ export async function startPortForward(
     headers['X-HEADLAMP-USER-ID'] = getUserIdFromLocalStorage();
   }
 
+  if (helpers.isBackstage()) {
+    const backstageToken = helpers.getBackstageToken();
+    if (backstageToken) {
+      headers['X-Backstage-Token'] = backstageToken;
+    }
+  }
+
   const request: PortForwardRequest = {
     cluster,
     namespace,
@@ -119,6 +126,13 @@ export async function stopOrDeletePortForward(
     headers['X-HEADLAMP-USER-ID'] = getUserIdFromLocalStorage();
   }
 
+  if (helpers.isBackstage()) {
+    const backstageToken = helpers.getBackstageToken();
+    if (backstageToken) {
+      headers['X-Backstage-Token'] = backstageToken;
+    }
+  }
+
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'DELETE',
     body: JSON.stringify({
@@ -152,6 +166,13 @@ export async function listPortForward(cluster: string): Promise<PortForward[]> {
   // This means cluster is dynamically configured.
   if (kubeconfig !== null) {
     headers['X-HEADLAMP-USER-ID'] = getUserIdFromLocalStorage();
+  }
+
+  if (helpers.isBackstage()) {
+    const backstageToken = helpers.getBackstageToken();
+    if (backstageToken) {
+      headers['X-Backstage-Token'] = backstageToken;
+    }
   }
 
   return fetch(`${helpers.getAppUrl()}portforward/list?cluster=${cluster}`, {

@@ -18,6 +18,13 @@ export const BASE_HTTP_URL = helpers.getAppUrl();
  * @returns fetch Response
  */
 async function backendFetch(url: string | URL, init: RequestInit) {
+  if (helpers.isBackstage()) {
+    const backstageToken = helpers.getBackstageToken();
+    if (backstageToken) {
+      init.headers = new Headers(init.headers);
+      init.headers.set('X-Backstage-Token', backstageToken);
+    }
+  }
   const response = await fetch(makeUrl([BASE_HTTP_URL, url]), init);
 
   // The backend signals through this header that it wants a reload.

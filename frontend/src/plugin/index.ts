@@ -245,19 +245,28 @@ export async function fetchAndExecutePlugins(
   onSettingsChange: (plugins: PluginInfo[]) => void,
   onIncompatible: (plugins: Record<string, PluginInfo>) => void
 ) {
-  const pluginPaths = (await fetch(`${helpers.getAppUrl()}plugins`).then(resp =>
-    resp.json()
-  )) as string[];
+  const backstageToken = helpers.getBackstageToken();
+  const headers: HeadersInit = {};
+  if (backstageToken) {
+    headers['X-Backstage-Token'] = backstageToken;
+  }
+  const pluginPaths = (await fetch(`${helpers.getAppUrl()}plugins`, {
+    headers,
+  }).then(resp => resp.json())) as string[];
 
   const sourcesPromise = Promise.all(
     pluginPaths.map(path =>
-      fetch(`${helpers.getAppUrl()}${path}/main.js`).then(resp => resp.text())
+      fetch(`${helpers.getAppUrl()}${path}/main.js`, {
+        headers,
+      }).then(resp => resp.text())
     )
   );
 
   const packageInfosPromise = await Promise.all<PluginInfo>(
     pluginPaths.map(path =>
-      fetch(`${helpers.getAppUrl()}${path}/package.json`).then(resp => {
+      fetch(`${helpers.getAppUrl()}${path}/package.json`, {
+        headers,
+      }).then(resp => {
         if (!resp.ok) {
           if (resp.status !== 404) {
             return Promise.reject(resp);

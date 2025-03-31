@@ -134,6 +134,58 @@ function isDockerDesktop(): boolean {
   return true;
 }
 
+/**
+ * isBackstage checks if Headlamp is running in a backstage app
+ *
+ * @returns true if Headlamp is running in a backstage app
+ */
+function isBackstage(): boolean {
+  // if running in iframe and the url has /api/headlamp in it, then we are running in backstage
+  return window.self !== window.top && window.location.href.includes('/api/headlamp');
+}
+
+const BACKSTAGE_TOKEN_STORAGE_KEY = 'backstage_token';
+
+/**
+ * setBackstageToken sets the backstage token in the local storage
+ *
+ * @param token - the token to set
+ */
+function setBackstageToken(token: string) {
+  localStorage.setItem(BACKSTAGE_TOKEN_STORAGE_KEY, token);
+}
+
+/**
+ * getBackstageToken gets the backstage token from the local storage
+ *
+ * @returns the backstage token
+ */
+function getBackstageToken(): string | null {
+  return localStorage.getItem(BACKSTAGE_TOKEN_STORAGE_KEY);
+}
+
+/**
+ * setupBackstageTokenReceiver sets up a listener for messages from the backstage app
+ * and sets the backend token if it is received
+ */
+function setupBackstageTokenReceiver() {
+  if (isBackstage()) {
+    console.log('Running in backstage, so setting up token receiver');
+
+    const handleMessage = (event: MessageEvent) => {
+      const { type, payload } = event.data || {};
+      if (type === 'BACKSTAGE_AUTH_TOKEN') {
+        const { token } = payload || {};
+        if (token) {
+          setBackstageToken(token);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+  }
+}
+
 export function getFilterValueByNameFromURL(key: string, location: any): string[] {
   const searchParams = new URLSearchParams(location.search);
 
@@ -394,6 +446,9 @@ const exportFunctions = {
   getAppUrl,
   isElectron,
   isDockerDesktop,
+  isBackstage,
+  setupBackstageTokenReceiver,
+  getBackstageToken,
   getAppVersion,
   setAppVersion,
   setRecentCluster,

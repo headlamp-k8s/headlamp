@@ -45,13 +45,20 @@ export default function ReleaseNotes() {
 
             const githubReleaseURL = `https://api.github.com/repos/kinvolk/headlamp/releases`;
 
+            const headers: HeadersInit = {
+              'Content-Type': 'application/json',
+            };
+            if (helpers.isBackstage()) {
+              const backstageToken = helpers.getBackstageToken();
+              if (backstageToken) {
+                headers['X-Backstage-Token'] = backstageToken;
+              }
+            }
             try {
               // get all the releases -> default decreasing order of releases
               const response = await fetch(githubReleaseURL, {
                 method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
+                headers,
                 signal,
               });
 
@@ -89,12 +96,19 @@ export default function ReleaseNotes() {
                 // get the release notes for the version with which the app was built
                 const tagReleaseURL = `https://api.github.com/repos/kinvolk/headlamp/releases/tags/v${currentBuildAppVersion}`;
 
+                const headers: HeadersInit = {
+                  'Content-Type': 'application/json',
+                };
+                if (helpers.isBackstage()) {
+                  const backstageToken = helpers.getBackstageToken();
+                  if (backstageToken) {
+                    headers['X-Backstage-Token'] = backstageToken;
+                  }
+                }
                 try {
                   const tagResponse = await fetch(tagReleaseURL, {
                     method: 'GET',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
+                    headers,
                     signal,
                   });
 

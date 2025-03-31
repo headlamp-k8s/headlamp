@@ -1,5 +1,6 @@
 import { decodeToken } from 'react-jwt';
 import { isDebugVerbose } from '../../../../helpers';
+import helpers from '../../../../helpers';
 import { getToken, setToken } from '../../../auth';
 import { getCluster } from '../../../cluster';
 import { KubeToken } from '../../token';
@@ -83,6 +84,12 @@ export async function refreshToken(token: string | null): Promise<void> {
       ...JSON_HEADERS,
     });
 
+    if (helpers.isBackstage()) {
+      const backstageToken = helpers.getBackstageToken();
+      if (backstageToken) {
+        headers.set('X-Backstage-Token', backstageToken);
+      }
+    }
     const token = getToken(cluster);
     if (!!token) {
       headers.set('Authorization', `Bearer ${token}`);

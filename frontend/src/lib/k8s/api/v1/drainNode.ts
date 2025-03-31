@@ -18,12 +18,21 @@ import { JSON_HEADERS } from './constants';
  * to get the status of the drain node process.
  */
 export function drainNode(cluster: string, nodeName: string) {
+  const headers: HeadersInit = { ...JSON_HEADERS };
+  if (helpers.isBackstage()) {
+    const backstageToken = helpers.getBackstageToken();
+    if (backstageToken) {
+      headers['X-Backstage-Token'] = backstageToken;
+    }
+  }
+  const token = getToken(cluster);
+  if (!!token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   return fetch(`${helpers.getAppUrl()}drain-node`, {
     method: 'POST',
-    headers: new Headers({
-      Authorization: `Bearer ${getToken(cluster)}`,
-      ...JSON_HEADERS,
-    }),
+    headers,
     body: JSON.stringify({
       cluster,
       nodeName,
@@ -60,12 +69,20 @@ interface DrainNodeStatus {
  * @throws {Error} if the response is not ok
  */
 export function drainNodeStatus(cluster: string, nodeName: string): Promise<DrainNodeStatus> {
+  const headers: HeadersInit = { ...JSON_HEADERS };
+  if (helpers.isBackstage()) {
+    const backstageToken = helpers.getBackstageToken();
+    if (backstageToken) {
+      headers['X-Backstage-Token'] = backstageToken;
+    }
+  }
+  const token = getToken(cluster);
+  if (!!token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
   return fetch(`${helpers.getAppUrl()}drain-node-status?cluster=${cluster}&nodeName=${nodeName}`, {
     method: 'GET',
-    headers: new Headers({
-      Authorization: `Bearer ${getToken(cluster)}`,
-      ...JSON_HEADERS,
-    }),
+    headers,
   }).then(response => {
     return response.json().then((data: DrainNodeStatus) => {
       if (!response.ok) {

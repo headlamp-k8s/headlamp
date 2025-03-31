@@ -1,6 +1,7 @@
 // @todo: Params is a confusing name for options, because params are also query params.
 
 import { isDebugVerbose } from '../../../../helpers';
+import helpers from '../../../../helpers';
 import store from '../../../../redux/stores/store';
 import { findKubeconfigByClusterName, getUserIdFromLocalStorage } from '../../../../stateless';
 import { getToken, logout, setToken } from '../../../auth';
@@ -81,6 +82,7 @@ export async function request(
 ): Promise<any> {
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = (useCluster && getCluster()) || '';
+  console.log('=== request ===', path, cluster);
 
   if (isDebugVerbose('k8s/apiProxy@request')) {
     console.debug('k8s/apiProxy@request', { path, params, useCluster, queryParams });
@@ -147,10 +149,16 @@ export async function clusterRequest(
 
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
-
   let url = combinePath(BASE_HTTP_URL, fullPath);
   url += asQuery(queryParams);
   const requestData = { signal: controller.signal, ...opts };
+  // add backstage token to the request
+  if (helpers.isBackstage()) {
+    const backstageToken = helpers.getBackstageToken();
+    if (backstageToken) {
+      requestData.headers['X-Backstage-Token'] = backstageToken;
+    }
+  }
   let response: Response = new Response(undefined, { status: 502, statusText: 'Unreachable' });
   try {
     response = await fetch(url, requestData);

@@ -252,6 +252,11 @@ function HomeComponent(props: HomeComponentProps) {
     Object.values(customNameClusters).map(c => c.name)
   );
 
+  // setup the backstage token receiver
+  if (helpers.isBackstage()) {
+    helpers.setupBackstageTokenReceiver();
+  }
+
   React.useEffect(() => {
     setCustomNameClusters(currentNames => {
       if (isEqual(currentNames, getClusterNames())) {
