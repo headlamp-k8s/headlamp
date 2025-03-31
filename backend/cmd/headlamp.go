@@ -173,6 +173,11 @@ func (h embeddedSpaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// if request is for / or index.html replace the headlampBaseUrl with the baseURL in the index.html file
+	if path == h.indexPath || path == "/"+h.indexPath || path == "/"+h.indexPath+"/" {
+		content = bytes.ReplaceAll(content, []byte("headlampBaseUrl = './'"), []byte("headlampBaseUrl = '"+h.baseURL+"'"))
+	}
+
 	// Set the correct Content-Type header
 	ext := filepath.Ext(fullPath)
 	contentType := mime.TypeByExtension(ext)
