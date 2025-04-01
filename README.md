@@ -9,6 +9,8 @@
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/headlamp-k8s/headlamp/badge)](https://scorecard.dev/viewer/?uri=github.com/headlamp-k8s/headlamp)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fheadlamp-k8s%2Fheadlamp.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fheadlamp-k8s%2Fheadlamp?ref=badge_shield)
 
+**NOTICE:** We have just moved the project under the Kubernetes SIG UI (and the repo under the _kubernetes-sigs_ org). Please bear with us while we may experience some broken links.
+
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
 Headlamp was created to blend the traditional feature set of other web UIs/dashboards
