@@ -21,7 +21,7 @@
           <p
             class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-7142su-MuiTypography-root"
           >
-            NaN / NaN units
+            500m / 2 cores
           </p>
         </div>
         <div
@@ -59,6 +59,39 @@
                     />
                   </clippath>
                 </defs>
+                <g
+                  class="recharts-layer recharts-pie"
+                  tabindex="0"
+                >
+                  <g
+                    class="recharts-layer"
+                  >
+                    <g
+                      class="recharts-layer recharts-pie-sector"
+                      tabindex="-1"
+                    />
+                    <g
+                      class="recharts-layer recharts-pie-sector"
+                      tabindex="-1"
+                    />
+                  </g>
+                  <text
+                    class="recharts-text recharts-label"
+                    fill="#808080"
+                    offset="5"
+                    style="font-size: 16.8px; fill: #000;"
+                    text-anchor="middle"
+                    x="61"
+                    y="61"
+                  >
+                    <tspan
+                      dy="0.355em"
+                      x="61"
+                    >
+                      25.0 %
+                    </tspan>
+                  </text>
+                </g>
               </svg>
             </div>
           </div>
