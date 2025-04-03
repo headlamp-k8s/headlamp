@@ -172,7 +172,7 @@ func TestUpdateRepo(t *testing.T) {
 		for _, repo := range listRepoResponse.Repositories {
 			repo := repo
 			if repo.Name == "headlamp_test_repo" {
-				assert.Equal(t, "https://headlamp-k8s-update-url.github.io/headlamp/", repo.URL)
+				assert.Equal(t, "https://kubernetes-sigs-update-url.github.io/headlamp/", repo.URL)
 			}
 		}
 	})

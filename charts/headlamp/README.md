@@ -231,6 +231,6 @@ env:
 
 ## Links
 
-- [GitHub Repository](https://github.com/headlamp-k8s/headlamp)
+- [GitHub Repository](https://github.com/kubernetes-sigs/headlamp)
 - [Documentation](https://headlamp.dev/)
-- [Maintainers](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAINERS.md)
+- [Maintainers](https://github.com/kubernetes-sigs/headlamp/blob/main/MAINTAINERS.md)
