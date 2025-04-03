@@ -17,7 +17,7 @@ Headlamp is an easy-to-use and extensible Kubernetes web UI that provides:
 Add the Headlamp repository and install the chart:
 
 ```console
-$ helm repo add headlamp https://headlamp-k8s.github.io/headlamp/
+$ helm repo add headlamp https://kubernetes-sigs.github.io/headlamp/
 $ helm repo update
 $ helm install my-headlamp headlamp/headlamp --namespace kube-system
 ```

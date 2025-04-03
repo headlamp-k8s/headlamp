@@ -13,7 +13,7 @@ use [helm](https://helm.sh/docs/intro/quickstart/) with our [helm chart](https:/
 
 ```bash
 # first add our custom repo to your local helm repositories
-helm repo add headlamp https://headlamp-k8s.github.io/headlamp/
+helm repo add headlamp https://kubernetes-sigs.github.io/headlamp/
 
 # now you should be able to install headlamp via helm
 helm install my-headlamp headlamp/headlamp --namespace kube-system
