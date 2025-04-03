@@ -34,6 +34,9 @@ tools/golangci-lint: backend/go.mod backend/go.sum
 backend-lint: tools/golangci-lint
 	cd backend && ./tools/golangci-lint run
 
+backend-lint-fix: tools/golangci-lint
+	cd backend && ./tools/golangci-lint run --fix
+
 frontend/build:
 	make frontend
 
