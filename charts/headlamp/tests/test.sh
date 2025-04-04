@@ -29,7 +29,7 @@ update_versions_in_expected_templates() {
     # Replace the old app version with the current app version
     sed -i.bak "s/app.kubernetes.io\/version: \"[0-9]\+\.[0-9]\+\.[0-9]\+\"/app.kubernetes.io\/version: \"${CURRENT_APP_VERSION}\"/g" "${expected_file}"
     # Replace the old image version with the current image version
-    sed -i.bak "s/ghcr.io\/headlamp-k8s\/headlamp:v[0-9]\+\.[0-9]\+\.[0-9]\+/ghcr.io\/headlamp-k8s\/headlamp:v${CURRENT_IMAGE_VERSION}/g" "${expected_file}"
+    sed -i.bak "s/ghcr.io\/kubernetes-sigs\/headlamp:v[0-9]\+\.[0-9]\+\.[0-9]\+/ghcr.io\/kubernetes-sigs\/headlamp:v${CURRENT_IMAGE_VERSION}/g" "${expected_file}"
     rm -f "${expected_file}.bak"
 }
 

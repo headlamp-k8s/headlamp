@@ -94,7 +94,7 @@ spec:
             runAsGroup: 101
             runAsNonRoot: true
             runAsUser: 100
-          image: "ghcr.io/headlamp-k8s/headlamp:v0.23.1"
+          image: "ghcr.io/kubernetes-sigs/headlamp:v0.23.1"
           imagePullPolicy: IfNotPresent
           
           env:

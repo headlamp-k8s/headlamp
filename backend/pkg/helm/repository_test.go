@@ -8,8 +8,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
-	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
+	"github.com/kubernetes-sigs/headlamp/backend/pkg/cache"
+	"github.com/kubernetes-sigs/headlamp/backend/pkg/helm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -172,7 +172,7 @@ func TestUpdateRepo(t *testing.T) {
 		for _, repo := range listRepoResponse.Repositories {
 			repo := repo
 			if repo.Name == "headlamp_test_repo" {
-				assert.Equal(t, "https://kubernetes-sigs-update-url.github.io/headlamp/", repo.URL)
+				assert.Equal(t, "https://headlamp-k8s-update-url.github.io/headlamp/", repo.URL)
 			}
 		}
 	})
@@ -194,7 +194,7 @@ func TestUpdateRepo(t *testing.T) {
 func TestListRepositories(t *testing.T) {
 	helmHandler := newHelmHandler(t)
 
-	testAddRepo(t, helmHandler, "headlamp_test_repo", "https://kubernetes-sigs.github.io/headlamp/")
+	testAddRepo(t, helmHandler, "headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/")
 
 	// list repositories
 	listRepoReq, err := http.NewRequestWithContext(context.Background(),
