@@ -43,7 +43,7 @@ committed to Git, but is shown on the website at
 
 Components can be discovered, developed, and tested inside the 'storybook'.
 
-From within the [Headlamp](https://github.com/headlamp-k8s/headlamp/) repo run:
+From within the [Headlamp](https://github.com/kubernetes-sigs/headlamp/) repo run:
 
 ```bash
 make storybook
