@@ -65,10 +65,12 @@ jobs:
         TAGS=$(echo $TAGS | sed s/,$//g)
         echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
         echo "CONTAINER_TAGS=$TAGS" >> $GITHUB_ENV
+
     - name: Print finalised tags
       run: |
         echo "BUILD_TAG=${{ env.BUILD_TAG }}"
         echo "CONTAINER_TAGS=${{ env.CONTAINER_TAGS }}"
+
     - name: Log in to the Container registry
       uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
       with:
@@ -76,36 +78,58 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
 
-    - name: Build and push Docker image
+    - name: Build Docker image
       uses: docker/build-push-action@0a97817b6ade9f46837855d676c4cca3a2471fc9 # v4.2.1
       with:
         context: plugins/headlamp-plugin
         file: plugins/headlamp-plugin/Dockerfile
-        push: false  # Don't push until we scan
+        push: false
         platforms: linux/amd64,linux/arm64
         tags: ${{ env.CONTAINER_TAGS }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
         outputs: type=docker,dest=/tmp/headlamp-plugin.tar
 
+    # Setup Trivy
+    - name: Install Trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.47.0
+
+    # Run vulnerability scan
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-        input: /tmp/headlamp-plugin.tar
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        severity: 'CRITICAL,HIGH'
-        exit-code: '1'
-        ignore-unfixed: true
+      id: scan
+      run: |
+        # First update Trivy DB
+        trivy image --download-db-only
+        
+        # Run the scan and store SARIF output
+        set +e
+        trivy image \
+          --input /tmp/headlamp-plugin.tar \
+          --format sarif \
+          --output trivy-results.sarif \
+          --severity HIGH,CRITICAL \
+          --ignore-unfixed \
+          --exit-code 1
+        
+        echo "SCAN_EXIT_CODE=$?" >> $GITHUB_ENV
+        set -e
 
     - name: Upload Trivy scan results to GitHub Security tab
+      if: always() && steps.scan.outcome == 'success'
       uses: github/codeql-action/upload-sarif@v3
-      if: always()
       with:
         sarif_file: 'trivy-results.sarif'
 
+    - name: Check scan results
+      run: |
+        if [ "${{ env.SCAN_EXIT_CODE }}" == "1" ]; then
+          echo "Security vulnerabilities were found. Cannot proceed with publishing."
+          exit 1
+        fi
+
     - name: Push image if scan passes
-      if: success()
+      if: env.SCAN_EXIT_CODE == 0
       uses: docker/build-push-action@0a97817b6ade9f46837855d676c4cca3a2471fc9 # v4.2.1
       with:
         context: plugins/headlamp-plugin

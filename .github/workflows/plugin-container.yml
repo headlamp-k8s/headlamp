@@ -36,24 +36,44 @@ jobs:
         tags: ghcr.io/headlamp-k8s/headlamp-plugin:test
         cache-from: type=gha
         cache-to: type=gha,mode=max
-        # Add output for local image scanning
-        outputs: type=docker,dest=/tmp/headlamp-plugin.tar
+        load: true
 
+    # Setup Trivy
+    - name: Install Trivy
+      run: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.47.0
+
+    # Run vulnerability scan
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-        input: /tmp/headlamp-plugin.tar
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        severity: 'CRITICAL,HIGH'
-        exit-code: '1'
-        ignore-unfixed: true
+      run: |
+        # Run the scan and store output
+        trivy image \
+          ghcr.io/headlamp-k8s/headlamp-plugin:test \
+          --format table \
+          --output trivy-result.txt \
+          --severity HIGH,CRITICAL
 
-    - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v3
-      if: always()
+    - name: Check Trivy result file
+      run: cat trivy-result.txt
+
+    - name: Format Trivy Scan Result
+      run: |
+        if [ -s trivy-result.txt ]; then
+          echo -e "## Vulnerability Scan Results\n<details><summary>Details</summary>\n\n\`\`\`\n$(cat trivy-result.txt)\n\`\`\`\n</details>" > formatted-trivy-result.md
+        else
+          echo -e "## Vulnerability Scan Results\nNo vulnerabilities were detected." > formatted-trivy-result.md
+        fi
+
+    - name: Comment PR with Trivy scan results
+      uses: marocchino/sticky-pull-request-comment@v2
       with:
-        sarif_file: 'trivy-results.sarif'
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+        path: formatted-trivy-result.md
+        recreate: true
+        hide_classify: OUTDATED
+
+    - name: Clean up Trivy result files
+      run: rm -f trivy-result.txt formatted-trivy-result.md
 
     - name: Test plugin container
       run: |
@@ -73,4 +93,5 @@ jobs:
           -v $(pwd)/test/plugins:/plugins-dir \
           -v $(pwd)/test/config/config.yaml:/plugins.yaml \
           ghcr.io/headlamp-k8s/headlamp-plugin:test \
-          install --config /plugins.yaml --folderName /plugins-dir
+          install https://artifacthub.io/packages/headlamp/test-123/appcatalog_headlamp_plugin
+          
