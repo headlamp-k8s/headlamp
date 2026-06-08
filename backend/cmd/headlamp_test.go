@@ -43,6 +43,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
+	"github.com/kubernetes-sigs/headlamp/backend/pkg/auth"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/cache"
 	inventorymetadata "github.com/kubernetes-sigs/headlamp/backend/pkg/clusterinventory/metadata"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/config"
@@ -4836,4 +4837,741 @@ func TestExternalProxyOversizeResponseGzip(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, rr.Code)
 	assert.Equal(t, int(maxProxyResponseSize), rr.Body.Len())
+}
+
+func TestOIDCLogoutEndpoint(t *testing.T) {
+	setupTestEnv(t)
+
+	testCluster := "test-cluster"
+
+	tests := getOIDCLogoutTestCases(testCluster)
+	tests = append(tests, getOIDCLogoutRedirectTestCases(testCluster)...)
+	tests = append(tests, getInvalidOIDCLogoutEndpointTestCases()...)
+	tests = append(tests, getOIDCLogoutFallbackTestCases()...)
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			rr := runOIDCLogoutTest(t, testCluster, tc)
+			assertOIDCLogoutResponse(t, rr, tc, testCluster)
+		})
+	}
+}
+
+func TestOIDCLogoutEndpointWithSpecialContext(t *testing.T) {
+	setupTestEnv(t)
+
+	tests := []struct {
+		name                       string
+		cluster                    string
+		expectedPostLogoutRedirect string
+	}{
+		{
+			name:                       "slash-containing context",
+			cluster:                    "team/cluster",
+			expectedPostLogoutRedirect: "https://headlamp.example/encoded-clusters/dGVhbS9jbHVzdGVy/login",
+		},
+		{
+			name:                       "dot-segment context",
+			cluster:                    "team/../prod",
+			expectedPostLogoutRedirect: "https://headlamp.example/encoded-clusters/dGVhbS8uLi9wcm9k/login",
+		},
+		{
+			name:                       "leading-tilde context",
+			cluster:                    "~YWJj",
+			expectedPostLogoutRedirect: "https://headlamp.example/encoded-clusters/fllXSmo/login",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			tc := oidcLogoutTestCase{
+				setupOIDCProvider:          setupOIDCProviderWithEndSessionEndpoint(),
+				setIDTokenCookie:           true,
+				callbackURL:                "https://headlamp.example/oidc-callback",
+				expectedStatusCode:         http.StatusOK,
+				expectedRedirectContains:   "/logout",
+				expectedPostLogoutRedirect: test.expectedPostLogoutRedirect,
+				expectTokenCookieCleared:   true,
+				expectIDTokenCookieCleared: true,
+			}
+
+			rr := runOIDCLogoutTest(t, test.cluster, tc)
+			assertOIDCLogoutResponse(t, rr, tc, test.cluster)
+		})
+	}
+}
+
+func TestSetTokenEndpointPreservesLegacyLeadingTildeContext(t *testing.T) {
+	setupTestEnv(t)
+
+	cfg := &HeadlampConfig{
+		HeadlampConfig: &headlampconfig.HeadlampConfig{
+			HeadlampCFG: &headlampconfig.HeadlampCFG{
+				KubeConfigStore: kubeconfig.NewContextStore(),
+			},
+			Cache:            cache.New[interface{}](),
+			TelemetryHandler: &telemetry.RequestHandler{},
+		},
+	}
+
+	req, err := makeJSONReq(http.MethodPost, "/clusters/~YWJj/set-token", map[string]string{"token": ""})
+	require.NoError(t, err)
+
+	rr := httptest.NewRecorder()
+	createHeadlampHandler(context.Background(), cfg).ServeHTTP(rr, req)
+
+	require.Equal(t, http.StatusOK, rr.Code)
+	require.Len(t, rr.Result().Cookies(), 1)
+	assert.Equal(t, "headlamp-auth-YWJj.0", rr.Result().Cookies()[0].Name)
+	assert.Equal(t, "/clusters/~YWJj", rr.Result().Cookies()[0].Path)
+}
+
+func TestClearTokenEndpointWithSpecialContext(t *testing.T) {
+	setupTestEnv(t)
+
+	cfg := &HeadlampConfig{
+		HeadlampConfig: &headlampconfig.HeadlampConfig{
+			HeadlampCFG: &headlampconfig.HeadlampCFG{
+				KubeConfigStore: kubeconfig.NewContextStore(),
+			},
+			Cache:            cache.New[interface{}](),
+			TelemetryHandler: &telemetry.RequestHandler{},
+		},
+	}
+
+	for _, cluster := range []string{"team/cluster", "team/../prod", "~YWJj"} {
+		t.Run(cluster, func(t *testing.T) {
+			req, err := makeJSONReq(http.MethodPost,
+				"/encoded-clusters/"+auth.EncodeClusterForURL(cluster)+"/clear-token", map[string]string{
+					"token": "",
+				})
+			require.NoError(t, err)
+			req.Header.Set("Content-Type", "application/json")
+
+			rr := httptest.NewRecorder()
+			createHeadlampHandler(context.Background(), cfg).ServeHTTP(rr, req)
+
+			require.Equal(t, http.StatusOK, rr.Code)
+			require.Len(t, rr.Result().Cookies(), 1)
+			assert.Equal(t, "headlamp-auth-"+auth.SanitizeClusterName(cluster)+".0", rr.Result().Cookies()[0].Name)
+			assert.Equal(t, "/clusters/"+cluster, rr.Result().Cookies()[0].Path)
+			assert.Equal(t, -1, rr.Result().Cookies()[0].MaxAge)
+		})
+	}
+}
+
+func getOIDCLogoutRedirectTestCases(testCluster string) []oidcLogoutTestCase {
+	return []oidcLogoutTestCase{
+		{
+			name:                     "configured callback origin ignores an untrusted request host",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpoint(),
+			setIDTokenCookie:         true,
+			callbackURL:              "https://headlamp.example/oidc-callback",
+			requestHost:              "attacker.example",
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/logout",
+			expectedPostLogoutRedirect: "https://headlamp.example/encoded-clusters/" +
+				auth.EncodeClusterForURL(testCluster) + "/login",
+		},
+		{
+			name:                     "configured return supports the base URL",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpoint(),
+			callbackURL:              "https://headlamp.example/headlamp/oidc-callback",
+			baseURL:                  "/headlamp",
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/logout",
+			expectedPostLogoutRedirect: "https://headlamp.example/headlamp/encoded-clusters/" +
+				auth.EncodeClusterForURL(testCluster) + "/login",
+		},
+		{
+			name:                     "authenticated POST returns the provider logout URL",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpoint(),
+			setIDTokenCookie:         true,
+			callbackURL:              "https://headlamp.example/oidc-callback",
+			backendToken:             "desktop-backend-token",
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/logout",
+			expectedPostLogoutRedirect: "https://headlamp.example/encoded-clusters/" +
+				auth.EncodeClusterForURL(testCluster) + "/login",
+		},
+		{
+			name:                       "provider discovery uses the validator issuer override",
+			setupOIDCProvider:          setupOIDCProviderWithAdvertisedIssuer("https://validator.example"),
+			validatorIssuerURL:         "https://validator.example",
+			expectedStatusCode:         http.StatusOK,
+			expectedRedirectContains:   "/logout",
+			expectedPostLogoutRedirect: "",
+		},
+	}
+}
+
+func getInvalidOIDCLogoutEndpointTestCases() []oidcLogoutTestCase {
+	return []oidcLogoutTestCase{
+		{
+			name:                     "relative provider logout endpoint is rejected",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpointValue("/logout"),
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/",
+		},
+		{
+			name:                     "non-HTTP provider logout endpoint is rejected",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpointValue("javascript:alert(1)"),
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/",
+		},
+		{
+			name:                     "remote HTTP provider logout endpoint is rejected",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpointValue("http://example.com/logout"),
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/",
+		},
+		{
+			name:                     "provider logout endpoint with userinfo is rejected",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpointValue("https://user@example.com/logout"),
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/",
+		},
+		{
+			name:                     "provider logout endpoint without a hostname is rejected",
+			setupOIDCProvider:        setupOIDCProviderWithEndSessionEndpointValue("https://:443/logout"),
+			expectedStatusCode:       http.StatusOK,
+			expectedRedirectContains: "/",
+		},
+	}
+}
+
+func getOIDCLogoutFallbackTestCases() []oidcLogoutTestCase {
+	return []oidcLogoutTestCase{
+		{
+			name:                       "OIDC config failure clears cookies and returns home fallback",
+			invalidOIDCCAFile:          true,
+			setIDTokenCookie:           true,
+			expectedStatusCode:         http.StatusOK,
+			expectedRedirectContains:   "/",
+			expectTokenCookieCleared:   true,
+			expectIDTokenCookieCleared: true,
+		},
+		{
+			name:                       "OIDC config failure clears cookies and returns POST fallback",
+			invalidOIDCCAFile:          true,
+			setIDTokenCookie:           true,
+			backendToken:               "desktop-backend-token",
+			expectedStatusCode:         http.StatusOK,
+			expectedRedirectContains:   "/",
+			expectTokenCookieCleared:   true,
+			expectIDTokenCookieCleared: true,
+		},
+		{
+			name:               "skip logout validates the cluster first",
+			oidcSkipLogout:     true,
+			missingCluster:     true,
+			expectedStatusCode: http.StatusNotFound,
+		},
+		{
+			name:               "GET logout is rejected",
+			requestMethod:      http.MethodGet,
+			expectedStatusCode: http.StatusMethodNotAllowed,
+		},
+		{
+			name:                       "simple form POST is rejected",
+			requestContentType:         "application/x-www-form-urlencoded",
+			expectedStatusCode:         http.StatusUnsupportedMediaType,
+			expectedRedirectContains:   "",
+			expectTokenCookieCleared:   false,
+			expectIDTokenCookieCleared: false,
+		},
+	}
+}
+
+func TestGetOIDCPostLogoutRedirectURL(t *testing.T) {
+	redirectURL, ok := getOIDCPostLogoutRedirectURL(
+		"https://headlamp.example/headlamp/oidc-callback?ignored=true#fragment",
+		"/headlamp",
+		"team/cluster",
+	)
+
+	require.True(t, ok)
+	assert.Equal(t, "https://headlamp.example/headlamp/encoded-clusters/dGVhbS9jbHVzdGVy/login", redirectURL)
+
+	_, ok = getOIDCPostLogoutRedirectURL("https://:443/oidc-callback", "", "cluster")
+	assert.False(t, ok)
+}
+
+func TestOIDCLogoutState(t *testing.T) {
+	now := time.Now()
+	state := createOIDCLogoutState("team/cluster", "id-token", now)
+
+	assert.True(t, validateOIDCLogoutState(state, "team/cluster", "id-token", now))
+	assert.False(t, validateOIDCLogoutState(state, "other-cluster", "id-token", now))
+	assert.False(t, validateOIDCLogoutState(state, "team/cluster", "other-token", now))
+	assert.False(t, validateOIDCLogoutState(state+"tampered", "team/cluster", "id-token", now))
+	assert.False(t, validateOIDCLogoutState(state, "team/cluster", "id-token", now.Add(2*time.Minute)))
+}
+
+func setupTestEnv(t *testing.T) {
+	t.Setenv("HOME", t.TempDir())
+	t.Setenv("XDG_CONFIG_HOME", t.TempDir())
+	t.Setenv("APPDATA", t.TempDir())
+}
+
+func getOIDCLogoutTestCases(testCluster string) []oidcLogoutTestCase {
+	return []oidcLogoutTestCase{
+		{
+			name:               "OidcSkipLogout=true clears cookies and redirects to login",
+			oidcSkipLogout:     true,
+			setIDTokenCookie:   true,
+			expectedStatusCode: http.StatusOK,
+			expectedRedirectContains: "/encoded-clusters/" +
+				auth.EncodeClusterForURL(testCluster) + "/login",
+			expectTokenCookieCleared:   true,
+			expectIDTokenCookieCleared: true,
+		},
+		{
+			name: "provider discovery failure clears cookies and redirects to home",
+			setupOIDCProvider: func(t *testing.T) string {
+				return "http://invalid-provider.example.com"
+			},
+			setIDTokenCookie:           true,
+			expectedStatusCode:         http.StatusOK,
+			expectedRedirectContains:   "/",
+			expectTokenCookieCleared:   true,
+			expectIDTokenCookieCleared: true,
+		},
+		{
+			name:                       "missing end_session_endpoint clears cookies",
+			setupOIDCProvider:          setupOIDCProviderWithoutEndSessionEndpoint(),
+			setIDTokenCookie:           true,
+			expectedStatusCode:         http.StatusOK,
+			expectedRedirectContains:   "/",
+			expectTokenCookieCleared:   true,
+			expectIDTokenCookieCleared: true,
+		},
+		{
+			name:                       "successful logout with id_token_hint",
+			setupOIDCProvider:          setupOIDCProviderWithEndSessionEndpoint(),
+			setIDTokenCookie:           true,
+			expectedStatusCode:         http.StatusOK,
+			expectedRedirectContains:   "/logout",
+			expectTokenCookieCleared:   true,
+			expectIDTokenCookieCleared: true,
+		},
+		{
+			name:                       "successful logout without id_token_hint",
+			setupOIDCProvider:          setupOIDCProviderWithEndSessionEndpoint(),
+			setIDTokenCookie:           false,
+			expectedStatusCode:         http.StatusOK,
+			expectedRedirectContains:   "/logout",
+			expectTokenCookieCleared:   false,
+			expectIDTokenCookieCleared: false,
+		},
+	}
+}
+
+type oidcLogoutTestCase struct {
+	name                       string
+	oidcSkipLogout             bool
+	setupOIDCProvider          func(t *testing.T) string
+	setIDTokenCookie           bool
+	expectedStatusCode         int
+	expectedRedirectContains   string
+	expectTokenCookieCleared   bool
+	expectIDTokenCookieCleared bool
+	callbackURL                string
+	baseURL                    string
+	requestHost                string
+	requestMethod              string
+	requestContentType         string
+	backendToken               string
+	validatorIssuerURL         string
+	invalidOIDCCAFile          bool
+	missingCluster             bool
+	expectedPostLogoutRedirect string
+}
+
+func setupOIDCProviderWithEndSessionEndpoint() func(t *testing.T) string {
+	return setupOIDCProviderWithAdvertisedIssuer("")
+}
+
+func setupOIDCProviderWithAdvertisedIssuer(advertisedIssuer string) func(t *testing.T) string {
+	return setupOIDCProvider(advertisedIssuer, "")
+}
+
+func setupOIDCProviderWithEndSessionEndpointValue(endpoint string) func(t *testing.T) string {
+	return setupOIDCProvider("", endpoint)
+}
+
+func setupOIDCProvider(advertisedIssuer, endSessionEndpoint string) func(t *testing.T) string {
+	return func(t *testing.T) string {
+		providerServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path == "/.well-known/openid-configuration" {
+				issuer := advertisedIssuer
+				if issuer == "" {
+					issuer = "http://" + r.Host
+				}
+
+				logoutEndpoint := endSessionEndpoint
+				if logoutEndpoint == "" {
+					logoutEndpoint = "http://" + r.Host + "/logout"
+				}
+
+				w.Header().Set("Content-Type", "application/json")
+				_ = json.NewEncoder(w).Encode(map[string]interface{}{
+					"issuer":                 issuer,
+					"authorization_endpoint": "http://" + r.Host + "/auth",
+					"token_endpoint":         "http://" + r.Host + "/token",
+					"end_session_endpoint":   logoutEndpoint,
+				})
+
+				return
+			}
+
+			http.NotFound(w, r)
+		}))
+		t.Cleanup(providerServer.Close)
+
+		return providerServer.URL
+	}
+}
+
+func setupOIDCProviderWithoutEndSessionEndpoint() func(t *testing.T) string {
+	return func(t *testing.T) string {
+		providerServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path == "/.well-known/openid-configuration" {
+				w.Header().Set("Content-Type", "application/json")
+				_ = json.NewEncoder(w).Encode(map[string]interface{}{
+					"issuer":                 "http://" + r.Host,
+					"authorization_endpoint": "http://" + r.Host + "/auth",
+					"token_endpoint":         "http://" + r.Host + "/token",
+				})
+
+				return
+			}
+
+			http.NotFound(w, r)
+		}))
+		t.Cleanup(providerServer.Close)
+
+		return providerServer.URL
+	}
+}
+
+func runOIDCLogoutTest(t *testing.T, cluster string, tc oidcLogoutTestCase) *httptest.ResponseRecorder {
+	t.Setenv("HEADLAMP_BACKEND_TOKEN", tc.backendToken)
+
+	kubeConfigStore := kubeconfig.NewContextStore()
+
+	var issuerURL string
+	if tc.setupOIDCProvider != nil {
+		issuerURL = tc.setupOIDCProvider(t)
+	}
+
+	cfg := &HeadlampConfig{
+		HeadlampConfig: &headlampconfig.HeadlampConfig{
+			HeadlampCFG: &headlampconfig.HeadlampCFG{
+				KubeConfigStore: kubeConfigStore,
+				BaseURL:         tc.baseURL,
+			},
+			OidcSkipLogout:            tc.oidcSkipLogout,
+			OidcCallbackURL:           tc.callbackURL,
+			OidcValidatorIdpIssuerURL: tc.validatorIssuerURL,
+			Cache:                     cache.New[interface{}](),
+			TelemetryHandler:          &telemetry.RequestHandler{},
+		},
+	}
+
+	if !tc.missingCluster {
+		err := kubeConfigStore.AddContext(newOIDCLogoutTestContext(t, cluster, issuerURL, tc.invalidOIDCCAFile))
+		require.NoError(t, err)
+	}
+
+	handler := createHeadlampHandler(context.Background(), cfg)
+	req := newOIDCLogoutTestRequest(t, cluster, tc)
+	rr := httptest.NewRecorder()
+	handler.ServeHTTP(rr, req)
+
+	if combinedRR := followOIDCLogoutTransition(t, handler, req, rr); combinedRR != nil {
+		return combinedRR
+	}
+
+	return rr
+}
+
+func followOIDCLogoutTransition(
+	t *testing.T,
+	handler http.Handler,
+	req *http.Request,
+	rr *httptest.ResponseRecorder,
+) *httptest.ResponseRecorder {
+	if rr.Code != http.StatusOK {
+		return nil
+	}
+
+	var response struct {
+		RedirectURL string `json:"redirectURL"`
+	}
+	if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil ||
+		!strings.Contains(response.RedirectURL, "/oidc-logout/redirect") {
+		return nil
+	}
+
+	require.NotContains(t, rr.Body.String(), "test-id-token")
+
+	transitionURL, err := url.Parse(response.RedirectURL)
+	require.NoError(t, err)
+	require.False(t, transitionURL.IsAbs())
+	require.Empty(t, transitionURL.Host)
+	require.True(t, strings.HasPrefix(transitionURL.Path, "/"))
+
+	redirectReq := httptest.NewRequestWithContext(req.Context(), http.MethodGet, response.RedirectURL, nil)
+	for _, cookie := range req.Cookies() {
+		redirectReq.AddCookie(cookie)
+	}
+
+	addOIDCLogoutCookies(t, redirectReq, rr, transitionURL.Path)
+
+	redirectRR := httptest.NewRecorder()
+	handler.ServeHTTP(redirectRR, redirectReq)
+	require.Equal(t, http.StatusFound, redirectRR.Code)
+
+	combinedRR := httptest.NewRecorder()
+	combinedRR.Code = rr.Code
+
+	for name, values := range rr.Header() {
+		combinedRR.Header()[name] = append([]string(nil), values...)
+	}
+
+	combinedRR.Header()["Set-Cookie"] = append(
+		combinedRR.Header()["Set-Cookie"], redirectRR.Header()["Set-Cookie"]...)
+	require.NoError(t, json.NewEncoder(combinedRR.Body).Encode(map[string]string{
+		"redirectURL": redirectRR.Header().Get("Location"),
+	}))
+
+	return combinedRR
+}
+
+func addOIDCLogoutCookies(
+	t *testing.T,
+	redirectReq *http.Request,
+	rr *httptest.ResponseRecorder,
+	transitionPath string,
+) {
+	t.Helper()
+
+	var foundShortLivedIDToken bool
+
+	for _, cookie := range rr.Result().Cookies() {
+		if strings.HasPrefix(cookie.Name, "headlamp-id-token-") && cookie.Value != "" {
+			assert.True(t, cookie.HttpOnly)
+			assert.Equal(t, http.SameSiteStrictMode, cookie.SameSite)
+			assert.Equal(t, strings.TrimSuffix(transitionPath, "/redirect"), cookie.Path)
+			assert.Equal(t, 60, cookie.MaxAge)
+
+			foundShortLivedIDToken = true
+		}
+
+		if cookie.MaxAge >= 0 {
+			redirectReq.AddCookie(cookie)
+		}
+	}
+
+	require.True(t, foundShortLivedIDToken)
+}
+
+func newOIDCLogoutTestContext(
+	t *testing.T,
+	cluster string,
+	issuerURL string,
+	invalidCAFile bool,
+) *kubeconfig.Context {
+	kubeContext := &kubeconfig.Context{
+		Name: cluster,
+		OidcConf: &kubeconfig.OidcConfig{
+			ClientID:     "test-client",
+			ClientSecret: "test-secret",
+			IdpIssuerURL: issuerURL,
+		},
+	}
+	if invalidCAFile {
+		kubeContext.OidcConf = nil
+		kubeContext.AuthInfo = &api.AuthInfo{
+			AuthProvider: &api.AuthProviderConfig{
+				Name: "oidc",
+				Config: map[string]string{
+					"client-id":                 "test-client",
+					"client-secret":             "test-secret",
+					"idp-issuer-url":            issuerURL,
+					"idp-certificate-authority": filepath.Join(t.TempDir(), "missing-ca.crt"),
+				},
+			},
+		}
+	}
+
+	return kubeContext
+}
+
+func newOIDCLogoutTestRequest(t *testing.T, cluster string, tc oidcLogoutTestCase) *http.Request {
+	requestMethod := tc.requestMethod
+	if requestMethod == "" {
+		requestMethod = http.MethodPost
+	}
+
+	req, err := http.NewRequestWithContext(context.Background(), requestMethod,
+		auth.GetOIDCLogoutCookiePath(tc.baseURL, cluster), nil)
+	require.NoError(t, err)
+
+	if tc.requestHost != "" {
+		req.Host = tc.requestHost
+	} else {
+		req.Host = "headlamp.example"
+	}
+
+	if tc.backendToken != "" {
+		req.Header.Set("X-HEADLAMP_BACKEND-TOKEN", tc.backendToken)
+	}
+
+	contentType := tc.requestContentType
+	if contentType == "" {
+		contentType = "application/json"
+	}
+
+	req.Header.Set("Content-Type", contentType)
+
+	if tc.setIDTokenCookie {
+		sanitizedCluster := auth.SanitizeClusterName(cluster)
+		//nolint:gosec
+		req.AddCookie(&http.Cookie{
+			Name:  "headlamp-id-token-" + sanitizedCluster + ".0",
+			Value: "test-id-token",
+			Path:  auth.GetOIDCLogoutCookiePath(tc.baseURL, cluster),
+		})
+		//nolint:gosec
+		req.AddCookie(&http.Cookie{
+			Name:  "headlamp-auth-" + sanitizedCluster + ".0",
+			Value: "test-auth-token",
+			Path:  auth.GetCookiePath(tc.baseURL, cluster),
+		})
+	}
+
+	return req
+}
+
+func assertOIDCLogoutResponse(t *testing.T, rr *httptest.ResponseRecorder, tc oidcLogoutTestCase, cluster string) {
+	assert.Equal(t, tc.expectedStatusCode, rr.Code, "Unexpected status code")
+
+	location := rr.Header().Get("Location")
+
+	if tc.expectedStatusCode == http.StatusOK {
+		var response struct {
+			RedirectURL string `json:"redirectURL"`
+		}
+		require.NoError(t, json.NewDecoder(rr.Body).Decode(&response))
+		location = response.RedirectURL
+	}
+
+	if tc.expectedRedirectContains == "/logout" {
+		redirect, err := url.Parse(location)
+		require.NoError(t, err)
+		assert.Equal(t, "/logout", redirect.Path)
+		assert.Equal(t, "test-client", redirect.Query().Get("client_id"))
+		assert.Equal(t, tc.expectedPostLogoutRedirect, redirect.Query().Get("post_logout_redirect_uri"))
+
+		if tc.setIDTokenCookie {
+			assert.Equal(t, "test-id-token", redirect.Query().Get("id_token_hint"))
+		} else {
+			assert.False(t, redirect.Query().Has("id_token_hint"))
+		}
+	} else {
+		assert.Equal(t, tc.expectedRedirectContains, location)
+	}
+
+	if tc.expectTokenCookieCleared {
+		assertCookieCleared(t, rr, "headlamp-auth-"+auth.SanitizeClusterName(cluster))
+	}
+
+	if tc.expectIDTokenCookieCleared {
+		assertCookieCleared(t, rr, "headlamp-id-token-"+auth.SanitizeClusterName(cluster))
+	}
+}
+
+func TestOIDCLogoutResponseHeaderBudget(t *testing.T) {
+	setupTestEnv(t)
+	t.Setenv("HEADLAMP_BACKEND_TOKEN", "")
+	issuer := setupOIDCProviderWithEndSessionEndpoint()(t)
+
+	for _, baseURL := range []string{"", "/headlamp"} {
+		for _, skip := range []bool{false, true} {
+			t.Run(fmt.Sprintf("base=%s/skip=%t", baseURL, skip), func(t *testing.T) {
+				store := kubeconfig.NewContextStore()
+				require.NoError(t, store.AddContext(newOIDCLogoutTestContext(t, "main", issuer, false)))
+				cfg := &HeadlampConfig{
+					HeadlampConfig: &headlampconfig.HeadlampConfig{
+						HeadlampCFG:      &headlampconfig.HeadlampCFG{KubeConfigStore: store, BaseURL: baseURL},
+						OidcSkipLogout:   skip,
+						Cache:            cache.New[interface{}](),
+						TelemetryHandler: &telemetry.RequestHandler{},
+					},
+				}
+				ctx, cancel := context.WithCancel(context.Background())
+				t.Cleanup(cancel)
+
+				handler := createHeadlampHandler(ctx, cfg)
+				req := httptest.NewRequestWithContext(ctx, http.MethodPost,
+					"https://headlamp.example"+auth.GetOIDCLogoutCookiePath(baseURL, "main"), nil)
+				req.Header.Set("Content-Type", "application/json")
+
+				hintCookie := &http.Cookie{
+					Name: "headlamp-id-token-main.0", Value: strings.Repeat("a", 2048),
+					Secure: true, HttpOnly: true, SameSite: http.SameSiteStrictMode,
+				}
+				req.AddCookie(hintCookie)
+
+				rr := httptest.NewRecorder()
+				handler.ServeHTTP(rr, req)
+				require.Equal(t, http.StatusOK, rr.Code)
+				assertResponseHeaderBudget(t, rr, 4096)
+
+				if !skip {
+					var body struct {
+						RedirectURL string `json:"redirectURL"`
+					}
+					require.NoError(t, json.Unmarshal(rr.Body.Bytes(), &body))
+					redirectReq := httptest.NewRequestWithContext(ctx, http.MethodGet,
+						"https://headlamp.example"+body.RedirectURL, nil)
+					redirectReq.AddCookie(hintCookie)
+
+					redirectRR := httptest.NewRecorder()
+					handler.ServeHTTP(redirectRR, redirectReq)
+					require.Equal(t, http.StatusFound, redirectRR.Code)
+					assertResponseHeaderBudget(t, redirectRR, 4096)
+				}
+			})
+		}
+	}
+}
+
+func assertResponseHeaderBudget(t *testing.T, rr *httptest.ResponseRecorder, budget int) {
+	t.Helper()
+
+	response := rr.Result()
+
+	t.Cleanup(func() { require.NoError(t, response.Body.Close()) })
+
+	var wire bytes.Buffer
+	require.NoError(t, response.Write(&wire))
+	headerEnd := bytes.Index(wire.Bytes(), []byte("\r\n\r\n"))
+	require.NotEqual(t, -1, headerEnd)
+	assert.LessOrEqual(t, headerEnd+4, budget, "HTTP response headers exceed proxy buffer")
+	t.Logf("HTTP response headers: %d bytes (budget %d)", headerEnd+4, budget)
+}
+
+func assertCookieCleared(t *testing.T, rr *httptest.ResponseRecorder, cookiePrefix string) {
+	var foundCookie bool
+
+	for _, cookie := range rr.Result().Cookies() {
+		if strings.HasPrefix(cookie.Name, cookiePrefix) && cookie.Value == "" && cookie.MaxAge == -1 {
+			foundCookie = true
+		}
+	}
+
+	assert.True(t, foundCookie, "Expected cookie with prefix %q to be cleared", cookiePrefix)
 }

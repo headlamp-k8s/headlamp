@@ -464,6 +464,13 @@ var parseFlagTests = []parseFlagTest{
 		},
 	},
 	{
+		name: "oidc_skip_logout_flag",
+		args: []string{"go run ./cmd", "--oidc-skip-logout"},
+		verify: func(t *testing.T, conf *config.Config) {
+			assert.Equal(t, true, conf.OidcSkipLogout)
+		},
+	},
+	{
 		name: "oidc_ca_file_flag",
 		args: []string{
 			"go run ./cmd",
@@ -839,6 +846,14 @@ func TestOIDCTLSEnvironmentVariables(t *testing.T) {
 			tt.verify(t, conf)
 		})
 	}
+}
+
+func TestOIDCSkipLogoutEnvironmentVariable(t *testing.T) {
+	t.Setenv("HEADLAMP_CONFIG_OIDC_SKIP_LOGOUT", "true")
+
+	conf, err := config.Parse([]string{"go run ./cmd"})
+	require.NoError(t, err)
+	assert.True(t, conf.OidcSkipLogout)
 }
 
 var applyMeDefaultsTests = []struct {
