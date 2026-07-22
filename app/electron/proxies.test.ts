@@ -21,17 +21,21 @@ import { tmpdir } from 'os';
 import path from 'path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-const { createConnectionMock, createServerMock, probedPorts, spawnMock } = vi.hoisted(() => ({
-  createConnectionMock: vi.fn(),
-  createServerMock: vi.fn(),
-  probedPorts: [] as number[],
-  spawnMock: vi.fn(),
-}));
+const { createConnectionMock, createServerMock, execFileMock, probedPorts, spawnMock } = vi.hoisted(
+  () => ({
+    createConnectionMock: vi.fn(),
+    createServerMock: vi.fn(),
+    execFileMock: vi.fn(),
+    probedPorts: [] as number[],
+    spawnMock: vi.fn(),
+  })
+);
 const PROXY_CAPABILITY = '0123456789abcdef0123456789abcdef';
 const createdProxyChildren: ChildProcessWithoutNullStreams[] = [];
 
 vi.mock('child_process', async importOriginal => ({
   ...(await importOriginal<typeof import('child_process')>()),
+  execFile: execFileMock,
   spawn: spawnMock,
 }));
 
@@ -253,6 +257,18 @@ describe('cluster proxy handler', () => {
     });
     createServerMock.mockReset();
     createServerMock.mockImplementation(() => portProbe());
+    execFileMock.mockReset();
+    execFileMock.mockImplementation((_command, _args, _options, callback) => {
+      callback(
+        null,
+        JSON.stringify({
+          pid: 9001,
+          creationDate: '2026-08-01T00:00:00.000000+00:00',
+          executablePath: 'C:\\Program Files\\AzureConnectedMachineAgent\\ArcProxy.exe',
+        }),
+        ''
+      );
+    });
     spawnMock.mockReset();
     spawnMock.mockReturnValue(proxyChild());
   });
@@ -750,42 +766,38 @@ describe('cluster proxy handler', () => {
   it('returns a failure when the proxy exits before reporting ready', async () => {
     await withPlatform('win32', async () => {
       const child = proxyChild();
-      const taskkillChild = proxyChild(3333);
-      spawnMock.mockReturnValueOnce(child).mockReturnValueOnce(taskkillChild);
+      spawnMock.mockReturnValue(child);
       const start = startHandler();
 
       const result = start({} as Electron.IpcMainInvokeEvent, proxyRequest('cluster-a'));
       await vi.waitFor(() => expect(spawnMock).toHaveBeenCalledTimes(1));
       child.emit('exit', 1, null);
-      await vi.waitFor(() => expect(spawnMock).toHaveBeenCalledTimes(2));
-      taskkillChild.emit('exit', 0, null);
 
       await expect(result).resolves.toEqual({
         success: false,
         error: 'Cluster proxy exited before reporting readiness (code 1).',
       });
+      expect(spawnMock).toHaveBeenCalledTimes(1);
     });
   });
 
   it('includes a bounded stderr tail when startup exits', async () => {
     await withPlatform('win32', async () => {
       const child = proxyChild();
-      const taskkillChild = proxyChild(3333);
-      spawnMock.mockReturnValueOnce(child).mockReturnValueOnce(taskkillChild);
+      spawnMock.mockReturnValue(child);
       const start = startHandler();
 
       const result = start({} as Electron.IpcMainInvokeEvent, proxyRequest('cluster-a'));
       await vi.waitFor(() => expect(spawnMock).toHaveBeenCalledTimes(1));
       child.stderr.emit('data', `${'x'.repeat(3000)}Azure CLI login required`);
       child.emit('exit', 1, null);
-      await vi.waitFor(() => expect(spawnMock).toHaveBeenCalledTimes(2));
-      taskkillChild.emit('exit', 0, null);
 
       const failure = await result;
       expect(failure.success).toBe(false);
       expect(failure.error).toContain('Cluster proxy exited before reporting readiness (code 1).');
       expect(failure.error).toContain('Azure CLI login required');
       expect(failure.error!.length).toBeLessThan(2300);
+      expect(spawnMock).toHaveBeenCalledTimes(1);
     });
   });
 
