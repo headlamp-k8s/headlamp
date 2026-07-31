@@ -606,6 +606,10 @@ export default function Table<RowItem extends Record<string, any>>({
 
   const emptyMsg = emptyMessage || t('No data to be shown.');
   const isEmpty = !tableProps.data?.length && !loading;
+  const showTopToolbar =
+    (tableProps.enableTopToolbar ?? true) &&
+    !errorMessage &&
+    ((!loading && !!tableProps.data?.length) || table.getState().showGlobalFilter);
   const noSearchResults = !errorMessage && !loading && !isEmpty && rows.length === 0;
   const statusMsg = isEmpty ? emptyMsg : noSearchResults ? t('No results found') : '';
 
@@ -637,7 +641,6 @@ export default function Table<RowItem extends Record<string, any>>({
 
     content = (
       <>
-        {(tableProps.enableTopToolbar ?? true) && <MRT_TopToolbar table={table} />}
         <MuiTable
           sx={{
             display: 'grid',
@@ -689,6 +692,7 @@ export default function Table<RowItem extends Record<string, any>>({
       <Box role="status" aria-live="polite" aria-atomic="true" sx={visuallyHidden}>
         {announcedStatus}
       </Box>
+      {showTopToolbar && <MRT_TopToolbar table={table} />}
       {content}
     </Box>
   );
