@@ -1250,7 +1250,8 @@ describe('apiProxy', () => {
 
         const [url, options] = (fetch as Mock).mock.lastCall!;
 
-        expect(url).toContain('drain-node');
+        expect(url).toBe(`${baseApiUrl}clusters/${clusterName}/drain-node`);
+        expect(options.credentials).toBe('include');
         expect(options.method).toBe('POST');
         expect(new Headers(options.headers).get('content-type')).toEqual('application/json');
         expect(new Headers(options.headers).get('X-HEADLAMP_BACKEND-TOKEN')).toEqual(
@@ -1282,7 +1283,10 @@ describe('apiProxy', () => {
 
         const [url, options] = (fetch as Mock).mock.lastCall!;
 
-        expect(url).toContain('drain-node-status');
+        expect(url).toBe(
+          `${baseApiUrl}clusters/${clusterName}/drain-node-status?nodeName=${nodeName}`
+        );
+        expect(options.credentials).toBe('include');
         expect(options.method).toBe('GET');
         expect(new Headers(options.headers).get('content-type')).toEqual('application/json');
         expect(new Headers(options.headers).get('X-HEADLAMP_BACKEND-TOKEN')).toEqual(

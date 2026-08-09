@@ -731,6 +731,8 @@ func refreshedTokenString(newToken *oauth2.Token, useAccessToken bool) (string, 
 
 // RefreshAndSetToken refreshes an expiring token, updates the auth cookie,
 // and records telemetry based on the provided parameters.
+//
+//nolint:funlen // Updates both response cookies and current request identity.
 func RefreshAndSetToken(params RefreshAndSetTokenParams) {
 	// The token type to use
 	tokenType := "id_token"
@@ -791,6 +793,9 @@ func RefreshAndSetToken(params RefreshAndSetTokenParams) {
 	}
 
 	setRefreshedIDTokenCookie(params, newToken, newTokenString)
+
+	// The current request must use the renewed credential, not only the next browser request.
+	params.Request.Header.Set("Authorization", "Bearer "+newTokenString)
 
 	params.TelemetryHandler.RecordEvent(params.Span, "Token refreshed successfully")
 }
