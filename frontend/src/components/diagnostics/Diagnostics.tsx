@@ -671,21 +671,9 @@ export function getWorkloadDiagnostics(
     const count = podsForReason.length;
     let title: string;
     if (reason === 'Unschedulable') {
-      title =
-        count === 1
-          ? t('{{ podCount }} pod is unschedulable', { podCount: count })
-          : t('{{ podCount }} pods are unschedulable', { podCount: count });
+      title = t('{{ count }} pods are unschedulable', { count });
     } else {
-      title =
-        count === 1
-          ? t('{{ podCount }} pod is failing with {{ reason }}', {
-              podCount: count,
-              reason,
-            })
-          : t('{{ podCount }} pods are failing with {{ reason }}', {
-              podCount: count,
-              reason,
-            });
+      title = t('{{ count }} pods are failing with {{ reason }}', { count, reason });
     }
 
     diagnostics.push({
