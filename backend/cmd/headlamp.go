@@ -195,6 +195,7 @@ type clientConfig struct {
 	DefaultLightTheme         string    `json:"defaultLightTheme,omitempty"`
 	DefaultDarkTheme          string    `json:"defaultDarkTheme,omitempty"`
 	ForceTheme                string    `json:"forceTheme,omitempty"`
+	OidcAutoLogin             bool      `json:"oidcAutoLogin"`
 }
 
 type OauthConfig struct {
@@ -203,6 +204,7 @@ type OauthConfig struct {
 	Ctx          context.Context
 	CodeVerifier string // PKCE code verifier
 	Cluster      string // cluster context name this is associated with
+	Popup        bool   // login was started from the OauthPopup window
 	createdAt    time.Time
 }
 
@@ -1417,6 +1419,7 @@ func createHeadlampHandler(ctx context.Context, config *HeadlampConfig) http.Han
 			Verifier:  verifier,
 			Ctx:       ctx,
 			Cluster:   cluster,
+			Popup:     r.URL.Query().Get("popup") == "true",
 			createdAt: time.Now(),
 		}
 
@@ -1599,7 +1602,10 @@ func createHeadlampHandler(ctx context.Context, config *HeadlampConfig) http.Han
 				err, "failed to retain ID token for provider logout")
 		}
 
-		redirectURL += fmt.Sprintf("auth?cluster=%1s", oauthConfig.Cluster)
+		redirectURL += "auth?cluster=" + url.QueryEscape(oauthConfig.Cluster)
+		if oauthConfig.Popup {
+			redirectURL += "&popup=true"
+		}
 
 		http.Redirect(w, r, redirectURL, http.StatusSeeOther)
 	})
@@ -2666,6 +2672,7 @@ func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 		DefaultLightTheme:         c.DefaultLightTheme,
 		DefaultDarkTheme:          c.DefaultDarkTheme,
 		ForceTheme:                c.ForceTheme,
+		OidcAutoLogin:             c.OidcAutoLogin,
 	}
 
 	if err := json.NewEncoder(w).Encode(&clientConfig); err != nil {
