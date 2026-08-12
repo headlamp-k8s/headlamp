@@ -965,6 +965,7 @@ const defaultRoutes: { [routeName: string]: Route } = {
     path: '/auth',
     name: 'OidcAuth',
     sidebar: null,
+    useClusterURL: false,
     noAuthRequired: true,
     component: () => <OIDCAuth />,
   },
