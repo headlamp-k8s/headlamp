@@ -17,17 +17,28 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import type Pod from '../../lib/k8s/pod';
-import { filterPod, PodListRenderer } from './List';
+import PodList, { filterPod, PodListRenderer } from './List';
 
-const { mockTranslation } = vi.hoisted(() => ({
-  mockTranslation: vi.fn((key: string, values?: Record<string, string>) => {
-    const label = key.split('|').at(-1)!;
-    return Object.entries(values ?? {}).reduce(
-      (result, [name, value]) => result.replace(`{{ ${name} }}`, value),
-      label
-    );
-  }),
-}));
+const { mockNamespaces, mockPodMetricsUseList, mockPodUseList, mockTranslation } = vi.hoisted(
+  () => ({
+    mockNamespaces: new Set(['default']),
+    mockPodMetricsUseList: vi.fn(() => ({ items: null, loadMore: undefined })),
+    mockPodUseList: vi.fn(() => ({
+      errors: null,
+      hasMore: false,
+      items: null,
+      loadMore: undefined,
+      remainingItemCount: 0,
+    })),
+    mockTranslation: vi.fn((key: string, values?: Record<string, string>) => {
+      const label = key.split('|').at(-1)!;
+      return Object.entries(values ?? {}).reduce(
+        (result, [name, value]) => result.replace(`{{ ${name} }}`, value),
+        label
+      );
+    }),
+  })
+);
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: mockTranslation }),
@@ -35,12 +46,27 @@ vi.mock('react-i18next', () => ({
 }));
 
 vi.mock('../../lib/k8s/pod', () => ({
-  default: class Pod {},
+  default: class Pod {
+    static useList = mockPodUseList;
+  },
 }));
 
 vi.mock('../../lib/k8s/PodMetrics', () => ({
   METRIC_REFETCH_INTERVAL_MS: 30_000,
-  PodMetrics: class PodMetrics {},
+  PodMetrics: class PodMetrics {
+    static useList = mockPodMetricsUseList;
+  },
+}));
+
+vi.mock('../../redux/filterSlice', async importOriginal => ({
+  ...(await importOriginal<typeof import('../../redux/filterSlice')>()),
+  useLabelSelector: () => 'environment=production',
+  useNamespaces: () => mockNamespaces,
+}));
+
+vi.mock('../../redux/headlampEventSlice', async importOriginal => ({
+  ...(await importOriginal<typeof import('../../redux/headlampEventSlice')>()),
+  useEventCallback: () => vi.fn(),
 }));
 
 vi.mock('../common', () => ({
@@ -142,5 +168,23 @@ describe('filterPod', () => {
   it('returns undefined for unrelated search terms so default fuzzy column matching applies', () => {
     expect(filterPod(readyPod, 'nginx')).toBeUndefined();
     expect(filterPod(notReadyPod, 'nginx')).toBeUndefined();
+  });
+});
+
+describe('PodList', () => {
+  it('keeps Pod and PodMetrics selector pagination aligned', () => {
+    render(<PodList />);
+
+    expect(mockPodUseList).toHaveBeenCalledWith({
+      labelSelector: 'environment=production',
+      limit: 1000,
+      namespace: mockNamespaces,
+    });
+    expect(mockPodMetricsUseList).toHaveBeenCalledWith({
+      labelSelector: 'environment=production',
+      limit: 1000,
+      namespace: mockNamespaces,
+      refetchInterval: 30_000,
+    });
   });
 });

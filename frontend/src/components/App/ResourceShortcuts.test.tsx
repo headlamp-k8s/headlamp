@@ -134,7 +134,7 @@ function makeStore(namespaces: string[], shortcutKeys?: Record<string, string>) 
     reducer: { shortcuts: shortcutsReducer, filter: filterReducer },
     preloadedState: {
       shortcuts: { shortcuts, isShortcutsDialogOpen: false },
-      filter: { namespaces: new Set(namespaces) },
+      filter: { namespaces: new Set(namespaces), labelSelector: '' },
     },
   });
 }
