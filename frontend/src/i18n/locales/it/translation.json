@@ -450,6 +450,7 @@
   "This will discard your changes in the editor. Do you want to proceed?": "Questo annullerà le modifiche apportate nell'editor. Vuoi procedere?",
   "Undo Changes": "Annulla Modifiche",
   "Dry Run": "",
+  "You have unsaved changes in the editor. Closing will discard them. Do you want to proceed?": "",
   "Invalid Secret Reference": "",
   "Invalid Config Map Reference": "",
   "Invalid fieldRef": "",

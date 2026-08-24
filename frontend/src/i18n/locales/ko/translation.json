@@ -446,6 +446,7 @@
   "This will discard your changes in the editor. Do you want to proceed?": "편집기의 변경 사항이 삭제됩니다. 계속하시겠습니까?",
   "Undo Changes": "변경 사항 취소",
   "Dry Run": "",
+  "You have unsaved changes in the editor. Closing will discard them. Do you want to proceed?": "",
   "Invalid Secret Reference": "",
   "Invalid Config Map Reference": "",
   "Invalid fieldRef": "",
