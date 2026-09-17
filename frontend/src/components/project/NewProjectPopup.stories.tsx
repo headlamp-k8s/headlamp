@@ -52,6 +52,7 @@ const makeStore = (customCreateProject = {}) => {
         },
         isDynamicClusterEnabled: false,
         allowKubeconfigChanges: false,
+        kubeconfigExportEnabled: false,
         defaultPodDebugImage: '',
         defaultNodeShellImage: '',
         defaultNodeShellNamespace: '',

@@ -26,7 +26,7 @@ import { logout } from '../../lib/auth';
 import { useSelectedClusters } from '../../lib/k8s';
 import { canLogoutFromProvider } from '../../lib/k8s/clusterAuthType';
 import { redirectToOIDCLogout } from '../../lib/oidcLogout';
-import TopBar, { AppBarActionsMenu } from './TopBar';
+import TopBar, { AppBarActionsMenu, KubeconfigCopyMenuItem } from './TopBar';
 
 // ── Mocks needed to prevent circular-dependency crashes when TopBar.tsx is ──
 // imported (it transitively loads k8s resource classes through lib/k8s and
@@ -64,10 +64,22 @@ vi.mock('../../redux/hooks', () => ({
       ui: {
         hideAppBar: false,
       },
+      config: {
+        kubeconfigExportEnabled: false,
+        statelessClusters: {},
+      },
     })
   ),
 }));
 vi.mock('../../redux/uiSlice', () => ({ uiSlice: { actions: { setVersionDialogOpen: vi.fn() } } }));
+vi.mock('notistack', () => ({
+  useSnackbar: vi.fn(() => ({ enqueueSnackbar: vi.fn() })),
+}));
+vi.mock('./Home/clusterKubeconfigExport', () => ({
+  getClusterKubeconfigYaml: vi.fn(async () => 'apiVersion: v1'),
+  downloadKubeconfigYaml: vi.fn(),
+  useKubeconfigExportEnabled: vi.fn(() => false),
+}));
 vi.mock('../cluster/Chooser', () => ({
   ClusterTitle: () => null,
   useClusterTitleVisible: vi.fn(() => false),
@@ -150,6 +162,21 @@ describe('AppBarActionsMenu', () => {
 
     const item = screen.getByRole('menuitem');
     expect(item).toHaveTextContent('inner content');
+  });
+
+  it('passes KubeconfigCopyMenuItem through without nesting menuitems', () => {
+    // The mobile "Copy kubeconfig" action renders its own MenuItem, so
+    // AppBarActionsMenu must not wrap it in NullableMenuItem again.
+    const action = {
+      id: 'kubeconfig-copy',
+      action: <KubeconfigCopyMenuItem clusterName="cluster-a" onCopyDone={vi.fn()} />,
+    };
+    render(<AppBarActionsMenu appBarActions={[action]} />);
+
+    const items = screen.getAllByRole('menuitem');
+    expect(items).toHaveLength(1);
+    expect(items[0].querySelector('[role="menuitem"], [role="button"], button')).toBeNull();
+    expect(items[0]).toHaveTextContent('Copy kubeconfig');
   });
 
   it('renders nothing for a null action', () => {

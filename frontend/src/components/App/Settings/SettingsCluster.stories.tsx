@@ -36,6 +36,7 @@ function getMockStore(clusters: Record<string, any> = {}) {
           clusters,
           statelessClusters: {},
           allClusters: clusters,
+          kubeconfigExportEnabled: true,
           settings: {
             tableRowsPerPageOptions: [15, 25, 50],
             timezone: 'UTC',
