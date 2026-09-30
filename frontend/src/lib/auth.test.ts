@@ -19,6 +19,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import store from '../redux/stores/store';
 import { getUserInfo, setToken } from './auth';
 import { backendFetch } from './k8s/api/v2/fetch';
+import { queryClient } from './queryClient';
 
 // Mock the dependencies
 vi.mock('./k8s/api/v2/fetch');
@@ -35,6 +36,7 @@ const mockStore = vi.mocked(store);
 describe('auth', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    queryClient.clear();
     mockStore.getState.mockReturnValue({
       ui: { functionsToOverride: {} },
       config: { allClusters: {} },
@@ -64,6 +66,26 @@ describe('auth', () => {
       });
     });
 
+    it.each(['replacement-token', null])(
+      "removes that cluster's cached resource data when its token changes to %s",
+      async token => {
+        const cluster = 'test-cluster';
+        const objectKey = ['object', cluster, '/api/v1/pods', 'ns', 'pod-a', {}];
+        const listKey = ['kubeObject', 'list', 'v1', 'pods', cluster, 'ns', {}];
+        const otherClusterListKey = ['kubeObject', 'list', 'v1', 'pods', 'other-cluster', 'ns', {}];
+        queryClient.setQueryData(objectKey, { name: 'pod-a' });
+        queryClient.setQueryData(listKey, [{ name: 'pod-a' }]);
+        queryClient.setQueryData(otherClusterListKey, [{ name: 'pod-b' }]);
+        mockBackendFetch.mockResolvedValue({ ok: true } as Response);
+
+        await setToken(cluster, token);
+
+        expect(queryClient.getQueryData(objectKey)).toBeUndefined();
+        expect(queryClient.getQueryData(listKey)).toBeUndefined();
+        expect(queryClient.getQueryData(otherClusterListKey)).toEqual([{ name: 'pod-b' }]);
+      }
+    );
+
     it('should successfully clear a token when token is null', async () => {
       const cluster = 'test-cluster';
       const token = null;
@@ -89,6 +111,10 @@ describe('auth', () => {
     it('should throw an error when backend returns error response', async () => {
       const cluster = 'test-cluster';
       const token = 'test-token-123';
+      const objectKey = ['object', cluster, '/api/v1/pods', 'ns', 'pod-a', {}];
+      const listKey = ['kubeObject', 'list', 'v1', 'pods', cluster, 'ns', {}];
+      queryClient.setQueryData(objectKey, { name: 'pod-a' });
+      queryClient.setQueryData(listKey, [{ name: 'pod-a' }]);
       const mockResponse: Partial<Response> = {
         ok: false,
         status: 500,
@@ -97,6 +123,38 @@ describe('auth', () => {
       mockBackendFetch.mockResolvedValue(mockResponse as Response);
 
       await expect(setToken(cluster, token)).rejects.toThrow('Failed to set cookie token');
+      expect(queryClient.getQueryData(objectKey)).toEqual({ name: 'pod-a' });
+      expect(queryClient.getQueryData(listKey)).toEqual([{ name: 'pod-a' }]);
+    });
+
+    it('removes resource data after a custom token setter succeeds', async () => {
+      const cluster = 'test-cluster';
+      const objectKey = ['object', cluster, '/api/v1/pods', 'ns', 'pod-a', {}];
+      queryClient.setQueryData(objectKey, { name: 'pod-a' });
+      const setTokenOverride = vi.fn().mockResolvedValue(undefined);
+      mockStore.getState.mockReturnValue({
+        ui: { functionsToOverride: { setToken: setTokenOverride } },
+        config: { allClusters: {} },
+      } as any);
+
+      await setToken(cluster, 'replacement-token');
+
+      expect(setTokenOverride).toHaveBeenCalledWith(cluster, 'replacement-token');
+      expect(queryClient.getQueryData(objectKey)).toBeUndefined();
+    });
+
+    it('retains resource data when a custom token setter rejects', async () => {
+      const cluster = 'test-cluster';
+      const objectKey = ['object', cluster, '/api/v1/pods', 'ns', 'pod-a', {}];
+      queryClient.setQueryData(objectKey, { name: 'pod-a' });
+      const setTokenOverride = vi.fn().mockRejectedValue(new Error('custom setter failed'));
+      mockStore.getState.mockReturnValue({
+        ui: { functionsToOverride: { setToken: setTokenOverride } },
+        config: { allClusters: {} },
+      } as any);
+
+      await expect(setToken(cluster, 'replacement-token')).rejects.toThrow('custom setter failed');
+      expect(queryClient.getQueryData(objectKey)).toEqual({ name: 'pod-a' });
     });
   });
 
