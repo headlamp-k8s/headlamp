@@ -143,6 +143,7 @@ func getFreePort() (int, error) {
 //nolint:funlen
 func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache[interface{}],
 	unsafeUseServiceAccountToken bool,
+	impersonation *kubeconfig.Impersonation,
 	contextKey string,
 	w http.ResponseWriter, r *http.Request,
 ) {
@@ -217,7 +218,10 @@ func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache
 
 	token := ""
 
-	if !unsafeUseServiceAccountToken || !kContext.UsesInClusterServiceAccountToken() {
+	switch {
+	case impersonation != nil:
+		kContext = kContext.WithImpersonation(*impersonation)
+	case !unsafeUseServiceAccountToken || !kContext.UsesInClusterServiceAccountToken():
 		// Check Authorization header first (consistent with ParseClusterAndToken),
 		// then fall back to the cluster cookie.
 		if authHeader := r.Header.Get("Authorization"); authHeader != "" {
