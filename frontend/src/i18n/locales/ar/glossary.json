@@ -73,6 +73,7 @@
   "Driver": "",
   "Device Classes": "",
   "Drivers": "",
+  "Resource Claims": "",
   "Subsets": "المجموعات الفرعية",
   "Endpoint: {{ name }}": "نقطة النهاية: {{ name }}",
   "IP": "عنوان IP",

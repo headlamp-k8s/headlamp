@@ -73,6 +73,7 @@
   "Driver": "",
   "Device Classes": "",
   "Drivers": "",
+  "Resource Claims": "",
   "Subsets": "Podskupiny",
   "Endpoint: {{ name }}": "Koncový bod: {{ name }}",
   "IP": "IP adresa",
