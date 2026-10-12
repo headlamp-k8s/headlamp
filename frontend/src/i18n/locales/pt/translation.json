@@ -804,6 +804,14 @@
   "Duration": "",
   "Active Deadline": "",
   "TTL After Finished": "",
+  "Suspending Job {{ newItemName }}...": "",
+  "Resuming Job {{ newItemName }}...": "",
+  "Cancelled suspending Job {{ newItemName }}.": "",
+  "Cancelled resuming Job {{ newItemName }}.": "",
+  "Suspended Job {{ newItemName }}.": "",
+  "Resumed Job {{ newItemName }}.": "",
+  "Failed to suspend Job {{ newItemName }}.": "",
+  "Failed to resume Job {{ newItemName }}.": "",
   "Group Size": "",
   "Holder Identity": "",
   "Lease Duration Seconds": "",
@@ -1083,5 +1091,9 @@
   "Toggle Table Filters": "",
   "Toggle column filters in tables": "",
   "Log Viewer Search": "",
-  "Toggle search in log viewer": ""
+  "Toggle search in log viewer": "",
+  "Go to Pods": "",
+  "Navigate to the Pods list": "",
+  "Go to Deployments": "",
+  "Navigate to the Deployments list": ""
 }
