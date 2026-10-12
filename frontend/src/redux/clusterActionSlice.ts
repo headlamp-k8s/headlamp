@@ -137,19 +137,23 @@ export interface CallbackActionOptions {
    */
   cancelCallback?: (...args: any[]) => void;
   /**
-   * A function to format the error message.
+   * Synchronously formats the error message. Empty results or synchronous
+   * exceptions fall back to the default message; exceptions are logged.
    */
   errorMessageFormatter?: (error: Error) => string;
   /**
-   * A callback to execute when the action is successful.
+   * Called synchronously on success, not awaited. Synchronous exceptions are
+   * logged without changing the action outcome.
    */
   onSuccess?: () => void;
   /**
-   * A callback to execute when the action fails.
+   * Called synchronously on failure, not awaited. Synchronous exceptions are
+   * logged without changing the action outcome.
    */
   onError?: (error: Error) => void;
   /**
-   * A callback to execute when the action is cancelled.
+   * Called synchronously on cancellation, not awaited. Synchronous exceptions
+   * are logged without changing the action outcome.
    */
   onCancelled?: () => void;
 }
