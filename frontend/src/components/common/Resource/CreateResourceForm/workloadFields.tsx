@@ -209,15 +209,40 @@ export function ContainerTextField(props: ContainerTextFieldProps) {
 
   function handleEdit(index: number, field: string, newVal: string) {
     onChange(
-      safeValue.map((c, i) => {
-        if (i !== index) return c;
+      safeValue.map((rawC, i) => {
+        if (i !== index) return rawC;
+        const c =
+          rawC && typeof rawC === 'object' && !Array.isArray(rawC)
+            ? (rawC as Record<string, any>)
+            : {};
         if (field === 'containerPort') {
           const portNum = parseInt(newVal, 10);
-          const rest = _.omit(c, ['containerPort', 'ports']);
+          const rest = _.omit(c, ['containerPort']);
+          const existingPorts: any[] = Array.isArray(c?.ports) ? c.ports : [];
+          const firstPort: Record<string, any> =
+            existingPorts.length > 0 &&
+            typeof existingPorts[0] === 'object' &&
+            existingPorts[0] !== null
+              ? existingPorts[0]
+              : {};
+          const remainingPorts = existingPorts.slice(1);
+
           if (!isNaN(portNum) && portNum > 0) {
-            return { ...rest, ports: [{ containerPort: portNum }] };
+            const updatedFirstPort = { ...firstPort, containerPort: portNum };
+            return { ...rest, ports: [updatedFirstPort, ...remainingPorts] };
           }
-          return rest;
+
+          // When input is empty or invalid, preserve remaining ports and any metadata on
+          // the first port so unrelated ports/metadata are not deleted and the second port
+          // is not shifted to index 0.
+          const updatedFirstPort = _.omit(firstPort, ['containerPort']);
+          const hasFirstPortMetadata = Object.keys(updatedFirstPort).length > 0;
+
+          if (hasFirstPortMetadata || remainingPorts.length > 0) {
+            return { ...rest, ports: [updatedFirstPort, ...remainingPorts] };
+          }
+
+          return _.omit(rest, ['ports']);
         }
         return { ...c, [field]: newVal };
       })
@@ -239,6 +264,15 @@ export function ContainerTextField(props: ContainerTextFieldProps) {
           rawContainer && typeof rawContainer === 'object' && !Array.isArray(rawContainer)
             ? (rawContainer as Record<string, any>)
             : {};
+        const firstPort =
+          Array.isArray(container.ports) && container.ports.length > 0 ? container.ports[0] : null;
+        const hasPortNumber =
+          firstPort &&
+          typeof firstPort === 'object' &&
+          Number.isInteger(firstPort.containerPort) &&
+          firstPort.containerPort >= 1 &&
+          firstPort.containerPort <= 65535;
+        const hasPortError = Boolean(firstPort && !hasPortNumber);
         return (
           <Box
             key={rowIds[index] ?? `container-fallback-${index}`}
@@ -274,6 +308,12 @@ export function ContainerTextField(props: ContainerTextFieldProps) {
                 onChange={e => handleEdit(index, 'containerPort', e.target.value)}
                 inputProps={{ 'aria-label': t('translation|Container port') }}
                 type="number"
+                error={hasPortError}
+                helperText={
+                  hasPortError
+                    ? t('translation|Please enter a valid port number (1-65535).')
+                    : undefined
+                }
               />
               <IconButton
                 onClick={() => handleRemove(index)}

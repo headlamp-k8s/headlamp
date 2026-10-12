@@ -29,6 +29,8 @@ vi.mock('../../../../lib/k8s/namespace', () => ({
 const { ContainerTextField } = await import('./workloadFields');
 const { ServicePortsTextField } = await import('./CreateResourceForm');
 const { default: CreateResourceForm } = await import('./index');
+const { default: CreatePodForm } = await import('../../../pod/CreatePodForm');
+const { default: CreateDeploymentForm } = await import('../../../deployments/CreateDeploymentForm');
 
 function renderContainers(value: unknown) {
   return render(<ContainerTextField value={value as any} onChange={() => {}} />);
@@ -316,5 +318,502 @@ describe('CreateResourceForm – select field', () => {
       expect(screen.queryByText('a')).toBeNull();
       expect(screen.queryByText('b')).toBeNull();
     });
+  });
+});
+
+describe('ContainerTextField port edit preservation', () => {
+  const makeReproContainer = () => ({
+    name: 'app',
+    image: 'nginx:alpine',
+    imagePullPolicy: 'IfNotPresent',
+    command: ['sh', '-c', 'sleep 3600'],
+    env: [{ name: 'KEEP_ME', value: 'unchanged' }],
+    ports: [
+      {
+        name: 'dns',
+        containerPort: 5353,
+        protocol: 'UDP',
+        hostPort: 5353,
+        hostIP: '127.0.0.1',
+      },
+      {
+        name: 'metrics',
+        containerPort: 9090,
+        protocol: 'TCP',
+      },
+    ],
+  });
+
+  it('preserves first-port metadata and the second port when editing containerPort', () => {
+    const handleChange = vi.fn();
+    const initialContainers = [makeReproContainer()];
+    render(<ContainerTextField value={initialContainers} onChange={handleChange} />);
+
+    const portInput = screen.getByLabelText('Container port');
+    fireEvent.change(portInput, { target: { value: '5354' } });
+
+    expect(handleChange).toHaveBeenCalledWith([
+      {
+        name: 'app',
+        image: 'nginx:alpine',
+        imagePullPolicy: 'IfNotPresent',
+        command: ['sh', '-c', 'sleep 3600'],
+        env: [{ name: 'KEEP_ME', value: 'unchanged' }],
+        ports: [
+          {
+            name: 'dns',
+            containerPort: 5354,
+            protocol: 'UDP',
+            hostPort: 5353,
+            hostIP: '127.0.0.1',
+          },
+          {
+            name: 'metrics',
+            containerPort: 9090,
+            protocol: 'TCP',
+          },
+        ],
+      },
+    ]);
+  });
+
+  it('does not mutate the original input object or its nested arrays/objects', () => {
+    const handleChange = vi.fn();
+    const initialContainers = [makeReproContainer()];
+    const deepFreeze = (obj: any): any => {
+      Object.freeze(obj);
+      Object.keys(obj).forEach(key => {
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+          deepFreeze(obj[key]);
+        }
+      });
+      return obj;
+    };
+    deepFreeze(initialContainers);
+
+    render(<ContainerTextField value={initialContainers} onChange={handleChange} />);
+    const portInput = screen.getByLabelText('Container port');
+    expect(() => {
+      fireEvent.change(portInput, { target: { value: '5354' } });
+    }).not.toThrow();
+
+    expect(handleChange).toHaveBeenCalledWith([
+      expect.objectContaining({
+        ports: [
+          expect.objectContaining({ containerPort: 5354, name: 'dns' }),
+          expect.objectContaining({ containerPort: 9090, name: 'metrics' }),
+        ],
+      }),
+    ]);
+  });
+
+  it('preserves other containers when editing a container port', () => {
+    const handleChange = vi.fn();
+    const sidecar = {
+      name: 'sidecar',
+      image: 'envoyproxy/envoy',
+      ports: [{ name: 'admin', containerPort: 9901, protocol: 'TCP' }],
+    };
+    const initialContainers = [makeReproContainer(), sidecar];
+    render(<ContainerTextField value={initialContainers} onChange={handleChange} />);
+
+    const portInputs = screen.getAllByLabelText('Container port');
+    fireEvent.change(portInputs[0], { target: { value: '5354' } });
+
+    expect(handleChange).toHaveBeenCalledWith([
+      expect.objectContaining({
+        name: 'app',
+        ports: [
+          expect.objectContaining({ containerPort: 5354, name: 'dns' }),
+          expect.objectContaining({ containerPort: 9090, name: 'metrics' }),
+        ],
+      }),
+      sidecar,
+    ]);
+  });
+
+  it('creates the expected port entry when container has no existing ports', () => {
+    const handleChange = vi.fn();
+    const initialContainers = [{ name: 'app', image: 'nginx:alpine' }];
+    render(<ContainerTextField value={initialContainers} onChange={handleChange} />);
+
+    const portInput = screen.getByLabelText('Container port');
+    fireEvent.change(portInput, { target: { value: '80' } });
+
+    expect(handleChange).toHaveBeenCalledWith([
+      {
+        name: 'app',
+        image: 'nginx:alpine',
+        ports: [{ containerPort: 80 }],
+      },
+    ]);
+  });
+
+  it('preserves first-port metadata and second port when input is cleared', () => {
+    const handleChange = vi.fn();
+    const initialContainers = [makeReproContainer()];
+    render(<ContainerTextField value={initialContainers} onChange={handleChange} />);
+
+    const portInput = screen.getByLabelText('Container port');
+    fireEvent.change(portInput, { target: { value: '' } });
+
+    expect(handleChange).toHaveBeenCalledWith([
+      expect.objectContaining({
+        name: 'app',
+        ports: [
+          {
+            name: 'dns',
+            protocol: 'UDP',
+            hostPort: 5353,
+            hostIP: '127.0.0.1',
+          },
+          {
+            name: 'metrics',
+            containerPort: 9090,
+            protocol: 'TCP',
+          },
+        ],
+      }),
+    ]);
+  });
+
+  it('preserves configuration and avoids editing second port during a sequence of controlled input updates', () => {
+    let currentContainers: Record<string, any>[] = [makeReproContainer()];
+    const { rerender } = render(
+      <ContainerTextField
+        value={currentContainers}
+        onChange={updated => {
+          currentContainers = updated;
+        }}
+      />
+    );
+
+    const portInput = screen.getByLabelText('Container port') as HTMLInputElement;
+
+    // 1. User clears the input box
+    fireEvent.change(portInput, { target: { value: '' } });
+    rerender(
+      <ContainerTextField
+        value={currentContainers}
+        onChange={updated => {
+          currentContainers = updated;
+        }}
+      />
+    );
+    // Port input should be empty, NOT jumping to second port (9090)
+    expect(portInput.value).toBe('');
+    expect(currentContainers[0].ports).toHaveLength(2);
+    expect(currentContainers[0].ports[1]).toEqual({
+      name: 'metrics',
+      containerPort: 9090,
+      protocol: 'TCP',
+    });
+
+    // 2. User starts typing: "5"
+    fireEvent.change(portInput, { target: { value: '5' } });
+    rerender(
+      <ContainerTextField
+        value={currentContainers}
+        onChange={updated => {
+          currentContainers = updated;
+        }}
+      />
+    );
+    expect(currentContainers[0].ports[0].containerPort).toBe(5);
+    expect(currentContainers[0].ports[0].name).toBe('dns');
+    expect(currentContainers[0].ports[1].containerPort).toBe(9090);
+
+    // 3. User finishes typing: "5354"
+    fireEvent.change(portInput, { target: { value: '5354' } });
+    rerender(
+      <ContainerTextField
+        value={currentContainers}
+        onChange={updated => {
+          currentContainers = updated;
+        }}
+      />
+    );
+    expect(currentContainers[0].ports[0]).toEqual({
+      name: 'dns',
+      containerPort: 5354,
+      protocol: 'UDP',
+      hostPort: 5353,
+      hostIP: '127.0.0.1',
+    });
+    expect(currentContainers[0].ports[1]).toEqual({
+      name: 'metrics',
+      containerPort: 9090,
+      protocol: 'TCP',
+    });
+  });
+
+  it('removes ports property when clearing a bare container with only a single containerPort and no metadata', () => {
+    const handleChange = vi.fn();
+    const initialContainers = [{ name: 'app', image: 'nginx', ports: [{ containerPort: 80 }] }];
+    render(<ContainerTextField value={initialContainers} onChange={handleChange} />);
+
+    const portInput = screen.getByLabelText('Container port');
+    fireEvent.change(portInput, { target: { value: '' } });
+
+    expect(handleChange).toHaveBeenCalledWith([{ name: 'app', image: 'nginx' }]);
+  });
+
+  it('tolerates editing name or port on a null container row (e.g. from partially typed YAML) without throwing', () => {
+    const handleChange = vi.fn();
+    // Partially typed YAML: `containers:\n  -` parses to [null]
+    render(<ContainerTextField value={[null as any]} onChange={handleChange} />);
+
+    const portInput = screen.getByLabelText('Container port');
+    expect(() => {
+      fireEvent.change(portInput, { target: { value: '8080' } });
+    }).not.toThrow();
+    expect(handleChange).toHaveBeenCalledWith([{ ports: [{ containerPort: 8080 }] }]);
+
+    const nameInput = screen.getByLabelText('Container name');
+    expect(() => {
+      fireEvent.change(nameInput, { target: { value: 'my-app' } });
+    }).not.toThrow();
+    expect(handleChange).toHaveBeenCalledWith([{ name: 'my-app' }]);
+  });
+
+  it('control test: editing container name preserves all ports and port metadata', () => {
+    const handleChange = vi.fn();
+    const initialContainers = [makeReproContainer()];
+    render(<ContainerTextField value={initialContainers} onChange={handleChange} />);
+
+    const nameInput = screen.getByLabelText('Container name');
+    fireEvent.change(nameInput, { target: { value: 'app-renamed' } });
+
+    expect(handleChange).toHaveBeenCalledWith([
+      expect.objectContaining({
+        name: 'app-renamed',
+        ports: [
+          {
+            name: 'dns',
+            containerPort: 5353,
+            protocol: 'UDP',
+            hostPort: 5353,
+            hostIP: '127.0.0.1',
+          },
+          {
+            name: 'metrics',
+            containerPort: 9090,
+            protocol: 'TCP',
+          },
+        ],
+      }),
+    ]);
+  });
+
+  it('displays field error and helper text when a container port entry is missing containerPort', () => {
+    const handleChange = vi.fn();
+    const containerWithIncompletePort = {
+      name: 'app',
+      image: 'nginx',
+      ports: [{ name: 'dns', protocol: 'UDP' }],
+    };
+
+    render(<ContainerTextField value={[containerWithIncompletePort]} onChange={handleChange} />);
+
+    expect(screen.getByText('Please enter a valid port number (1-65535).')).toBeDefined();
+    const portInput = screen.getByLabelText('Container port');
+    expect(portInput.getAttribute('aria-invalid')).toBe('true');
+  });
+
+  it('does not display field error for a bare container without ports', () => {
+    const handleChange = vi.fn();
+    const bareContainer = {
+      name: 'app',
+      image: 'nginx',
+    };
+
+    render(<ContainerTextField value={[bareContainer]} onChange={handleChange} />);
+
+    expect(screen.queryByText('Please enter a valid port number (1-65535).')).toBeNull();
+    const portInput = screen.getByLabelText('Container port');
+    expect(portInput.getAttribute('aria-invalid')).toBe('false');
+  });
+
+  it('CreatePodForm workload form emits the complete resource preserving ports after port edit', () => {
+    const handleChange = vi.fn();
+    const podResource = {
+      apiVersion: 'v1',
+      kind: 'Pod',
+      metadata: {
+        name: 'port-edit-repro',
+        namespace: 'default',
+        labels: { app: 'port-edit-repro' },
+      },
+      spec: {
+        containers: [makeReproContainer()],
+      },
+    };
+
+    render(<CreatePodForm resource={podResource} onChange={handleChange} />);
+
+    const portInput = screen.getByLabelText('Container port');
+    fireEvent.change(portInput, { target: { value: '5354' } });
+
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        apiVersion: 'v1',
+        kind: 'Pod',
+        metadata: {
+          name: 'port-edit-repro',
+          namespace: 'default',
+          labels: { app: 'port-edit-repro' },
+        },
+        spec: expect.objectContaining({
+          containers: [
+            expect.objectContaining({
+              name: 'app',
+              env: [{ name: 'KEEP_ME', value: 'unchanged' }],
+              ports: [
+                {
+                  name: 'dns',
+                  containerPort: 5354,
+                  protocol: 'UDP',
+                  hostPort: 5353,
+                  hostIP: '127.0.0.1',
+                },
+                {
+                  name: 'metrics',
+                  containerPort: 9090,
+                  protocol: 'TCP',
+                },
+              ],
+            }),
+          ],
+        }),
+      })
+    );
+  });
+
+  it('CreatePodForm reports form invalid via onValidChange and shows field error when clearing port with metadata, and recovers when a valid port is entered', () => {
+    let currentResource = {
+      apiVersion: 'v1',
+      kind: 'Pod',
+      metadata: {
+        name: 'port-edit-validity',
+        namespace: 'default',
+      },
+      spec: {
+        containers: [makeReproContainer()],
+      },
+    };
+    const handleChange = vi.fn((next: any) => {
+      currentResource = next;
+    });
+    const handleValidChange = vi.fn();
+
+    const { rerender } = render(
+      <CreatePodForm
+        resource={currentResource}
+        onChange={handleChange}
+        onValidChange={handleValidChange}
+      />
+    );
+
+    // Initial state with valid containerPort (5353) is valid
+    expect(handleValidChange).toHaveBeenLastCalledWith(true);
+    expect(screen.queryByText('Please enter a valid port number (1-65535).')).toBeNull();
+
+    // 1. User clears the port input
+    const portInput = screen.getByLabelText('Container port');
+    fireEvent.change(portInput, { target: { value: '' } });
+
+    // Emitted resource preserves dns metadata without containerPort
+    expect(currentResource.spec.containers[0].ports[0]).toEqual({
+      name: 'dns',
+      protocol: 'UDP',
+      hostPort: 5353,
+      hostIP: '127.0.0.1',
+    });
+
+    // Re-render form with emitted resource
+    rerender(
+      <CreatePodForm
+        resource={currentResource}
+        onChange={handleChange}
+        onValidChange={handleValidChange}
+      />
+    );
+
+    // Form must be marked invalid and display field-level error
+    expect(handleValidChange).toHaveBeenLastCalledWith(false);
+    expect(screen.getByText('Please enter a valid port number (1-65535).')).toBeDefined();
+
+    // 2. User types a valid port number again
+    fireEvent.change(portInput, { target: { value: '5354' } });
+    rerender(
+      <CreatePodForm
+        resource={currentResource}
+        onChange={handleChange}
+        onValidChange={handleValidChange}
+      />
+    );
+
+    // Form becomes valid again and error is cleared
+    expect(handleValidChange).toHaveBeenLastCalledWith(true);
+    expect(screen.queryByText('Please enter a valid port number (1-65535).')).toBeNull();
+  });
+
+  it('CreateDeploymentForm emits the complete resource preserving ports after port edit', () => {
+    const handleChange = vi.fn();
+    const deploymentResource = {
+      apiVersion: 'apps/v1',
+      kind: 'Deployment',
+      metadata: {
+        name: 'dep-edit-repro',
+        namespace: 'default',
+      },
+      spec: {
+        replicas: 1,
+        selector: { matchLabels: { app: 'dep-edit-repro' } },
+        template: {
+          metadata: { labels: { app: 'dep-edit-repro' } },
+          spec: {
+            containers: [makeReproContainer()],
+          },
+        },
+      },
+    };
+
+    render(<CreateDeploymentForm resource={deploymentResource} onChange={handleChange} />);
+
+    const portInput = screen.getByLabelText('Container port');
+    fireEvent.change(portInput, { target: { value: '5354' } });
+
+    expect(handleChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        apiVersion: 'apps/v1',
+        kind: 'Deployment',
+        spec: expect.objectContaining({
+          template: expect.objectContaining({
+            spec: expect.objectContaining({
+              containers: [
+                expect.objectContaining({
+                  name: 'app',
+                  ports: [
+                    {
+                      name: 'dns',
+                      containerPort: 5354,
+                      protocol: 'UDP',
+                      hostPort: 5353,
+                      hostIP: '127.0.0.1',
+                    },
+                    {
+                      name: 'metrics',
+                      containerPort: 9090,
+                      protocol: 'TCP',
+                    },
+                  ],
+                }),
+              ],
+            }),
+          }),
+        }),
+      })
+    );
   });
 });
