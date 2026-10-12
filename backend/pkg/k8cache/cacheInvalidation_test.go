@@ -778,6 +778,8 @@ var allAllowedGVRs = []schema.GroupVersionResource{
 	{Group: "", Version: "v1", Resource: "resourcequotas"},
 	{Group: "", Version: "v1", Resource: "limitranges"},
 	{Group: "scheduling.k8s.io", Version: "v1", Resource: "priorityclasses"},
+	{Group: "scheduling.k8s.io", Version: "v1beta1", Resource: "podgroups"},
+	{Group: "scheduling.k8s.io", Version: "v1beta1", Resource: "workloads"},
 	{Group: "node.k8s.io", Version: "v1", Resource: "runtimeclasses"},
 	{Group: "admissionregistration.k8s.io", Version: "v1", Resource: "mutatingwebhookconfigurations"},
 	{Group: "admissionregistration.k8s.io", Version: "v1", Resource: "validatingwebhookconfigurations"},

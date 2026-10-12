@@ -215,6 +215,8 @@ func filterImportantResources(gvrList []schema.GroupVersionResource) []schema.Gr
 		{Group: "autoscaling.k8s.io", Resource: "verticalpodautoscalers"}: {},
 		{Group: "policy", Resource: "poddisruptionbudgets"}:               {},
 		{Group: "scheduling.k8s.io", Resource: "priorityclasses"}:         {},
+		{Group: "scheduling.k8s.io", Resource: "podgroups"}:               {},
+		{Group: "scheduling.k8s.io", Resource: "workloads"}:               {},
 		{Group: "node.k8s.io", Resource: "runtimeclasses"}:                {},
 		// Admission webhooks
 		{Group: "admissionregistration.k8s.io", Resource: "mutatingwebhookconfigurations"}:   {},
