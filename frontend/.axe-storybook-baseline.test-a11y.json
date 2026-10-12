@@ -43,7 +43,6 @@
     "cluster/ClusterChooserPopup/Scrollbar": [
       "aria-required-children",
       "listitem",
-      "scrollable-region-focusable",
       "aria-input-field-name"
     ],
     "DropZoneBox/Upload Files": ["aria-allowed-role"],
