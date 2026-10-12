@@ -25,10 +25,12 @@ import ReactDOM from 'react-dom';
 import {
   Bar,
   BarChart,
+  Cell,
   Label,
   Pie,
   PieChart,
   ResponsiveContainer,
+  Sector,
   Tooltip,
   XAxis,
   YAxis,
@@ -37,8 +39,10 @@ import Loader from './Loader';
 
 export interface ChartDataPoint {
   name: string;
+  label?: string;
   value: number;
   fill?: string;
+  onClick?: (data?: any) => void;
 }
 
 export interface PercentageCircleProps {
@@ -75,6 +79,13 @@ export function PercentageCircle(props: PercentageCircleProps) {
   const chartSize = size * 0.8;
   const isLoading = total < 0;
 
+  const chartLoadingTitle =
+    loaderTitle ||
+    (typeof title === 'string' && title.trim() ? title.trim() : '') ||
+    (typeof label === 'string' && label.trim() && label !== '…' ? label.trim() : '');
+
+  const loaderLabel = chartLoadingTitle ? `Loading data for ${chartLoadingTitle}` : 'Loading data';
+
   function formatData() {
     let filledValue = 0;
     const formattedData = data.map(item => {
@@ -91,19 +102,100 @@ export function PercentageCircle(props: PercentageCircleProps) {
         ? {
             name: 'total',
             percentage: 100,
-            value: total,
-            fill: theme.palette.chartStyles.defaultFillColor,
+            value: 0,
+            fill: theme.palette?.chartStyles?.defaultFillColor,
           }
         : {
             name: 'total',
             percentage: ((total - filledValue) / total) * 100,
-            value: total,
-            fill: theme.palette.chartStyles.defaultFillColor,
+            value: total - filledValue,
+            fill: theme.palette?.chartStyles?.defaultFillColor,
             ...totalProps,
           };
 
     return formattedData.concat(totalValue);
   }
+
+  const renderCustomSector = (sectorProps: any) => {
+    const {
+      cx,
+      cy,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle,
+      fill: sectorFill,
+      stroke,
+      payload,
+      index,
+    } = sectorProps;
+
+    const onClick = payload?.onClick;
+    const isInteractive = !!onClick;
+    const labelName = payload?.label || payload?.name || '';
+    // The empty-chart placeholder has value 0 but percentage 100, so omit the percentage for 0.
+    const pct =
+      typeof payload?.percentage === 'number' && payload?.value !== 0
+        ? `${Math.round(payload.percentage)}%`
+        : '';
+    const val = typeof payload?.value === 'number' ? `${payload.value}` : '';
+    const accessibleLabel =
+      labelName && val
+        ? `${labelName}: ${val}${pct ? ` (${pct})` : ''}`
+        : labelName && pct
+        ? `${labelName} (${pct})`
+        : labelName || `slice-${index}`;
+
+    const fill =
+      payload?.fill ||
+      sectorFill ||
+      theme.palette?.chartStyles?.fillColor ||
+      theme.palette?.common?.black;
+
+    if (isInteractive) {
+      return (
+        <g
+          tabIndex={0}
+          role="button"
+          aria-label={accessibleLabel}
+          style={{ cursor: 'pointer' }}
+          onClick={onClick}
+          onKeyDown={(e: React.KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onClick(e);
+            }
+          }}
+        >
+          <Sector
+            cx={cx}
+            cy={cy}
+            innerRadius={innerRadius}
+            outerRadius={outerRadius}
+            startAngle={startAngle}
+            endAngle={endAngle}
+            fill={fill}
+            stroke={stroke}
+            aria-label={accessibleLabel}
+          />
+        </g>
+      );
+    }
+
+    return (
+      <Sector
+        cx={cx}
+        cy={cy}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        fill={fill}
+        stroke={stroke}
+        aria-label={accessibleLabel}
+      />
+    );
+  };
 
   return (
     <Box
@@ -127,7 +219,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
         </Typography>
       )}
       {isLoading ? (
-        <Loader title={`Loading data for ${loaderTitle ?? title}`} />
+        <Loader title={loaderLabel} />
       ) : (
         <PieChart
           cx={size / 2}
@@ -138,6 +230,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
             marginLeft: 'auto',
             marginRight: 'auto',
           }}
+          accessibilityLayer
         >
           <Pie
             aria-label={label || '0%'}
@@ -152,15 +245,31 @@ export function PercentageCircle(props: PercentageCircleProps) {
             // Start at the top
             startAngle={90}
             endAngle={-270}
-            stroke={theme.palette.chartStyles.defaultFillColor}
-            fill={theme.palette.chartStyles.fillColor || theme.palette.common.black}
+            stroke={theme.palette?.chartStyles?.defaultFillColor}
+            fill={theme.palette?.chartStyles?.fillColor || theme.palette?.common?.black}
+            activeIndex={formatData().flatMap((entry, index) =>
+              entry.percentage > 0 && Number.isFinite(entry.percentage) ? [index] : []
+            )}
+            activeShape={renderCustomSector}
           >
+            {formatData().map((entry, index) => {
+              return (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={
+                    entry.fill ||
+                    theme.palette?.chartStyles?.fillColor ||
+                    theme.palette?.common?.black
+                  }
+                />
+              );
+            })}
             <Label
               value={label || ''}
               position="center"
               style={{
                 fontSize: `${chartSize * 0.15}px`,
-                fill: theme.palette.chartStyles.labelColor,
+                fill: theme.palette?.chartStyles?.labelColor,
               }}
             />
           </Pie>
