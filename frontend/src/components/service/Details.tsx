@@ -260,8 +260,8 @@ export default function ServiceDetails(props: {
                         label: t('translation|Addresses'),
                         getter: endpointSlice => (
                           <Box display="flex" flexDirection="column">
-                            {endpointSlice.spec.endpoints.map((ep: any, index: number) => (
-                              <ValueLabel key={index}>{ep.addresses.join(',')}</ValueLabel>
+                            {(endpointSlice.spec.endpoints ?? []).map((ep: any, index: number) => (
+                              <ValueLabel key={index}>{ep.addresses?.join(',')}</ValueLabel>
                             ))}
                           </Box>
                         ),
