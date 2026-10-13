@@ -3371,6 +3371,7 @@ func newHeadlampConfig(fakeK8s *httptest.Server, testName string) *HeadlampConfi
 			HeadlampCFG:      &headlampconfig.HeadlampCFG{KubeConfigStore: store, CacheEnabled: true},
 			TelemetryHandler: &telemetry.RequestHandler{},
 			Cache:            cache.New[interface{}](),
+			ClientsetCache:   k8cache.NewClientsetCache(),
 		},
 	}
 }
@@ -3828,6 +3829,7 @@ func newRealK8sHeadlampConfig(t *testing.T) (*HeadlampConfig, string) {
 				UserPluginDir:   userPluginDir,
 			},
 			Cache:            cache.New[interface{}](),
+			ClientsetCache:   k8cache.NewClientsetCache(),
 			TelemetryConfig:  GetDefaultTestTelemetryConfig(),
 			TelemetryHandler: &telemetry.RequestHandler{},
 		},
