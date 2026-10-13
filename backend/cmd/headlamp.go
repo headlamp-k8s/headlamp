@@ -585,6 +585,9 @@ func setupInClusterContext(config *HeadlampConfig) {
 		strings.Join(config.OidcScopes, ","),
 		config.OidcSkipTLSVerify,
 		config.OidcCACert,
+		config.OidcAPIProxy,
+		config.OidcAPIProxyCACert,
+		config.OidcAPIProxySkipTLSVerify,
 		config.UnsafeUseServiceAccountToken,
 		config.ServiceAccountTokenPath,
 	)
@@ -1971,7 +1974,12 @@ func clusterRequestHandler(c *HeadlampConfig) http.Handler { //nolint:funlen
 			return
 		}
 
-		clusterURL, err := url.Parse(kContext.Cluster.Server)
+		// When the context routes traffic through an external API proxy this
+		// is the proxy URL, so Host/Scheme below address the proxy instead of
+		// the kube-apiserver. The proxy URL's path prefix (if any) is appended
+		// by the reverse-proxy Director; the user's bearer token from the
+		// cookie authenticates against the proxy.
+		clusterURL, err := kContext.UpstreamURL()
 		if err != nil {
 			c.handleError(w, ctx, span, err, "failed to parse cluster URL", http.StatusNotFound)
 			return
@@ -1980,6 +1988,7 @@ func clusterRequestHandler(c *HeadlampConfig) http.Handler { //nolint:funlen
 		// Record attributes about the proxy request
 		span.SetAttributes(
 			attribute.String("cluster.server", kContext.Cluster.Server),
+			attribute.String("cluster.upstream", clusterURL.Host),
 			attribute.String("cluster.api_path", mux.Vars(r)["api"]),
 		)
 		c.TelemetryHandler.RecordClusterProxyRequestsCount(ctx, attribute.String("cluster", contextKey),
