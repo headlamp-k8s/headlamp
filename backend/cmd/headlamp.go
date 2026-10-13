@@ -55,6 +55,7 @@ import (
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/helm"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/kubeconfig"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/logger"
+	"github.com/kubernetes-sigs/headlamp/backend/pkg/nsaccess"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/plugins"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/portforward"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/serviceproxy"
@@ -82,6 +83,8 @@ type HeadlampConfig struct {
 	proxyURLMu        sync.Mutex
 	compiledProxyURLs []glob.Glob
 	oidcStateReader   io.Reader
+	// namespaceFilter is set when --require-namespace-get is enabled.
+	namespaceFilter *nsaccess.Filter
 }
 
 func compileProxyURLPatterns(patterns []string) ([]glob.Glob, error) {
@@ -585,6 +588,9 @@ func setupInClusterContext(config *HeadlampConfig) {
 		strings.Join(config.OidcScopes, ","),
 		config.OidcSkipTLSVerify,
 		config.OidcCACert,
+		config.OidcAPIProxy,
+		config.OidcAPIProxyCACert,
+		config.OidcAPIProxySkipTLSVerify,
 		config.UnsafeUseServiceAccountToken,
 		config.ServiceAccountTokenPath,
 	)
@@ -1971,7 +1977,12 @@ func clusterRequestHandler(c *HeadlampConfig) http.Handler { //nolint:funlen
 			return
 		}
 
-		clusterURL, err := url.Parse(kContext.Cluster.Server)
+		// When the context routes traffic through an external API proxy this
+		// is the proxy URL, so Host/Scheme below address the proxy instead of
+		// the kube-apiserver. The proxy URL's path prefix (if any) is appended
+		// by the reverse-proxy Director; the user's bearer token from the
+		// cookie authenticates against the proxy.
+		clusterURL, err := kContext.UpstreamURL()
 		if err != nil {
 			c.handleError(w, ctx, span, err, "failed to parse cluster URL", http.StatusNotFound)
 			return
@@ -1980,6 +1991,7 @@ func clusterRequestHandler(c *HeadlampConfig) http.Handler { //nolint:funlen
 		// Record attributes about the proxy request
 		span.SetAttributes(
 			attribute.String("cluster.server", kContext.Cluster.Server),
+			attribute.String("cluster.upstream", clusterURL.Host),
 			attribute.String("cluster.api_path", mux.Vars(r)["api"]),
 		)
 		c.TelemetryHandler.RecordClusterProxyRequestsCount(ctx, attribute.String("cluster", contextKey),
@@ -2049,6 +2061,12 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 	handler := clusterRequestHandler(c)
 	if c.CacheEnabled {
 		handler = CacheMiddleWare(c)(handler)
+	}
+
+	// The namespace filter wraps the cache so that cached bodies are
+	// filtered per user too.
+	if c.namespaceFilter != nil {
+		handler = RequireNamespaceGetMiddleware(c)(handler)
 	}
 
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").Handler(auth.NewBackendTokenMiddleware(c.UseInCluster)(handler))
