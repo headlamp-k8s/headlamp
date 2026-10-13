@@ -19,6 +19,15 @@ import { loadSettings, saveSettings } from '../settings';
 import { expandEnvAndResolvePaths, loadMCPSettings, saveMCPSettings } from './MCPSettings';
 import * as MCP from './MCPSettings';
 
+vi.mock('electron', () => ({
+  app: {
+    getPath: vi.fn().mockReturnValue('/tmp'),
+  },
+  dialog: {
+    showMessageBox: vi.fn(),
+  },
+}));
+
 vi.mock('../settings', () => ({
   loadSettings: vi.fn(),
   saveSettings: vi.fn(),
@@ -136,12 +145,14 @@ describe('expandEnvAndResolvePaths', () => {
 
 describe('MultiServerMCPClient', () => {
   beforeEach(() => {
+    vi.stubEnv('HEADLAMP_MCP_DEBUG', undefined);
     // ensure predictable env for merging tests
     process.env.TEST_ORIG_ENV = 'orig';
     vi.resetAllMocks();
   });
 
   afterEach(() => {
+    vi.unstubAllEnvs();
     delete process.env.TEST_ORIG_ENV;
   });
 
@@ -240,6 +251,35 @@ describe('MultiServerMCPClient', () => {
     const entry = result['withCluster'] as any;
     // the expand function should have replaced the placeholder
     expect(entry.args).toEqual(['connect', 'my-current-cluster']);
+  });
+
+  it('redacts expanded args when MCP debug logging is enabled', () => {
+    process.env.HEADLAMP_MCP_DEBUG = 'true';
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    try {
+      const mcpSettings = {
+        enabled: true,
+        servers: [
+          {
+            name: 'withSecret',
+            command: 'cmd',
+            args: ['--token=secret-value', 'HEADLAMP_CURRENT_CLUSTER'],
+            enabled: true,
+          },
+        ],
+      };
+
+      (loadSettings as Mock).mockReturnValue({ mcp: mcpSettings });
+
+      MCP.makeMcpServersFromSettings('/cfg', ['prod-cluster']);
+
+      expect(logSpy).toHaveBeenCalledWith('Expanded args for MCP server:', {
+        serverName: '[REDACTED]',
+        expandedArgs: ['[REDACTED]', '[REDACTED]'],
+      });
+    } finally {
+      logSpy.mockRestore();
+    }
   });
 });
 
