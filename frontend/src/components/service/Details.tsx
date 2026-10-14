@@ -83,7 +83,8 @@ export default function ServiceDetails(props: {
           {
             name: t('External IP'),
             value: item.getExternalAddresses(),
-            hide: _.isEmpty,
+            // ExternalName services show their name in the External Name row below.
+            hide: item.spec.type === 'ExternalName' || _.isEmpty(item.getExternalAddresses()),
           },
           {
             name: t('External Name'),
