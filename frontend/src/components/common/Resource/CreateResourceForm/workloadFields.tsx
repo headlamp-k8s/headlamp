@@ -264,18 +264,23 @@ export function ContainerTextField(props: ContainerTextFieldProps) {
           rawContainer && typeof rawContainer === 'object' && !Array.isArray(rawContainer)
             ? (rawContainer as Record<string, any>)
             : {};
-        const hasPortError =
-          container.ports !== undefined &&
-          container.ports !== null &&
-          (!Array.isArray(container.ports) ||
-            !container.ports.every(
-              (p: any) =>
+        const invalidPortIndices = Array.isArray(container.ports)
+          ? container.ports
+              .map((p: any, portIndex: number) =>
                 p &&
                 typeof p === 'object' &&
                 Number.isInteger(p.containerPort) &&
                 p.containerPort >= 1 &&
                 p.containerPort <= 65535
-            ));
+                  ? -1
+                  : portIndex
+              )
+              .filter(portIndex => portIndex >= 0)
+          : [];
+        const hasPortError =
+          container.ports !== undefined &&
+          container.ports !== null &&
+          (!Array.isArray(container.ports) || invalidPortIndices.includes(0));
         return (
           <Box
             key={rowIds[index] ?? `container-fallback-${index}`}
@@ -329,6 +334,15 @@ export function ContainerTextField(props: ContainerTextFieldProps) {
                 <Icon icon="mdi:close-circle" width={24} height={24} />
               </IconButton>
             </Box>
+            {invalidPortIndices
+              .filter(portIndex => portIndex > 0)
+              .map(portIndex => (
+                <Typography key={portIndex} variant="caption" color="error" role="alert">
+                  {t('translation|Port {{ index }} is invalid. Fix it in the Editor tab.', {
+                    index: portIndex + 1,
+                  })}
+                </Typography>
+              ))}
             {showCommand && (
               <CommandInput
                 value={container.command}

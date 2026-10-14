@@ -40,9 +40,6 @@ describe('Container port validation feedback', () => {
     { name: 'numeric ports', ports: 0 },
     { name: 'boolean ports', ports: false },
     { name: 'null first port', ports: [null] },
-    { name: 'incomplete second port', ports: [{ containerPort: 80 }, { name: 'metrics' }] },
-    { name: 'null second port', ports: [{ containerPort: 80 }, null] },
-    { name: 'out-of-range second port', ports: [{ containerPort: 80 }, { containerPort: 65536 }] },
   ])('rejects $name and displays a port error', ({ ports }) => {
     const onValidChange = vi.fn();
     render(
@@ -59,6 +56,75 @@ describe('Container port validation feedback', () => {
     expect(onValidChange).toHaveBeenLastCalledWith(false);
     expect(screen.getByLabelText('Container port').getAttribute('aria-invalid')).toBe('true');
     expect(screen.getByText('Please enter a valid port number (1-65535).')).toBeDefined();
+  });
+
+  it.each([
+    { name: 'incomplete second port', ports: [{ containerPort: 80 }, { name: 'metrics' }] },
+    { name: 'null second port', ports: [{ containerPort: 80 }, null] },
+    { name: 'out-of-range second port', ports: [{ containerPort: 80 }, { containerPort: 65536 }] },
+  ])('directs users to repair $name in the Editor tab', ({ ports }) => {
+    let resource: Record<string, any> = {
+      metadata: { name: 'port-validation', namespace: 'default' },
+      spec: { containers: [{ name: 'app', image: 'nginx', ports }] },
+    };
+    const onChange = vi.fn(next => {
+      resource = next;
+    });
+    const onValidChange = vi.fn();
+    const form = () => (
+      <CreatePodForm resource={resource} onChange={onChange} onValidChange={onValidChange} />
+    );
+    const { rerender } = render(form());
+    const portInput = screen.getByLabelText('Container port') as HTMLInputElement;
+
+    expect(onValidChange).toHaveBeenLastCalledWith(false);
+    expect(portInput.value).toBe('80');
+    expect(portInput.getAttribute('aria-invalid')).toBe('false');
+    expect(screen.getByRole('alert').textContent).toBe(
+      'Port 2 is invalid. Fix it in the Editor tab.'
+    );
+    expect(screen.queryByText('Please enter a valid port number (1-65535).')).toBeNull();
+
+    // Editing the valid first port cannot repair the preserved second entry.
+    fireEvent.change(portInput, { target: { value: '8080' } });
+    rerender(form());
+    expect(portInput.getAttribute('aria-invalid')).toBe('false');
+    expect(resource.spec.containers[0].ports[1]).toEqual(ports[1]);
+    expect(onValidChange).toHaveBeenLastCalledWith(false);
+    expect(screen.getByRole('alert').textContent).toBe(
+      'Port 2 is invalid. Fix it in the Editor tab.'
+    );
+
+    // The Editor tab supplies the complete resource after repairing the second port.
+    resource = {
+      ...resource,
+      spec: {
+        ...resource.spec,
+        containers: [
+          {
+            ...resource.spec.containers[0],
+            ports: [resource.spec.containers[0].ports[0], { name: 'metrics', containerPort: 9090 }],
+          },
+        ],
+      },
+    };
+    rerender(form());
+    expect(onValidChange).toHaveBeenLastCalledWith(true);
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(portInput.value).toBe('8080');
+  });
+
+  it('identifies every invalid secondary port separately from the first-port error', () => {
+    renderContainers([
+      { name: 'app', image: 'nginx', ports: [{ name: 'http' }, null, { containerPort: 65536 }] },
+    ]);
+
+    expect(screen.getByLabelText('Container port').getAttribute('aria-invalid')).toBe('true');
+    expect(screen.getByText('Please enter a valid port number (1-65535).')).toBeDefined();
+    expect(screen.getAllByRole('alert').map(alert => alert.textContent)).toEqual([
+      'Port 2 is invalid. Fix it in the Editor tab.',
+      'Port 3 is invalid. Fix it in the Editor tab.',
+    ]);
   });
 
   it.each([
@@ -83,6 +149,7 @@ describe('Container port validation feedback', () => {
     expect(onValidChange).toHaveBeenLastCalledWith(true);
     expect(screen.getByLabelText('Container port').getAttribute('aria-invalid')).toBe('false');
     expect(screen.queryByText('Please enter a valid port number (1-65535).')).toBeNull();
+    expect(screen.queryByRole('alert')).toBeNull();
   });
 });
 
