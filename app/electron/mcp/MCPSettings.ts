@@ -50,9 +50,36 @@ interface MCPServer {
    */
   enabled: boolean;
   /**
-   * Environment variables for the MCP tool command
+   * Environment variables to explicitly pass to the MCP tool command
    */
   env?: Record<string, string>;
+}
+
+// The MCP SDK supplies its platform-specific baseline; only pass explicit string overrides.
+function sanitizeServerEnv(serverEnv: unknown): Record<string, string> | undefined {
+  if (serverEnv === undefined) {
+    return undefined;
+  }
+
+  if (serverEnv === null || typeof serverEnv !== 'object' || Array.isArray(serverEnv)) {
+    console.error('Ignoring invalid MCP server environment: expected an object.');
+    return undefined;
+  }
+
+  const entries = Object.entries(serverEnv);
+  const stringEntries = entries.filter(
+    (entry): entry is [string, string] => typeof entry[1] === 'string'
+  );
+  if (stringEntries.length !== entries.length) {
+    console.error('Ignoring non-string MCP server environment values.');
+  }
+  // Windows names are case-insensitive; avoid duplicate PATH/Path keys in the SDK merge.
+  return Object.fromEntries(
+    stringEntries.map(([key, value]) => [
+      process.platform === 'win32' ? key.toUpperCase() : key,
+      value,
+    ])
+  );
 }
 
 /**
@@ -181,13 +208,11 @@ export function makeMcpServersFromSettings(
       expandedArgs,
     });
 
-    const serverEnv = server.env ? { ...process.env, ...server.env } : process.env;
-
     mcpServers[server.name] = {
       transport: 'stdio',
       command: server.command,
       args: expandedArgs,
-      env: serverEnv as Record<string, string>,
+      env: sanitizeServerEnv(server.env),
       restart: {
         enabled: true,
         maxAttempts: 3,
