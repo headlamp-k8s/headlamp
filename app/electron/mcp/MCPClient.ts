@@ -74,7 +74,6 @@ export default class MCPClient {
   private clusters: string[] = [];
 
   private currentClusters: string[] | null = null;
-  private oldClusters: string[] | null = null;
 
   /**
    * Creates an MCP client whose server adapter remains dormant until first use.
@@ -283,6 +282,14 @@ export default class MCPClient {
     this.mainWindow = win;
   }
 
+  private normalizeClusters(clusters: string[] | null): string[] | null {
+    if (clusters === null) {
+      return null;
+    }
+
+    return [...new Set(clusters)].sort();
+  }
+
   /**
    * Handle clusters change notification.
    *
@@ -304,14 +311,20 @@ export default class MCPClient {
       throw new Error('MCPClient: not initialized');
     }
 
-    // If cluster hasn't actually changed, do nothing.
-    if (JSON.stringify(this.currentClusters) === JSON.stringify(newClusters)) {
+    const normalizedClusters = this.normalizeClusters(newClusters);
+    const oldConfiguredClusters = this.clusters;
+    this.clusters = [...(newClusters ?? [])];
+
+    // Ignore secondary order, but keep the first/current cluster significant.
+    if (
+      JSON.stringify(this.currentClusters) === JSON.stringify(normalizedClusters) &&
+      oldConfiguredClusters[0] === this.clusters[0]
+    ) {
       return;
     }
 
     const oldClusters = this.currentClusters;
-    this.currentClusters = newClusters;
-    this.clusters = newClusters || [];
+    this.currentClusters = normalizedClusters;
 
     try {
       // An initialization already captured the previous cluster context. Wait
@@ -348,7 +361,7 @@ export default class MCPClient {
       console.error('Error restarting MCP client for cluster change:', error);
       // Restore previous cluster on error
       this.currentClusters = oldClusters;
-      this.clusters = oldClusters || [];
+      this.clusters = oldConfiguredClusters;
       throw error;
     }
   }

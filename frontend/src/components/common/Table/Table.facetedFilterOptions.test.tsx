@@ -130,9 +130,11 @@ function renderStatusTable(props: Parameters<typeof statusTable>[0] = {}) {
 
 /** The options a viewer can actually pick, MRT's disabled placeholder excluded. */
 function dropdownOptions() {
-  return within(screen.getByRole('listbox'))
-    .queryAllByRole('option')
-    .map(option => option.textContent);
+  // Role queries compute visibility for every option, which is costly for 1000 items in jsdom.
+  return Array.from(
+    screen.getByRole('listbox').querySelectorAll('[role="option"]:not([aria-disabled="true"])'),
+    option => option.textContent
+  );
 }
 
 describe('Table select filter options with real MRT', () => {

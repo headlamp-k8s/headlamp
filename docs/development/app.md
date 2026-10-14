@@ -286,3 +286,8 @@ The typical development workflow for the desktop app:
   in the MCP server's `env` configuration. Values must be strings; malformed
   entries are reported and ignored. Windows variable names are normalized to
   uppercase so explicit overrides replace the SDK defaults.
+- Active cluster-dependent MCP servers restart when selected cluster membership
+  or the first/current cluster changes. Reordering only secondary selected
+  clusters does not restart them. The caller's cluster order is preserved when
+  expanding `HEADLAMP_CURRENT_CLUSTER`, and cluster updates do not start dormant
+  servers.
