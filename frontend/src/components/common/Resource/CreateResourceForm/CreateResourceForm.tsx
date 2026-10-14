@@ -157,15 +157,17 @@ function isFieldValid(field: FormField, value: any, resource: Record<string, any
             c?.image &&
             typeof c.image === 'string' &&
             c.image.trim().length > 0 &&
-            (!Array.isArray(c?.ports) ||
-              c.ports.every(
-                (p: any) =>
-                  p &&
-                  typeof p === 'object' &&
-                  Number.isInteger(p.containerPort) &&
-                  p.containerPort >= 1 &&
-                  p.containerPort <= 65535
-              ))
+            (c.ports === undefined ||
+              c.ports === null ||
+              (Array.isArray(c.ports) &&
+                c.ports.every(
+                  (p: any) =>
+                    p &&
+                    typeof p === 'object' &&
+                    Number.isInteger(p.containerPort) &&
+                    p.containerPort >= 1 &&
+                    p.containerPort <= 65535
+                )))
         )
       );
     case 'ports':

@@ -32,6 +32,60 @@ const { default: CreateResourceForm } = await import('./index');
 const { default: CreatePodForm } = await import('../../../pod/CreatePodForm');
 const { default: CreateDeploymentForm } = await import('../../../deployments/CreateDeploymentForm');
 
+describe('Container port validation feedback', () => {
+  it.each([
+    { name: 'string ports', ports: 'invalid' },
+    { name: 'empty string ports', ports: '' },
+    { name: 'object ports', ports: { containerPort: 80 } },
+    { name: 'numeric ports', ports: 0 },
+    { name: 'boolean ports', ports: false },
+    { name: 'null first port', ports: [null] },
+    { name: 'incomplete second port', ports: [{ containerPort: 80 }, { name: 'metrics' }] },
+    { name: 'null second port', ports: [{ containerPort: 80 }, null] },
+    { name: 'out-of-range second port', ports: [{ containerPort: 80 }, { containerPort: 65536 }] },
+  ])('rejects $name and displays a port error', ({ ports }) => {
+    const onValidChange = vi.fn();
+    render(
+      <CreatePodForm
+        resource={{
+          metadata: { name: 'port-validation', namespace: 'default' },
+          spec: { containers: [{ name: 'app', image: 'nginx', ports }] },
+        }}
+        onChange={() => {}}
+        onValidChange={onValidChange}
+      />
+    );
+
+    expect(onValidChange).toHaveBeenLastCalledWith(false);
+    expect(screen.getByLabelText('Container port').getAttribute('aria-invalid')).toBe('true');
+    expect(screen.getByText('Please enter a valid port number (1-65535).')).toBeDefined();
+  });
+
+  it.each([
+    { name: 'absent ports', ports: undefined },
+    { name: 'null ports', ports: null },
+    { name: 'empty ports', ports: [] },
+    { name: 'valid first port', ports: [{ containerPort: 1 }] },
+    { name: 'valid multiple ports', ports: [{ containerPort: 80 }, { containerPort: 65535 }] },
+  ])('accepts $name without a port error', ({ ports }) => {
+    const onValidChange = vi.fn();
+    render(
+      <CreatePodForm
+        resource={{
+          metadata: { name: 'port-validation', namespace: 'default' },
+          spec: { containers: [{ name: 'app', image: 'nginx', ports }] },
+        }}
+        onChange={() => {}}
+        onValidChange={onValidChange}
+      />
+    );
+
+    expect(onValidChange).toHaveBeenLastCalledWith(true);
+    expect(screen.getByLabelText('Container port').getAttribute('aria-invalid')).toBe('false');
+    expect(screen.queryByText('Please enter a valid port number (1-65535).')).toBeNull();
+  });
+});
+
 function renderContainers(value: unknown) {
   return render(<ContainerTextField value={value as any} onChange={() => {}} />);
 }

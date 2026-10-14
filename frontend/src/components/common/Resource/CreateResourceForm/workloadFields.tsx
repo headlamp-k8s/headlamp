@@ -264,15 +264,18 @@ export function ContainerTextField(props: ContainerTextFieldProps) {
           rawContainer && typeof rawContainer === 'object' && !Array.isArray(rawContainer)
             ? (rawContainer as Record<string, any>)
             : {};
-        const firstPort =
-          Array.isArray(container.ports) && container.ports.length > 0 ? container.ports[0] : null;
-        const hasPortNumber =
-          firstPort &&
-          typeof firstPort === 'object' &&
-          Number.isInteger(firstPort.containerPort) &&
-          firstPort.containerPort >= 1 &&
-          firstPort.containerPort <= 65535;
-        const hasPortError = Boolean(firstPort && !hasPortNumber);
+        const hasPortError =
+          container.ports !== undefined &&
+          container.ports !== null &&
+          (!Array.isArray(container.ports) ||
+            !container.ports.every(
+              (p: any) =>
+                p &&
+                typeof p === 'object' &&
+                Number.isInteger(p.containerPort) &&
+                p.containerPort >= 1 &&
+                p.containerPort <= 65535
+            ));
         return (
           <Box
             key={rowIds[index] ?? `container-fallback-${index}`}
