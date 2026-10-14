@@ -17,6 +17,7 @@ limitations under the License.
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
@@ -138,6 +139,9 @@ type Multiplexer struct {
 	saTokenCache map[string]saTokenCacheEntry
 	// saTokenMu guards saTokenCache.
 	saTokenMu sync.RWMutex
+	// exchangeToken, when set, exchanges the request token for a cluster-scoped
+	// STS token before connecting to the cluster.
+	exchangeToken func(ctx context.Context, clusterName, token string) (string, error)
 }
 
 // saTokenCacheEntry caches a service account token alongside the source file's mtime.
@@ -395,7 +399,7 @@ func (m *Multiplexer) establishClusterConnection(
 		return nil, fmt.Errorf("getting REST config: %w", err)
 	}
 
-	authToken, err := m.clusterConnectionToken(clusterContext, token)
+	authToken, err := m.clusterConnectionToken(clusterID, clusterContext, token)
 	if err != nil {
 		return nil, err
 	}
@@ -467,11 +471,21 @@ func (m *Multiplexer) getClusterContextWithFallback(clusterID, userID string) (*
 }
 
 func (m *Multiplexer) clusterConnectionToken(
+	clusterID string,
 	clusterContext *kubeconfig.Context,
 	requestToken *string,
 ) (*string, error) {
 	if !m.unsafeUseServiceAccountToken || !clusterContext.UsesInClusterServiceAccountToken() {
-		return requestToken, nil
+		if requestToken == nil || m.exchangeToken == nil {
+			return requestToken, nil
+		}
+
+		token, err := m.exchangeToken(context.Background(), clusterID, *requestToken)
+		if err != nil {
+			return nil, err
+		}
+
+		return &token, nil
 	}
 
 	token, err := m.readServiceAccountToken(clusterContext.AuthInfo.TokenFile)

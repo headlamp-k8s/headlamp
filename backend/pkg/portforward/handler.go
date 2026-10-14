@@ -214,6 +214,9 @@ func StartPortForward(kubeConfigStore kubeconfig.ContextStore, cache cache.Cache
 	token := ""
 	if !unsafeUseServiceAccountToken || !kContext.UsesInClusterServiceAccountToken() {
 		token, _ = auth.GetTokenFromCookie(r, requestClusterName)
+		if token == "" {
+			token = auth.BearerTokenValue(r.Header.Get("Authorization"))
+		}
 	}
 
 	err = startPortForward(kContext, cache, p, token, contextKey, requestClusterName)

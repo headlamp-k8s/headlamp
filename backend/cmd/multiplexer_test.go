@@ -17,6 +17,7 @@ limitations under the License.
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
@@ -1934,4 +1935,17 @@ func BenchmarkCreateConnectionKey(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		benchConnectionKeySink = m.createConnectionKey(clusterID, path, userID)
 	}
+}
+
+func TestClusterConnectionTokenUsesSTSExchange(t *testing.T) {
+	m := NewMultiplexer(kubeconfig.NewContextStore(), false)
+	m.exchangeToken = func(_ context.Context, clusterName, token string) (string, error) {
+		return clusterName + ":" + token, nil
+	}
+
+	subject := "subject-token"
+
+	token, err := m.clusterConnectionToken("cluster-a", &kubeconfig.Context{}, &subject)
+	require.NoError(t, err)
+	assert.Equal(t, "cluster-a:subject-token", *token)
 }
