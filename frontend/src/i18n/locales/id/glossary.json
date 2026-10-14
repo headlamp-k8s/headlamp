@@ -73,6 +73,7 @@
   "Driver": "",
   "Device Classes": "",
   "Drivers": "",
+  "Resource Claims": "",
   "Subsets": "Subset",
   "Endpoint: {{ name }}": "Titik akhir: {{ name }}",
   "IP": "IP",
