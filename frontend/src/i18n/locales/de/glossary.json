@@ -235,6 +235,7 @@
   "API Groups": "API-Gruppen",
   "Resources": "Ressourcen",
   "Non Resources": "Nicht-Ressourcen",
+  "Resource Names": "",
   "Verbs": "Verben",
   "RuntimeClass": "Laufzeit-Klasse",
   "Workloads (scheduling)": "Workloads (Scheduling)",

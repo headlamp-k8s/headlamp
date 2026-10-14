@@ -235,6 +235,7 @@
   "API Groups": "API-csoportok",
   "Resources": "Erőforrások",
   "Non Resources": "Nem erőforrások",
+  "Resource Names": "",
   "Verbs": "Műveletek",
   "RuntimeClass": "RuntimeClass",
   "Workloads (scheduling)": "",
