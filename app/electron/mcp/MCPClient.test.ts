@@ -608,7 +608,7 @@ describe('MCPClient', () => {
     expect(client.clientTools).toEqual([{ name: 'new' }]);
   });
 
-  it.each([null, ['old-cluster']])(
+  it.each([null, ['old-cluster'], ['z-current', 'a-selected']])(
     'restores cluster context when an MCP restart fails from %j',
     async oldClusters => {
       vi.resetModules();
@@ -620,14 +620,14 @@ describe('MCPClient', () => {
       const { default: MCPClient } = await import('./MCPClient');
       const client = new MCPClient(cfgPath, settingsPath) as any;
       await client.initialize();
+      await client.handleClustersChange(oldClusters);
+      const oldMembership = client.currentClusters;
       client.client = { close: vi.fn().mockResolvedValue(undefined) };
-      client.currentClusters = oldClusters;
-      client.clusters = oldClusters || [];
       vi.spyOn(client, 'initializeClient').mockRejectedValue(new Error('restart failed'));
       vi.spyOn(console, 'error').mockImplementation(() => {});
 
       await expect(client.handleClustersChange(['new-cluster'])).rejects.toThrow('restart failed');
-      expect(client.currentClusters).toEqual(oldClusters);
+      expect(client.currentClusters).toEqual(oldMembership);
       expect(client.clusters).toEqual(oldClusters || []);
     }
   );
@@ -740,10 +740,8 @@ describe('MCPClient', () => {
     const client = new MCPClient(cfgPath, settingsPath);
 
     await client.initialize();
-    await (client as any).initializeClient();
-
-    // set currentClusters to a value and call with the same value
-    (client as any).currentClusters = ['same-cluster'];
+    await client.handleClustersChange(['same-cluster']);
+    await client['initializeClient']();
 
     vi.spyOn(console, 'info').mockImplementation(() => {});
     const closeSpy = vi.spyOn((client as any).client, 'close').mockImplementation(async () => {});
@@ -752,6 +750,124 @@ describe('MCPClient', () => {
 
     // close should not have been called because clusters didn't change
     expect(closeSpy).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    [['z-current', 'a-selected']],
+    [
+      ['z-current', 'a-selected', 'b-selected'],
+      ['z-current', 'b-selected', 'a-selected'],
+    ],
+  ])('preserves caller order for lazy MCP configuration after %j', async (...updates) => {
+    const MultiServerMCPClientMock = vi.fn().mockImplementation(function () {
+      return {
+        getTools: vi.fn().mockResolvedValue([]),
+        close: vi.fn().mockResolvedValue(undefined),
+      };
+    });
+
+    vi.resetModules();
+    vi.doUnmock('./MCPSettings');
+    vi.doMock('@langchain/mcp-adapters', () => ({
+      MultiServerMCPClient: MultiServerMCPClientMock,
+    }));
+    fs.writeFileSync(
+      settingsPath,
+      JSON.stringify({
+        mcp: {
+          enabled: true,
+          servers: [
+            {
+              name: 'context',
+              command: 'echo',
+              args: ['HEADLAMP_CURRENT_CLUSTER'],
+              enabled: true,
+            },
+          ],
+        },
+      })
+    );
+
+    const { default: MCPClient } = await import('./MCPClient');
+    const client = new MCPClient(cfgPath, settingsPath);
+    await client.initialize();
+    for (const clusters of updates) {
+      await client.handleClustersChange(clusters);
+    }
+    expect(MultiServerMCPClientMock).not.toHaveBeenCalled();
+    await client['initializeClient']();
+
+    expect(MultiServerMCPClientMock).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({
+        mcpServers: {
+          context: expect.objectContaining({ args: ['z-current'] }),
+        },
+      })
+    );
+    expect(client['clusters']).toEqual(updates.at(-1));
+  });
+
+  it('does not restart MCP for secondary-cluster reordering', async () => {
+    const getTools = vi.fn().mockResolvedValue([]);
+    const close = vi.fn().mockResolvedValue(undefined);
+    const MultiServerMCPClientMock = vi.fn().mockImplementation(function () {
+      return { getTools, close };
+    });
+
+    vi.resetModules();
+    vi.doMock('@langchain/mcp-adapters', () => ({
+      MultiServerMCPClient: MultiServerMCPClientMock,
+    }));
+    vi.doMock('./MCPSettings', () => ({
+      makeMcpServersFromSettings: vi.fn().mockReturnValue({ serverA: {} }),
+      hasClusterDependentServers: vi.fn().mockReturnValue(true),
+    }));
+
+    const { default: MCPClient } = await import('./MCPClient');
+    const client = new MCPClient(cfgPath, settingsPath);
+
+    await client.initialize();
+    await client.handleClustersChange(['cluster-a', 'cluster-b', 'cluster-c']);
+    await client['initializeClient']();
+
+    await client.handleClustersChange(['cluster-a', 'cluster-c', 'cluster-b']);
+
+    expect(close).not.toHaveBeenCalled();
+    expect(MultiServerMCPClientMock).toHaveBeenCalledTimes(1);
+    expect(client['currentClusters']).toEqual(['cluster-a', 'cluster-b', 'cluster-c']);
+    expect(client['clusters']).toEqual(['cluster-a', 'cluster-c', 'cluster-b']);
+  });
+
+  it('restarts MCP when the current cluster changes within the same membership', async () => {
+    const close = vi.fn().mockResolvedValue(undefined);
+    const MultiServerMCPClientMock = vi.fn().mockImplementation(function () {
+      return { getTools: vi.fn().mockResolvedValue([]), close };
+    });
+
+    vi.resetModules();
+    vi.doMock('@langchain/mcp-adapters', () => ({
+      MultiServerMCPClient: MultiServerMCPClientMock,
+    }));
+    const makeMcpServersFromSettings = vi.fn().mockReturnValue({ serverA: {} });
+    vi.doMock('./MCPSettings', () => ({
+      makeMcpServersFromSettings,
+      hasClusterDependentServers: vi.fn().mockReturnValue(true),
+    }));
+
+    const { default: MCPClient } = await import('./MCPClient');
+    const client = new MCPClient(cfgPath, settingsPath);
+    await client.initialize();
+    await client.handleClustersChange(['cluster-a', 'cluster-b']);
+    await client['initializeClient']();
+
+    await client.handleClustersChange(['cluster-b', 'cluster-a']);
+
+    expect(close).toHaveBeenCalledTimes(1);
+    expect(MultiServerMCPClientMock).toHaveBeenCalledTimes(2);
+    expect(makeMcpServersFromSettings).toHaveBeenLastCalledWith(settingsPath, [
+      'cluster-b',
+      'cluster-a',
+    ]);
   });
 
   it('handleClustersChange restarts client when cluster-dependent servers exist', async () => {
@@ -797,12 +913,15 @@ describe('MCPClient', () => {
 
     // The MCP client constructor should have been called for initial setup and again for restart
     expect(MultiServerMCPClientMock).toHaveBeenCalledTimes(2);
+    expect(makeMcpServersFromSettings).toHaveBeenNthCalledWith(1, settingsPath, []);
+    expect(makeMcpServersFromSettings).toHaveBeenNthCalledWith(2, settingsPath, ['new-cluster']);
 
     // After restart, client should have been replaced
     const afterClientRef = (client as any).client;
     expect(afterClientRef).not.toBeNull();
     // And tools should reflect second initialization
     expect((client as any).clientTools).toEqual([{ name: 'b' }]);
+    expect((client as any).clusters).toEqual(['new-cluster']);
   });
 });
 

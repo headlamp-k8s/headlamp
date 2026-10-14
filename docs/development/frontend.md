@@ -76,6 +76,18 @@ cd frontend && npm run ci-lint
 
 You can run `ci-lint` locally before pushing to catch any react-hooks violations that CI would flag.
 
+## Unit test reliability
+
+Sidebar hook tests mock CRD listing and resource availability rather than
+contacting a backend. They assert that no fetch requests escape, unmount hook
+consumers, and cancel and clear React Query work before restoring mocks. Keep
+these boundaries when adding sidebar cases so pending requests cannot log after
+the Vitest worker starts shutting down.
+
+For large dropdowns, scope option assertions to the listbox and inspect its
+option nodes directly. Role queries compute visibility for every option, which
+can exceed the test timeout for thousand-item menus in jsdom under CI load.
+
 ## API documentation
 
 API documentation for TypeScript is done with [typedoc](https://typedoc.org/) and [typedoc-plugin-markdown](https://github.com/tgreyuk/typedoc-plugin-markdown), and is configured in tsconfig.json.
