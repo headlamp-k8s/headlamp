@@ -51,6 +51,8 @@ import { uiSlice } from '../../redux/uiSlice';
 import { navigateToClusterSettings, SettingsButton } from '../App/Settings';
 import { ClusterTitle, useClusterTitleVisible } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
+// TEST-ONLY: welcome dialog toggle button. Remove this import during cleanup.
+import WelcomeToggleTestButton from '../common/Welcome/WelcomeToggleTestButton';
 import { GlobalSearch } from '../globalSearch/GlobalSearch';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import { setWhetherSidebarOpen } from '../Sidebar/sidebarSlice';
@@ -606,6 +608,8 @@ export const PureTopBar = memo(
             ) : (
               <>
                 <AppLogo />
+                {/* TEST-ONLY: welcome dialog toggle. Remove during cleanup. */}
+                <WelcomeToggleTestButton />
                 <AppBarActions
                   appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
                 />
