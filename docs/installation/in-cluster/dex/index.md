@@ -48,6 +48,9 @@ Both paths use the same Dex client ID, OAuth2-Proxy callback path, Headlamp
 upstream, and pinned chart versions. Their transport and Kubernetes identity
 intentionally differ.
 
+To use Dex as Headlamp's own OIDC provider without OAuth2-Proxy, see
+[Connect Headlamp directly to Dex](#connect-headlamp-directly-to-dex).
+
 ## Prerequisites
 
 - [Minikube](https://minikube.sigs.k8s.io/) 1.31 or newer
@@ -372,3 +375,25 @@ audit or authorization.
   server trusts the same issuer and client ID, and can validate Dex's TLS chain.
 - **Login succeeds but resources are forbidden:** Check the token's email and
   group claims, then compare them with the relevant RBAC subjects.
+
+## Connect Headlamp directly to Dex
+
+Instead of placing OAuth2-Proxy in front of Headlamp, you can configure
+Headlamp's built-in OIDC "Sign in" flow to use Dex as its provider. To do so:
+
+- Add Headlamp's callback URL (e.g. `https://YOUR_URL/oidc-callback`) to the
+  Dex static client's `redirectURIs`
+- Set `-oidc-client-id` to the Dex static client's `id`
+- Set `-oidc-client-secret` to the Dex static client's `secret`
+- Set `-oidc-idp-issuer-url` to Dex's issuer URL (the same value as the
+  Kubernetes API server's `--oidc-issuer-url`)
+- Set `-oidc-scopes` if needed, e.g. `-oidc-scopes=profile,email,groups`
+
+If the Kubernetes API server already uses a Dex static client for its
+[OIDC configuration](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#configuring-the-api-server),
+use that **same client ID** for Headlamp's `-oidc-client-id`, and add
+Headlamp's callback URL to that client's `redirectURIs` alongside any existing
+entries.
+
+For the equivalent environment variables and all other options, see
+[Accessing using OpenID Connect](../oidc.md).
