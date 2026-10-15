@@ -929,6 +929,7 @@
   "Local Port": "Místní port",
   "Error starting port forward": "",
   "Please enter a valid port number (1-65535).": "Zadejte prosím platné číslo portu (1–65535).",
+  "Port {{ index }} is invalid. Fix it in the Editor tab.": "",
   "Docker Desktop requires ports in range 30000-32000.": "Docker Desktop vyžaduje porty v rozsahu 30000–32000.",
   "Leave empty to auto-assign from range 30000-32000.": "Pokud chcete automatické přiřazení v rozsahu 30000–32000, ponechte prázdné.",
   "Leave empty to auto-assign an available port.": "Pokud chcete automaticky přiřadit dostupný port, ponechte prázdné.",

@@ -922,6 +922,7 @@
   "Local Port": "Port local",
   "Error starting port forward": "",
   "Please enter a valid port number (1-65535).": "Veuillez entrer un numéro de port valide (1-65535).",
+  "Port {{ index }} is invalid. Fix it in the Editor tab.": "",
   "Docker Desktop requires ports in range 30000-32000.": "Docker Desktop nécessite des ports dans la plage 30000-32000.",
   "Leave empty to auto-assign from range 30000-32000.": "Laisser vide pour assigner automatiquement depuis la plage 30000-32000.",
   "Leave empty to auto-assign an available port.": "Laisser vide pour assigner automatiquement un port disponible.",
