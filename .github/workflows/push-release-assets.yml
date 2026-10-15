@@ -14,6 +14,11 @@ on:
         type: boolean
         required: false
         default: false
+      allow_non_main:
+        description: 'Allow a test upload from this branch (draft releases only)'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -29,10 +34,20 @@ jobs:
       # Users verify the checksums signature against this workflow on main, so
       # a signature made from any other branch would fail verification.
       - name: Check that the workflow runs from main
-        if: github.ref != 'refs/heads/main'
+        if: github.ref != 'refs/heads/main' && (!inputs.allow_non_main || inputs.force)
         run: |
-          echo "::error::Run this workflow from the main branch, not ${GITHUB_REF}."
+          if [ "${{ inputs.force }}" == "true" ]; then
+            echo "::error::Force upload is not allowed from ${GITHUB_REF}."
+          else
+            echo "::error::Enable 'Allow non-main' to test a draft release upload from ${GITHUB_REF}."
+          fi
           exit 1
+
+      - name: Warn about non-main test upload
+        if: github.ref != 'refs/heads/main' && inputs.allow_non_main
+        run: |
+          echo "::warning::This test run uploads to the requested draft release from ${GITHUB_REF}."
+          echo "::warning::Rerun from main before publishing so the Sigstore identity is trusted."
 
       - name: Checkout code
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -98,7 +113,7 @@ jobs:
 
       - name: Upload assets to release
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           FORCE_FLAG=""
           if [ "${{ github.event.inputs.force }}" == "true" ]; then
@@ -124,7 +139,7 @@ jobs:
       # Look it up by name instead, like push-release-assets.js does.
       - name: Download checksums.txt
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           RELEASE_NAME: ${{ inputs.release_name }}
         run: |
           # Wait a moment for the checksums.txt to be available
@@ -164,7 +179,7 @@ jobs:
       - name: Upload signature to release
         working-directory: ./app/scripts/push-release-assets
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           RELEASE_NAME: ${{ inputs.release_name }}
           FORCE: ${{ inputs.force }}
         run: |
@@ -186,7 +201,7 @@ jobs:
       # so check that the signature was actually attached.
       - name: Verify signature was attached
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           RELEASE_NAME: ${{ inputs.release_name }}
         run: |
           node ./tools/releaser/dist/index.js ci verify-assets "$RELEASE_NAME" \
