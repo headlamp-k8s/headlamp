@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
+import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import ResourceListView from './ResourceListView';
 
-const { createButtonProps } = vi.hoisted(() => ({ createButtonProps: vi.fn() }));
+const { createButtonProps, mockHeader, mockTable } = vi.hoisted(() => ({
+  createButtonProps: vi.fn(),
+  mockHeader: vi.fn(),
+  mockTable: vi.fn(),
+}));
 
 vi.mock('../CreateResourceButton', () => ({
   CreateResourceButton: (props: any) => {
@@ -37,10 +42,18 @@ vi.mock('../SectionBox', () => ({
 }));
 
 vi.mock('../SectionFilterHeader', () => ({
-  default: (props: any) => <>{props.titleSideActions}</>,
+  default: (props: any) => {
+    mockHeader(props);
+    return <>{props.titleSideActions}</>;
+  },
 }));
 
-vi.mock('./ResourceTable', () => ({ default: () => null }));
+vi.mock('./ResourceTable', () => ({
+  default: (props: any) => {
+    mockTable(props);
+    return null;
+  },
+}));
 
 const resourceClass = { kind: 'DeviceClass', isNamespaced: false } as any;
 
@@ -56,7 +69,11 @@ function renderList(clusters?: string[]) {
 }
 
 describe('ResourceListView', () => {
-  beforeEach(() => createButtonProps.mockReset());
+  beforeEach(() => {
+    createButtonProps.mockReset();
+    mockHeader.mockReset();
+    mockTable.mockReset();
+  });
 
   it('leaves the create action on its default cluster when the list is not limited', () => {
     renderList();
@@ -75,5 +92,60 @@ describe('ResourceListView', () => {
     renderList([]);
 
     expect(createButtonProps).not.toHaveBeenCalled();
+  });
+
+  it('hides label filtering when data is supplied without a resource class', () => {
+    render(React.createElement(ResourceListView as any, { title: 'Roles', columns: [], data: [] }));
+
+    expect(mockHeader).toHaveBeenCalledWith(expect.objectContaining({ noLabelFilter: true }));
+  });
+
+  it('supports an explicitly enabled data-driven list and derives its label keys', () => {
+    render(
+      React.createElement(ResourceListView as any, {
+        title: 'Pods',
+        columns: [],
+        data: [
+          { metadata: { labels: { tier: 'frontend', app: 'checkout' } } },
+          { metadata: { labels: { app: 'payments', environment: 'production' } } },
+        ],
+        headerProps: { noLabelFilter: false },
+      })
+    );
+
+    expect(mockHeader).toHaveBeenCalledWith(
+      expect.objectContaining({
+        labelKeys: ['app', 'environment', 'tier'],
+        noLabelFilter: false,
+      })
+    );
+  });
+
+  it('shows label filtering when a resource class supplies server-side listing', () => {
+    render(
+      React.createElement(ResourceListView as any, {
+        title: 'Pods',
+        columns: [],
+        resourceClass: { isNamespaced: true },
+      })
+    );
+
+    expect(mockHeader).toHaveBeenCalledWith(expect.objectContaining({ noLabelFilter: false }));
+  });
+
+  it('passes label keys reported by the resource table to the filter header', () => {
+    render(
+      React.createElement(ResourceListView as any, {
+        title: 'Pods',
+        columns: [],
+        resourceClass: { isNamespaced: true },
+      })
+    );
+
+    act(() => mockTable.mock.calls.at(-1)![0].onLabelKeysChange(['app', 'tier']));
+
+    expect(mockHeader).toHaveBeenLastCalledWith(
+      expect.objectContaining({ labelKeys: ['app', 'tier'] })
+    );
   });
 });

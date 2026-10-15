@@ -193,6 +193,12 @@ export interface ResourceTableFromResourceClassProps<KubeClass extends KubeObjec
    * are not queried. An empty list queries no cluster and shows an empty table.
    */
   clusters?: string[];
+  /** Reports label keys found in resources loaded by this table. */
+  onLabelKeysChange?: (labelKeys: string[]) => void;
+}
+
+function getLabelKeysFromResources(items: KubeObject[] | null): string[] {
+  return [...new Set(items?.flatMap(item => Object.keys(item.metadata.labels ?? {})) ?? [])].sort();
 }
 
 export default function ResourceTable<KubeClass extends KubeObjectClass>(
@@ -212,16 +218,19 @@ export default function ResourceTable<KubeClass extends KubeObjectClass>(
 function TableFromResourceClass<KubeClass extends KubeObjectClass>(
   props: ResourceTableFromResourceClassProps<KubeClass>
 ) {
-  const { resourceClass, id, clusters, ...otherProps } = props;
+  const { resourceClass, id, clusters, onLabelKeysChange, ...otherProps } = props;
   const selectedNamespaces = useNamespaces();
+  const labelSelector = useTypedSelector(state => state.filter.labelSelector);
   const listed = resourceClass.useList({
     namespace: props.namespaces ?? selectedNamespaces,
     clusters,
+    labelSelector: labelSelector || undefined,
   });
   const { items, errors } = clusters?.length === 0 ? NOTHING_LISTED : listed;
 
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);
+  const labelKeys = useMemo(() => getLabelKeysFromResources(items), [items]);
   const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
   const dispatchHeadlampEventRef = useRef(dispatchHeadlampEvent);
 
@@ -236,6 +245,10 @@ function TableFromResourceClass<KubeClass extends KubeObjectClass>(
       error: errors?.[0] || undefined,
     });
   }, [errors, items, resourceClass.className]);
+
+  useEffect(() => {
+    onLabelKeysChange?.(labelKeys);
+  }, [labelKeys, onLabelKeysChange]);
 
   return (
     <ResourceTableContent
