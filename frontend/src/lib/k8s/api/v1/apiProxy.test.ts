@@ -25,6 +25,7 @@ import WS from 'vitest-websocket-mock';
 import { getAppUrl } from '../../../../helpers/getAppUrl';
 import { setBackendToken } from '../../../../helpers/getHeadlampAPIHeaders';
 import * as cluster from '../../../cluster';
+import { encodeClusterPath } from '../../../oidcLogout';
 import * as apiProxy from '../../apiProxy';
 
 const baseApiUrl = getAppUrl();
@@ -186,11 +187,14 @@ describe('apiProxy', () => {
 
     it('auto-logs out after a 401 with a Headers authorization value', async () => {
       const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-      nock(baseApiUrl).get(testPath).reply(401, errorResponse401);
-      const logoutRequest = nock(baseApiUrl).post('/clusters/set-token').reply(200);
+      nock(baseApiUrl).get(`/clusters/${clusterName}${testPath}`).reply(401, errorResponse401);
+      const logoutRequest = nock(baseApiUrl)
+        .post(`/encoded-clusters/${encodeClusterPath(clusterName)}/clear-token`)
+        .reply(200);
 
       await expect(
         apiProxy.clusterRequest(testPath, {
+          cluster: clusterName,
           headers: new Headers({ Authorization: '******' }),
         })
       ).rejects.toThrow(errorResponse401.error);
@@ -200,6 +204,22 @@ describe('apiProxy', () => {
         expect.objectContaining({ status: 401, path: testPath })
       );
       await vi.waitFor(() => expect(logoutRequest.isDone()).toBe(true));
+    });
+
+    it('does not auto-log out after a clusterless 401', async () => {
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      nock(baseApiUrl).get(testPath).reply(401, errorResponse401);
+      const logoutRequest = nock(baseApiUrl)
+        .post(/\/encoded-clusters\/.*\/clear-token/)
+        .reply(200);
+
+      await expect(
+        apiProxy.clusterRequest(testPath, {
+          headers: new Headers({ Authorization: '******' }),
+        })
+      ).rejects.toThrow(errorResponse401.error);
+
+      expect(logoutRequest.isDone()).toBe(false);
     });
   });
 

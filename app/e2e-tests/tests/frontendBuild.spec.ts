@@ -50,6 +50,7 @@ test('loads the default frontend production build in Electron', async () => {
 
   try {
     const page = await electronApp.firstWindow();
+    await page.evaluate(() => localStorage.setItem('disable_update_check', 'true'));
     const rendererErrors: string[] = [];
     const loadedScripts: string[] = [];
     page.on('pageerror', error => rendererErrors.push(error.message));

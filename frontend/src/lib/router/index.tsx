@@ -980,6 +980,19 @@ const defaultRoutes: { [routeName: string]: Route } = {
       </AuthChooser>
     ),
   },
+  encodedClusterLogin: {
+    path: '/encoded-clusters/:encodedCluster/login',
+    exact: true,
+    name: 'Login',
+    sidebar: null,
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => (
+      <AuthChooser>
+        <LocaleSelect />
+      </AuthChooser>
+    ),
+  },
   crds: {
     path: '/crds',
     exact: true,
