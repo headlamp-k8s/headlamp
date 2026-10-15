@@ -103,9 +103,9 @@ because that skips signing. If you need to add or replace an asset, re-run the
 workflow with the run ID of the build that produced it (set `force` if the
 release is no longer a draft), so that `checksums.txt` is signed again.
 
-Note: The workflow uses the `RELEASE_UPDATE_TOKEN` secret configured in the
-repository. If it fails because the token has expired, ask a maintainer with
-admin access to the repository to rotate it.
+The workflow uses GitHub's short-lived automatic token with `contents: write`
+permission to update the release. It does not require a long-lived personal
+access token or repository secret.
 
 
 ### 9. Push the new tag

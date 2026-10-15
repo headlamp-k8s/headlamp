@@ -98,7 +98,7 @@ jobs:
 
       - name: Upload assets to release
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           FORCE_FLAG=""
           if [ "${{ github.event.inputs.force }}" == "true" ]; then
@@ -124,7 +124,7 @@ jobs:
       # Look it up by name instead, like push-release-assets.js does.
       - name: Download checksums.txt
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           RELEASE_NAME: ${{ inputs.release_name }}
         run: |
           # Wait a moment for the checksums.txt to be available
@@ -164,7 +164,7 @@ jobs:
       - name: Upload signature to release
         working-directory: ./app/scripts/push-release-assets
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           RELEASE_NAME: ${{ inputs.release_name }}
           FORCE: ${{ inputs.force }}
         run: |
@@ -186,7 +186,7 @@ jobs:
       # so check that the signature was actually attached.
       - name: Verify signature was attached
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_UPDATE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           RELEASE_NAME: ${{ inputs.release_name }}
         run: |
           node ./tools/releaser/dist/index.js ci verify-assets "$RELEASE_NAME" \
