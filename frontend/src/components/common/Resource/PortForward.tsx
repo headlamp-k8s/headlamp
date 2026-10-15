@@ -174,6 +174,7 @@ function PortForwardContent(props: PortForwardProps) {
   const [pods, podsFetchError] = Pod.useList({
     namespace,
     labelSelector: getPodsSelectorFilter(service),
+    cluster: resource?.cluster,
   });
 
   const cluster = React.useMemo(() => {
