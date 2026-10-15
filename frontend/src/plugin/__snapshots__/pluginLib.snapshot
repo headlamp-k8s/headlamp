@@ -521,6 +521,7 @@
       "PriorityClass": [Function],
       "ReplicaSet": [Function],
       "ResourceClaim": [Function],
+      "ResourceClaimTemplate": [Function],
       "ResourceQuota": [Function],
       "Role": [Function],
       "RoleBinding": [Function],
@@ -658,6 +659,9 @@
       "getAllocatedDeviceId": [Function],
       "getRequestedDeviceClasses": [Function],
       "getResourceClaimState": [Function],
+    },
+    "resourceClaimTemplate": {
+      "default": [Function],
     },
     "role": {
       "default": [Function],

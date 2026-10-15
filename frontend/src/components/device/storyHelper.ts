@@ -16,6 +16,7 @@
 
 import type { KubeDeviceClass } from '../../lib/k8s/deviceClass';
 import type { KubeResourceClaim } from '../../lib/k8s/resourceClaim';
+import type { KubeResourceClaimTemplate } from '../../lib/k8s/resourceClaimTemplate';
 
 const creationTimestamp = new Date('2022-01-01').toISOString();
 
@@ -247,3 +248,94 @@ export const RESOURCE_CLAIM_DUMMY_DATA: KubeResourceClaim[] = [
     },
   },
 ];
+
+/** Templates as the example driver's demo workloads write them. */
+export const RESOURCE_CLAIM_TEMPLATE_DUMMY_DATA: KubeResourceClaimTemplate[] = [
+  {
+    apiVersion: 'resource.k8s.io/v1',
+    kind: 'ResourceClaimTemplate',
+    metadata: {
+      name: 'single-gpu',
+      namespace: 'default',
+      creationTimestamp,
+      uid: 'resource-claim-template-uid-1',
+    },
+    spec: {
+      metadata: { labels: { app: 'trainer' } },
+      spec: {
+        devices: {
+          requests: [
+            {
+              name: 'gpu',
+              exactly: {
+                deviceClassName: 'gpu.example.com',
+                allocationMode: 'ExactCount',
+                count: 1,
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+  {
+    apiVersion: 'resource.k8s.io/v1',
+    kind: 'ResourceClaimTemplate',
+    metadata: {
+      name: 'multiple-gpus',
+      namespace: 'default',
+      creationTimestamp,
+      uid: 'resource-claim-template-uid-2',
+    },
+    spec: {
+      spec: {
+        devices: {
+          requests: [
+            {
+              name: 'gpu-1',
+              exactly: {
+                deviceClassName: 'gpu.example.com',
+                allocationMode: 'ExactCount',
+                count: 1,
+              },
+            },
+            {
+              name: 'gpu-2',
+              exactly: {
+                deviceClassName: 'a100.example.com',
+                allocationMode: 'All',
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+];
+
+/** A template whose request is a prioritized list of alternatives, each with its own amount. */
+export const PRIORITIZED_RESOURCE_CLAIM_TEMPLATE: KubeResourceClaimTemplate = {
+  apiVersion: 'resource.k8s.io/v1',
+  kind: 'ResourceClaimTemplate',
+  metadata: {
+    name: 'prioritized-gpu',
+    namespace: 'default',
+    creationTimestamp,
+    uid: 'resource-claim-template-uid-3',
+  },
+  spec: {
+    spec: {
+      devices: {
+        requests: [
+          {
+            name: 'gpu',
+            firstAvailable: [
+              { name: 'big', deviceClassName: 'a100.example.com', count: 1 },
+              { name: 'small', deviceClassName: 'gpu.example.com', allocationMode: 'All' },
+            ],
+          },
+        ],
+      },
+    },
+  },
+};
