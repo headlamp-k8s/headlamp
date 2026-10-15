@@ -54,6 +54,7 @@
     "CreateButton": [Function],
     "CreateDaemonSetForm": [Function],
     "CreateDeploymentForm": [Function],
+    "CreateEndpointsForm": [Function],
     "CreateJobForm": [Function],
     "CreatePodForm": [Function],
     "CreateReplicaSetForm": [Function],
@@ -112,6 +113,7 @@
     "OwnedPodsSection": [Function],
     "OwnedStatefulSetsSection": [Function],
     "PORT_FORWARDS_STORAGE_KEY": "portforwards",
+    "PORT_FORWARD_RECONNECTING_STATUS": "Reconnecting",
     "PORT_FORWARD_RUNNING_STATUS": "Running",
     "PORT_FORWARD_STOP_STATUS": "Stopped",
     "PageGrid": [Function],
@@ -131,6 +133,10 @@
         "form": [Function],
       },
       "Deployment": {
+        "class": [Function],
+        "form": [Function],
+      },
+      "Endpoints": {
         "class": [Function],
         "form": [Function],
       },
@@ -173,6 +179,7 @@
       "CreateButton": [Function],
       "CreateDaemonSetForm": [Function],
       "CreateDeploymentForm": [Function],
+      "CreateEndpointsForm": [Function],
       "CreateJobForm": [Function],
       "CreatePodForm": [Function],
       "CreateReplicaSetForm": [Function],
@@ -212,6 +219,7 @@
       "OwnedPodsSection": [Function],
       "OwnedStatefulSetsSection": [Function],
       "PORT_FORWARDS_STORAGE_KEY": "portforwards",
+      "PORT_FORWARD_RECONNECTING_STATUS": "Reconnecting",
       "PORT_FORWARD_RUNNING_STATUS": "Running",
       "PORT_FORWARD_STOP_STATUS": "Stopped",
       "PageGrid": [Function],
@@ -227,6 +235,10 @@
           "form": [Function],
         },
         "Deployment": {
+          "class": [Function],
+          "form": [Function],
+        },
+        "Endpoints": {
           "class": [Function],
           "form": [Function],
         },
@@ -477,12 +489,14 @@
     "ResourceClasses": {
       "ClusterRole": [Function],
       "ClusterRoleBinding": [Function],
+      "CompositePodGroup": [Function],
       "ConfigMap": [Function],
       "ControllerRevision": [Function],
       "CronJob": [Function],
       "CustomResourceDefinition": [Function],
       "DaemonSet": [Function],
       "Deployment": [Function],
+      "DeviceClass": [Function],
       "Endpoint": [Function],
       "EndpointSlice": [Function],
       "Endpoints": [Function],
@@ -508,6 +522,7 @@
       "PodGroup": [Function],
       "PriorityClass": [Function],
       "ReplicaSet": [Function],
+      "ResourceClaim": [Function],
       "ResourceQuota": [Function],
       "Role": [Function],
       "RoleBinding": [Function],
@@ -533,6 +548,11 @@
     "clusterRoleBinding": {
       "default": [Function],
     },
+    "compositePodGroup": {
+      "COMPOSITE_POD_GROUP_INITIALLY_SCHEDULED_CONDITION": "CompositePodGroupInitiallyScheduled",
+      "default": [Function],
+      "getCompositeDisruptionMode": [Function],
+    },
     "configMap": {
       "default": [Function],
     },
@@ -550,6 +570,9 @@
       "default": [Function],
     },
     "deployment": {
+      "default": [Function],
+    },
+    "deviceClass": {
       "default": [Function],
     },
     "event": {
@@ -627,9 +650,16 @@
       "default": [Function],
       "getDisruptionMode": [Function],
       "getSchedulingPolicyKind": [Function],
+      "isSchedulingResourceServed": [Function],
     },
     "replicaSet": {
       "default": [Function],
+    },
+    "resourceClaim": {
+      "default": [Function],
+      "getAllocatedDeviceId": [Function],
+      "getRequestedDeviceClasses": [Function],
+      "getResourceClaimState": [Function],
     },
     "role": {
       "default": [Function],

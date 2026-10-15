@@ -150,6 +150,10 @@ macOS copyright attribution, and Linux vendor. Set `platforms.linux.maintainer`
 separately to a package contact in `Name <email>` form. Missing or empty fields
 retain the values from `app/package.json`.
 
+`product.trayIcon` optionally selects a system tray icon using a path relative
+to the packaged resources directory. Declare the same file in `resources` so
+Electron Builder copies it into the package.
+
 For example:
 
 ```json
@@ -158,7 +162,11 @@ For example:
     "name": "example-desktop",
     "productName": "Example Desktop",
     "companyName": "Example Company",
-    "version": "1.2.3"
+    "version": "1.2.3",
+    "trayIcon": "assets/example-tray.png"
+  },
+  "resources": {
+    "common": [{ "from": "./example-tray.png", "to": "assets/example-tray.png" }]
   },
   "platforms": {
     "linux": {
@@ -273,3 +281,13 @@ The typical development workflow for the desktop app:
 - Compiled `.js` files in `app/electron/` are git-ignored
 - The app uses the frontend's ESLint and Prettier configuration
 - For linting/formatting, the app scripts delegate to the frontend scripts
+- MCP child processes inherit the MCP SDK's platform-specific default environment
+  rather than the full desktop environment. Grant additional variables explicitly
+  in the MCP server's `env` configuration. Values must be strings; malformed
+  entries are reported and ignored. Windows variable names are normalized to
+  uppercase so explicit overrides replace the SDK defaults.
+- Active cluster-dependent MCP servers restart when selected cluster membership
+  or the first/current cluster changes. Reordering only secondary selected
+  clusters does not restart them. The caller's cluster order is preserved when
+  expanding `HEADLAMP_CURRENT_CLUSTER`, and cluster updates do not start dormant
+  servers.

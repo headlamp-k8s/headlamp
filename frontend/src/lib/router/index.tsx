@@ -29,6 +29,8 @@ import SettingsClusters from '../../components/App/Settings/SettingsClusters';
 import AuthChooser from '../../components/authchooser';
 import Overview from '../../components/cluster/Overview';
 import { PageGrid } from '../../components/common/Resource/Resource';
+import CompositePodGroupDetails from '../../components/compositePodGroup/Details';
+import CompositePodGroupList from '../../components/compositePodGroup/List';
 import ConfigDetails from '../../components/configmap/Details';
 import ConfigMapList from '../../components/configmap/List';
 import CustomResourceDetails from '../../components/crd/CustomResourceDetails';
@@ -38,6 +40,10 @@ import CustomResourceDefinitionDetails from '../../components/crd/Details';
 import CustomResourceDefinitionList from '../../components/crd/List';
 import DaemonSetList from '../../components/daemonset/List';
 import DeploymentsList from '../../components/deployments/List';
+import DeviceClassDetails from '../../components/device/DeviceClassDetails';
+import DeviceClassList from '../../components/device/DeviceClassList';
+import ResourceClaimDetails from '../../components/device/ResourceClaimDetails';
+import ResourceClaimList from '../../components/device/ResourceClaimList';
 import EndpointDetails from '../../components/endpoints/Details';
 import EndpointList from '../../components/endpoints/List';
 import EndpointSliceDetails from '../../components/endpointSlices/Details';
@@ -761,6 +767,20 @@ const defaultRoutes: { [routeName: string]: Route } = {
     sidebar: 'podGroups',
     component: () => <PodGroupDetails />,
   },
+  compositepodgroups: {
+    path: '/compositepodgroups',
+    exact: true,
+    name: 'Composite Pod Groups',
+    sidebar: 'compositePodGroups',
+    component: () => <CompositePodGroupList />,
+  },
+  CompositePodGroup: {
+    path: '/compositepodgroups/:namespace/:name',
+    exact: true,
+    name: 'Composite Pod Group',
+    sidebar: 'compositePodGroups',
+    component: () => <CompositePodGroupDetails />,
+  },
   // The 'workloads' route name is taken by the Workloads overview page, so the
   // scheduling.k8s.io Workload uses 'schedulingWorkloads' as its list route.
   schedulingWorkloads: {
@@ -776,6 +796,34 @@ const defaultRoutes: { [routeName: string]: Route } = {
     name: 'Workload',
     sidebar: 'schedulingWorkloads',
     component: () => <SchedulingWorkloadDetails />,
+  },
+  deviceclasses: {
+    path: '/deviceclasses',
+    exact: true,
+    name: 'Device Classes',
+    sidebar: 'deviceClasses',
+    component: () => <DeviceClassList />,
+  },
+  deviceClass: {
+    path: '/deviceclasses/:name',
+    exact: true,
+    name: 'Device Class',
+    sidebar: 'deviceClasses',
+    component: () => <DeviceClassDetails />,
+  },
+  resourceclaims: {
+    path: '/resourceclaims',
+    exact: true,
+    name: 'Resource Claims',
+    sidebar: 'resourceClaims',
+    component: () => <ResourceClaimList />,
+  },
+  resourceClaim: {
+    path: '/resourceclaims/:namespace/:name',
+    exact: true,
+    name: 'Resource Claim',
+    sidebar: 'resourceClaims',
+    component: () => <ResourceClaimDetails />,
   },
   priorityclasses: {
     path: '/priorityclasses',
