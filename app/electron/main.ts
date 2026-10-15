@@ -1844,6 +1844,19 @@ function startElectron() {
       setMenu(mainWindow, currentMenu);
     });
 
+    ipcMain.handle('oidc-logout', async (event, cluster: unknown) => {
+      if (!mainWindow || !isFromMainWindowFrame(event, mainWindow)) {
+        throw new Error('OIDC logout IPC request rejected');
+      }
+      const { openOIDCLogout } = await import('./oidcLogout');
+      await openOIDCLogout(
+        mainWindow,
+        `http://${INTERNAL_BACKEND_HOST}:${actualPort}`,
+        backendToken,
+        cluster
+      );
+    });
+
     ipcMain.on('appConfig', event => {
       if (!isFromMainWindowFrame(event, mainWindow)) {
         return;

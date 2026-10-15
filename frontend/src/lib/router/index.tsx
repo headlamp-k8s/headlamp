@@ -42,6 +42,10 @@ import DaemonSetList from '../../components/daemonset/List';
 import DeploymentsList from '../../components/deployments/List';
 import DeviceClassDetails from '../../components/device/DeviceClassDetails';
 import DeviceClassList from '../../components/device/DeviceClassList';
+import ResourceClaimDetails from '../../components/device/ResourceClaimDetails';
+import ResourceClaimList from '../../components/device/ResourceClaimList';
+import ResourceClaimTemplateDetails from '../../components/device/ResourceClaimTemplateDetails';
+import ResourceClaimTemplateList from '../../components/device/ResourceClaimTemplateList';
 import EndpointDetails from '../../components/endpoints/Details';
 import EndpointList from '../../components/endpoints/List';
 import EndpointSliceDetails from '../../components/endpointSlices/Details';
@@ -809,6 +813,34 @@ const defaultRoutes: { [routeName: string]: Route } = {
     sidebar: 'deviceClasses',
     component: () => <DeviceClassDetails />,
   },
+  resourceclaims: {
+    path: '/resourceclaims',
+    exact: true,
+    name: 'Resource Claims',
+    sidebar: 'resourceClaims',
+    component: () => <ResourceClaimList />,
+  },
+  resourceClaim: {
+    path: '/resourceclaims/:namespace/:name',
+    exact: true,
+    name: 'Resource Claim',
+    sidebar: 'resourceClaims',
+    component: () => <ResourceClaimDetails />,
+  },
+  resourceclaimtemplates: {
+    path: '/resourceclaimtemplates',
+    exact: true,
+    name: 'Resource Claim Templates',
+    sidebar: 'resourceClaimTemplates',
+    component: () => <ResourceClaimTemplateList />,
+  },
+  resourceClaimTemplate: {
+    path: '/resourceclaimtemplates/:namespace/:name',
+    exact: true,
+    name: 'Resource Claim Template',
+    sidebar: 'resourceClaimTemplates',
+    component: () => <ResourceClaimTemplateDetails />,
+  },
   priorityclasses: {
     path: '/priorityclasses',
     exact: true,
@@ -933,6 +965,7 @@ const defaultRoutes: { [routeName: string]: Route } = {
     path: '/auth',
     name: 'OidcAuth',
     sidebar: null,
+    useClusterURL: false,
     noAuthRequired: true,
     component: () => <OIDCAuth />,
   },
@@ -941,6 +974,19 @@ const defaultRoutes: { [routeName: string]: Route } = {
     exact: true,
     name: 'Login',
     sidebar: null,
+    noAuthRequired: true,
+    component: () => (
+      <AuthChooser>
+        <LocaleSelect />
+      </AuthChooser>
+    ),
+  },
+  encodedClusterLogin: {
+    path: '/encoded-clusters/:encodedCluster/login',
+    exact: true,
+    name: 'Login',
+    sidebar: null,
+    useClusterURL: false,
     noAuthRequired: true,
     component: () => (
       <AuthChooser>

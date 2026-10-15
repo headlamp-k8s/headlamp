@@ -338,6 +338,8 @@ const namespacedClasses = [
   'Pod',
   'PodGroup',
   'ReplicaSet',
+  'ResourceClaim',
+  'ResourceClaimTemplate',
   'ResourceQuota',
   'Role',
   'RoleBinding',

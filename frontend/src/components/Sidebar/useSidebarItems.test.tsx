@@ -16,12 +16,14 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
+import { cleanup, renderHook, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import App from '../../App';
 import { useSelectedClusters } from '../../lib/k8s/api/v1/hooks';
 import CompositePodGroup from '../../lib/k8s/compositePodGroup';
+import CRD from '../../lib/k8s/crd';
+import DeviceClass from '../../lib/k8s/deviceClass';
 import { useGatewayL4RouteAvailability } from '../../lib/k8s/gatewayL4RouteAvailability';
 import PodGroup from '../../lib/k8s/podGroup';
 import reducers from '../../redux/reducers/reducers';
@@ -78,9 +80,41 @@ describe('useSidebarItems', () => {
 
   beforeEach(() => {
     queryClient.clear();
+    vi.mocked(useSelectedClusters).mockReturnValue([]);
+    vi.spyOn(PodGroup, 'isEnabled').mockResolvedValue(false);
+    vi.spyOn(CompositePodGroup, 'isEnabled').mockResolvedValue(false);
+    vi.spyOn(DeviceClass, 'isEnabled').mockResolvedValue(false);
+    const emptyCRDs: [CRD[], null] = [[], null];
+    vi.spyOn(CRD, 'useList').mockReturnValue(
+      Object.assign(emptyCRDs, {
+        data: null,
+        items: emptyCRDs[0],
+        error: null,
+        errors: null,
+        isError: false,
+        isLoading: false,
+        isFetching: false,
+        isSuccess: true,
+        status: 'success' as const,
+      })
+    );
+    vi.spyOn(globalThis, 'fetch').mockRejectedValue(
+      new Error('Sidebar unit tests must not make network requests')
+    );
     vi.mocked(useGatewayL4RouteAvailability).mockReturnValue({ data: [] } as unknown as ReturnType<
       typeof useGatewayL4RouteAvailability
     >);
+  });
+
+  afterEach(async () => {
+    cleanup();
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    try {
+      expect(globalThis.fetch).not.toHaveBeenCalled();
+    } finally {
+      vi.restoreAllMocks();
+    }
   });
 
   it.each([
@@ -138,8 +172,6 @@ describe('useSidebarItems', () => {
     beforeEach(() => {
       vi.mocked(useSelectedClusters).mockReturnValue(['test-cluster']);
     });
-
-    afterEach(() => vi.restoreAllMocks());
 
     it('keeps the section but leaves out Composite Pod Groups when only its gate is off', async () => {
       // CompositePodGroup needs a feature gate on top of the ones PodGroup needs, so a

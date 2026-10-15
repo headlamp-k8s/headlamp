@@ -131,6 +131,15 @@ export default defineConfig({
         changeOrigin: true,
         ws: true,
       },
+      {
+        pathFilter: withServerBase([
+          '/encoded-clusters/*/oidc-logout',
+          '/encoded-clusters/*/oidc-logout/redirect',
+          '/encoded-clusters/*/clear-token',
+        ]),
+        target: backendTarget,
+        changeOrigin: true,
+      },
     ],
   },
   // dev: {
