@@ -74,13 +74,18 @@ cosign verify ghcr.io/headlamp-k8s/headlamp:vX.Y.Z \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
-The `nightly` image is signed by the nightly build from the `main` branch:
+The `nightly` image is signed by scheduled builds from `main` or manual builds
+from a selected branch. Both publish to the same `nightly` tag. To verify an
+image built from `main`:
 
 ```shell
 cosign verify ghcr.io/headlamp-k8s/headlamp:nightly \
   --certificate-identity 'https://github.com/kubernetes-sigs/headlamp/.github/workflows/nightly-build.yml@refs/heads/main' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
+
+For a manual build from another branch, replace `refs/heads/main` in the
+certificate identity above with `refs/heads/<selected-branch>`.
 
 ## Helm chart
 
