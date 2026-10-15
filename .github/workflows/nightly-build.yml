@@ -14,7 +14,7 @@ env:
 
 jobs:
   push_to_registry:
-    if: ${{ github.repository == 'kubernetes-sigs/headlamp' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.repository == 'kubernetes-sigs/headlamp' && (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch') }}
     name: Build and push nightly container image
     runs-on: ubuntu-latest
     permissions:
