@@ -2387,6 +2387,10 @@ func clusterRequestHandler(c *HeadlampConfig) http.Handler { //nolint:funlen
 // It parses the request and creates a proxy request to the cluster.
 // That proxy is saved in the cache with the context key.
 func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
+	router.Handle("/clusters/{clusterName}/drain-node",
+		auth.NewBackendTokenMiddleware(c.UseInCluster)(http.HandlerFunc(c.handleNodeDrain))).Methods("POST")
+	router.Handle("/clusters/{clusterName}/drain-node-status",
+		auth.NewBackendTokenMiddleware(c.UseInCluster)(http.HandlerFunc(c.handleNodeDrainStatus))).Methods("GET")
 	router.Handle("/encoded-clusters/{encodedClusterName}/clear-token",
 		auth.NewBackendTokenMiddleware(c.UseInCluster)(http.HandlerFunc(c.handleClearToken))).Methods("POST")
 	router.Handle("/clusters/{clusterName}/set-token",
@@ -3324,10 +3328,29 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 		auth.NewBackendTokenMiddleware(c.UseInCluster)(http.HandlerFunc(c.renameCluster))).Methods("PUT")
 }
 
-/*
-This function is used to handle the node drain request.
-*/
+func (c *HeadlampConfig) drainContextKey(r *http.Request, cluster string) (string, error) {
+	routeCluster := mux.Vars(r)["clusterName"]
+	if routeCluster == "" {
+		return cluster, nil
+	}
+
+	if cluster != "" && routeCluster != cluster {
+		return "", errors.New("cluster does not match request path")
+	}
+
+	return c.getContextKeyForRequest(r)
+}
+
+// handleNodeDrain submits a drain using the caller's cluster credentials.
 func (c *HeadlampConfig) handleNodeDrain(w http.ResponseWriter, r *http.Request) { //nolint:funlen
+	if mux.Vars(r)["clusterName"] != "" {
+		mediaType, _, err := mime.ParseMediaType(r.Header.Get("Content-Type"))
+		if err != nil || mediaType != "application/json" {
+			http.Error(w, "Content-Type must be application/json", http.StatusUnsupportedMediaType)
+			return
+		}
+	}
+
 	ctx := r.Context()
 	_, span := telemetry.CreateSpan(ctx, r, "node-management", "handleNodeDrain")
 	c.TelemetryHandler.RecordRequestCount(ctx, r)
@@ -3357,7 +3380,13 @@ func (c *HeadlampConfig) handleNodeDrain(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	ctxtProxy, err := c.KubeConfigStore.GetContext(drainPayload.Cluster)
+	contextKey, err := c.drainContextKey(r, drainPayload.Cluster)
+	if err != nil {
+		c.handleError(w, ctx, span, err, "resolving drain context", http.StatusBadRequest)
+		return
+	}
+
+	ctxtProxy, err := c.KubeConfigStore.GetContext(contextKey)
 	if err != nil {
 		c.handleError(w, ctx, span, err, "Cluster not found", http.StatusNotFound)
 
@@ -3365,6 +3394,14 @@ func (c *HeadlampConfig) handleNodeDrain(w http.ResponseWriter, r *http.Request)
 	}
 
 	token := c.requestTokenForContext(r, drainPayload.Cluster, ctxtProxy)
+
+	if token == "" && c.UseInCluster && ctxtProxy.Source == kubeconfig.InCluster &&
+		!c.shouldUseUnsafeServiceAccountTokenForContext(ctxtProxy) {
+		c.handleError(w, ctx, span, errors.New("user authentication is required"),
+			"missing drain credentials", http.StatusUnauthorized)
+
+		return
+	}
 
 	clientset, err := ctxtProxy.ClientSetWithToken(token)
 	if err != nil {
@@ -3392,7 +3429,7 @@ func (c *HeadlampConfig) handleNodeDrain(w http.ResponseWriter, r *http.Request)
 		serverCtx = context.Background()
 	}
 
-	c.drainNode(serverCtx, clientset, drainPayload.NodeName, drainPayload.Cluster)
+	c.drainNode(serverCtx, clientset, drainPayload.NodeName, contextKey)
 }
 
 func (c *HeadlampConfig) drainNode(
@@ -3511,7 +3548,7 @@ func isDaemonSetPod(pod *corev1.Pod) bool {
 Since node drain is an async operation, we need to poll for the status of the drain operation
 This endpoint returns the status of the drain operation.
 */
-func (c *HeadlampConfig) handleNodeDrainStatus(w http.ResponseWriter, r *http.Request) {
+func (c *HeadlampConfig) handleNodeDrainStatus(w http.ResponseWriter, r *http.Request) { //nolint:funlen
 	start := time.Now()
 	ctx := r.Context()
 
@@ -3533,6 +3570,16 @@ func (c *HeadlampConfig) handleNodeDrainStatus(w http.ResponseWriter, r *http.Re
 		NodeName: r.URL.Query().Get("nodeName"),
 	}
 
+	contextKey, err := c.drainContextKey(r, drainPayload.Cluster)
+	if err != nil {
+		c.handleError(w, ctx, span, err, "resolving drain status context", http.StatusBadRequest)
+		return
+	}
+
+	if routeCluster := mux.Vars(r)["clusterName"]; routeCluster != "" {
+		drainPayload.Cluster = routeCluster
+	}
+
 	if drainPayload.NodeName == "" {
 		c.handleError(w, ctx, span, errors.New("nodeName is required"), "nodeName is missing", http.StatusBadRequest)
 		return
@@ -3544,7 +3591,7 @@ func (c *HeadlampConfig) handleNodeDrainStatus(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	cacheKey := uuid.NewSHA1(uuid.Nil, []byte(drainPayload.NodeName+"\x00"+drainPayload.Cluster)).String()
+	cacheKey := uuid.NewSHA1(uuid.Nil, []byte(drainPayload.NodeName+"\x00"+contextKey)).String()
 
 	cacheItem, err := c.Cache.Get(ctx, cacheKey)
 	if err != nil {
