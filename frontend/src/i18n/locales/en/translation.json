@@ -448,6 +448,7 @@
   "This will discard your changes in the editor. Do you want to proceed?": "This will discard your changes in the editor. Do you want to proceed?",
   "Undo Changes": "Undo Changes",
   "Dry Run": "Dry Run",
+  "You have unsaved changes in the editor. Closing will discard them. Do you want to proceed?": "You have unsaved changes in the editor. Closing will discard them. Do you want to proceed?",
   "Invalid Secret Reference": "Invalid Secret Reference",
   "Invalid Config Map Reference": "Invalid Config Map Reference",
   "Invalid fieldRef": "Invalid fieldRef",

@@ -448,6 +448,7 @@
   "This will discard your changes in the editor. Do you want to proceed?": "Ezzel elveti a módosításokat a szerkesztőben. Folytatja?",
   "Undo Changes": "Módosítások visszavonása",
   "Dry Run": "",
+  "You have unsaved changes in the editor. Closing will discard them. Do you want to proceed?": "",
   "Invalid Secret Reference": "Érvénytelen titkos kód hivatkozás",
   "Invalid Config Map Reference": "Érvénytelen konfigurációs térkép hivatkozás",
   "Invalid fieldRef": "Érvénytelen fieldRef",

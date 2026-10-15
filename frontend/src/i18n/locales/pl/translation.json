@@ -452,6 +452,7 @@
   "This will discard your changes in the editor. Do you want to proceed?": "Spowoduje to odrzucenie zmian w edytorze. Czy chcesz kontynuować?",
   "Undo Changes": "Cofnij zmiany",
   "Dry Run": "",
+  "You have unsaved changes in the editor. Closing will discard them. Do you want to proceed?": "",
   "Invalid Secret Reference": "Nieprawidłowe odwołanie do wpisu tajnego",
   "Invalid Config Map Reference": "Nieprawidłowe odwołanie do mapy konfiguracji",
   "Invalid fieldRef": "Nieprawidłowy element fieldRef",
