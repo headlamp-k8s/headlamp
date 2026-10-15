@@ -70,6 +70,9 @@ vi.mock('../../podDisruptionBudget/Details', () => ({
 vi.mock('../../priorityClass/Details', () => ({ default: makeDetails('PriorityClass') }));
 vi.mock('../../device/DeviceClassDetails', () => ({ default: makeDetails('DeviceClass') }));
 vi.mock('../../device/ResourceClaimDetails', () => ({ default: makeDetails('ResourceClaim') }));
+vi.mock('../../device/ResourceClaimTemplateDetails', () => ({
+  default: makeDetails('ResourceClaimTemplate'),
+}));
 vi.mock('../../resourceQuota/Details', () => ({ default: makeDetails('ResourceQuota') }));
 vi.mock('../../role/BindingDetails', () => ({ default: makeDetails('RoleBinding') }));
 vi.mock('../../role/Details', () => ({ default: makeDetails('Role') }));
@@ -121,6 +124,7 @@ const dispatchCases = [
   ['PriorityClass', 'PriorityClass'],
   ['DeviceClass', 'DeviceClass'],
   ['ResourceClaim', 'ResourceClaim'],
+  ['ResourceClaimTemplate', 'ResourceClaimTemplate'],
   ['ResourceQuota', 'ResourceQuota'],
   ['ClusterRole', 'Role'],
   ['Role', 'Role'],

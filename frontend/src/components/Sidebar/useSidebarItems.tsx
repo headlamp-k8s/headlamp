@@ -495,7 +495,7 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
     if (devicesEnabled) {
       inClusterItems.push({
         name: 'devices',
-        label: t('glossary|Devices'),
+        label: t('glossary|Devices (alpha)'),
         icon: 'mdi:expansion-card',
         subList: [
           {
@@ -505,6 +505,10 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
           {
             name: 'resourceClaims',
             label: t('glossary|Resource Claims'),
+          },
+          {
+            name: 'resourceClaimTemplates',
+            label: t('glossary|Resource Claim Templates'),
           },
         ],
       });
