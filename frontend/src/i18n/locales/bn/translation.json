@@ -1104,6 +1104,7 @@
   "Navigate to the Pods list": "",
   "Go to Deployments": "",
   "Navigate to the Deployments list": "",
+  "({{ seconds }}s)": "({{ seconds }} সেঃ)",
   "Action Delay": "কাজের বিলম্ব",
   "Enter a whole number of seconds between 0 and {{ maxSeconds }}.": "0 থেকে {{ maxSeconds }}-এর মধ্যে পূর্ণসংখ্যায় সেকেন্ড লিখুন।",
   "0 (immediately)": "0 (অবিলম্বে)",
