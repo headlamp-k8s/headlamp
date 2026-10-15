@@ -495,7 +495,7 @@ export const useSidebarItems = (sidebarName: string = DefaultSidebars.IN_CLUSTER
     if (devicesEnabled) {
       inClusterItems.push({
         name: 'devices',
-        label: t('glossary|Devices'),
+        label: t('glossary|Devices (alpha)'),
         icon: 'mdi:expansion-card',
         subList: [
           {
