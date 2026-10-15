@@ -55,8 +55,8 @@ export default function ResourceClaimTemplateDetails(props: {
                     {
                       label: t('glossary|Device Classes'),
                       getter: (request: DeviceRequest) =>
-                        getRequestedDeviceClasses(request).map(className => (
-                          <div key={className}>
+                        getRequestedDeviceClasses(request).map((className, index) => (
+                          <div key={`${className}-${index}`}>
                             <Link
                               routeName="deviceClass"
                               params={{ name: className }}

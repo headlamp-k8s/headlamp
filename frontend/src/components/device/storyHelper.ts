@@ -313,7 +313,10 @@ export const RESOURCE_CLAIM_TEMPLATE_DUMMY_DATA: KubeResourceClaimTemplate[] = [
   },
 ];
 
-/** A template whose request is a prioritized list of alternatives, each with its own amount. */
+/**
+ * A template whose request is a prioritized list of alternatives, each with its own amount.
+ * Two alternatives share a device class, which the details page must still list separately.
+ */
 export const PRIORITIZED_RESOURCE_CLAIM_TEMPLATE: KubeResourceClaimTemplate = {
   apiVersion: 'resource.k8s.io/v1',
   kind: 'ResourceClaimTemplate',
@@ -332,6 +335,7 @@ export const PRIORITIZED_RESOURCE_CLAIM_TEMPLATE: KubeResourceClaimTemplate = {
             firstAvailable: [
               { name: 'big', deviceClassName: 'a100.example.com', count: 1 },
               { name: 'small', deviceClassName: 'gpu.example.com', allocationMode: 'All' },
+              { name: 'shared', deviceClassName: 'gpu.example.com', count: 2 },
             ],
           },
         ],

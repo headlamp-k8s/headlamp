@@ -278,6 +278,14 @@
                             gpu.example.com
                           </a>
                         </div>
+                        <div>
+                          <a
+                            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
+                            href="/"
+                          >
+                            gpu.example.com
+                          </a>
+                        </div>
                       </td>
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-oh2q4q-MuiTableCell-root"
@@ -287,6 +295,9 @@
                         </div>
                         <div>
                           All
+                        </div>
+                        <div>
+                          2
                         </div>
                       </td>
                     </tr>
