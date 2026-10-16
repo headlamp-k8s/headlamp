@@ -333,6 +333,8 @@
   "From": "送信元",
   "Age": "経過時間",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} ({{ firstEventDate }} 以来 {{ count }} 回)",
+  "Ready": "準備完了",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "リリースノート ({{ appVersion }})",
   "Fetching release information…": "リリース情報を取得中…",
   "Skip": "スキップ",

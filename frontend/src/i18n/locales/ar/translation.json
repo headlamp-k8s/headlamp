@@ -343,6 +343,8 @@
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_few": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_many": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} ({{ count }} مرات منذ {{ firstEventDate }})",
+  "Ready": "جاهز",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "ملاحظات الإصدار ({{ appVersion }})",
   "Fetching release information…": "جارٍ جلب معلومات الإصدار…",
   "Skip": "تخطي",

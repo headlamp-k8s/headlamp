@@ -333,6 +333,8 @@
   "From": "시작",
   "Age": "경과 시간",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ firstEventDate }} 이후 {{ count }}회 발생 ({{ eventDate }})",
+  "Ready": "준비 완료",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "릴리스 노트 ({{ appVersion }})",
   "Fetching release information…": "릴리스 정보 가져오는 중…",
   "Skip": "건너뛰기",

@@ -333,6 +333,8 @@
   "From": "Dari",
   "Age": "Usia",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} ({{ count }} kali sejak {{ firstEventDate }})",
+  "Ready": "Siap",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "Catatan Rilis ({{ appVersion }})",
   "Fetching release information…": "Mengambil informasi rilis…",
   "Skip": "Lewati",

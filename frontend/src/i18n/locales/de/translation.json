@@ -335,6 +335,8 @@
   "Age": "Alter",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "",
+  "Ready": "Bereit",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "Versionshinweise ({{ appVersion }})",
   "Fetching release information…": "Abrufen von Release-Informationen…",
   "Skip": "Überspringen",

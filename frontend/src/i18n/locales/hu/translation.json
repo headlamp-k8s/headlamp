@@ -335,6 +335,8 @@
   "Age": "Kor",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "{{ eventDate }} ({{ count }} alkalommal {{ firstEventDate }} óta)",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} ({{ count }} alkalommal {{ firstEventDate }} óta)",
+  "Ready": "Kész",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "Kiadási megjegyzések ({{ appVersion }})",
   "Fetching release information…": "Kiadási adatok beolvasása…",
   "Skip": "Kihagyás",

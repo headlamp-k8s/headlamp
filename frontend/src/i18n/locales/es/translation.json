@@ -337,6 +337,8 @@
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "{{ eventDate }} ({{ count }} vez desde {{ firstEventDate }})",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_many": "{{ eventDate }} ({{ count }} veces desde {{ firstEventDate }})",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} ({{ count }} veces desde {{ firstEventDate }})",
+  "Ready": "Listo",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "Notas de lanzamiento ({{ appVersion }})",
   "Fetching release information…": "Obteniendo información de la versión…",
   "Skip": "Saltar",

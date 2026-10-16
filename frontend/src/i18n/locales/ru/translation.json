@@ -339,6 +339,8 @@
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_few": "{{ eventDate }} ({{ count }} раза с {{ firstEventDate }})",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_many": "{{ eventDate }} ({{ count }} раз с {{ firstEventDate }})",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} ({{ count }} раз с {{ firstEventDate }})",
+  "Ready": "Готово к работе",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "Примечания к выпуску ({{ appVersion }})",
   "Fetching release information…": "Получение информации о выпуске…",
   "Skip": "Пропустить",

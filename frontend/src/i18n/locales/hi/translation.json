@@ -335,6 +335,8 @@
   "Age": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "",
+  "Ready": "तैयार",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "",
   "Fetching release information…": "",
   "Skip": "",

@@ -333,6 +333,8 @@
   "From": "從",
   "Age": "存活時間",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} (自 {{ firstEventDate }} 起 {{ count }} 次)",
+  "Ready": "準備好",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "發行說明 ({{ appVersion }})",
   "Fetching release information…": "正在獲取發行訊息…",
   "Skip": "跳過",

@@ -337,6 +337,8 @@
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_one": "{{ eventDate }} ({{ count }} volta da {{ firstEventDate }})",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_many": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_other": "{{ eventDate }} ({{ count }} volte da {{ firstEventDate }})",
+  "Ready": "Pronto",
+  "Not Ready": "",
   "Release Notes ({{ appVersion }})": "Note di rilascio ({{ appVersion }})",
   "Fetching release information…": "Recupero informazioni di rilascio…",
   "Skip": "Salta",
