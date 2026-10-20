@@ -56,6 +56,13 @@ describe('PodResourceClaimsSection', () => {
     expect(screen.getByText('Extended resource')).toBeVisible();
   });
 
+  it('links the template a claim is generated from', () => {
+    renderSection(new Pod(podWithResourceClaims));
+
+    expect(screen.getByRole('link', { name: 'Template: single-gpu' })).toBeVisible();
+    expect(screen.getByRole('link', { name: 'Template: scratch-nvme' })).toBeVisible();
+  });
+
   it('marks a template claim that has not been generated yet', () => {
     renderSection(new Pod(podWithResourceClaims));
 

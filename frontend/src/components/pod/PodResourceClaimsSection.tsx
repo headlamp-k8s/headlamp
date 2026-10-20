@@ -38,7 +38,15 @@ export default function PodResourceClaimsSection({ pod }: PodResourceClaimsSecti
       case 'claim':
         return t('translation|Claim');
       case 'template':
-        return t('translation|Template: {{ name }}', { name: claim.templateName ?? '' });
+        return (
+          <Link
+            routeName="resourceClaimTemplate"
+            params={{ namespace: pod.getNamespace(), name: claim.templateName ?? '' }}
+            activeCluster={pod.cluster}
+          >
+            {t('translation|Template: {{ name }}', { name: claim.templateName ?? '' })}
+          </Link>
+        );
       case 'extendedResource':
         return t('translation|Extended resource');
     }

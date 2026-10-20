@@ -108,7 +108,12 @@
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-oh2q4q-MuiTableCell-root"
                 >
-                  Template: single-gpu
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    Template: single-gpu
+                  </a>
                 </td>
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-oh2q4q-MuiTableCell-root"
@@ -127,7 +132,12 @@
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-oh2q4q-MuiTableCell-root"
                 >
-                  Template: scratch-nvme
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    Template: scratch-nvme
+                  </a>
                 </td>
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-oh2q4q-MuiTableCell-root"
