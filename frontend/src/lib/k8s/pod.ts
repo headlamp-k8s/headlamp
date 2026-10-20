@@ -64,6 +64,14 @@ export interface PodExtendedResourceClaimStatus {
   }[];
 }
 
+export interface PodClaimReference {
+  source: 'claim' | 'template' | 'extendedResource';
+  podClaimName?: string;
+  claimName?: string;
+  templateName?: string;
+  containers: string[];
+}
+
 export interface KubePodSpec {
   containers: KubeContainer[];
   nodeName: string;
@@ -181,6 +189,45 @@ class Pod extends KubeObject<KubePod> {
 
   get status(): KubePod['status'] {
     return this.jsonData.status;
+  }
+
+  get resourceClaims(): PodClaimReference[] {
+    const containers = [...(this.spec?.initContainers ?? []), ...(this.spec?.containers ?? [])];
+    const containersUsing = (claim: string) =>
+      containers
+        .filter(container => container.resources?.claims?.some(used => used.name === claim))
+        .map(container => container.name);
+
+    const references: PodClaimReference[] = (this.spec?.resourceClaims ?? []).map(claim => {
+      if (claim.resourceClaimName) {
+        return {
+          source: 'claim',
+          podClaimName: claim.name,
+          claimName: claim.resourceClaimName,
+          containers: containersUsing(claim.name),
+        };
+      }
+      return {
+        source: 'template',
+        podClaimName: claim.name,
+        claimName: this.status?.resourceClaimStatuses?.find(status => status.name === claim.name)
+          ?.resourceClaimName,
+        templateName: claim.resourceClaimTemplateName,
+        containers: containersUsing(claim.name),
+      };
+    });
+
+    const extended = this.status?.extendedResourceClaimStatus;
+    if (extended?.resourceClaimName) {
+      references.push({
+        source: 'extendedResource',
+        claimName: extended.resourceClaimName,
+        containers: [
+          ...new Set((extended.requestMappings ?? []).map(mapping => mapping.containerName)),
+        ],
+      });
+    }
+    return references;
   }
 
   evict() {
