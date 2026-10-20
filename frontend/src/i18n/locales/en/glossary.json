@@ -277,6 +277,8 @@
   "Parent Gateway": "Parent Gateway",
   "Attached Routes": "Attached Routes",
   "No routes are attached to this ListenerSet": "No routes are attached to this ListenerSet",
+  "Could not load attached routes": "Could not load attached routes",
+  "Could not load ListenerSets": "Could not load ListenerSets",
   "Listener": "Listener",
   "TLS Mode": "TLS Mode",
   "Certificates": "Certificates",

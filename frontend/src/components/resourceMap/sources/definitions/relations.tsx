@@ -451,24 +451,30 @@ const udpRouteToGateway = makeL4RouteToGatewayRelation('udproute-gateway', UDPRo
 const udpRouteToService = makeL4RouteToServiceRelation('udproute-service', UDPRoute);
 
 // ListenerSet (GEP-1713) attaches its listeners to a parent Gateway.
-const listenerSetToGateway = makeRelation(
-  'listenerset-gateway',
-  ListenerSet,
-  Gateway,
-  (listenerSet, gateway) => {
+// A ListenerSet and its parent Gateway may live in different namespaces, so this
+// can't use makeRelation (which requires an equal namespace). Match on cluster
+// and the resolved parentRef identity instead.
+const listenerSetToGateway: Relation = {
+  id: 'listenerset-gateway',
+  fromSource: makeKubeSourceId(ListenerSet),
+  toSource: makeKubeSourceId(Gateway),
+  predicate(fromNode, toNode) {
+    const listenerSet = fromNode.kubeObject as ListenerSet;
+    const gateway = toNode.kubeObject as Gateway;
     const ref = listenerSet.spec?.parentRef;
     if (!ref) {
       return false;
     }
     const reference = resolveGatewayParentReference(ref, listenerSet.metadata.namespace);
     return (
+      listenerSet.cluster === gateway.cluster &&
       reference.group === Gateway.apiGroupName &&
       reference.kind === Gateway.kind &&
       reference.name === gateway.metadata.name &&
       reference.namespace === gateway.metadata.namespace
     );
-  }
-);
+  },
+};
 
 // Routes can attach directly to a ListenerSet via a parentRef of kind ListenerSet.
 const makeRouteToListenerSetRelation = (

@@ -29,6 +29,7 @@ import EmptyContent from '../common/EmptyContent';
 import { StatusLabel } from '../common/Label';
 import { StatusLabelProps } from '../common/Label';
 import Link from '../common/Link';
+import Loader from '../common/Loader';
 import { ConditionsTable, DetailsGrid } from '../common/Resource';
 import SectionBox from '../common/SectionBox';
 import SimpleTable, { NameValueTable } from '../common/SimpleTable';
@@ -39,7 +40,13 @@ function GatewayListenerSets(props: { gateway: Gateway }) {
   const { gateway } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
-  const { items: listenerSets } = ListenerSet.useList({ cluster: gateway.cluster });
+  const {
+    items: listenerSets,
+    isLoading,
+    errors,
+  } = ListenerSet.useList({
+    cluster: gateway.cluster,
+  });
 
   const attached = (listenerSets ?? []).filter(ls => {
     const ref = ls.parentRef;
@@ -55,11 +62,13 @@ function GatewayListenerSets(props: { gateway: Gateway }) {
     );
   });
 
+  // A missing ListenerSet CRD (404) is benign; other failures must not be
+  // reported as "no ListenerSets".
+  const realErrors = (errors ?? []).filter(e => e.status !== 404);
+
   return (
     <SectionBox title={t('glossary|Listener Sets')}>
-      {attached.length === 0 ? (
-        <EmptyContent>{t('glossary|No ListenerSets target this Gateway')}</EmptyContent>
-      ) : (
+      {attached.length > 0 ? (
         <SimpleTable
           columns={[
             {
@@ -90,6 +99,12 @@ function GatewayListenerSets(props: { gateway: Gateway }) {
           data={attached}
           reflectInURL="listenerSets"
         />
+      ) : isLoading ? (
+        <Loader title="" noContainer />
+      ) : realErrors.length > 0 ? (
+        <EmptyContent color="error">{t('glossary|Could not load ListenerSets')}</EmptyContent>
+      ) : (
+        <EmptyContent>{t('glossary|No ListenerSets target this Gateway')}</EmptyContent>
       )}
     </SectionBox>
   );

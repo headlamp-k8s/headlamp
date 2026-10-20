@@ -18,12 +18,7 @@ import Box from '@mui/system/Box';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { KubeCondition } from '../../lib/k8s/cluster';
-import {
-  GatewayListener,
-  GatewayListenerStatus,
-  GatewayParentReference,
-} from '../../lib/k8s/gateway';
-import { GATEWAY_API_GROUP, resolveGatewayParentReference } from '../../lib/k8s/gatewayReferences';
+import { GatewayListener, GatewayListenerStatus } from '../../lib/k8s/gateway';
 import GRPCRoute from '../../lib/k8s/grpcRoute';
 import HTTPRoute from '../../lib/k8s/httpRoute';
 import ListenerSet from '../../lib/k8s/listenerSet';
@@ -32,9 +27,11 @@ import UDPRoute from '../../lib/k8s/udpRoute';
 import EmptyContent from '../common/EmptyContent';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import Link from '../common/Link';
+import Loader from '../common/Loader';
 import { ConditionsTable, DetailsGrid } from '../common/Resource';
 import SectionBox from '../common/SectionBox';
 import SimpleTable, { NameValueTable } from '../common/SimpleTable';
+import { routeTargetsListenerSet } from './utils';
 
 /**
  * Gateway API listener conditions whose healthy state is `status: "False"`
@@ -150,21 +147,7 @@ function ListenerSetListenerTable(props: {
   return <NameValueTable rows={mainRows} />;
 }
 
-/** True if the route's parentRefs target the given ListenerSet. */
-function routeTargetsListenerSet(
-  parentRefs: GatewayParentReference[],
-  listenerSet: ListenerSet
-): GatewayParentReference | undefined {
-  return parentRefs.find(ref => {
-    const resolved = resolveGatewayParentReference(ref, listenerSet.metadata.namespace);
-    return (
-      resolved.kind === 'ListenerSet' &&
-      resolved.group === GATEWAY_API_GROUP &&
-      ref.name === listenerSet.metadata.name &&
-      resolved.namespace === listenerSet.metadata.namespace
-    );
-  });
-}
+type AttachableRoute = HTTPRoute | GRPCRoute | TCPRoute | UDPRoute;
 
 function ListenerSetAttachedRoutes(props: { listenerSet: ListenerSet }) {
   const { listenerSet } = props;
@@ -172,30 +155,29 @@ function ListenerSetAttachedRoutes(props: { listenerSet: ListenerSet }) {
 
   // Query every route kind across namespaces; a route may live in another
   // namespace yet target this ListenerSet by setting parentRef.namespace.
-  const { items: httpRoutes } = HTTPRoute.useList({ cluster: listenerSet.cluster });
-  const { items: grpcRoutes } = GRPCRoute.useList({ cluster: listenerSet.cluster });
-  const { items: tcpRoutes } = TCPRoute.useList({ cluster: listenerSet.cluster });
-  const { items: udpRoutes } = UDPRoute.useList({ cluster: listenerSet.cluster });
-
-  const allRoutes = [
-    ...(httpRoutes ?? []),
-    ...(grpcRoutes ?? []),
-    ...(tcpRoutes ?? []),
-    ...(udpRoutes ?? []),
+  const queries = [
+    HTTPRoute.useList({ cluster: listenerSet.cluster }),
+    GRPCRoute.useList({ cluster: listenerSet.cluster }),
+    TCPRoute.useList({ cluster: listenerSet.cluster }),
+    UDPRoute.useList({ cluster: listenerSet.cluster }),
   ];
 
+  const allRoutes = queries.flatMap(q => (q.items ?? []) as AttachableRoute[]);
   const attached = allRoutes
     .map(route => {
-      const match = routeTargetsListenerSet(route.parentRefs ?? [], listenerSet);
+      const match = routeTargetsListenerSet(route, listenerSet);
       return match ? { route, sectionName: match.sectionName } : null;
     })
     .filter(Boolean) as { route: any; sectionName?: string }[];
 
+  const stillLoading = queries.some(q => q.isLoading);
+  // A route kind whose CRD isn't installed returns 404 — that's benign. Other
+  // failures (e.g. forbidden) must not be reported as "no routes attached".
+  const realErrors = queries.flatMap(q => q.errors ?? []).filter(e => e.status !== 404);
+
   return (
     <SectionBox title={t('glossary|Attached Routes')}>
-      {attached.length === 0 ? (
-        <EmptyContent>{t('glossary|No routes are attached to this ListenerSet')}</EmptyContent>
-      ) : (
+      {attached.length > 0 ? (
         <SimpleTable
           columns={[
             {
@@ -230,14 +212,24 @@ function ListenerSetAttachedRoutes(props: { listenerSet: ListenerSet }) {
           data={attached}
           reflectInURL="attachedRoutes"
         />
+      ) : stillLoading ? (
+        <Loader title="" noContainer />
+      ) : realErrors.length > 0 ? (
+        <EmptyContent color="error">{t('glossary|Could not load attached routes')}</EmptyContent>
+      ) : (
+        <EmptyContent>{t('glossary|No routes are attached to this ListenerSet')}</EmptyContent>
       )}
     </SectionBox>
   );
 }
 
-export default function ListenerSetDetails(props: { name?: string; namespace?: string }) {
+export default function ListenerSetDetails(props: {
+  name?: string;
+  namespace?: string;
+  cluster?: string;
+}) {
   const params = useParams<{ namespace: string; name: string }>();
-  const { name = params.name, namespace = params.namespace } = props;
+  const { name = params.name, namespace = params.namespace, cluster } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (
@@ -245,6 +237,7 @@ export default function ListenerSetDetails(props: { name?: string; namespace?: s
       resourceType={ListenerSet}
       name={name}
       namespace={namespace}
+      cluster={cluster}
       withEvents
       extraInfo={item =>
         item && [
