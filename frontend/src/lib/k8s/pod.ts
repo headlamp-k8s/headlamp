@@ -44,6 +44,26 @@ export interface KubeVolume {
   [volumeName: string]: any;
 }
 
+export interface PodResourceClaim {
+  name: string;
+  resourceClaimName?: string;
+  resourceClaimTemplateName?: string;
+}
+
+export interface PodResourceClaimStatus {
+  name: string;
+  resourceClaimName?: string;
+}
+
+export interface PodExtendedResourceClaimStatus {
+  resourceClaimName: string;
+  requestMappings: {
+    containerName: string;
+    resourceName: string;
+    requestName: string;
+  }[];
+}
+
 export interface KubePodSpec {
   containers: KubeContainer[];
   nodeName: string;
@@ -71,6 +91,7 @@ export interface KubePodSpec {
   schedulingGroup?: {
     podGroupName: string;
   };
+  resourceClaims?: PodResourceClaim[];
 }
 
 export interface KubePod extends KubeObjectInterface {
@@ -89,6 +110,8 @@ export interface KubePod extends KubeObjectInterface {
     reason?: string;
     nominatedNodeName?: string;
     startTime: Time;
+    resourceClaimStatuses?: PodResourceClaimStatus[];
+    extendedResourceClaimStatus?: PodExtendedResourceClaimStatus;
     [other: string]: any;
   };
 }
