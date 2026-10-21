@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { AppTheme } from '../../../lib/AppTheme';
 import {
+  FOLLOW_SYSTEM_APPEARANCE_KEY,
   PREFERRED_DARK_THEME_KEY,
   PREFERRED_LIGHT_THEME_KEY,
   QUICK_SWAP_ENABLED_KEY,
@@ -100,6 +101,19 @@ export function setQuickSwapEnabled(value: boolean): void {
 }
 
 /**
+ * Whether the active theme follows the system's light/dark appearance, using the quick swap
+ * light and dark themes. Works independently of the quick swap switch. Defaults to false.
+ */
+export function getFollowSystemAppearance(): boolean {
+  return localStorage.getItem(FOLLOW_SYSTEM_APPEARANCE_KEY) === 'true';
+}
+
+export function setFollowSystemAppearance(value: boolean): void {
+  localStorage.setItem(FOLLOW_SYSTEM_APPEARANCE_KEY, String(value));
+  notifyQuickSwapChanged();
+}
+
+/**
  * Re-renders the calling component whenever any quick-swap setting changes.
  *
  * A monotonically increasing revision is used instead of tracking a specific
@@ -117,6 +131,7 @@ export function useQuickSwapSettingsRevision(): number {
         PREFERRED_DARK_THEME_KEY,
         REMEMBER_THEME_CHOICES_KEY,
         QUICK_SWAP_ENABLED_KEY,
+        FOLLOW_SYSTEM_APPEARANCE_KEY,
       ];
       if (
         event.storageArea === window.localStorage &&
@@ -142,12 +157,20 @@ export function useQuickSwapEnabled(): boolean {
   return getQuickSwapEnabled();
 }
 
+/** Reactive read of the "Follow system appearance" flag. */
+export function useFollowSystemAppearance(): boolean {
+  useQuickSwapSettingsRevision();
+  return getFollowSystemAppearance();
+}
+
 /**
- * Persists the theme as the preferred choice for its base when the "remember" mode is active.
+ * Persists the theme as the preferred choice for its base when the "remember" mode is active,
+ * or when following the system appearance (where the light/dark pair is what gets shown).
  * Call this alongside `dispatch(setTheme(...))` from any theme-picker UI.
  */
 export function rememberThemeChoiceIfEnabled(theme: AppTheme): void {
-  if (!getQuickSwapEnabled() || !getRememberThemeChoices()) {
+  const remember = getQuickSwapEnabled() && getRememberThemeChoices();
+  if (!remember && !getFollowSystemAppearance()) {
     return;
   }
   if (isDarkTheme(theme)) {
@@ -221,9 +244,11 @@ export default function ThemeToggleButton() {
   const configuredLight = useTypedSelector(state => state.config.defaultLightTheme);
   const configuredDark = useTypedSelector(state => state.config.defaultDarkTheme);
   const quickSwapEnabled = useQuickSwapEnabled();
+  const followSystemAppearance = useFollowSystemAppearance();
   const { t } = useTranslation();
 
-  if (forceTheme || !quickSwapEnabled) {
+  // While following the system appearance, the OS setting picks light or dark instead.
+  if (forceTheme || !quickSwapEnabled || followSystemAppearance) {
     return null;
   }
 

@@ -22,6 +22,7 @@ import React, { useEffect, useRef } from 'react';
 import { AppTheme } from '../../../lib/AppTheme';
 import {
   createMuiTheme,
+  FOLLOW_SYSTEM_APPEARANCE_KEY,
   PREFERRED_DARK_THEME_KEY,
   PREFERRED_LIGHT_THEME_KEY,
   QUICK_SWAP_ENABLED_KEY,
@@ -37,6 +38,7 @@ const ALL_KEYS = [
   PREFERRED_DARK_THEME_KEY,
   REMEMBER_THEME_CHOICES_KEY,
   QUICK_SWAP_ENABLED_KEY,
+  FOLLOW_SYSTEM_APPEARANCE_KEY,
 ];
 
 /**
@@ -162,5 +164,13 @@ QuickSwapDisabled.args = {
   currentTheme: lightTheme,
   storage: {
     [QUICK_SWAP_ENABLED_KEY]: 'false',
+  },
+};
+
+export const FollowSystemAppearanceHidesButton = Template.bind({});
+FollowSystemAppearanceHidesButton.args = {
+  currentTheme: lightTheme,
+  storage: {
+    [FOLLOW_SYSTEM_APPEARANCE_KEY]: 'true',
   },
 };

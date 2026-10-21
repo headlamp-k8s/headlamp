@@ -31,12 +31,14 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../../redux/hooks';
 import { reapplyThemePreferences, useAppThemes } from '../../App/themeSlice';
 import {
+  getFollowSystemAppearance,
   getQuickSwapEnabled,
   getRememberThemeChoices,
   isDarkTheme,
   isLightTheme,
   resolvePreferredDarkThemeName,
   resolvePreferredLightThemeName,
+  setFollowSystemAppearance,
   setPreferredDarkThemeName,
   setPreferredLightThemeName,
   setQuickSwapEnabled,
@@ -63,6 +65,7 @@ export function PreferredThemeSelectors() {
   useQuickSwapSettingsRevision();
   const rememberEnabled = getRememberThemeChoices();
   const quickSwapOn = getQuickSwapEnabled();
+  const followSystem = getFollowSystemAppearance();
 
   // Display-only fallback: storage is only written on explicit user choices, so a stored
   // preference for a not-yet-registered (or temporarily unavailable) plugin theme survives.
@@ -98,13 +101,22 @@ export function PreferredThemeSelectors() {
   const disabled = !!forceTheme;
   const featureOff = disabled || !quickSwapOn;
   const customEnabled = !rememberEnabled;
-  const pairEditable = !featureOff && customEnabled;
+  // The light/dark pair is used by custom quick swap and by following the system appearance.
+  const pairEditable = !disabled && ((quickSwapOn && customEnabled) || followSystem);
   const lightLabelId = 'preferred-light-mode-label';
   const darkLabelId = 'preferred-dark-mode-label';
 
   const handleQuickSwapToggle = (value: boolean) => {
     setQuickSwapEnabled(value);
   };
+
+  const handleFollowSystemToggle = (value: boolean) => {
+    setFollowSystemAppearance(value);
+  };
+
+  const followSystemDescription = t(
+    'translation|Switch between your light and dark themes automatically when your system appearance changes. While on, picking a theme sets it as your light or dark theme.'
+  );
 
   return (
     <Box sx={{ mt: 3 }}>
@@ -136,6 +148,40 @@ export function PreferredThemeSelectors() {
           }
           label={<span>{quickSwapOn ? t('translation|Enabled') : t('translation|Disabled')}</span>}
         />
+      </Box>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+        <FormControlLabel
+          // A small switch with this offset lines its control and label up with the radios below.
+          sx={{ ml: '-9px' }}
+          control={
+            <Switch
+              size="small"
+              color="primary"
+              checked={followSystem}
+              disabled={disabled}
+              onChange={e => handleFollowSystemToggle(e.target.checked)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && !disabled) {
+                  e.preventDefault();
+                  handleFollowSystemToggle(!followSystem);
+                }
+              }}
+            />
+          }
+          label={t('translation|Follow system appearance')}
+        />
+        <Tooltip title={followSystemDescription}>
+          <Box
+            component="span"
+            role="img"
+            tabIndex={0}
+            sx={{ display: 'inline-flex', color: 'text.secondary' }}
+            aria-label={followSystemDescription}
+          >
+            <Icon icon="mdi:information-outline" width={18} />
+          </Box>
+        </Tooltip>
       </Box>
 
       <FormControl component="fieldset" disabled={featureOff} sx={{ mt: 1 }}>

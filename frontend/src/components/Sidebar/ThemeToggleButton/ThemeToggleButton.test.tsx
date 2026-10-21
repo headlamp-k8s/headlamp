@@ -19,17 +19,25 @@ import { configureStore } from '@reduxjs/toolkit';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AppTheme } from '../../../lib/AppTheme';
 import { createMuiTheme } from '../../../lib/themes';
 import { TestContext } from '../../../test';
 import defaultAppThemes, { darkTheme, lightTheme } from '../../App/defaultAppThemes';
-import themeReducer, { initialState as themeInitialState, themeSlice } from '../../App/themeSlice';
+import themeReducer, {
+  applyBackendThemeConfig,
+  initialState as themeInitialState,
+  themeSlice,
+  ThemeState,
+} from '../../App/themeSlice';
 import { PreferredThemeSelectors } from './PreferredThemeSelectors';
+import { SystemAppearanceSync } from './SystemAppearanceSync';
 import ThemeToggleButton, {
   AZURE_THEME_NAME,
+  getFollowSystemAppearance,
   getRememberThemeChoices,
   isDarkTheme,
+  rememberThemeChoiceIfEnabled,
   setPreferredLightThemeName,
 } from './ThemeToggleButton';
 
@@ -37,13 +45,15 @@ const PREFERRED_LIGHT_THEME_KEY = 'headlampPreferredLightTheme';
 const PREFERRED_DARK_THEME_KEY = 'headlampPreferredDarkTheme';
 const REMEMBER_THEME_CHOICES_KEY = 'headlampRememberThemeChoices';
 const QUICK_SWAP_ENABLED_KEY = 'headlampQuickSwapEnabled';
+const FOLLOW_SYSTEM_APPEARANCE_KEY = 'headlampFollowSystemAppearance';
 
 /** Builds a store with the real theme reducer so dispatched `setTheme` updates state. */
 function makeStore(
   themeName: string,
   forceTheme = '',
   appThemes: AppTheme[] = defaultAppThemes,
-  configuredDefaults: { defaultLightTheme?: string; defaultDarkTheme?: string } = {}
+  configuredDefaults: { defaultLightTheme?: string; defaultDarkTheme?: string } = {},
+  themeState: Partial<ThemeState> = {}
 ) {
   return configureStore({
     reducer: {
@@ -51,7 +61,7 @@ function makeStore(
       config: (state = { forceTheme, ...configuredDefaults }) => state,
     },
     preloadedState: {
-      theme: { ...themeInitialState, name: themeName, appThemes },
+      theme: { ...themeInitialState, name: themeName, appThemes, ...themeState },
     },
   });
 }
@@ -434,5 +444,206 @@ describe('quick swap cross-tab sync', () => {
 
     fireStorageEvent(QUICK_SWAP_ENABLED_KEY);
     expect(toggleButton()).not.toBeInTheDocument();
+  });
+});
+
+describe('Follow system appearance', () => {
+  const configured = { defaultLightTheme: 'Monochrome Light', defaultDarkTheme: 'Lights Out' };
+  const themeByName = (name: string) => defaultAppThemes.find(t => t.name === name)!;
+
+  /** A store whose backend theme config has loaded, which the sync waits for. */
+  function makeLoadedStore(
+    themeName: string,
+    forceTheme = '',
+    configuredDefaults: { defaultLightTheme?: string; defaultDarkTheme?: string } = {}
+  ) {
+    return makeStore(themeName, forceTheme, defaultAppThemes, configuredDefaults, {
+      backendConfigReady: true,
+    });
+  }
+
+  /** Fakes the system color scheme; `setDark` fires the change event like a real OS switch. */
+  function mockSystemAppearance(initiallyDark: boolean) {
+    let dark = initiallyDark;
+    const listeners = new Set<(event: { matches: boolean }) => void>();
+    vi.spyOn(window, 'matchMedia').mockImplementation(
+      query =>
+        ({
+          get matches() {
+            if (query === '(prefers-color-scheme: dark)') return dark;
+            if (query === '(prefers-color-scheme: light)') return !dark;
+            return false;
+          },
+          media: query,
+          addEventListener: (_: string, listener: any) => listeners.add(listener),
+          removeEventListener: (_: string, listener: any) => listeners.delete(listener),
+        } as any)
+    );
+    return {
+      setDark(value: boolean) {
+        dark = value;
+        act(() => listeners.forEach(listener => listener({ matches: value })));
+      },
+    };
+  }
+
+  function renderWithSync(store: ReturnType<typeof makeStore>, children: ReactNode = null) {
+    return renderWithProviders(
+      <>
+        <SystemAppearanceSync />
+        {children}
+      </>,
+      lightTheme,
+      store
+    );
+  }
+
+  const followSwitch = () => screen.getByRole('checkbox', { name: /follow system appearance/i });
+  const toggleButton = () => screen.queryByRole('button', { name: /switch to (light|dark) mode/i });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('is off by default and leaves the theme alone', () => {
+    mockSystemAppearance(true);
+    const store = makeLoadedStore('Light');
+    renderWithSync(store, <PreferredThemeSelectors />);
+
+    expect(getFollowSystemAppearance()).toBe(false);
+    expect(followSwitch()).not.toBeChecked();
+    expect(store.getState().theme.name).toBe('Light');
+  });
+
+  it('applies the theme for the system appearance when turned on and hides the toggle', async () => {
+    mockSystemAppearance(true);
+    const store = makeLoadedStore('Light');
+    renderWithSync(
+      store,
+      <>
+        <PreferredThemeSelectors />
+        <ThemeToggleButton />
+      </>
+    );
+    expect(toggleButton()).toBeInTheDocument();
+
+    await userEvent.click(followSwitch());
+
+    expect(localStorage.getItem(FOLLOW_SYSTEM_APPEARANCE_KEY)).toBe('true');
+    expect(store.getState().theme.name).toBe('Dark');
+    expect(toggleButton()).not.toBeInTheDocument();
+  });
+
+  it('switches between the light and dark themes when the system appearance changes', () => {
+    localStorage.setItem(FOLLOW_SYSTEM_APPEARANCE_KEY, 'true');
+    localStorage.setItem(PREFERRED_DARK_THEME_KEY, 'Dark');
+    const system = mockSystemAppearance(false);
+    const store = makeLoadedStore('Light', '', configured);
+    renderWithSync(store);
+
+    // Nothing saved for light, so the configured light default is used.
+    expect(store.getState().theme.name).toBe('Monochrome Light');
+
+    system.setDark(true);
+    expect(store.getState().theme.name).toBe('Dark');
+
+    system.setDark(false);
+    expect(store.getState().theme.name).toBe('Monochrome Light');
+  });
+
+  it('works while quick swap is turned off, and keeps the theme pair editable', () => {
+    localStorage.setItem(FOLLOW_SYSTEM_APPEARANCE_KEY, 'true');
+    localStorage.setItem(QUICK_SWAP_ENABLED_KEY, 'false');
+    const system = mockSystemAppearance(false);
+    const store = makeLoadedStore('Light', '', configured);
+    renderWithSync(store, <PreferredThemeSelectors />);
+
+    system.setDark(true);
+    expect(store.getState().theme.name).toBe('Lights Out');
+    expect(screen.getByRole('combobox', { name: /preferred dark mode/i })).not.toHaveAttribute(
+      'aria-disabled',
+      'true'
+    );
+    // The quick swap mode radios still belong to quick swap, so they stay disabled.
+    expect(screen.getByRole('radio', { name: /remember theme choices/i })).toBeDisabled();
+  });
+
+  it('keeps the theme pair locked when neither quick swap custom mode nor follow is on', () => {
+    localStorage.setItem(QUICK_SWAP_ENABLED_KEY, 'false');
+    mockSystemAppearance(false);
+    renderWithSync(makeLoadedStore('Light'), <PreferredThemeSelectors />);
+
+    expect(screen.getByRole('combobox', { name: /preferred dark mode/i })).toHaveAttribute(
+      'aria-disabled',
+      'true'
+    );
+  });
+
+  it('turns a picked theme into that side of the pair, even in custom mode', () => {
+    localStorage.setItem(FOLLOW_SYSTEM_APPEARANCE_KEY, 'true');
+    localStorage.setItem(REMEMBER_THEME_CHOICES_KEY, 'false');
+    const system = mockSystemAppearance(false);
+    const store = makeLoadedStore('Light');
+    renderWithSync(store);
+
+    // Picking a light theme while the system is light applies it and keeps it.
+    act(() => {
+      rememberThemeChoiceIfEnabled(themeByName('Monochrome Light'));
+      store.dispatch(themeSlice.actions.setTheme('Monochrome Light'));
+    });
+    expect(store.getState().theme.name).toBe('Monochrome Light');
+    expect(localStorage.getItem(PREFERRED_LIGHT_THEME_KEY)).toBe('Monochrome Light');
+
+    // Picking a dark theme while the system is light saves it for dark mode only.
+    act(() => {
+      rememberThemeChoiceIfEnabled(themeByName('Lights Out'));
+      store.dispatch(themeSlice.actions.setTheme('Lights Out'));
+    });
+    expect(store.getState().theme.name).toBe('Monochrome Light');
+
+    system.setDark(true);
+    expect(store.getState().theme.name).toBe('Lights Out');
+  });
+
+  it('does not save picks when follow is off and quick swap is in custom mode', () => {
+    localStorage.setItem(REMEMBER_THEME_CHOICES_KEY, 'false');
+    rememberThemeChoiceIfEnabled(themeByName('Lights Out'));
+    expect(localStorage.getItem(PREFERRED_DARK_THEME_KEY)).toBeNull();
+  });
+
+  it('does nothing while a theme is forced', () => {
+    localStorage.setItem(FOLLOW_SYSTEM_APPEARANCE_KEY, 'true');
+    const system = mockSystemAppearance(false);
+    const store = makeLoadedStore('Corporate', 'Corporate');
+    renderWithSync(store);
+
+    system.setDark(true);
+    expect(store.getState().theme.name).toBe('Corporate');
+  });
+
+  it('starts following when turned on in another tab', () => {
+    mockSystemAppearance(true);
+    const store = makeLoadedStore('Light');
+    renderWithSync(store);
+
+    localStorage.setItem(FOLLOW_SYSTEM_APPEARANCE_KEY, 'true');
+    fireStorageEvent(FOLLOW_SYSTEM_APPEARANCE_KEY);
+
+    expect(store.getState().theme.name).toBe('Dark');
+  });
+
+  it('waits for the backend theme config before applying', () => {
+    localStorage.setItem(FOLLOW_SYSTEM_APPEARANCE_KEY, 'true');
+    mockSystemAppearance(true);
+    const store = makeStore('Light', '', defaultAppThemes, configured);
+    renderWithSync(store);
+
+    expect(store.getState().theme.name).toBe('Light');
+
+    act(() => {
+      store.dispatch(applyBackendThemeConfig({}));
+    });
+    // The configured dark default comes from the sync, not from the config being applied.
+    expect(store.getState().theme.name).toBe('Lights Out');
   });
 });

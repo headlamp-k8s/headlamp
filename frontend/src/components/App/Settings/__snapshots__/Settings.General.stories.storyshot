@@ -759,6 +759,47 @@
                   </span>
                 </label>
               </div>
+              <div
+                class="MuiBox-root css-171onha"
+              >
+                <label
+                  class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-lgp4p7-MuiFormControlLabel-root"
+                >
+                  <span
+                    class="MuiSwitch-root MuiSwitch-sizeSmall css-1diaq70-MuiSwitch-root"
+                  >
+                    <span
+                      class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-po6g13-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input css-1p3z7et-MuiSwitchBase-root"
+                        type="checkbox"
+                      />
+                      <span
+                        class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+                      />
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </span>
+                    <span
+                      class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
+                    />
+                  </span>
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1ezega9-MuiTypography-root"
+                  >
+                    Follow system appearance
+                  </span>
+                </label>
+                <span
+                  aria-label="Switch between your light and dark themes automatically when your system appearance changes. While on, picking a theme sets it as your light or dark theme."
+                  class="MuiBox-root css-np4o2"
+                  data-mui-internal-clone-element="true"
+                  role="img"
+                  tabindex="0"
+                />
+              </div>
               <fieldset
                 class="MuiFormControl-root css-jayakb-MuiFormControl-root"
               >

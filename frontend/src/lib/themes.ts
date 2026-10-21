@@ -614,6 +614,7 @@ export const PREFERRED_LIGHT_THEME_KEY = 'headlampPreferredLightTheme';
 export const PREFERRED_DARK_THEME_KEY = 'headlampPreferredDarkTheme';
 export const REMEMBER_THEME_CHOICES_KEY = 'headlampRememberThemeChoices';
 export const QUICK_SWAP_ENABLED_KEY = 'headlampQuickSwapEnabled';
+export const FOLLOW_SYSTEM_APPEARANCE_KEY = 'headlampFollowSystemAppearance';
 /**
  * Names the stored theme preference when it was applied automatically (for example a plugin
  * default or a fallback), so it isn't mistaken for a theme the user picked.
