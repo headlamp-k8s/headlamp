@@ -83,24 +83,59 @@ rather than as an obvious configuration problem.
 `dynamicCluster.spec.ts` reads your kubeconfig with `kubectl config view`, which
 redacts embedded `certificate-authority-data` and the client certificate fields,
 and then reads the referenced files from disk. If those fields are embedded
-rather than file paths, six tests in that file fail with `ENOENT`.
+rather than file paths, seven tests in that file fail with `ENOENT`.
 
 CI works around this by rewriting the kubeconfig so the certificates live in
 files. If you hit those failures, do the same, and note that the paths must be
 absolute, because the test resolves them relative to its own working directory:
 
 ```bash
+umask 077
 mkdir -p ~/headlamp-e2e-certs
-kubectl config view --raw --minify --context=test -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 --decode > ~/headlamp-e2e-certs/ca.crt
-kubectl config set-cluster kind-test --certificate-authority="$HOME/headlamp-e2e-certs/ca.crt" --embed-certs=false
-kubectl config unset clusters.kind-test.certificate-authority-data
+
+# test cluster
+kubectl config view --raw --minify --context=test -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 --decode > ~/headlamp-e2e-certs/test-ca.crt
+kubectl config view --raw --minify --context=test -o jsonpath='{.users[0].user.client-certificate-data}' | base64 --decode > ~/headlamp-e2e-certs/test-client.crt
+kubectl config view --raw --minify --context=test -o jsonpath='{.users[0].user.client-key-data}' | base64 --decode > ~/headlamp-e2e-certs/test-client.key
+
+kubectl config set-cluster kind-test \
+  --certificate-authority="$HOME/headlamp-e2e-certs/test-ca.crt" \
+  --embed-certs=false
+
+kubectl config set-credentials admin@kind-test \
+  --client-certificate="$HOME/headlamp-e2e-certs/test-client.crt" \
+  --client-key="$HOME/headlamp-e2e-certs/test-client.key" \
+  --embed-certs=false
+
+# test2 cluster
+kubectl config view --raw --minify --context=test2 -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 --decode > ~/headlamp-e2e-certs/test2-ca.crt
+kubectl config view --raw --minify --context=test2 -o jsonpath='{.users[0].user.client-certificate-data}' | base64 --decode > ~/headlamp-e2e-certs/test2-client.crt
+kubectl config view --raw --minify --context=test2 -o jsonpath='{.users[0].user.client-key-data}' | base64 --decode > ~/headlamp-e2e-certs/test2-client.key
+
+kubectl config set-cluster kind-test2 \
+  --certificate-authority="$HOME/headlamp-e2e-certs/test2-ca.crt" \
+  --embed-certs=false
+
+kubectl config set-credentials admin@kind-test2 \
+  --client-certificate="$HOME/headlamp-e2e-certs/test2-client.crt" \
+  --client-key="$HOME/headlamp-e2e-certs/test2-client.key" \
+  --embed-certs=false
 ```
 
-Do the same for the `client-certificate-data` and `client-key-data` fields on
-the user entry. To update the second cluster, use `--context=test2` and the
-`kind-test2` cluster entry.
-
 ### Additional suites
+
+`tests/pomeriumProxyAuth.spec.ts` verifies Headlamp behind the Pomerium Ingress Controller. Its harness creates a disposable kind cluster on the active Docker engine, deploys Dex as a test identity provider, and installs the local Headlamp chart. The harness pins the Kubernetes node image to `kindest/node:v1.36.1`.
+
+Prerequisites are Docker, kind, kubectl, Helm, OpenSSL, curl, Node.js, and Google Chrome. Run it from the repository root:
+
+```bash
+cd e2e-tests
+npm ci
+cd ..
+./e2e-tests/pomerium/run.sh
+```
+
+The [reference screenshot](pomerium/proof/headlamp-namespaces-through-pomerium.png) shows the authenticated identity in Headlamp. The harness writes the latest screenshot to `e2e-tests/pomerium/generated/pomerium-headlamp.png` and deletes its `headlamp-pomerium-e2e` kind cluster after a successful run. Set `KEEP_CLUSTER=1` to keep the cluster for inspection. The harness stops its port-forward processes when it exits. If a failed run leaves the cluster behind, remove that exact cluster with `kind delete cluster --name headlamp-pomerium-e2e`.
 
 `tests/incluster-api.spec.ts` tests a separate Headlamp deployment running in
 in-cluster mode. CI runs it in a dedicated step after deploying

@@ -69,8 +69,12 @@ export abstract class Plugin {
 
 /** APIs exposed to Headlamp's renderer process by the desktop preload bridge. */
 export interface DesktopApi {
+  /** Ends an OIDC session in an isolated desktop browser window. */
+  oidcLogout?: (cluster: string) => Promise<void>;
   /** Operating system platform hosting the desktop app. */
   platform: NodeJS.Platform;
+  /** Whether Electron is running in development mode, independent of the frontend build mode. */
+  isDevelopment?: boolean;
   /** Additional APIs exposed by the desktop preload bridge. */
   [key: string]: any;
 }

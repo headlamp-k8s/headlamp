@@ -30,11 +30,16 @@ Once built, it can be run in development mode (auto-refresh) using:
 npm run frontend:start
 ```
 
-This command starts the Vite development server for the frontend
-(by default at `localhost:3000`).
+This command starts the Rsbuild development server for the frontend
+(by default at `localhost:3000`). To use the Vite fallback, run
+`npm --prefix frontend run start:vite`.
 
 We use [react-query](https://tanstack.com/query/latest/docs/framework/react/overview)
 for network requests. If you need the devtools for react-query, you can simply set `REACT_APP_ENABLE_REACT_QUERY_DEVTOOLS=true` in the `.env` file.
+
+Packaged products can generate the frontend version, product name, and source
+revision from app build inputs. See [Custom product builds](./app.md#custom-product-builds)
+for the `HEADLAMP_BUILD_MANIFEST` and `HEADLAMP_SOURCE_COMMIT` configuration.
 
 ## Product error content
 
@@ -70,6 +75,18 @@ cd frontend && npm run ci-lint
 ```
 
 You can run `ci-lint` locally before pushing to catch any react-hooks violations that CI would flag.
+
+## Unit test reliability
+
+Sidebar hook tests mock CRD listing and resource availability rather than
+contacting a backend. They assert that no fetch requests escape, unmount hook
+consumers, and cancel and clear React Query work before restoring mocks. Keep
+these boundaries when adding sidebar cases so pending requests cannot log after
+the Vitest worker starts shutting down.
+
+For large dropdowns, scope option assertions to the listbox and inspect its
+option nodes directly. Role queries compute visibility for every option, which
+can exceed the test timeout for thousand-item menus in jsdom under CI load.
 
 ## API documentation
 
@@ -141,18 +158,17 @@ npm run test:a11y
 ```
 
 This command will:
+
 1. Build the Storybook
 2. Run axe accessibility tests on all stories
 3. Report any accessibility violations found
 
 The tests will fail if any accessibility issues are detected, making it useful for CI/CD pipelines.
 
-
 #### Baseline Storybook a11y Configuration
 
 Known failures are tracked in `frontend/.axe-storybook-baseline.test-a11y.json`. This file is
 used by the test suite to allow known failures while catching new violations.
-
 
 ## Property testing (fuzzing)
 

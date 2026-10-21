@@ -16,6 +16,7 @@
 
 import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron';
 import { MenuItemConstructorOptions } from 'electron/main';
+import fs from 'node:fs';
 import path from 'path';
 import { loadSettings, saveSettings, SETTINGS_PATH } from './settings';
 
@@ -32,7 +33,11 @@ interface HeadlampTrayOptions {
   createWindow: () => Promise<void>;
   getBackendPort: () => number;
   getMainWindow: () => BrowserWindow | null;
+  /** Returns whether the backend still owns its confirmed endpoint. */
+  isBackendAvailable: () => boolean;
   isDev: boolean;
+  /** Resource-relative product tray icon used by packaged applications. */
+  trayIcon?: string;
   quit: () => void;
 }
 
@@ -99,6 +104,45 @@ export function cleanupHeadlampTray(): void {
   tray = null;
 }
 
+/** Resolves a product tray icon without allowing paths outside packaged resources. */
+export function resolveTrayIconPath(
+  options: Pick<HeadlampTrayOptions, 'isDev' | 'trayIcon'>,
+  resourcesPath: string = process.resourcesPath
+): { path: string; isCustom: boolean } {
+  const trayIconFilename =
+    process.platform === 'darwin' ? 'tray-iconTemplate.png' : 'tray-icon.png';
+  const fallback = {
+    path: options.isDev
+      ? path.join(__dirname, '..', 'assets', trayIconFilename)
+      : path.join(resourcesPath, 'assets', trayIconFilename),
+    isCustom: false,
+  };
+
+  if (options.trayIcon && !options.isDev) {
+    let root: string;
+    let iconPath: string;
+    try {
+      root = fs.realpathSync(resourcesPath);
+      iconPath = fs.realpathSync(path.resolve(root, options.trayIcon));
+    } catch {
+      console.error(`Ignoring unavailable tray icon: "${options.trayIcon}"`);
+      return fallback;
+    }
+    const relativePath = path.relative(root, iconPath);
+    if (
+      relativePath &&
+      relativePath !== '..' &&
+      !relativePath.startsWith(`..${path.sep}`) &&
+      !path.isAbsolute(relativePath)
+    ) {
+      return { path: iconPath, isCustom: true };
+    }
+    console.error(`Ignoring tray icon outside packaged resources: "${options.trayIcon}"`);
+  }
+
+  return fallback;
+}
+
 export function createHeadlampTray(options: HeadlampTrayOptions): boolean {
   if (!shouldRunTray()) {
     return false;
@@ -112,13 +156,16 @@ export function createHeadlampTray(options: HeadlampTrayOptions): boolean {
     return true;
   }
 
-  const trayIconFilename =
-    process.platform === 'darwin' ? 'tray-iconTemplate.png' : 'tray-icon.png';
-  const iconPath = options.isDev
-    ? path.join(__dirname, '..', 'assets', trayIconFilename)
-    : path.join(process.resourcesPath, 'assets', trayIconFilename);
+  let { path: iconPath, isCustom } = resolveTrayIconPath(options);
 
-  const trayIcon = nativeImage.createFromPath(iconPath);
+  let trayIcon = nativeImage.createFromPath(iconPath);
+  if (trayIcon.isEmpty() && isCustom) {
+    console.error(
+      `Failed to load custom tray icon from path "${iconPath}"; using the default icon.`
+    );
+    ({ path: iconPath, isCustom } = resolveTrayIconPath({ ...options, trayIcon: undefined }));
+    trayIcon = nativeImage.createFromPath(iconPath);
+  }
   if (trayIcon.isEmpty()) {
     console.error(
       `Failed to load tray icon from path "${iconPath}". System tray will not be created.`
@@ -127,6 +174,9 @@ export function createHeadlampTray(options: HeadlampTrayOptions): boolean {
   }
 
   if (process.platform === 'darwin') {
+    if (isCustom) {
+      trayIcon = trayIcon.resize({ width: 22, height: 22 });
+    }
     trayIcon.setTemplateImage(true);
   }
 
@@ -150,9 +200,13 @@ export function createHeadlampTray(options: HeadlampTrayOptions): boolean {
 }
 
 export async function getClusterStatuses(options: HeadlampTrayOptions): Promise<ClusterStatus[]> {
+  if (!options.isBackendAvailable()) {
+    return [];
+  }
+
   try {
     // Keep the app token separate from Authorization, which cluster routes reserve for Kubernetes credentials.
-    const configResponse = await fetch(`http://localhost:${options.getBackendPort()}/config`, {
+    const configResponse = await fetch(`http://127.0.0.1:${options.getBackendPort()}/config`, {
       headers: { 'X-HEADLAMP_BACKEND-TOKEN': options.backendToken },
     });
 
@@ -175,8 +229,11 @@ export async function getClusterStatuses(options: HeadlampTrayOptions): Promise<
       }
 
       try {
+        if (!options.isBackendAvailable()) {
+          return { name: cluster.name, status: 'unknown' as const };
+        }
         const healthResponse = await fetch(
-          `http://localhost:${options.getBackendPort()}/clusters/${cluster.name}/healthz`,
+          `http://127.0.0.1:${options.getBackendPort()}/clusters/${cluster.name}/healthz`,
           {
             headers: { 'X-HEADLAMP_BACKEND-TOKEN': options.backendToken },
           }

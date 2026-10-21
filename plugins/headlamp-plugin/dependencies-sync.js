@@ -76,10 +76,18 @@ const dependenciesToNotCopy = [
   'remark-gfm',
   '@typescript/native-preview',
   '@chanzuckerberg/axe-storybook-testing',
+  'tsx',
 ];
 
 // Dependencies that can have different versions
-const differentlyVersionedDependencies = ['eslint-plugin-react-hooks'];
+// vitest 4 crashes npm 10 on fresh installs, so plugin authors use vitest 5,
+// which needs @types/node 22 or newer.
+const differentlyVersionedDependencies = [
+  'eslint-plugin-react-hooks',
+  'vitest',
+  '@vitest/coverage-istanbul',
+  '@types/node',
+];
 
 const yargs = require('yargs/yargs');
 const fs = require('fs-extra');
