@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+// Registers the app's routes (via setDefaultRoutes) so createRouteURL below has routes to resolve.
+import '../../lib/router';
 import { configureStore } from '@reduxjs/toolkit';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
