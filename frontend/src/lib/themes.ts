@@ -609,6 +609,12 @@ export function usePrefersColorScheme() {
   return value ? 'dark' : 'light';
 }
 
+/** localStorage keys for the quick swap theme settings. */
+export const PREFERRED_LIGHT_THEME_KEY = 'headlampPreferredLightTheme';
+export const PREFERRED_DARK_THEME_KEY = 'headlampPreferredDarkTheme';
+export const REMEMBER_THEME_CHOICES_KEY = 'headlampRememberThemeChoices';
+export const QUICK_SWAP_ENABLED_KEY = 'headlampQuickSwapEnabled';
+
 /**
  * Hook gets theme based on user preference, and also OS/Browser preference.
  */
