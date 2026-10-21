@@ -76,7 +76,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c/gpu-cluster/resourceclaims/default/shared-gpu"
                   >
                     shared-gpu
                   </a>
@@ -100,7 +100,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c/gpu-cluster/resourceclaims/default/trainer-0-gpu-x7k2q"
                   >
                     trainer-0-gpu-x7k2q
                   </a>
@@ -110,7 +110,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c/gpu-cluster/resourceclaimtemplates/default/single-gpu"
                   >
                     Template: single-gpu
                   </a>
@@ -134,7 +134,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c/gpu-cluster/resourceclaimtemplates/default/scratch-nvme"
                   >
                     Template: scratch-nvme
                   </a>
@@ -151,7 +151,7 @@
                 >
                   <a
                     class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-2ugbm1-MuiTypography-root-MuiLink-root"
-                    href="/"
+                    href="/c/gpu-cluster/resourceclaims/default/trainer-0-extended-resources-p26fr"
                   >
                     trainer-0-extended-resources-p26fr
                   </a>

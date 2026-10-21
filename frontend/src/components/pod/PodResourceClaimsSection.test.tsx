@@ -39,6 +39,9 @@ const renderSection = (pod: Pod) =>
     </TestContext>
   );
 
+const cluster = 'gpu-cluster';
+const namespace = podWithResourceClaims.metadata.namespace;
+
 describe('PodResourceClaimsSection', () => {
   it('shows nothing for a Pod that holds no claim', () => {
     const { container } = renderSection(new Pod(podList[0]));
@@ -46,21 +49,31 @@ describe('PodResourceClaimsSection', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('links every claim the Pod holds, and says how the Pod names it', () => {
-    renderSection(new Pod(podWithResourceClaims));
+  it('links every claim the Pod holds to its page, and says how the Pod names it', () => {
+    renderSection(new Pod(podWithResourceClaims, cluster));
 
-    expect(screen.getByRole('link', { name: 'shared-gpu' })).toBeVisible();
-    expect(screen.getByRole('link', { name: 'trainer-0-gpu-x7k2q' })).toBeVisible();
-    expect(screen.getByRole('link', { name: 'trainer-0-extended-resources-p26fr' })).toBeVisible();
-    expect(screen.getByText('Template: single-gpu')).toBeVisible();
+    for (const claim of [
+      'shared-gpu',
+      'trainer-0-gpu-x7k2q',
+      'trainer-0-extended-resources-p26fr',
+    ]) {
+      expect(screen.getByRole('link', { name: claim })).toHaveAttribute(
+        'href',
+        `/c/${cluster}/resourceclaims/${namespace}/${claim}`
+      );
+    }
     expect(screen.getByText('Extended resource')).toBeVisible();
   });
 
-  it('links the template a claim is generated from', () => {
-    renderSection(new Pod(podWithResourceClaims));
+  it('links the template a claim is generated from to its page', () => {
+    renderSection(new Pod(podWithResourceClaims, cluster));
 
-    expect(screen.getByRole('link', { name: 'Template: single-gpu' })).toBeVisible();
-    expect(screen.getByRole('link', { name: 'Template: scratch-nvme' })).toBeVisible();
+    for (const template of ['single-gpu', 'scratch-nvme']) {
+      expect(screen.getByRole('link', { name: `Template: ${template}` })).toHaveAttribute(
+        'href',
+        `/c/${cluster}/resourceclaimtemplates/${namespace}/${template}`
+      );
+    }
   });
 
   it('marks a template claim that has not been generated yet', () => {

@@ -35,7 +35,7 @@ export default {
 const Template: StoryFn<{ pod: Pod }> = args => <PodResourceClaimsSection {...args} />;
 
 export const EveryKindOfClaim = Template.bind({});
-EveryKindOfClaim.args = { pod: new Pod(podWithResourceClaims) };
+EveryKindOfClaim.args = { pod: new Pod(podWithResourceClaims, 'gpu-cluster') };
 
 export const NoClaims = Template.bind({});
 NoClaims.args = { pod: new Pod(podList[0]) };
