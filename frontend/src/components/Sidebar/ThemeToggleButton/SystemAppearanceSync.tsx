@@ -18,7 +18,7 @@ import { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { usePrefersColorScheme } from '../../../lib/themes';
 import { useTypedSelector } from '../../../redux/hooks';
-import { setTheme, useAppThemes } from '../../App/themeSlice';
+import { applySystemTheme, useAppThemes } from '../../App/themeSlice';
 import {
   resolvePreferredDarkThemeName,
   resolvePreferredLightThemeName,
@@ -51,9 +51,10 @@ export function SystemAppearanceSync() {
   }
 
   // A layout effect applies the switch before paint, so the previous theme doesn't flash.
+  // The switch is system-driven, so it isn't saved as the user's own theme choice.
   useLayoutEffect(() => {
-    if (targetThemeName && targetThemeName !== currentThemeName) {
-      dispatch(setTheme(targetThemeName));
+    if (targetThemeName) {
+      dispatch(applySystemTheme(targetThemeName));
     }
   }, [dispatch, targetThemeName, currentThemeName]);
 

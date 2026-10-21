@@ -22,12 +22,14 @@ import {
 } from '../components/App/defaultAppThemes';
 import { AppTheme } from './AppTheme';
 import {
+  AUTOMATIC_THEME_PREFERENCE_KEY,
   createMuiTheme,
   getThemeName,
   getUserSelectedThemeName,
   PREFERRED_DARK_THEME_KEY,
   PREFERRED_LIGHT_THEME_KEY,
   setTheme,
+  SYSTEM_THEME_PREFERENCE_KEY,
   usePrefersColorScheme,
 } from './themes';
 
@@ -469,6 +471,30 @@ describe('themes.ts', () => {
       stubStorage(saved);
       stubOsScheme('dark');
       expect(getThemeName({ ...backendConfig, forceTheme: 'forced' })).toBe('forced');
+    });
+
+    it('keeps a theme applied by following the system over the saved quick swap theme', () => {
+      vi.stubGlobal('localStorage', {
+        headlampThemePreference: 'followed',
+        [AUTOMATIC_THEME_PREFERENCE_KEY]: 'followed',
+        [SYSTEM_THEME_PREFERENCE_KEY]: 'followed',
+        getItem: vi.fn((key: string) => (saved as Record<string, string>)[key] ?? null),
+        clear: vi.fn(),
+      });
+      stubOsScheme('light');
+      expect(getThemeName(backendConfig)).toBe('followed');
+      expect(getThemeName({ ...backendConfig, forceTheme: 'forced' })).toBe('forced');
+    });
+
+    it('does not keep other automatically applied themes over the saved quick swap theme', () => {
+      vi.stubGlobal('localStorage', {
+        headlampThemePreference: 'plugin-default',
+        [AUTOMATIC_THEME_PREFERENCE_KEY]: 'plugin-default',
+        getItem: vi.fn((key: string) => (saved as Record<string, string>)[key] ?? null),
+        clear: vi.fn(),
+      });
+      stubOsScheme('light');
+      expect(getThemeName(backendConfig)).toBe('my-light');
     });
 
     it('ignores a saved quick swap theme that is not registered', () => {

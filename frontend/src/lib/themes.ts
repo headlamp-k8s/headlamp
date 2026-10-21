@@ -620,6 +620,11 @@ export const FOLLOW_SYSTEM_APPEARANCE_KEY = 'headlampFollowSystemAppearance';
  * default or a fallback), so it isn't mistaken for a theme the user picked.
  */
 export const AUTOMATIC_THEME_PREFERENCE_KEY = 'headlampAutomaticThemePreference';
+/**
+ * Names the stored theme preference when it was applied by following the system appearance, so
+ * it stays active after following is turned off instead of changing with the OS color scheme.
+ */
+export const SYSTEM_THEME_PREFERENCE_KEY = 'headlampSystemThemePreference';
 
 function osPrefersDark(): boolean {
   return (
@@ -629,7 +634,8 @@ function osPrefersDark(): boolean {
 }
 
 /**
- * The theme the user picked in the app, if any: the last theme they switched to, otherwise
+ * The theme the user picked in the app, if any: the last theme they switched to, otherwise the
+ * theme last applied by following the system appearance (a setting they turned on), otherwise
  * their saved quick swap theme for the OS color scheme (light unless the OS prefers dark).
  *
  * @param availableThemes - When given, a saved quick swap theme is only used if registered,
@@ -638,6 +644,9 @@ function osPrefersDark(): boolean {
 export function getUserSelectedThemeName(availableThemes?: AppTheme[]): string | undefined {
   const themePreference = localStorage.headlampThemePreference;
   if (themePreference && themePreference !== localStorage[AUTOMATIC_THEME_PREFERENCE_KEY]) {
+    return themePreference;
+  }
+  if (themePreference && themePreference === localStorage[SYSTEM_THEME_PREFERENCE_KEY]) {
     return themePreference;
   }
 
@@ -715,6 +724,7 @@ export function getThemeName(
 export function setTheme(themeName: string) {
   localStorage.headlampThemePreference = themeName;
   delete localStorage[AUTOMATIC_THEME_PREFERENCE_KEY];
+  delete localStorage[SYSTEM_THEME_PREFERENCE_KEY];
 }
 
 /**
@@ -724,4 +734,20 @@ export function setTheme(themeName: string) {
 export function setAutomaticTheme(themeName: string) {
   localStorage.headlampThemePreference = themeName;
   localStorage[AUTOMATIC_THEME_PREFERENCE_KEY] = themeName;
+  delete localStorage[SYSTEM_THEME_PREFERENCE_KEY];
+}
+
+/**
+ * Stores a theme applied by following the system appearance. It isn't an explicit pick, but it
+ * stays active across config refreshes and launches until the user picks a theme or changes the
+ * quick swap light/dark themes (see `clearSystemTheme`).
+ */
+export function setSystemTheme(themeName: string) {
+  setAutomaticTheme(themeName);
+  localStorage[SYSTEM_THEME_PREFERENCE_KEY] = themeName;
+}
+
+/** Stops keeping the theme last applied by following the system appearance. */
+export function clearSystemTheme() {
+  delete localStorage[SYSTEM_THEME_PREFERENCE_KEY];
 }

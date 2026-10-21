@@ -21,7 +21,7 @@ import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AppTheme } from '../../../lib/AppTheme';
-import { createMuiTheme } from '../../../lib/themes';
+import { AUTOMATIC_THEME_PREFERENCE_KEY, createMuiTheme, getThemeName } from '../../../lib/themes';
 import { TestContext } from '../../../test';
 import defaultAppThemes, { darkTheme, lightTheme } from '../../App/defaultAppThemes';
 import themeReducer, {
@@ -619,6 +619,58 @@ describe('Follow system appearance', () => {
 
     system.setDark(true);
     expect(store.getState().theme.name).toBe('Corporate');
+  });
+
+  it('lets a dropdown pick apply after following is turned off', async () => {
+    localStorage.setItem(REMEMBER_THEME_CHOICES_KEY, 'false');
+    const system = mockSystemAppearance(false);
+    const store = makeLoadedStore('Light');
+    renderWithSync(store, <PreferredThemeSelectors />);
+
+    await userEvent.click(followSwitch());
+    system.setDark(true);
+    expect(store.getState().theme.name).toBe('Dark');
+    // The system-driven switch isn't saved as an explicit pick.
+    expect(localStorage.getItem(AUTOMATIC_THEME_PREFERENCE_KEY)).toBe('Dark');
+
+    await userEvent.click(followSwitch());
+    await userEvent.click(screen.getByRole('combobox', { name: /preferred dark mode/i }));
+    await userEvent.click(screen.getByRole('option', { name: 'Lights Out' }));
+
+    expect(store.getState().theme.name).toBe('Lights Out');
+    expect(getThemeName()).toBe('Lights Out');
+  });
+
+  it('keeps the theme through config refreshes after following is turned off', async () => {
+    localStorage.setItem(REMEMBER_THEME_CHOICES_KEY, 'false');
+    const system = mockSystemAppearance(false);
+    const store = makeLoadedStore('Light');
+    renderWithSync(store, <PreferredThemeSelectors />);
+    // Layout re-applies the backend theme config on each periodic config refresh.
+    const refreshConfig = (config: { forceTheme?: string } = {}) =>
+      act(() => {
+        store.dispatch(applyBackendThemeConfig(config));
+      });
+
+    await userEvent.click(followSwitch());
+    system.setDark(true);
+    await userEvent.click(followSwitch());
+    system.setDark(false);
+    refreshConfig();
+
+    expect(store.getState().theme.name).toBe('Dark');
+    expect(getThemeName()).toBe('Dark');
+
+    // A forced theme still takes precedence, and the kept theme returns once it's lifted.
+    refreshConfig({ forceTheme: 'Corporate' });
+    expect(store.getState().theme.name).toBe('Corporate');
+    refreshConfig();
+    expect(store.getState().theme.name).toBe('Dark');
+
+    // Changing the theme pair still applies it.
+    await userEvent.click(screen.getByRole('combobox', { name: /preferred light mode/i }));
+    await userEvent.click(screen.getByRole('option', { name: 'Monochrome Light' }));
+    expect(store.getState().theme.name).toBe('Monochrome Light');
   });
 
   it('starts following when turned on in another tab', () => {

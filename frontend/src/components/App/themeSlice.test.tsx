@@ -16,11 +16,17 @@
 
 import React from 'react';
 import { vi } from 'vitest';
-import { getThemeName } from '../../lib/themes';
+import {
+  AUTOMATIC_THEME_PREFERENCE_KEY,
+  getThemeName,
+  PREFERRED_DARK_THEME_KEY,
+  PREFERRED_LIGHT_THEME_KEY,
+} from '../../lib/themes';
 import { AppLogoProps, AppLogoType } from './AppLogo';
 import { darkTheme } from './defaultAppThemes';
 import themeReducer, {
   applyBackendThemeConfig,
+  applySystemTheme,
   ensureValidThemeName,
   initialState,
   reapplyThemePreferences,
@@ -48,6 +54,54 @@ describe('themeSlice', () => {
     const themeName = darkTheme.name;
     const actual = themeReducer(initialState, setTheme(themeName));
     expect(actual.name).toEqual(themeName);
+  });
+
+  describe('applySystemTheme', () => {
+    const ready = { ...initialState, backendConfigReady: true };
+    const configured = { defaultLightTheme: 'Monochrome Light', defaultDarkTheme: 'Dark' };
+
+    beforeEach(() => {
+      localStorage.clear();
+    });
+
+    afterEach(() => {
+      localStorage.clear();
+    });
+
+    it('sets the theme without recording it as an explicit choice', () => {
+      const actual = themeReducer(ready, applySystemTheme('Lights Out'));
+
+      expect(actual.name).toEqual('Lights Out');
+      expect(localStorage.getItem(AUTOMATIC_THEME_PREFERENCE_KEY)).toEqual('Lights Out');
+    });
+
+    it('keeps the theme across backend config refreshes', () => {
+      const applied = themeReducer(ready, applySystemTheme('Lights Out'));
+      const actual = themeReducer(applied, applyBackendThemeConfig(configured));
+
+      expect(actual.name).toEqual('Lights Out');
+      expect(getThemeName(configured)).toEqual('Lights Out');
+    });
+
+    it('lets a forced theme take precedence', () => {
+      const applied = themeReducer(ready, applySystemTheme('Lights Out'));
+      const actual = themeReducer(
+        applied,
+        applyBackendThemeConfig({ ...configured, forceTheme: 'corporate' })
+      );
+
+      expect(actual.name).toEqual('corporate');
+    });
+
+    it('gives way to changed quick swap themes', () => {
+      const applied = themeReducer(ready, applySystemTheme('Lights Out'));
+      // Saved for both modes so the result doesn't depend on the OS color scheme.
+      localStorage.setItem(PREFERRED_LIGHT_THEME_KEY, 'Monochrome Light');
+      localStorage.setItem(PREFERRED_DARK_THEME_KEY, 'Monochrome Light');
+      const actual = themeReducer(applied, reapplyThemePreferences(configured));
+
+      expect(actual.name).toEqual('Monochrome Light');
+    });
   });
 
   describe('applyBackendThemeConfig', () => {

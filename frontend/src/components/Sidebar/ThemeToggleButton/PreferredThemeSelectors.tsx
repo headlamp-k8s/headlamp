@@ -75,6 +75,9 @@ export function PreferredThemeSelectors() {
   // A saved quick swap theme is also the launch theme when no other theme was picked, so
   // re-evaluate now instead of waiting for the next periodic backend config refresh.
   const applyLaunchTheme = () => {
+    if (followSystem) {
+      return;
+    }
     dispatch(
       reapplyThemePreferences({
         defaultLightTheme: configuredLight,
