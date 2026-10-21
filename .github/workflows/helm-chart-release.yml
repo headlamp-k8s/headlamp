@@ -24,6 +24,7 @@ jobs:
       contents: write # need to write a commit to the repo
       packages: write # need to push chart to ghcr
       id-token: write # needed for cosign keyless signing via GitHub OIDC
+      attestations: write # needed to store the provenance attestation
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -98,16 +99,18 @@ jobs:
 
       # chart-releaser also reports charts whose release already existed and
       # was skipped, so only sign releases created from this commit. A re-run
-      # signs any package the previous attempt didn't. The GPG .prov file is
-      # kept for `helm verify`.
+      # adds any signature or provenance the previous attempt didn't. The GPG
+      # .prov file is kept for `helm verify`.
       - name: Sign chart packages with cosign (keyless)
+        id: sign
         if: steps.cr.outputs.changed_charts != ''
         env:
           GH_TOKEN: ${{ github.token }}
           CHANGED_CHARTS: ${{ steps.cr.outputs.changed_charts }}
         run: |
           IFS=',' read -ra charts <<< "$CHANGED_CHARTS"
-          mkdir -p .cr-release-signed
+          mkdir -p .cr-release-signed .cr-release-attest
+          needs_provenance=()
           for chart in "${charts[@]}"; do
             name=$(helm show chart "$chart" | awk '/^name:/ { print $2; exit }')
             version=$(helm show chart "$chart" | awk '/^version:/ { print $2; exit }')
@@ -121,15 +124,53 @@ jobs:
             fi
 
             assets=$(gh release view "$tag" --json assets --jq '.assets[].name')
+            has_signature=false
+            has_provenance=false
             if grep -qxF "${pkg}.sigstore.json" <<< "$assets"; then
-              echo "Release ${tag} is already signed"
+              has_signature=true
+            fi
+            if grep -qxF "${pkg}.intoto.jsonl" <<< "$assets"; then
+              has_provenance=true
+            fi
+            if [ "$has_signature" = true ] && [ "$has_provenance" = true ]; then
+              echo "Release ${tag} is already signed and has provenance"
               continue
             fi
 
-            # Sign the package attached to the release, which is what users download.
+            # Use the package attached to the release, which is what users download.
             gh release download "$tag" --pattern "$pkg" --dir .cr-release-signed
-            cosign sign-blob --yes \
-              --bundle ".cr-release-signed/${pkg}.sigstore.json" \
-              ".cr-release-signed/${pkg}"
-            gh release upload "$tag" ".cr-release-signed/${pkg}.sigstore.json"
+            if [ "$has_signature" = false ]; then
+              cosign sign-blob --yes \
+                --bundle ".cr-release-signed/${pkg}.sigstore.json" \
+                ".cr-release-signed/${pkg}"
+              gh release upload "$tag" ".cr-release-signed/${pkg}.sigstore.json"
+            fi
+            if [ "$has_provenance" = false ]; then
+              cp ".cr-release-signed/${pkg}" .cr-release-attest/
+              needs_provenance+=("${tag}=${pkg}")
+            fi
+          done
+          echo "releases=${needs_provenance[*]}" >> "$GITHUB_OUTPUT"
+
+      # SLSA provenance recording the workflow run that packaged the charts. It
+      # is also stored in GitHub's attestation API.
+      - name: Generate provenance for the chart packages
+        id: attest
+        if: steps.sign.outputs.releases != ''
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: .cr-release-attest/*.tgz
+
+      - name: Upload provenance to chart releases
+        if: steps.sign.outputs.releases != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUNDLE_PATH: ${{ steps.attest.outputs.bundle-path }}
+          RELEASES: ${{ steps.sign.outputs.releases }}
+        run: |
+          for release in $RELEASES; do
+            tag="${release%%=*}"
+            pkg="${release#*=}"
+            cp "$BUNDLE_PATH" ".cr-release-attest/${pkg}.intoto.jsonl"
+            gh release upload "$tag" ".cr-release-attest/${pkg}.intoto.jsonl"
           done
