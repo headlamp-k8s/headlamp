@@ -7,11 +7,11 @@ sidebar_position: 5
 Headlamp releases are signed, so you can check that what you downloaded was
 built by the Headlamp project and hasn't been tampered with.
 
-Release checksums and container images are signed with
+Release checksums, container images, and Helm charts are signed with
 [Sigstore](https://www.sigstore.dev/) keyless signing in the GitHub Actions
 workflows that build them, so there is no long-lived private key that could
 leak. Release tags are signed by the maintainer who creates the release, with
-their own key. The Helm chart is signed with GPG.
+their own key. The Helm chart is also signed with GPG.
 
 :::note
 Signatures for release checksums, container images, and release tags start with
@@ -89,9 +89,31 @@ certificate identity above with `refs/heads/<selected-branch>`.
 
 ## Helm chart
 
-The Helm chart is signed with GPG (key fingerprint
-`2956 B7F7 1677 6937 0C93  730C 7264 DA7B 85D0 8A37`), and each chart release
-includes a `.prov` provenance file. To verify the chart with Helm:
+Each chart release on GitHub (`headlamp-helm-X.Y.Z`) includes the chart package,
+`headlamp-X.Y.Z.tgz`, a Sigstore signature bundle for it,
+`headlamp-X.Y.Z.tgz.sigstore.json`, and a GPG `.prov` provenance file.
+
+:::note
+Sigstore signatures for the chart start with the first chart release after
+0.46.0.
+:::
+
+To verify the chart with cosign, download the chart and its signature bundle,
+then check that it was signed by the chart release workflow running from the
+`main` branch:
+
+```shell
+helm repo add headlamp https://kubernetes-sigs.github.io/headlamp/
+helm pull headlamp/headlamp --version X.Y.Z
+curl -LO https://github.com/kubernetes-sigs/headlamp/releases/download/headlamp-helm-X.Y.Z/headlamp-X.Y.Z.tgz.sigstore.json
+cosign verify-blob headlamp-X.Y.Z.tgz \
+  --bundle headlamp-X.Y.Z.tgz.sigstore.json \
+  --certificate-identity 'https://github.com/kubernetes-sigs/headlamp/.github/workflows/helm-chart-release.yml@refs/heads/main' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+
+The GPG signature (key fingerprint
+`2956 B7F7 1677 6937 0C93  730C 7264 DA7B 85D0 8A37`) can be verified with Helm:
 
 :::note
 The public key is not currently available from public keyservers (see
