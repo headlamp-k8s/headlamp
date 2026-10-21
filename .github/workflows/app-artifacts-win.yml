@@ -21,6 +21,7 @@ jobs:
       id-token: write # For fetching an OpenID Connect (OIDC) token
       contents: read
       actions: write # needed to upload artifacts
+      attestations: write # needed to store the provenance attestation
     strategy:
       fail-fast: false
       matrix:
@@ -128,5 +129,44 @@ jobs:
       with:
         name: Win-${{ matrix.arch }}-exes
         path: ./headlamp/app/dist/Headlamp*${{ matrix.arch }}*.*
+        if-no-files-found: error
+        retention-days: 2
+
+    # Provenance records the workflow's commit as the source, so it is only
+    # generated when that commit was built, as with `releaser ci app`.
+    - name: Check that the workflow ref was built
+      id: source
+      shell: pwsh
+      run: |
+        $built = git -C headlamp rev-parse HEAD
+        if ($built -eq $env:GITHUB_SHA) {
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "matches=true"
+        } else {
+          Write-Output "::warning::Built $built, but the workflow ran from $env:GITHUB_SHA, so no provenance is generated. Run the workflow from the ref it builds for release builds."
+        }
+
+    - name: Generate provenance
+      id: attest
+      if: steps.source.outputs.matches == 'true'
+      uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+      with:
+        subject-path: headlamp/app/dist/Headlamp*${{ matrix.arch }}*.*
+
+    - name: Prepare provenance artifact
+      if: steps.source.outputs.matches == 'true'
+      shell: pwsh
+      env:
+        BUNDLE_PATH: ${{ steps.attest.outputs.bundle-path }}
+        ARCH: ${{ matrix.arch }}
+      run: |
+        New-Item -ItemType Directory -Force -Path provenance | Out-Null
+        Copy-Item -Path $env:BUNDLE_PATH -Destination "provenance/headlamp-win-$env:ARCH.intoto.jsonl"
+
+    - name: Upload provenance artifact
+      if: steps.source.outputs.matches == 'true'
+      uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+      with:
+        name: Provenance-win-${{ matrix.arch }}
+        path: ./provenance/headlamp-win-${{ matrix.arch }}.intoto.jsonl
         if-no-files-found: error
         retention-days: 2
