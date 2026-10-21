@@ -49,9 +49,6 @@ describe('themeSlice', () => {
   describe('applyBackendThemeConfig', () => {
     beforeEach(() => {
       localStorage.clear();
-      // The mock's clear() only resets store; setTheme() writes localStorage.headlampThemePreference
-      // as a direct property that survives clear(). Delete it explicitly so tests start clean.
-      delete (localStorage as any).headlampThemePreference;
     });
 
     it('should apply forced theme and override current theme', () => {
