@@ -147,6 +147,11 @@ releaser publish 0.42.0 --force
 
 Trigger or list app build workflow runs on GitHub Actions.
 
+The build workflows run from the given git ref itself, so the build provenance
+that they generate records it as the source. Release assets can't be uploaded
+without that provenance, so trigger release builds with `releaser ci app` rather
+than running the workflows from `main` with a different build branch.
+
 ```bash
 # Trigger builds
 releaser ci app --build <git-ref> [options]
