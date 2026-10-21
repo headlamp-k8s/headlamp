@@ -64,7 +64,7 @@ releaser check 0.42.0
 
 ### `check` — Verify a release
 
-Check whether a release exists on GitHub and verify that all required artifacts (Mac, Linux, Windows) and the `checksums.txt` cosign signature (`checksums.txt.sigstore.json`) are present. Once the `v<version>` tag is on GitHub, it also checks that the tag is signed (failing for unsigned or lightweight tags and invalid signatures, such as ones made with an expired key) and warns if GitHub can't match the signing key to the tagger's GitHub account or couldn't check the signature at the moment. Run it before and after publishing a release.
+Check whether a release exists on GitHub and verify that all required artifacts (Mac, Linux, Windows), the `checksums.txt` cosign signature (`checksums.txt.sigstore.json`), and the release provenance (`headlamp-<version>.intoto.jsonl`) are present. Once the `v<version>` tag is on GitHub, it also checks that the tag is signed (failing for unsigned or lightweight tags and invalid signatures, such as ones made with an expired key) and warns if GitHub can't match the signing key to the tagger's GitHub account or couldn't check the signature at the moment. Run it before and after publishing a release.
 
 ```bash
 releaser check <release-version>
@@ -193,7 +193,7 @@ releaser ci verify-assets <release-version> <files...>
 **Example:**
 
 ```bash
-releaser ci verify-assets 0.42.0 ./checksums.txt.sigstore.json
+releaser ci verify-assets 0.42.0 ./checksums.txt.sigstore.json ./headlamp-0.42.0.intoto.jsonl
 ```
 
 ### `security-check` — Scan the backend and Dockerfiles for security issues
