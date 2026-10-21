@@ -27,8 +27,9 @@ import Switch from '@mui/material/Switch';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../../redux/hooks';
-import { useAppThemes } from '../../App/themeSlice';
+import { reapplyThemePreferences, useAppThemes } from '../../App/themeSlice';
 import {
   getQuickSwapEnabled,
   getRememberThemeChoices,
@@ -51,6 +52,9 @@ export function PreferredThemeSelectors() {
   const { t } = useTranslation(['translation']);
   const appThemes = useAppThemes();
   const forceTheme = useTypedSelector(state => state.config.forceTheme);
+  const configuredLight = useTypedSelector(state => state.config.defaultLightTheme);
+  const configuredDark = useTypedSelector(state => state.config.defaultDarkTheme);
+  const dispatch = useDispatch();
   const lightThemes = appThemes.filter(isLightTheme);
   const darkThemes = appThemes.filter(isDarkTheme);
 
@@ -62,15 +66,28 @@ export function PreferredThemeSelectors() {
 
   // Display-only fallback: storage is only written on explicit user choices, so a stored
   // preference for a not-yet-registered (or temporarily unavailable) plugin theme survives.
-  const preferredLight = resolvePreferredLightThemeName(appThemes);
-  const preferredDark = resolvePreferredDarkThemeName(appThemes);
+  const preferredLight = resolvePreferredLightThemeName(appThemes, configuredLight);
+  const preferredDark = resolvePreferredDarkThemeName(appThemes, configuredDark);
+
+  // A saved quick swap theme is also the launch theme when no other theme was picked, so
+  // re-evaluate now instead of waiting for the next periodic backend config refresh.
+  const applyLaunchTheme = () => {
+    dispatch(
+      reapplyThemePreferences({
+        defaultLightTheme: configuredLight,
+        defaultDarkTheme: configuredDark,
+      })
+    );
+  };
 
   const handleLightChange = (event: SelectChangeEvent<string>) => {
     setPreferredLightThemeName(event.target.value);
+    applyLaunchTheme();
   };
 
   const handleDarkChange = (event: SelectChangeEvent<string>) => {
     setPreferredDarkThemeName(event.target.value);
+    applyLaunchTheme();
   };
 
   // The two modes are mutually exclusive; enabling one turns the other off.

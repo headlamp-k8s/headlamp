@@ -39,11 +39,16 @@ const REMEMBER_THEME_CHOICES_KEY = 'headlampRememberThemeChoices';
 const QUICK_SWAP_ENABLED_KEY = 'headlampQuickSwapEnabled';
 
 /** Builds a store with the real theme reducer so dispatched `setTheme` updates state. */
-function makeStore(themeName: string, forceTheme = '', appThemes: AppTheme[] = defaultAppThemes) {
+function makeStore(
+  themeName: string,
+  forceTheme = '',
+  appThemes: AppTheme[] = defaultAppThemes,
+  configuredDefaults: { defaultLightTheme?: string; defaultDarkTheme?: string } = {}
+) {
   return configureStore({
     reducer: {
       theme: themeReducer,
-      config: (state = { forceTheme }) => state,
+      config: (state = { forceTheme, ...configuredDefaults }) => state,
     },
     preloadedState: {
       theme: { ...themeInitialState, name: themeName, appThemes },
@@ -148,6 +153,64 @@ describe('ThemeToggleButton', () => {
     const { container } = renderWithProviders(<ThemeToggleButton />, lightTheme, store);
 
     expect(container).toBeEmptyDOMElement();
+  });
+});
+
+describe('configured default themes', () => {
+  const configured = { defaultLightTheme: 'Monochrome Light', defaultDarkTheme: 'Lights Out' };
+  const toLight = () => screen.getByRole('button', { name: /switch to light mode/i });
+  const toDark = () => screen.getByRole('button', { name: /switch to dark mode/i });
+
+  it('swaps between the configured pair when nothing is saved', async () => {
+    const store = makeStore('Monochrome Light', '', defaultAppThemes, configured);
+    renderWithProviders(<ThemeToggleButton />, lightTheme, store);
+
+    await userEvent.click(toDark());
+    expect(store.getState().theme.name).toBe('Lights Out');
+
+    await userEvent.click(toLight());
+    expect(store.getState().theme.name).toBe('Monochrome Light');
+  });
+
+  it('prefers saved choices over the configured pair', async () => {
+    localStorage.setItem(PREFERRED_LIGHT_THEME_KEY, 'Light');
+    localStorage.setItem(PREFERRED_DARK_THEME_KEY, 'Dark');
+    const store = makeStore('Monochrome Light', '', defaultAppThemes, configured);
+    renderWithProviders(<ThemeToggleButton />, lightTheme, store);
+
+    await userEvent.click(toDark());
+    expect(store.getState().theme.name).toBe('Dark');
+
+    await userEvent.click(toLight());
+    expect(store.getState().theme.name).toBe('Light');
+  });
+
+  it('falls back to built-in themes when the configured ones are unusable', async () => {
+    // Unregistered light default, and a dark default that is actually a light theme.
+    const store = makeStore('Light', '', defaultAppThemes, {
+      defaultLightTheme: 'NoSuchTheme',
+      defaultDarkTheme: 'Monochrome Light',
+    });
+    renderWithProviders(<ThemeToggleButton />, lightTheme, store);
+
+    await userEvent.click(toDark());
+    expect(store.getState().theme.name).toBe('Dark');
+
+    await userEvent.click(toLight());
+    expect(store.getState().theme.name).toBe('Light');
+  });
+
+  it('shows the configured pair in the settings dropdowns', () => {
+    localStorage.setItem(REMEMBER_THEME_CHOICES_KEY, 'false');
+    const store = makeStore('Monochrome Light', '', defaultAppThemes, configured);
+    renderWithProviders(<PreferredThemeSelectors />, lightTheme, store);
+
+    expect(screen.getByRole('combobox', { name: /preferred light mode/i })).toHaveTextContent(
+      'Monochrome Light'
+    );
+    expect(screen.getByRole('combobox', { name: /preferred dark mode/i })).toHaveTextContent(
+      'Lights Out'
+    );
   });
 });
 

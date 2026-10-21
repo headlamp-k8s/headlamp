@@ -17,7 +17,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { AppTheme } from '../../lib/AppTheme';
-import { getThemeName, setTheme as setAppTheme } from '../../lib/themes';
+import {
+  getThemeName,
+  getUserSelectedThemeName,
+  setAutomaticTheme,
+  setTheme as setAppTheme,
+} from '../../lib/themes';
 import { AppLogoType } from './AppLogo';
 import defaultAppThemes from './defaultAppThemes';
 export interface ThemeState {
@@ -42,6 +47,30 @@ export const initialState: ThemeState = {
   appThemes: defaultAppThemes,
   backendConfigReady: false,
 };
+
+interface BackendThemeConfig {
+  defaultLightTheme?: string;
+  defaultDarkTheme?: string;
+  forceTheme?: string;
+}
+
+/** Picks the active theme from the forced theme, user choices, plugin default and config. */
+function updateThemeName(state: ThemeState, backendConfig: BackendThemeConfig) {
+  const pluginDefault =
+    !backendConfig.forceTheme && !getUserSelectedThemeName(state.appThemes)
+      ? state.pluginDefault
+      : undefined;
+  const newThemeName = pluginDefault || getThemeName(backendConfig, state.appThemes);
+
+  if (pluginDefault) {
+    setAutomaticTheme(pluginDefault);
+  }
+
+  // Only update if theme has changed
+  if (newThemeName !== state.name) {
+    state.name = newThemeName;
+  }
+}
 
 const themeSlice = createSlice({
   name: 'theme',
@@ -73,10 +102,10 @@ const themeSlice = createSlice({
       if (
         state.backendConfigReady &&
         !state.forceTheme &&
-        !localStorage.getItem('headlampThemePreference')
+        !getUserSelectedThemeName(state.appThemes)
       ) {
         state.name = action.payload;
-        setAppTheme(action.payload);
+        setAutomaticTheme(action.payload);
       }
     },
     /** Checks if the selected theme name doesn't exist anymore and sets a fallback */
@@ -86,40 +115,31 @@ const themeSlice = createSlice({
         // Remove cached theme name so that getThemeName returns theme that
         // preferred by OS and not the cached name
         setAppTheme('');
-        const defaultThemeName = getThemeName();
+        const defaultThemeName = getThemeName(undefined, state.appThemes);
         state.name = defaultThemeName;
-        setAppTheme(defaultThemeName);
+        setAutomaticTheme(defaultThemeName);
       }
     },
     /**
      * Applies backend theme configuration if set.
      * Should be called after config is loaded from backend.
      */
-    applyBackendThemeConfig(
-      state,
-      action: PayloadAction<{
-        defaultLightTheme?: string;
-        defaultDarkTheme?: string;
-        forceTheme?: string;
-      }>
-    ) {
+    applyBackendThemeConfig(state, action: PayloadAction<BackendThemeConfig>) {
       const backendConfig = action.payload;
       state.backendConfigReady = true;
       state.forceTheme = backendConfig.forceTheme;
-      const hasHigherPriorityTheme =
-        backendConfig.forceTheme || localStorage.getItem('headlampThemePreference');
-      const newThemeName = hasHigherPriorityTheme
-        ? getThemeName(backendConfig)
-        : state.pluginDefault || getThemeName(backendConfig);
-
-      if (state.pluginDefault && newThemeName === state.pluginDefault) {
-        setAppTheme(newThemeName);
+      updateThemeName(state, backendConfig);
+    },
+    /**
+     * Re-evaluates the active theme after the user's saved theme choices change (for example
+     * the quick swap light/dark themes), using the backend configuration already applied.
+     * Does nothing until the backend configuration has been applied.
+     */
+    reapplyThemePreferences(state, action: PayloadAction<Omit<BackendThemeConfig, 'forceTheme'>>) {
+      if (!state.backendConfigReady) {
+        return;
       }
-
-      // Only update if theme has changed
-      if (newThemeName !== state.name) {
-        state.name = newThemeName;
-      }
+      updateThemeName(state, { ...action.payload, forceTheme: state.forceTheme });
     },
   },
 });
@@ -164,6 +184,7 @@ export const {
   setBrandingAppLogoComponent,
   setTheme,
   applyBackendThemeConfig,
+  reapplyThemePreferences,
   ensureValidThemeName,
   setPluginDefaultTheme,
 } = themeSlice.actions;

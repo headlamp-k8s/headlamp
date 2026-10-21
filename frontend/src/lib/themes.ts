@@ -614,6 +614,43 @@ export const PREFERRED_LIGHT_THEME_KEY = 'headlampPreferredLightTheme';
 export const PREFERRED_DARK_THEME_KEY = 'headlampPreferredDarkTheme';
 export const REMEMBER_THEME_CHOICES_KEY = 'headlampRememberThemeChoices';
 export const QUICK_SWAP_ENABLED_KEY = 'headlampQuickSwapEnabled';
+/**
+ * Names the stored theme preference when it was applied automatically (for example a plugin
+ * default or a fallback), so it isn't mistaken for a theme the user picked.
+ */
+export const AUTOMATIC_THEME_PREFERENCE_KEY = 'headlampAutomaticThemePreference';
+
+function osPrefersDark(): boolean {
+  return (
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+}
+
+/**
+ * The theme the user picked in the app, if any: the last theme they switched to, otherwise
+ * their saved quick swap theme for the OS color scheme (light unless the OS prefers dark).
+ *
+ * @param availableThemes - When given, a saved quick swap theme is only used if registered,
+ *   so a plugin theme that is missing (or not loaded yet) doesn't become the active theme.
+ */
+export function getUserSelectedThemeName(availableThemes?: AppTheme[]): string | undefined {
+  const themePreference = localStorage.headlampThemePreference;
+  if (themePreference && themePreference !== localStorage[AUTOMATIC_THEME_PREFERENCE_KEY]) {
+    return themePreference;
+  }
+
+  const quickSwapTheme = localStorage.getItem(
+    osPrefersDark() ? PREFERRED_DARK_THEME_KEY : PREFERRED_LIGHT_THEME_KEY
+  );
+  if (!quickSwapTheme) {
+    return undefined;
+  }
+  if (availableThemes && !availableThemes.some(theme => theme.name === quickSwapTheme)) {
+    return undefined;
+  }
+  return quickSwapTheme;
+}
 
 /**
  * Hook gets theme based on user preference, and also OS/Browser preference.
@@ -623,28 +660,31 @@ export const QUICK_SWAP_ENABLED_KEY = 'headlampQuickSwapEnabled';
  *
  * Precedence order:
  * 1. If forceTheme is set → use it (ignore user preference)
- * 2. If user has selected theme in localStorage → use it
+ * 2. If the user picked a theme in the app → use it (see `getUserSelectedThemeName`)
  * 3. If backend has default theme matching OS preference → use it
  * 4. Fallback to OS/browser preference (light/dark)
  *
  * @param backendConfig - Optional backend theme configuration
+ * @param availableThemes - When given, saved quick swap themes must be registered to be used
  * @returns The theme name to use
  */
-export function getThemeName(backendConfig?: {
-  defaultLightTheme?: string;
-  defaultDarkTheme?: string;
-  forceTheme?: string;
-}): string {
+export function getThemeName(
+  backendConfig?: {
+    defaultLightTheme?: string;
+    defaultDarkTheme?: string;
+    forceTheme?: string;
+  },
+  availableThemes?: AppTheme[]
+): string {
   // If force theme is set, it overrides everything
   if (backendConfig?.forceTheme) {
     return backendConfig.forceTheme;
   }
 
-  const themePreference = localStorage.headlampThemePreference;
-
-  // User-selected theme preference takes precedence
-  if (themePreference) {
-    return themePreference;
+  // Themes picked in the app take precedence over configured defaults
+  const userSelectedTheme = getUserSelectedThemeName(availableThemes);
+  if (userSelectedTheme) {
+    return userSelectedTheme;
   }
 
   // Detect OS preference
@@ -670,6 +710,17 @@ export function getThemeName(backendConfig?: {
   return lightTheme.name;
 }
 
+/** Stores a theme the user explicitly switched to. */
 export function setTheme(themeName: string) {
   localStorage.headlampThemePreference = themeName;
+  delete localStorage[AUTOMATIC_THEME_PREFERENCE_KEY];
+}
+
+/**
+ * Stores a theme applied without a user choice (such as a plugin default), keeping it out of
+ * `getUserSelectedThemeName` so saved and later user choices still take precedence.
+ */
+export function setAutomaticTheme(themeName: string) {
+  localStorage.headlampThemePreference = themeName;
+  localStorage[AUTOMATIC_THEME_PREFERENCE_KEY] = themeName;
 }

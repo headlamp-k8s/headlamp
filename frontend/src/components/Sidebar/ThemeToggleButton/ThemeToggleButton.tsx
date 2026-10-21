@@ -38,7 +38,7 @@ function notifyQuickSwapChanged(): void {
   }
 }
 
-/** Fallback names used when the user hasn't picked a preferred theme yet. */
+/** Fallback names used when the user hasn't picked a preferred theme and none is configured. */
 export const DEFAULT_LIGHT_THEME_NAME = 'Light';
 export const DEFAULT_DARK_THEME_NAME = 'Dark';
 
@@ -179,20 +179,32 @@ function resolvePreferredThemeName(
 
 /**
  * The light theme quick swap will switch to: the user's stored preference, then the
- * built-in default. The stored preference is never overwritten here, so a plugin theme
- * that registers later is picked up again.
+ * configured default (`--default-light-theme`), then the built-in default. The stored
+ * preference is never overwritten here, so a plugin theme that registers later is
+ * picked up again.
  */
-export function resolvePreferredLightThemeName(themes: AppTheme[]): string {
+export function resolvePreferredLightThemeName(
+  themes: AppTheme[],
+  configuredDefault?: string
+): string {
   return resolvePreferredThemeName(themes, false, [
     localStorage.getItem(PREFERRED_LIGHT_THEME_KEY),
+    configuredDefault,
     getDefaultLightThemeName(themes),
   ]);
 }
 
-/** The dark theme quick swap will switch to; see `resolvePreferredLightThemeName`. */
-export function resolvePreferredDarkThemeName(themes: AppTheme[]): string {
+/**
+ * The dark theme quick swap will switch to; see `resolvePreferredLightThemeName`.
+ * The configured default comes from `--default-dark-theme`.
+ */
+export function resolvePreferredDarkThemeName(
+  themes: AppTheme[],
+  configuredDefault?: string
+): string {
   return resolvePreferredThemeName(themes, true, [
     localStorage.getItem(PREFERRED_DARK_THEME_KEY),
+    configuredDefault,
     DEFAULT_DARK_THEME_NAME,
   ]);
 }
@@ -206,6 +218,8 @@ export default function ThemeToggleButton() {
   const appThemes = useAppThemes();
   const currentThemeName = useTypedSelector(state => state.theme.name);
   const forceTheme = useTypedSelector(state => state.config.forceTheme);
+  const configuredLight = useTypedSelector(state => state.config.defaultLightTheme);
+  const configuredDark = useTypedSelector(state => state.config.defaultDarkTheme);
   const quickSwapEnabled = useQuickSwapEnabled();
   const { t } = useTranslation();
 
@@ -216,8 +230,8 @@ export default function ThemeToggleButton() {
   const currentAppTheme = appThemes.find(t => t.name === currentThemeName);
   const isDark = currentAppTheme ? isDarkTheme(currentAppTheme) : theme.palette.mode === 'dark';
   const nextThemeName = isDark
-    ? resolvePreferredLightThemeName(appThemes)
-    : resolvePreferredDarkThemeName(appThemes);
+    ? resolvePreferredLightThemeName(appThemes, configuredLight)
+    : resolvePreferredDarkThemeName(appThemes, configuredDark);
 
   const description = isDark
     ? t('translation|Switch to light mode')
