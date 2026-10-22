@@ -252,7 +252,60 @@ func TestCreateHeadlampHandlerTracesRequests(t *testing.T) {
 	}
 }
 
-//nolint:funlen
+// capturedLog is one entry recorded from the process-global logger sink.
+type capturedLog struct {
+	level uint
+	msg   string
+}
+
+// logCapture records the entries written to the process-global logger sink.
+//
+// Other tests in this package create Headlamp handlers, which start kubeconfig
+// and plugin watcher goroutines. Those goroutines log their shutdown once their
+// context is cancelled, which happens after the test that started them has
+// returned, into whichever sink is installed by then. A capture therefore has
+// to be mutex-guarded, and has to be matched by message rather than taken as a
+// whole.
+type logCapture struct {
+	mu      sync.Mutex
+	entries []capturedLog
+}
+
+// newLogCapture installs a capture as the logger sink for the duration of the
+// test and restores the previous sink afterwards.
+func newLogCapture(t *testing.T) *logCapture {
+	t.Helper()
+
+	capture := &logCapture{}
+
+	originalLogFunc := logger.SetLogFunc(func(level uint, _ map[string]string, _ interface{}, msg string) {
+		capture.mu.Lock()
+		defer capture.mu.Unlock()
+
+		capture.entries = append(capture.entries, capturedLog{level: level, msg: msg})
+	})
+
+	t.Cleanup(func() { logger.SetLogFunc(originalLogFunc) })
+
+	return capture
+}
+
+// matching returns the captured entries carrying the given message.
+func (c *logCapture) matching(msg string) []capturedLog {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	var matches []capturedLog
+
+	for _, entry := range c.entries {
+		if entry.msg == msg {
+			matches = append(matches, entry)
+		}
+	}
+
+	return matches
+}
+
 func TestLoadKubeConfigClustersLogging(t *testing.T) {
 	tests := []struct {
 		name          string
@@ -289,18 +342,7 @@ func TestLoadKubeConfigClustersLogging(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			var logs []struct {
-				level uint
-				msg   string
-			}
-
-			originalLogFunc := logger.SetLogFunc(func(level uint, _ map[string]string, _ interface{}, msg string) {
-				logs = append(logs, struct {
-					level uint
-					msg   string
-				}{level: level, msg: msg})
-			})
-			defer logger.SetLogFunc(originalLogFunc)
+			capture := newLogCapture(t)
 
 			config := &HeadlampConfig{
 				HeadlampConfig: &headlampconfig.HeadlampConfig{
@@ -313,9 +355,9 @@ func TestLoadKubeConfigClustersLogging(t *testing.T) {
 
 			loadKubeConfigClusters(config, test.path, nil)
 
-			require.Len(t, logs, 1)
-			assert.Equal(t, test.expectedLevel, logs[0].level)
-			assert.Equal(t, test.expectedMsg, logs[0].msg)
+			matches := capture.matching(test.expectedMsg)
+			require.Len(t, matches, 1, "expected one %q log entry", test.expectedMsg)
+			assert.Equal(t, test.expectedLevel, matches[0].level)
 		})
 	}
 }
@@ -345,20 +387,16 @@ func TestLoadDynamicClustersLogging(t *testing.T) {
 		},
 	}
 
+	// The messages loadDynamicClusters itself can emit. The empty-path case has
+	// to be checked against these, since unrelated goroutines may have logged.
+	ownMessages := []string{
+		"No kubeconfig for dynamically added clusters",
+		"loading the kubeconfig of dynamically added clusters",
+	}
+
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			var logs []struct {
-				level uint
-				msg   string
-			}
-
-			originalLogFunc := logger.SetLogFunc(func(level uint, _ map[string]string, _ interface{}, msg string) {
-				logs = append(logs, struct {
-					level uint
-					msg   string
-				}{level: level, msg: msg})
-			})
-			defer logger.SetLogFunc(originalLogFunc)
+			capture := newLogCapture(t)
 
 			config := &HeadlampConfig{
 				HeadlampConfig: &headlampconfig.HeadlampConfig{
@@ -371,14 +409,16 @@ func TestLoadDynamicClustersLogging(t *testing.T) {
 			loadDynamicClusters(config, test.path, nil)
 
 			if test.expectedMsg == "" {
-				assert.Empty(t, logs)
+				for _, msg := range ownMessages {
+					assert.Empty(t, capture.matching(msg), "unexpected %q log entry", msg)
+				}
 
 				return
 			}
 
-			require.Len(t, logs, 1)
-			assert.Equal(t, test.expectedLevel, logs[0].level)
-			assert.Equal(t, test.expectedMsg, logs[0].msg)
+			matches := capture.matching(test.expectedMsg)
+			require.Len(t, matches, 1, "expected one %q log entry", test.expectedMsg)
+			assert.Equal(t, test.expectedLevel, matches[0].level)
 		})
 	}
 }
