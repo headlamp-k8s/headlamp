@@ -262,6 +262,22 @@ func captureErrorLogs(t *testing.T) func() []string {
 	}
 }
 
+// newWatcherOrSkip creates a watcher, or skips the test when the host cannot
+// hand out another inotify instance. The limit is per user rather than per
+// process, so every test binary running at the same time draws on it, and on
+// the emulated s390x and ppc64le runners it runs out. A test that cannot have
+// a watcher at all is not testing what it was written for.
+func newWatcherOrSkip(t *testing.T) *fsnotify.Watcher {
+	t.Helper()
+
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		t.Skipf("inotify watchers unavailable: %v", err)
+	}
+
+	return watcher
+}
+
 // TestLoadAndWatchFilesEmptyPath verifies that the watcher does not run when no
 // kubeconfig is set, as in in-cluster mode with plugin watching enabled.
 func TestLoadAndWatchFilesEmptyPath(t *testing.T) {
@@ -286,6 +302,10 @@ func TestLoadAndWatchFilesEmptyPath(t *testing.T) {
 // TestLoadAndWatchFilesMissingFile verifies that watching a kubeconfig file that
 // does not exist yet is not logged as an error.
 func TestLoadAndWatchFilesMissingFile(t *testing.T) {
+	// LoadAndWatchFiles creates a watcher of its own and logs an error when it
+	// cannot, which says nothing about the missing file this test is about.
+	require.NoError(t, newWatcherOrSkip(t).Close())
+
 	errorLogs := captureErrorLogs(t)
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -312,8 +332,7 @@ func TestReAddMissingFilesLoadsCreatedFile(t *testing.T) {
 
 	kubeConfigPath := filepath.Join(t.TempDir(), "config")
 
-	watcher, err := fsnotify.NewWatcher()
-	require.NoError(t, err)
+	watcher := newWatcherOrSkip(t)
 
 	defer func() { _ = watcher.Close() }()
 
