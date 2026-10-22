@@ -49,7 +49,7 @@ jobs:
           version: v2.12.2
           working-directory: backend
           skip-cache: true
-          args: --timeout 3m
+          args: --timeout 10m
 
       - name: Lint, Build & Check
         run: |
