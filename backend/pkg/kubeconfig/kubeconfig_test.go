@@ -171,6 +171,7 @@ func TestLoadContextFromFile(t *testing.T) {
 		assert.Contains(t, expectedNames, ctx.Name, "Unexpected context name")
 		assert.Contains(t, expectedClusterIDs, ctx.ClusterID, "Unexpected ClusterID")
 		assert.Equal(t, kubeConfigFile, ctx.KubeConfigPath, "Unexpected kubeconfig path")
+		assert.Equal(t, ctx.Name, ctx.KubeConfigContextName, "Unexpected original context name")
 		assert.Equal(t, fmt.Sprintf("%s+%s", kubeConfigFile, ctx.Name), ctx.ClusterID, "Unexpected ClusterID")
 	}
 }
@@ -686,10 +687,11 @@ func newTestContext() *kubeconfig.Context {
 			SkipTLSVerify: boolPtr(true),
 			CACert:        stringPtr("test-ca-cert"),
 		},
-		Internal:       true,
-		Error:          "test-error",
-		KubeConfigPath: "/path/to/kubeconfig",
-		ClusterID:      "test-cluster-id",
+		Internal:              true,
+		Error:                 "test-error",
+		KubeConfigPath:        "/path/to/kubeconfig",
+		KubeConfigContextName: "original-context",
+		ClusterID:             "test-cluster-id",
 	}
 }
 

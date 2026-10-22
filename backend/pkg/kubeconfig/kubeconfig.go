@@ -123,6 +123,8 @@ type Context struct {
 	Error       string                 `json:"error"`
 	// KubeConfigPath is the file path for the kubeconfig file.
 	KubeConfigPath string `json:"kubeConfigPath"`
+	// KubeConfigContextName is the original on-disk context key, before display-name changes.
+	KubeConfigContextName string `json:"-"`
 	// ClusterID is the unique identifier for the cluster, consisting of the filepath and context name.
 	ClusterID string `json:"clusterID"`
 	// ClusterInventory stores metadata copied from a Cluster Inventory ClusterProfile.
@@ -169,17 +171,18 @@ func (c *Context) Copy() *Context {
 	}
 
 	return &Context{
-		Name:             c.Name,
-		KubeContext:      kubeContext,
-		Cluster:          cluster,
-		AuthInfo:         authInfo,
-		Source:           c.Source,
-		OidcConf:         oidcConf,
-		Internal:         c.Internal,
-		Error:            c.Error,
-		KubeConfigPath:   c.KubeConfigPath,
-		ClusterID:        c.ClusterID,
-		ClusterInventory: c.ClusterInventory.DeepCopy(),
+		Name:                  c.Name,
+		KubeContext:           kubeContext,
+		Cluster:               cluster,
+		AuthInfo:              authInfo,
+		Source:                c.Source,
+		OidcConf:              oidcConf,
+		Internal:              c.Internal,
+		Error:                 c.Error,
+		KubeConfigPath:        c.KubeConfigPath,
+		KubeConfigContextName: c.KubeConfigContextName,
+		ClusterID:             c.ClusterID,
+		ClusterInventory:      c.ClusterInventory.DeepCopy(),
 	}
 }
 
@@ -1129,21 +1132,19 @@ func convertToContext(contextName string, clientConfig *api.Config, source int, 
 
 	authInfo := clientConfig.AuthInfos[context.AuthInfo]
 
-	// Make contextName DNS friendly.
-	contextName = MakeDNSFriendly(contextName)
-
 	newContext := Context{
-		Name:        contextName,
-		KubeContext: context,
-		Cluster:     cluster,
-		AuthInfo:    authInfo,
-		Source:      source,
+		Name:                  MakeDNSFriendly(contextName),
+		KubeConfigContextName: contextName,
+		KubeContext:           context,
+		Cluster:               cluster,
+		AuthInfo:              authInfo,
+		Source:                source,
 	}
 
 	if !skipProxySetup {
 		err := newContext.SetupProxy()
 		if err != nil {
-			return Context{}, ContextError{ContextName: contextName, Reason: fmt.Sprintf("couldn't setup proxy: %v", err)}
+			return Context{}, ContextError{ContextName: newContext.Name, Reason: fmt.Sprintf("couldn't setup proxy: %v", err)}
 		}
 	}
 
