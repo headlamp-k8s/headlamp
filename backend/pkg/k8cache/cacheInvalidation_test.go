@@ -504,10 +504,12 @@ func TestInvalidateCacheKeysForResourceEvent_FilteredListsAndSubresources(t *tes
 
 	for _, k := range keysToEvict {
 		require.NoError(t, realCache.Set(ctx, k, "evict-me"))
+		k8cache.ExportedIndexCacheKey(k)
 	}
 
 	for _, k := range keysToPreserve {
 		require.NoError(t, realCache.Set(ctx, k, "keep-me"))
+		k8cache.ExportedIndexCacheKey(k)
 	}
 
 	k8cache.ExportedInvalidateCacheKeysForResourceEvent(
@@ -548,10 +550,12 @@ func TestInvalidateCacheKeysForResourceEvent_NamespaceResource(t *testing.T) {
 
 	for _, k := range keysToEvict {
 		require.NoError(t, realCache.Set(ctx, k, "evict-me"))
+		k8cache.ExportedIndexCacheKey(k)
 	}
 
 	for _, k := range keysToPreserve {
 		require.NoError(t, realCache.Set(ctx, k, "keep-me"))
+		k8cache.ExportedIndexCacheKey(k)
 	}
 
 	k8cache.ExportedInvalidateCacheKeysForResourceEvent(
@@ -595,10 +599,12 @@ func TestInvalidateCacheKeysForResourceEvent_MultiVersionCRD(t *testing.T) {
 
 	for _, k := range keysToEvict {
 		require.NoError(t, realCache.Set(ctx, k, "evict-me"))
+		k8cache.ExportedIndexCacheKey(k)
 	}
 
 	for _, k := range keysToPreserve {
 		require.NoError(t, realCache.Set(ctx, k, "keep-me"))
+		k8cache.ExportedIndexCacheKey(k)
 	}
 
 	k8cache.ExportedInvalidateCacheKeysForResourceEvent(
@@ -1258,4 +1264,134 @@ func TestResourceKeyIndex_UnmonitoredResourceJanitor(t *testing.T) {
 
 	assert.False(t, k8cache.ExportedIsKeyIndexed(key1), "expired event index entry should be pruned")
 	assert.True(t, k8cache.ExportedIsKeyIndexed(key2), "active event index entry should remain")
+}
+
+type MockTrackingCache struct {
+	onGetAll func()
+}
+
+func (m *MockTrackingCache) Set(ctx context.Context, key, value string) error { return nil }
+func (m *MockTrackingCache) SetWithTTL(ctx context.Context, key, value string, ttl time.Duration) error {
+	return nil
+}
+func (m *MockTrackingCache) Get(ctx context.Context, key string) (string, error) { return "", nil }
+func (m *MockTrackingCache) Delete(ctx context.Context, key string) error        { return nil }
+func (m *MockTrackingCache) GetAll(ctx context.Context, selectFunc cache.Matcher) (map[string]string, error) {
+	if m.onGetAll != nil {
+		m.onGetAll()
+	}
+	return nil, nil
+}
+func (m *MockTrackingCache) UpdateTTL(ctx context.Context, key string, ttl time.Duration) error {
+	return nil
+}
+func (m *MockTrackingCache) SetOnEvicted(f func(key string, value string)) {}
+func (m *MockTrackingCache) Close() error                                  { return nil }
+
+// TestGetKeysForResourceInvalidation_EmptyBucketDoesNotScanCache verifies that when
+// candidate bucket is empty (no cached entries for resource), invalidation does not
+// execute a global GetAll scan of the response cache.
+func TestGetKeysForResourceInvalidation_EmptyBucketDoesNotScanCache(t *testing.T) {
+	k8cache.ResetRegistries()
+	t.Cleanup(func() { k8cache.ResetRegistries() })
+
+	getAllCalled := false
+	mockCache := &MockTrackingCache{
+		onGetAll: func() {
+			getAllCalled = true
+		},
+	}
+
+	gvr := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "pods"}
+	k8cache.ExportedInvalidateCacheKeysForResourceEvent(gvr, "default", "uncached-pod", "test-context", mockCache)
+
+	assert.False(t, getAllCalled, "empty candidate bucket must not trigger a global GetAll cache scan")
+}
+
+// TestInvalidateCacheKeysForResourceEvent_NamespaceSubresources verifies that an informer
+// event for a Namespace resource evicts cached /namespaces/{name}/status and /finalize keys.
+func TestInvalidateCacheKeysForResourceEvent_NamespaceSubresources(t *testing.T) {
+	k8cache.ResetRegistries()
+	t.Cleanup(func() { k8cache.ResetRegistries() })
+
+	gvr := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "namespaces"}
+	contextKey := "test-context"
+	ctx := context.Background()
+
+	realCache := cache.New[string]()
+
+	statusKey := "+v1+namespaces/default/status++" + contextKey
+	finalizeKey := "+v1+namespaces/default/finalize++" + contextKey
+	otherNsStatusKey := "+v1+namespaces/other/status++" + contextKey
+
+	require.NoError(t, realCache.Set(ctx, statusKey, "status-data"))
+	require.NoError(t, realCache.Set(ctx, finalizeKey, "finalize-data"))
+	require.NoError(t, realCache.Set(ctx, otherNsStatusKey, "other-status-data"))
+
+	k8cache.ExportedIndexCacheKey(statusKey)
+	k8cache.ExportedIndexCacheKey(finalizeKey)
+	k8cache.ExportedIndexCacheKey(otherNsStatusKey)
+
+	k8cache.ExportedInvalidateCacheKeysForResourceEvent(gvr, "", "default", contextKey, realCache)
+
+	_, err := realCache.Get(ctx, statusKey)
+	assert.Error(t, err, "namespace status key should be evicted on namespace event")
+
+	_, err = realCache.Get(ctx, finalizeKey)
+	assert.Error(t, err, "namespace finalize key should be evicted on namespace event")
+
+	val, err := realCache.Get(ctx, otherNsStatusKey)
+	assert.NoError(t, err, "unrelated namespace status key should be preserved")
+	assert.Equal(t, "other-status-data", val)
+}
+
+// TestHandleNonGETCacheInvalidation_ObjectNamedExecInvalidatesList verifies that a DELETE request
+// for an object named "exec" is not skipped as an interactive subresource and invalidates cached lists.
+func TestHandleNonGETCacheInvalidation_ObjectNamedExecInvalidatesList(t *testing.T) {
+	k8cache.ResetRegistries()
+	t.Cleanup(func() { k8cache.ResetRegistries() })
+
+	ctxKey := "test-context"
+	listKey := "+v1+widgets+default+" + ctxKey
+	namedKey := "+v1+widgets/exec+default+" + ctxKey
+
+	realCache := cache.New[string]()
+	ctx := context.Background()
+
+	require.NoError(t, realCache.Set(ctx, listKey, "widget-list"))
+	require.NoError(t, realCache.Set(ctx, namedKey, "widget-named"))
+
+	k8cache.ExportedIndexCacheKey(listKey)
+	k8cache.ExportedIndexCacheKey(namedKey)
+
+	targetURL, err := url.Parse("/api/v1/namespaces/default/widgets/exec")
+	require.NoError(t, err)
+
+	r := httptest.NewRequestWithContext(ctx, http.MethodDelete, targetURL.String(), nil)
+	r.URL = targetURL
+
+	// Ensure ShouldSkipCache evaluates to false for object named "exec"
+	assert.False(t, k8cache.ShouldSkipCache(r), "DELETE on object named 'exec' must not skip cache invalidation")
+
+	nextCalled := false
+	next := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		nextCalled = true
+		if req.Method == http.MethodGet {
+			w.WriteHeader(http.StatusNotFound)
+			_, _ = w.Write([]byte(`{"kind":"Status","status":"Failure","reason":"NotFound"}`))
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+	})
+
+	w := httptest.NewRecorder()
+	err = k8cache.HandleNonGETCacheInvalidation(realCache, w, r, next, ctxKey)
+	assert.ErrorIs(t, err, k8cache.ErrHandled)
+	assert.True(t, nextCalled)
+
+	_, err = realCache.Get(ctx, namedKey)
+	assert.Error(t, err, "named key for object 'exec' should be evicted")
+
+	_, err = realCache.Get(ctx, listKey)
+	assert.Error(t, err, "list key should be evicted on mutation of object 'exec'")
 }

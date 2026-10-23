@@ -644,23 +644,10 @@ func getKeysForResourceInvalidationLocked(
 
 	var toDelete []string
 
-	if len(candidateKeys) > 0 {
-		for _, k := range candidateKeys {
-			if matchesResourceInvalidation(k, gvr, namespace, name, contextKey) {
-				toDelete = append(toDelete, k)
-			}
+	for _, k := range candidateKeys {
+		if matchesResourceInvalidation(k, gvr, namespace, name, contextKey) {
+			toDelete = append(toDelete, k)
 		}
-
-		return toDelete
-	}
-
-	// Fallback when index is unpopulated (e.g. unit tests directly seeding mock cache)
-	matchingKeys, _ := k8scache.GetAll(context.Background(), func(k string) bool {
-		return matchesResourceInvalidation(k, gvr, namespace, name, contextKey)
-	})
-
-	for k := range matchingKeys {
-		toDelete = append(toDelete, k)
 	}
 
 	return toDelete

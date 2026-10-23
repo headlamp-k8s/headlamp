@@ -264,8 +264,23 @@ func parseNamespacedResourcePath(resParts []string) (string, string) {
 	case 2:
 		return "", strings.Join(resParts, "/")
 	default:
+		// Core namespace subresources (e.g. /api/v1/namespaces/{name}/status or /finalize)
+		// are cluster-scoped subresources of the Namespace resource.
+		if resParts[0] == namespacePathSegment && (resParts[2] == "status" || resParts[2] == "finalize") {
+			return "", strings.Join(resParts, "/")
+		}
+
 		return resParts[1], strings.Join(resParts[2:], "/")
 	}
+}
+
+func isProxySubresourcePath(resourcePath string) bool {
+	clean := resourcePath
+	if idx := strings.Index(clean, "?"); idx != -1 {
+		clean = clean[:idx]
+	}
+
+	return strings.Contains("/"+clean+"/", "/proxy/") || strings.HasSuffix(clean, "/proxy")
 }
 
 func parseResourceParts(parts []string, apiPart string, apiIdx int) (string, string) {
@@ -299,6 +314,7 @@ func extractNamespaceAndResourcePath(u *url.URL) (string, string) {
 	path := u.EscapedPath()
 	rawQuery := u.RawQuery
 
+	hasTrailingSlash := strings.HasSuffix(path, "/")
 	path = strings.TrimRight(path, "/")
 	parts := strings.Split(path, "/")
 
@@ -308,6 +324,10 @@ func extractNamespaceAndResourcePath(u *url.URL) (string, string) {
 	}
 
 	namespace, resourcePath := parseResourceParts(parts, parts[apiIdx], apiIdx)
+
+	if hasTrailingSlash && isProxySubresourcePath(resourcePath) {
+		resourcePath += "/"
+	}
 
 	if rawQuery != "" {
 		if parsedQuery, err := url.ParseQuery(rawQuery); err == nil {
@@ -340,16 +360,31 @@ func ShouldSkipCache(r *http.Request) bool {
 		return true
 	}
 
-	cleanPath := strings.TrimRight(r.URL.Path, "/")
+	return isInteractiveSubresource(r.URL)
+}
 
-	parts := strings.Split(cleanPath, "/")
-	if len(parts) == 0 {
+func isInteractiveSubresource(u *url.URL) bool {
+	if u == nil {
 		return false
 	}
 
-	last := parts[len(parts)-1]
+	_, resourcePath := extractNamespaceAndResourcePath(u)
+	if idx := strings.Index(resourcePath, "?"); idx != -1 {
+		resourcePath = resourcePath[:idx]
+	}
 
-	return last == "exec" || last == "attach" || last == "portforward"
+	parts := strings.Split(strings.Trim(resourcePath, "/"), "/")
+	if len(parts) < 3 {
+		return false
+	}
+
+	for _, sub := range parts[2:] {
+		if sub == "exec" || sub == "attach" || sub == "portforward" {
+			return true
+		}
+	}
+
+	return false
 }
 
 // GenerateKey function helps to generate a unique key based on the request from the client.

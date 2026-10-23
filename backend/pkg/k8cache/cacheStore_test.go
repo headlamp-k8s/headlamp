@@ -791,6 +791,31 @@ func TestShouldSkipCache(t *testing.T) {
 			expected: true,
 		},
 		{
+			name:     "object named exec does not bypass cache",
+			rawURL:   "/api/v1/namespaces/default/widgets/exec",
+			expected: false,
+		},
+		{
+			name:     "pod named exec does not bypass cache",
+			rawURL:   "/api/v1/namespaces/default/pods/exec",
+			expected: false,
+		},
+		{
+			name:     "cluster-scoped object named exec does not bypass cache",
+			rawURL:   "/api/v1/nodes/exec",
+			expected: false,
+		},
+		{
+			name:     "custom resource named attach does not bypass cache",
+			rawURL:   "/apis/example.io/v1/namespaces/default/widgets/attach",
+			expected: false,
+		},
+		{
+			name:     "custom resource with attach subresource bypasses cache",
+			rawURL:   "/apis/example.io/v1/namespaces/default/widgets/w1/attach",
+			expected: true,
+		},
+		{
 			name:     "regular pod snapshot log does not bypass cache",
 			rawURL:   "/api/v1/namespaces/default/pods/p1/log?container=app",
 			expected: false,
@@ -1338,4 +1363,69 @@ func TestRedactCacheKey(t *testing.T) {
 			assert.Equal(t, tc.expected, result)
 		})
 	}
+}
+
+// TestGenerateKey_CoreNamespaceSubresources verifies that /api/v1/namespaces/{name}/status and
+// /finalize are treated as cluster-scoped subresources of the Namespace resource with an empty namespace.
+func TestGenerateKey_CoreNamespaceSubresources(t *testing.T) {
+	contextID := "test-cluster"
+
+	statusURL, err := url.Parse("/api/v1/namespaces/default/status")
+	require.NoError(t, err)
+
+	statusKey, err := k8cache.GenerateKey(statusURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+namespaces/default/status++test-cluster", statusKey)
+
+	finalizeURL, err := url.Parse("/api/v1/namespaces/default/finalize")
+	require.NoError(t, err)
+
+	finalizeKey, err := k8cache.GenerateKey(finalizeURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+namespaces/default/finalize++test-cluster", finalizeKey)
+
+	// Contrast with namespaced pod status which has namespace="default"
+	podStatusURL, err := url.Parse("/api/v1/namespaces/default/pods/p1/status")
+	require.NoError(t, err)
+
+	podStatusKey, err := k8cache.GenerateKey(podStatusURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+pods/p1/status+default+test-cluster", podStatusKey)
+}
+
+// TestGenerateKey_ProxyTrailingSlashPreserved verifies that trailing slashes on proxy
+// subresources produce distinct cache keys to avoid redirect and route collisions.
+func TestGenerateKey_ProxyTrailingSlashPreserved(t *testing.T) {
+	contextID := "test-cluster"
+
+	serviceNoSlash, err := url.Parse("/api/v1/namespaces/default/services/web/proxy/docs")
+	require.NoError(t, err)
+
+	keyNoSlash, err := k8cache.GenerateKey(serviceNoSlash, contextID)
+	require.NoError(t, err)
+
+	serviceWithSlash, err := url.Parse("/api/v1/namespaces/default/services/web/proxy/docs/")
+	require.NoError(t, err)
+
+	keyWithSlash, err := k8cache.GenerateKey(serviceWithSlash, contextID)
+	require.NoError(t, err)
+
+	assert.NotEqual(t, keyNoSlash, keyWithSlash, "proxy routes with and without trailing slash must not share key")
+	assert.Equal(t, "+v1+services/web/proxy/docs+default+test-cluster", keyNoSlash)
+	assert.Equal(t, "+v1+services/web/proxy/docs/+default+test-cluster", keyWithSlash)
+
+	// Verify standard non-proxy paths still trim trailing slashes
+	podNoSlash, err := url.Parse("/api/v1/namespaces/default/pods")
+	require.NoError(t, err)
+
+	podWithSlash, err := url.Parse("/api/v1/namespaces/default/pods/")
+	require.NoError(t, err)
+
+	keyPodNoSlash, err := k8cache.GenerateKey(podNoSlash, contextID)
+	require.NoError(t, err)
+
+	keyPodWithSlash, err := k8cache.GenerateKey(podWithSlash, contextID)
+	require.NoError(t, err)
+
+	assert.Equal(t, keyPodNoSlash, keyPodWithSlash, "non-proxy paths should trim trailing slashes")
 }
