@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -275,4 +276,88 @@ func TestDeleteClusterWithoutFileMutation(t *testing.T) {
 
 	after := readClusterDeletionConfig(t, configPath)
 	assert.Equal(t, before, after)
+}
+
+//nolint:funlen // Exercise import and rename through the runtime handlers before deletion.
+func TestDeleteClusterAfterRuntimeChanges(t *testing.T) {
+	tests := []struct {
+		name        string
+		imported    bool
+		renamed     bool
+		deleteOther bool
+	}{
+		{name: "import then delete", imported: true},
+		{name: "rename then delete", renamed: true},
+		{name: "rename preserves other contexts", renamed: true, deleteOther: true},
+		{name: "import then rename then delete", imported: true, renamed: true},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			originalName := "team/cluster + dev"
+			c, configPath, outsidePath, name := newClusterDeletionTestConfig(t, originalName, "", false)
+			c.KubeConfigPath = configPath
+			source := "kubeconfig"
+
+			if tt.imported {
+				c.KubeConfigDir = t.TempDir()
+				c.KubeConfigStore = kubeconfig.NewContextStore()
+				encoded := base64.StdEncoding.EncodeToString(readClusterDeletionConfig(t, configPath))
+				req, err := makeJSONReq(http.MethodPost, "/cluster", ClusterReq{KubeConfig: &encoded})
+				require.NoError(t, err)
+				req.Header.Set("X-HEADLAMP_BACKEND-TOKEN", "test-backend-token")
+
+				w := httptest.NewRecorder()
+				c.addCluster(w, req)
+				require.Equal(t, http.StatusCreated, w.Code, w.Body.String())
+
+				configPath = filepath.Join(c.KubeConfigDir, "config")
+				source = "dynamic"
+			}
+
+			if tt.renamed {
+				req, err := makeJSONReq(http.MethodPut, "/cluster/test", RenameClusterRequest{
+					NewClusterName: "renamed",
+					Source:         source,
+				})
+				require.NoError(t, err)
+
+				req = mux.SetURLVars(req, map[string]string{"name": name})
+
+				w := httptest.NewRecorder()
+				c.renameCluster(w, req)
+				require.Equal(t, http.StatusCreated, w.Code, w.Body.String())
+
+				name = "renamed"
+			}
+
+			if tt.deleteOther {
+				name, originalName = "kept", "kept"
+			}
+
+			stored, err := c.KubeConfigStore.GetContext(name)
+			require.NoError(t, err)
+			assert.Equal(t, configPath, stored.KubeConfigPath)
+			assert.Equal(t, originalName, stored.KubeConfigContextName)
+			outsideBefore := readClusterDeletionConfig(t, outsidePath)
+
+			w := deleteClusterTestRequest(c, name, url.Values{
+				"removeKubeConfig": {"true"},
+				"configPath":       {outsidePath},
+				"originalName":     {"victim"},
+				"clusterID":        {"untrusted"},
+			})
+
+			require.Equal(t, http.StatusOK, w.Code, w.Body.String())
+
+			_, err = c.KubeConfigStore.GetContext(name)
+			require.Error(t, err)
+
+			persisted, err := clientcmd.LoadFromFile(configPath)
+			require.NoError(t, err)
+			assert.NotContains(t, persisted.Contexts, originalName)
+			assert.Len(t, persisted.Contexts, 1)
+			assert.Equal(t, outsideBefore, readClusterDeletionConfig(t, outsidePath))
+		})
+	}
 }

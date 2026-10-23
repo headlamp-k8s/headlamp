@@ -1166,20 +1166,19 @@ func LoadContextsFromAPIConfig(config *api.Config, skipProxySetup bool) ([]Conte
 		// Note: nil authInfo is valid as authInfo can be provided by token.
 		authInfo := config.AuthInfos[context.AuthInfo]
 
-		// Make contextName DNS friendly.
-		contextName = MakeDNSFriendly(contextName)
-
 		context := Context{
-			Name:        contextName,
-			KubeContext: context,
-			Cluster:     cluster,
-			AuthInfo:    authInfo,
+			Name:                  MakeDNSFriendly(contextName),
+			KubeConfigPath:        context.LocationOfOrigin,
+			KubeConfigContextName: contextName,
+			KubeContext:           context,
+			Cluster:               cluster,
+			AuthInfo:              authInfo,
 		}
 
 		if !skipProxySetup {
 			err := context.SetupProxy()
 			if err != nil {
-				errors = append(errors, fmt.Errorf("couldnt setup proxy for context: %q, err:%q", contextName, err))
+				errors = append(errors, fmt.Errorf("couldnt setup proxy for context: %q, err:%q", context.Name, err))
 				continue
 			}
 		}

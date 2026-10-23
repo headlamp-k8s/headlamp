@@ -2810,8 +2810,13 @@ func (c *HeadlampConfig) processKubeConfig(clusterReq ClusterReq) ([]kubeconfig.
 	setupErrors := c.handleLoadErrors(err, contextLoadErrors)
 
 	if len(contextLoadErrors) == 0 {
-		if err := c.writeKubeConfig(*clusterReq.KubeConfig); err != nil {
+		configPath, err := c.writeKubeConfig(*clusterReq.KubeConfig)
+		if err != nil {
 			setupErrors = append(setupErrors, err)
+		} else {
+			for i := range contexts {
+				contexts[i].KubeConfigPath = configPath
+			}
 		}
 	}
 
@@ -2853,24 +2858,28 @@ func (c *HeadlampConfig) handleLoadErrors(err error, contextLoadErrors []kubecon
 	return setupErrors
 }
 
-// writeKubeConfig writes the kubeconfig to the kubeconfig file.
-func (c *HeadlampConfig) writeKubeConfig(kubeConfigBase64 string) error {
+// writeKubeConfig persists the kubeconfig and returns its server-selected file path.
+func (c *HeadlampConfig) writeKubeConfig(kubeConfigBase64 string) (string, error) {
 	kubeConfigByte, err := base64.StdEncoding.DecodeString(kubeConfigBase64)
 	if err != nil {
-		return fmt.Errorf("decoding kubeconfig: %w", err)
+		return "", fmt.Errorf("decoding kubeconfig: %w", err)
 	}
 
 	config, err := clientcmd.Load(kubeConfigByte)
 	if err != nil {
-		return fmt.Errorf("loading kubeconfig: %w", err)
+		return "", fmt.Errorf("loading kubeconfig: %w", err)
 	}
 
 	kubeConfigPersistenceDir, err := cfg.MakeKubeConfigsDir(c.KubeConfigDir)
 	if err != nil {
-		return fmt.Errorf("getting default kubeconfig persistence dir: %w", err)
+		return "", fmt.Errorf("getting default kubeconfig persistence dir: %w", err)
 	}
 
-	return kubeconfig.WriteToFile(*config, kubeConfigPersistenceDir)
+	if err := kubeconfig.WriteToFile(*config, kubeConfigPersistenceDir); err != nil {
+		return "", err
+	}
+
+	return filepath.Join(kubeConfigPersistenceDir, "config"), nil
 }
 
 // addContextsToStore adds the contexts to the store.

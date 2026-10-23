@@ -176,6 +176,27 @@ func TestLoadContextFromFile(t *testing.T) {
 	}
 }
 
+func TestLoadContextsFromAPIConfigPreservesOrigin(t *testing.T) {
+	for _, origin := range []string{"", filepath.Join(t.TempDir(), "config")} {
+		t.Run(origin, func(t *testing.T) {
+			config := api.NewConfig()
+			config.Clusters["cluster"] = &api.Cluster{Server: "https://cluster.example.com"}
+			config.Contexts["team/cluster + dev"] = &api.Context{
+				Cluster:          "cluster",
+				LocationOfOrigin: origin,
+			}
+
+			contexts, errs := kubeconfig.LoadContextsFromAPIConfig(config, true)
+
+			require.Empty(t, errs)
+			require.Len(t, contexts, 1)
+			assert.Equal(t, "team--cluster__+__dev", contexts[0].Name)
+			assert.Equal(t, "team/cluster + dev", contexts[0].KubeConfigContextName)
+			assert.Equal(t, origin, contexts[0].KubeConfigPath)
+		})
+	}
+}
+
 // TestLoadContextsWithDuplicateNames validates the behavior of the LoadContextsFromMultipleFiles function.
 func TestLoadContextsWithDuplicateNames(t *testing.T) {
 	// Simulate two kubeconfig files with duplicate context names
