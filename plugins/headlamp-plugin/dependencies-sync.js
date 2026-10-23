@@ -77,6 +77,7 @@ const dependenciesToNotCopy = [
   '@typescript/native-preview',
   '@chanzuckerberg/axe-storybook-testing',
   'tsx',
+  'react-colorful',
 ];
 
 // Dependencies that can have different versions
