@@ -16,10 +16,13 @@
 
 import List from '@mui/material/List';
 import { ThemeProvider } from '@mui/material/styles';
-import { render, screen } from '@testing-library/react';
+import { configureStore } from '@reduxjs/toolkit';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createMuiTheme } from '../../lib/themes';
+import reducers from '../../redux/reducers/reducers';
 import SidebarItem, { SidebarItemProps } from './SidebarItem';
 
 vi.mock('../../lib/k8s', () => ({
@@ -28,15 +31,37 @@ vi.mock('../../lib/k8s', () => ({
 
 const theme = createMuiTheme({ name: 'light', base: 'light' });
 
-function renderSidebarItem(props: SidebarItemProps) {
+function createTestStore() {
+  return configureStore({
+    reducer: reducers,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
+  });
+}
+
+let testStore = createTestStore();
+
+beforeEach(() => {
+  testStore = createTestStore();
+});
+
+function renderWithProviders(ui: React.ReactElement, storeInstance = testStore) {
   return render(
-    <ThemeProvider theme={theme}>
-      <MemoryRouter>
-        <List>
-          <SidebarItem {...props} />
-        </List>
-      </MemoryRouter>
-    </ThemeProvider>
+    <Provider store={storeInstance}>
+      <ThemeProvider theme={theme}>
+        <MemoryRouter>{ui}</MemoryRouter>
+      </ThemeProvider>
+    </Provider>
+  );
+}
+
+function renderSidebarItem(props: SidebarItemProps) {
+  return renderWithProviders(
+    <List>
+      <SidebarItem {...props} />
+    </List>
   );
 }
 
@@ -119,5 +144,219 @@ describe('SidebarItem', () => {
       fontWeight: '800',
       textTransform: 'none',
     });
+  });
+
+  it('toggles expandable submenus on click', async () => {
+    renderSidebarItem({
+      name: 'workloads',
+      label: 'Workloads',
+      subList: [
+        {
+          name: 'pods',
+          label: 'Pods',
+          url: '/pods',
+        },
+      ],
+    });
+
+    const parentButton = screen.getByRole('button', { name: /workloads/i });
+    expect(parentButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('button', { name: /pods/i })).not.toBeInTheDocument();
+
+    // Click to expand
+    fireEvent.click(parentButton);
+    expect(await screen.findByRole('button', { name: /pods/i })).toBeInTheDocument();
+    expect(parentButton).toHaveAttribute('aria-expanded', 'true');
+
+    // Click again to collapse
+    fireEvent.click(parentButton);
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: /pods/i })).not.toBeInTheDocument();
+    });
+    expect(parentButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('toggles an initially selected submenu closed and open on click', async () => {
+    renderSidebarItem({
+      name: 'workloads-selected',
+      label: 'Workloads Selected',
+      isSelected: true,
+      subList: [
+        {
+          name: 'pods-selected',
+          label: 'Pods Selected',
+          url: '/pods',
+        },
+      ],
+    });
+
+    const parentButton = screen.getByRole('button', { name: /workloads selected/i });
+    expect(parentButton).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('button', { name: /pods selected/i })).toBeInTheDocument();
+
+    // Click to collapse
+    fireEvent.click(parentButton);
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: /pods selected/i })).not.toBeInTheDocument();
+    });
+    expect(parentButton).toHaveAttribute('aria-expanded', 'false');
+
+    // Click again to expand
+    fireEvent.click(parentButton);
+    expect(await screen.findByRole('button', { name: /pods selected/i })).toBeInTheDocument();
+    expect(parentButton).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('sets aria-expanded to false when sidebar is collapsed even if expanded or selected', () => {
+    renderSidebarItem({
+      name: 'workloads-collapsed',
+      label: 'Workloads Collapsed',
+      isSelected: true,
+      fullWidth: false,
+      subList: [
+        {
+          name: 'pods-collapsed',
+          label: 'Pods Collapsed',
+          url: '/pods',
+        },
+      ],
+    });
+
+    const parentButton = screen.getByRole('button', { name: /workloads collapsed/i });
+    expect(parentButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('button', { name: /pods collapsed/i })).not.toBeInTheDocument();
+  });
+
+  it('toggles expandable submenus on click for external URLs', async () => {
+    renderSidebarItem({
+      name: 'external-parent',
+      label: 'External Parent',
+      url: 'https://headlamp.dev',
+      subList: [
+        {
+          name: 'external-child',
+          label: 'External Child',
+          url: '/external-child',
+        },
+      ],
+    });
+
+    const parentLink = screen.getByRole('button', { name: /external parent/i });
+    expect(parentLink).toHaveAttribute('href', 'https://headlamp.dev');
+    expect(parentLink).toHaveAttribute('target', '_blank');
+    expect(parentLink).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(parentLink).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('button', { name: /external child/i })).not.toBeInTheDocument();
+
+    // Click to expand
+    fireEvent.click(parentLink);
+    expect(await screen.findByRole('button', { name: /external child/i })).toBeInTheDocument();
+    expect(parentLink).toHaveAttribute('aria-expanded', 'true');
+
+    // Click again to collapse
+    fireEvent.click(parentLink);
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: /external child/i })).not.toBeInTheDocument();
+    });
+    expect(parentLink).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('preserves href and target destination on external links', () => {
+    renderSidebarItem({
+      name: 'external-link',
+      label: 'External Link',
+      url: 'https://headlamp.dev',
+    });
+
+    const link = screen.getByRole('button', { name: /external link/i });
+    expect(link).toHaveAttribute('href', 'https://headlamp.dev');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('persists selected parent expansion when selection moves away while honoring explicit collapse', async () => {
+    function TwoGroupSidebar({ selectedGroup }: { selectedGroup: 'groupA' | 'groupB' }) {
+      return (
+        <List>
+          <SidebarItem
+            name="groupA"
+            label="Group A"
+            isSelected={selectedGroup === 'groupA'}
+            subList={[{ name: 'childA', label: 'Child A', url: '/childA' }]}
+          />
+          <SidebarItem
+            name="groupB"
+            label="Group B"
+            isSelected={selectedGroup === 'groupB'}
+            subList={[{ name: 'childB', label: 'Child B', url: '/childB' }]}
+          />
+        </List>
+      );
+    }
+
+    const { rerender } = renderWithProviders(<TwoGroupSidebar selectedGroup="groupA" />);
+
+    // Initially Group A is selected (expanded) and Group B is not
+    expect(screen.getByRole('button', { name: /group a/i })).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('button', { name: /child a/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /group b/i })).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+    expect(screen.queryByRole('button', { name: /child b/i })).not.toBeInTheDocument();
+
+    // Click Group B header to expand it
+    fireEvent.click(screen.getByRole('button', { name: /group b/i }));
+    expect(await screen.findByRole('button', { name: /child b/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /group b/i })).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    // Group A should still be expanded
+    expect(screen.getByRole('button', { name: /child a/i })).toBeInTheDocument();
+
+    // Now navigation moves selection away from Group A to Group B
+    rerender(
+      <Provider store={testStore}>
+        <ThemeProvider theme={theme}>
+          <MemoryRouter>
+            <TwoGroupSidebar selectedGroup="groupB" />
+          </MemoryRouter>
+        </ThemeProvider>
+      </Provider>
+    );
+
+    // Group A should persist its expansion even though selection moved away
+    expect(screen.getByRole('button', { name: /group a/i })).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('button', { name: /child a/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /child b/i })).toBeInTheDocument();
+
+    // Explicitly collapse Group A
+    fireEvent.click(screen.getByRole('button', { name: /group a/i }));
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: /child a/i })).not.toBeInTheDocument();
+    });
+    expect(screen.getByRole('button', { name: /group a/i })).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    // Re-navigating to group A honors the explicit collapse
+    rerender(
+      <Provider store={testStore}>
+        <ThemeProvider theme={theme}>
+          <MemoryRouter>
+            <TwoGroupSidebar selectedGroup="groupA" />
+          </MemoryRouter>
+        </ThemeProvider>
+      </Provider>
+    );
+    expect(screen.queryByRole('button', { name: /child a/i })).not.toBeInTheDocument();
   });
 });

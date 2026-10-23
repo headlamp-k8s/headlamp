@@ -40,6 +40,8 @@ interface ListItemLinkProps {
   level?: number;
   fullWidth?: boolean;
   divider?: boolean;
+  isExpandable?: boolean;
+  isExpanded?: boolean;
   containerProps?: {
     [prop: string]: any;
   };
@@ -63,6 +65,8 @@ export default function ListItemLink(props: ListItemLinkProps) {
     hasParent,
     level,
     fullWidth,
+    isExpandable,
+    isExpanded,
     ...other
   } = props;
 
@@ -74,9 +78,11 @@ export default function ListItemLink(props: ListItemLinkProps) {
   const renderLink = React.useMemo(() => {
     return React.forwardRef<HTMLAnchorElement, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => {
       if (pathname.startsWith('http')) {
-        const { children, className } = itemProps;
+        const { children, className, ...restProps } = itemProps;
+        delete (restProps as { href?: any }).href;
         return (
           <a
+            {...restProps}
             href={pathname}
             target="_blank"
             ref={ref}
@@ -130,6 +136,7 @@ export default function ListItemLink(props: ListItemLinkProps) {
       <ListItemButton
         component={renderLink}
         aria-label={iconOnly ? name : undefined}
+        aria-expanded={isExpandable ? Boolean(isExpanded) : undefined}
         {...other}
         sx={theme => ({
           color:
@@ -260,6 +267,14 @@ export default function ListItemLink(props: ListItemLinkProps) {
             secondaryTypographyProps={
               typeof subtitle === 'string' ? { sx: { whiteSpace: 'pre' } } : undefined
             }
+          />
+        )}
+        {!iconOnly && isExpandable && (
+          <Icon
+            icon={isExpanded ? 'mdi:chevron-up' : 'mdi:chevron-down'}
+            width={ExpandedIconSize}
+            height={ExpandedIconSize}
+            style={{ opacity: 0.7 }}
           />
         )}
       </ListItemButton>
