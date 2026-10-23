@@ -3,14 +3,18 @@ package main
 import (
 	"context"
 	"encoding/base64"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"os"
 	"path/filepath"
 	"runtime"
+	"sync"
 	"testing"
+	"time"
 
+	"github.com/gofrs/flock"
 	"github.com/gorilla/mux"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/headlampconfig"
 	"github.com/kubernetes-sigs/headlamp/backend/pkg/kubeconfig"
@@ -66,7 +70,7 @@ func newClusterDeletionTestConfig(
 			t.Skip("creating symlinks requires additional privileges on Windows")
 		}
 
-		link := filepath.Join(t.TempDir(), "config-link")
+		link := filepath.Join(t.TempDir(), "config")
 		require.NoError(t, os.Symlink(configPath, link))
 		configPath = link
 	}
@@ -360,4 +364,89 @@ func TestDeleteClusterAfterRuntimeChanges(t *testing.T) {
 			assert.Equal(t, outsideBefore, readClusterDeletionConfig(t, outsidePath))
 		})
 	}
+}
+
+//nolint:funlen // Verify concurrent runtime handlers block on the same symlink-origin lock.
+func TestDeleteClusterSerializesWithImportThroughSymlink(t *testing.T) {
+	c, configPath, _, name := newClusterDeletionTestConfig(t, "selected", "", true)
+	c.KubeConfigDir = filepath.Dir(configPath)
+
+	imported := api.NewConfig()
+	imported.Clusters["cluster"] = &api.Cluster{Server: "https://cluster.example.com"}
+	imported.AuthInfos["user"] = &api.AuthInfo{Token: "test-token"}
+	imported.Contexts["imported"] = &api.Context{Cluster: "cluster", AuthInfo: "user"}
+	data, err := clientcmd.Write(*imported)
+	require.NoError(t, err)
+
+	encoded := base64.StdEncoding.EncodeToString(data)
+	req, err := makeJSONReq(http.MethodPost, "/cluster", ClusterReq{KubeConfig: &encoded})
+	require.NoError(t, err)
+	req.Header.Set("X-HEADLAMP_BACKEND-TOKEN", "test-backend-token")
+
+	lock := flock.New(configPath + ".lock")
+	require.NoError(t, lock.Lock())
+
+	var wg sync.WaitGroup
+
+	results := make(chan error, 2)
+	started := make(chan struct{}, 2)
+
+	t.Cleanup(func() {
+		assert.NoError(t, lock.Unlock())
+		wg.Wait()
+	})
+	wg.Add(2)
+
+	go func() {
+		defer wg.Done()
+
+		started <- struct{}{}
+
+		w := httptest.NewRecorder()
+		c.addCluster(w, req)
+
+		if w.Code != http.StatusCreated {
+			results <- fmt.Errorf("import returned %d: %s", w.Code, w.Body.String())
+			return
+		}
+
+		results <- nil
+	}()
+
+	go func() {
+		defer wg.Done()
+
+		started <- struct{}{}
+
+		w := deleteClusterTestRequest(c, name, url.Values{"removeKubeConfig": {"true"}})
+
+		if w.Code != http.StatusOK {
+			results <- fmt.Errorf("delete returned %d: %s", w.Code, w.Body.String())
+			return
+		}
+
+		results <- nil
+	}()
+
+	<-started
+	<-started
+	assert.Never(t, func() bool { return len(results) > 0 }, 500*time.Millisecond, 10*time.Millisecond,
+		"neither mutation may bypass the persistence-origin lock")
+	require.NoError(t, lock.Unlock())
+	wg.Wait()
+	close(results)
+
+	for err := range results {
+		require.NoError(t, err)
+	}
+
+	persisted, err := clientcmd.LoadFromFile(configPath)
+	require.NoError(t, err)
+	assert.NotContains(t, persisted.Contexts, "selected")
+	assert.Contains(t, persisted.Contexts, "kept")
+	assert.Contains(t, persisted.Contexts, "imported")
+
+	info, err := os.Lstat(configPath)
+	require.NoError(t, err)
+	assert.NotZero(t, info.Mode()&os.ModeSymlink)
 }

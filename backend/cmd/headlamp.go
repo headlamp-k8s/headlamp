@@ -2970,15 +2970,10 @@ func (c *HeadlampConfig) handleRemoveKubeConfig(
 		return false
 	}
 
-	// Only server-loaded provenance may select the file and its original context.
-	configPath, err := filepath.EvalSymlinks(clusterContext.KubeConfigPath)
-	if err != nil {
-		c.handleError(w, ctx, span, err, "failed to resolve cluster kubeconfig", http.StatusInternalServerError)
-
-		return false
-	}
-
-	if err := kubeconfig.RemoveContextFromFile(clusterContext.KubeConfigContextName, configPath); err != nil {
+	// Keep the import lock identity: both operations use the server-recorded origin.
+	if err := kubeconfig.RemoveContextFromFile(
+		clusterContext.KubeConfigContextName, clusterContext.KubeConfigPath,
+	); err != nil {
 		c.handleError(w, ctx, span, err, "failed to remove cluster from kubeconfig", http.StatusInternalServerError)
 
 		return false

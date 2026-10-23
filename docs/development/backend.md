@@ -59,6 +59,7 @@ separate origin.
 file-backed cluster. The backend uses its loaded file and original context key,
 not client-supplied identifiers; configured external files and symlinks work.
 Runtime imports and renames retain this origin.
+Imports and deletions lock the same recorded path, including symlinks.
 File updates precede in-memory removal, so failures keep the stored cluster.
 Memory-only deletion does not require file-mutation permission.
 
