@@ -1289,14 +1289,14 @@ func TestStoreK8sResponseInCache_5xxResponseShouldNotBeCached(t *testing.T) {
 	rw := httptest.NewRecorder()
 	rcw := k8cache.NewResponseCapture(rw)
 
-	// Simulate a load balancer 502 — body has no K8s "Failure" string
+	// Simulate a load balancer 502 : body has no K8s "Failure" string
 	rcw.WriteHeader(http.StatusBadGateway)
 	_, _ = rcw.Write([]byte(`<html><body>Bad Gateway</body></html>`))
 
 	err := k8cache.StoreK8sResponseInCache(mockCache, targetURL, rcw, "infra-error-key")
 	assert.NoError(t, err)
 
-	// Key must NOT be in cache — infrastructure errors should not be cached
+	// Key must NOT be in cache : infrastructure errors should not be cached
 	_, getErr := mockCache.Get(context.Background(), "infra-error-key")
 	assert.Error(t, getErr, "5xx infrastructure errors should not be cached")
 }

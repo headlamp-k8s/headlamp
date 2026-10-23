@@ -742,7 +742,7 @@ func TestGetKindAndVerb_EmptyAPIVar(t *testing.T) {
 	assert.Equal(t, "unknown", verb)
 }
 
-// IsAllowed — "could not determine resource or verb" guard branch
+// IsAllowed : "could not determine resource or verb" guard branch
 
 // TestIsAllowed_EmptyKind drives the `last == ""` guard inside IsAllowed
 // by sending a request with no mux "api" variable so that
@@ -769,7 +769,7 @@ func TestIsAllowed_EmptyKind(t *testing.T) {
 	assert.Error(t, err)
 }
 
-// ServeFromCacheOrForwardToK8s — StoreK8sResponseInCache error path
+// ServeFromCacheOrForwardToK8s : StoreK8sResponseInCache error path
 
 // errOnWriteCache wraps MockCache and makes SetWithTTL always return an
 // error, triggering the error-logging branch in ServeFromCacheOrForwardToK8s.
@@ -819,7 +819,7 @@ func TestServeFromCacheOrForwardToK8s_StoreError(t *testing.T) {
 	assert.Error(t, err, "failed cache write must not persist the key")
 }
 
-// HandleNonGETCacheInvalidation — three branches currently at 0%
+// HandleNonGETCacheInvalidation : three branches currently at 0%
 
 // TestHandleNonGETCacheInvalidation_GETSkipped verifies that GET requests
 // return nil immediately without touching the cache or calling next.
@@ -843,7 +843,7 @@ func TestHandleNonGETCacheInvalidation_GETSkipped(t *testing.T) {
 
 // TestHandleNonGETCacheInvalidation_BypassURLExcluded verifies that a POST
 // on a selfsubjectrulesreviews authorization endpoint is NOT invalidated because
-// IsAuthBypassURL returns false for that path — the function returns nil.
+// IsAuthBypassURL returns false for that path : the function returns nil.
 func TestHandleNonGETCacheInvalidation_BypassURLExcluded(t *testing.T) {
 	mockCache := NewMockCache()
 	called := false
