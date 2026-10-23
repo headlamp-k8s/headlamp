@@ -283,12 +283,23 @@ function isRedirectError(err: unknown): boolean {
  * or destructively inlining the document.
  */
 export function resolveLocalRef(ref: string, document: SchemaDocument): SchemaObject | null {
-  if (!ref || !ref.startsWith('#/')) {
+  if (!ref || !ref.startsWith('#')) {
     return null;
   }
 
-  const tokens = ref
-    .slice(2)
+  let pointer: string;
+  try {
+    // URI fragment decoding precedes JSON Pointer tokenization and unescaping.
+    pointer = decodeURIComponent(ref.slice(1));
+  } catch {
+    return null;
+  }
+  if (!pointer.startsWith('/')) {
+    return null;
+  }
+
+  const tokens = pointer
+    .slice(1)
     .split('/')
     .map(token => token.replace(/~1/g, '/').replace(/~0/g, '~'));
 

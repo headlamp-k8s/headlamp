@@ -1418,6 +1418,44 @@ describe('schemaLoader', () => {
       );
     });
 
+    it.each([
+      ['#/components/schemas/io%2Ek8s.api.core.v1.Pod', 'io.k8s.api.core.v1.Pod'],
+      ['#/components/schemas/space%20name', 'space name'],
+      ['#/components/schemas/percent%25name', 'percent%name'],
+      ['#/components/schemas/slash%7E1name', 'slash/name'],
+      ['#/components/schemas/tilde%7E0name', 'tilde~name'],
+      ['#/components/schemas/literal%2520name', 'literal%20name'],
+      ['#/components/schemas/caf%C3%A9', 'café'],
+      ['#%2Fcomponents%2Fschemas%2Fspace%20name', 'space name'],
+      ['#/components/schemas/slash~1name', 'slash/name'],
+      ['#/components/schemas/tilde~01name', 'tilde~1name'],
+    ])('resolves URI fragment %s without modifying its document', (ref, name) => {
+      const schema = { type: 'object' as const };
+      const document = {
+        ...mockCoreV1Document,
+        components: { schemas: { [name]: schema } },
+      };
+      const before = JSON.stringify(document);
+      expect(resolveLocalRef(ref, document)).toBe(schema);
+      expect(JSON.stringify(document)).toBe(before);
+    });
+
+    it.each([
+      '#/components/schemas/%',
+      '#/components/schemas/%2',
+      '#/components/schemas/%GG',
+      '#/components/schemas/%C3%28',
+    ])('returns null for malformed URI fragment %s', ref => {
+      expect(resolveLocalRef(ref, mockCoreV1Document)).toBeNull();
+    });
+
+    it.each(['#/components/schemas/missing', '#anchor', 'other.json#/components/schemas/Pod'])(
+      'returns null for an unresolved or non-pointer URI fragment %s',
+      ref => {
+        expect(resolveLocalRef(ref, mockCoreV1Document)).toBeNull();
+      }
+    );
+
     it('safely handles recursive schemas without infinite recursion', async () => {
       vi.mocked(clusterRequest).mockImplementation(async path => {
         if (path === '/openapi/v3') {
