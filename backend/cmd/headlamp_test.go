@@ -1821,6 +1821,75 @@ func TestDrainNodeRenewsStatusWhileARequestIsStalled(t *testing.T) {
 	assert.Equal(t, "success", waitForDrainStatus(t, testCache, cacheKey))
 }
 
+// A second request to drain a node that is already being drained must not start another drain, whose
+// renewal timer could overwrite the result of the first. Once the drain is done, the node can be drained again.
+func TestDrainNodeIgnoresRequestsWhileDraining(t *testing.T) {
+	oldRenew, oldPoll := drainStatusRenewInterval, drainTerminationPollInterval
+	drainStatusRenewInterval, drainTerminationPollInterval = 10*time.Millisecond, 10*time.Millisecond
+
+	t.Cleanup(func() { drainStatusRenewInterval, drainTerminationPollInterval = oldRenew, oldPoll })
+
+	fakeClient, c, testCache, cacheKey := drainTestSetup(t)
+
+	var nodeReads atomic.Int32
+
+	fakeClient.PrependReactor("get", "nodes", func(k8stesting.Action) (bool, k8sruntime.Object, error) {
+		nodeReads.Add(1)
+
+		return false, nil, nil
+	})
+
+	release := make(chan struct{})
+	started := make(chan struct{}, 1)
+
+	fakeClient.PrependReactor("create", "pods", func(action k8stesting.Action) (bool, k8sruntime.Object, error) {
+		if action.GetSubresource() != "eviction" {
+			return false, nil, nil
+		}
+
+		started <- struct{}{}
+
+		<-release
+
+		return true, nil, nil
+	})
+
+	ctx := context.Background()
+
+	c.drainNode(ctx, fakeClient, "test-node", "test-cluster")
+
+	<-started
+
+	c.drainNode(ctx, fakeClient, "test-node", "test-cluster")
+
+	assert.Equal(t, int32(1), nodeReads.Load(), "a drain that is already running must not be started again")
+
+	close(release)
+	require.NoError(t, fakeClient.Tracker().Delete(
+		corev1.SchemeGroupVersion.WithResource("pods"), "default", "pdb-pod"))
+
+	assert.Equal(t, "success", waitForDrainStatus(t, testCache, cacheKey))
+
+	// The guard is released when the drain ends.
+	require.Eventually(t, func() bool {
+		_, running := c.activeDrains.Load(cacheKey)
+
+		return !running
+	}, time.Second, 10*time.Millisecond)
+
+	c.drainNode(ctx, fakeClient, "test-node", "test-cluster")
+
+	assert.Equal(t, "success", waitForDrainStatus(t, testCache, cacheKey))
+	assert.Equal(t, int32(2), nodeReads.Load(), "the node must be drainable again after the drain finished")
+
+	// Let the second drain end before the test restores the intervals it shortened.
+	require.Eventually(t, func() bool {
+		_, running := c.activeDrains.Load(cacheKey)
+
+		return !running
+	}, time.Second, 10*time.Millisecond)
+}
+
 // When the pods cannot be read, for example without the get permission, the failure says so instead
 // of claiming that the pods are still terminating.
 func TestWaitForPodsGoneReportsReadErrors(t *testing.T) {
