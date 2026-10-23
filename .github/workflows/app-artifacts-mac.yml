@@ -21,6 +21,8 @@ jobs:
     permissions:
       contents: read
       actions: write # needed to upload artifacts
+      id-token: write # needed to sign the provenance via GitHub OIDC
+      attestations: write # needed to store the provenance attestation
     steps:
     - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       with:
@@ -69,6 +71,38 @@ jobs:
       with:
         name: dmgs
         path: ./app/dist/Headlamp*.dmg
+        if-no-files-found: error
+        retention-days: 2
+    # Provenance records the workflow's commit as the source, so it is only
+    # generated when that commit was built, as with `releaser ci app`.
+    - name: Check that the workflow ref was built
+      id: source
+      run: |
+        built=$(git rev-parse HEAD)
+        if [ "$built" = "$GITHUB_SHA" ]; then
+          echo "matches=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "::warning::Built ${built}, but the workflow ran from ${GITHUB_SHA}, so no provenance is generated. Run the workflow from the ref it builds for release builds."
+        fi
+    - name: Generate provenance
+      id: attest
+      if: steps.source.outputs.matches == 'true'
+      uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+      with:
+        subject-path: app/dist/Headlamp*.dmg
+    - name: Prepare provenance artifact
+      if: steps.source.outputs.matches == 'true'
+      env:
+        BUNDLE_PATH: ${{ steps.attest.outputs.bundle-path }}
+      run: |
+        mkdir -p provenance
+        cp "$BUNDLE_PATH" provenance/headlamp-mac.intoto.jsonl
+    - name: Upload provenance artifact
+      if: steps.source.outputs.matches == 'true'
+      uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+      with:
+        name: Provenance-mac
+        path: ./provenance/headlamp-mac.intoto.jsonl
         if-no-files-found: error
         retention-days: 2
   verify-notarization:
