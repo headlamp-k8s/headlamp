@@ -43,13 +43,27 @@ const (
 	namespacePathSegment = "namespaces"
 )
 
-func kubernetesAPIPathIndex(parts []string) int {
-	if len(parts) > 1 && (parts[1] == apiPathSegment || parts[1] == apisPathSegment) {
-		return 1
+func unescapeSegment(s string) string {
+	if u, err := url.PathUnescape(s); err == nil {
+		return u
 	}
 
-	if len(parts) > 3 && parts[1] == "clusters" && (parts[3] == apiPathSegment || parts[3] == apisPathSegment) {
-		return 3
+	return s
+}
+
+func kubernetesAPIPathIndex(parts []string) int {
+	if len(parts) > 1 {
+		s1 := unescapeSegment(parts[1])
+		if s1 == apiPathSegment || s1 == apisPathSegment {
+			return 1
+		}
+	}
+
+	if len(parts) > 3 && unescapeSegment(parts[1]) == "clusters" {
+		s3 := unescapeSegment(parts[3])
+		if s3 == apiPathSegment || s3 == apisPathSegment {
+			return 3
+		}
 	}
 
 	return -1
@@ -113,22 +127,22 @@ func GetAPIGroup(path string) (apiGroup, version string, err error) {
 		return "", "", fmt.Errorf("invalid url format")
 	}
 
-	switch parts[apiIdx] {
+	switch unescapeSegment(parts[apiIdx]) {
 	case apiPathSegment:
 		// Core API group
 		apiGroup = ""
 
 		if len(parts) > apiIdx+1 {
-			version = parts[apiIdx+1]
+			version = unescapeSegment(parts[apiIdx+1])
 		}
 	case apisPathSegment:
 		// Named API group
 		if len(parts) > apiIdx+1 {
-			apiGroup = parts[apiIdx+1]
+			apiGroup = unescapeSegment(parts[apiIdx+1])
 		}
 
 		if len(parts) > apiIdx+2 {
-			version = parts[apiIdx+2]
+			version = unescapeSegment(parts[apiIdx+2])
 		}
 	}
 
@@ -156,14 +170,14 @@ func ExtractNamespace(rawURL string) (string, string) {
 	}
 
 	for i := 0; i < n-1; i++ {
-		if urls[i] == namespacePathSegment {
-			namespace = urls[i+1]
+		if unescapeSegment(urls[i]) == namespacePathSegment {
+			namespace = unescapeSegment(urls[i+1])
 			break
 		}
 	}
 
 	if n > 2 {
-		kind = urls[n-1]
+		kind = unescapeSegment(urls[n-1])
 	}
 
 	return namespace, kind
@@ -257,23 +271,55 @@ func parseContextKeyFromCacheKey(key string) (string, bool) {
 	return "", false
 }
 
+func formatResourcePath(segments []string) string {
+	if len(segments) == 0 {
+		return ""
+	}
+
+	proxyIdx := -1
+
+	for i, seg := range segments {
+		if unescapeSegment(seg) == "proxy" {
+			proxyIdx = i
+			break
+		}
+	}
+
+	result := make([]string, len(segments))
+	if proxyIdx == -1 {
+		for i, seg := range segments {
+			result[i] = unescapeSegment(seg)
+		}
+	} else {
+		for i := 0; i <= proxyIdx; i++ {
+			result[i] = unescapeSegment(segments[i])
+		}
+
+		for i := proxyIdx + 1; i < len(segments); i++ {
+			result[i] = segments[i]
+		}
+	}
+
+	return strings.Join(result, "/")
+}
+
 func parseNamespacedResourcePath(resParts []string, apiPart string) (string, string) {
 	switch len(resParts) {
 	case 1:
 		return "", namespacePathSegment
 	case 2:
-		return "", strings.Join(resParts, "/")
+		return "", formatResourcePath(resParts)
 	default:
 		// Core namespace subresources (e.g. /api/v1/namespaces/{name}/status or /finalize)
 		// are cluster-scoped subresources of the Namespace resource under the core API.
 		isCoreNamespaceSubresource := apiPart == apiPathSegment &&
-			resParts[0] == namespacePathSegment &&
-			(resParts[2] == "status" || resParts[2] == "finalize")
+			unescapeSegment(resParts[0]) == namespacePathSegment &&
+			(unescapeSegment(resParts[2]) == "status" || unescapeSegment(resParts[2]) == "finalize")
 		if isCoreNamespaceSubresource {
-			return "", strings.Join(resParts, "/")
+			return "", formatResourcePath(resParts)
 		}
 
-		return resParts[1], strings.Join(resParts[2:], "/")
+		return unescapeSegment(resParts[1]), formatResourcePath(resParts[2:])
 	}
 }
 
@@ -291,7 +337,7 @@ func parseResourceParts(parts []string, apiPart string, apiIdx int) (string, str
 	case len(parts) == apiIdx+1:
 		return "", apiPart
 	case apiPart == apisPathSegment && len(parts) == apiIdx+2:
-		return "", parts[apiIdx+1]
+		return "", unescapeSegment(parts[apiIdx+1])
 	}
 
 	resStart := apiIdx + 2
@@ -304,17 +350,25 @@ func parseResourceParts(parts []string, apiPart string, apiIdx int) (string, str
 	}
 
 	resParts := parts[resStart:]
-	if len(resParts) > 0 && resParts[0] == namespacePathSegment {
+	if len(resParts) > 0 && unescapeSegment(resParts[0]) == namespacePathSegment {
 		return parseNamespacedResourcePath(resParts, apiPart)
 	}
 
-	return "", strings.Join(resParts, "/")
+	return "", formatResourcePath(resParts)
 }
 
 // extractNamespaceAndResourcePath extracts the namespace and canonical resource path
 // (including resource name, subresources, and canonicalized query parameters) from the URL.
 func extractNamespaceAndResourcePath(u *url.URL) (string, string) {
+	if u == nil {
+		return "", ""
+	}
+
 	path := u.EscapedPath()
+	if path == "" {
+		path = u.Path
+	}
+
 	rawQuery := u.RawQuery
 
 	hasTrailingSlash := strings.HasSuffix(path, "/")
@@ -326,7 +380,8 @@ func extractNamespaceAndResourcePath(u *url.URL) (string, string) {
 		return "", ""
 	}
 
-	namespace, resourcePath := parseResourceParts(parts, parts[apiIdx], apiIdx)
+	apiPart := unescapeSegment(parts[apiIdx])
+	namespace, resourcePath := parseResourceParts(parts, apiPart, apiIdx)
 
 	if hasTrailingSlash && isProxySubresourcePath(resourcePath) {
 		resourcePath += "/"
@@ -394,11 +449,20 @@ func isInteractiveSubresource(u *url.URL) bool {
 // The function accepts url (which includes all the information of request) and contextID which
 // helps to differentiate in multiple contexts.
 func GenerateKey(url *url.URL, contextID string) (string, error) {
-	if url == nil || !IsKubernetesAPIPath(url.Path) {
+	if url == nil {
 		return "", fmt.Errorf("invalid url format")
 	}
 
-	apiGroup, apiVersion, err := GetAPIGroup(url.Path)
+	path := url.EscapedPath()
+	if path == "" {
+		path = url.Path
+	}
+
+	if !IsKubernetesAPIPath(path) {
+		return "", fmt.Errorf("invalid url format")
+	}
+
+	apiGroup, apiVersion, err := GetAPIGroup(path)
 	if err != nil {
 		return "", err
 	}

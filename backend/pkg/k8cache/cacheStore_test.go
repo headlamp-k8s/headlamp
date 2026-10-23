@@ -1455,3 +1455,116 @@ func TestGenerateKey_ProxyTrailingSlashPreserved(t *testing.T) {
 
 	assert.Equal(t, keyPodNoSlash, keyPodWithSlash, "non-proxy paths should trim trailing slashes")
 }
+
+// TestGenerateKey_EncodedAPIPrefixDistinctKeys verifies that requests with percent-encoded
+// API prefixes generate distinct cache keys for different objects and do not collapse to
+// the version discovery key.
+func TestGenerateKey_EncodedAPIPrefixDistinctKeys(t *testing.T) {
+	clusterCtx := "c"
+
+	reqPodA, err := url.Parse("/clusters/c/%61pi/v1/namespaces/default/pods/pod-a/log")
+	require.NoError(t, err)
+
+	keyPodA, err := k8cache.GenerateKey(reqPodA, clusterCtx)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+pods/pod-a/log+default+c", keyPodA)
+
+	reqPodB, err := url.Parse("/clusters/c/%61pi/v1/namespaces/default/pods/pod-b/log")
+	require.NoError(t, err)
+
+	keyPodB, err := k8cache.GenerateKey(reqPodB, clusterCtx)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+pods/pod-b/log+default+c", keyPodB)
+
+	assert.NotEqual(t, keyPodA, keyPodB, "different pods must produce distinct cache keys")
+
+	// Compare with core version discovery which generates +v1+++c
+	discoveryURL, err := url.Parse("/clusters/c/api/v1")
+	require.NoError(t, err)
+
+	discoveryKey, err := k8cache.GenerateKey(discoveryURL, clusterCtx)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+++c", discoveryKey)
+
+	assert.NotEqual(t, keyPodA, discoveryKey, "pod log key must not collide with version discovery")
+	assert.NotEqual(t, keyPodB, discoveryKey, "pod log key must not collide with version discovery")
+}
+
+// TestGenerateKey_NormalizedIdentifiers verifies that percent-encoded Kubernetes identifiers
+// (namespaces, resource names, subresources) normalize so they match unencoded requests and
+// can be reliably indexed and invalidated.
+func TestGenerateKey_NormalizedIdentifiers(t *testing.T) {
+	contextID := "test-cluster"
+
+	// Encoded namespace and pod name
+	encodedURL, err := url.Parse("/api/v1/namespaces/%64efault/pods/my%2Dpod")
+	require.NoError(t, err)
+
+	unencodedURL, err := url.Parse("/api/v1/namespaces/default/pods/my-pod")
+	require.NoError(t, err)
+
+	encodedKey, err := k8cache.GenerateKey(encodedURL, contextID)
+	require.NoError(t, err)
+
+	unencodedKey, err := k8cache.GenerateKey(unencodedURL, contextID)
+	require.NoError(t, err)
+
+	assert.Equal(t, "+v1+pods/my-pod+default+test-cluster", encodedKey)
+	assert.Equal(t, unencodedKey, encodedKey, "encoded identifiers must normalize to match unencoded key")
+
+	// Encoded custom resource path
+	crdURL, err := url.Parse("/apis/%65xample.io/v1/namespaces/%64efault/%77idgets/my%2Ditem")
+	require.NoError(t, err)
+
+	crdKey, err := k8cache.GenerateKey(crdURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, "example.io+v1+widgets/my-item+default+test-cluster", crdKey)
+
+	// Encoded core namespace status subresource
+	nsStatusURL, err := url.Parse("/%61pi/v1/namespaces/%64efault/%73tatus")
+	require.NoError(t, err)
+
+	nsStatusKey, err := k8cache.GenerateKey(nsStatusURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+namespaces/default/status++test-cluster", nsStatusKey)
+}
+
+// TestGenerateKey_ProxyPreservesEscapedDelimiters verifies that proxy subresource paths
+// preserve percent-encoded delimiters (such as %2F and %3F) in suffixes after /proxy.
+func TestGenerateKey_ProxyPreservesEscapedDelimiters(t *testing.T) {
+	contextID := "test-cluster"
+
+	// Namespaced service proxy with encoded slash in path suffix
+	serviceProxyURL, err := url.Parse("/api/v1/namespaces/default/services/web/proxy/docs/foo%2Fbar")
+	require.NoError(t, err)
+
+	serviceProxyKey, err := k8cache.GenerateKey(serviceProxyURL, contextID)
+	require.NoError(t, err)
+	// %2F in kind segment is escaped to %252F by buildCacheKey so the key can safely use + delimiters
+	assert.Equal(t, "+v1+services/web/proxy/docs/foo%252Fbar+default+test-cluster", serviceProxyKey)
+
+	// Contrast with unescaped slash path: docs/foo/bar must produce distinct key
+	serviceUnescapedURL, err := url.Parse("/api/v1/namespaces/default/services/web/proxy/docs/foo/bar")
+	require.NoError(t, err)
+
+	serviceUnescapedKey, err := k8cache.GenerateKey(serviceUnescapedURL, contextID)
+	require.NoError(t, err)
+	assert.NotEqual(t, serviceProxyKey, serviceUnescapedKey, "paths with encoded vs unencoded slash must not collide")
+	assert.Equal(t, "+v1+services/web/proxy/docs/foo/bar+default+test-cluster", serviceUnescapedKey)
+
+	// Encoded structural segment before proxy normalizes, while suffix preserves encoding
+	normBeforeProxyURL, err := url.Parse("/api/v1/namespaces/%64efault/services/%77eb/proxy/docs/foo%2Fbar")
+	require.NoError(t, err)
+
+	normBeforeProxyKey, err := k8cache.GenerateKey(normBeforeProxyURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, serviceProxyKey, normBeforeProxyKey)
+
+	// Node proxy with encoded delimiters
+	nodeProxyURL, err := url.Parse("/api/v1/nodes/node-1/proxy/metrics%2Ffoo")
+	require.NoError(t, err)
+
+	nodeProxyKey, err := k8cache.GenerateKey(nodeProxyURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+nodes/node-1/proxy/metrics%252Ffoo++test-cluster", nodeProxyKey)
+}

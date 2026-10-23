@@ -1407,3 +1407,32 @@ func TestHandleNonGETCacheInvalidation_ObjectNamedExecInvalidatesList(t *testing
 	_, err = realCache.Get(ctx, listKey)
 	assert.Error(t, err, "list key should be evicted on mutation of object 'exec'")
 }
+
+// TestInvalidateCacheKeysForResourceEvent_EncodedIdentifiers verifies that cached entries
+// created via percent-encoded identifiers are properly indexed and invalidated by informer events.
+func TestInvalidateCacheKeysForResourceEvent_EncodedIdentifiers(t *testing.T) {
+	k8cache.ResetRegistries()
+	t.Cleanup(func() { k8cache.ResetRegistries() })
+
+	gvr := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "pods"}
+	contextKey := "test-context"
+	ctx := context.Background()
+
+	realCache := cache.New[string]()
+
+	reqURL, err := url.Parse("/api/v1/namespaces/%64efault/pods/my%2Dpod")
+	require.NoError(t, err)
+
+	key, err := k8cache.GenerateKey(reqURL, contextKey)
+	require.NoError(t, err)
+	assert.Equal(t, "+v1+pods/my-pod+default+test-context", key)
+
+	require.NoError(t, realCache.Set(ctx, key, "pod-data"))
+	k8cache.ExportedIndexCacheKey(key)
+
+	// Informer event carries decoded name and namespace
+	k8cache.ExportedInvalidateCacheKeysForResourceEvent(gvr, "default", "my-pod", contextKey, realCache)
+
+	_, err = realCache.Get(ctx, key)
+	assert.Error(t, err, "cache entry with normalized key should be evicted by informer event")
+}
