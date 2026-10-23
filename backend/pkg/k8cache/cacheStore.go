@@ -257,7 +257,7 @@ func parseContextKeyFromCacheKey(key string) (string, bool) {
 	return "", false
 }
 
-func parseNamespacedResourcePath(resParts []string) (string, string) {
+func parseNamespacedResourcePath(resParts []string, apiPart string) (string, string) {
 	switch len(resParts) {
 	case 1:
 		return "", namespacePathSegment
@@ -265,8 +265,11 @@ func parseNamespacedResourcePath(resParts []string) (string, string) {
 		return "", strings.Join(resParts, "/")
 	default:
 		// Core namespace subresources (e.g. /api/v1/namespaces/{name}/status or /finalize)
-		// are cluster-scoped subresources of the Namespace resource.
-		if resParts[0] == namespacePathSegment && (resParts[2] == "status" || resParts[2] == "finalize") {
+		// are cluster-scoped subresources of the Namespace resource under the core API.
+		isCoreNamespaceSubresource := apiPart == apiPathSegment &&
+			resParts[0] == namespacePathSegment &&
+			(resParts[2] == "status" || resParts[2] == "finalize")
+		if isCoreNamespaceSubresource {
 			return "", strings.Join(resParts, "/")
 		}
 
@@ -302,7 +305,7 @@ func parseResourceParts(parts []string, apiPart string, apiIdx int) (string, str
 
 	resParts := parts[resStart:]
 	if len(resParts) > 0 && resParts[0] == namespacePathSegment {
-		return parseNamespacedResourcePath(resParts)
+		return parseNamespacedResourcePath(resParts, apiPart)
 	}
 
 	return "", strings.Join(resParts, "/")

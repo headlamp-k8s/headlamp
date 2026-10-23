@@ -1409,6 +1409,14 @@ func TestGenerateKey_CoreNamespaceSubresources(t *testing.T) {
 	podStatusKey, err := k8cache.GenerateKey(podStatusURL, contextID)
 	require.NoError(t, err)
 	assert.Equal(t, "+v1+pods/p1/status+default+test-cluster", podStatusKey)
+
+	// Contrast with namespaced custom resource whose plural happens to be "status"
+	crdStatusURL, err := url.Parse("/apis/example.com/v1/namespaces/default/status")
+	require.NoError(t, err)
+
+	crdStatusKey, err := k8cache.GenerateKey(crdStatusURL, contextID)
+	require.NoError(t, err)
+	assert.Equal(t, "example.com+v1+status+default+test-cluster", crdStatusKey)
 }
 
 // TestGenerateKey_ProxyTrailingSlashPreserved verifies that trailing slashes on proxy
