@@ -1223,6 +1223,36 @@ describe('schemaLoader', () => {
       }
     );
 
+    it.each([401, 403, 503])(
+      'preserves explicit HTTP %s document errors mentioning redirect without recovery requests',
+      async status => {
+        const apiVersion = 'redirect.example.com/v1';
+        const url = '/openapi/v3/apis/redirect.example.com/v1?hash=denied';
+        const error = Object.assign(new Error(`Access denied for ${url}`), { status });
+        let discoveryCalls = 0;
+        vi.mocked(clusterRequest).mockImplementation(async path => {
+          if (path === '/openapi/v3') {
+            discoveryCalls++;
+            // An incorrect rediscovery would remove the group and allow v2 fallback.
+            return discoveryCalls === 1
+              ? { paths: { [`apis/${apiVersion}`]: { serverRelativeURL: url } } }
+              : { paths: {} };
+          }
+          if (path === url) throw error;
+          if (path === '/openapi/v2') return mockOpenAPIV2FallbackDocument;
+          throw new Error(`Unexpected path: ${path}`);
+        });
+
+        await expect(
+          loadResourceSchema({ cluster: 'denied-cluster', apiVersion, kind: 'Example' })
+        ).rejects.toBe(error);
+        expect(vi.mocked(clusterRequest).mock.calls.map(([path]) => path)).toEqual([
+          '/openapi/v3',
+          url,
+        ]);
+      }
+    );
+
     it('preserves 401 and 403 authentication/authorization errors and never masks them as v3 unsupported', async () => {
       vi.mocked(clusterRequest).mockImplementation(async path => {
         if (path === '/openapi/v3') {

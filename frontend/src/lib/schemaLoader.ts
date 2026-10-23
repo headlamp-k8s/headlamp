@@ -263,9 +263,7 @@ function isRedirectError(err: unknown): boolean {
   if (err && typeof err === 'object') {
     if ('status' in err) {
       const status = (err as { status: number }).status;
-      if (status === 0 || (status >= 300 && status < 400)) {
-        return true;
-      }
+      return status === 0 || (status >= 300 && status < 400);
     }
     if ('type' in err && (err as { type: string }).type === 'opaqueredirect') {
       return true;
