@@ -607,7 +607,6 @@ func matchesResourceInvalidation(k string, gvr schema.GroupVersionResource, name
 func getKeysForResourceInvalidationLocked(
 	gvr schema.GroupVersionResource,
 	namespace, name, contextKey string,
-	k8scache cache.Cache[string],
 ) []string {
 	var candidateKeys []string
 
@@ -709,7 +708,7 @@ func invalidateCacheKeysForResourceEvent(
 
 	// Invalidate any cached list queries with query parameters (e.g. ?labelSelector=...),
 	// multiple served-version entries, or subresource entries matching this resource.
-	keysToDelete := getKeysForResourceInvalidationLocked(gvr, namespace, name, contextKey, k8scache)
+	keysToDelete := getKeysForResourceInvalidationLocked(gvr, namespace, name, contextKey)
 
 	for _, k := range keysToDelete {
 		_ = k8scache.Delete(context.Background(), k)

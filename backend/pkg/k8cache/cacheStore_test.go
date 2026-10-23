@@ -753,8 +753,8 @@ func TestGenerateKey_MalformedQueryPreservesPartition(t *testing.T) {
 	assert.Contains(t, malformedKey, "unused=%25ZZ")
 }
 
-// TestShouldSkipCache verifies that streaming and interactive endpoints bypass the cache.
-func TestShouldSkipCache(t *testing.T) {
+// TestShouldSkipCache_StreamingEndpoints verifies that streaming query parameters bypass cache.
+func TestShouldSkipCache_StreamingEndpoints(t *testing.T) {
 	tests := []struct {
 		name     string
 		rawURL   string
@@ -775,6 +775,36 @@ func TestShouldSkipCache(t *testing.T) {
 			rawURL:   "/api/v1/namespaces/default/pods/p1/log?follow=true",
 			expected: true,
 		},
+		{
+			name:     "regular pod snapshot log does not bypass cache",
+			rawURL:   "/api/v1/namespaces/default/pods/p1/log?container=app",
+			expected: false,
+		},
+		{
+			name:     "regular list query does not bypass cache",
+			rawURL:   "/api/v1/namespaces/default/pods",
+			expected: false,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, tc.rawURL, nil)
+			require.NoError(t, err)
+			assert.Equal(t, tc.expected, k8cache.ShouldSkipCache(req))
+		})
+	}
+
+	assert.False(t, k8cache.ShouldSkipCache(nil))
+}
+
+// TestShouldSkipCache_InteractiveSubresources verifies subresources bypass cache while objects do not.
+func TestShouldSkipCache_InteractiveSubresources(t *testing.T) {
+	tests := []struct {
+		name     string
+		rawURL   string
+		expected bool
+	}{
 		{
 			name:     "exec interactive subresource bypasses cache",
 			rawURL:   "/api/v1/namespaces/default/pods/p1/exec",
@@ -815,16 +845,6 @@ func TestShouldSkipCache(t *testing.T) {
 			rawURL:   "/apis/example.io/v1/namespaces/default/widgets/w1/attach",
 			expected: true,
 		},
-		{
-			name:     "regular pod snapshot log does not bypass cache",
-			rawURL:   "/api/v1/namespaces/default/pods/p1/log?container=app",
-			expected: false,
-		},
-		{
-			name:     "regular list query does not bypass cache",
-			rawURL:   "/api/v1/namespaces/default/pods",
-			expected: false,
-		},
 	}
 
 	for _, tc := range tests {
@@ -834,8 +854,6 @@ func TestShouldSkipCache(t *testing.T) {
 			assert.Equal(t, tc.expected, k8cache.ShouldSkipCache(req))
 		})
 	}
-
-	assert.False(t, k8cache.ShouldSkipCache(nil))
 }
 
 // TestSetHeader tests whether the SetHeader is providing correct metadata for

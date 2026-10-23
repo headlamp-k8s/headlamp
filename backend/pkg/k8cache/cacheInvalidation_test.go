@@ -1271,22 +1271,30 @@ type MockTrackingCache struct {
 }
 
 func (m *MockTrackingCache) Set(ctx context.Context, key, value string) error { return nil }
+
 func (m *MockTrackingCache) SetWithTTL(ctx context.Context, key, value string, ttl time.Duration) error {
 	return nil
 }
+
 func (m *MockTrackingCache) Get(ctx context.Context, key string) (string, error) { return "", nil }
-func (m *MockTrackingCache) Delete(ctx context.Context, key string) error        { return nil }
+
+func (m *MockTrackingCache) Delete(ctx context.Context, key string) error { return nil }
+
 func (m *MockTrackingCache) GetAll(ctx context.Context, selectFunc cache.Matcher) (map[string]string, error) {
 	if m.onGetAll != nil {
 		m.onGetAll()
 	}
+
 	return nil, nil
 }
+
 func (m *MockTrackingCache) UpdateTTL(ctx context.Context, key string, ttl time.Duration) error {
 	return nil
 }
+
 func (m *MockTrackingCache) SetOnEvicted(f func(key string, value string)) {}
-func (m *MockTrackingCache) Close() error                                  { return nil }
+
+func (m *MockTrackingCache) Close() error { return nil }
 
 // TestGetKeysForResourceInvalidation_EmptyBucketDoesNotScanCache verifies that when
 // candidate bucket is empty (no cached entries for resource), invalidation does not
@@ -1376,11 +1384,15 @@ func TestHandleNonGETCacheInvalidation_ObjectNamedExecInvalidatesList(t *testing
 	nextCalled := false
 	next := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		nextCalled = true
+
 		if req.Method == http.MethodGet {
 			w.WriteHeader(http.StatusNotFound)
+
 			_, _ = w.Write([]byte(`{"kind":"Status","status":"Failure","reason":"NotFound"}`))
+
 			return
 		}
+
 		w.WriteHeader(http.StatusOK)
 	})
 
