@@ -24,6 +24,8 @@ import {
   mockRecursiveDocument,
 } from './fixtures/schemaFixtures';
 import { clusterRequest } from './k8s/api/v1/clusterRequests';
+import { CLUSTERS_PREFIX } from './k8s/api/v1/constants';
+import { combinePath } from './k8s/api/v1/formatUrl';
 import {
   loadResourceSchema,
   mapApiVersionToDiscoveryKey,
@@ -121,6 +123,204 @@ describe('schemaLoader', () => {
         )
       ).not.toThrow();
     });
+  });
+
+  describe('Review regressions', () => {
+    it.each(['\t', '\r', '\n'])(
+      'rejects control-character traversal before cluster URL canonicalization (%j)',
+      async control => {
+        const advertisedUrl = `/openapi/v3/${`.${control}./`.repeat(4)}openapi/v3/api/v1`;
+        // Prove this input escapes the same prefix used by clusterRequest.
+        expect(
+          new URL(combinePath(`/${CLUSTERS_PREFIX}/prod`, advertisedUrl), 'http://localhost')
+            .pathname
+        ).toBe('/openapi/v3/api/v1');
+        const safeUrl = '/openapi/v3/api/v1?hash=safe';
+        validateAdvertisedUrl(safeUrl);
+        expect(
+          new URL(combinePath(`/${CLUSTERS_PREFIX}/prod`, safeUrl), 'http://localhost').pathname
+        ).toBe('/clusters/prod/openapi/v3/api/v1');
+        vi.mocked(clusterRequest).mockResolvedValue({
+          paths: { 'api/v1': { serverRelativeURL: advertisedUrl } },
+        });
+        await expect(
+          loadResourceSchema({ cluster: 'prod', apiVersion: 'v1', kind: 'Pod' })
+        ).rejects.toThrow(/Control characters/);
+        expect(clusterRequest).toHaveBeenCalledTimes(1);
+        expect(() =>
+          validateAdvertisedUrl(
+            `/openapi/v3/api/%${control.charCodeAt(0).toString(16).padStart(2, '0')}v1`
+          )
+        ).toThrow(/Control characters/);
+      }
+    );
+
+    it.each([
+      ['v3', false],
+      ['v3', true],
+      ['v2', false],
+      ['v2', true],
+    ] as const)(
+      'shares explicit %s refreshes while superseding a previous request (pending: %s)',
+      async (format, pending) => {
+        let release!: () => void;
+        const blocked = new Promise<void>(resolve => {
+          release = resolve;
+        });
+        let documentCalls = 0;
+        const url = mockOpenAPIV3Discovery.paths['apis/apps/v1'].serverRelativeURL;
+        vi.mocked(clusterRequest).mockImplementation(async path => {
+          if (path === '/openapi/v3') {
+            if (format === 'v2') throw { status: 404 };
+            return mockOpenAPIV3Discovery;
+          }
+          if (path === (format === 'v3' ? url : '/openapi/v2')) {
+            documentCalls++;
+            if (pending || documentCalls > 1) await blocked;
+            return format === 'v3' ? mockAppsV1Document : mockOpenAPIV2FallbackDocument;
+          }
+          throw new Error(`Unexpected path: ${path}`);
+        });
+        const params = { cluster: 'refresh-cluster', apiVersion: 'apps/v1', kind: 'Deployment' };
+        const original = loadResourceSchema(params);
+        await vi.waitFor(() => expect(documentCalls).toBe(1));
+        if (!pending) await original;
+        const refreshes = Array.from({ length: 5 }, () =>
+          loadResourceSchema({ ...params, refresh: true })
+        );
+        await vi.waitFor(() => expect(documentCalls).toBeGreaterThan(1));
+        release();
+        const results = await Promise.all([original, ...refreshes]);
+        expect(results.every(result => result.sourceFormat === `openapi/${format}`)).toBe(true);
+        expect(documentCalls).toBe(2);
+        await loadResourceSchema(params);
+        expect(documentCalls).toBe(2);
+      }
+    );
+
+    it.each(['v3', 'v2'] as const)('retries failed shared %s refreshes', async format => {
+      let reject!: (error: Error) => void;
+      const blocked = new Promise((_, rejectPromise) => {
+        reject = rejectPromise;
+      });
+      let documentCalls = 0;
+      vi.mocked(clusterRequest).mockImplementation(async path => {
+        if (path === '/openapi/v3') {
+          if (format === 'v2') throw { status: 404 };
+          return mockOpenAPIV3Discovery;
+        }
+        documentCalls++;
+        if (documentCalls === 2) return blocked;
+        return format === 'v3' ? mockAppsV1Document : mockOpenAPIV2FallbackDocument;
+      });
+      const params = { cluster: 'retry-refresh', apiVersion: 'apps/v1', kind: 'Deployment' };
+      await loadResourceSchema(params);
+      const refreshes = Promise.allSettled(
+        Array.from({ length: 5 }, () => loadResourceSchema({ ...params, refresh: true }))
+      );
+      await vi.waitFor(() => expect(documentCalls).toBeGreaterThan(1));
+      reject(new Error('temporary failure'));
+      const results = await refreshes;
+      expect(results.every(result => result.status === 'rejected')).toBe(true);
+      expect(documentCalls).toBe(2);
+      expect((await loadResourceSchema({ ...params, refresh: true })).sourceFormat).toBe(
+        `openapi/${format}`
+      );
+      expect(documentCalls).toBe(3);
+    });
+
+    it.each([
+      [false, false],
+      [false, true],
+      [true, false],
+      [true, true],
+    ])(
+      'invalidates pending v2 fallback (all clusters: %s, failure: %s)',
+      async (allClusters, failure) => {
+        let settle!: (value: any) => void;
+        let reject!: (error: any) => void;
+        const blocked = new Promise((resolve, rejectPromise) => {
+          settle = resolve;
+          reject = rejectPromise;
+        });
+        let documentCalls = 0;
+        vi.mocked(clusterRequest).mockImplementation(async path => {
+          if (path === '/openapi/v3') throw { status: 404 };
+          documentCalls++;
+          if (documentCalls === 1) return blocked;
+          return mockOpenAPIV2FallbackDocument;
+        });
+        const params = { cluster: 'reset-fallback', apiVersion: 'apps/v1', kind: 'Deployment' };
+        const oldLoad = loadResourceSchema(params).catch(error => error);
+        await vi.waitFor(() => expect(documentCalls).toBe(1));
+        resetSchemaLoaderCache(allClusters ? undefined : params.cluster);
+        await loadResourceSchema(params);
+        if (failure) reject({ status: 404 });
+        else settle(mockOpenAPIV2FallbackDocument);
+        expect(await oldLoad).toEqual(
+          expect.objectContaining({ message: expect.stringMatching(/cache was reset/i) })
+        );
+        await loadResourceSchema(params);
+        expect(documentCalls).toBe(2);
+      }
+    );
+
+    it.each([
+      ['initial discovery', false],
+      ['initial discovery', true],
+      ['missing-group rediscovery', false],
+      ['missing-group rediscovery', true],
+      ['redirect rediscovery', false],
+      ['redirect rediscovery', true],
+      ['unsupported discovery', false],
+      ['unsupported discovery', true],
+    ] as const)(
+      'stops dependent requests after reset during %s (all clusters: %s)',
+      async (phase, allClusters) => {
+        let settle!: (value: any) => void;
+        let reject!: (error: any) => void;
+        const blocked = new Promise((resolve, rejectPromise) => {
+          settle = resolve;
+          reject = rejectPromise;
+        });
+        const oldUrl = '/openapi/v3/apis/apps/v1?hash=obsolete';
+        const newUrl = '/openapi/v3/apis/apps/v1?hash=current';
+        const index = (url: string) => ({ paths: { 'apis/apps/v1': { serverRelativeURL: url } } });
+        let discoveryCalls = 0;
+        const blockedCall = phase.includes('rediscovery') ? 2 : 1;
+        vi.mocked(clusterRequest).mockImplementation(async path => {
+          if (path === '/openapi/v3') {
+            discoveryCalls++;
+            if (discoveryCalls === blockedCall) return blocked;
+            if (discoveryCalls < blockedCall)
+              return phase === 'missing-group rediscovery' ? { paths: {} } : index(oldUrl);
+            return index(newUrl);
+          }
+          if (path === oldUrl && phase === 'redirect rediscovery') throw { status: 301 };
+          if (path === oldUrl || path === newUrl) return mockAppsV1Document;
+          if (path === '/openapi/v2') return mockOpenAPIV2FallbackDocument;
+          throw new Error(`Unexpected path: ${path}`);
+        });
+        const params = { cluster: 'reset-cluster', apiVersion: 'apps/v1', kind: 'Deployment' };
+        // Attach rejection handling before releasing any deferred work.
+        const oldLoad = loadResourceSchema(params).then(
+          result => result,
+          error => error
+        );
+        await vi.waitFor(() => expect(discoveryCalls).toBe(blockedCall));
+        resetSchemaLoaderCache(allClusters ? undefined : params.cluster);
+        expect((await loadResourceSchema(params)).sourceUrl).toBe(newUrl);
+        const callsAfterReset = vi.mocked(clusterRequest).mock.calls.length;
+        if (phase === 'unsupported discovery') reject({ status: 404 });
+        else settle(phase === 'missing-group rediscovery' ? { paths: {} } : index(oldUrl));
+        expect(await oldLoad).toEqual(
+          expect.objectContaining({ message: expect.stringMatching(/cache was reset/i) })
+        );
+        expect(clusterRequest).toHaveBeenCalledTimes(callsAfterReset);
+        expect((await loadResourceSchema(params)).sourceUrl).toBe(newUrl);
+        expect(clusterRequest).toHaveBeenCalledTimes(callsAfterReset);
+      }
+    );
   });
 
   describe('Discovery and exact GVK selection', () => {
@@ -1105,7 +1305,7 @@ describe('schemaLoader', () => {
 
       // Finish first fetch
       resolveFirstDoc!(mockAppsV1Document);
-      await inFlight;
+      await expect(inFlight).rejects.toThrow(/cache was reset/i);
 
       // Now request again; it must make a fresh fetch because the invalidated request was discarded
       await loadResourceSchema({

@@ -69,7 +69,9 @@ interface ClusterCacheEntry {
   discoveryData: OpenAPIV3DiscoveryIndex | null;
   v3Supported: boolean | null;
   documents: Map<string, Promise<SchemaDocument>>;
+  documentRefreshes: Map<string, Promise<OpenAPIV3.Document>>;
   v2Promise: Promise<OpenAPIV2.Document> | null;
+  v2RefreshPromise: Promise<OpenAPIV2.Document> | null;
   missingDiscoveryKeys: Set<string>;
 }
 
@@ -86,7 +88,9 @@ function getOrCreateClusterCache(cluster: string): ClusterCacheEntry {
       discoveryData: null,
       v3Supported: null,
       documents: new Map(),
+      documentRefreshes: new Map(),
       v2Promise: null,
+      v2RefreshPromise: null,
       missingDiscoveryKeys: new Set(),
     };
     clusterCaches.set(cluster, cache);
@@ -109,7 +113,9 @@ export function resetSchemaLoaderCache(cluster?: string): void {
       cache.discoveryData = null;
       cache.v3Supported = null;
       cache.documents.clear();
+      cache.documentRefreshes.clear();
       cache.v2Promise = null;
+      cache.v2RefreshPromise = null;
       cache.missingDiscoveryKeys.clear();
     }
   } else {
@@ -121,7 +127,9 @@ export function resetSchemaLoaderCache(cluster?: string): void {
       cache.discoveryData = null;
       cache.v3Supported = null;
       cache.documents.clear();
+      cache.documentRefreshes.clear();
       cache.v2Promise = null;
+      cache.v2RefreshPromise = null;
       cache.missingDiscoveryKeys.clear();
     }
     clusterCaches.clear();
@@ -174,6 +182,10 @@ export function validateAdvertisedUrl(url: string): void {
     decodedPath = decodeURIComponent(rawPath);
   } catch {
     throw new Error(`Malformed URL encoding in advertised URL: ${url}`);
+  }
+
+  if (/[\t\r\n]/.test(decodedPath)) {
+    throw new Error(`Control characters are not permitted in advertised URL: ${url}`);
   }
 
   if (decodedPath.includes('..') || decodedPath.includes('\\')) {
@@ -358,6 +370,7 @@ async function fetchOpenAPIV3Discovery(
         for (const url of cache.documents.keys()) {
           if (!advertisedUrls.has(url)) {
             cache.documents.delete(url);
+            cache.documentRefreshes.delete(url);
           }
         }
       }
@@ -405,6 +418,10 @@ async function fetchDocument(
   const cache = getOrCreateClusterCache(cluster);
   const currentGen = cache.generation;
 
+  const pendingRefresh = cache.documentRefreshes.get(serverRelativeURL);
+  if (pendingRefresh) {
+    return pendingRefresh;
+  }
   if (!forceRefresh && cache.documents.has(serverRelativeURL)) {
     return (await cache.documents.get(serverRelativeURL)!) as OpenAPIV3.Document;
   }
@@ -434,10 +451,20 @@ async function fetchDocument(
         cache.documents.delete(serverRelativeURL);
       }
       throw err;
+    } finally {
+      if (
+        cache.generation === currentGen &&
+        cache.documentRefreshes.get(serverRelativeURL) === requestHolder.promise
+      ) {
+        cache.documentRefreshes.delete(serverRelativeURL);
+      }
     }
   })();
 
   const promise = requestHolder.promise;
+  if (forceRefresh) {
+    cache.documentRefreshes.set(serverRelativeURL, promise);
+  }
   cache.documents.set(serverRelativeURL, promise);
   return promise;
 }
@@ -452,6 +479,9 @@ async function fetchOpenAPIV2Fallback(
   const cache = getOrCreateClusterCache(cluster);
   const currentGen = cache.generation;
 
+  if (cache.v2RefreshPromise) {
+    return cache.v2RefreshPromise;
+  }
   if (!forceRefresh && cache.v2Promise) {
     return cache.v2Promise;
   }
@@ -476,10 +506,17 @@ async function fetchOpenAPIV2Fallback(
         cache.v2Promise = null;
       }
       throw err;
+    } finally {
+      if (cache.generation === currentGen && cache.v2RefreshPromise === requestHolder.promise) {
+        cache.v2RefreshPromise = null;
+      }
     }
   })();
 
   const promise = requestHolder.promise;
+  if (forceRefresh) {
+    cache.v2RefreshPromise = promise;
+  }
   cache.v2Promise = promise;
   return promise;
 }
@@ -539,14 +576,30 @@ export async function loadResourceSchema(
 
   const { group, version, discoveryKey } = mapApiVersionToDiscoveryKey(apiVersion);
   const cache = getOrCreateClusterCache(cluster);
+  // Keep the original identity through discovery, retries, and fallback.
+  const generation = cache.generation;
+  const assertCurrent = () => {
+    if (clusterCaches.get(cluster) !== cache || cache.generation !== generation) {
+      throw new Error(`Schema cache was reset for cluster ${cluster}; retry schema loading`);
+    }
+  };
+  const loadFallback = async () => {
+    assertCurrent();
+    try {
+      return await loadViaV2Fallback(cluster, group, version, kind, refresh);
+    } finally {
+      assertCurrent();
+    }
+  };
 
   // If v3 is known to be unsupported on this cluster, use v2 fallback directly
   if (cache.v3Supported === false && !refresh) {
-    return loadViaV2Fallback(cluster, group, version, kind, refresh);
+    return loadFallback();
   }
 
   try {
     let discovery = await fetchOpenAPIV3Discovery(cluster, refresh);
+    assertCurrent();
 
     let advertisedEntry = discovery.paths[discoveryKey];
 
@@ -554,6 +607,7 @@ export async function loadResourceSchema(
     if (!advertisedEntry && !refresh) {
       if (!cache.missingDiscoveryKeys.has(discoveryKey)) {
         discovery = await fetchOpenAPIV3Discovery(cluster, true);
+        assertCurrent();
         advertisedEntry = discovery.paths[discoveryKey];
         if (!advertisedEntry) {
           cache.missingDiscoveryKeys.add(discoveryKey);
@@ -564,7 +618,7 @@ export async function loadResourceSchema(
     // If still missing after refresh:
     if (!advertisedEntry) {
       // Aggregated API servers may publish v2 schemas without advertising v3.
-      return await loadViaV2Fallback(cluster, group, version, kind, refresh);
+      return await loadFallback();
     }
 
     const advertisedUrl = advertisedEntry.serverRelativeURL;
@@ -574,9 +628,11 @@ export async function loadResourceSchema(
     try {
       document = await fetchDocument(cluster, advertisedUrl, refresh);
     } catch (docErr) {
+      assertCurrent();
       // If advertised document returns 404, 501, or redirect (e.g. stale hash/rotation), re-read discovery once
       if (isEndpointUnsupported(docErr) || isRedirectError(docErr)) {
         const refreshedDiscovery = await fetchOpenAPIV3Discovery(cluster, true);
+        assertCurrent();
         const refreshedEntry = refreshedDiscovery.paths[discoveryKey];
 
         if (refreshedEntry && refreshedEntry.serverRelativeURL !== advertisedUrl) {
@@ -586,7 +642,7 @@ export async function loadResourceSchema(
         } else if (!refreshedEntry) {
           // A group removed from v3 may still be served by a v2-only API server.
           cache.missingDiscoveryKeys.add(discoveryKey);
-          return await loadViaV2Fallback(cluster, group, version, kind, refresh);
+          return await loadFallback();
         } else {
           // Advertised URL is unchanged and still broken; report failure
           throw docErr;
@@ -596,6 +652,7 @@ export async function loadResourceSchema(
       }
     }
 
+    assertCurrent();
     const schemas = document.components?.schemas || {};
     const schema = findExactGVKSchema(schemas, group, version, kind);
 
@@ -606,9 +663,10 @@ export async function loadResourceSchema(
       sourceFormat: 'openapi/v3',
     };
   } catch (v3Err) {
+    assertCurrent();
     // If OpenAPI v3 endpoint is genuinely unsupported (404/501), fall back to v2
     if (isEndpointUnsupported(v3Err)) {
-      return await loadViaV2Fallback(cluster, group, version, kind, refresh);
+      return await loadFallback();
     }
 
     // Preserve authentication, authorization, timeouts, and network errors
